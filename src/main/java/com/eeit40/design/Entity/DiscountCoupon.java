@@ -32,8 +32,20 @@ public class DiscountCoupon {
   @OneToMany(mappedBy = "fkCoupon")
   private Set<OrderInformation> orderInformations = new LinkedHashSet<>();
 
+  @Column(name = "coupon", length = 50)
+  private String coupon;
+
   public DiscountCoupon() {
   }
+
+  public String getCoupon() {
+    return coupon;
+  }
+
+  public void setCoupon(String coupon) {
+    this.coupon = coupon;
+  }
+
 
   public Set<OrderInformation> getOrderInformations() {
     return orderInformations;
