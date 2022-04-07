@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * */
 
-@Controller
+@Controller("FrontDemoPageController")
 public class DemoPageController {
 
   @GetMapping("FrontSide/index.html")

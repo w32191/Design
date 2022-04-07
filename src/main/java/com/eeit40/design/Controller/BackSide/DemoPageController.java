@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * */
 
-@Controller
+@Controller("BackDemoPageController")
 public class DemoPageController {
 
 
