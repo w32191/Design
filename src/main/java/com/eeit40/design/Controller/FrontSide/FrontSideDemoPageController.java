@@ -1,10 +1,10 @@
-package com.eeit40.design.Controller;
+package com.eeit40.design.Controller.FrontSide;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class FrontSideDefaultPageController {
+public class FrontSideDemoPageController {
 
   //前台view controller
   @GetMapping("FrontSide/index.html")
