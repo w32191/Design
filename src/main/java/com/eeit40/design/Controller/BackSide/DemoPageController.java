@@ -3,10 +3,16 @@ package com.eeit40.design.Controller.BackSide;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class BackSideDemoPageController {
+/**
+ * 這隻DemoPageController是放，模板demo用的 url路徑
+ * 給大家 測試demo畫面用的
+ *
+ * */
 
-  //後台 view controller
+@Controller
+public class DemoPageController {
+
+
   @GetMapping("BackSide/index.html")
   public String indexPage() {
     return "BackSide/demoPage/index";

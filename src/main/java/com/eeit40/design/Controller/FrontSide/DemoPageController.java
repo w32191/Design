@@ -3,10 +3,15 @@ package com.eeit40.design.Controller.FrontSide;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class FrontSideDemoPageController {
+/**
+ * 這隻DemoPageController是放，模板demo用的 url路徑
+ * 給大家 測試demo畫面用的
+ *
+ * */
 
-  //前台view controller
+@Controller
+public class DemoPageController {
+
   @GetMapping("FrontSide/index.html")
   public String indexPage() {
     return "FrontSide/demoPage/index";
