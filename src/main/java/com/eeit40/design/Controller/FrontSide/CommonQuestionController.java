@@ -18,12 +18,12 @@ public class CommonQuestionController {
 	
 	
 	
-	@GetMapping("FrontSide/test.html")
+	@GetMapping("FrontSide/CommonQuestion.html")
 	  public ModelAndView wishListPage2(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
 		mav.getModel().put("cqs", cq);
 		
-		mav.setViewName("/FrontSide/MillerPage/test");
+		mav.setViewName("/FrontSide/CommonQuestion/CommonQuestion");
 		
 	    return mav;
 	  }
