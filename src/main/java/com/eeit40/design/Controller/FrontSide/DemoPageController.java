@@ -12,132 +12,132 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller("FrontDemoPageController")
 public class DemoPageController {
 
-  @GetMapping(path = {"/FrontSide/","FrontSide/index.html"})
+  @GetMapping(path = {"/F/","F/index.html"})
   public String indexPage() {
-    return "FrontSide/demoPage/index";
+    return "F/demoPage/index";
   }
 
-  @GetMapping("FrontSide/index-2.html")
+  @GetMapping("F/index-2.html")
   public String index2Page() {
-    return "FrontSide/demoPage/index-2";
+    return "F/demoPage/index-2";
   }
 
-  @GetMapping("FrontSide/index-3.html")
+  @GetMapping("F/index-3.html")
   public String index3Page() {
-    return "FrontSide/demoPage/index-3";
+    return "F/demoPage/index-3";
   }
 
-  @GetMapping("FrontSide/index-4.html")
+  @GetMapping("F/index-4.html")
   public String index4Page() {
-    return "FrontSide/demoPage/index-4";
+    return "F/demoPage/index-4";
   }
 
-  @GetMapping("FrontSide/index-5.html")
+  @GetMapping("F/index-5.html")
   public String index5Page() {
-    return "FrontSide/demoPage/index-5";
+    return "F/demoPage/index-5";
   }
 
-  @GetMapping("FrontSide/index-6.html")
+  @GetMapping("F/index-6.html")
   public String index6Page() {
-    return "FrontSide/demoPage/index-6";
+    return "F/demoPage/index-6";
   }
 
-  @GetMapping("FrontSide/cart.html")
+  @GetMapping("F/cart.html")
   public String cartPage() {
-    return "FrontSide/demoPage/cart";
+    return "F/demoPage/cart";
   }
 
-  @GetMapping("FrontSide/blog.html")
+  @GetMapping("F/blog.html")
   public String blogPage() {
-    return "FrontSide/demoPage/blog";
+    return "F/demoPage/blog";
   }
 
-  @GetMapping("FrontSide/blog-2-col.html")
+  @GetMapping("F/blog-2-col.html")
   public String blog2Page() {
-    return "FrontSide/demoPage/blog-2-col";
+    return "F/demoPage/blog-2-col";
   }
 
-  @GetMapping("FrontSide/blog-2-col-mas.html")
+  @GetMapping("F/blog-2-col-mas.html")
   public String blog2masPage() {
-    return "FrontSide/demoPage/blog-2-col-mas";
+    return "F/demoPage/blog-2-col-mas";
   }
 
-  @GetMapping("FrontSide/blog-3-col.html")
+  @GetMapping("F/blog-3-col.html")
   public String blog3Page() {
-    return "FrontSide/demoPage/blog-3-col";
+    return "F/demoPage/blog-3-col";
   }
 
-  @GetMapping("FrontSide/blog-details.html")
+  @GetMapping("F/blog-details.html")
   public String blogDetailsPage() {
-    return "FrontSide/demoPage/blog-details";
+    return "F/demoPage/blog-details";
   }
 
 
-  @GetMapping("FrontSide/blog-left-sidebar.html")
+  @GetMapping("F/blog-left-sidebar.html")
   public String blogLeftSideBarPage() {
-    return "FrontSide/demoPage/blog-left-sidebar";
+    return "F/demoPage/blog-left-sidebar";
   }
 
-  @GetMapping("FrontSide/blog-no-sidebar.html")
+  @GetMapping("F/blog-no-sidebar.html")
   public String blogLeftNoBarPage() {
-    return "FrontSide/demoPage/blog-no-sidebar";
+    return "F/demoPage/blog-no-sidebar";
   }
 
-  @GetMapping("FrontSide/checkout.html")
+  @GetMapping("F/checkout.html")
   public String checkOutPage() {
-    return "FrontSide/demoPage/checkout";
+    return "F/demoPage/checkout";
   }
 
-  @GetMapping("FrontSide/contact.html")
+  @GetMapping("F/contact.html")
   public String contactPage() {
-    return "FrontSide/demoPage/contact";
+    return "F/demoPage/contact";
   }
 
-  @GetMapping("FrontSide/error.html")
+  @GetMapping("F/error.html")
   public String errorPage() {
-    return "FrontSide/demoPage/error";
+    return "F/demoPage/error";
   }
 
-  @GetMapping("FrontSide/login.html")
+  @GetMapping("F/login.html")
   public String loginPage() {
-    return "FrontSide/demoPage/login";
+    return "F/demoPage/login";
   }
 
 
-  @GetMapping("FrontSide/register.html")
+  @GetMapping("F/register.html")
   public String registerPage() {
-    return "FrontSide/demoPage/register";
+    return "F/demoPage/register";
   }
 
-  @GetMapping("FrontSide/product-details.html")
+  @GetMapping("F/product-details.html")
   public String productDetailsPage() {
-    return "FrontSide/demoPage/product-details";
+    return "F/demoPage/product-details";
   }
 
-  @GetMapping("FrontSide/shop.html")
+  @GetMapping("F/shop.html")
   public String shopPage() {
-    return "FrontSide/demoPage/shop";
+    return "F/demoPage/shop";
   }
 
-  @GetMapping("FrontSide/shop-3-col.html")
+  @GetMapping("F/shop-3-col.html")
   public String shop3ColPage() {
-    return "FrontSide/demoPage/shop-3-col";
+    return "F/demoPage/shop-3-col";
   }
 
-  @GetMapping("FrontSide/shop-4-col.html")
+  @GetMapping("F/shop-4-col.html")
   public String shop4ColPage() {
-    return "FrontSide/demoPage/shop-4-col";
+    return "F/demoPage/shop-4-col";
   }
 
-  @GetMapping("FrontSide/shop-right-sidebar.html")
+  @GetMapping("F/shop-right-sidebar.html")
   public String shopRightSidebarPage() {
-    return "FrontSide/demoPage/shop-right-sidebar";
+    return "F/demoPage/shop-right-sidebar";
   }
 
 
-  @GetMapping("FrontSide/wishlist.html")
+  @GetMapping("F/wishlist.html")
   public String wishListPage() {
-    return "FrontSide/demoPage/wishlist";
+    return "F/demoPage/wishlist";
   }
 
 

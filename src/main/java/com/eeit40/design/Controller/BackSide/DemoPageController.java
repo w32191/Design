@@ -13,149 +13,150 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DemoPageController {
 
 
-  @GetMapping(path = {"/BackSide/","BackSide/index.html"})
+  @GetMapping(path = {"/B/","B/index.html"})
   public String indexPage() {
-    return "BackSide/demoPage/index";
+    return "B/demoPage/index";
   }
 
-  @GetMapping("BackSide/app-email.html")
+  @GetMapping("B/app-email.html")
   public String appEmailPage() {
-    return "BackSide/demoPage/app-email";
+    return "B/demoPage/app-email";
   }
 
-  @GetMapping("BackSide/app-event-calender.html")
+  @GetMapping("B/app-event-calender.html")
   public String appEventCalenderPage() {
-    return "BackSide/demoPage/app-event-calender";
+    return "B/demoPage/app-event-calender";
   }
 
-  @GetMapping("BackSide/app-profile.html")
+  @GetMapping("B/app-profile.html")
   public String appProfilePage() {
-    return "BackSide/demoPage/app-profile";
+    return "B/demoPage/app-profile";
   }
 
-  @GetMapping("BackSide/app-widget-card.html")
+  @GetMapping("B/app-widget-card.html")
   public String appWidgetCardPage() {
-    return "BackSide/demoPage/app-widget-card";
+    return "B/demoPage/app-widget-card";
   }
 
-  @GetMapping("BackSide/blank.html")
+  @GetMapping("B/blank.html")
   public String blankPage() {
-    return "BackSide/demoPage/blank";
+    return "B/demoPage/blank";
   }
 
-  @GetMapping("BackSide/chart-flot.html")
+
+  @GetMapping("B/chart-flot.html")
   public String chartFlotPage() {
-    return "BackSide/demoPage/chart-flot";
+    return "B/demoPage/chart-flot";
   }
 
-  @GetMapping("BackSide/font-themify.html")
+  @GetMapping("B/font-themify.html")
   public String fontThemifyPage() {
-    return "BackSide/demoPage/font-themify";
+    return "B/demoPage/font-themify";
   }
 
-  @GetMapping("BackSide/form-basic.html")
+  @GetMapping("B/form-basic.html")
   public String formBasicPage() {
-    return "BackSide/demoPage/form-basic";
+    return "B/demoPage/form-basic";
   }
 
-  @GetMapping("BackSide/form-validation.html")
+  @GetMapping("B/form-validation.html")
   public String formValidationPage() {
-    return "BackSide/demoPage/form-validation";
+    return "B/demoPage/form-validation";
   }
 
-  @GetMapping("BackSide/page-login.html")
+  @GetMapping("B/page-login.html")
   public String loginPage() {
-    return "BackSide/demoPage/page-login";
+    return "B/demoPage/page-login";
   }
 
-  @GetMapping("BackSide/page-register.html")
+  @GetMapping("B/page-register.html")
   public String registerPage() {
-    return "BackSide/demoPage/page-register";
+    return "B/demoPage/page-register";
   }
 
-  @GetMapping("BackSide/page-reset-password.html")
+  @GetMapping("B/page-reset-password.html")
   public String resetPasswordPage() {
-    return "BackSide/demoPage/page-reset-password";
+    return "B/demoPage/page-reset-password";
   }
 
-  @GetMapping("BackSide/table-basic.html")
+  @GetMapping("B/table-basic.html")
   public String tableBasicPage() {
-    return "BackSide/demoPage/table-basic";
+    return "B/demoPage/table-basic";
   }
 
-  @GetMapping("BackSide/table-export.html")
+  @GetMapping("B/table-export.html")
   public String tableExportPage() {
-    return "BackSide/demoPage/table-export";
+    return "B/demoPage/table-export";
   }
 
-  @GetMapping("BackSide/table-jsgrid.html")
+  @GetMapping("B/table-jsgrid.html")
   public String tableJsgridPage() {
-    return "BackSide/demoPage/table-jsgrid";
+    return "B/demoPage/table-jsgrid";
   }
 
-  @GetMapping("BackSide/table-row-select.html")
+  @GetMapping("B/table-row-select.html")
   public String tableRowSelectPage() {
-    return "BackSide/demoPage/table-row-select";
+    return "B/demoPage/table-row-select";
   }
 
-  @GetMapping("BackSide/uc-calendar.html")
+  @GetMapping("B/uc-calendar.html")
   public String ucCalendarPage() {
-    return "BackSide/demoPage/uc-calendar";
+    return "B/demoPage/uc-calendar";
   }
 
-  @GetMapping("BackSide/ui-alerts.html")
+  @GetMapping("B/ui-alerts.html")
   public String uiAlertsPage() {
-    return "BackSide/demoPage/ui-alerts";
+    return "B/demoPage/ui-alerts";
   }
 
-  @GetMapping("BackSide/ui-button.html")
+  @GetMapping("B/ui-button.html")
   public String uiButtonPage() {
-    return "BackSide/demoPage/ui-button";
+    return "B/demoPage/ui-button";
   }
 
-  @GetMapping("BackSide/ui-dropdown.html")
+  @GetMapping("B/ui-dropdown.html")
   public String uiDropdownPage() {
-    return "BackSide/demoPage/ui-dropdown";
+    return "B/demoPage/ui-dropdown";
   }
 
-  @GetMapping("BackSide/ui-images.html")
+  @GetMapping("B/ui-images.html")
   public String uiImagesPage() {
-    return "BackSide/demoPage/ui-images";
+    return "B/demoPage/ui-images";
   }
 
-  @GetMapping("BackSide/ui-navbar.html")
+  @GetMapping("B/ui-navbar.html")
   public String uiNavbarPage() {
-    return "BackSide/demoPage/ui-navbar";
+    return "B/demoPage/ui-navbar";
   }
 
-  @GetMapping("BackSide/ui-panels.html")
+  @GetMapping("B/ui-panels.html")
   public String uiPanelsPage() {
-    return "BackSide/demoPage/ui-panels";
+    return "B/demoPage/ui-panels";
   }
 
-  @GetMapping("BackSide/ui-progressbar.html")
+  @GetMapping("B/ui-progressbar.html")
   public String uiProgressbarPage() {
-    return "BackSide/demoPage/ui-progressbar";
+    return "B/demoPage/ui-progressbar";
   }
 
-  @GetMapping("BackSide/ui-timeline.html")
+  @GetMapping("B/ui-timeline.html")
   public String uiTimelinePage() {
-    return "BackSide/demoPage/ui-timeline";
+    return "B/demoPage/ui-timeline";
   }
 
-  @GetMapping("BackSide/ui-typography.html")
+  @GetMapping("B/ui-typography.html")
   public String uiTypographyPage() {
-    return "BackSide/demoPage/ui-typography";
+    return "B/demoPage/ui-typography";
   }
 
-  @GetMapping("BackSide/ui-user-card.html")
+  @GetMapping("B/ui-user-card.html")
   public String uiUserCardPage() {
-    return "BackSide/demoPage/ui-user-card";
+    return "B/demoPage/ui-user-card";
   }
 
-  @GetMapping("BackSide/vector-map.html")
+  @GetMapping("B/vector-map.html")
   public String vectorMapPage() {
-    return "BackSide/demoPage/vector-map";
+    return "B/demoPage/vector-map";
   }
 
 }
