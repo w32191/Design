@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "account")
@@ -29,6 +30,7 @@ public class Account {
   private String email;
 
   @NotNull(message = "密碼欄不可空白")
+  @Size(min = 6 , max = 20 , message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
 
