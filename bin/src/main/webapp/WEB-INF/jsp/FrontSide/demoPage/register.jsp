@@ -51,8 +51,6 @@
                     <div class="basic-login">
                         <h3 class="text-center mb-60">Signup From Here</h3>
                         <form action="#">
-                            <label for="name">Username <span>**</span></label>
-                            <input id="name" type="text" placeholder="Enter Username"/>
                             <label for="email-id">Email Address <span>**</span></label>
                             <input id="email-id" type="text" placeholder="Email address..."/>
                             <label for="pass">Password <span>**</span></label>
