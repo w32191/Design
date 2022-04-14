@@ -73,32 +73,31 @@
                                     <!-- /# column -->
                                 </div>
 
-                                <div id="container">
-                                    <table id="table_id" class="display responsive nowrap">
+                                <div class="container" align="center">
+                                    <table id="table_id" class="display" >
                                         <thead>
-                                            <!-- 標題欄位 -->
                                             <tr>
-                                                <th>問題類型</th>
-                                                <th>問題</th>
-                                                <th>答案</th>
+                                                <th width="200px">問題類型
+                                                <th width="50px">問題
+                                                <th width="80px">回答
                                             </tr>
                                         </thead>
+                                        
                                         <tbody>
-                                            <!-- 資料內容 -->
+                                        <c:forEach items="${cqs}" var="cq"> 
                                             <tr>
-                                                <td>Row 1 Data 1</td>
-                                                <td>Row 1 Data 2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Row 2 Data 1</td>
-                                                <td>Row 2 Data 2</td>
-                                            </tr>
+                                                    <td>${cq.question}
+                                                    <td>${cq.question}
+                                                    <td>${cq.answer}
+                                                    <td><a href=# ><button type="button">更新</button></a>
+                                                    <td><a href=# ><button id="deleteButton" type="button">刪除</button></a>
+                                                </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
-
-
-
-                                </div>
+                                    </div>
+                                
+                            
 
 
                                 <!-- /# row -->
