@@ -33,6 +33,9 @@ public class Account {
   @Size(min = 6 , max = 20 , message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
+  
+  @Column(name = "salt")
+  private String salt;
 
   @Column(name = "permission")
   private Integer permission;
@@ -115,4 +118,13 @@ public class Account {
   public void setId(Integer id) {
     this.id = id;
   }
+
+public String getSalt() {
+	return salt;
+}
+
+public void setSalt(String salt) {
+	this.salt = salt;
+}
+  
 }

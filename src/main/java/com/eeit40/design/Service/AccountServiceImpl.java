@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.eeit40.design.Dao.AccountRepository;
 import com.eeit40.design.Entity.Account;
+import com.eeit40.design.vo.AccountVO;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -14,26 +15,14 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountRepository accountDao;
 	
-	
+	@Autowired
+	private AccountService accountService;
 
-	public void insertAccount(Account account) {
-		accountDao.save(account);
-	}
 	
-	public String getPassword(String pwd) {
-		return pwd;
-	}
-	
-	public Optional<Account> findByEmail(String email) {
+	public AccountVO login(Account account) {
+		return null;
 		
-		Optional<Account> option = accountDao.findByEmail(email);
-		
-		if(option == null ) {
-			return null;
-		}
-		return option;
 	}
-	
 
 	
 	
