@@ -1,14 +1,15 @@
 package com.eeit40.design.Service;
 
+import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import java.util.List;
-import org.springframework.data.domain.Page;
 
 public interface ActivityService {
 
 
-
   List<Activity> findAll();
 
+  List<ActivityDto> findAllDto();
 
+  boolean deleteByID(int id);
 }

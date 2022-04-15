@@ -8,6 +8,7 @@ public class UniversalPageController {
 
   @GetMapping("/B/Activity")
   public String activityPage(){
-    return "redirect:/B/Activity/findAllByPage";
+    return "redirect:/B/Activity/findAll";
   }
+
 }

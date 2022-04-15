@@ -38,8 +38,8 @@
                         <div class="page-title">
                             <h1>Hello, <span>Welcome Here</span></h1>
                             <button type="button"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"><i
-                                    class="ti-plus"></i>Primary
+                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                <i class="ti-plus"></i>新增活動
                             </button>
                         </div>
                     </div>
@@ -72,39 +72,35 @@
                                         <tr>
                                             <th>#</th>
                                             <th>主題</th>
+                                            <th>圖片</th>
                                             <th>類型</th>
                                             <th>折扣</th>
                                             <th>起始日</th>
                                             <th>結束日</th>
-                                            <th>#</th>
-                                            <th>主題</th>
-                                            <th>類型</th>
-                                            <th>折扣</th>
-                                            <th>起始日</th>
-                                            <th>結束日</th>
+                                            <th>刪除</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${activities}" var="ac">
                                             <tr>
-
-                                                <th scope="row">${ac.id}</th>
-                                                <td>${ac.subject}</td>
+                                                <th scope="row" class="col-lg">${ac.id}</th>
+                                                <td class="col-lg">${ac.subject}</td>
+                                                <td><img
+                                                        src="data:image/jpeg;base64,${ac.imgBase64Str}"
+                                                        alt=""/>
+                                                </td>
                                                 <td><span
                                                         class="badge badge-primary">Discount</span>
                                                 </td>
-                                                <td class="color-danger">${ac.discountPercentage}%</td>
-                                                <td>${ac.startDate}</td>
-                                                <td>${ac.endDate}</td>
-                                                <th scope="row">${ac.id}</th>
-                                                <td>${ac.subject}</td>
-                                                <td><span
-                                                        class="badge badge-primary">Discount</span>
-                                                </td>
-                                                <td class="color-danger">${ac.discountPercentage}%</td>
+                                                <td class="color-danger col-lg">${ac.discountPercentage}%</td>
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
 
+                                                <td>
+                                                    <button type="button"
+                                                            class="btn btn-danger delete">刪除
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -117,9 +113,29 @@
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>新增活動</h4>
+                            </div>
+                            <div class="card-body">
 
-                <!-- Footer -->
-                <jsp:include page="../IncludePage/layoutPage/footerPage.jsp"/>
+                                <form method="POST" enctype="multipart/form-data"
+                                      id="insertActivityForm">
+                                    <label for="subject">活動主題:</label>
+                                    <input type="text" name="subject" id="subject"/><br/>
+                                    <label for="uploadFile">上傳圖片</label>
+                                    <input type="file" name="files" id="uploadFile"><br/>
+                                </form>
+                                <!-- button 不能放在form裏面 -->
+                                <button id="ajaxBtn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <%--  <jsp:include page="../IncludePage/layoutPage/footerPage.jsp"/> --%>
             </section>
         </div>
     </div>
@@ -135,11 +151,36 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="${contextRoot}/static/back/universal/Activity.js"></script>
 <script>
-  $(document).ready(function () {
-    $('#table_data').DataTable({});
+  $('#ajaxBtn').click(function (event) {
+    send();
   });
+
+  function send() {
+    const dataFile = new FormData();
+
+    const data = {
+      subject: $('#subject').val()
+    }
+    dataFile.append("file", $('#uploadFile')[0].files[0]);
+    dataFile.append("json", JSON.stringify(data));
+
+    $.ajax({
+      type: "POST",
+      url: "insertActivity",
+      data: dataFile,
+      processData: false, //防止jquery將data變成query String
+      contentType: false,
+      success: function (res) {
+      },
+      error: function (e) {
+      }
+    });
+  }
 </script>
+
 </body>
+
 
 </html>
