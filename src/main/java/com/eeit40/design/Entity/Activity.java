@@ -1,5 +1,6 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,21 +43,14 @@ public class Activity {
   @Column(name = "photo")
   private byte[] photo;
 
-  @ManyToMany
+  @JsonIgnore
+  @ManyToMany(cascade = {javax.persistence.CascadeType.ALL})
   @JoinTable(name = "activities_product",
-      joinColumns = @JoinColumn(name = "fk_activities_id"),
-      inverseJoinColumns = @JoinColumn(name = "fk_product_id"))
+      joinColumns = @JoinColumn(name = "fk_activities_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "fk_product_id", referencedColumnName = "id"))
   private Set<Product> products = new LinkedHashSet<>();
 
   public Activity() {
-  }
-
-  public Set<Product> getProducts() {
-    return products;
-  }
-
-  public void setProducts(Set<Product> products) {
-    this.products = products;
   }
 
   public byte[] getPhoto() {
@@ -113,5 +107,26 @@ public class Activity {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public Set<Product> getProducts() {
+    return products;
+  }
+
+  public void setProducts(Set<Product> products) {
+    this.products = products;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("Activity{");
+    sb.append("id=").append(id);
+    sb.append(", subject='").append(subject).append('\'');
+    sb.append(", content='").append(content).append('\'');
+    sb.append(", discountPercentage=").append(discountPercentage);
+    sb.append(", startDate=").append(startDate);
+    sb.append(", endDate=").append(endDate);
+    sb.append('}');
+    return sb.toString();
   }
 }

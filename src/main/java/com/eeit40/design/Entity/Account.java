@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "account")
@@ -21,11 +24,18 @@ public class Account {
   @Column(name = "id", nullable = false)
   private Integer id;
 
+  @NotNull(message = "信箱欄不可空白")
+  @Email(message = "請輸入信箱帳號")
   @Column(name = "email", length = 60)
   private String email;
 
+  @NotNull(message = "密碼欄不可空白")
+  @Size(min = 6 , max = 20 , message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
+  
+  @Column(name = "salt")
+  private String salt;
 
   @Column(name = "permission")
   private Integer permission;
@@ -108,4 +118,13 @@ public class Account {
   public void setId(Integer id) {
     this.id = id;
   }
+
+public String getSalt() {
+	return salt;
+}
+
+public void setSalt(String salt) {
+	this.salt = salt;
+}
+  
 }
