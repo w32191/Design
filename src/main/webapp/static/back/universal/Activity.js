@@ -1,7 +1,7 @@
 $(function () {
   $('#table_data').DataTable({
-
   });
+
 
   let id;
   $('.btn.btn-danger.delete').click(function () {
