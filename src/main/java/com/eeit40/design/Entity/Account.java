@@ -30,7 +30,7 @@ public class Account {
   private String email;
 
   @NotNull(message = "密碼欄不可空白")
-  @Size(min = 6 , max = 20 , message = "密碼長度不符合")
+  @Size(min = 6 , max = 16 , message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
   
@@ -119,12 +119,19 @@ public class Account {
     this.id = id;
   }
 
-public String getSalt() {
+	public String getSalt() {
 	return salt;
 }
 
 public void setSalt(String salt) {
 	this.salt = salt;
+}
+
+@Override
+public String toString() {
+	return "Account [id=" + id + ", email=" + email + ", pwd=" + pwd + ", salt=" + salt + ", permission=" + permission
+			+ ", questions=" + questions + ", members=" + members + ", orderInformations=" + orderInformations
+			+ ", shoppingCards=" + shoppingCards + "]";
 }
   
 }
