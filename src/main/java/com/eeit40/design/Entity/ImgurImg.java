@@ -1,5 +1,6 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "imgurImg")
@@ -31,6 +33,7 @@ public class ImgurImg {
   @Column(name = "type", length = 50)
   private String type;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_activity_id")
   private Activity fkActivity;

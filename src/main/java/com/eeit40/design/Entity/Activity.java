@@ -1,7 +1,8 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -35,23 +36,23 @@ public class Activity {
   @Column(name = "discount_percentage")
   private Integer discountPercentage;
 
+  @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss") // 序列化後的格式
   @Column(name = "start_date")
-  private LocalDate startDate;
+  private LocalDateTime startDate;
 
+  @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss")
   @Column(name = "end_date")
-  private LocalDate endDate;
+  private LocalDateTime endDate;
 
   @Column(name = "photo")
   private byte[] photo;
 
-  @JsonIgnore
   @ManyToMany(cascade = {javax.persistence.CascadeType.ALL})
   @JoinTable(name = "activities_product",
       joinColumns = @JoinColumn(name = "fk_activities_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "fk_product_id", referencedColumnName = "id"))
   private Set<Product> products = new LinkedHashSet<>();
 
-  @JsonIgnore
   @OneToMany(mappedBy = "fkActivity")
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
 
@@ -74,19 +75,19 @@ public class Activity {
     this.photo = photo;
   }
 
-  public LocalDate getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDate endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
 
-  public LocalDate getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(LocalDate startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
 
@@ -139,6 +140,12 @@ public class Activity {
     sb.append(", discountPercentage=").append(discountPercentage);
     sb.append(", startDate=").append(startDate);
     sb.append(", endDate=").append(endDate);
+    sb.append(", photo=").append(Arrays.toString(photo));
+    sb.append(", products=[");
+    for (Product product : products) {
+      sb.append("{id:").append(product.getId()).append("},");
+    }
+    sb.append("], imgurImgs=").append(imgurImgs);
     sb.append('}');
     return sb.toString();
   }

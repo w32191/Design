@@ -3,7 +3,9 @@ package com.eeit40.design.Dto;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Entity.Product;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,8 +17,8 @@ public class ActivityDto implements Serializable {
   private String subject;
   private String content;
   private Integer discountPercentage;
-  private LocalDate startDate;
-  private LocalDate endDate;
+  private LocalDateTime startDate;
+  private LocalDateTime endDate;
   private String imgBase64Str;
   private List<Integer> productIdList;
   private Set<ImgurImg> imgs;
@@ -25,8 +27,7 @@ public class ActivityDto implements Serializable {
   }
 
   public ActivityDto(Integer id, String subject, String content, Integer discountPercentage,
-      LocalDate startDate, LocalDate endDate, Set<ImgurImg> imgs,
-      Set<Product> products) {
+      LocalDateTime startDate, LocalDateTime endDate, Set<ImgurImg> imgs, Set<Product> products) {
     this.id = id;
     this.subject = subject;
     this.content = content;
@@ -74,19 +75,19 @@ public class ActivityDto implements Serializable {
     this.discountPercentage = discountPercentage;
   }
 
-  public LocalDate getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(LocalDate startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
 
-  public LocalDate getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDate endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
 
@@ -103,7 +104,6 @@ public class ActivityDto implements Serializable {
   }
 
   public void setProductIdList(Set<Product> products) {
-
     List<Integer> productsId = new ArrayList<>();
     for (Product product : products) {
       productsId.add(product.getId());
@@ -117,5 +117,19 @@ public class ActivityDto implements Serializable {
 
   public void setImgs(Set<ImgurImg> imgs) {
     this.imgs = imgs;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("ActivityDto{");
+    sb.append("id=").append(id);
+    sb.append(", subject='").append(subject).append('\'');
+    sb.append(", content='").append(content).append('\'');
+    sb.append(", discountPercentage=").append(discountPercentage);
+    sb.append(", startDate=").append(startDate);
+    sb.append(", endDate=").append(endDate);
+    sb.append(", imgBase64Str='").append(imgBase64Str).append('\'');
+    sb.append('}');
+    return sb.toString();
   }
 }

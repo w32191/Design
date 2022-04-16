@@ -1,15 +1,23 @@
 package com.eeit40.design.Service.Impl;
 
 import com.eeit40.design.Dao.ActivityRepository;
+import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.ImgurImg;
+import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
+import com.eeit40.design.util.ImgurUtil;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -17,6 +25,10 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Autowired
   private ActivityRepository activityRepository;
+  @Autowired
+  private ProductRepository productRepository;
+  @Autowired
+  private ImgurUtil imgurUtil;
 
   @Override
   public List<Activity> findAll() {
@@ -63,6 +75,32 @@ public class ActivityServiceImpl implements ActivityService {
     // 查一次結果如果是空的，表示刪除成功
     return findResult.isEmpty();
 
+  }
+
+  @Override
+  public boolean insertActivity(ActivityDto dto, MultipartFile file) throws IOException {
+
+    Activity activity = new Activity();
+    activity.setSubject(dto.getSubject());
+    activity.setContent(dto.getContent());
+    activity.setDiscountPercentage(dto.getDiscountPercentage());
+    activity.setStartDate(dto.getStartDate());
+    activity.setEndDate(dto.getEndDate());
+    Set<Product> products;
+    if (!dto.getProductIdList().isEmpty()) {
+      products = new LinkedHashSet<>();
+      // 因前端傳來的只有 此活動相關的商品ＩＤ，
+      for (Integer productId : dto.getProductIdList()) {
+        Product product = new Product();
+        product.setId(productId);
+        products.add(product);
+      } // end of for()
+      activity.setProducts(products);
+    } // end of if()
+    Set<ImgurImg> imgs = new LinkedHashSet<>();
+    imgs.add(imgurUtil.uploadImg(file));
+
+    return true;
   }
 
 }

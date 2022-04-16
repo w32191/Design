@@ -133,6 +133,9 @@
                                       id="insertActivityForm">
                                     <label for="subject">活動主題:</label>
                                     <input type="text" name="subject" id="subject"/><br/>
+                                    <label>開始日：
+                                        <input type="datetime-local" name="startDate" id="startDate">
+                                    </label><br/>
                                     <label for="uploadFile">上傳圖片</label>
                                     <input type="file" name="files" id="uploadFile"><br/>
                                 </form>
@@ -169,10 +172,13 @@
     const dataFile = new FormData();
 
     const data = {
-      subject: $('#subject').val()
+      subject: $('#subject').val(),
+      startDate:$('#startDate').val(),
+      products: [{id: 1}, {id: 2}]
     }
     dataFile.append("file", $('#uploadFile')[0].files[0]);
-    dataFile.append("json", JSON.stringify(data));
+    dataFile.append("data", JSON.stringify(data));
+    console.log(JSON.stringify(data));
 
     $.ajax({
       type: "POST",
@@ -181,7 +187,7 @@
       processData: false, //防止jquery將data變成query String
       contentType: false,
       success: function (res) {
-        console.log(res.link);
+        console.log(res);
       },
       error: function (e) {
       }
