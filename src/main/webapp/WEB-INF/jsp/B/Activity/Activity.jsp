@@ -74,7 +74,6 @@
                                             <th>主題</th>
                                             <th>圖片</th>
                                             <th>類型</th>
-                                            <th>折扣</th>
                                             <th>起始日</th>
                                             <th>結束日</th>
                                             <th>刪除</th>
@@ -85,17 +84,26 @@
                                             <tr>
                                                 <th scope="row" class="col-lg">${ac.id}</th>
                                                 <td class="col-lg">${ac.subject}</td>
-                                                <td><img
-                                                        src="data:image/jpeg;base64,${ac.imgBase64Str}"
-                                                        alt=""/>
-                                                </td>
-                                                <td><span
-                                                        class="badge badge-primary">Discount</span>
-                                                </td>
+                                                <c:choose>
+                                                    <c:when test="${ac.imgs.size() != 0 }">
+                                                        <c:forEach items="${ac.imgs}" var="img"
+                                                                   begin="0" end="0">
+                                                            <td>
+                                                                <img src="${img.link}" alt=""
+                                                                     width="500"/>
+                                                            </td>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td>
+                                                            <img src="" alt="沒有圖片" width="500"/>
+                                                        </td>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                                 <td class="color-danger col-lg">${ac.discountPercentage}%</td>
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
-
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-danger delete">刪除
@@ -173,6 +181,7 @@
       processData: false, //防止jquery將data變成query String
       contentType: false,
       success: function (res) {
+        console.log(res.link);
       },
       error: function (e) {
       }

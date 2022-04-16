@@ -1,5 +1,6 @@
 package com.eeit40.design.Dto;
 
+import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Entity.Product;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,12 +19,13 @@ public class ActivityDto implements Serializable {
   private LocalDate endDate;
   private String imgBase64Str;
   private List<Integer> productIdList;
+  private Set<ImgurImg> imgs;
 
   public ActivityDto() {
   }
 
   public ActivityDto(Integer id, String subject, String content, Integer discountPercentage,
-      LocalDate startDate, LocalDate endDate, byte[] photo,
+      LocalDate startDate, LocalDate endDate, Set<ImgurImg> imgs,
       Set<Product> products) {
     this.id = id;
     this.subject = subject;
@@ -31,7 +33,8 @@ public class ActivityDto implements Serializable {
     this.discountPercentage = discountPercentage;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.imgBase64Str = Base64Utils.encodeToString(photo);
+    this.imgs = imgs;
+
     List<Integer> productsId = new ArrayList<>();
     for (Product product : products) {
       productsId.add(product.getId());
@@ -108,19 +111,11 @@ public class ActivityDto implements Serializable {
     this.productIdList = productsId;
   }
 
-  @Override
-  public String toString() {
-    final StringBuilder sb = new StringBuilder("ActivityDto{");
-    sb.append("id=").append(id);
-    sb.append(", subject='").append(subject).append('\'');
-    sb.append(", content='").append(content).append('\'');
-    sb.append(", discountPercentage=").append(discountPercentage);
-    sb.append(", startDate=").append(startDate);
-    sb.append(", endDate=").append(endDate);
-    sb.append(", imgBase64Str='").append(imgBase64Str).append('\'');
-    sb.append(", productIdList=").append(productIdList);
-    sb.append('}');
-    return sb.toString();
+  public Set<ImgurImg> getImgs() {
+    return imgs;
   }
 
+  public void setImgs(Set<ImgurImg> imgs) {
+    this.imgs = imgs;
+  }
 }

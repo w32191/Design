@@ -36,7 +36,7 @@ public class ActivityServiceImpl implements ActivityService {
 
         ActivityDto dto = new ActivityDto(activity.getId(), activity.getSubject(),
             activity.getContent(), activity.getDiscountPercentage(), activity.getStartDate(),
-            activity.getEndDate(), activity.getPhoto(), activity.getProducts());
+            activity.getEndDate(), activity.getImgurImgs(), activity.getProducts());
 
         dtoList.add(dto);
       }
