@@ -1,6 +1,5 @@
 package com.eeit40.design.Service;
 
-import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +10,7 @@ public interface ActivityService {
 
   List<Activity> findAll();
 
-  List<ActivityDto> findAllDto();
-
   boolean deleteByID(int id);
 
-  boolean insertActivity(ActivityDto dto, MultipartFile file) throws IOException;
+  boolean insertActivity(Activity activity, MultipartFile file) throws IOException;
 }

@@ -1,13 +1,14 @@
 package com.eeit40.design.Controller.BackSide;
 
-import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,28 +35,29 @@ public class ActivityController {
   @Autowired
   private Jackson2ObjectMapperBuilder objectMapperBuilder;
 
+
   @GetMapping("/B/Activity/findAll")
   public ModelAndView findAll(ModelAndView modelAndView) {
-    List<ActivityDto> list = service.findAllDto();
+    List<Activity> list = service.findAll();
 
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
     return modelAndView;
   }
 
-  @GetMapping("/B/Activity/findAllList")
+  @GetMapping("/B/Activity/findAllAjax")
   @ResponseBody
-  public String findAllList() throws JsonProcessingException {
+  public String findAllAjax() throws JsonProcessingException {
     ObjectMapper mapper = objectMapperBuilder.build();
     List<Activity> result = service.findAll();
     for (Activity activity : result) {
       for (Product product : activity.getProducts()) {
         entityManager.detach(product);
       }
-      log.info(activity.getStartDate().toString());
     }
-
-    return mapper.writeValueAsString(result);
+    Map<String ,List<Activity>> map = new HashMap<>();
+    map.put("data",result);
+    return mapper.writeValueAsString(map);
   }
 
 
@@ -71,14 +74,14 @@ public class ActivityController {
   @PostMapping(value = "/B/Activity/insertActivity")
   @ResponseBody
   public Activity insertActivity(
-//      @RequestParam("file") MultipartFile file,
+      @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = objectMapperBuilder.build();
     Activity activity = objectMapper.readValue(dataJsonStr, Activity.class);
-//    service.insertActivity(dto, file);
+    // SamWang To-Do View 傳過來的資料待處理
 
-    log.info(activity.toString());
+    //  service.insertActivity(dto, file);
     return activity;
   }
 }

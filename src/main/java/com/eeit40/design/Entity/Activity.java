@@ -1,7 +1,6 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,13 +35,12 @@ public class Activity {
   @Column(name = "discount_percentage")
   private Integer discountPercentage;
 
-  @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss") // 序列化後的格式
+   // 設定序列化後的格式
   @Column(name = "start_date")
-  private LocalDateTime startDate;
+  private LocalDate startDate;
 
-  @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss")
   @Column(name = "end_date")
-  private LocalDateTime endDate;
+  private LocalDate endDate;
 
   @Column(name = "photo")
   private byte[] photo;
@@ -53,7 +51,7 @@ public class Activity {
       inverseJoinColumns = @JoinColumn(name = "fk_product_id", referencedColumnName = "id"))
   private Set<Product> products = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkActivity")
+  @OneToMany(fetch = javax.persistence.FetchType.EAGER, mappedBy = "fkActivity")
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
 
   public Activity() {
@@ -75,19 +73,19 @@ public class Activity {
     this.photo = photo;
   }
 
-  public LocalDateTime getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDateTime endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
-  public LocalDateTime getStartDate() {
+  public LocalDate getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(LocalDateTime startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
