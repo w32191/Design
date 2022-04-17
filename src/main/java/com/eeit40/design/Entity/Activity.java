@@ -51,7 +51,7 @@ public class Activity {
       inverseJoinColumns = @JoinColumn(name = "fk_product_id", referencedColumnName = "id"))
   private Set<Product> products = new LinkedHashSet<>();
 
-  @OneToMany(fetch = javax.persistence.FetchType.EAGER, mappedBy = "fkActivity")
+  @OneToMany(mappedBy = "fkActivity", cascade = javax.persistence.CascadeType.ALL)
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
 
   public Activity() {

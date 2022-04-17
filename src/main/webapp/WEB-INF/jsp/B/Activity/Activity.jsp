@@ -83,7 +83,7 @@
                                         <tbody>
                                         <c:forEach items="${activities}" var="ac">
                                             <tr>
-                                                <td>${ac.id}</td>
+                                                <td class="showId">${ac.id}</td>
                                                 <td>${ac.subject}</td>
                                                 <c:choose>
                                                     <c:when test="${ac.imgurImgs.size() != 0 }">
@@ -147,10 +147,10 @@
                                     </label><br/>
                                     <label>折扣％：
                                         <input type="number" placeholder="95％" step="10"
-                                               min="1" max="99">
+                                               min="1" max="99" id="insertdiscountPercentage">
                                     </label><br/>
                                     <label>開始日：
-                                        <input type="datetime-local" name="startDate"
+                                        <input type="date" name="startDate"
                                                id="insertStartDate">
                                     </label><br/>
                                     <label>結束日：

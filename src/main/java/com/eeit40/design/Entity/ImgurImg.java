@@ -34,7 +34,7 @@ public class ImgurImg {
   private String type;
 
   @JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL)
   @JoinColumn(name = "fk_activity_id")
   private Activity fkActivity;
 

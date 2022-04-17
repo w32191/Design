@@ -6,6 +6,7 @@ import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,6 @@ public class ActivityController {
   @GetMapping("/B/Activity/findAll")
   public ModelAndView findAll(ModelAndView modelAndView) {
     List<Activity> list = service.findAll();
-
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
     return modelAndView;
@@ -55,21 +55,19 @@ public class ActivityController {
         entityManager.detach(product);
       }
     }
-    Map<String ,List<Activity>> map = new HashMap<>();
-    map.put("data",result);
+    Map<String, List<Activity>> map = new HashMap<>();
+    map.put("data", result);
     return mapper.writeValueAsString(map);
   }
 
-
   @GetMapping("/B/Activity/deleteApi/{id}")
   @ResponseBody
-  public String deleteById(@PathVariable Integer id) {
+  public String deleteById(@PathVariable Integer id) throws MalformedURLException {
     if (service.deleteByID(id)) {
       return "DeleteSuccess";
     }
     return "DeleteFail";
   }
-
 
   @PostMapping(value = "/B/Activity/insertActivity")
   @ResponseBody
@@ -79,9 +77,9 @@ public class ActivityController {
 
     ObjectMapper objectMapper = objectMapperBuilder.build();
     Activity activity = objectMapper.readValue(dataJsonStr, Activity.class);
-    // SamWang To-Do View 傳過來的資料待處理
 
-    //  service.insertActivity(dto, file);
-    return activity;
+    return service.insertActivity(activity, file);
   }
+
+
 }
