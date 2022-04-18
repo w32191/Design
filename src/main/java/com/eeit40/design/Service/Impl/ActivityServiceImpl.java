@@ -4,7 +4,7 @@ import com.eeit40.design.Dao.ActivityRepository;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Service.ActivityService;
-import com.eeit40.design.util.ImgurUtil;
+import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.LinkedHashSet;

@@ -1,4 +1,4 @@
-package com.eeit40.design.util;
+package com.eeit40.design.Util;
 
 import com.eeit40.design.Entity.ImgurImg;
 import com.fasterxml.jackson.databind.JsonNode;
