@@ -16,7 +16,8 @@ import java.util.Optional;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -25,8 +26,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @PropertySource("classpath:imgur.properties")
-@Slf4j
 public class ActivityServiceImpl implements ActivityService {
+
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private ActivityRepository activityRepository;
@@ -66,9 +68,9 @@ public class ActivityServiceImpl implements ActivityService {
       for (ImgurImg img : activity.getImgurImgs()) {
         // 刪除imgur圖床的照片
         if (imgurUtil.delete(img.getDeleteHash())) {
-          log.info("id:" + img.getId() + "imgur圖床照片刪除成功");
+          log.info("id:" + img.getId() + " imgur圖床照片刪除成功");
         } else {
-          log.info("id:" + img.getId() + "imgur圖床照片刪除失敗");
+          log.info("id:" + img.getId() + " imgur圖床照片刪除失敗");
         }
       }
 

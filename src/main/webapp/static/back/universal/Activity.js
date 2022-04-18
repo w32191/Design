@@ -54,7 +54,9 @@ $(function () {
       success: function (res) {
         console.log(res)
       },
-      error: function (e) {
+      error: function (res) {
+        let result = JSON.parse(res.responseText);
+        console.log(result.data.error);
       }
     });
   }
