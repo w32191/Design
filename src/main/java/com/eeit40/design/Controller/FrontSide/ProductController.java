@@ -18,6 +18,19 @@ public class ProductController {
   @Autowired
   private ProductRepository dao;
 
+
+  @GetMapping("/product/getById/{id}")
+  public Product getById(@PathVariable Integer id){
+     Product resPro = dao.findProductById(id);
+    return (Product) resPro;
+  }
+
+public Product updateProduct(@RequestBody Product pro){
+    Product resPro = dao.save(pro);
+    return resPro;
+}
+
+
   @PostMapping("/product/insert")
   public Product insertProduct(@RequestBody Product pro) {
     Product resPro = dao.save(pro);
