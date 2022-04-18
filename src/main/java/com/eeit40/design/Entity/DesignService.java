@@ -45,6 +45,17 @@ public class DesignService {
   @OneToMany(mappedBy = "fkDesignService")
   private Set<DesignReview> designReviews = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "fkDesignService")
+  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
+
+  public Set<ImgurImg> getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
+
   public DesignService() {
   }
 

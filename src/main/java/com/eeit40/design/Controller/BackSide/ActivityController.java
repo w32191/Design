@@ -78,9 +78,10 @@ public class ActivityController {
 
     System.out.println(dataJsonStr);
     ObjectMapper objectMapper = objectMapperBuilder.build();
-//    Activity activity = objectMapper.readValue(dataJsonStr, Activity.class);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     Map<String, byte[]> imgs;
+
+    //  若前端有傳MultipartFile來
     if (file != null) {
       imgs = new HashMap<String, byte[]>();
       imgs.put(file.getOriginalFilename(), file.getBytes());

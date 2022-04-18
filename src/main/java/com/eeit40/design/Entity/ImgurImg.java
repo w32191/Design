@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,46 +20,110 @@ public class ImgurImg {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
+  @Column(name = "id")
   private Integer id;
 
-  @Column(name = "link", nullable = false)
+  @Column(name = "link")
   private String link;
 
-  @Column(name = "delete_hash", nullable = false)
+  @Column(name = "delete_hash")
   private String deleteHash;
 
   @Column(name = "img_name")
   private String imgName;
 
-  @Column(name = "type", length = 50)
+  @Column(name = "file_type", length = 50)
   private String type;
+
+  @Column(name = "authorization_account", length = 50)
+  private String authorizationAccount;
+
+  @Column(name = "\"order\"")
+  private Integer order;
+
+  @Lob
+  @Column(name = "message")
+  private String message;
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL)
   @JoinColumn(name = "fk_activity_id")
   private Activity fkActivity;
 
-  @Column(name = "authorization_account", length = 50)
-  private String authorizationAccount;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_account_id")
+  private Account fkAccount;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_member_id")
+  private Member fkMember;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_brand_id")
+  private Brand fkBrand;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_design_service_id")
+  private DesignService fkDesignService;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_case_id")
+  private Case fkCase;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_product_id")
+  private Product fkProduct;
+
+  public Product getFkProduct() {
+    return fkProduct;
+  }
+
+  public void setFkProduct(Product fkProduct) {
+    this.fkProduct = fkProduct;
+  }
+
+  public Case getFkCase() {
+    return fkCase;
+  }
+
+  public void setFkCase(Case fkCase) {
+    this.fkCase = fkCase;
+  }
+
+  public DesignService getFkDesignService() {
+    return fkDesignService;
+  }
+
+  public void setFkDesignService(DesignService fkDesignService) {
+    this.fkDesignService = fkDesignService;
+  }
+
+  public Brand getFkBrand() {
+    return fkBrand;
+  }
+
+  public void setFkBrand(Brand fkBrand) {
+    this.fkBrand = fkBrand;
+  }
+
+  public Member getFkMember() {
+    return fkMember;
+  }
+
+  public void setFkMember(Member fkMember) {
+    this.fkMember = fkMember;
+  }
+
+  public Account getFkAccount() {
+    return fkAccount;
+  }
+
+  public void setFkAccount(Account fkAccount) {
+    this.fkAccount = fkAccount;
+  }
+
 
   public ImgurImg() {
-  }
-
-  public String getAuthorizationAccount() {
-    return authorizationAccount;
-  }
-
-  public void setAuthorizationAccount(String authorizationAccount) {
-    this.authorizationAccount = authorizationAccount;
-  }
-
-  public Activity getFkActivity() {
-    return fkActivity;
-  }
-
-  public void setFkActivity(Activity fkActivity) {
-    this.fkActivity = fkActivity;
   }
 
   public Integer getId() {
@@ -99,4 +166,35 @@ public class ImgurImg {
     this.type = type;
   }
 
+  public String getAuthorizationAccount() {
+    return authorizationAccount;
+  }
+
+  public void setAuthorizationAccount(String authorizationAccount) {
+    this.authorizationAccount = authorizationAccount;
+  }
+
+  public Integer getOrder() {
+    return order;
+  }
+
+  public void setOrder(Integer order) {
+    this.order = order;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public Activity getFkActivity() {
+    return fkActivity;
+  }
+
+  public void setFkActivity(Activity fkActivity) {
+    this.fkActivity = fkActivity;
+  }
 }

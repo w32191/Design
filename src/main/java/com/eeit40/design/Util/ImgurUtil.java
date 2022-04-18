@@ -20,11 +20,28 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /*
+  參考資料：
  imgur api:
   https://apidocs.imgur.com/#c85c9dfc-7487-4de2-9ecd-66f727cf3139
 
+  imgur 檔案格式限制：
+  https://help.imgur.com/hc/en-us/articles/115000083326-What-files-can-I-upload-Is-there-a-size-limit-
+
   取得imgur OAuth2 Token:
   https://medium.com/front-end-augustus-study-notes/imgur-api-3a41f2848bb8
+ */
+
+/*
+ 程式說明：
+
+ 在使用 上傳/刪除 方法前，須先用 setAuthorization()，注入認證的Token。 (可參考ActivityServiceImpl那隻程式中,上面的設定)
+
+ 上傳圖片(upload) : 需要傳入參數(String 檔案名稱,byte[] 檔案的byte[])，
+ (前端傳入的FormData，可用MultipartFile.getOriginalFilename(),MultipartFile.getBytes()取得)
+ 回傳：ImgurImg (裡面只有：link、deleteHash、imgName、type、authorizationAccount)
+
+ 刪除圖片(delete) : 需要傳入參數(String deleteHash)， 須從DB取出deleteHash字串，串在URL後，發起 DELETE Request
+ 回傳：boolean
  */
 
 
@@ -40,16 +57,12 @@ public class ImgurUtil {
   @Value("${DELETE_URL}")
   private String DELETE_URL;
 
-  // 在new ImgurUtil時，就要給他驗證的Token
   private String authorization;
 
   public ImgurUtil() {
   }
 
-  public ImgurUtil(String authorization) {
-    this.authorization = authorization;
-  }
-
+  // 可透過Setter給每個人不同的
   public void setAuthorization(String authorization) {
     this.authorization = authorization;
   }
@@ -99,6 +112,7 @@ public class ImgurUtil {
     return img;
   }
 
+
   // 刪除圖床照片
   public boolean delete(String deleteHash) throws MalformedURLException {
     log.info("照片刪除中....");
@@ -114,7 +128,6 @@ public class ImgurUtil {
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<String> result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
         String.class);
-    log.info("Delete resp body:" + result.getBody());
     // SamWang To-Do: 刪除失敗的Exception尚未處理
     return result.getStatusCodeValue() == 200;
   }

@@ -38,10 +38,12 @@ public class ActivityServiceImpl implements ActivityService {
   private ImgurUtil imgurUtil;
 
   // 認證放在imgur.properties，class上方要加 @PropertySource("classpath:imgur.properties")
+  // ${ 中間放imgur.properties中的key值 }
   @Value("${AUTHORIZATION_w32191w32191}")
   private String authorization;
 
   // 整個Bean初始化中的執行順序：Constructor -> @Autowired/@Value -> @PostConstruct
+  // 若不使用 @PostConstruct則需要在呼叫imgurUtil的方法前，用setter注入
   @PostConstruct
   public void init() {
     // imgurUtil沒有認證字串，setter注入

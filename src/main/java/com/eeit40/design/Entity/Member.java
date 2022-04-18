@@ -59,6 +59,17 @@ public class Member {
   @OneToMany(mappedBy = "fkMember")
   private Set<DesignReview> designReviews = new LinkedHashSet<>();
 
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkMember")
+  private ImgurImg imgurImgs;
+
+  public ImgurImg getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(ImgurImg imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
+
   public Member() {
   }
 

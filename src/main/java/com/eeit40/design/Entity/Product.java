@@ -90,6 +90,16 @@ public class Product {
   @OneToMany(mappedBy = "fkProduct")
   private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "fkProduct")
+  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
+
+  public Set<ImgurImg> getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
 
 
   public Product() {

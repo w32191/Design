@@ -55,6 +55,9 @@ public class Case {
   @OneToMany(mappedBy = "fkCases")
   private Set<CasesPhoto> casesPhotos = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "fkCase")
+  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
+
   public Case() {
   }
 
@@ -144,6 +147,14 @@ public class Case {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public Set<ImgurImg> getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
+    this.imgurImgs = imgurImgs;
   }
 
 }

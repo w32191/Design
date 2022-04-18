@@ -52,6 +52,9 @@ public class Account {
   @OneToMany(mappedBy = "fkAccount")
   private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
+  private ImgurImg imgurImgs;
+
   public Account() {
   }
 
@@ -126,5 +129,14 @@ public class Account {
   public void setSalt(String salt) {
     this.salt = salt;
   }
+
+  public ImgurImg getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(ImgurImg imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
+
 
 }
