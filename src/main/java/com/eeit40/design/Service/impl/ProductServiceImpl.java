@@ -1,4 +1,4 @@
-package com.eeit40.design.Service.impl;
+package com.eeit40.design.Service.Impl;
 
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Entity.Product;
