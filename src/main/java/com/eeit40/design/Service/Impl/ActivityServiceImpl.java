@@ -1,8 +1,11 @@
 package com.eeit40.design.Service.Impl;
 
 import com.eeit40.design.Dao.ActivityRepository;
+import com.eeit40.design.Dao.ProductRepository;
+import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.ImgurImg;
+import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
@@ -11,14 +14,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
+@PropertySource("classpath:imgur.properties")
 @Slf4j
 public class ActivityServiceImpl implements ActivityService {
 
@@ -26,7 +32,21 @@ public class ActivityServiceImpl implements ActivityService {
   private ActivityRepository activityRepository;
 
   @Autowired
+  private ProductRepository productRepository;
+
+  @Autowired
   private ImgurUtil imgurUtil;
+
+  // 認證放在imgur.properties，class上方要加 @PropertySource("classpath:imgur.properties")
+  @Value("${AUTHORIZATION_w32191w32191}")
+  private String authorization;
+
+  // 整個Bean初始化中的執行順序：Constructor -> @Autowired/@Value -> @PostConstruct
+  @PostConstruct
+  public void init() {
+    // imgurUtil沒有認證字串，setter注入
+    this.imgurUtil.setAuthorization(authorization);
+  }
 
   @Override
   public List<Activity> findAll() {
@@ -67,20 +87,43 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   @Override
-  public Activity insertActivity(Activity activity, MultipartFile file) throws IOException {
-    Set<ImgurImg> imgs = new LinkedHashSet<>();
-    // SamWang To-Do: 目前只讓使用者傳一張照片，多張照片這邊要再調整
+  public Activity insertActivity(ActivityDto dto) throws IOException {
+    Set<Product> products = null;
+    Set<ImgurImg> imgs = null;
+    Activity activity = new Activity();
+
+    activity.setSubject(dto.getSubject());
+    activity.setContent(dto.getContent());
+    activity.setDiscountPercentage(dto.getDiscountPercentage());
+    activity.setStartDate(dto.getStartDate());
+    activity.setEndDate(dto.getEndDate());
 
     //如果使用者有上傳圖片的話
-    if (file != null) {
-      ImgurImg img = imgurUtil.uploadImg(file);
-      // 關聯活動
-      img.setFkActivity(activity);
-      imgs.add(img);
-    }
+    if (dto.getImgs() != null) {
+      imgs = new LinkedHashSet<>();
+      for (String fileName : dto.getImgs().keySet()) {
+        ImgurImg img = imgurUtil.uploadImg(fileName, dto.getImgs().get(fileName));
+        // 圖片關聯活動
+        img.setFkActivity(activity);
+        imgs.add(img);
+      } // end of img for()
+    } // end of img if()
 
-    //關聯圖片
+    //如果使用者有勾選，此活動的商品
+    if (dto.getProductId() != null) {
+      products = new LinkedHashSet<>();
+      for (Integer productId : dto.getProductId()) {
+        Optional<Product> result = productRepository.findById(productId);
+        if (result.isPresent()) {
+          products.add(result.get());
+        }
+      } // end of product for()
+    } // end of product if()
+
+    //活動關聯圖片
     activity.setImgurImgs(imgs);
+    //活動關聯商品
+    activity.setProducts(products);
     // 回傳新增後的Activity
     return activityRepository.save(activity);
   }

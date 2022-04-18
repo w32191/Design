@@ -1,5 +1,6 @@
 package com.eeit40.design.Controller.BackSide;
 
+import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
@@ -75,10 +76,19 @@ public class ActivityController {
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
 
+    System.out.println(dataJsonStr);
     ObjectMapper objectMapper = objectMapperBuilder.build();
-    Activity activity = objectMapper.readValue(dataJsonStr, Activity.class);
+//    Activity activity = objectMapper.readValue(dataJsonStr, Activity.class);
+    ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    Map<String, byte[]> imgs;
+    if (file != null) {
+      imgs = new HashMap<String, byte[]>();
+      imgs.put(file.getOriginalFilename(), file.getBytes());
+      dto.setImgs(imgs);
+    }
 
-    return service.insertActivity(activity, file);
+    return service.insertActivity(dto);
+//    return service.insertActivity(activity, file);
   }
 
 

@@ -1,10 +1,10 @@
 package com.eeit40.design.Service;
 
+import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
-import org.springframework.web.multipart.MultipartFile;
 
 public interface ActivityService {
 
@@ -13,5 +13,5 @@ public interface ActivityService {
 
   boolean deleteByID(int id) throws MalformedURLException;
 
-  Activity insertActivity(Activity activity, MultipartFile file) throws IOException;
+  Activity insertActivity(ActivityDto dto) throws IOException;
 }

@@ -18,7 +18,6 @@ import org.springframework.util.Base64Utils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 
 /*
  imgur api:
@@ -34,32 +33,43 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class ImgurUtil {
 
-  // 設定直放在imgur.properties
-  @Value("${AUTHORIZATION}")
-  private String AUTHORIZATION;
-
+  // 設定值放在imgur.properties
   @Value("${UPLOAD_URL}")
   private String UPLOAD_URL;
 
   @Value("${DELETE_URL}")
   private String DELETE_URL;
 
-  // 上傳照片
-  public ImgurImg uploadImg(MultipartFile multipartFile) throws IOException {
+  // 在new ImgurUtil時，就要給他驗證的Token
+  private String authorization;
+
+  public ImgurUtil() {
+  }
+
+  public ImgurUtil(String authorization) {
+    this.authorization = authorization;
+  }
+
+  public void setAuthorization(String authorization) {
+    this.authorization = authorization;
+  }
+
+  // 上傳照片至圖床
+  public ImgurImg uploadImg(String fileName, byte[] imgBytes) throws IOException {
     log.info("照片上傳中....");
     // 將照片轉為Imgur API支援的base64字串
-    String imgBase64 = Base64Utils.encodeToString(multipartFile.getBytes());
+    String imgBase64 = Base64Utils.encodeToString(imgBytes);
 
     // 設定requestBody的內容
     MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
     requestBody.set("image", imgBase64);
     requestBody.set("type", "base64");
-    requestBody.set("name", multipartFile.getOriginalFilename());
+    requestBody.set("name", fileName);
 
     // 設定requestHeaders
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);  // multipart/form-data
-    headers.add("Authorization", AUTHORIZATION); // 加入Access Token
+    headers.add("Authorization", authorization); // 加入Access Token
 
     // 向ＡＰＩ發起post request,回傳結果轉為String
     HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
@@ -80,12 +90,16 @@ public class ImgurUtil {
       img.setLink(jsonNode.get("data").get("link").asText());
       img.setType(jsonNode.get("data").get("type").asText());
       img.setDeleteHash(jsonNode.get("data").get("deletehash").asText());
+      img.setAuthorizationAccount(jsonNode.get("data").get("account_url").asText());
+    } else {
+      log.info("上傳至imgur失敗，回傳null");
+      // SamWang To-Do: 上傳失敗的Exception尚未處理
     }
 
-    // SamWang To-Do: 上傳失敗的Exception尚未處理
     return img;
   }
 
+  // 刪除圖床照片
   public boolean delete(String deleteHash) throws MalformedURLException {
     log.info("照片刪除中....");
     // 先將要刪除的deleteHash串好
@@ -93,7 +107,7 @@ public class ImgurUtil {
 
     // 設定requestHeaders
     HttpHeaders headers = new HttpHeaders();
-    headers.add("Authorization", AUTHORIZATION); // 加入Access Token
+    headers.add("Authorization", authorization); // 加入Access Token
     HttpEntity<Object> request = new HttpEntity<>(null, headers);
 
     // 向ＡＰＩ發起Delete Request
@@ -103,4 +117,5 @@ public class ImgurUtil {
     log.info("Delete resp body:" + result.getBody());
     return result.getStatusCodeValue() == 200;
   }
+
 }

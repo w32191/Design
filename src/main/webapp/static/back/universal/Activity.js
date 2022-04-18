@@ -1,14 +1,5 @@
 $(function () {
 
-  // $.ajax({
-  //   url: "findAllAjax",
-  //   type: "GET",
-  //   success: function (res) {
-  //   },
-  //   error: function (res) {
-  //   }
-  // });
-
   // 主要清單的DataTable
   $('#table_data').DataTable({});
 
@@ -17,21 +8,22 @@ $(function () {
   $('.btn.btn-danger.delete').click(function () {
     let deleteBtn = $(this);
     // SamWang To-Do: jQuery 尚未抓到ID的值
-    id = deleteBtn.closest('tr').text();
+    id = deleteBtn.parent('td').siblings('td:eq(0)').text();
     console.log(id);
     let urlStr = "deleteApi/" + id;
-    // console.log(id);
-    // $.ajax({
-    //   url: urlStr,
-    //   method: 'GET',
-    //   success: function (res) {
-    //     console.log(res);
-    //     deleteBtn.closest('tr').remove();
-    //   },
-    //   error: function (res) {
-    //     console.log(res);
-    //   }
-    // });
+    $.ajax({
+      url: urlStr,
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+        deleteBtn.closest('tr').remove();
+        window.alert('刪除成功');
+      },
+      error: function (res) {
+        console.log(res);
+        window.alert('刪除失敗');
+      }
+    });
   });
 
   // 新增活動功能

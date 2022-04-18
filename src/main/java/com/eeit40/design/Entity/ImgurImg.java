@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "imgurImg")
@@ -37,6 +36,20 @@ public class ImgurImg {
   @ManyToOne(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL)
   @JoinColumn(name = "fk_activity_id")
   private Activity fkActivity;
+
+  @Column(name = "authorization_account", length = 50)
+  private String authorizationAccount;
+
+  public ImgurImg() {
+  }
+
+  public String getAuthorizationAccount() {
+    return authorizationAccount;
+  }
+
+  public void setAuthorizationAccount(String authorizationAccount) {
+    this.authorizationAccount = authorizationAccount;
+  }
 
   public Activity getFkActivity() {
     return fkActivity;
