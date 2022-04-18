@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-imgurConfig.properties
+imgurConfigs.properties
 
 ### STS ###
 .apt_generated
