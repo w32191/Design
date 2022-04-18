@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-@PropertySource("classpath:imgur.properties")
+@PropertySource("classpath:imgurConfigs.properties")
 public class ActivityServiceImpl implements ActivityService {
 
   private final Logger log = LoggerFactory.getLogger(this.getClass());

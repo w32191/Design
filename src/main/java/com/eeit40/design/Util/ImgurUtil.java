@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
@@ -46,9 +47,10 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Component
-@PropertySource("classpath:imgur.properties")
-@Slf4j
+@PropertySource("classpath:imgurConfigs.properties")
 public class ImgurUtil {
+
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   // 設定值放在imgur.properties
   @Value("${UPLOAD_URL}")
