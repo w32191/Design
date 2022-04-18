@@ -30,10 +30,10 @@ public class Account {
   private String email;
 
   @NotNull(message = "密碼欄不可空白")
-  @Size(min = 6 , max = 20 , message = "密碼長度不符合")
+  @Size(min = 6, max = 20, message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
-  
+
   @Column(name = "salt")
   private String salt;
 
@@ -49,17 +49,17 @@ public class Account {
   @OneToMany(mappedBy = "fkAccount")
   private Set<OrderInformation> orderInformations = new LinkedHashSet<>();
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
-  private ShoppingCard shoppingCards;
+  @OneToMany(mappedBy = "fkAccount")
+  private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
   public Account() {
   }
 
-  public ShoppingCard getShoppingCards() {
+  public Set<ShoppingCard> getShoppingCards() {
     return shoppingCards;
   }
 
-  public void setShoppingCards(ShoppingCard shoppingCards) {
+  public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
     this.shoppingCards = shoppingCards;
   }
 
@@ -119,12 +119,12 @@ public class Account {
     this.id = id;
   }
 
-public String getSalt() {
-	return salt;
-}
+  public String getSalt() {
+    return salt;
+  }
 
-public void setSalt(String salt) {
-	this.salt = salt;
-}
-  
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
+
 }
