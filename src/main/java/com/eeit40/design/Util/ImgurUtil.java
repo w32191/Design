@@ -115,7 +115,7 @@ public class ImgurUtil {
     ResponseEntity<String> result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
         String.class);
     log.info("Delete resp body:" + result.getBody());
-    // SamWang To-Do: 上傳失敗的Exception尚未處理
+    // SamWang To-Do: 刪除失敗的Exception尚未處理
     return result.getStatusCodeValue() == 200;
   }
 
