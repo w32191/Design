@@ -3,7 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-imgur.properties
+
+imgurConfig.properties
 
 ### STS ###
 .apt_generated
