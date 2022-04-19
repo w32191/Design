@@ -1,4 +1,4 @@
-package com.eeit40.design.utils;
+package com.eeit40.design.Util;
 
 public class ValidFormat {
 
