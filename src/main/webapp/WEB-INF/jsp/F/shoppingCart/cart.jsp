@@ -62,16 +62,16 @@
                                 <tbody>
                                 
                                <c:forEach var="cart" items="${cart}">
-                               <div>${cart.fkProduct.image01}</div>
+                               <%-- <div>${cart.fkProduct.image01}</div> --%>
                                 <tr>
                                 	<input type="hidden" value="${cart.id}" name="cartid"/>
                                     <td class="product-thumbnail"><a href="product-details.html"><img src="data:image/jpeg;base64,${cart.fkProduct.image01}" alt=""></a></td>
                                     <td class="product-name"><a href="product-details.html">${cart.fkProduct.name}</a></td>
-                                    <td class="product-price"><span class="price" id="price">$${cart.fkProduct.price}</span></td>
+                                    <td class="product-price"><span class="price">$${cart.fkProduct.price}</span></td>
                                     <td class="product-quantity">
                                         <div class="cart-plus-minus"><input type="text" class="amount" value="${cart.tempMount}" name="uamount"/></div>
                                     </td>
-                                    <td class="product-subtotal"><span class="tprice" id="tprice"></span></td>
+                                    <td class="product-subtotal"><span class="tprice"></span></td>
                                     <td class="product-remove"><a href="deleteshoppingcart?id=${cart.id}"><i class="fa fa-times"></i></a></td>
                                 </tr>
                                </c:forEach>
@@ -122,19 +122,25 @@
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
 
 <script>
-        /* $(document).ready(function(){
+
+	$(function(){
+       
+		function price(){
            
            let ProductRow=$(".amount").closest("tr"); //找到目前數量所屬tr
             console.log(ProductRow);
             let qty=$(".amount").val();  //數量
+            console.log(qty);
             let price=ProductRow.find(".price").text();  //單價
-            console.log(qty,price);
+            console.log(price);
             let s_price=price*qty; //金額
             ProductRow.find(".tprice").text(s_price); //小計
     
-        }); */
+        };
+        price();
+	});
         
-        $(".amount").on("change keyup", function(){
+      /*  $(".amount").on("change keyup", function(){
             console.log(this);
             let ProductRow=$(this).closest("tr"); //找到目前數量所屬tr
              console.log(ProductRow);
@@ -146,9 +152,7 @@
              ProductRow.find(".tprice").text(s_price);
 
              console.log($(".tprice"));
-
-             
-         });
+         }); */
 </script>
 
 </body>

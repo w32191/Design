@@ -28,14 +28,17 @@ public interface ShoppingCardRepository extends JpaRepository<ShoppingCard, Inte
 	@Query(value="update shopping_card set temp_mount=:amount where id=:id",nativeQuery = true)
 	public void editAmountByCartId(@Param("amount") int tempMount,@Param("id") int id);
 	
-//	//刪除
-//	@Transactional
-//	@Modifying
-//	@Query(value="delete from shopping_card where id=:id",nativeQuery = true)
-//	public void deleteShoppingCratByCartId(@Param("id") int id);
-	
 	//新增
 	@Query(value="insert into shopping_card(temp_mount,fk_account_id,fk_product_id) values(:amount,:accountId,:productId)",nativeQuery = true)
 	public void addProductToShoppingCart(@Param("amount") int tempMount,@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
 	
+	//確認購物車品項是否重複
+	@Query(value="select * from shopping_card where fk_account_id = :accountId and fk_product_id = :productId",nativeQuery = true)
+	public List<ShoppingCard> checkShoppingCart(@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
+	
+	//購物車品項重覆累加
+	@Transactional
+	@Modifying
+	@Query(value="update shopping_card set temp_mount=:amount where fk_account_id = :accountId and fk_product_id = :productId",nativeQuery = true)
+	public void editAmountByProduct(@Param("amount") int tempMount,@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
 }

@@ -69,23 +69,43 @@ public class ShoppingCartController {
 	}
 	
 	//新增
-	@PostMapping("F/addshoppingcart")
-	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
+//	@PostMapping("F/addshoppingcart")
+//	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
+//		
+//		String tempMount = request.getParameter("amount");
+////		String  sessionId= request.getRequestedSessionId();
+//		String fkProduct = request.getParameter("fkProduct");
+//		
+//	    int amount = Integer.valueOf(tempMount);
+////	    int accountId = Integer.valueOf(sessionId);
+//	    int productId = Integer.valueOf(fkProduct);
+//	    
+//	    int fakesessionid=2;
+//		
+//	    shoppingCartService.addProductToShoppingCart(amount, fakesessionid, productId);
+//	    
+//		return mav;
+//		
+//	} 
+	
+	//確認購物車品項是否重複
+	@PostMapping("F/addshoppingcart2")
+	public ModelAndView checkShoppingCart(ModelAndView mav,HttpServletRequest request) {
 		
-		String tempMount = request.getParameter("amount");
-//		String  sessionId= request.getRequestedSessionId();
+//		String id = request.getParameter("cartid");
+		String tempMount = request.getParameter("uamount");
 		String fkProduct = request.getParameter("fkProduct");
 		
-	    int amount = Integer.valueOf(tempMount);
-//	    int accountId = Integer.valueOf(sessionId);
-	    int productId = Integer.valueOf(fkProduct);
-	    
-	    int fakesessionid=2;
+//		int cartId = Integer.valueOf(id);
+		int amount = Integer.valueOf(tempMount);
+		int productId = Integer.valueOf(fkProduct);
 		
-	    shoppingCartService.addProductToShoppingCart(amount, fakesessionid, productId);
+	    int fakesessionid=2;
+	    
+	    shoppingCartService.checkShoppingCart(amount, fakesessionid, productId);
+//	    shoppingCartService.checkShoppingCart(fakesessionid, productId, amount, id);
 	    
 		return mav;
-		
-	} 
+	}
 	
 }
