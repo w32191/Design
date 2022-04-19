@@ -10,10 +10,15 @@ import org.springframework.data.repository.query.Param;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
   @Query("from Product where categories= :categories")
-  public List<Product> findProductByCategories(@Param("categories") String categories);
+  List<Product> findProductByCategories(@Param("categories") String categories);
 
   @Query("from Product where name = :name")
-  public List<Product> findProductByName(@Param("name") String name);
+  List<Product> findProductByName(@Param("name") String name);
+
+  @Query("from Product  where id = :id")
+  Product findProductById(@Param("id")Integer Id);
+
+
 
 //  @Query("update from Product set name= :name ,  where id = :id")
 //  public Product updateProductById(Product pro);

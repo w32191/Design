@@ -1,19 +1,12 @@
 package com.eeit40.design.Entity;
 
-import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cases")
@@ -43,11 +36,20 @@ public class Case {
   @Column(name = "message")
   private String message;
 
-  @Column(name = "date_time")
-  private LocalDate dateTime;
+  @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "date_time", columnDefinition = "datetime")
+  private Date dateTime;
+
+  @PrePersist
+  public void onCreate(){
+    if(dateTime == null){
+      dateTime = new Date();
+    }
+  }
 
   @Column(name = "expiry_date")
-  private LocalDate expiryDate;
+  private Date expiryDate;
 
   @Column(name = "viewing_count")
   private Integer viewingCount;
@@ -59,6 +61,37 @@ public class Case {
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
 
   public Case() {
+  }
+
+  public Case(Integer id, Member fkMember, String name, String classification, String location, String caseEmail, String message, Date dateTime, Date expiryDate, Integer viewingCount, Set<CasesPhoto> casesPhotos) {
+    this.id = id;
+    this.fkMember = fkMember;
+    this.name = name;
+    this.classification = classification;
+    this.location = location;
+    this.caseEmail = caseEmail;
+    this.message = message;
+    this.dateTime = dateTime;
+    this.expiryDate = expiryDate;
+    this.viewingCount = viewingCount;
+    this.casesPhotos = casesPhotos;
+  }
+
+  @Override
+  public String toString() {
+    return "Case{" +
+            "id=" + id +
+            ", fkMember=" + fkMember +
+            ", name='" + name + '\'' +
+            ", classification='" + classification + '\'' +
+            ", location='" + location + '\'' +
+            ", caseEmail='" + caseEmail + '\'' +
+            ", message='" + message + '\'' +
+            ", dateTime=" + dateTime +
+            ", expiryDate=" + expiryDate +
+            ", viewingCount=" + viewingCount +
+            ", casesPhotos=" + casesPhotos +
+            '}';
   }
 
   public Set<CasesPhoto> getCasesPhotos() {
@@ -77,19 +110,19 @@ public class Case {
     this.viewingCount = viewingCount;
   }
 
-  public LocalDate getExpiryDate() {
+  public Date getExpiryDate() {
     return expiryDate;
   }
 
-  public void setExpiryDate(LocalDate expiryDate) {
+  public void setExpiryDate(Date expiryDate) {
     this.expiryDate = expiryDate;
   }
 
-  public LocalDate getDateTime() {
+  public Date getDateTime() {
     return dateTime;
   }
 
-  public void setDateTime(LocalDate dateTime) {
+  public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
 

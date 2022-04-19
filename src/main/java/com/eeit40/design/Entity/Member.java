@@ -1,5 +1,7 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -41,21 +43,27 @@ public class Member {
   @Column(name = "images")
   private byte[] images;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
   private Set<Punch> punches = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
   private Set<ChatRoom> chatRooms = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
   private Set<Case> cases = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
   private Set<ProductReview> productReviews = new LinkedHashSet<>();
 
+  @JsonIgnore
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkMember")
   private DesignService designServices;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
   private Set<DesignReview> designReviews = new LinkedHashSet<>();
 

@@ -1,5 +1,9 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -16,25 +20,27 @@ import javax.persistence.Table;
 @Table(name = "brand")
 public class Brand {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-  @Column(name = "brand_id")
-  private Integer brandId;
+    @Column(name = "brand_id")
+    private Integer brandId;
 
-  @Column(name = "name", length = 50)
-  private String name;
+    @Column(name = "name", length = 50)
+    private String name;
 
-  @Column(name = "img")
-  private byte[] img;
+    @Column(name = "img")
+    private byte[] img;
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "description")
+    private String description;
 
-  @OneToMany(mappedBy = "fkBrand")
-  private Set<Product> products = new LinkedHashSet<>();
+
+
+    @OneToMany(mappedBy = "fkBrand")
+    private Set<Product> products = new LinkedHashSet<>();
 
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkBrand")
   private ImgurImg imgurImgs;
@@ -42,49 +48,49 @@ public class Brand {
   public Brand() {
   }
 
-  public Set<Product> getProducts() {
-    return products;
-  }
+    public Set<Product> getProducts() {
+        return products;
+    }
 
-  public void setProducts(Set<Product> products) {
-    this.products = products;
-  }
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public byte[] getImg() {
-    return img;
-  }
+    public byte[] getImg() {
+        return img;
+    }
 
-  public void setImg(byte[] img) {
-    this.img = img;
-  }
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public Integer getBrandId() {
-    return brandId;
-  }
+    public Integer getBrandId() {
+        return brandId;
+    }
 
-  public void setBrandId(Integer brandId) {
-    this.brandId = brandId;
-  }
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
   public void setId(Integer id) {
     this.id = id;
@@ -97,4 +103,5 @@ public class Brand {
   public void setImgurImgs(ImgurImg imgurImgs) {
     this.imgurImgs = imgurImgs;
   }
+
 }

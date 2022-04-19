@@ -1,94 +1,97 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
 public class Product {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_brand_id")
-  private Brand fkBrand;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_brand_id")
+    private Brand fkBrand;
+    @Column(name = "product_id")
+    private Integer productId;
 
-  @Column(name = "product_id")
-  private Integer productId;
+    @Column(name = "name", length = 50)
+    private String name;
 
-  @Column(name = "name", length = 50)
-  private String name;
+    @Column(name = "description")
+    private String description;
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "price")
+    private Integer price;
 
-  @Column(name = "price")
-  private Integer price;
+    @Column(name = "categories", length = 50)
+    private String categories;
 
-  @Column(name = "categories", length = 50)
-  private String categories;
+    @Column(name = "stock")
+    private Integer stock;
 
-  @Column(name = "stock")
-  private Integer stock;
+    @Column(name = "model")
+    private String model;
 
-  @Column(name = "model")
-  private String model;
+    @Lob
+    @Column(name = "barcode")
+    private String barcode;
 
-  @Lob
-  @Column(name = "barcode")
-  private String barcode;
+    @Column(name = "views")
+    private Integer views;
 
-  @Column(name = "views")
-  private Integer views;
+    @Column(name = "avaliable")
+    private Integer avaliable;
 
-  @Column(name = "avaliable")
-  private Integer avaliable;
+    @Column(name = "added")
+    private LocalDate added;
 
-  @Column(name = "added")
-  private LocalDate added;
+    @Column(name = "image01", columnDefinition = "VARBINARY(MAX)")
+    private byte[] image01;
 
-  @Column(name = "image01",columnDefinition = "VARBINARY(MAX)")
-  private byte[] image01;
+    @Column(name = "image02", columnDefinition = "VARBINARY(MAX)")
+    private byte[] image02;
 
-  @Column(name = "image02",columnDefinition = "VARBINARY(MAX)")
-  private byte[] image02;
+    @Column(name = "image03", columnDefinition = "VARBINARY(MAX)")
+    private byte[] image03;
 
-  @Column(name = "image03",columnDefinition = "VARBINARY(MAX)")
-  private byte[] image03;
+    @Column(name = "image04", columnDefinition = "VARBINARY(MAX)")
+    private byte[] image04;
 
-  @Column(name = "image04",columnDefinition = "VARBINARY(MAX)")
-  private byte[] image04;
+    @ManyToMany(mappedBy = "products")
+    private Set<Activity> activities = new LinkedHashSet<>();
 
-  @ManyToMany(mappedBy = "products")
-  private Set<Activity> activities = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "fkProduct")
+    private Set<ProductImg> productImgs = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkProduct")
-  private Set<ProductImg> productImgs = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "fkProduct")
+    private Set<ProductReview> productReviews = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkProduct")
-  private Set<ProductReview> productReviews = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "fkProduct")
+    private Set<OrderList> orderLists = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkProduct")
-  private Set<OrderList> orderLists = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "fkProduct")
+    private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkProduct")
-  private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
+
+    public Product() {
+    }
+
+    public Set<ShoppingCard> getShoppingCards() {
+        return shoppingCards;
+    }
+
 
   @OneToMany(mappedBy = "fkProduct")
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
@@ -101,183 +104,177 @@ public class Product {
     this.imgurImgs = imgurImgs;
   }
 
+    public Set<OrderList> getOrderLists() {
+        return orderLists;
+    }
 
-  public Product() {
-  }
+    public void setOrderLists(Set<OrderList> orderLists) {
+        this.orderLists = orderLists;
+    }
 
-  public Set<ShoppingCard> getShoppingCards() {
-    return shoppingCards;
-  }
 
-  public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
-    this.shoppingCards = shoppingCards;
-  }
+    public Set<ProductReview> getProductReviews() {
+        return productReviews;
+    }
 
-  public Set<OrderList> getOrderLists() {
-    return orderLists;
-  }
+    public void setProductReviews(Set<ProductReview> productReviews) {
+        this.productReviews = productReviews;
+    }
 
-  public void setOrderLists(Set<OrderList> orderLists) {
-    this.orderLists = orderLists;
-  }
+    public Set<ProductImg> getProductImgs() {
+        return productImgs;
+    }
 
-  public Set<ProductReview> getProductReviews() {
-    return productReviews;
-  }
+    public void setProductImgs(Set<ProductImg> productImgs) {
+        this.productImgs = productImgs;
+    }
 
-  public void setProductReviews(Set<ProductReview> productReviews) {
-    this.productReviews = productReviews;
-  }
+    public Set<Activity> getActivities() {
+        return activities;
+    }
 
-  public Set<ProductImg> getProductImgs() {
-    return productImgs;
-  }
 
-  public void setProductImgs(Set<ProductImg> productImgs) {
-    this.productImgs = productImgs;
-  }
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
+    }
 
-  public Set<Activity> getActivities() {
-    return activities;
-  }
+    public LocalDate getAdded() {
+        return added;
+    }
 
-  public void setActivities(Set<Activity> activities) {
-    this.activities = activities;
-  }
+    public void setAdded(LocalDate added) {
+        this.added = added;
+    }
 
-  public LocalDate getAdded() {
-    return added;
-  }
+    public Integer getAvaliable() {
+        return avaliable;
+    }
 
-  public void setAdded(LocalDate added) {
-    this.added = added;
-  }
+    public void setAvaliable(Integer avaliable) {
+        this.avaliable = avaliable;
+    }
 
-  public Integer getAvaliable() {
-    return avaliable;
-  }
+    public Integer getViews() {
+        return views;
+    }
 
-  public void setAvaliable(Integer avaliable) {
-    this.avaliable = avaliable;
-  }
+    public void setViews(Integer views) {
+        this.views = views;
+    }
 
-  public Integer getViews() {
-    return views;
-  }
+    public String getBarcode() {
+        return barcode;
+    }
 
-  public void setViews(Integer views) {
-    this.views = views;
-  }
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
 
-  public String getBarcode() {
-    return barcode;
-  }
+    public String getModel() {
+        return model;
+    }
 
-  public void setBarcode(String barcode) {
-    this.barcode = barcode;
-  }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-  public String getModel() {
-    return model;
-  }
+    public Integer getStock() {
+        return stock;
+    }
 
-  public void setModel(String model) {
-    this.model = model;
-  }
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
-  public Integer getStock() {
-    return stock;
-  }
+    public String getCategories() {
+        return categories;
+    }
 
-  public void setStock(Integer stock) {
-    this.stock = stock;
-  }
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
 
-  public String getCategories() {
-    return categories;
-  }
+    public Integer getPrice() {
+        return price;
+    }
 
-  public void setCategories(String categories) {
-    this.categories = categories;
-  }
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
-  public Integer getPrice() {
-    return price;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setPrice(Integer price) {
-    this.price = price;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public Integer getProductId() {
+        return productId;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-  public Integer getProductId() {
-    return productId;
-  }
 
-  public void setProductId(Integer productId) {
-    this.productId = productId;
-  }
+    public Brand getFkBrand() {
+        return fkBrand;
+    }
 
-  public Brand getFkBrand() {
-    return fkBrand;
-  }
 
-  public void setFkBrand(Brand fkBrand) {
-    this.fkBrand = fkBrand;
-  }
+    public void setFkBrand(Brand fkBrand) {
+        this.fkBrand = fkBrand;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public byte[] getImage01() {
-    return image01;
-  }
+    public byte[] getImage01() {
+        return image01;
+    }
 
-  public void setImage01(byte[] image01) {
-    this.image01 = image01;
-  }
+    public void setImage01(byte[] image01) {
+        this.image01 = image01;
+    }
 
-  public byte[] getImage02() {
-    return image02;
-  }
+    public byte[] getImage02() {
+        return image02;
+    }
 
-  public void setImage02(byte[] image02) {
-    this.image02 = image02;
-  }
+    public void setImage02(byte[] image02) {
+        this.image02 = image02;
+    }
 
-  public byte[] getImage03() {
-    return image03;
-  }
+    public byte[] getImage03() {
+        return image03;
+    }
 
-  public void setImage03(byte[] image03) {
-    this.image03 = image03;
-  }
+    public void setImage03(byte[] image03) {
+        this.image03 = image03;
+    }
 
-  public byte[] getImage04() {
-    return image04;
-  }
+    public byte[] getImage04() {
+        return image04;
+    }
 
-  public void setImage04(byte[] image04) {
-    this.image04 = image04;
-  }
+
+    public void setImage04(byte[] image04) {
+        this.image04 = image04;
+    }
 }
+
