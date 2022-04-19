@@ -18,7 +18,7 @@ public class CommonQuestionController {
 	
 	
 	
-	@GetMapping("F/CommonQuestion.html")
+	@GetMapping("/F/CommonQuestion.html")
 	  public ModelAndView wishListPage2(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
 		//mav.getModel().put("cqs", cq); 

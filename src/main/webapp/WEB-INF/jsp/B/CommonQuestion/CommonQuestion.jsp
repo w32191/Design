@@ -77,16 +77,16 @@
                                     <table id="table_id" class="display" >
                                         <thead>
                                             <tr>
-                                                <th width="200px">問題類型
-                                                <th width="50px">問題
-                                                <th width="80px">回答
+                                                <th width="100px">問題類型
+                                                <th width="200px">問題
+                                                <th width="400px">回答
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
                                         <c:forEach items="${cqs}" var="cq"> 
                                             <tr>
-                                                    <td>${cq.question}
+                                                    <td>${cq.questionType}
                                                     <td>${cq.question}
                                                     <td>${cq.answer}
                                                     <td><a href=# ><button type="button">更新</button></a>
@@ -95,8 +95,46 @@
                                         </c:forEach>
                                         </tbody>
                                     </table>
+                                </div>
+                                
+
+                                <div class="container">
+                                    <p />
+                                    <div class="row justify-content-center">
+                                        <div class="col-9">
+                                            <div class="card">
+                                                <div class="card-header">新增問題</div>
+                                                <div class="card-body">
+                                
+                                                    <form:form class="form" method="POST" modelAttribute="commonQuestion">
+                                
+                                                        <!-- form:errors  bindingResult 回傳的物件 -->
+                                                        <form:errors path="text" />
+                                
+                                                        <div class="input-group">
+                                                            <form:textarea path="text" class="form-control"></form:textarea>
+                                                        </div>
+                                
+                                                        <input type="submit" name="submit" value="新增問題">
+                                                    </form:form>
+                                
+                                
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 
+                                    <div class="row justify-content-center">
+                                        <div class="col-9">
+                                            <div class="card">                                                
+                                                <div class="card-body">
+                                                    <c:out value="${lastMessage.text}" />
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             
 
 
