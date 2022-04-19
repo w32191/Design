@@ -104,6 +104,7 @@ public class Product {
         this.orderLists = orderLists;
     }
 
+
     public Set<ProductReview> getProductReviews() {
         return productReviews;
     }
@@ -123,6 +124,7 @@ public class Product {
     public Set<Activity> getActivities() {
         return activities;
     }
+
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
@@ -262,7 +264,9 @@ public class Product {
         return image04;
     }
 
+
     public void setImage04(byte[] image04) {
         this.image04 = image04;
     }
 }
+
