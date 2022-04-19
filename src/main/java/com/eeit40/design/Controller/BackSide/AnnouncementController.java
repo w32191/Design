@@ -19,7 +19,7 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService announcementService;
 	
-	@PostMapping("/message/add")
+	@PostMapping("/B/Announcement/message/add")
 	public ModelAndView addMessage(ModelAndView mav,@Valid @ModelAttribute(name="Announcement") Announcement anct, BindingResult br) {
 		
 		if(!br.hasErrors()) {
