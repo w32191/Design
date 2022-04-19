@@ -4,7 +4,6 @@ import com.eeit40.design.Entity.ImgurImg;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -90,14 +89,15 @@ public class ImgurUtil {
     // 向ＡＰＩ發起post request,回傳結果轉為String
     HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
     RestTemplate restTemplate = new RestTemplate();
-    String result = restTemplate.postForObject(UPLOAD_URL, request, String.class);
-    // 回傳範例：{"status":200,"success":true,"data":{"id":"s68wxgI","deletehash":"nZ6s4GOCYLzGwQM","account_id":112836003,"account_url":"w32191w32191","ad_type":null,"ad_url":null,"title":null,"description":null,"name":"平台.png","type":"image/png","width":6036,"height":976,"size":396218,"views":0,"section":null,"vote":null,"bandwidth":0,"animated":false,"favorite":false,"in_gallery":false,"in_most_viral":false,"has_sound":false,"is_ad":false,"nsfw":null,"link":"https://i.imgur.com/s68wxgI.png","tags":[],"datetime":1650097788,"mp4":"","hls":""}}
 
+    String result;
+    ImgurImg img = null;
+
+    result = restTemplate.postForObject(UPLOAD_URL, request, String.class);
+    // 回傳範例：{"status":200,"success":true,"data":{"id":"s68wxgI","deletehash":"nZ6s4GOCYLzGwQM","account_id":112836003,"account_url":"w32191w32191","ad_type":null,"ad_url":null,"title":null,"description":null,"name":"平台.png","type":"image/png","width":6036,"height":976,"size":396218,"views":0,"section":null,"vote":null,"bandwidth":0,"animated":false,"favorite":false,"in_gallery":false,"in_most_viral":false,"has_sound":false,"is_ad":false,"nsfw":null,"link":"https://i.imgur.com/s68wxgI.png","tags":[],"datetime":1650097788,"mp4":"","hls":""}}
     // 讀取回傳結果的nodetree
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(result);
-
-    ImgurImg img = null;
 
     if ((jsonNode.get("status").asText()).equals("200")) {
       log.info("成功上傳至imgur");
@@ -108,7 +108,7 @@ public class ImgurUtil {
       img.setDeleteHash(jsonNode.get("data").get("deletehash").asText());
       img.setAuthorizationAccount(jsonNode.get("data").get("account_url").asText());
     } else {
-      log.info("上傳至imgur失敗，回傳null");
+
       // SamWang To-Do: 上傳失敗的Exception尚未處理
     }
 
@@ -117,7 +117,9 @@ public class ImgurUtil {
 
 
   // 刪除圖床照片
-  public boolean delete(String deleteHash) throws MalformedURLException {
+  public boolean delete(String deleteHash) {
+    ResponseEntity<String> result = null;
+
     log.info("照片刪除中....");
     // 先將要刪除的deleteHash串好
     String targetUrl = DELETE_URL + deleteHash;
@@ -129,8 +131,9 @@ public class ImgurUtil {
 
     // 向ＡＰＩ發起Delete Request
     RestTemplate restTemplate = new RestTemplate();
-    ResponseEntity<String> result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
+    result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
         String.class);
+
     // SamWang To-Do: 刪除失敗的Exception尚未處理
     return result.getStatusCodeValue() == 200;
   }

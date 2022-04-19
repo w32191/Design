@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 
 @ControllerAdvice
-public class ImgurUtilExceptionHandler {
+public class ImgurExceptionHandler {
 
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -27,7 +28,10 @@ public class ImgurUtilExceptionHandler {
     ObjectMapper mapper = builder.build();
     JsonNode res = mapper.readTree(exception.getResponseBodyAsString());
 
-    return ResponseEntity.status(res.get("status").asInt())
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Location", "/Error");
+    // SamWang To-Do: ERROR Page 未完成
+    return ResponseEntity.status(res.get("status").asInt()).headers(headers)
         .body("Error:" + res.get("data").get("error").asText());
   }
 

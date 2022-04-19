@@ -114,6 +114,7 @@
                                                     <button type="button"
                                                             class="btn btn-danger delete">刪除
                                                     </button>
+<%--                                                    <a href="" class="btn btn-danger delete">刪除</a>--%>
                                                 </td>
                                             </tr>
                                         </c:forEach>

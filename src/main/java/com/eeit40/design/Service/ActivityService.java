@@ -11,7 +11,7 @@ public interface ActivityService {
 
   List<Activity> findAll();
 
-  boolean deleteByID(int id) throws MalformedURLException;
+  boolean deleteByID(int id);
 
   Activity insertActivity(ActivityDto dto) throws IOException;
 }

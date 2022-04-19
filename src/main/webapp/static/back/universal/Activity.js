@@ -7,9 +7,11 @@ $(function () {
   let id;
   $('.btn.btn-danger.delete').click(function () {
     let deleteBtn = $(this);
-    // SamWang To-Do: jQuery 尚未抓到ID的值
     id = deleteBtn.parent('td').siblings('td:eq(0)').text();
-    console.log(id);
+
+    // let urlStr = "delete/" + id;
+    // deleteBtn.attr("href",urlStr);
+
     let urlStr = "deleteApi/" + id;
     $.ajax({
       url: urlStr,
@@ -55,8 +57,7 @@ $(function () {
         console.log(res)
       },
       error: function (res) {
-        let result = JSON.parse(res.responseText);
-        console.log(result.data.error);
+        console.log(res.responseText);
       }
     });
   }

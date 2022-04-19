@@ -58,7 +58,7 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   @Override
-  public boolean deleteByID(int id) throws MalformedURLException {
+  public boolean deleteByID(int id) {
     Optional<Activity> findResult = activityRepository.findById(id);
 
     // 先確認是否有這個ID的Activity

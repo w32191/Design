@@ -48,6 +48,8 @@ public class ActivityController {
     return modelAndView;
   }
 
+
+  // 站未使用
   @GetMapping("/B/Activity/findAllAjax")
   @ResponseBody
   public String findAllAjax() throws JsonProcessingException {
@@ -63,9 +65,21 @@ public class ActivityController {
     return mapper.writeValueAsString(map);
   }
 
+  @GetMapping("/B/Activity/delete/{id}")
+  public ModelAndView deleteByIdView(ModelAndView mav, @PathVariable("id") Integer id)
+      throws MalformedURLException {
+    if (service.deleteByID(id)) {
+      mav.addObject("result","Success");
+
+    }
+    mav.setViewName("/B/Activity/Result");
+    return mav;
+  }
+
+
   @GetMapping("/B/Activity/deleteApi/{id}")
   @ResponseBody
-  public String deleteById(@PathVariable Integer id) throws MalformedURLException {
+  public String deleteById(@PathVariable Integer id){
     if (service.deleteByID(id)) {
       return "DeleteSuccess";
     }
