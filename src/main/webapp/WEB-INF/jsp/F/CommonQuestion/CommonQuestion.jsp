@@ -71,6 +71,9 @@
                                                     <div class="categories__list">
                                                         <ul>
                                                             <li><a href="#">${cq.answer}</a></li>
+                                                            <li><button class="shop-accordion-btn collapsed" data-toggle="collapse" data-target="#collapsetest${cq.id}" aria-expanded="false" aria-controls="collapsetest${cq.id}">
+                                                                ${cq.question}
+                                                            </button></li>
                                                         </ul>
                                                     </div>
                                                 </div>

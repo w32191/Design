@@ -1,4 +1,4 @@
-package com.eeit40.design.Controller.FrontSide;
+package com.eeit40.design.Controller.BackSide;
 
 import java.util.List;
 
@@ -8,25 +8,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit40.design.Entity.CommonQuestion;
-import com.eeit40.design.Service.CommonQuestionService;
+import com.eeit40.design.Service.CommonQuestionService2;
 
 @Controller
-public class CommonQuestionController {
+public class CommonQuestionBackController {
 
 	@Autowired
-	private CommonQuestionService cqsService;
+	private CommonQuestionService2 cqsService;
 	
 	
 	
-	@GetMapping("/F/CommonQuestion.html")
+	@GetMapping("/B/CommonQuestion.html")
 	  public ModelAndView wishListPage2(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
-		//mav.getModel().put("cqs", cq); 
-		mav.addObject("cqs", cq); //addObject作用跟getModel().put()是一樣的
-		mav.setViewName("/F/CommonQuestion/CommonQuestion");
+		mav.addObject("cqs", cq);		
+		mav.setViewName("/B/CommonQuestion/CommonQuestion");
 		
 	    return mav;
 	  }
+	
+	
 	
 	
 	
