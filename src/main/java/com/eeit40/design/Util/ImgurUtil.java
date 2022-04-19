@@ -85,7 +85,6 @@ public class ImgurUtil {
     // 設定requestHeaders
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);  // multipart/form-data
-    log.info("加入header前的AU:" + this.authorization);
     headers.add("Authorization", authorization); // 加入Access Token
 
     // 向ＡＰＩ發起post request,回傳結果轉為String
@@ -93,7 +92,7 @@ public class ImgurUtil {
     RestTemplate restTemplate = new RestTemplate();
     String result = restTemplate.postForObject(UPLOAD_URL, request, String.class);
     // 回傳範例：{"status":200,"success":true,"data":{"id":"s68wxgI","deletehash":"nZ6s4GOCYLzGwQM","account_id":112836003,"account_url":"w32191w32191","ad_type":null,"ad_url":null,"title":null,"description":null,"name":"平台.png","type":"image/png","width":6036,"height":976,"size":396218,"views":0,"section":null,"vote":null,"bandwidth":0,"animated":false,"favorite":false,"in_gallery":false,"in_most_viral":false,"has_sound":false,"is_ad":false,"nsfw":null,"link":"https://i.imgur.com/s68wxgI.png","tags":[],"datetime":1650097788,"mp4":"","hls":""}}
-    System.out.println(result);
+
     // 讀取回傳結果的nodetree
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(result);
