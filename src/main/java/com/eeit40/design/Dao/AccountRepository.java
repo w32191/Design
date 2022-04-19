@@ -9,9 +9,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface AccountRepository extends JpaRepository<Account, Integer>{
+public interface AccountRepository {
 
-	public Optional<Account> findByEmail(String email);
+	public Integer update(Account account);
+
+	public Integer insert(Account account);
+
+	public Account findByemail(String email);
+
 
 	@Query("from Account where id = :id")
 	public Account findAccountById(@Param("id") Integer id );
