@@ -54,6 +54,7 @@ public class AnnouncementService {
 	}
 	
 	public Announcement getLatest() {
+		// test
 		return announcementDao.findFirstByOrderByIdDesc();
 	}
 
