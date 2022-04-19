@@ -1,4 +1,4 @@
-package com.eeit40.design.Controller.FrontSide;
+package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Entity.Product;
@@ -18,43 +18,30 @@ public class ProductController {
   @Autowired
   private ProductRepository dao;
 
-
-  @GetMapping("/product/getById/{id}")
-  public Product getById(@PathVariable Integer id){
-     Product resPro = dao.findProductById(id);
-    return (Product) resPro;
-  }
-
-public Product updateProduct(@RequestBody Product pro){
-    Product resPro = dao.save(pro);
-    return resPro;
-}
-
-
-  @PostMapping("/product/insert")
+  @PostMapping("/B/product/insert")
   public Product insertProduct(@RequestBody Product pro) {
     Product resPro = dao.save(pro);
     return resPro;
   }
 
-//  @PostMapping("/product/updateProductById/{id}")
-//  public Product updateProductById(@PathVariable Product pro){
-//    Product resPro= dao.save(pro);
-//    return resPro;
-//  }
+  @GetMapping("/B/product/findProductById/{id}")
+  public Product findProductById(@PathVariable Integer id){
+     Product resPro = dao.findProductById(id);
+    return (Product) resPro;
+  }
 
-  @GetMapping("product/delete/{id}")
+  @GetMapping("/B/product/delete/{id}")
   public boolean deleteProductById(@PathVariable Integer id) {
     dao.deleteById(id);
     return true;
   }
 
-  @GetMapping(value = "product/findProductByName/{name}")
-  public List<Product> findByName(@PathVariable String name) {
+  @GetMapping(value = "/B/product/findProductByName/{name}")
+  public List<Product> findProductByName(@PathVariable String name) {
     return dao.findProductByName(name);
   }
 
-  @GetMapping(value = "product/findProductByCategories/{categories}")
+  @GetMapping(value = "/B/product/findProductByCategories/{categories}")
   public List<Product> findProductByCategories(@PathVariable String categories) {
     return dao.findProductByCategories(categories);
   }
