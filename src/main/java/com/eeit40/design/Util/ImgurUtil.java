@@ -42,6 +42,8 @@ import org.springframework.web.client.RestTemplate;
 
  刪除圖片(delete) : 需要傳入參數(String deleteHash)， 須從DB取出deleteHash字串，串在URL後，發起 DELETE Request
  回傳：boolean
+
+ 有Exception的話，
  */
 
 

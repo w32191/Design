@@ -1,5 +1,25 @@
 $(function () {
 
+  $('#insertBtn').click(function () {
+        $("#insertDialog").dialog('open');
+      }
+  );
+  $("#insertDialog").dialog({
+    autoOpen: false,
+    // width: 350,
+    modal: true,
+    buttons: {
+      "新增": function () {
+        // $('#insertForm').submit();
+        send();
+        $(this).dialog('close');
+      },
+      "取消": function () {
+        $(this).dialog('close');
+      }
+    }
+  });
+
   // 主要清單的DataTable
   $('#table_data').DataTable({});
 

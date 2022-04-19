@@ -1,5 +1,6 @@
 package com.eeit40.design.Exception.Handler;
 
+import com.eeit40.design.Controller.BackSide.ActivityController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = {Controller.class, RestController.class})
 public class ImgurExceptionHandler {
 
   private final Logger log = LoggerFactory.getLogger(this.getClass());

@@ -17,6 +17,9 @@
           rel="stylesheet"/>
     <link href="${contextRoot}/static/back/assets/css/lib/data-table/buttons.bootstrap.min.css"
           rel="stylesheet"/>
+
+    <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+          rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
 </head>
@@ -37,7 +40,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <h1>Hello, <span>Welcome Here</span></h1>
-                            <button type="button"
+                            <button type="button" id="insertBtn"
                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
                                 <i class="ti-plus"></i>新增活動
                             </button>
@@ -114,7 +117,7 @@
                                                     <button type="button"
                                                             class="btn btn-danger delete">刪除
                                                     </button>
-<%--                                                    <a href="" class="btn btn-danger delete">刪除</a>--%>
+                                                        <%--                                                    <a href="" class="btn btn-danger delete">刪除</a>--%>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -130,7 +133,7 @@
                 </div>
                 <!-- /# row -->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" id="insertDialog">
                         <div class="card">
                             <div class="card-title">
                                 <h4>新增活動</h4>
@@ -186,6 +189,8 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+
+<script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 </body>
 

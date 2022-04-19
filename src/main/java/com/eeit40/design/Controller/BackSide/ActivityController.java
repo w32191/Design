@@ -54,7 +54,9 @@ public class ActivityController {
   @ResponseBody
   public String findAllAjax() throws JsonProcessingException {
     ObjectMapper mapper = objectMapperBuilder.build();
+//    ObjectMapper mapper = new ObjectMapper();
     List<Activity> result = service.findAll();
+
     for (Activity activity : result) {
       for (Product product : activity.getProducts()) {
         entityManager.detach(product);
