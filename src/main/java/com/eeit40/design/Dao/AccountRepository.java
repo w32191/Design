@@ -18,9 +18,9 @@ public interface AccountRepository {
 	public Account findByemail(String email);
 
 
-	@Query("from Account where id = :id")
-	public Account findAccountById(@Param("id") Integer id );
-
+//	@Query("from Account where id = :id")
+//	public Account findAccountById(@Param("id") Integer id );
+//
 
 
 }
