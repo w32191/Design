@@ -33,7 +33,7 @@ public class Account {
   @Size(min = 6 , max = 16 , message = "密碼長度不符合")
   @Column(name = "pwd", length = 60)
   private String pwd;
-  
+
   @Column(name = "salt")
   private String salt;
 
@@ -49,17 +49,20 @@ public class Account {
   @OneToMany(mappedBy = "fkAccount")
   private Set<OrderInformation> orderInformations = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "fkAccount")
+  private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
+
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
-  private ShoppingCard shoppingCards;
+  private ImgurImg imgurImgs;
 
   public Account() {
   }
 
-  public ShoppingCard getShoppingCards() {
+  public Set<ShoppingCard> getShoppingCards() {
     return shoppingCards;
   }
 
-  public void setShoppingCards(ShoppingCard shoppingCards) {
+  public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
     this.shoppingCards = shoppingCards;
   }
 
@@ -118,6 +121,19 @@ public class Account {
   public void setId(Integer id) {
     this.id = id;
   }
+
+
+
+
+  public ImgurImg getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(ImgurImg imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
+
+
 
 	public String getSalt() {
 	return salt;

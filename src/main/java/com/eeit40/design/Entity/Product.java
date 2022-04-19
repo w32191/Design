@@ -92,9 +92,17 @@ public class Product {
         return shoppingCards;
     }
 
-    public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
-        this.shoppingCards = shoppingCards;
-    }
+
+  @OneToMany(mappedBy = "fkProduct")
+  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
+
+  public Set<ImgurImg> getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
 
     public Set<OrderList> getOrderLists() {
         return orderLists;

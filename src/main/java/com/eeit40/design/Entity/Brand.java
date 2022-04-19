@@ -8,10 +8,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,8 +42,11 @@ public class Brand {
     @OneToMany(mappedBy = "fkBrand")
     private Set<Product> products = new LinkedHashSet<>();
 
-    public Brand() {
-    }
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkBrand")
+  private ImgurImg imgurImgs;
+
+  public Brand() {
+  }
 
     public Set<Product> getProducts() {
         return products;
@@ -87,7 +92,16 @@ public class Brand {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public ImgurImg getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(ImgurImg imgurImgs) {
+    this.imgurImgs = imgurImgs;
+  }
+
 }

@@ -17,6 +17,9 @@
           rel="stylesheet"/>
     <link href="${contextRoot}/static/back/assets/css/lib/data-table/buttons.bootstrap.min.css"
           rel="stylesheet"/>
+
+    <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+          rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
 </head>
@@ -37,7 +40,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <h1>Hello, <span>Welcome Here</span></h1>
-                            <button type="button"
+                            <button type="button" id="insertBtn"
                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
                                 <i class="ti-plus"></i>新增活動
                             </button>
@@ -73,37 +76,53 @@
                                             <th>#</th>
                                             <th>主題</th>
                                             <th>圖片</th>
-                                            <th>類型</th>
                                             <th>折扣</th>
                                             <th>起始日</th>
                                             <th>結束日</th>
+                                            <th>編輯</th>
                                             <th>刪除</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${activities}" var="ac">
                                             <tr>
-                                                <th scope="row" class="col-lg">${ac.id}</th>
-                                                <td class="col-lg">${ac.subject}</td>
-                                                <td><img
-                                                        src="data:image/jpeg;base64,${ac.imgBase64Str}"
-                                                        alt=""/>
-                                                </td>
-                                                <td><span
-                                                        class="badge badge-primary">Discount</span>
-                                                </td>
-                                                <td class="color-danger col-lg">${ac.discountPercentage}%</td>
+                                                <td class="showId">${ac.id}</td>
+                                                <td>${ac.subject}</td>
+                                                <c:choose>
+                                                    <c:when test="${ac.imgurImgs.size() != 0 }">
+                                                        <c:forEach items="${ac.imgurImgs}" var="img"
+                                                                   begin="0" end="0">
+                                                            <td>
+                                                                <img src="${img.link}" alt=""
+                                                                     width="400"/>
+                                                            </td>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td>
+                                                            <img src="" alt="沒有圖片" width="500"/>
+                                                        </td>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                                <td class="color-danger">${ac.discountPercentage}%</td>
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
-
+                                                <td>
+                                                    <button type="button"
+                                                            class="btn btn-warning">編輯
+                                                    </button>
+                                                </td>
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-danger delete">刪除
                                                     </button>
+                                                        <%--                                                    <a href="" class="btn btn-danger delete">刪除</a>--%>
                                                 </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -114,7 +133,7 @@
                 </div>
                 <!-- /# row -->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" id="insertDialog">
                         <div class="card">
                             <div class="card-title">
                                 <h4>新增活動</h4>
@@ -123,10 +142,29 @@
 
                                 <form method="POST" enctype="multipart/form-data"
                                       id="insertActivityForm">
-                                    <label for="subject">活動主題:</label>
-                                    <input type="text" name="subject" id="subject"/><br/>
-                                    <label for="uploadFile">上傳圖片</label>
-                                    <input type="file" name="files" id="uploadFile"><br/>
+                                    <label>活動主題：
+                                        <input type="text" name="subject" id="insertSubject"/>
+                                    </label>
+                                    <br/>
+                                    <label>活動內容：
+                                        <textarea id="insertContent"></textarea>
+                                    </label><br/>
+                                    <label>折扣％：
+                                        <input type="number" placeholder="95％" step="10"
+                                               min="1" max="99" id="insertdiscountPercentage">
+                                    </label><br/>
+                                    <label>開始日：
+                                        <input type="date" name="startDate"
+                                               id="insertStartDate">
+                                    </label><br/>
+                                    <label>結束日：
+                                        <input type="date" name="startDate"
+                                               id="insertEndDate">
+                                    </label><br/>
+                                    <label>上傳圖片：
+                                        <input type="file" name="files"
+                                               id="insertUploadFile">
+                                    </label><br/>
                                 </form>
                                 <!-- button 不能放在form裏面 -->
                                 <button id="ajaxBtn">Submit</button>
@@ -151,35 +189,9 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+
+<script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/Activity.js"></script>
-<script>
-  $('#ajaxBtn').click(function (event) {
-    send();
-  });
-
-  function send() {
-    const dataFile = new FormData();
-
-    const data = {
-      subject: $('#subject').val()
-    }
-    dataFile.append("file", $('#uploadFile')[0].files[0]);
-    dataFile.append("json", JSON.stringify(data));
-
-    $.ajax({
-      type: "POST",
-      url: "insertActivity",
-      data: dataFile,
-      processData: false, //防止jquery將data變成query String
-      contentType: false,
-      success: function (res) {
-      },
-      error: function (e) {
-      }
-    });
-  }
-</script>
-
 </body>
 
 

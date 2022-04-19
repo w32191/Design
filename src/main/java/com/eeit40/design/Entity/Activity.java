@@ -1,7 +1,7 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +35,7 @@ public class Activity {
   @Column(name = "discount_percentage")
   private Integer discountPercentage;
 
+   // 設定序列化後的格式
   @Column(name = "start_date")
   private LocalDate startDate;
 
@@ -43,14 +45,24 @@ public class Activity {
   @Column(name = "photo")
   private byte[] photo;
 
-  @JsonIgnore
   @ManyToMany(cascade = {javax.persistence.CascadeType.ALL})
   @JoinTable(name = "activities_product",
       joinColumns = @JoinColumn(name = "fk_activities_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "fk_product_id", referencedColumnName = "id"))
   private Set<Product> products = new LinkedHashSet<>();
 
+  @OneToMany(mappedBy = "fkActivity", cascade = javax.persistence.CascadeType.ALL)
+  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
+
   public Activity() {
+  }
+
+  public Set<ImgurImg> getImgurImgs() {
+    return imgurImgs;
+  }
+
+  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
+    this.imgurImgs = imgurImgs;
   }
 
   public byte[] getPhoto() {
@@ -126,6 +138,12 @@ public class Activity {
     sb.append(", discountPercentage=").append(discountPercentage);
     sb.append(", startDate=").append(startDate);
     sb.append(", endDate=").append(endDate);
+    sb.append(", photo=").append(Arrays.toString(photo));
+    sb.append(", products=[");
+    for (Product product : products) {
+      sb.append("{id:").append(product.getId()).append("},");
+    }
+    sb.append("], imgurImgs=").append(imgurImgs);
     sb.append('}');
     return sb.toString();
   }

@@ -2,15 +2,24 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,34 +28,87 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ActivityController {
 
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
+
   @Autowired
   private ActivityService service;
 
+  @Autowired
+  private EntityManager entityManager;
+
+  @Autowired
+  private Jackson2ObjectMapperBuilder objectMapperBuilder;
+
+
   @GetMapping("/B/Activity/findAll")
   public ModelAndView findAll(ModelAndView modelAndView) {
-    List<ActivityDto> list = service.findAllDto();
-
+    List<Activity> list = service.findAll();
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
     return modelAndView;
   }
 
 
+  // 站未使用
+  @GetMapping("/B/Activity/findAllAjax")
+  @ResponseBody
+  public String findAllAjax() throws JsonProcessingException {
+    ObjectMapper mapper = objectMapperBuilder.build();
+//    ObjectMapper mapper = new ObjectMapper();
+    List<Activity> result = service.findAll();
+
+    for (Activity activity : result) {
+      for (Product product : activity.getProducts()) {
+        entityManager.detach(product);
+      }
+    }
+    Map<String, List<Activity>> map = new HashMap<>();
+    map.put("data", result);
+    return mapper.writeValueAsString(map);
+  }
+
+  @GetMapping("/B/Activity/delete/{id}")
+  public ModelAndView deleteByIdView(ModelAndView mav, @PathVariable("id") Integer id)
+      throws MalformedURLException {
+    if (service.deleteByID(id)) {
+      mav.addObject("result","Success");
+
+    }
+    mav.setViewName("/B/Activity/Result");
+    return mav;
+  }
+
+
   @GetMapping("/B/Activity/deleteApi/{id}")
   @ResponseBody
-  public String deleteById(@PathVariable Integer id) {
+  public String deleteById(@PathVariable Integer id){
     if (service.deleteByID(id)) {
       return "DeleteSuccess";
     }
     return "DeleteFail";
   }
 
-
   @PostMapping(value = "/B/Activity/insertActivity")
-  public String insertActivity(@RequestParam("file") MultipartFile file,
-      @RequestParam("json") String json) throws IOException {
-    System.out.println(json);
-    System.out.println(file.getOriginalFilename());
-    return "redirect:/B/Activity/findAll";
+  @ResponseBody
+  public Activity insertActivity(
+      @RequestParam(name = "file", required = false) MultipartFile file,
+      @RequestParam("data") String dataJsonStr) throws IOException {
+
+    System.out.println(dataJsonStr);
+    ObjectMapper objectMapper = objectMapperBuilder.build();
+    ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    Map<String, byte[]> imgs;
+
+    //  若前端有傳MultipartFile來
+    if (file != null) {
+      imgs = new HashMap<String, byte[]>();
+      imgs.put(file.getOriginalFilename(), file.getBytes());
+      dto.setImgs(imgs);
+    }
+
+    return service.insertActivity(dto);
+//    return service.insertActivity(activity, file);
   }
+
+
 }

@@ -1,12 +1,11 @@
 package com.eeit40.design.Dto;
 
-import com.eeit40.design.Entity.Product;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import org.springframework.util.Base64Utils;
+import java.util.Map;
+import org.springframework.lang.Nullable;
+
 
 public class ActivityDto implements Serializable {
 
@@ -16,27 +15,24 @@ public class ActivityDto implements Serializable {
   private Integer discountPercentage;
   private LocalDate startDate;
   private LocalDate endDate;
-  private String imgBase64Str;
-  private List<Integer> productIdList;
+  private Map<String, byte[]> imgs; // <fileName,fileByte[]>
+  private List<Integer> productId;
 
   public ActivityDto() {
   }
 
-  public ActivityDto(Integer id, String subject, String content, Integer discountPercentage,
-      LocalDate startDate, LocalDate endDate, byte[] photo,
-      Set<Product> products) {
+  public ActivityDto(
+      @Nullable Integer id, String subject, String content, Integer discountPercentage,
+      LocalDate startDate, LocalDate endDate, @Nullable Map<String, byte[]> imgs,
+      @Nullable List<Integer> productId) {
     this.id = id;
     this.subject = subject;
     this.content = content;
     this.discountPercentage = discountPercentage;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.imgBase64Str = Base64Utils.encodeToString(photo);
-    List<Integer> productsId = new ArrayList<>();
-    for (Product product : products) {
-      productsId.add(product.getId());
-    }
-    this.productIdList = productsId;
+    this.imgs = imgs;
+    this.productId = productId;
   }
 
   public Integer getId() {
@@ -87,40 +83,19 @@ public class ActivityDto implements Serializable {
     this.endDate = endDate;
   }
 
-  public String getImgBase64Str() {
-    return imgBase64Str;
+  public Map<String, byte[]> getImgs() {
+    return imgs;
   }
 
-  public void setImgBase64Str(byte[] photo) {
-    this.imgBase64Str = Base64Utils.encodeToString(photo);
+  public void setImgs(Map<String, byte[]> imgs) {
+    this.imgs = imgs;
   }
 
-  public List<Integer> getProductIdList() {
-    return productIdList;
+  public List<Integer> getProductId() {
+    return productId;
   }
 
-  public void setProductIdList(Set<Product> products) {
-
-    List<Integer> productsId = new ArrayList<>();
-    for (Product product : products) {
-      productsId.add(product.getId());
-    }
-    this.productIdList = productsId;
+  public void setProductId(List<Integer> productId) {
+    this.productId = productId;
   }
-
-  @Override
-  public String toString() {
-    final StringBuilder sb = new StringBuilder("ActivityDto{");
-    sb.append("id=").append(id);
-    sb.append(", subject='").append(subject).append('\'');
-    sb.append(", content='").append(content).append('\'');
-    sb.append(", discountPercentage=").append(discountPercentage);
-    sb.append(", startDate=").append(startDate);
-    sb.append(", endDate=").append(endDate);
-    sb.append(", imgBase64Str='").append(imgBase64Str).append('\'');
-    sb.append(", productIdList=").append(productIdList);
-    sb.append('}');
-    return sb.toString();
-  }
-
 }
