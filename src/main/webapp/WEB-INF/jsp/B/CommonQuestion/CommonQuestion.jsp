@@ -89,8 +89,8 @@
                                                     <td>${cq.questionType}
                                                     <td>${cq.question}
                                                     <td>${cq.answer}
-                                                    <td><a href=# ><button type="button">更新</button></a>
-                                                    <td><a href=# ><button id="deleteButton" type="button">刪除</button></a>
+                                                    <td><a href=${contextRoot}/message/editMessage?id=${cq.id} ><button id="updateButton" type="button">更新</button></a>
+                                                    <td><a href=${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id} ><button id="deleteButton" type="button">刪除</button></a>
                                                 </tr>
                                         </c:forEach>
                                         </tbody>
