@@ -3,9 +3,7 @@ package com.eeit40.design.Service.Impl;
 import com.eeit40.design.Dao.AccountRepository;
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Service.AccountService;
-import com.eeit40.design.Util.ValidFormat;
 import com.eeit40.design.vo.AccountVO;
-import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +14,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	private AccountRepository accountDao;
-	
-	@Autowired
-	private AccountService accountService;
+
 	
 	private String getmd5pwd(String pwd , String salt) {
 		
@@ -31,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountVO login(Account account) {
+	public Account login(Account account) {
 		
 		//檢查帳號是否存在
 		Account accountemail = accountDao.findByemail(account.getEmail());
@@ -47,43 +43,57 @@ public class AccountServiceImpl implements AccountService {
 			return null;
 		}
 		
+		accountemail.setPwd(null);
+		accountemail.setSalt(null);
+		return accountemail;
 		
-		AccountVO accountvo = new AccountVO();
-		accountvo.setEmail(account.getEmail());
 		
-		return accountvo;
 	}
 	
 
 	@Override
-	public Optional<String> register(AccountVO accountvo){
+	public void register(AccountVO accountvo){
 		
-		//驗證欄位是否填寫及格式相等
-		if(!ValidFormat.isEmail(accountvo.getEmail())) return Optional.of("帳號必需是Email格式");
-		if(!ValidFormat.isPassword(accountvo.getPwd())) return Optional.of("密碼長度必須為6~16位碼大小寫英文加數字");
-		if(!accountvo.getPwd().equals(accountvo.getCheckpwd())) return Optional.of("兩次輸入密碼不相符");
+		if(!accountvo.getPwd().equals(accountvo.getCheckpwd())) {
+			
+		}
 		
 		//檢查帳號是否重複註冊
 		Account dataemail = accountDao.findByemail(accountvo.getEmail());
 		if(dataemail != null) {
-			return Optional.of("該帳號已被使用");	
+				
 		}
 		
 		//產生鹽值
 		String salt = UUID.randomUUID().toString().toUpperCase().replaceAll("-","");
 		
+		String md5Pwd = getmd5pwd(accountvo.getPwd(), salt);
+		
+		
 		// 新增MemberAccount 資料
 		Account account = new Account();
 		account.setEmail(accountvo.getEmail());
-		account.setPwd(accountvo.getPwd());
+		account.setPwd(md5Pwd);
 		account.setSalt(salt);
+		account.setPermission(2);
 		Integer id = accountDao.insert(account);
 		if(id == 0) {
-			return Optional.of("新增會員時發生錯誤");
+			
 		}
-		return Optional.empty();
+		
+		
+		
 		
 	}
+	
+	@Override
+	public Account findByemail(String email) {
+		
+		return accountDao.findByemail(email);
+	}
+			
+		
+		
 
 	
 	

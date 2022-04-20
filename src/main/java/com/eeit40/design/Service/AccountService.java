@@ -1,15 +1,15 @@
 package com.eeit40.design.Service;
 
-import java.util.Optional;
-
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.vo.AccountVO;
 
 public interface AccountService {
 
-	AccountVO login(Account account);
+	public Account login(Account account);
 
-	Optional<String> register(AccountVO accountvo);
+	public void register(AccountVO accountvo);
+
+	public Account findByemail(String email);
 
 	
 	

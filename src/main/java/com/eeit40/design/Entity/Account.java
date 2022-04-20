@@ -12,7 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,13 +25,14 @@ public class Account {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @NotNull(message = "信箱欄不可空白")
-  @Email(message = "請輸入信箱帳號")
+  @NotBlank(message = "帳號不可為空")
+  @Email(message = "帳號必須是Email格式")
   @Column(name = "email", length = 60)
   private String email;
 
-  @NotNull(message = "密碼欄不可空白")
-  @Size(min = 6 , max = 16 , message = "密碼長度不符合")
+  @NotBlank(message = "密碼欄不可空白")
+  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\w]{6,16}$", 
+	 message = "密碼必須為長度6~16位碼大小寫英文加數字")
   @Column(name = "pwd", length = 60)
   private String pwd;
 

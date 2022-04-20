@@ -1,4 +1,4 @@
-package com.eeit40.design.Service.Impl;
+package com.eeit40.design.Dao.Impl;
 
 import java.util.List;
 
@@ -29,8 +29,11 @@ public class AccountRepositoryDaoImpl implements AccountRepository {
 	@Override
 	public Integer insert(Account account) {
 		String sql = "insert into account("
-				+ "email, pwd, salt, permission,)"
-				+ "value(:eamil, :pwd, :salt, :permission)";
+				+ "email, pwd, salt, permission,"
+				+ ")"
+				+ "value( "
+				+ ":email, :pwd, :salt, :permission "
+				+ ")";
 				
 		SqlParameterSource  parameterSource = new BeanPropertySqlParameterSource(account);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -51,7 +54,6 @@ public class AccountRepositoryDaoImpl implements AccountRepository {
 		
 		return null;
 	}
-	
 	
 	
 	@Override
