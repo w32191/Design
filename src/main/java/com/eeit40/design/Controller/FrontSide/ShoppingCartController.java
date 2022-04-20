@@ -69,7 +69,7 @@ public class ShoppingCartController {
 	}
 	
 	//新增
-//	@PostMapping("F/addshoppingcart")
+//	@PostMapping("F/addshoppingcart1")
 //	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
 //		
 //		String tempMount = request.getParameter("amount");
@@ -88,24 +88,41 @@ public class ShoppingCartController {
 //		
 //	} 
 	
-	//確認購物車品項是否重複
-	@PostMapping("F/addshoppingcart2")
-	public ModelAndView checkShoppingCart(ModelAndView mav,HttpServletRequest request) {
+	//新增(確認購物車品項是否重複)
+	// 以產品id修改數量
+	@PostMapping("F/addshoppingcart")
+	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
 		
-//		String id = request.getParameter("cartid");
-		String tempMount = request.getParameter("uamount");
+		String tempMount = request.getParameter("amount");
 		String fkProduct = request.getParameter("fkProduct");
 		
-//		int cartId = Integer.valueOf(id);
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 		
-	    int fakesessionid=2;
+	    int fakesessionid=1;
 	    
 	    shoppingCartService.checkShoppingCart(amount, fakesessionid, productId);
-//	    shoppingCartService.checkShoppingCart(fakesessionid, productId, amount, id);
 	    
 		return mav;
 	}
+	
+	// 以購物車id修改數量
+//	@PostMapping("F/addshoppingcart2")
+//	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
+//		
+//		String id = request.getParameter("id");
+//		String tempMount = request.getParameter("amount");
+//		String fkProduct = request.getParameter("fkProduct");
+//		
+//		int cartId = Integer.valueOf(id);
+//		int amount = Integer.valueOf(tempMount);
+//		int productId = Integer.valueOf(fkProduct);
+//		
+//	    int fakesessionid=1;
+//	    
+//	    shoppingCartService.checkShoppingCart(fakesessionid, productId, amount, cartId);
+//	    
+//		return mav;
+//	}
 	
 }
