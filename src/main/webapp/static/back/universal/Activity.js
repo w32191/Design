@@ -1,7 +1,11 @@
 $(function () {
 
   // 主要清單的DataTable
-  $('#table_data').DataTable({});
+  // $('#table_data').DataTable({
+  //   "searching": false,
+  //   "autoWidth": false,
+  //   "lengthMenu":false
+  // });
 
   // 刪除按鈕功能
   $('.btn.btn-danger.delete').click(function () {

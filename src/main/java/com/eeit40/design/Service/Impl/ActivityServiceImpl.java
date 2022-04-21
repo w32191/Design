@@ -9,8 +9,10 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -25,6 +27,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -75,8 +78,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Activity insertActivity(ActivityDto dto) throws IOException {
-    Set<Product> products = null;
-    Set<ImgurImg> imgs = null;
+
     Activity activity = new Activity();
 
     activity.setSubject(dto.getSubject());
@@ -85,32 +87,11 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
 
-    //如果使用者有上傳圖片的話
-    if (dto.getInsertImg() != null) {
-      imgs = new LinkedHashSet<>();
-      for (String fileName : dto.getInsertImg().keySet()) {
-        ImgurImg img = imgurUtil.uploadImg(fileName, dto.getInsertImg().get(fileName));
-        // 圖片關聯活動
-        img.setFkActivity(activity);
-        imgs.add(img);
-      } // end of img for()
-    } // end of img if()
-
-    //如果使用者有勾選，此活動的商品
-    if (dto.getProductId() != null) {
-      products = new LinkedHashSet<>();
-      for (Integer productId : dto.getProductId()) {
-        Optional<Product> result = productRepository.findById(productId);
-        if (result.isPresent()) {
-          products.add(result.get());
-        }
-      } // end of product for()
-    } // end of product if()
-
+    Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
     //活動關聯圖片
     activity.setImgurImgs(imgs);
     //活動關聯商品
-    activity.setProducts(products);
+    activity.setProducts(productListToSet(dto.getProductId()));
     // 回傳新增後的Activity
     return activityRepository.save(activity);
   }
@@ -148,5 +129,78 @@ public class ActivityServiceImpl implements ActivityService {
     return findResult.isEmpty();
 
   }
+
+
+  @Override
+  public Activity updateActivity(ActivityDto dto) throws IOException {
+    Optional<Activity> findResult = activityRepository.findById(dto.getId());
+
+    // 如果傳入的ＩＤ是沒有這筆資料的
+    if (findResult.isEmpty()) {
+      log.info("update findResult is Empty!");
+      // 把ＩＤ欄位清掉後，直接新增這筆
+      dto.setId(null);
+      return insertActivity(dto);
+    }
+
+    Activity activity = findResult.get();
+    activity.setProducts(productListToSet(dto.getProductId()));
+    activity.setSubject(dto.getSubject());
+    activity.setContent(dto.getContent());
+    activity.setStartDate(dto.getStartDate());
+    activity.setEndDate(dto.getEndDate());
+    Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
+    activity.setImgurImgs(imgs);
+
+    return activityRepository.save(activity);
+  }
+
+  // Dto 將前端傳來的MultipartFile file轉換
+  @Override
+  public ActivityDto setImg(MultipartFile file, ActivityDto dto) throws IOException {
+    Map<String, byte[]> imgs;
+    //  若前端有傳MultipartFile來
+    if (file != null) {
+      log.info("有收到圖片");
+      imgs = new HashMap<>();
+      imgs.put(file.getOriginalFilename(), file.getBytes());
+      dto.setInsertImg(imgs);
+    }
+    return dto;
+  }
+
+
+  // 用DTO中product id 的 List，去取得這些product的Set
+  private Set<Product> productListToSet(List<Integer> productsId) {
+    Set<Product> products = null;
+    //如果使用者有勾選，此活動的商品
+    if (productsId != null) {
+      products = new LinkedHashSet<>();
+      for (Integer productId : productsId) {
+        Optional<Product> result = productRepository.findById(productId);
+        if (result.isPresent()) {
+          products.add(result.get());
+        } // end of inner of()
+      } // end of product forEach()
+    } // end of outer if()
+    return products;
+  }
+
+  // 檢查是否有傳入圖片，有的話就上傳圖片至imgur
+  private Set<ImgurImg> doUploadImg(Map<String, byte[]> map, Activity activity) throws IOException {
+    Set<ImgurImg> imgs = null;
+    //如果使用者有上傳圖片的話
+    if (map != null) {
+      imgs = new LinkedHashSet<>();
+      for (String fileName : map.keySet()) {
+        ImgurImg img = imgurUtil.uploadImg(fileName, map.get(fileName));
+        // 圖片關聯活動
+        img.setFkActivity(activity);
+        imgs.add(img);
+      } // end of img for()
+    } // end of img if()
+    return imgs;
+  }
+
 
 }

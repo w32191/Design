@@ -26,17 +26,24 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>發生錯誤：${errorMessage}</h1>
-<%--                        <div class="page__title-breadcrumb">--%>
-<%--                            <nav aria-label="breadcrumb">--%>
-<%--                                <ol class="breadcrumb justify-content-center">--%>
-<%--                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>--%>
-<%--                                    <li class="breadcrumb-item active" aria-current="page"> 404--%>
-<%--                                        Error page--%>
-<%--                                    </li>--%>
-<%--                                </ol>--%>
-<%--                            </nav>--%>
-<%--                        </div>--%>
+                        <c:choose>
+                            <c:when test="${errorMessageStr != null}">
+                                <h1>${errorMessageStr}</h1>
+                            </c:when>
+                            <c:otherwise>
+                                <h1>404</h1>
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="page__title-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb justify-content-center">
+                                    <li class="breadcrumb-item"><a href="">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        404 Error page
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>

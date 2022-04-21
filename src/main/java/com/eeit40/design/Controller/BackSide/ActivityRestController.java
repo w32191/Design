@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,29 +51,36 @@ public class ActivityRestController {
   }
 
 
-  @PutMapping(value = "/B/Activity/insertActivity")
+  @PutMapping("/B/Activity/insertActivity")
   public String insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
-
-    System.out.println(dataJsonStr);
+    // SamWang To-Do: 產品未處理
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
-    Map<String, byte[]> imgs;
-
-    //  若前端有傳MultipartFile來
-    if (file != null) {
-      log.info("有收到圖片");
-      imgs = new HashMap<>();
-      imgs.put(file.getOriginalFilename(), file.getBytes());
-      dto.setInsertImg(imgs);
-    }
-
-    Activity insertResult = service.insertActivity(dto);
+    Activity insertResult = service.insertActivity(service.setImg(file, dto));
 
     if (insertResult != null) {
       return "Insert Success!";
     }
     return "Insert Fail!";
+  }
+
+
+  @PostMapping("/B/Activity/updateActivity")
+  public String updateActivity(
+      @RequestParam(name = "file", required = false) MultipartFile file,
+      @RequestParam("data") String dataJsonStr
+  ) throws IOException {
+
+    log.info("Update Json:" + dataJsonStr);
+    ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    // SamWang To-Do: 產品未處理
+    Activity result = service.updateActivity(service.setImg(file, dto));
+
+    if (result != null) {
+      return "Update Success!";
+    }
+    return "Update Fail!";
   }
 
 

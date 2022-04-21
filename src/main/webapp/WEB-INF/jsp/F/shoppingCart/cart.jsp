@@ -62,10 +62,10 @@
                                 <tbody>
                                 
                                <c:forEach var="cart" items="${cart}">
-                               <div>${cart.fkProduct.image01}</div>
+                               <div>${cart.fkProduct.image001}</div>
                                 <tr>
                                 	<input type="hidden" value="${cart.id}" name="cartid"/>
-                                    <td class="product-thumbnail"><a href="product-details.html"><img src="data:image/jpeg;base64,${cart.fkProduct.image01}" alt=""></a></td>
+                                    <td class="product-thumbnail"><a href="product-details.html"><img src="data:image/jpeg;base64,${cart.fkProduct.image001}" alt=""></a></td>
                                     <td class="product-name"><a href="product-details.html">${cart.fkProduct.name}</a></td>
                                     <td class="product-price"><span class="price" id="price">$${cart.fkProduct.price}</span></td>
                                     <td class="product-quantity">
