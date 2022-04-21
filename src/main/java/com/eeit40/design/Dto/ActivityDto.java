@@ -15,7 +15,7 @@ public class ActivityDto implements Serializable {
   private Integer discountPercentage;
   private LocalDate startDate;
   private LocalDate endDate;
-  private Map<String, byte[]> imgs; // <fileName,fileByte[]>
+  private Map<String, byte[]> insertImg; // <fileName,fileByte[]>
   private List<Integer> productId;
 
   public ActivityDto() {
@@ -23,7 +23,7 @@ public class ActivityDto implements Serializable {
 
   public ActivityDto(
       @Nullable Integer id, String subject, String content, Integer discountPercentage,
-      LocalDate startDate, LocalDate endDate, @Nullable Map<String, byte[]> imgs,
+      LocalDate startDate, LocalDate endDate, @Nullable Map<String, byte[]> insertImg,
       @Nullable List<Integer> productId) {
     this.id = id;
     this.subject = subject;
@@ -31,7 +31,7 @@ public class ActivityDto implements Serializable {
     this.discountPercentage = discountPercentage;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.imgs = imgs;
+    this.insertImg = insertImg;
     this.productId = productId;
   }
 
@@ -83,12 +83,12 @@ public class ActivityDto implements Serializable {
     this.endDate = endDate;
   }
 
-  public Map<String, byte[]> getImgs() {
-    return imgs;
+  public Map<String, byte[]> getInsertImg() {
+    return insertImg;
   }
 
-  public void setImgs(Map<String, byte[]> imgs) {
-    this.imgs = imgs;
+  public void setInsertImg(Map<String, byte[]> insertImg) {
+    this.insertImg = insertImg;
   }
 
   public List<Integer> getProductId() {

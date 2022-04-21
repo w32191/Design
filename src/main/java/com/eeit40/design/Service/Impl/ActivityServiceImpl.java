@@ -9,7 +9,6 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -52,10 +55,66 @@ public class ActivityServiceImpl implements ActivityService {
     this.imgurUtil.setAuthorization(authorization);
   }
 
+
   @Override
   public List<Activity> findAll() {
     return activityRepository.findAll();
   }
+
+  @Override
+  public Page<Activity> findByPage(Integer pageNumber) {
+    Pageable page = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
+    return activityRepository.findAll(page);
+  }
+
+  @Override
+  public Activity findById(Integer id) {
+    Optional<Activity> result = activityRepository.findById(id);
+    return result.orElse(null);
+  }
+
+  @Override
+  public Activity insertActivity(ActivityDto dto) throws IOException {
+    Set<Product> products = null;
+    Set<ImgurImg> imgs = null;
+    Activity activity = new Activity();
+
+    activity.setSubject(dto.getSubject());
+    activity.setContent(dto.getContent());
+    activity.setDiscountPercentage(dto.getDiscountPercentage());
+    activity.setStartDate(dto.getStartDate());
+    activity.setEndDate(dto.getEndDate());
+
+    //如果使用者有上傳圖片的話
+    if (dto.getInsertImg() != null) {
+      imgs = new LinkedHashSet<>();
+      for (String fileName : dto.getInsertImg().keySet()) {
+        ImgurImg img = imgurUtil.uploadImg(fileName, dto.getInsertImg().get(fileName));
+        // 圖片關聯活動
+        img.setFkActivity(activity);
+        imgs.add(img);
+      } // end of img for()
+    } // end of img if()
+
+    //如果使用者有勾選，此活動的商品
+    if (dto.getProductId() != null) {
+      products = new LinkedHashSet<>();
+      for (Integer productId : dto.getProductId()) {
+        Optional<Product> result = productRepository.findById(productId);
+        if (result.isPresent()) {
+          products.add(result.get());
+        }
+      } // end of product for()
+    } // end of product if()
+
+    //活動關聯圖片
+    activity.setImgurImgs(imgs);
+    //活動關聯商品
+    activity.setProducts(products);
+    // 回傳新增後的Activity
+    return activityRepository.save(activity);
+  }
+
 
   @Override
   public boolean deleteByID(int id) {
@@ -88,48 +147,6 @@ public class ActivityServiceImpl implements ActivityService {
     // 查一次結果如果是空的，表示刪除成功
     return findResult.isEmpty();
 
-  }
-
-  @Override
-  public Activity insertActivity(ActivityDto dto) throws IOException {
-    Set<Product> products = null;
-    Set<ImgurImg> imgs = null;
-    Activity activity = new Activity();
-
-    activity.setSubject(dto.getSubject());
-    activity.setContent(dto.getContent());
-    activity.setDiscountPercentage(dto.getDiscountPercentage());
-    activity.setStartDate(dto.getStartDate());
-    activity.setEndDate(dto.getEndDate());
-
-    //如果使用者有上傳圖片的話
-    if (dto.getImgs() != null) {
-      imgs = new LinkedHashSet<>();
-      for (String fileName : dto.getImgs().keySet()) {
-        ImgurImg img = imgurUtil.uploadImg(fileName, dto.getImgs().get(fileName));
-        // 圖片關聯活動
-        img.setFkActivity(activity);
-        imgs.add(img);
-      } // end of img for()
-    } // end of img if()
-
-    //如果使用者有勾選，此活動的商品
-    if (dto.getProductId() != null) {
-      products = new LinkedHashSet<>();
-      for (Integer productId : dto.getProductId()) {
-        Optional<Product> result = productRepository.findById(productId);
-        if (result.isPresent()) {
-          products.add(result.get());
-        }
-      } // end of product for()
-    } // end of product if()
-
-    //活動關聯圖片
-    activity.setImgurImgs(imgs);
-    //活動關聯商品
-    activity.setProducts(products);
-    // 回傳新增後的Activity
-    return activityRepository.save(activity);
   }
 
 }

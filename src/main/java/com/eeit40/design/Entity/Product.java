@@ -19,8 +19,8 @@ public class Product {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "fk_brand_id")
     private Brand fkBrand;
     @Column(name = "product_id")

@@ -1,11 +1,13 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +17,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "activities")
+//@EntityListeners(AuditingEntityListener.class)
 public class Activity {
 
   @Id
@@ -35,10 +40,11 @@ public class Activity {
   @Column(name = "discount_percentage")
   private Integer discountPercentage;
 
-   // 設定序列化後的格式
+  @JsonFormat(pattern = "yyyy-MM-dd")
   @Column(name = "start_date")
   private LocalDate startDate;
 
+  @JsonFormat(pattern = "yyyy-MM-dd")
   @Column(name = "end_date")
   private LocalDate endDate;
 
