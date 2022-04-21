@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,46 +21,32 @@ public class CommonQuestionService {
 	@Autowired
 	private CommonQuestionRepository cqrDao;
 	
+	//顯示全部QA
 	public List<CommonQuestion> selectAll() {
 		List<CommonQuestion> cq = cqrDao.findAll();		
 		return cq;
 	}
 	
-	public void insert(CommonQuestion questions) {
-	  cqrDao.save(questions);
+	//修改QA
+    public void insert(CommonQuestion cq) {
+      cqrDao.save(cq);
+    }
+    
+    public CommonQuestion findById(Integer id) {
+      Optional<CommonQuestion> option = cqrDao.findById(id);
+      
+      if(option.isPresent()) {
+          return option.get();
+      }      
+      return null;
+  }
+
+	//刪除QA
+    public void deleteQA(Integer id) {
+      cqrDao.deleteById(id);
+      System.out.println("Service -- Delete QA Complete!!");
     }
 	
-	public void deleteById(Integer id) {
-	  cqrDao.deleteById(id);
-    }
-	
-	// 修改
-    public void updateQuestion(String pName, int pPrice, String pSpecs, String pDes, int pType, int pCountry,
-            String pAvailable, int pID, Part part) {
-
-        try {
-            File file = new File("");
-            String absolutePath = file.getAbsolutePath();
-            String path = absolutePath + "\\src\\main\\webapp\\src\\productimg\\" + pID + "\\";
-            String filename = "main.jpg";
-            // 有無上傳圖檔判斷是否寫入
-            if (part.getSubmittedFileName() != "") {
-                InputStream in = part.getInputStream();
-                OutputStream out = new FileOutputStream(path + filename);
-                byte[] buf = new byte[256];
-                while (in.read(buf) != -1)
-                    out.write(buf);
-                out.close();
-                in.close();
-            }
-        } catch (Exception e) {
-
-        }
-        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = new Date();
-        String strDate = sdFormat.format(date);
-        cqrDao.updateProduct(pName, pPrice, pSpecs, pDes, pType, pCountry, pAvailable, strDate, pID);
-    }
 	
 	
 }
