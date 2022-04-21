@@ -45,13 +45,12 @@ public class ShoppingCartController {
 		int amount=Integer.valueOf(tempMount);
 		int cartid=Integer.valueOf(id);
 		//先給死的id
-		int fakesessionid =1;
+		int fkAccount =1;
 		
 		shoppingCartService.editAmountByCartId(amount, cartid);
 		
-		mav.setViewName("redirect:/F/shoppingcart?fkAccount="+fakesessionid);
+		mav.setViewName("redirect:/F/shoppingcart?fkAccount="+fkAccount);
 		return mav;
-		
 		
 	}
 	
@@ -61,8 +60,8 @@ public class ShoppingCartController {
 		
 		shoppingCartService.deletById(id);
 		
-		int fakesessionid=1;
-		mav.setViewName("redirect:/F/shoppingcart?fkAccount="+fakesessionid);
+		int fkAccount=2;
+		mav.setViewName("redirect:/F/shoppingcart?fkAccount="+fkAccount);
 		
 		return mav;
 		
@@ -99,9 +98,9 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 		
-	    int fakesessionid=1;
+	    int fkAccount=2;
 	    
-	    shoppingCartService.checkShoppingCart(amount, fakesessionid, productId);
+	    shoppingCartService.checkShoppingCart(amount, fkAccount, productId);
 	    
 		return mav;
 	}

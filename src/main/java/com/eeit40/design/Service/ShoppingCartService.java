@@ -28,7 +28,7 @@ public class ShoppingCartService {
 	public void editAmountByCartId(int tempMount, int id) {
 		shoppingCardDao.editAmountByCartId(tempMount, id);
 	}
-
+	
 	// 刪除
 	public void deletById(int id) {
 		shoppingCardDao.deleteById(id);
