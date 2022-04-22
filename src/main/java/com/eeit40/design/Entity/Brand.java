@@ -1,6 +1,7 @@
 package com.eeit40.design.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -31,30 +32,32 @@ public class Brand {
     @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "img")
-    private byte[] img;
+    @Column(name = "img", columnDefinition = "varchar(255)")
+    private String img;
 
     @Column(name = "description")
     private String description;
 
 
 
-    @OneToMany(mappedBy = "fkBrand")
-    private Set<Product> products = new LinkedHashSet<>();
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkBrand")
-  private ImgurImg imgurImgs;
 
-  public Brand() {
-  }
+//    @OneToMany(mappedBy = "fkBrand")
+//    private Set<Product> products = new LinkedHashSet<>();
 
-    public Set<Product> getProducts() {
-        return products;
+    @OneToOne(mappedBy = "fkBrand")
+    private ImgurImg imgurImgs;
+
+    public Brand() {
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
+
+//    public void setProducts(Set<Product> products) {
+//        this.products = products;
+//    }
 
     public String getDescription() {
         return description;
@@ -64,13 +67,7 @@ public class Brand {
         this.description = description;
     }
 
-    public byte[] getImg() {
-        return img;
-    }
 
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
 
     public String getName() {
         return name;
@@ -92,16 +89,26 @@ public class Brand {
         return id;
     }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public ImgurImg getImgurImgs() {
-    return imgurImgs;
-  }
 
-  public void setImgurImgs(ImgurImg imgurImgs) {
-    this.imgurImgs = imgurImgs;
-  }
 
+    public ImgurImg getImgurImgs() {
+        return imgurImgs;
+    }
+
+    public void setImgurImgs(ImgurImg imgurImgs) {
+        this.imgurImgs = imgurImgs;
+    }
+
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }

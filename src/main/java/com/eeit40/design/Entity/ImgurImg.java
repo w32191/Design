@@ -58,7 +58,7 @@ public class ImgurImg {
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "fk_brand_id")
   private Brand fkBrand;
 
@@ -70,7 +70,7 @@ public class ImgurImg {
   @JoinColumn(name = "fk_case_id")
   private Case fkCase;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "fk_product_id")
   private Product fkProduct;
 
