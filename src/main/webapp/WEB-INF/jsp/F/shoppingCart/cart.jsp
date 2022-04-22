@@ -41,6 +41,7 @@
                             </div>
                         </div>
                     </div>
+
                 </section>
                 <!-- page title area end -->
 

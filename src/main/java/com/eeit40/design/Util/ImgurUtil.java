@@ -5,9 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
@@ -51,20 +50,72 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @PropertySource("classpath:imgurConfigs.properties")
+@Slf4j
 public class ImgurUtil {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+  // 設定值放在imgur.properties
+  @Value("${UPLOAD_URL}")
+  private String UPLOAD_URL;
 
-    // 設定值放在imgur.properties
-    @Value("${UPLOAD_URL}")
-    private String UPLOAD_URL;
+  @Value("${DELETE_URL}")
+  private String DELETE_URL;
 
-    @Value("${DELETE_URL}")
-    private String DELETE_URL;
+  private String authorization;
 
-    private String authorization;
+  public ImgurUtil() {
+  }
+
+  // 可透過Setter給每個人不同的
+  public void setAuthorization(String authorization) {
+    String prefix = "Bearer ";
+    this.authorization = prefix + authorization;
+  }
+
+  // 上傳照片至圖床
+  public ImgurImg uploadImg(String fileName, byte[] imgBytes) throws IOException {
+    log.info("照片上傳中....");
+    // 將照片轉為Imgur API支援的base64字串
+    String imgBase64 = Base64Utils.encodeToString(imgBytes);
+
+    // 設定requestBody的內容
+    MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+    requestBody.set("image", imgBase64);
+    requestBody.set("type", "base64");
+    requestBody.set("name", fileName);
+
+    // 設定requestHeaders
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.MULTIPART_FORM_DATA);  // multipart/form-data
+    headers.add("Authorization", authorization); // 加入Access Token
+
+    // 向ＡＰＩ發起post request,回傳結果轉為String
+    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
+    RestTemplate restTemplate = new RestTemplate();
+
+    String result;
+    ImgurImg img = null;
+
+    result = restTemplate.postForObject(UPLOAD_URL, request, String.class);
+    // 回傳範例：{"status":200,"success":true,"data":{"id":"s68wxgI","deletehash":"nZ6s4GOCYLzGwQM","account_id":112836003,"account_url":"w32191w32191","ad_type":null,"ad_url":null,"title":null,"description":null,"name":"平台.png","type":"image/png","width":6036,"height":976,"size":396218,"views":0,"section":null,"vote":null,"bandwidth":0,"animated":false,"favorite":false,"in_gallery":false,"in_most_viral":false,"has_sound":false,"is_ad":false,"nsfw":null,"link":"https://i.imgur.com/s68wxgI.png","tags":[],"datetime":1650097788,"mp4":"","hls":""}}
+    // 失敗的話會噴一個HttpClientErrorException
+
+    // 讀取回傳結果的nodetree
+    ObjectMapper objectMapper = new ObjectMapper();
+    JsonNode jsonNode = objectMapper.readTree(result);
+
+    if ((jsonNode.get("status").asText()).equals("200")) {
+      log.info("成功上傳至imgur");
+      img = new ImgurImg();
+      img.setImgName(jsonNode.get("data").get("name").asText());
+      img.setLink(jsonNode.get("data").get("link").asText());
+      img.setType(jsonNode.get("data").get("type").asText());
+      img.setDeleteHash(jsonNode.get("data").get("deletehash").asText());
+      img.setAuthorizationAccount(jsonNode.get("data").get("account_url").asText());
+
+ 
 
     public ImgurUtil() {
+
     }
 
     // 可透過Setter給每個人不同的
@@ -133,6 +184,7 @@ public class ImgurUtil {
         headers.add("Authorization", authorization); // 加入Access Token
         HttpEntity<Object> request = new HttpEntity<>(null, headers);
 
+
         // 向ＡＰＩ發起Delete Request
         RestTemplate restTemplate = new RestTemplate();
         result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
@@ -141,5 +193,6 @@ public class ImgurUtil {
         // SamWang To-Do: 刪除失敗的Exception尚未處理
         return result.getStatusCodeValue() == 200;
     }
+
 
 }

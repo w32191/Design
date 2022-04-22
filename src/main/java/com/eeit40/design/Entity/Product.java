@@ -1,10 +1,5 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -57,6 +52,7 @@ public class Product {
     @Column(name = "added")
     private LocalDate added;
 
+
     @Column(name = "image01", columnDefinition = "varchar(255)")
     private String image01;
 
@@ -93,17 +89,6 @@ public class Product {
         return shoppingCards;
     }
 
-
-    @OneToMany(mappedBy = "fkProduct")
-    private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
-
-    public Set<ImgurImg> getImgurImgs() {
-        return imgurImgs;
-    }
-
-    public void setImgurImgs(Set<ImgurImg> imgurImgs) {
-        this.imgurImgs = imgurImgs;
-    }
 
     public Set<OrderList> getOrderLists() {
         return orderLists;
@@ -272,6 +257,7 @@ public class Product {
     public String getImage04() {
         return image04;
     }
+
 
     public void setImage04(String image04) {
         this.image04 = image04;
