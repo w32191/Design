@@ -1,15 +1,19 @@
 package com.eeit40.design.Service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.vo.AccountVO;
 
+@Service
 public interface AccountService {
 
-	public Account login(Account account);
 
-	public void register(AccountVO accountvo);
+	List<Account> findAccountByemail(String email);
 
-	public Account findByemail(String email);
+	public void save(Account account);
 
 	
 	
