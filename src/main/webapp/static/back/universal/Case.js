@@ -1,4 +1,5 @@
 classificationData = [
+    {"name": "所有工程"},
     {"name": "拆除工程"},
     {"name": "泥作工程"},
     {"name": "防水止漏工程"},
@@ -38,14 +39,19 @@ $(function(){
 
     function doLocationData() {
         $.each(locationData, function (index, value) {
-            console.log(value.name);
+            // console.log(value.name);
             // 添加下拉選單
             let option = document.createElement('option');
             option.innerHTML = `${value.name}`;
             option.value = `${index}`;
             $('#locationData').append(option);
             // 下拉選單結束----
-
         });
     }
+
+    $("#classificationData").change(function(){
+        let classId =$(this).val();
+        console.log(classId);
+
+    })
 });

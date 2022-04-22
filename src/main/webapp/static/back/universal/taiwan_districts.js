@@ -1,4 +1,5 @@
 locationData=[
+    {"name": "所有地區"},
     {
         "districts": [
             {
@@ -1629,7 +1630,10 @@ $(function () {
             option.value = `${index}`;
             $('#locationData').append(option);
             // 下拉選單結束----
-
         });
     }
+    $("#locationData").change(function(){
+        let locationValue = $(this).val();
+        console.log(locationValue);
+    })
 });
