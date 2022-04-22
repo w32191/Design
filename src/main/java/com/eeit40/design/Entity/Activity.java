@@ -17,11 +17,18 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "activities")
+@Getter
+@Setter
+@NoArgsConstructor
 //@EntityListeners(AuditingEntityListener.class)
 public class Activity {
 
@@ -60,80 +67,6 @@ public class Activity {
   @OneToMany(mappedBy = "fkActivity", cascade = javax.persistence.CascadeType.ALL)
   private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
 
-  public Activity() {
-  }
-
-  public Set<ImgurImg> getImgurImgs() {
-    return imgurImgs;
-  }
-
-  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
-    this.imgurImgs = imgurImgs;
-  }
-
-  public byte[] getPhoto() {
-    return photo;
-  }
-
-  public void setPhoto(byte[] photo) {
-    this.photo = photo;
-  }
-
-  public LocalDate getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(LocalDate endDate) {
-    this.endDate = endDate;
-  }
-
-  public LocalDate getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(LocalDate startDate) {
-    this.startDate = startDate;
-  }
-
-  public Integer getDiscountPercentage() {
-    return discountPercentage;
-  }
-
-  public void setDiscountPercentage(Integer discountPercentage) {
-    this.discountPercentage = discountPercentage;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
-
-  public String getSubject() {
-    return subject;
-  }
-
-  public void setSubject(String subject) {
-    this.subject = subject;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public Set<Product> getProducts() {
-    return products;
-  }
-
-  public void setProducts(Set<Product> products) {
-    this.products = products;
-  }
 
   @Override
   public String toString() {
@@ -145,11 +78,8 @@ public class Activity {
     sb.append(", startDate=").append(startDate);
     sb.append(", endDate=").append(endDate);
     sb.append(", photo=").append(Arrays.toString(photo));
-    sb.append(", products=[");
-    for (Product product : products) {
-      sb.append("{id:").append(product.getId()).append("},");
-    }
-    sb.append("], imgurImgs=").append(imgurImgs);
+    sb.append(", products=").append(products);
+    sb.append(", imgurImgs=").append(imgurImgs);
     sb.append('}');
     return sb.toString();
   }

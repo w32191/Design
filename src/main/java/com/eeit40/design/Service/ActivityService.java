@@ -2,6 +2,7 @@ package com.eeit40.design.Service;
 
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,4 +29,6 @@ public interface ActivityService {
 
   // Dto 將前端傳來的MultipartFile file轉換
   ActivityDto setImg(MultipartFile file, ActivityDto dto) throws IOException;
+
+  List<Brand> getAllBrands();
 }

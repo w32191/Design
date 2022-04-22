@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@Slf4j
 public class ActivityRestController {
-
-  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private ActivityService service;
@@ -65,7 +63,6 @@ public class ActivityRestController {
     return "Insert Fail!";
   }
 
-
   @PostMapping("/B/Activity/updateActivity")
   public String updateActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
@@ -76,6 +73,7 @@ public class ActivityRestController {
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     // SamWang To-Do: 產品未處理
     Activity result = service.updateActivity(service.setImg(file, dto));
+
 
     if (result != null) {
       return "Update Success!";

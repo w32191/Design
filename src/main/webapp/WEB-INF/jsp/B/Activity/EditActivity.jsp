@@ -18,6 +18,69 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+    <style>
+      .brandList ul {
+        list-style-type: none;
+      }
+
+      .brandList li {
+        display: inline-block;
+      }
+
+      /*input[type="checkbox"][id^="myCheckbox"] {*/
+      /*  display: none;*/
+      /*}*/
+
+      label {
+        border: 1px solid #fff;
+        padding: 10px;
+        display: block;
+        position: relative;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      label:before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid grey;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 28px;
+        transition-duration: 0.4s;
+        transform: scale(0);
+      }
+
+      label img {
+        height: 150px;
+        width: 150px;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+      }
+
+      :checked + label {
+        border-color: #ddd;
+      }
+
+      /*:checked + label:before {*/
+      /*  content: "✓";*/
+      /*  background-color: grey;*/
+      /*  transform: scale(1);*/
+      /*}*/
+
+      :checked + label img {
+        transform: scale(0.9);
+        /* box-shadow: 0 0 5px #333; */
+        z-index: -1;
+      }
+    </style>
 </head>
 
 <body>
@@ -31,7 +94,6 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
@@ -66,7 +128,7 @@
                                                         <input type="date"
                                                                value="${activity.startDate}"
                                                                name="startDate"
-                                                        id="updateStartDate">
+                                                               id="updateStartDate">
                                                     </p>
                                                 </div>
                                                 <div class="work-content">
@@ -94,7 +156,11 @@
                                                 <div class="user-send-message">
                                                     <button class="btn btn-primary btn-addon"
                                                             type="button" id="updateBtn">
-                                                        <i class="ti-email"></i>編輯
+                                                        <i class="ti-email"></i>編輯完成
+                                                    </button>
+                                                    <button class="btn btn-secondary btn-addon"
+                                                            type="button" id="chooseBrand">
+                                                        <i class="ti-layout-grid3-alt"></i>折扣商品
                                                     </button>
                                                 </div>
                                                 <div class="custom-tab user-profile-tab">
@@ -136,140 +202,59 @@
                     </div>
                 </div>
                 <!-- /# row -->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>活動產品</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover ">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                            <th>Price</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${activity.products}" var="product">
-                                            <tr>
-                                                <td>${product.fkBrand.name}</td>
-                                                <td><img src="${product.fkBrand.imgurImgs.link}">
-                                                </td>
-                                            </tr>
-                                            <%--  SamWang To-Do: 產品待處理--%>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <%--                    <div class="col-lg-6">--%>
-                    <%--                        <div class="card">--%>
-                    <%--                            <div class="card-title">--%>
-                    <%--                                <h4>Recent Comments </h4>--%>
-
-                    <%--                            </div>--%>
-                    <%--                            <div class="recent-comment">--%>
-                    <%--                                <div class="media">--%>
-                    <%--                                    <div class="media-left">--%>
-                    <%--                                        <a href="#">--%>
-                    <%--                                            <img class="media-object"--%>
-                    <%--                                                 src="${contextRoot}/static/back/assets/images/avatar/1.jpg"--%>
-                    <%--                                                 alt="...">--%>
-                    <%--                                        </a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="media-body">--%>
-                    <%--                                        <h4 class="media-heading">john doe</h4>--%>
-                    <%--                                        <p>Cras sit amet nibh libero, in gravida nulla. </p>--%>
-                    <%--                                        <div class="comment-action">--%>
-                    <%--                                            <div class="badge badge-success">Approved</div>--%>
-                    <%--                                            <span class="m-l-10">--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-check color-success"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-close color-danger"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="fa fa-reply color-primary"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                        </span>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <p class="comment-date">October 21, 2017</p>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <div class="media">--%>
-                    <%--                                    <div class="media-left">--%>
-                    <%--                                        <a href="#">--%>
-                    <%--                                            <img class="media-object"--%>
-                    <%--                                                 src="${contextRoot}/static/back/assets/images/avatar/2.jpg"--%>
-                    <%--                                                 alt="...">--%>
-                    <%--                                        </a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="media-body">--%>
-                    <%--                                        <h4 class="media-heading">Mr. John</h4>--%>
-                    <%--                                        <p>Cras sit amet nibh libero, in gravida nulla. </p>--%>
-                    <%--                                        <div class="comment-action">--%>
-                    <%--                                            <div class="badge badge-warning">Pending</div>--%>
-                    <%--                                            <span class="m-l-10">--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-check color-success"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-close color-danger"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="fa fa-reply color-primary"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                        </span>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <p class="comment-date">October 21, 2017</p>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <div class="media no-border">--%>
-                    <%--                                    <div class="media-left">--%>
-                    <%--                                        <a href="#">--%>
-                    <%--                                            <img class="media-object"--%>
-                    <%--                                                 src="${contextRoot}/static/back/assets/images/avatar/3.jpg"--%>
-                    <%--                                                 alt="...">--%>
-                    <%--                                        </a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="media-body">--%>
-                    <%--                                        <h4 class="media-heading">Mr. John</h4>--%>
-                    <%--                                        <p>Cras sit amet nibh libero, in gravida nulla. </p>--%>
-                    <%--                                        <div class="comment-action">--%>
-                    <%--                                            <div class="badge badge-danger">Rejected</div>--%>
-                    <%--                                            <span class="m-l-10">--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-check color-success"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="ti-close color-danger"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                          <a href="#">--%>
-                    <%--                            <i class="fa fa-reply color-primary"></i>--%>
-                    <%--                          </a>--%>
-                    <%--                        </span>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <div class="comment-date">October 21, 2017</div>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                        <!-- /# card -->--%>
-                    <%--                    </div>--%>
-                    <!-- /# column -->
-                </div>
+<%--                <div class="row">--%>
+                <%--                    <div class="col-lg-6">--%>
+                <%--                        <div class="card">--%>
+                <%--                            <div class="card-title">--%>
+                <%--                                <h4>活動產品</h4>--%>
+                <%--                            </div>--%>
+                <%--                            <div class="card-body">--%>
+                <%--                                <div class="table-responsive">--%>
+                <%--                                    <table class="table table-hover ">--%>
+                <%--                                        <thead>--%>
+                <%--                                        <tr>--%>
+                <%--                                            <th>Name</th>--%>
+                <%--                                            <th>Status</th>--%>
+                <%--                                            <th>Date</th>--%>
+                <%--                                            <th>Price</th>--%>
+                <%--                                        </tr>--%>
+                <%--                                        </thead>--%>
+                <%--                                        <tbody>--%>
+                <%--                                        <c:forEach items="${activity.products}" var="product">--%>
+                <%--                                            <tr>--%>
+                <%--                                                <td>${product.fkBrand.name}</td>--%>
+                <%--                                                <td><img src="${product.fkBrand.img}">--%>
+                <%--                                                </td>--%>
+                <%--                                            </tr>--%>
+                <%--                                            &lt;%&ndash;  SamWang To-Do: 產品待處理&ndash;%&gt;--%>
+                <%--                                        </c:forEach>--%>
+                <%--                                        </tbody>--%>
+                <%--                                    </table>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
             </section>
         </div>
     </div>
 </div>
+<div class="col-lg-8" id="brandDialog" title="品牌列表">
+    <div class="brandList">
+        <ul>
+            <c:forEach items="${brandAllList}" var="brand">
+                <li>
+                    <label for="myCheckbox${brand.id}">
+                    <input type="checkbox" id="myCheckbox${brand.id}" value="${brand.id}"
+                           name="brands"/>&nbsp ${brand.name}</label>
+                    <label><img src="${brand.img}"/></label>
+                </li>
+            </c:forEach>
+        </ul>
+
+    </div>
+</div>
+
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
@@ -284,69 +269,7 @@
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<script>
-  $(function () {
-    $('#updateBtn').click(
-        function () {
-
-          let data = {
-            id:$('#activityID').text(),
-            subject: $('#updateSubject').val(),
-            content: $('#updateContent').val(),
-            discountPercentage: $('#updatediscountPercentage').val(),
-            startDate: $('#updateStartDate').val(),
-            endDate: $('#updateEndDate').val()
-          }
-
-          const dataFile = new FormData();
-          dataFile.append("file", $('#updateImg')[0].files[0]);
-          dataFile.append("data", JSON.stringify(data));
-          console.log("送出內容：" + JSON.stringify(data))
-
-          $.ajax({
-            type: "POST",
-            url: "/Design/B/Activity/updateActivity",
-            data: dataFile,
-            processData: false, // 防止jquery將data變成query String
-            contentType: false,
-            beforeSend: function () {
-              swal.fire({
-                html: '<h5>更新中...</h5>',
-                showConfirmButton: false,
-                onRender: function () {
-                  // there will only ever be one sweet alert open.
-                  // $('.swal2-content').prepend(sweet_loader);
-                }
-              });
-            },
-            success: function (json) {
-              console.log(json);
-              // window.alert('新增成功');
-              // location.reload();
-              swal.fire({
-                icon: 'success',
-                html: '<h5>更新成功!</h5>'
-              }).then(function () {
-                location.reload();
-              });
-
-            },
-            error: function (res) {
-              console.log(res);
-              swal.fire({
-                icon: 'error',
-                html: `<h5>${res.responseText}!</h5>`
-              }).then(function () {
-                location.reload();
-              });
-              // return false;
-            }
-          }); //end of ajax
-        }
-    );
-
-  });
-</script>
+<script src="${contextRoot}/static/back/universal/EditActivity.js"></script>
 </body>
 
 </html>

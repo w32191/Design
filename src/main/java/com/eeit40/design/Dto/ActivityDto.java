@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
-
+@NoArgsConstructor
+@Data
 public class ActivityDto implements Serializable {
 
   private Integer id;
@@ -17,9 +20,6 @@ public class ActivityDto implements Serializable {
   private LocalDate endDate;
   private Map<String, byte[]> insertImg; // <fileName,fileByte[]>
   private List<Integer> productId;
-
-  public ActivityDto() {
-  }
 
   public ActivityDto(
       @Nullable Integer id, String subject, String content, Integer discountPercentage,
@@ -32,70 +32,6 @@ public class ActivityDto implements Serializable {
     this.startDate = startDate;
     this.endDate = endDate;
     this.insertImg = insertImg;
-    this.productId = productId;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public String getSubject() {
-    return subject;
-  }
-
-  public void setSubject(String subject) {
-    this.subject = subject;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
-
-  public Integer getDiscountPercentage() {
-    return discountPercentage;
-  }
-
-  public void setDiscountPercentage(Integer discountPercentage) {
-    this.discountPercentage = discountPercentage;
-  }
-
-  public LocalDate getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(LocalDate startDate) {
-    this.startDate = startDate;
-  }
-
-  public LocalDate getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(LocalDate endDate) {
-    this.endDate = endDate;
-  }
-
-  public Map<String, byte[]> getInsertImg() {
-    return insertImg;
-  }
-
-  public void setInsertImg(Map<String, byte[]> insertImg) {
-    this.insertImg = insertImg;
-  }
-
-  public List<Integer> getProductId() {
-    return productId;
-  }
-
-  public void setProductId(List<Integer> productId) {
     this.productId = productId;
   }
 }

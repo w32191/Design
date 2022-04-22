@@ -3,8 +3,7 @@ package com.eeit40.design.Exception.Handler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,9 +12,9 @@ import org.springframework.web.client.HttpClientErrorException;
 
 // 接住RestController 發出的Exception
 @RestControllerAdvice
+@Slf4j
 public class RestControllerExceptionHandler {
 
-  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private ObjectMapper mapper;

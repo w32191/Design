@@ -1,9 +1,11 @@
 package com.eeit40.design.Service.Impl;
 
 import com.eeit40.design.Dao.ActivityRepository;
+import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
@@ -17,8 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -32,15 +33,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @Transactional
 @PropertySource("classpath:imgurConfigs.properties")
+@Slf4j
 public class ActivityServiceImpl implements ActivityService {
-
-  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private ActivityRepository activityRepository;
 
   @Autowired
   private ProductRepository productRepository;
+
+  @Autowired
+  private BrandRepository brandRepository;
 
   @Autowired
   private ImgurUtil imgurUtil;
@@ -169,6 +172,10 @@ public class ActivityServiceImpl implements ActivityService {
     return dto;
   }
 
+  @Override
+  public List<Brand> getAllBrands() {
+    return brandRepository.findAll();
+  }
 
   // 用DTO中product id 的 List，去取得這些product的Set
   private Set<Product> productListToSet(List<Integer> productsId) {
