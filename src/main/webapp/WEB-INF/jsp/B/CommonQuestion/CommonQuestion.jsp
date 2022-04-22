@@ -240,8 +240,8 @@
                                                                     href="${contextRoot}/B/CommonQuestion/updateQuestion?id=${cq.id}">編輯</a>
                                                             </td>
                                                             <td> |
-                                                                <button id="deleteQuestion" name="deleteQuestion"
-                                                                    href="${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id}">刪除</button>
+                                                                <a id="deleteQuestion" name="deleteQuestion"
+                                                                    href="${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id}">刪除</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -249,6 +249,35 @@
                                             </div>
                                         </div>
                                     </table>
+                                </div>
+
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Launch demo modal
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- /# row -->
@@ -268,25 +297,12 @@
 
                     <script>
                         // < !--刪除-->
-                        document.getElementById("deleteQuestion").onclick = function () {
-                            swal({
-                                title: "確定刪除？",
-                                text: "刪除後將無法恢復",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "是的，删除！",
-                                cancelButtonText: "不，取消",
-                                closeOnConfirm: false,
-                                closeOnCancel: false
-                            }, function (isConfirm) {
-                                if (isConfirm) {
-                                    swal("删除!", "已删除！", "success")
-                                } else {
-                                    swal("取消!", "已取消！", "error")
-                                }
-                            })
-                        };
+                        var myModal = document.getElementById('exampleModal')
+                        var myInput = document.getElementById('exampleModalLabel')
+
+                        myModal.addEventListener('shown.bs.modal', function () {
+                            myInput.focus()
+                        })
 
 
                     </script>
