@@ -45,9 +45,10 @@ public class JsonConfiguration {
     objectMapper.registerModule(new JavaTimeModule());
     // 設定objectMapper 序列化時不要轉成timestamps
     objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    //
+    objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     return objectMapper;
   }
-
 
 
 }
