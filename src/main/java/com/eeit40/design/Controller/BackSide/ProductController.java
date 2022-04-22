@@ -1,6 +1,8 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.ProductRepository;
+import com.eeit40.design.Dto.ProductDto;
+import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 import java.util.List;
 import java.util.Properties;
@@ -46,7 +48,10 @@ public class ProductController {
     return dao.findProductByCategories(categories);
   }
 
-
+@GetMapping(value = "/B/product/findProductByBrand/{id}")
+  public List<Product> findProductByBrand(@PathVariable Brand id){
+    return dao.findProductByFkBrand(id);
+  }
 
 
 }

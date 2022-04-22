@@ -8,6 +8,8 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -31,6 +33,7 @@ public class JsonConfiguration {
     return builder;
   }
 
+
   @Bean
   @Primary  // RestController & Controller的@ResponseBody 會優先用這個ObjectMapper轉換
   public ObjectMapper objectMapper() {
@@ -44,4 +47,7 @@ public class JsonConfiguration {
     objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     return objectMapper;
   }
+
+
+
 }

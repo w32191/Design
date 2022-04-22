@@ -1,5 +1,6 @@
 package com.eeit40.design.Entity;
 
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -25,6 +26,7 @@ public class Brand {
     @Column(name = "name", length = 50)
     private String name;
 
+
     @Column(name = "img")
     private String img;
 
@@ -33,20 +35,24 @@ public class Brand {
 
 
 
-    @OneToMany(mappedBy = "fkBrand")
-    private Set<Product> products = new LinkedHashSet<>();
 
 
-  public Brand() {
-  }
+//    @OneToMany(mappedBy = "fkBrand")
+//    private Set<Product> products = new LinkedHashSet<>();
 
-    public Set<Product> getProducts() {
-        return products;
+    @OneToOne(mappedBy = "fkBrand")
+    private ImgurImg imgurImgs;
+
+    public Brand() {
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
+
+//    public void setProducts(Set<Product> products) {
+//        this.products = products;
+//    }
 
     public String getDescription() {
         return description;
@@ -56,6 +62,7 @@ public class Brand {
         this.description = description;
     }
 
+
     public String getImg() {
         return img;
     }
@@ -63,6 +70,7 @@ public class Brand {
     public void setImg(String img) {
         this.img = img;
     }
+
 
     public String getName() {
         return name;
@@ -84,9 +92,16 @@ public class Brand {
         return id;
     }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }

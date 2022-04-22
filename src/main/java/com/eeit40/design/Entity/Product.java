@@ -52,17 +52,19 @@ public class Product {
     @Column(name = "added")
     private LocalDate added;
 
-    @Column(name = "image01")
-    private String  image01;
 
-    @Column(name = "image02")
+    @Column(name = "image01", columnDefinition = "varchar(255)")
+    private String image01;
+
+    @Column(name = "image02", columnDefinition = "varchar(255)")
     private String image02;
 
-    @Column(name = "image03")
+    @Column(name = "image03", columnDefinition = "varchar(255)")
     private String image03;
 
-    @Column(name = "image04")
+    @Column(name = "image04", columnDefinition = "varchar(255)")
     private String image04;
+
 
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
@@ -261,4 +263,3 @@ public class Product {
         this.image04 = image04;
     }
 }
-
