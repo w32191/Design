@@ -1,5 +1,6 @@
 $(function () {
 
+  // SamWang to-do: DataTables尚未解決
   // 主要清單的DataTable
   // $('#table_data').DataTable({
   //   "searching": false,
@@ -7,12 +8,12 @@ $(function () {
   //   "lengthMenu":false
   // });
 
-  // 刪除按鈕功能
+  // 刪除按鈕 按了觸發
   $('.btn.btn-danger.delete').click(function () {
     let deleteBtn = $(this);
     let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
     let urlStr = "delete/" + id;
-    swal.fire({
+    swal.fire({   // swal.fire 都是在設定sweetalert
       title: '你確定要刪除嗎？',
       text: "此動作無法復原！",
       icon: 'warning',
@@ -21,8 +22,8 @@ $(function () {
       cancelButtonColor: '#d33',
       confirmButtonText: '確定刪除',
       cancelButtonText: '取消'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    }).then((result) => {   // 按了任何一個按鈕後
+      if (result.isConfirmed) {   // 如果是按確定
         $.ajax({
           url: urlStr,
           method: 'DELETE',
@@ -55,16 +56,18 @@ $(function () {
             }).then(function () {
               location.reload();
             });
-          }
-        });
-      }
-    })
+
+          } // end of error:
+        }); // end of $.ajax()
+      } // end of if (result.isConfirmed)
+    }); //end of then((result)
 
   });
 
-  // 新增活動 按鈕
+  // 新增活動按鈕 按了觸發
   $('#insertBtn').click(function () {
         $("#insertDialog").removeAttr('hidden').dialog('open');
+        // 原本的<div>是hidden的
       }
   );
 

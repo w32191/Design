@@ -21,6 +21,8 @@ public class ActivityDto implements Serializable {
   private Map<String, byte[]> insertImg; // <fileName,fileByte[]>
   private List<Integer> productId;
 
+  private List<Integer> brand;
+
   public ActivityDto(
       @Nullable Integer id, String subject, String content, Integer discountPercentage,
       LocalDate startDate, LocalDate endDate, @Nullable Map<String, byte[]> insertImg,

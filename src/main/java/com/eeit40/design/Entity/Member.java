@@ -25,6 +25,7 @@ public class Member {
   @Column(name = "id", nullable = false)
   private Integer id;
 
+  @JsonIgnore
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_account_id")
   private Account fkAccount;

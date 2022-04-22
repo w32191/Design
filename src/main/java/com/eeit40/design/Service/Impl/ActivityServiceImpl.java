@@ -94,7 +94,7 @@ public class ActivityServiceImpl implements ActivityService {
     //活動關聯圖片
     activity.setImgurImgs(imgs);
     //活動關聯商品
-    activity.setProducts(productListToSet(dto.getProductId()));
+    activity.setProducts(productListToSet(dto));
     // 回傳新增後的Activity
     return activityRepository.save(activity);
   }
@@ -147,7 +147,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     Activity activity = findResult.get();
-    activity.setProducts(productListToSet(dto.getProductId()));
+    activity.setProducts(productListToSet(dto));
     activity.setSubject(dto.getSubject());
     activity.setContent(dto.getContent());
     activity.setStartDate(dto.getStartDate());
@@ -178,12 +178,12 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   // 用DTO中product id 的 List，去取得這些product的Set
-  private Set<Product> productListToSet(List<Integer> productsId) {
+  private Set<Product> productListToSet(ActivityDto dto) {
     Set<Product> products = null;
     //如果使用者有勾選，此活動的商品
-    if (productsId != null) {
+    if (dto.getProductId() != null) {
       products = new LinkedHashSet<>();
-      for (Integer productId : productsId) {
+      for (Integer productId : dto.getProductId()) {
         Optional<Product> result = productRepository.findById(productId);
         if (result.isPresent()) {
           products.add(result.get());

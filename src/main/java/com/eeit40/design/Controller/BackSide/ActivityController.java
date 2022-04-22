@@ -5,7 +5,6 @@ import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Service.ActivityService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +20,6 @@ public class ActivityController {
 
   @Autowired
   private ActivityService service;
-
-  @Autowired
-  private ObjectMapper objectMapper;
 
   // 活動全部資料table
   @GetMapping("/B/Activity/findAll")
@@ -45,19 +41,18 @@ public class ActivityController {
     // 所有品牌的list
     List<Brand> brandAllList = service.getAllBrands();
 
-    List<Brand> checkedBrands = null;
+    List<Integer> checkedBrandsId = null;
     // 如果原本產品已經有勾選折扣商品
     if (!editActivity.getProducts().isEmpty()) {
-      checkedBrands = new ArrayList<>();
+      checkedBrandsId = new ArrayList<>();
       for (Product product : editActivity.getProducts()) {
-        checkedBrands.add(product.getFkBrand());
+        checkedBrandsId.add(product.getFkBrand().getId());
       }
-      log.info(checkedBrands.get(0).toString());
     }
 
     mav.addObject("activity", editActivity);
     mav.addObject("brandAllList", brandAllList);
-    mav.addObject("checkedBrands", checkedBrands);
+    mav.addObject("checkedBrandsId", checkedBrandsId);
     mav.setViewName("/B/Activity/EditActivity");
     return mav;
   }

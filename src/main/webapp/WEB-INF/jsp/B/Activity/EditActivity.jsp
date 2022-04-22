@@ -202,7 +202,7 @@
                     </div>
                 </div>
                 <!-- /# row -->
-<%--                <div class="row">--%>
+                <%--                <div class="row">--%>
                 <%--                    <div class="col-lg-6">--%>
                 <%--                        <div class="card">--%>
                 <%--                            <div class="card-title">--%>
@@ -239,22 +239,37 @@
         </div>
     </div>
 </div>
-<div class="col-lg-8" id="brandDialog" title="品牌列表">
+
+<%-- 折扣商品的品牌選單 --%>
+<div class="col-lg-8" id="brandDialog" title="品牌列表" hidden>
     <div class="brandList">
         <ul>
             <c:forEach items="${brandAllList}" var="brand">
                 <li>
                     <label for="myCheckbox${brand.id}">
-                    <input type="checkbox" id="myCheckbox${brand.id}" value="${brand.id}"
-                           name="brands"/>&nbsp ${brand.name}</label>
-                    <label><img src="${brand.img}"/></label>
+                        <c:choose>
+                            <c:when test="${checkedBrandsId.contains(brand.id)}"> <%-- 把原本就有選的改為checked --%>
+                                <input type="checkbox" id="myCheckbox${brand.id}"
+                                       value="${brand.id}" name="brands"
+                                       checked="checked"/>&nbsp ${brand.name}
+                            </c:when>
+                            <c:otherwise>
+                                <input type="checkbox" id="myCheckbox${brand.id}"
+                                       value="${brand.id}"
+                                       name="brands"/>&nbsp ${brand.name}
+                            </c:otherwise>
+                        </c:choose>
+                    </label>
+                    <label><img src="${brand.img}" alt="沒有圖片" data-brandId="brand${brand.id}"/></label>
                 </li>
             </c:forEach>
         </ul>
-
     </div>
 </div>
+<%-- SamWang to-do: 抓得到商品了 但dialog未處理--%>
+<div>
 
+</div>
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
@@ -269,7 +284,7 @@
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="${contextRoot}/static/back/universal/EditActivity.js"></script>
+<script src="${contextRoot}/static/back/universal/js/EditActivity.js"></script>
 </body>
 
 </html>
