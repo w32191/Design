@@ -14,11 +14,14 @@ public class BrandController {
     @Autowired
     private BrandRepository dao;
 
-//    @PostMapping("/brand/insert")
-//    public Brand insertBrand(@RequestBody Brand bnd){
-//        Brand resBnd = dao.save(bnd);
-//        return resBnd;
-//    }
+    @PostMapping("/B/brand/insert")
+    public Brand insertBrand(@RequestBody Brand bnd){
+        Brand resBnd = dao.save(bnd);
+        return resBnd;
+    }
+
+
+
 
 //    @GetMapping(value = "/B/Brand/findProductByBrandId/{id}")
 //    public Set<Product> findProductByBrandId(@PathVariable Integer id) {

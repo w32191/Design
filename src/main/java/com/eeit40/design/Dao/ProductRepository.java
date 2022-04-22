@@ -1,5 +1,6 @@
 package com.eeit40.design.Dao;
 
+import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
   @Query("from Product  where id = :id")
   Product findProductById(@Param("id")Integer Id);
 
+  @Query("from Product where fkBrand = :fkBrand")
+  List<Product>findProductByFkBrand(@Param("fkBrand") Brand id);
 
 
 //  @Query("update from Product set name= :name ,  where id = :id")

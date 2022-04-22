@@ -4,6 +4,7 @@ import com.eeit40.design.Entity.Brand;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProductDto implements Serializable {
 
@@ -31,11 +32,12 @@ public class ProductDto implements Serializable {
 
     private LocalDate added;
 
-    public ProductDto(){
+    private Brand fkBrand;
 
+    public ProductDto() {
     }
 
-    public ProductDto(Integer id, Integer productId, String name, String description, Integer price, String categories, Integer stock, String model, String barcode, Integer views, Integer avaliable, LocalDate added) {
+    public ProductDto(Integer id, Integer productId, String name, String description, Integer price, String categories, Integer stock, String model, String barcode, Integer views, Integer avaliable, LocalDate added, Brand fkBrand) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -48,104 +50,25 @@ public class ProductDto implements Serializable {
         this.views = views;
         this.avaliable = avaliable;
         this.added = added;
+        this.fkBrand = fkBrand;
     }
 
-    public Integer getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "ProductDto{" +
+                "id=" + id +
+                ", productId=" + productId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", categories='" + categories + '\'' +
+                ", stock=" + stock +
+                ", model='" + model + '\'' +
+                ", barcode='" + barcode + '\'' +
+                ", views=" + views +
+                ", avaliable=" + avaliable +
+                ", added=" + added +
+                ", fkBrand=" + fkBrand +
+                '}';
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public String getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
-    public Integer getAvaliable() {
-        return avaliable;
-    }
-
-    public void setAvaliable(Integer avaliable) {
-        this.avaliable = avaliable;
-    }
-
-    public LocalDate getAdded() {
-        return added;
-    }
-
-    public void setAdded(LocalDate added) {
-        this.added = added;
-    }
-
-
-
 }
