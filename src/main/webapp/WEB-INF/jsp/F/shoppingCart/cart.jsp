@@ -124,11 +124,15 @@
                             
                         </form>
                             <div class="row">
+                              <div>
+                                <span>testtesttesttest</span>
+                              </div>
                                 <div class="col-md-5 ml-auto">
                                     <div class="cart-page-total">
                                         <h2>Cart totals</h2>
                                         <ul class="mb-20">
                                             <li>Subtotal <span>$250.00</span></li>
+                                            <li>Discount<span></span></li>
                                             <li>Total <span>$250.00</span></li>
                                         </ul>
                                         <a class="os-btn" href="checkout.html">Proceed to checkout</a>
@@ -151,7 +155,7 @@
 
                 <script>
 
-					//修改購物車數量
+					//修改購物車商品數量
                        $(".cart-plus-minus").on("change click", function(){
 
                           //數量
@@ -187,7 +191,6 @@
                             let cartid = $(this).parent("td").next(".product-cartid").children("input").val();
 							//目前所屬tr
 							let row = $(this).parent("td").parent("tr");		
-                            console.log(row);
                             
                            $.ajax({
                             url:"deleteshoppingcart",
@@ -200,6 +203,9 @@
                             }
                            })
                         })
+                        
+                     //使用coupon
+                       
                        
                 </script>
 
