@@ -75,8 +75,8 @@
                                                     <tr>
                                                         <th><a href="${contextRoot}/B/Case/CaseMessage">#</a></th>
                                                         <th>標題</th>
-                                                        <th><select style="appearance: none ; border:none " id="classificationData" class="btn-group"><option>類別</option></select></th>
-                                                        <th><select style="appearance: none ; border:none " id="locationData" class="btn-group"><option>地區</option></select></th>
+                                                        <th><select style="appearance: none ; border:none " id="classificationData" class="btn-group"></select></th>
+                                                        <th><select style="appearance: none ; border:none " id="locationData" class="btn-group"></select></th>
                                                         <th>E-mail</th>
                                                         <th>資訊</th>
                                                         <th>
