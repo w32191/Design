@@ -15,36 +15,29 @@ import javax.persistence.Table;
 @Table(name = "brand")
 public class Brand {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Column(name = "brand_id")
-    private Integer brandId;
+  @Column(name = "brand_id")
+  private Integer brandId;
 
-    @Column(name = "name", length = 50)
-    private String name;
-
-
-    @Column(name = "img")
-    private String img;
-
-    @Column(name = "description")
-    private String description;
+  @Column(name = "name", length = 50)
+  private String name;
 
 
+  @Column(name = "img")
+  private String img;
 
-
+  @Column(name = "description")
+  private String description;
 
 //    @OneToMany(mappedBy = "fkBrand")
 //    private Set<Product> products = new LinkedHashSet<>();
 
-    @OneToOne(mappedBy = "fkBrand")
-    private ImgurImg imgurImgs;
-
-    public Brand() {
-    }
+  public Brand() {
+  }
 
 //    public Set<Product> getProducts() {
 //        return products;
@@ -54,54 +47,46 @@ public class Brand {
 //        this.products = products;
 //    }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
 
-    public String getName() {
-        return name;
-    }
+  public String getImg() {
+    return img;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(Integer brandId) {
-        this.brandId = brandId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setImg(String img) {
+    this.img = img;
+  }
 
 
-    public String getImg() {
-        return img;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Integer getBrandId() {
+    return brandId;
+  }
+
+  public void setBrandId(Integer brandId) {
+    this.brandId = brandId;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
 }
