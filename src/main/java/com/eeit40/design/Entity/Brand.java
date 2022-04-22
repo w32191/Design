@@ -1,19 +1,13 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +26,7 @@ public class Brand {
     private String name;
 
     @Column(name = "img")
-    private byte[] img;
+    private String img;
 
     @Column(name = "description")
     private String description;
@@ -42,8 +36,6 @@ public class Brand {
     @OneToMany(mappedBy = "fkBrand")
     private Set<Product> products = new LinkedHashSet<>();
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkBrand")
-  private ImgurImg imgurImgs;
 
   public Brand() {
   }
@@ -64,11 +56,11 @@ public class Brand {
         this.description = description;
     }
 
-    public byte[] getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -96,12 +88,5 @@ public class Brand {
     this.id = id;
   }
 
-  public ImgurImg getImgurImgs() {
-    return imgurImgs;
-  }
-
-  public void setImgurImgs(ImgurImg imgurImgs) {
-    this.imgurImgs = imgurImgs;
-  }
 
 }
