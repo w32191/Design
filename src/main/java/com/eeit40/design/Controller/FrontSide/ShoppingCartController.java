@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit40.design.Entity.DiscountCoupon;
 import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ShoppingCartService;
 
@@ -124,4 +125,17 @@ public class ShoppingCartController {
 //		return mav;
 //	}
 	
+	//確認coupon可否使用
+	@GetMapping("F/usecoupon")
+	public ModelAndView checkCouponDate(ModelAndView mav,@RequestParam(name="coupon") String coupon) {
+		
+		DiscountCoupon couponData = shoppingCartService.checkCouponDate(coupon);
+		
+		couponData.getStartDate();
+		couponData.getEndDate();
+		
+		
+		return mav;
+		
+	}
 }

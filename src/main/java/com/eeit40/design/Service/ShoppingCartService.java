@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.eeit40.design.Dao.ShoppingCardRepository;
+import com.eeit40.design.Entity.DiscountCoupon;
 import com.eeit40.design.Entity.ShoppingCard;
 
 @Service
@@ -74,5 +75,19 @@ public class ShoppingCartService {
 //				shoppingCardDao.addProductToShoppingCart(tempMount, fkAccount, fkProduct);
 //			}
 //		}
+	
+	
+	//查詢coupon使用日期
+	public DiscountCoupon checkCouponDate(String coupon){
+		
+		List<DiscountCoupon> couponData= shoppingCardDao.checkCouponDate(coupon);
+        
+		//判斷資料庫是否有此coupon
+		if(!CollectionUtils.isEmpty(couponData)) {
+		   return couponData.get(0);
+		}
+		return null;
+	}
 
+	
 }
