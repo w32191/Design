@@ -70,6 +70,14 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item blog__border-bottom mb-60 pb-60">
                         <div class="blog__thumb fix">

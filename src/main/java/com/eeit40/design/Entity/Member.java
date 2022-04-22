@@ -1,6 +1,7 @@
 package com.eeit40.design.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -67,7 +68,7 @@ public class Member {
   @OneToMany(mappedBy = "fkMember")
   private Set<DesignReview> designReviews = new LinkedHashSet<>();
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkMember")
+  @OneToOne(mappedBy = "fkMember")
   private ImgurImg imgurImgs;
 
   public ImgurImg getImgurImgs() {

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +35,9 @@ public class CaseService {
         caseDao.deleteById(id);
     }
 
-    public List<Case> findAllCases(){
-        return caseDao.findAll();
-    }
 
     public Page<Case> findByPage(Integer pageNumber){
-        Pageable pgb = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"dateTime");
+        Pageable pgb = PageRequest.of(pageNumber-1,9,Sort.Direction.DESC,"dateTime");
 
         Page<Case> page = caseDao.findAll(pgb);
 
@@ -47,8 +45,28 @@ public class CaseService {
 
     }
 
-    public Case getLastest(){
-        return caseDao.findFirstByOrderByDateTimeAsc();
+    //列出全部資料
+    public List<Case> findAllCases(){
+        return caseDao.findAll();
+    }
+
+    //按"時間"尋找
+    //1.Desc
+    public List<Case> findAllByOrderByDateTimeDesc(){
+        return caseDao.findAllByOrderByDateTimeDesc();
+    }
+    //2.Asc
+    public List<Case> findAllByOrderByDateTimeAsc(){
+        return caseDao.findAllByOrderByDateTimeAsc();
+    }
+
+
+    //按"類別"尋找
+    public List<Case> findByClassification(String classification){
+
+        List<Case> findByClassification = caseDao.findByClassification(classification);
+
+        return findByClassification ;
     }
 
 }
