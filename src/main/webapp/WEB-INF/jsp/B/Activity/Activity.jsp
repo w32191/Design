@@ -105,7 +105,8 @@
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
                                                 <td>
-                                                    <a href="find/${ac.id}" class="btn btn-warning">編輯</a>
+                                                    <a href="editActivity/${ac.id}"
+                                                       class="btn btn-warning">編輯</a>
                                                 </td>
                                                 <td>
                                                     <button type="button"

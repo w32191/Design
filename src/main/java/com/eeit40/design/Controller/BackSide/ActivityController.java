@@ -31,7 +31,7 @@ public class ActivityController {
   }
 
   // 編輯活動
-  @GetMapping("/B/Activity/find/{id}")
+  @GetMapping("/B/Activity/editActivity/{id}")
   public ModelAndView findById(ModelAndView mav, @PathVariable Integer id) {
     Activity editActivity = service.findById(id);
     if (editActivity == null) {
@@ -44,7 +44,7 @@ public class ActivityController {
     List<Integer> checkedBrandsId = null;
     // 如果原本產品已經有勾選折扣商品
     if (!editActivity.getProducts().isEmpty()) {
-      checkedBrandsId = new ArrayList<>();
+      checkedBrandsId = new ArrayList<>();  // 取得原本已經有勾選的品牌id
       for (Product product : editActivity.getProducts()) {
         checkedBrandsId.add(product.getFkBrand().getId());
       }

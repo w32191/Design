@@ -1,24 +1,36 @@
 $(function () {
-  // 點折扣商品，跳出選擇品牌的視窗
-  $('#chooseBrand').click(function () {
-    $('#brandDialog').removeAttr('hidden').dialog('open');
+
+  // 顯示商品列表按鈕
+  $('#openProducts').click(function () {
+    $(this).attr("hidden", "hidden");
+    $('#closeProducts').removeAttr("hidden");
+    $('#brandsList').removeAttr('hidden');
+    $('#productList').removeAttr('hidden');
+    $.ajax({
+      url: '/Design/B/Activity/getBrandsPage',
+      type: 'GET',
+      success: function (res) {
+        console.log(res);
+        let divMedia = document.createElement('div');
+        divMedia.addClassName('media');
+        // $('#brandContent').append(divMedia);
+      }, error: function (err) {
+        console.log(err);
+      }
+    });
   });
 
-  // 品牌選擇視窗設定
-  $('#brandDialog').dialog({
-    width: 1000,
-    autoOpen: false
+  // 隱藏商品列表按鈕
+  $('#closeProducts').click(function () {
+    $(this).attr("hidden", "hidden");
+    $('#openProducts').removeAttr("hidden");
+    $('#brandsList').attr("hidden", "hidden");
+    $('#productList').attr("hidden", "hidden");
   });
 
   // 編輯按鈕送出
   $('#updateBtn').click(
       function () {
-
-        let brandsChecked = [];
-        $("input[name='brands']:checked").each(function() {
-          // console.log($(this).val());
-          brandsChecked.push($(this).val());  // 將被勾選的val放入brandsChecked陣列
-        })
 
         // 準備要序列化的JavaScript物件
         let data = {
@@ -27,8 +39,8 @@ $(function () {
           content: $('#updateContent').val(),
           discountPercentage: $('#updatediscountPercentage').val(),
           startDate: $('#updateStartDate').val(),
-          endDate: $('#updateEndDate').val(),
-          brand:brandsChecked
+          endDate: $('#updateEndDate').val()
+          // brands: brandsChecked
         }
 
         // 將要送出的檔案＆序列化後的字串放入FormData
@@ -75,6 +87,6 @@ $(function () {
           }
         }); //end of ajax
       }
-  );
+  );  // end of ('#updateBtn').click()
 
 });

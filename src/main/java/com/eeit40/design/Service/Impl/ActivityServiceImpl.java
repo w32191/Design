@@ -11,7 +11,9 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +96,7 @@ public class ActivityServiceImpl implements ActivityService {
     //活動關聯圖片
     activity.setImgurImgs(imgs);
     //活動關聯商品
-    activity.setProducts(productListToSet(dto));
+    activity.setProducts(checkedProductSet(dto));
     // 回傳新增後的Activity
     return activityRepository.save(activity);
   }
@@ -147,7 +149,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     Activity activity = findResult.get();
-    activity.setProducts(productListToSet(dto));
+    activity.setProducts(checkedProductSet(dto));
     activity.setSubject(dto.getSubject());
     activity.setContent(dto.getContent());
     activity.setStartDate(dto.getStartDate());
@@ -177,20 +179,33 @@ public class ActivityServiceImpl implements ActivityService {
     return brandRepository.findAll();
   }
 
-  // 用DTO中product id 的 List，去取得這些product的Set
-  private Set<Product> productListToSet(ActivityDto dto) {
-    Set<Product> products = null;
+  // 用brandsId和productsId，去取得這些product的Set
+  private Set<Product> checkedProductSet(ActivityDto dto) {
+    Set<Product> productSet = new LinkedHashSet<>();
+//
+//    // 如果有輸入brands
+//    if (dto.getBrands() != null) {
+//      for (Integer brandId : dto.getBrands()) {
+//        //  先用brand id找到每一個brand
+//        Optional<Brand> brandResult = brandRepository.findById(brandId);
+//        if (brandResult.isPresent()) {
+//          // 找到該品牌的全部商品
+//          List<Product> productList = productRepository.findProductByFkBrand(brandResult.get());
+//          productSet.addAll(productList);
+//        }
+//      } // end of foreach(dto.getBrands())
+//    }
+
     //如果使用者有勾選，此活動的商品
     if (dto.getProductId() != null) {
-      products = new LinkedHashSet<>();
       for (Integer productId : dto.getProductId()) {
-        Optional<Product> result = productRepository.findById(productId);
-        if (result.isPresent()) {
-          products.add(result.get());
-        } // end of inner of()
+        Optional<Product> productResult = productRepository.findById(productId);
+        if (productResult.isPresent()) {
+          productSet.add(productResult.get());
+        } // end of 2nd if()
       } // end of product forEach()
-    } // end of outer if()
-    return products;
+    } // end of 1st if()
+    return productSet;
   }
 
   // 檢查是否有傳入圖片，有的話就上傳圖片至imgur
