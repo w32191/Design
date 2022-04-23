@@ -215,27 +215,27 @@
                                 <h4>品牌清單</h4>
                             </div>
                             <div class="recent-comment" id="brandContent">
-                                <c:forEach items="${brandAllList}" var="brand">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <c:choose>
-                                                <c:when test="${brand.img != null}">
-                                                    <img class="media-object" src="${brand.img}"
-                                                         alt=""/>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img class="media-object"
-                                                         src="${contextRoot}/static/back/universal/images/no-image.jpeg"
-                                                         alt=""/>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">${brand.name}</h4>
-                                            <p>${brand.description}</p>
-                                        </div>
-                                    </div>
-                                </c:forEach>
+<%--                                <c:forEach items="${brandAllList}" var="brand">--%>
+<%--                                    <div class="media">--%>
+<%--                                        <div class="media-left">--%>
+<%--                                            <c:choose>--%>
+<%--                                                <c:when test="${brand.img != null}">--%>
+<%--                                                    <img class="media-object" src="${brand.img}"--%>
+<%--                                                         alt=""/>--%>
+<%--                                                </c:when>--%>
+<%--                                                <c:otherwise>--%>
+<%--                                                    <img class="media-object"--%>
+<%--                                                         src="${contextRoot}/static/back/universal/images/no-image.jpeg"--%>
+<%--                                                         alt=""/>--%>
+<%--                                                </c:otherwise>--%>
+<%--                                            </c:choose>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="media-body">--%>
+<%--                                            <h4 class="media-heading">${brand.name}</h4>--%>
+<%--                                            <p>${brand.description}</p>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </c:forEach>--%>
                             </div>
                         </div>
                         <!-- /# card -->

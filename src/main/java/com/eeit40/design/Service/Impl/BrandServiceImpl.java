@@ -20,7 +20,7 @@ public class BrandServiceImpl implements BrandService {
 
   @Override
   public Page<Brand> findAllByPage(Integer pageNumber) {
-    Pageable pageable = PageRequest.of(pageNumber - 1, 5, Direction.ASC, "id");
+    Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return brandRepository.findAll(pageable);
   }
 

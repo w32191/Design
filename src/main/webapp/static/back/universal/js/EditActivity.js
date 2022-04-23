@@ -6,14 +6,41 @@ $(function () {
     $('#closeProducts').removeAttr("hidden");
     $('#brandsList').removeAttr('hidden');
     $('#productList').removeAttr('hidden');
+
     $.ajax({
       url: '/Design/B/Activity/getBrandsPage',
       type: 'GET',
       success: function (res) {
-        console.log(res);
-        let divMedia = document.createElement('div');
-        divMedia.addClassName('media');
-        // $('#brandContent').append(divMedia);
+        // 取得品牌的分頁json後，一個一個串起來
+        $.each(res.content, function (index, brand) {
+          // 品牌外層div
+          let divMedia = document.createElement('div');
+          divMedia.classList.add('media');
+          // divMedia.classList.add(`selectBrand${brand.id}`);
+          divMedia.setAttribute('id', `selectBrand${brand.id}`);
+          // 左側放圖div
+          let divMediaLeft = document.createElement('div');
+          divMediaLeft.classList.add('media-left');
+          // 設定圖片路徑
+          let img = document.createElement('img');
+          if (brand.img == null) {
+            img.setAttribute('src',
+                '/Design/static/back/universal/images/no-image.jpeg');
+          } else {
+            img.setAttribute('src', brand.img);
+          }
+          divMediaLeft.append(img);
+          // 右側品牌名稱及描述
+          let divMediaBody = document.createElement('div');
+          divMediaBody.classList.add('media-body');
+          let str = `<h4 class="media-heading">${brand.name}</h4>`;
+          str = str + `<p>${brand.description}</p>`;
+          divMediaBody.innerHTML = str;
+
+          divMedia.append(divMediaLeft, divMediaBody);
+          $('#brandContent').append(divMedia);
+        }); // end of each()
+
       }, error: function (err) {
         console.log(err);
       }
@@ -26,6 +53,14 @@ $(function () {
     $('#openProducts').removeAttr("hidden");
     $('#brandsList').attr("hidden", "hidden");
     $('#productList').attr("hidden", "hidden");
+    $('#brandContent').html('');
+  });
+
+  // 點品牌列表後，取的品牌id，用這個ＩＤ取得商品
+  $('#brandContent').on('click', 'div[id^="selectBrand"]', function () {
+    console.log($(this).attr('id').split('selectBrand')[1]);
+    let brandId = $(this).attr('id').split('selectBrand')[1];
+    // SamWang to-do: 取到品牌ＩＤ，尚未處理產品
   });
 
   // 編輯按鈕送出
