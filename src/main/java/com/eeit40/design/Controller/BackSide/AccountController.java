@@ -24,8 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RestController
 public class AccountController {
 
-    @Autowired
-    private AccountService accountService;
+//    @Autowired
+//    private AccountService accountService;
     
     //登入帳號頁面
 //    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
@@ -53,53 +53,53 @@ public class AccountController {
 //    }
     
     //註冊帳號頁面
-    @GetMapping("/register")
-    public ModelAndView register(
-    		ModelAndView mav,
-    		@ModelAttribute AccountVO accountvo) {
-    	
-    	mav.setViewName("/B/Account/register");
-    	
-    	return mav;
-    }
-    
+//    @GetMapping("/register")
+//    public ModelAndView register(
+//    		ModelAndView mav,
+//    		@ModelAttribute Account account) {
+//    	
+//    	mav.setViewName("/B/Account/register");
+//    	
+//    	return mav;
+//    }
+//    
     //註冊帳號中
-    @PostMapping("/register")
-    public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
-    HttpServletRequest request, Account account) {
-    	String email = request.getParameter("email");
-    	String pwd = request.getParameter("pwd");
-    	String checkpwd = request.getParameter("checkpwd");
-    	
-    	if(pwd.equals(checkpwd)) {
-    		if(registeremail(email) == true) {
-    			Account account1 = new Account();
-    			account1.setEmail(email);
-    			account1.setPwd(pwd);
-    			accountService.save(account1);
-    			
-    			mav.setViewName("/B/Account/login");
-    			return mav;
-    		}else {
-    			mav.setViewName("/B/Account/register");
-    			return mav;
-    		}
-    	}
-    	mav.setViewName("/B/Account/login");
-    	
-    	return mav;
-    }
-    
-    
-    public boolean registeremail(String email) {
-    	boolean a = true;
-    	if(accountService.findAccountByemail(email).isEmpty()) {
-    		return a;
-    	}else {
-    		return false;
-
-    	}
-    }
+//    @PostMapping("/register")
+//    public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
+//    HttpServletRequest request, Account account) {
+//    	String email = request.getParameter("email");
+//    	String pwd = request.getParameter("pwd");
+//    	String checkpwd = request.getParameter("checkpwd");
+//    	
+//    	if(pwd.equals(checkpwd)) {
+//    		if(registeremail(email) == true) {
+//    			Account account1 = new Account();
+//    			account1.setEmail(email);
+//    			account1.setPwd(pwd);
+//    			accountService.save(account1);
+//    			
+//    			mav.setViewName("/B/Account/login");
+//    			return mav;
+//    		}else {
+//    			mav.setViewName("/B/Account/register");
+//    			return mav;
+//    		}
+//    	}
+//    	mav.setViewName("/B/Account/login");
+//    	
+//    	return mav;
+//    }
+//    
+//    
+//    public boolean registeremail(String email) {
+//    	boolean a = true;
+//    	if(accountService.findAccountByemail(email).isEmpty()) {
+//    		return a;
+//    	}else {
+//    		return false;
+//
+//    	}
+//    }
     
 //    @RequestMapping("/logout")
 //    public String logout(HttpSession session, SessionStatus sessionStatus ) {
