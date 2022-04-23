@@ -46,4 +46,5 @@ public interface ShoppingCardRepository extends JpaRepository<ShoppingCard, Inte
 	//查詢coupon使用日期
 	@Query(value="select * from discount_coupon where coupon=:coupon",nativeQuery = true)
 	public List<DiscountCoupon> checkCouponDate(@Param("coupon") String coupon);
+//	public String checkCouponDate(@Param("coupon") String coupon);
 }

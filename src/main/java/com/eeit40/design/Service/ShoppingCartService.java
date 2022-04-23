@@ -78,15 +78,18 @@ public class ShoppingCartService {
 	
 	
 	//查詢coupon使用日期
-	public DiscountCoupon checkCouponDate(String coupon){
+	public List<DiscountCoupon> checkCouponDate(String coupon){
+//	public String checkCouponDate(String coupon) {
 		
-		List<DiscountCoupon> couponData= shoppingCardDao.checkCouponDate(coupon);
+		 List<DiscountCoupon> couponData = shoppingCardDao.checkCouponDate(coupon);
+		
+		return couponData;
         
-		//判斷資料庫是否有此coupon
-		if(!CollectionUtils.isEmpty(couponData)) {
-		   return couponData.get(0);
-		}
-		return null;
+//		//判斷資料庫是否有此coupon
+//		if(!CollectionUtils.isEmpty(couponData)) {
+//		   return couponData.get(0);
+//		}
+		
 	}
 
 	

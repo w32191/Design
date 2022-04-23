@@ -50,7 +50,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                               <form action="editshoppingcart" method="post">
+                              <!--  <form action="editshoppingcart" method="post"> -->
                                     <div class="table-content table-responsive">
                                         <table class="table">
                                             <thead>
@@ -112,7 +112,7 @@
                                         <div class="coupon">
                                             <input id="coupon_code" class="input-text" name="coupon_code" value=""
                                                 placeholder="Coupon code" type="text">
-                                            <button class="os-btn os-btn-black" name="apply_coupon" type="submit">Apply
+                                            <button class="os-btn os-btn-black" id="submit" name="apply_coupon" type="submit">Apply
                                                 coupon</button>
                                         </div>
                                         <!-- <div class="coupon2"> 
@@ -123,10 +123,10 @@
                                 </div>
                             </div>
                             
-                        </form>
+                      <!--   </form> -->
                             <div class="row">
                               <div>
-                                <span>testtesttesttest</span>
+                                <span id="discount">testtesttesttest</span>
                               </div>
                                 <div class="col-md-5 ml-auto">
                                     <div class="cart-page-total">
@@ -206,6 +206,26 @@
                         })
                         
                      //使用coupon
+                        $("#submit").on("click",function(){
+                            console.log($("#submit"));
+
+                            let coupon = $(this).prev("#coupon_code").val();
+                            console.log(typeof coupon);
+                            
+                            $.ajax({
+                            url:"usecoupon",
+                            type:"GET",
+                            data:{
+                            	coupon_code:coupon
+                            },
+                            success:function(result){
+                            	$("discount").append(discount);
+                            },
+                            error:function(err){
+                            	console.log("沒接到值");
+                            }
+                            })
+                        })
                        
                        
                 </script>
