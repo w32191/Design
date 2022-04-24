@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.eeit40.design.Dao.CommonQuestionRepository;
 import com.eeit40.design.Entity.CommonQuestion;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class CommonQuestionService {
 
 	@Autowired

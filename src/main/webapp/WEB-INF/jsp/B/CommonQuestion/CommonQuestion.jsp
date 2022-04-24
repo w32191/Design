@@ -11,162 +11,13 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <title>CommonQuestion</title>
-
+            
+            <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css" rel="stylesheet" />
+            <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+                rel="stylesheet" />
             <!-- Common Styles -->
             <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp" />
 
-            <!-- jQuery & Bootstrap-->
-            <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
-
-            <!-- Calender -->
-            <script src="${contextRoot}/static/back/assets/js/lib/jquery-ui/jquery-ui.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/moment/moment.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/calendar/fullcalendar.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/calendar/fullcalendar-init.js"></script>
-
-            <!--  Flot Chart -->
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/excanvas.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.pie.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.time.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.stack.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.resize.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/curvedLines.js"></script>
-            <script
-                src="${contextRoot}/static/back/assets/js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/flot-chart-init.js"></script>
-
-            <!--  Chartist -->
-            <script src="${contextRoot}/static/back/assets/js/lib/chartist/chartist.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/chartist/chartist-plugin-tooltip.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/chartist/chartist-init.js"></script>
-
-            <!--  Chartjs -->
-            <script src="${contextRoot}/static/back/assets/js/lib/chart-js/Chart.bundle.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/chart-js/chartjs-init.js"></script>
-
-            <!--  Knob -->
-            <script src="${contextRoot}/static/back/assets/js/lib/knob/jquery.knob.min.js "></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/knob/knob.init.js "></script>
-
-            <!--  Morris -->
-            <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/raphael-min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/morris.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/morris-init.js"></script>
-
-            <!--  Peity -->
-            <script src="${contextRoot}/static/back/assets/js/lib/peitychart/jquery.peity.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/peitychart/peitychart.init.js"></script>
-
-            <!--  Sparkline -->
-            <script src="${contextRoot}/static/back/assets/js/lib/sparklinechart/jquery.sparkline.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/sparklinechart/sparkline.init.js"></script>
-
-            <!-- Select2 -->
-            <script src="${contextRoot}/static/back/assets/js/lib/select2/select2.full.min.js"></script>
-
-            <!--  Validation -->
-            <script src="${contextRoot}/static/back/assets/js/lib/form-validation/jquery.validate.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/form-validation/jquery.validate-init.js"></script>
-
-            <!--  Circle Progress -->
-            <script src="${contextRoot}/static/back/assets/js/lib/circle-progress/circle-progress.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/circle-progress/circle-progress-init.js"></script>
-
-            <!--  Vector Map -->
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.algeria.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.argentina.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.brazil.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.france.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.germany.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.greece.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.iran.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.iraq.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.russia.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.tunisia.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.europe.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.usa.js"></script>
-
-            <!--  Simple Weather -->
-            <script src="${contextRoot}/static/back/assets/js/lib/weather/jquery.simpleWeather.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/weather/weather-init.js"></script>
-
-            <!--  Owl Carousel -->
-            <script src="${contextRoot}/static/back/assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
-
-
-            <!-- Datatable -->
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables-init.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.dataTables.min.js"></script>
-
-            <!-- JS Grid -->
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/db.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.core.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.load-indicator.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.load-strategies.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.sort-strategies.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.field.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.text.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.number.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.select.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.checkbox.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.control.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid-init.js"></script>
-
-            <!--  Datamap -->
-            <script src="${contextRoot}/static/back/assets/js/lib/datamap/d3.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/datamap/topojson.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/datamap/datamaps.world.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/datamap/datamap-init.js"></script>
-
-            <!--  Nestable -->
-            <script src="${contextRoot}/static/back/assets/js/lib/nestable/jquery.nestable.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/nestable/nestable.init.js"></script>
-
-            <!--ION Range Slider JS-->
-            <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/ion.rangeSlider.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/moment.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/moment-with-locales.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/rangeslider.init.js"></script>
-
-            <!-- Bar Rating-->
-            <script src="${contextRoot}/static/back/assets/js/lib/barRating/jquery.barrating.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/barRating/barRating.init.js"></script>
-
-            <!-- jRate -->
-            <script src="${contextRoot}/static/back/assets/js/lib/rating1/jRate.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/rating1/jRate.init.js"></script>
-
-            <!-- Sweet Alert -->
-            <script src="${contextRoot}/static/back/assets/js/lib/sweetalert/sweetalert.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/sweetalert/sweetalert.init.js"></script>
-
-            <!-- Toastr -->
-            <script src="${contextRoot}/static/back/assets/js/lib/toastr/toastr.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/toastr/toastr.init.js"></script>
-
-            <!--  Dashboard -->
-            <script src="${contextRoot}/static/back/assets/js/dashboard1.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/dashboard2.js"></script>
-
-            <!-- Calender 2 -->
-            <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/moment.latest.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/pignose.calendar.min.js"></script>
-            <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/pignose.init.js"></script>
 
         </head>
 
@@ -205,80 +56,76 @@
                                     <!-- /# column -->
                                 </div>
 
-                                <!-- CommonQuestion主程式區 -->
+                                <div class="container" align="center">
+                                    <table id="table_id" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th width="100px">問題類型
+                                                <th width="200px">問題
+                                                <th width="400px">回答
+                                            </tr>
+                                        </thead>
 
-
-
-
-                                <div class="row justify-content-center">
-                                    <table style="width: 100%;">
-                                        <div class="col-9">
-                                            <div class="card">
-                                                <thead>
-                                                    <tr>
-                                                        <td width='8%'>問題類型</td>
-                                                        <td>問題名稱</td>
-                                                        <td>回答</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tbody">
-                                                    <c:forEach items="${cqs}" var="cq">
-                                                        <tr>
-                                                            <td>
-                                                                <p>${cq.questionType}</p>
-                                                            </td>
-                                                            <td>
-                                                                <p>${cq.question}</p>
-                                                            </td>
-                                                            <td>
-                                                                <p>${cq.answer}</p>
-                                                            </td>
-                                                            <td>
-                                                                <a
-                                                                    href="${contextRoot}/B/CommonQuestion/updateQuestion?id=${cq.id}">編輯</a>
-                                                            </td>
-                                                            <td> |
-                                                                <a id="deleteQuestion" name="deleteQuestion"
-                                                                    href="${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id}">刪除</a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </div>
-                                        </div>
+                                        <tbody>
+                                            <c:forEach items="${cqs}" var="cq">
+                                                <tr>
+                                                    <td>${cq.questionType}
+                                                    <td>${cq.question}
+                                                    <td>${cq.answer}
+                                                    <td><button type="button" class="btn btn-info" name='edit'
+                                                            data-toggle="modal" data-target="#editModal">更新</button></td>
+                                                    <td><a
+                                                            href="${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id}"><button
+                                                                id="deleteButton" type="button"
+                                                                class="btn btn-danger delete">刪除</button></a>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
                                     </table>
                                 </div>
 
 
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Launch demo modal
-                                </button>
+                                <div class="container">
+                                    <p />
+                                    <div class="row justify-content-center">
+                                        <div class="col-9">
+                                            <div class="card">
+                                                <div class="card-header">新增問題</div>
+                                                <div class="card-body">
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                    <form:form class="form" method="POST"
+                                                        modelAttribute="commonQuestion">
+
+                                                        <!-- form:errors  bindingResult 回傳的物件 -->
+                                                        <form:errors path="text" />
+
+                                                        <div class="input-group">
+                                                            <form:textarea path="text" class="form-control">
+                                                            </form:textarea>
+                                                        </div>
+
+                                                        <input type="submit" name="submit" value="新增問題">
+                                                    </form:form>
+
+
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-9">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <c:out value="${lastMessage.text}" />
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 <!-- /# row -->
                                 <section id="main-content">
@@ -295,17 +142,16 @@
                         </div>
                     </div>
 
-                    <script>
-                        // < !--刪除-->
-                        var myModal = document.getElementById('exampleModal')
-                        var myInput = document.getElementById('exampleModalLabel')
 
-                        myModal.addEventListener('shown.bs.modal', function () {
-                            myInput.focus()
-                        })
+                    <!-- jQuery & Bootstrap-->
+                    <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
+
+                    <script
+                        src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+                    <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+                    <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 
 
-                    </script>
 
 
         </body>
