@@ -1,8 +1,6 @@
 package com.eeit40.design.Service;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,16 +81,8 @@ public class ShoppingCartService {
 
 	// 查詢是否有coupon
 	public DiscountCoupon checkCoupon(String coupon) {
-
 		DiscountCoupon couponData = discountCoupon.checkCoupon(coupon);
-
-//		 if (couponData != null) {
-
-//			 discountCoupon.checkCouponDate(today);
 		return couponData;
-//			}
-//		return null;
-
 	}
 
 	// 確認Coupon日期是否開始

@@ -2,8 +2,6 @@ package com.eeit40.design.Dao;
 
 import com.eeit40.design.Entity.DiscountCoupon;
 
-import java.sql.Date;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

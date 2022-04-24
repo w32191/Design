@@ -1,26 +1,16 @@
 package com.eeit40.design.Controller.FrontSide;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Collection;
-//import java.util.Date;
-//import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eeit40.design.Dto.DiscountCouponDto;
 import com.eeit40.design.Entity.DiscountCoupon;
@@ -167,7 +157,6 @@ public class ShoppingCartController {
 			discountCouponDto.setErrMsg("優惠券尚不能使用");
 			return discountCouponDto;
 		}
-
 		discountCouponDto.setErrMsg("無此優惠券");
 		return discountCouponDto;
 	}
