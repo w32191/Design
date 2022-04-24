@@ -1,10 +1,11 @@
 package com.eeit40.design.Controller.FrontSide;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Collection;
-import java.util.Date;
+//import java.util.Date;
 //import java.net.http.HttpRequest;
 import java.util.List;
 
@@ -17,8 +18,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.eeit40.design.Dto.DiscountCouponDto;
 import com.eeit40.design.Entity.DiscountCoupon;
 import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ShoppingCartService;
@@ -133,34 +137,39 @@ public class ShoppingCartController {
 //	}
 
 	// 確認coupon可否使用
-	@GetMapping("F/usecoupon")
-//	public String checkCouponDate(Model model, @RequestParam(name = "coupon") String coupon) {
-	public ModelAndView checkCouponDate(ModelAndView mav, HttpServletRequest request) {
+	@ResponseBody
+	@PostMapping("F/usecoupon")
+	public DiscountCouponDto checkCoupon(HttpServletRequest request) {
 
 		String coupon = request.getParameter("coupon_code");
 
-		List<DiscountCoupon> couponData = shoppingCartService.checkCouponDate(coupon);
+		DiscountCoupon couponData = shoppingCartService.checkCoupon(coupon);
+		DiscountCouponDto discountCouponDto = new DiscountCouponDto();
 
-		if (!CollectionUtils.isEmpty((Collection<?>) couponData)) {
+		if (couponData != null) {
 
-			LocalDate startDate = ((DiscountCoupon) couponData).getStartDate();
-			LocalDate endDate = ((DiscountCoupon) couponData).getEndDate();
-			System.out.println("startDate:" + startDate);
-			System.out.println("endDate:" + endDate);
+			discountCouponDto.setCoupon(couponData.getCoupon());
+			discountCouponDto.setDiscount(couponData.getDiscount());
 
-			Date date = new Date();
-			System.out.println("today:" + date);
-			LocalDate currentDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			DiscountCoupon couponStarDate = shoppingCartService.checkCouponStarDate(coupon);
 
-			if(currentDate.isAfter(startDate)) {
-				
-				if(currentDate.isBefore(endDate)) {
-					int discount = ((DiscountCoupon) couponData).getDiscount();
+			if (couponStarDate != null) {
+
+				DiscountCoupon couponEndDate = shoppingCartService.checkCouponEndDate(coupon);
+
+				if (couponEndDate != null) {
+
+					return discountCouponDto;
 				}
-				
+				discountCouponDto.setErrMsg("優惠券已過期");
+				return discountCouponDto;
 			}
+			discountCouponDto.setErrMsg("優惠券尚不能使用");
+			return discountCouponDto;
 		}
-		return mav;
+
+		discountCouponDto.setErrMsg("無此優惠券");
+		return discountCouponDto;
 	}
-	
+
 }
