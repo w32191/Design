@@ -19,136 +19,131 @@ import javax.validation.constraints.Pattern;
 @Table(name = "account")
 public class Account {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-  @NotBlank(message = "帳號不可為空")
-  @Email(message = "帳號必須是Email格式")
-  @Column(name = "email", length = 60)
-  private String email;
+	@NotBlank(message = "帳號不可空白")
+	@Email(message = "帳號必須是Email格式")
+	@Column(name = "email", length = 60)
+	private String email;
 
-  @NotBlank(message = "密碼欄不可空白")
-  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\w]{6,16}$", 
-	 message = "密碼必須為長度6~16位碼大小寫英文加數字")
-  @Column(name = "pwd", length = 60)
-  private String pwd;
-  
-  @Column(name = "salt")
-  private String salt;
+	@NotBlank(message = "密碼欄不可空白")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\w]{6,16}$", message = "密碼必須為長度6~16位碼大小寫英文加數字")
+	@Column(name = "pwd", length = 60)
+	private String pwd;
 
-  @Column(name = "permission")
-  private Integer permission;
+	@Column(name = "salt")
+	private String salt;
 
-  @OneToMany(mappedBy = "fkAccount")
-  private Set<Question> questions = new LinkedHashSet<>();
+	@Column(name = "permission")
+	private Integer permission;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
-  private Member members;
+	@OneToMany(mappedBy = "fkAccount")
+	private Set<Question> questions = new LinkedHashSet<>();
 
-  @OneToMany(mappedBy = "fkAccount")
-  private Set<OrderInformation> orderInformations = new LinkedHashSet<>();
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
+	private Member members;
 
-  @OneToMany(mappedBy = "fkAccount")
-  private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
+	@OneToMany(mappedBy = "fkAccount")
+	private Set<OrderInformation> orderInformations = new LinkedHashSet<>();
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
-  private ImgurImg imgurImgs;
+	@OneToMany(mappedBy = "fkAccount")
+	private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
-  public Account() {
-  }
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "fkAccount")
+	private ImgurImg imgurImgs;
 
-  public Set<ShoppingCard> getShoppingCards() {
-    return shoppingCards;
-  }
+	public Account() {
+	}
 
-  public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
-    this.shoppingCards = shoppingCards;
-  }
+	public Set<ShoppingCard> getShoppingCards() {
+		return shoppingCards;
+	}
 
-  public Set<OrderInformation> getOrderInformations() {
-    return orderInformations;
-  }
+	public void setShoppingCards(Set<ShoppingCard> shoppingCards) {
+		this.shoppingCards = shoppingCards;
+	}
 
-  public void setOrderInformations(Set<OrderInformation> orderInformations) {
-    this.orderInformations = orderInformations;
-  }
+	public Set<OrderInformation> getOrderInformations() {
+		return orderInformations;
+	}
 
-  public Member getMembers() {
-    return members;
-  }
+	public void setOrderInformations(Set<OrderInformation> orderInformations) {
+		this.orderInformations = orderInformations;
+	}
 
-  public void setMembers(Member members) {
-    this.members = members;
-  }
+	public Member getMembers() {
+		return members;
+	}
 
-  public Set<Question> getQuestions() {
-    return questions;
-  }
+	public void setMembers(Member members) {
+		this.members = members;
+	}
 
-  public void setQuestions(Set<Question> questions) {
-    this.questions = questions;
-  }
+	public Set<Question> getQuestions() {
+		return questions;
+	}
 
-  public Integer getPermission() {
-    return permission;
-  }
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
 
-  public void setPermission(Integer permission) {
-    this.permission = permission;
-  }
+	public Integer getPermission() {
+		return permission;
+	}
 
-  public String getPwd() {
-    return pwd;
-  }
+	public void setPermission(Integer permission) {
+		this.permission = permission;
+	}
 
-  public void setPwd(String pwd) {
-    this.pwd = pwd;
-  }
+	public String getPwd() {
+		return pwd;
+	}
 
-  public String getEmail() {
-    return email;
-  }
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public String getEmail() {
+		return email;
+	}
 
-  public Integer getId() {
-    return id;
-  }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public Integer getId() {
+		return id;
+	}
 
-  public ImgurImg getImgurImgs() {
-    return imgurImgs;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public void setImgurImgs(ImgurImg imgurImgs) {
-    this.imgurImgs = imgurImgs;
-  }
+	public ImgurImg getImgurImgs() {
+		return imgurImgs;
+	}
 
-
+	public void setImgurImgs(ImgurImg imgurImgs) {
+		this.imgurImgs = imgurImgs;
+	}
 
 	public String getSalt() {
-	return salt;
-}
+		return salt;
+	}
 
-public void setSalt(String salt) {
-	this.salt = salt;
-}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", email=" + email + ", pwd=" + pwd + ", checkpwd=" + ", salt=" + salt
+				+ ", permission=" + permission + ", questions=" + questions + ", members=" + members
+				+ ", orderInformations=" + orderInformations + ", shoppingCards=" + shoppingCards + ", imgurImgs="
+				+ imgurImgs + "]";
+	}
 
-@Override
-public String toString() {
-	return "Account [id=" + id + ", email=" + email + ", pwd=" + pwd + ", checkpwd=" + ", salt=" + salt
-			+ ", permission=" + permission + ", questions=" + questions + ", members=" + members
-			+ ", orderInformations=" + orderInformations + ", shoppingCards=" + shoppingCards + ", imgurImgs="
-			+ imgurImgs + "]";
-}
-
-  
 }

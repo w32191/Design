@@ -9,10 +9,9 @@
     <title>會員登入</title>
 </head>
 <body>
-    <main>
         <h1>會員登入</h1>
-        <form id=loginForm method="POST" action="@{/login}" enctype="multipart/form-data" autocomplete="off">
-        	<input type="hidden" id="MESSAGE" value="${MESSAGE}"/>
+        <form:form class="form" method="POST" ModelAttribute="login" >
+        	<input type="hidden" id="account" value="${account}"/>
             <section class="form-input">
                 <label>帳號/email</label>
                 <div class="input-area">
@@ -26,9 +25,8 @@
                 </div>
             </section>
             <button>登入</button>
+         </form:form>
             <span>還不是會員嗎<a href="">立即加入</a></span>
-        </form>
-    </main>
 
 </body>
 </html>

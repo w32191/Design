@@ -29,31 +29,31 @@ public class AccountController {
     private AccountService accountService;
     
     //登入帳號頁面
-    @GetMapping("/")
-    public ModelAndView login(
-    		ModelAndView modelAndView,
-    		@ModelAttribute Account account,
-    		 String message) {
+    @GetMapping("/login")
+    public ModelAndView login(ModelAndView mav,@ModelAttribute Account account) {
 		
-    	modelAndView.setViewName("/B/Account/login");
+    	mav.setViewName("/B/Account/login");
     	
-    	return modelAndView;
+    	return mav;
     }
     
     //登入帳號中並存入session
     @PostMapping("/login")
-    public Account doLogin(@Valid @ModelAttribute(name = "login")
-    		Account account,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes) {
+    public ModelAndView doLogin(@Valid @ModelAttribute(name = "login")
+    		ModelAndView mav,Account account ,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes) {
     	
-    	boolean login = accountService.login(email, pwd);
+    	boolean login = accountService.login(account, email, pwd);
     	if(login == true) {
-    		return account;
+    		return mav;
     	}
     	
-    	account = accountService.findAccountByemail(null);
-    	session.setAttribute("member", account);
-		return null;
+    	session.setAttribute("account", account);
+    	mav.setViewName("/B/Account/logout");
     	
+    	System.out.println(session);
+		return mav;
+    	
+		
     	
 
     }
@@ -103,15 +103,22 @@ public class AccountController {
 //    	}
 //    }
     
-    
-    @RequestMapping("/logout")
-    public String logout(HttpSession session, SessionStatus sessionStatus ) {
+    @GetMapping("/logout")
+    public ModelAndView logout(ModelAndView mav) {
     	
-    	if(session.getAttribute("member") != null) {
-    		session.removeAttribute("member");
+    	mav.setViewName("/B/Account/logout");
+    	return mav;
+    }
+    
+    
+    @PostMapping("/logout")
+    public String logout(@ModelAttribute(name = "loginout") HttpSession session, SessionStatus sessionStatus ) {
+    	
+    	if(session.getAttribute("account") != null) {
+    		session.removeAttribute("account");
 			sessionStatus.setComplete();
 		}		
-		return "redirect:login";
+		return "/B/Account/login";
     	
     }
 }
