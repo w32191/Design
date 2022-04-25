@@ -69,7 +69,7 @@
                                         <tbody>
                                             <c:forEach items="${cqs}" var="cq">
                                                 <tr>
-                                                    <td>${cq.questionType}
+                                                    <td><p>${cq.questionType}</p>
                                                     <td>${cq.question}
                                                     <td>${cq.answer}
                                                     <td><button type="button" class="btn btn-info" name='edit'
@@ -151,6 +151,93 @@
                     <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
                     <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 
+
+                    
+            <!-- 修改員工Modal -->
+			<div class="modal fade" id="editModal" tabindex="-1"
+            aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">修改員工資料</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form -->
+                        <form id="editEmpForm" class="form-inline" method="post"
+                            action="${contextRoot}/admin/updateEmp"
+                            enctype="multipart/form-data">
+                            <div class="col-sm-11">
+                                <input type="text" id="orphoto" name="orphoto"
+                                    hidden="">
+                                <h3>基本資料</h3>
+                            </div>                     
+                                                
+
+                            <div class="input-group mb-3 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="question_type"><span
+                                        style="color: red">*</span>問題類型</label>
+                                </div>
+                                <input type="text" class="form-control" id="question_type_e"
+                                    name="question_type" size="30" aria-describedby="question_type"
+                                    autocomplete="off" required><br>
+                                <input type="text" name="id" id="id_e">
+                                </div>
+                            
+
+                            <div class="input-group mb-3 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="question"><span
+                                        style="color: red">*</span>問題</label>
+                                </div>
+                                <input type="text" class="form-control" id="question_e"
+                                    name="question" size="30" aria-describedby="question"
+                                    autocomplete="off" required><br>
+                            </div>
+
+                            <div class="textarea-group mb-12 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="answer"><span
+                                        style="color: red">*</span>答案</label>
+                                </div>
+                                <textarea rows="80" cols="80" type="text" class="form-control" id="answer_e"
+                                    name="answer" aria-describedby="answer"
+                                    autocomplete="off" required></textarea><br>
+                            </div>
+                            
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">關閉</button>
+                            <button id="editBtn" type="button" class="btn btn-primary">送出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of modal -->
+
+        <script>
+        <!--修改-->
+	
+	$('body').on('click','button[name="edit"]',function(){
+		let id = $(this).parent().parent().find("p").html();
+		$.ajax({
+			url:"CommonQuestion/updateQuestion?id=" + id,
+			method:"get",
+			success: function(data){
+				$('#question_type_e').val(data.questionType);
+				$('#question_e').val(data.question);
+				$('#answer_e').val(data.answer);				
+				$('#id_e').val(data.id);
+			}
+		});
+	});
+        </script>
 
 
 
