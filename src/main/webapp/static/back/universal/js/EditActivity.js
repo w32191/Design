@@ -1,10 +1,18 @@
 $(function () {
   //用來儲存勾選的productID
   let checkProductArray = [];
+  // 預設取得第一頁的品牌
   let brandPageNumber = 1;
+  // 全選按鈕
   let selectAllBtn = $('#selectAllBtn');
+  // 取消全選按鈕
   let unSelectAllBtn = $('#unSelectAllBtn');
+  // 商品清單的tbody
   let productTbody = $('#productTbody');
+  // 品牌清單的div
+  let brandContent = $('#brandContent');
+
+  let productCheckBoxes = $('input[id^="checkProduct"]');
 
   // 先取得原本資料庫中，該活動以經有勾選的產品id
   $.ajax({
@@ -129,17 +137,23 @@ $(function () {
   }
 
   // 用頁數更新品牌清單
-  function freshBrandList(brandPageNumber) {// 取得品牌資料後，顯示品牌清單
+  function freshBrandList(brandPageNumber) {
+
+    // 清空品牌清單
+    brandContent.html('');
+    // 刷新前先將原本已經checked的id存起來
+    storeCheckProductArray();
+    // 取得品牌資料後，顯示品牌清單
     $.ajax({
       url: '/Design/B/Activity/getBrandsPage?page=' + brandPageNumber,
       type: 'GET',
-      beforeSend: function () {
-        swal.fire({
-          imageUrl: '/Design/static/back/universal/images/load-img.gif',
-          imageHeight: 300,
-          showConfirmButton: false
-        });
-      },
+      // beforeSend: function () {
+      //   swal.fire({
+      //     imageUrl: '/Design/static/back/universal/images/load-img.gif',
+      //     imageHeight: 300,
+      //     showConfirmButton: false
+      //   });
+      // },
       success: function (res) {
         swal.close();
         // 取得品牌清單後，append在左側清單
@@ -174,26 +188,35 @@ $(function () {
 
         // console.log(res);
         // console.log('totalPages:' + res.totalPages);
-        // console.log('pageNumber:' + res.pageable.pageNumber);
+        console.log('pageNumber:' + res.pageable.pageNumber);
         // SamWang to-do : brands分頁未完成
-        $('#brandContent').append(`<p></p>`)
-        .append(`<ul class="pagination">
-                                    <li class="page-item">
-                                        <button class="page-link" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </button>
-                                    </li>
-                                    <li class="page-item"><button class="page-link">1</button></li>
-                                    <li class="page-item"><button class="page-link">2</button></li>
-                                    <li class="page-item"><button class="page-link">3</button></li>
-                                    <li class="page-item">
-                                        <button class="page-link" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </button>
-                                    </li>
-                                </ul>`);
+
+        let documentFragment = document.createDocumentFragment();
+        let ul = document.createElement('ul');
+        ul.classList.add('pagination');
+
+        let li, btn;
+
+        for (let page = 1; page <= res.totalPages; page++) {
+
+          li = document.createElement('li');
+          li.classList.add('page-item');
+          // 當前頁數加上activity顏色
+          if (page === res.pageable.pageNumber + 1) {
+            li.classList.add('active');
+          }
+
+          btn = document.createElement('button');
+          btn.classList.add('page-link');
+          btn.innerText = `${page}`;
+
+          li.append(btn);
+          ul.append(li);
+        }
+
+        documentFragment.append(ul);
+
+        brandContent.append(`<p></p>`).append(documentFragment);
 
         // 右側商品清單，載入第一筆品牌的所有商品
         let brandId = res.content[0].id;
@@ -208,12 +231,21 @@ $(function () {
 
   // 檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
   function isProductAllChecked() {
+    // 預設全部都有勾
     let isAllChecked = true;
-    $('input[id^="checkProduct"]').each(function () {
+
+    // 只要其中一個沒有
+    productCheckBoxes.each(function () {
       if (!$(this).prop('checked')) {
         isAllChecked = false;
       }
     });
+    // 或根本沒有checkbox
+    if (productCheckBoxes.size() === 0) {
+      isAllChecked = false;
+    }
+    //  如果已經全勾，顯示(取消全選)按鈕
+    //  只要有一個沒勾，顯示(全選)按鈕
     if (isAllChecked) {
       selectAllBtn.attr('hidden', 'hidden');
       unSelectAllBtn.removeAttr('hidden');
@@ -243,10 +275,15 @@ $(function () {
   });
 
   // 點了品牌後，刷新產品
-  $('#brandContent').on('click', 'div[id^="selectBrand"]', function () {
+  brandContent.on('click', 'div[id^="selectBrand"]', function () {
     let brandId = $(this).attr('id').split('selectBrand')[1];
     freshProductList(brandId);
     isProductAllChecked();
+  });
+
+  // 品牌分頁按鈕 click事件
+  brandContent.on('click', 'button[class="page-link"]', function () {
+    freshBrandList($(this).text());
   });
 
   // 編輯按鈕送出
@@ -325,6 +362,9 @@ $(function () {
   });
 
   // 只要產品勾選有變化,就檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
-  productTbody.on('change', 'input[id^="checkProduct"]',
-      isProductAllChecked);
+  productTbody.on('change', 'input[id^="checkProduct"]', isProductAllChecked);
+
+
+
+
 });
