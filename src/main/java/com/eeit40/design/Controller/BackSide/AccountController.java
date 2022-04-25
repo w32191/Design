@@ -40,20 +40,17 @@ public class AccountController {
     //登入帳號中並存入session
     @PostMapping("/login")
     public ModelAndView doLogin(@Valid @ModelAttribute(name = "login")
-    		ModelAndView mav,Account account ,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes) {
+    		ModelAndView mav,Account account ,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
     	
-    	boolean login = accountService.login(account, email, pwd);
-    	if(login == true) {
+    	if(!br.hasErrors()) {
+    		Account login = accountService.login(email, pwd);
+    		if(login != null) {
+    		session.setAttribute("account", account);
+    		mav.setViewName("/B/Account/logout");
     		return mav;
+    		}
     	}
-    	
-    	session.setAttribute("account", account);
-    	mav.setViewName("/B/Account/logout");
-    	
-    	System.out.println(session);
-		return mav;
-    	
-		
+			return null;
     	
 
     }

@@ -10,18 +10,19 @@
 </head>
 <body>
         <h1>會員登入</h1>
-        <form:form class="form" method="POST" ModelAttribute="login" >
-        	<input type="hidden" id="account" value="${account}"/>
+        <form:form class="form" method="POST" ModelAttribute="login" >      	
+        <input type="hidden" id="account" value="${account}"/>
+        <form:errors type="text" name="pwd"/>
             <section class="form-input">
                 <label>帳號/email</label>
                 <div class="input-area">
-                    <input type="text"  placeholder="請輸入email"/>
+                    <input type="text" name="email"  placeholder="請輸入email"/>
                 </div>
             </section>
             <section class="form-input">
                 <label>密碼</label>
                 <div class="input-area">
-                    <input type="password" maxlength="16" placeholder="請輸入密碼"/>
+                    <input type="password" name="pwd" maxlength="16" placeholder="請輸入密碼"/>
                 </div>
             </section>
             <button>登入</button>
