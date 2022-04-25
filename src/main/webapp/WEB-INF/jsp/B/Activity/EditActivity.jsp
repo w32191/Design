@@ -216,6 +216,7 @@
                             </div>
                             <div class="recent-comment" id="brandContent">
                                 <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
+
                             </div>
                         </div>
                         <!-- /# card -->
@@ -228,10 +229,18 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover " id="productListTable">
+                                    <table class="table table-hover" id="productListTable">
                                         <thead>
                                         <tr>
-                                            <th><button class="btn btn-primary">全選</button></th>
+
+                                            <th>
+                                                <button class="btn btn-primary" id="selectAllBtn">
+                                                    全選
+                                                </button>
+                                                <button class="btn btn-primary" id="unSelectAllBtn"
+                                                        hidden>取消全選
+                                                </button>
+                                            </th>
                                             <th>圖片</th>
                                             <th>名稱</th>
                                             <th>分類</th>
@@ -240,7 +249,6 @@
                                         </tr>
                                         </thead>
                                         <tbody id="productTbody">
-
                                         </tbody>
                                     </table>
                                 </div>

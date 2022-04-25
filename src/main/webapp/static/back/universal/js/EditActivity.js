@@ -1,18 +1,31 @@
 $(function () {
   //用來儲存勾選的productID
   let checkProductArray = [];
+  let brandPageNumber = 1;
+  let selectAllBtn = $('#selectAllBtn');
+  let unSelectAllBtn = $('#unSelectAllBtn');
+  let productTbody = $('#productTbody');
 
   // 先取得原本資料庫中，該活動以經有勾選的產品id
   $.ajax({
     type: 'GET',
-    url: '/Design/B/Activity/findAlreadyCheckedProductId/' + $(
-        '#activityID').text(),
+    url: '/Design/B/Activity/findAlreadyCheckedProductId/' +
+        $('#activityID').text(),
+    beforeSend: function () {
+      swal.fire({
+        imageUrl: '/Design/static/back/universal/images/load-img.gif',
+        imageHeight: 300,
+        showConfirmButton: false
+      });
+    },
     success: function (res) {
       checkProductArray = res;
-      console.log(checkProductArray)
+      console.log(checkProductArray);
+      swal.close();
     },
     error: function (err) {
       console.log(err);
+      swal.close();
     }
   });
 
@@ -44,16 +57,24 @@ $(function () {
   // 用品牌Id來刷新商品清單
   function freshProductList(brandId) {
 
+    // 刷新前先將原本已經checked的id存起來
     storeCheckProductArray();
 
-    console.log(checkProductArray);
     // 先將產品清單清空
-    $('#productTbody').html('');
+    productTbody.html('');
 
     $.ajax({
       url: '/Design/B/product/findProductByBrand/' + brandId,
       type: 'GET',
+      beforeSend: function () {
+        swal.fire({
+          imageUrl: '/Design/static/back/universal/images/load-img.gif',
+          imageHeight: 300,
+          showConfirmButton: false
+        });
+      },
       success: function (res) {
+        swal.close();
         // res為該品牌的所有產品
         $.each(res, function (index, product) {
 
@@ -66,6 +87,7 @@ $(function () {
           } else {
             firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
                                       id="checkProduct${product.id}">`;
+            // isAllChecked = false;
           }
 
           let secondTd = document.createElement('td');
@@ -94,28 +116,32 @@ $(function () {
           tr.append(fourthTd);
           tr.append(fiveTh);
           tr.append(sixTd);
-          $('#productTbody').append(tr);
+          productTbody.append(tr);
         }); // end of each()
 
+        isProductAllChecked();
       },
       error: function (err) {
+        swal.close();
         console.log(err);
       }
     });
   }
 
-  // 顯示商品列表按鈕
-  $('#openProducts').click(function () {
-    $(this).attr("hidden", "hidden");
-    $('#closeProducts').removeAttr("hidden");
-    $('#brandsList').removeAttr('hidden');
-    $('#productList').removeAttr('hidden');
-
-    // 取得品牌資料後，顯示品牌清單
+  // 用頁數更新品牌清單
+  function freshBrandList(brandPageNumber) {// 取得品牌資料後，顯示品牌清單
     $.ajax({
-      url: '/Design/B/Activity/getBrandsPage',
+      url: '/Design/B/Activity/getBrandsPage?page=' + brandPageNumber,
       type: 'GET',
+      beforeSend: function () {
+        swal.fire({
+          imageUrl: '/Design/static/back/universal/images/load-img.gif',
+          imageHeight: 300,
+          showConfirmButton: false
+        });
+      },
       success: function (res) {
+        swal.close();
         // 取得品牌清單後，append在左側清單
         $.each(res.content, function (index, brand) {
           // 品牌外層div
@@ -146,15 +172,65 @@ $(function () {
           $('#brandContent').append(divMedia);
         }); // end of each()
 
+        // console.log(res);
+        // console.log('totalPages:' + res.totalPages);
+        // console.log('pageNumber:' + res.pageable.pageNumber);
+        // SamWang to-do : brands分頁未完成
+        $('#brandContent').append(`<p></p>`)
+        .append(`<ul class="pagination">
+                                    <li class="page-item">
+                                        <button class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </button>
+                                    </li>
+                                    <li class="page-item"><button class="page-link">1</button></li>
+                                    <li class="page-item"><button class="page-link">2</button></li>
+                                    <li class="page-item"><button class="page-link">3</button></li>
+                                    <li class="page-item">
+                                        <button class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </button>
+                                    </li>
+                                </ul>`);
+
         // 右側商品清單，載入第一筆品牌的所有商品
         let brandId = res.content[0].id;
         freshProductList(brandId);
 
       }, error: function (err) {
+        swal.close();
         console.log(err);
       }
     }); // end of $.ajax()
+  }
 
+  // 檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
+  function isProductAllChecked() {
+    let isAllChecked = true;
+    $('input[id^="checkProduct"]').each(function () {
+      if (!$(this).prop('checked')) {
+        isAllChecked = false;
+      }
+    });
+    if (isAllChecked) {
+      selectAllBtn.attr('hidden', 'hidden');
+      unSelectAllBtn.removeAttr('hidden');
+    } else {
+      unSelectAllBtn.attr('hidden', 'hidden');
+      selectAllBtn.removeAttr('hidden');
+    }
+  }
+
+  // 顯示商品列表按鈕
+  $('#openProducts').click(function () {
+    $(this).attr("hidden", "hidden");
+    $('#closeProducts').removeAttr("hidden");
+    $('#brandsList').removeAttr('hidden');
+    $('#productList').removeAttr('hidden');
+
+    freshBrandList(brandPageNumber);
   });
 
   // 隱藏商品列表按鈕
@@ -170,6 +246,7 @@ $(function () {
   $('#brandContent').on('click', 'div[id^="selectBrand"]', function () {
     let brandId = $(this).attr('id').split('selectBrand')[1];
     freshProductList(brandId);
+    isProductAllChecked();
   });
 
   // 編輯按鈕送出
@@ -202,15 +279,13 @@ $(function () {
           contentType: false,
           beforeSend: function () {
             swal.fire({
-              html: '<h5>更新中...</h5>',
-              showConfirmButton: false,
-              onRender: function () {
-                // there will only ever be one sweet alert open.
-                // $('.swal2-content').prepend(sweet_loader);
-              }
+              imageUrl: '/Design/static/back/universal/images/load-img.gif',
+              imageHeight: 300,
+              showConfirmButton: false
             });
           },
           success: function (json) {
+            swal.close();
             console.log(`成功的回傳值：${json}`);
             swal.fire({
               icon: 'success',
@@ -221,6 +296,7 @@ $(function () {
 
           },
           error: function (res) {
+            swal.close();
             console.log(`失敗的回傳值：${res}`);
             swal.fire({
               icon: 'error',
@@ -234,4 +310,21 @@ $(function () {
       }
   );  // end of ('#updateBtn').click()
 
+  // 全選按鈕click時
+  selectAllBtn.click(function () {
+    $(this).attr('hidden', 'hidden');
+    unSelectAllBtn.removeAttr('hidden');
+    $('input[id^="checkProduct"]').prop('checked', 'checked');
+  });
+
+  // 取消全選click時
+  unSelectAllBtn.click(function () {
+    $(this).attr('hidden', 'hidden');
+    selectAllBtn.removeAttr('hidden');
+    $('input[id^="checkProduct"]').removeAttr('checked');
+  });
+
+  // 只要產品勾選有變化,就檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
+  productTbody.on('change', 'input[id^="checkProduct"]',
+      isProductAllChecked);
 });

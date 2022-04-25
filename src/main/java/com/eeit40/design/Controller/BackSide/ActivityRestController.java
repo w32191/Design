@@ -96,10 +96,8 @@ public class ActivityRestController {
 
   @GetMapping("/B/Activity/getBrandsPage")
   public Page<Brand> findBrandByPage(
-      @RequestParam(name = "page", defaultValue = "1") String page) throws JsonProcessingException {
-    Page<Brand> result = brandService.findAllByPage(Integer.valueOf(page));
-    log.info("準備打回去");
-    return result;
+      @RequestParam(name = "page", defaultValue = "1") String page) {
+    return brandService.findAllByPage(Integer.valueOf(page));
   }
 
   @GetMapping("/B/Activity/findAlreadyCheckedProductId/{activityId}")

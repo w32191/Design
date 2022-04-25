@@ -29,12 +29,9 @@ $(function () {
           method: 'DELETE',
           beforeSend: function () {
             swal.fire({
-              html: '<h5>刪除中...</h5>',
-              showConfirmButton: false,
-              onRender: function () {
-                // there will only ever be one sweet alert open.
-                // $('.swal2-content').prepend(sweet_loader);
-              }
+              imageUrl: '/Design/static/back/universal/images/load-img.gif',
+              imageHeight: 300,
+              showConfirmButton: false
             });
           },
           success: function (res) {
@@ -111,12 +108,9 @@ $(function () {
       contentType: false,
       beforeSend: function () {
         swal.fire({
-          html: '<h5>圖片上傳中...</h5>',
-          showConfirmButton: false,
-          onRender: function () {
-            // there will only ever be one sweet alert open.
-            // $('.swal2-content').prepend(sweet_loader);
-          }
+          imageUrl: '/Design/static/back/universal/images/load-img.gif',
+          imageHeight: 300,
+          showConfirmButton: false
         });
       },
       success: function (json) {
