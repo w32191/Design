@@ -215,27 +215,7 @@
                                 <h4>品牌清單</h4>
                             </div>
                             <div class="recent-comment" id="brandContent">
-<%--                                <c:forEach items="${brandAllList}" var="brand">--%>
-<%--                                    <div class="media">--%>
-<%--                                        <div class="media-left">--%>
-<%--                                            <c:choose>--%>
-<%--                                                <c:when test="${brand.img != null}">--%>
-<%--                                                    <img class="media-object" src="${brand.img}"--%>
-<%--                                                         alt=""/>--%>
-<%--                                                </c:when>--%>
-<%--                                                <c:otherwise>--%>
-<%--                                                    <img class="media-object"--%>
-<%--                                                         src="${contextRoot}/static/back/universal/images/no-image.jpeg"--%>
-<%--                                                         alt=""/>--%>
-<%--                                                </c:otherwise>--%>
-<%--                                            </c:choose>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="media-body">--%>
-<%--                                            <h4 class="media-heading">${brand.name}</h4>--%>
-<%--                                            <p>${brand.description}</p>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </c:forEach>--%>
+                                <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
                             </div>
                         </div>
                         <!-- /# card -->
@@ -244,13 +224,14 @@
                     <div class="col-lg-8" id="productList" hidden>
                         <div class="card">
                             <div class="card-title">
-                                <h4>產品清單</h4>
+                                <h4 id="h4ProductTitle">產品清單</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover ">
+                                    <table class="table table-hover " id="productListTable">
                                         <thead>
                                         <tr>
+                                            <th><button class="btn btn-primary">全選</button></th>
                                             <th>圖片</th>
                                             <th>名稱</th>
                                             <th>分類</th>
@@ -258,9 +239,10 @@
                                             <th>庫存</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-
+                                        <tbody id="productTbody">
                                         <tr>
+                                            <td><input type="checkbox" name="checkProduct"
+                                                       id="checkProduct"></td>
                                             <td>
                                                 <img alt="" width="50" height="50"
                                                      src="${contextRoot}/static/back/universal/images/no-image.jpeg"/>

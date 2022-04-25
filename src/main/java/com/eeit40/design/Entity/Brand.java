@@ -34,20 +34,20 @@ public class Brand {
   @Column(name = "description")
   private String description;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "fkBrand")
-  private Set<Product> products = new LinkedHashSet<>();
+//  @JsonIgnore
+//  @OneToMany(mappedBy = "fkBrand")
+//  private Set<Product> products = new LinkedHashSet<>();
 
   public Brand() {
   }
 
-  public Set<Product> getProducts() {
-    return products;
-  }
-
-  public void setProducts(Set<Product> products) {
-    this.products = products;
-  }
+//  public Set<Product> getProducts() {
+//    return products;
+//  }
+//
+//  public void setProducts(Set<Product> products) {
+//    this.products = products;
+//  }
 
   public String getDescription() {
     return description;

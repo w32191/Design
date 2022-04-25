@@ -1,4 +1,60 @@
 $(function () {
+  //用來儲存勾選的productID
+  let checkProductArray = [];
+
+  // 用品牌Id來刷新商品清單
+  function freshProductList(brandId) {
+
+    // 先將產品清單清空
+    $('#productTbody').html('');
+
+    $.ajax({
+      url: '/Design/B/product/findProductByBrand/' + brandId,
+      type: 'GET',
+      success: function (res) {
+        // res為該品牌的所有產品
+        $.each(res, function (index, product) {
+
+          let tr = document.createElement('tr');
+
+          let firstTd = document.createElement('td');
+          firstTd.innerHTML = `<input type="checkbox" name="checkProduct"
+                                                       id="checkProduct${product.id}">`;
+          let secondTd = document.createElement('td');
+          if (product.image01 == null) {
+            secondTd.innerHTML = `<img alt="" width="50" height="50"
+                                                     src="/Design/static/back/universal/images/no-image.jpeg"/>`;
+          } else {
+            secondTd.innerHTML = `<img alt="" width="50" height="50"
+                                                     src="${product.image01}"/>`;
+          }
+          let thirdTd = document.createElement('td');
+          thirdTd.innerText = `${product.name}`;
+
+          let fourthTd = document.createElement('td');
+          fourthTd.innerText = `${product.categories}`;
+
+          let fiveTh = document.createElement('td');
+          fiveTh.innerText = `$${product.price}`;
+
+          let sixTd = document.createElement('td');
+          sixTd.innerText = `${product.stock}`;
+
+          tr.append(firstTd);
+          tr.append(secondTd);
+          tr.append(thirdTd);
+          tr.append(fourthTd);
+          tr.append(fiveTh);
+          tr.append(sixTd);
+          $('#productTbody').append(tr);
+        }); // end of each()
+
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
 
   // 顯示商品列表按鈕
   $('#openProducts').click(function () {
@@ -7,11 +63,13 @@ $(function () {
     $('#brandsList').removeAttr('hidden');
     $('#productList').removeAttr('hidden');
 
+    // 取得品牌資料後，顯示品牌清單
     $.ajax({
       url: '/Design/B/Activity/getBrandsPage',
       type: 'GET',
       success: function (res) {
-        // 取得品牌的分頁json後，一個一個串起來
+
+        // 取得品牌清單後，append在左側清單
         $.each(res.content, function (index, brand) {
           // 品牌外層div
           let divMedia = document.createElement('div');
@@ -41,10 +99,15 @@ $(function () {
           $('#brandContent').append(divMedia);
         }); // end of each()
 
+        // 右側商品清單，載入第一筆品牌的所有商品
+        let brandId = res.content[0].id;
+        freshProductList(brandId);
+
       }, error: function (err) {
         console.log(err);
       }
-    });
+    }); // end of $.ajax()
+
   });
 
   // 隱藏商品列表按鈕
@@ -56,12 +119,21 @@ $(function () {
     $('#brandContent').html('');
   });
 
-  // 點品牌列表後，取的品牌id，用這個ＩＤ取得商品
+  // 點了品牌後，刷新產品
   $('#brandContent').on('click', 'div[id^="selectBrand"]', function () {
-    console.log($(this).attr('id').split('selectBrand')[1]);
     let brandId = $(this).attr('id').split('selectBrand')[1];
-    // SamWang to-do: 取到品牌ＩＤ，尚未處理產品
+    freshProductList(brandId);
+
   });
+
+  $('#productListTable').on('change', 'input[id^="checkProduct"]',
+      function () {
+        // console.log($(this).attr('id'))
+        console.log($(this).attr('id').split('checkProduct')[1]);
+        let productId = $(this).attr('id').split('checkProduct')[1];
+        // SamWang to-do: product id 尚未收集起來送出
+      });
+
 
   // 編輯按鈕送出
   $('#updateBtn').click(

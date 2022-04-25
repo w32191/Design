@@ -69,8 +69,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "fkProduct")
-    private Set<ProductImg> productImgs = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "fkProduct")
+//    private Set<ProductImg> productImgs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "fkProduct")
     private Set<ProductReview> productReviews = new LinkedHashSet<>();
@@ -78,16 +78,16 @@ public class Product {
     @OneToMany(mappedBy = "fkProduct")
     private Set<OrderList> orderLists = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "fkProduct")
-    private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "fkProduct")
+//    private Set<ShoppingCard> shoppingCards = new LinkedHashSet<>();
 
 
     public Product() {
     }
 
-    public Set<ShoppingCard> getShoppingCards() {
-        return shoppingCards;
-    }
+//    public Set<ShoppingCard> getShoppingCards() {
+//        return shoppingCards;
+//    }
 
 
     public Set<OrderList> getOrderLists() {
@@ -107,13 +107,13 @@ public class Product {
         this.productReviews = productReviews;
     }
 
-    public Set<ProductImg> getProductImgs() {
-        return productImgs;
-    }
-
-    public void setProductImgs(Set<ProductImg> productImgs) {
-        this.productImgs = productImgs;
-    }
+//    public Set<ProductImg> getProductImgs() {
+//        return productImgs;
+//    }
+//
+//    public void setProductImgs(Set<ProductImg> productImgs) {
+//        this.productImgs = productImgs;
+//    }
 
     public Set<Activity> getActivities() {
         return activities;

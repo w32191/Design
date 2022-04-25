@@ -179,22 +179,9 @@ public class ActivityServiceImpl implements ActivityService {
     return brandRepository.findAll();
   }
 
-  // 用brandsId和productsId，去取得這些product的Set
+  // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {
     Set<Product> productSet = new LinkedHashSet<>();
-//
-//    // 如果有輸入brands
-//    if (dto.getBrands() != null) {
-//      for (Integer brandId : dto.getBrands()) {
-//        //  先用brand id找到每一個brand
-//        Optional<Brand> brandResult = brandRepository.findById(brandId);
-//        if (brandResult.isPresent()) {
-//          // 找到該品牌的全部商品
-//          List<Product> productList = productRepository.findProductByFkBrand(brandResult.get());
-//          productSet.addAll(productList);
-//        }
-//      } // end of foreach(dto.getBrands())
-//    }
 
     //如果使用者有勾選，此活動的商品
     if (dto.getProductId() != null) {
