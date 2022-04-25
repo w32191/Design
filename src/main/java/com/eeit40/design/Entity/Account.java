@@ -34,6 +34,12 @@ public class Account {
 	 message = "密碼必須為長度6~16位碼大小寫英文加數字")
   @Column(name = "pwd", length = 60)
   private String pwd;
+  
+  @NotBlank(message = "確認密碼欄不可空白")
+  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\w]{6,16}$", 
+	 message = "密碼必須為長度6~16位碼大小寫英文加數字")
+  @Column(name = "checkpwd", length = 60)
+  private String checkpwd;
 
   @Column(name = "salt")
   private String salt;
@@ -123,9 +129,6 @@ public class Account {
     this.id = id;
   }
 
-
-
-
   public ImgurImg getImgurImgs() {
     return imgurImgs;
   }
@@ -144,11 +147,23 @@ public void setSalt(String salt) {
 	this.salt = salt;
 }
 
+
+
+public String getCheckpwd() {
+	return checkpwd;
+}
+
+public void setCheckpwd(String checkpwd) {
+	this.checkpwd = checkpwd;
+}
+
 @Override
 public String toString() {
-	return "Account [id=" + id + ", email=" + email + ", pwd=" + pwd + ", salt=" + salt + ", permission=" + permission
-			+ ", questions=" + questions + ", members=" + members + ", orderInformations=" + orderInformations
-			+ ", shoppingCards=" + shoppingCards + "]";
+	return "Account [id=" + id + ", email=" + email + ", pwd=" + pwd + ", checkpwd=" + checkpwd + ", salt=" + salt
+			+ ", permission=" + permission + ", questions=" + questions + ", members=" + members
+			+ ", orderInformations=" + orderInformations + ", shoppingCards=" + shoppingCards + ", imgurImgs="
+			+ imgurImgs + "]";
 }
+
   
 }
