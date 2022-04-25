@@ -48,14 +48,6 @@ public class AccountService {
 	}
 	
 	
-	
-	public Account findAccountBycheckpwd(String checkpwd) {
-		
-		return accountRepository.findAccountBycheckpwd(checkpwd);
-	}
-	
-	
-	
 	public Account register(Account account) {
 		
 		if(accountRepository.findAccountByemail(account.getEmail())!=null) {
@@ -70,15 +62,16 @@ public class AccountService {
 	}
 	
 	
-	public Account login (String email, String pwd) {
+	public boolean login (String email, String pwd) {
 		
-		Account account = accountRepository.findAccountByeamilandpwd(email, pwd);
+		Account email1 = accountRepository.findAccountByemail(email);
+		Account pwd1 = accountRepository.findAccountBypwd(pwd);
 		
-		if(account != null) {
-			account.setPwd("");
+		if(email1 != null && pwd1.getPwd().equals(pwd)) {
+			return true;
 		}
 		
-		return account;
+		return false;
 			
 	}
 			

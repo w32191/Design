@@ -33,7 +33,7 @@ public class AccountController {
     public ModelAndView login(
     		ModelAndView modelAndView,
     		@ModelAttribute Account account,
-    		@ModelAttribute(value = "MESSAGE") String message) {
+    		 String message) {
 		
     	modelAndView.setViewName("/B/Account/login");
     	
@@ -42,12 +42,12 @@ public class AccountController {
     
     //登入帳號中並存入session
     @PostMapping("/login")
-    public Result<Account> doLogin(@Valid @ModelAttribute @RequestParam String email, @RequestParam String pwd,
-    		Account account, HttpSession session, RedirectAttributes redirectAttributes) {
+    public Account doLogin(@Valid @ModelAttribute(name = "login")
+    		Account account,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes) {
     	
-    	Account login = accountService.login(email, pwd);
-    	if(login != null) {
-    		return 
+    	boolean login = accountService.login(email, pwd);
+    	if(login == true) {
+    		return account;
     	}
     	
     	account = accountService.findAccountByemail(null);
@@ -75,18 +75,18 @@ public class AccountController {
     //註冊帳號中
     @PostMapping("/register")
     public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
-    Account account, String email , String pwd, String checkpwd,BindingResult br) {
-    	Account email1 = accountService.findAccountByemail(email);
-    	Account pwd1 = accountService.findAccountBypwd(pwd);
-		Account checkpwd1 = accountService.findAccountBycheckpwd(checkpwd);
+    Account account, String email , String pwd, BindingResult br) {
     	
     	if(!br.hasErrors()) {
-    		if(pwd1.equals(checkpwd1)) {
-    			
-    		}
-    	
+    		accountService.register(account);
+    		
+    		mav.setViewName("B/Account/login");
+    		
+    		return mav;
+    		
     	}
-    	return mav;
+    	
+    	return null;
     	
     }
     
@@ -94,14 +94,14 @@ public class AccountController {
     
     
     
-    public boolean registeremail(String email) {
-    	boolean a = true;
-    	if(accountService.findAccountByemail(email).) {
-    		return a;
-    	}else {
-    		return false;
-    	}
-    }
+//    public boolean registeremail(String email) {
+//    	boolean a = true;
+//    	if(accountService.findAccountByemail(email).) {
+//    		return a;
+//    	}else {
+//    		return false;
+//    	}
+//    }
     
     
     @RequestMapping("/logout")

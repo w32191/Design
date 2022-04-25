@@ -10,10 +10,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
 	public Account findAccountByemail(String email);
 	
 	public Account findAccountBypwd(String pwd);
-
-	public Account findAccountBycheckpwd(String checkpwd);
-	
-	public Account findAccountByeamilandpwd(String email, String pwd);
 	
 	Optional<Account> findById(Integer id);
 
