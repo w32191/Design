@@ -151,13 +151,13 @@ public class ShoppingCartController {
 
 					return discountCouponDto;
 				}
-				discountCouponDto.setErrMsg("優惠券已過期");
+				discountCouponDto.setErrMsg("優惠券已過期"+" , "+"請輸入正確優惠券代碼");
 				return discountCouponDto;
 			}
-			discountCouponDto.setErrMsg("優惠券尚不能使用");
+			discountCouponDto.setErrMsg("優惠券活動時間尚未開始"+" , "+"請輸入正確優惠券代碼");
 			return discountCouponDto;
 		}
-		discountCouponDto.setErrMsg("無此優惠券");
+		discountCouponDto.setErrMsg("查無此優惠券"+" , "+"請輸入正確優惠券代碼");
 		return discountCouponDto;
 	}
 

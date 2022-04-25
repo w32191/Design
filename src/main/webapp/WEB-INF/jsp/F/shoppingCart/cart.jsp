@@ -69,9 +69,8 @@
                                                 <tr>
 
                                                     <td class="product-thumbnail">
-                                                        <a href="product-details.html"><img
-                                                                src="data:image/jpeg;base64,${cart.fkProduct.image01}"
-                                                                alt=""></a>
+                                                        <a href="product-details.html">
+                                                            <img src="data:image/jpeg;base64,${cart.fkProduct.image01}" alt=""></a>
                                                     </td>
 
                                                     <td class="product-name">
@@ -84,25 +83,22 @@
 
                                                     <td class="product-quantity">
                                                         <div class="cart-plus-minus">
-                                                            <input type="text" class="amount" value="${cart.tempMount}"
-                                                                name="uamount" />
+                                                            <input type="text" class="amount" value="${cart.tempMount}" name="uamount" />
                                                         </div>
                                                     </td>
 
                                                     <td class="product-subtotal">
-                                                        $<span
-                                                            class="tprice">${cart.fkProduct.price*cart.tempMount}</span>
+                                                        $<span id="tprice">${cart.fkProduct.price*cart.tempMount}</span>
                                                     </td>
 
                                                     <td class="product-remove">
-                                                        <%-- <a href="deleteshoppingcart?id=${cart.id}"> --%>
+                                                        <!-- <a href="deleteshoppingcart?id=${cart.id}"> -->
                                                             <i class="fa fa-times"></i>
                                                             <!--  </a> -->
                                                     </td>
 
                                                     <td class="product-cartid" hidden="">
-                                                        <input type="hidden" class="cartid" value="${cart.id}"
-                                                            name="cartid" />
+                                                        <input type="hidden" id="cartid" class="cartid" value="${cart.id}" name="cartid" />
                                                     </td>
 
                                                 </tr>
@@ -115,12 +111,9 @@
                                     <div class="col-12">
                                         <div class="coupon-all">
                                             <div class="coupon">
-                                                <input id="coupon_code" class="input-text" name="coupon_code" value=""
-                                                    placeholder="Coupon code" type="text">
-                                                <button class="os-btn os-btn-black" id="submit" name="apply_coupon"
-                                                    type="submit">Apply
-                                                    coupon</button>
-                                                <span id="discount">testtesttesttest</span>
+                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                                <button class="os-btn os-btn-black" id="submit" name="apply_coupon" type="submit">Apply coupon</button>
+                                                <!-- <span id="discount">testtesttesttest</span> -->
                                             </div>
                                             <!-- <div class="coupon2"> 
                                             <button class="os-btn os-btn-black" name="update_cart" type="submit">Update
@@ -132,16 +125,16 @@
 
                                 <!--   </form> -->
                                 <div class="row">
-                                    <div>
-                                        <!-- <span id="discount">testtesttesttest</span> -->
+                                    <div style="margin-top: 10px; margin-left: 20px; color: brown;">
+                                        <span id="couponContext">coupon context</span>
                                     </div>
                                     <div class="col-md-5 ml-auto">
                                         <div class="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul class="mb-20">
-                                                <li>Subtotal <span>$250.00</span></li>
-                                                <li>Discount<span></span></li>
-                                                <li>Total <span>$250.00</span></li>
+                                                <li>Subtotal <span id="subtotal"></span></li>
+                                                <li>Discount <span id="discount">$0</span></li>
+                                                <li>Total <span id="total"></span></li>
                                             </ul>
                                             <a class="os-btn" href="checkout.html">Proceed to checkout</a>
                                         </div>
@@ -162,6 +155,27 @@
                 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp" />
 
                 <script>
+                    
+                    function carTotals(){
+
+                        let subtotal = 0;
+                        $("span[id='tprice']").each(function(){
+                            let price = $(this).text()
+                            subtotal += Number(price);
+                        })
+                        $("span[id='subtotal']").text("$"+subtotal);
+
+                        let latestSubtotal=subtotal;
+                        let latestDiscount=Number($("span[id='discount']").text().slice(1));
+
+                        let latestTotal=latestSubtotal+latestDiscount
+                        $("span[id='total']").text("$"+latestTotal);
+                    }
+
+                    //頁面載入
+                    $(function(){
+                        carTotals();
+                    })
 
                     //修改購物車商品數量
                     $(".cart-plus-minus").on("change click", function () {
@@ -175,7 +189,7 @@
                         //小計金額
                         let s_price = (price * qty);
                         $(this).parent("td").next(".product-subtotal").children("span").text(s_price);
-
+                        
                         //購物車id
                         let cartid = $(this).parent("td").nextAll().filter(".product-cartid").children("input").val();
 
@@ -187,6 +201,7 @@
                                 uamount: qty
                             },
                             success: function (result) {
+                                carTotals();
                             }
                         })
 
@@ -208,20 +223,22 @@
                             },
                             success: function (result) {
                                 row.remove();
+                                carTotals();
                             }
                         })
                     })
 
                     //使用coupon
                     $("#submit").on("click", function () {
-                        console.log($("#submit"));
+                        // console.log($("#submit"));
 
                         let coupon = $(this).prev("#coupon_code").val();
-                        console.log(typeof coupon);
-                        console.log(coupon);
 
-                        let couponDiscount = $(this).next("#discount")
-                        console.log(couponDiscount);
+                        // let couponDiscount = $(this).next("#discount")
+                        let couponContext = $("span[id='couponContext']")
+                        console.log(couponContext);
+                        // let discount = $("li[id='discount']").children("span")
+                        let discount = $("span[id='discount']")
 
                         $.ajax({
                             url: "usecoupon",
@@ -234,15 +251,21 @@
                             	var error = result.errMsg;
                             	
                                 if(result.coupon !=null){
-                                    
+
                                     if(error !=null){
-                                        couponDiscount.text(error);
+                                        couponContext.text(error);
+                                        discount.text("$0");
+                                        carTotals();
                                 	}else {
-                                        couponDiscount.text(result.discount);
+                                        couponContext.text("折扣 $"+result.discount+"元");
+                                        discount.text("$"+result.discount);
+                                        carTotals();
                                     }
 
                                 }else{
-                                	couponDiscount.text(error);
+                                	couponContext.text(error);
+                                    discount.text("$0");
+                                    carTotals();
                                 }
                             },
                             error: function (err) {
@@ -250,7 +273,6 @@
                             }
                         })
                     })
-
 
                 </script>
 
