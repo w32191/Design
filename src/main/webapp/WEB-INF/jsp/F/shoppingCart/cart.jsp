@@ -50,7 +50,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <!--  <form action="editshoppingcart" method="post"> -->
+                              <form action="#" method="post">
                                 <div class="table-content table-responsive">
                                     <table class="table">
                                         <thead>
@@ -70,7 +70,8 @@
 
                                                     <td class="product-thumbnail">
                                                         <a href="product-details.html">
-                                                            <img src="data:image/jpeg;base64,${cart.fkProduct.image01}" alt=""></a>
+                                                            <img src="${cart.fkProduct.image01}">
+                                                        </a>
                                                     </td>
 
                                                     <td class="product-name">
@@ -123,7 +124,7 @@
                                     </div>
                                 </div>
 
-                                <!--   </form> -->
+                               
                                 <div class="row">
                                     <div style="margin-top: 10px; margin-left: 20px; color: brown;">
                                         <span id="couponContext">coupon context</span>
@@ -140,6 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -154,128 +156,7 @@
                 <!-- JavaScript -->
                 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp" />
 
-                <script>
-                    
-                    function carTotals(){
-
-                        let subtotal = 0;
-                        $("span[id='tprice']").each(function(){
-                            let price = $(this).text()
-                            subtotal += Number(price);
-                        })
-                        $("span[id='subtotal']").text("$"+subtotal);
-
-                        let latestSubtotal=subtotal;
-                        let latestDiscount=Number($("span[id='discount']").text().slice(1));
-
-                        let latestTotal=latestSubtotal+latestDiscount
-                        $("span[id='total']").text("$"+latestTotal);
-                    }
-
-                    //頁面載入
-                    $(function(){
-                        carTotals();
-                    })
-
-                    //修改購物車商品數量
-                    $(".cart-plus-minus").on("change click", function () {
-
-                        //數量
-                        let qty = $(this).children("input").val();
-
-                        //單價
-                        let price = $(this).parent("td").prev(".product-price").children("span").text();
-
-                        //小計金額
-                        let s_price = (price * qty);
-                        $(this).parent("td").next(".product-subtotal").children("span").text(s_price);
-                        
-                        //購物車id
-                        let cartid = $(this).parent("td").nextAll().filter(".product-cartid").children("input").val();
-
-                        $.ajax({
-                            url: "editshoppingcart",
-                            type: "POST",
-                            data: {
-                                cartid: cartid,
-                                uamount: qty
-                            },
-                            success: function (result) {
-                                carTotals();
-                            }
-                        })
-
-                    });
-
-                    //刪除購物車商品
-                    $(".fa").on("click", function () {
-
-                        //購物車id
-                        let cartid = $(this).parent("td").next(".product-cartid").children("input").val();
-                        //目前所屬tr
-                        let row = $(this).parent("td").parent("tr");
-
-                        $.ajax({
-                            url: "deleteshoppingcart",
-                            type: "GET",
-                            data: {
-                                id: cartid
-                            },
-                            success: function (result) {
-                                row.remove();
-                                carTotals();
-                            }
-                        })
-                    })
-
-                    //使用coupon
-                    $("#submit").on("click", function () {
-                        // console.log($("#submit"));
-
-                        let coupon = $(this).prev("#coupon_code").val();
-
-                        // let couponDiscount = $(this).next("#discount")
-                        let couponContext = $("span[id='couponContext']")
-                        console.log(couponContext);
-                        // let discount = $("li[id='discount']").children("span")
-                        let discount = $("span[id='discount']")
-
-                        $.ajax({
-                            url: "usecoupon",
-                            type: "POST",
-                            data: {
-                                coupon_code: coupon
-                            },
-                            success: function (result) {
-                            	
-                            	var error = result.errMsg;
-                            	
-                                if(result.coupon !=null){
-
-                                    if(error !=null){
-                                        couponContext.text(error);
-                                        discount.text("$0");
-                                        carTotals();
-                                	}else {
-                                        couponContext.text("折扣 $"+result.discount+"元");
-                                        discount.text("$"+result.discount);
-                                        carTotals();
-                                    }
-
-                                }else{
-                                	couponContext.text(error);
-                                    discount.text("$0");
-                                    carTotals();
-                                }
-                            },
-                            error: function (err) {
-                                console.log("沒接到值");
-                            }
-                        })
-                    })
-
-                </script>
-
+               <script src="${contextRoot}/static/front/universal/ShoppingCart.js"></script>
         </body>
 
         </html>
