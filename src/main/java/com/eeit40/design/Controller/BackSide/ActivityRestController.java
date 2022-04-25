@@ -3,13 +3,18 @@ package com.eeit40.design.Controller.BackSide;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
+import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Service.BrandService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +45,7 @@ public class ActivityRestController {
   public Map<String, List<Activity>> findAllAjax() {
     List<Activity> result = service.findAll();
     for (Activity activity : result) {
-      log.info("Activity ID:"+activity.getId());
+      log.info("Activity ID:" + activity.getId());
     }
 
     Map<String, List<Activity>> map = new HashMap<>();
@@ -78,6 +83,7 @@ public class ActivityRestController {
   ) throws IOException {
 
     log.info("Update Json:" + dataJsonStr);
+//    System.out.println(dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     // SamWang To-Do: 產品未處理
     Activity result = service.updateActivity(service.setImg(file, dto));
@@ -90,10 +96,27 @@ public class ActivityRestController {
 
   @GetMapping("/B/Activity/getBrandsPage")
   public Page<Brand> findBrandByPage(
-      @RequestParam(name = "page", defaultValue = "1") String page) {
-
-    return brandService.findAllByPage(Integer.valueOf(page));
+      @RequestParam(name = "page", defaultValue = "1") String page) throws JsonProcessingException {
+    Page<Brand> result = brandService.findAllByPage(Integer.valueOf(page));
+    log.info("準備打回去");
+    return result;
   }
 
+  @GetMapping("/B/Activity/findAlreadyCheckedProductId/{activityId}")
+  public List<Integer> findAlreadyCheckedProductId(@PathVariable("activityId") Integer id) {
+    Activity editActivity = service.findById(id);
+    List<Integer> checkedProductId = new ArrayList<>();
+    if (editActivity == null) {
+      return checkedProductId;
+    }
+    // 如果原本產品已經有勾選折扣商品
+    if (!editActivity.getProducts().isEmpty()) {
+      // 取得原本已經有勾選的品牌id
+      for (Product product : editActivity.getProducts()) {
+        checkedProductId.add(product.getId());
+      }
+    }
+    return checkedProductId;
+  }
 
 }

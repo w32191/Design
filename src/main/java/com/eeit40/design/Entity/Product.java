@@ -1,5 +1,6 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -65,7 +66,7 @@ public class Product {
     @Column(name = "image04", columnDefinition = "varchar(255)")
     private String image04;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
 

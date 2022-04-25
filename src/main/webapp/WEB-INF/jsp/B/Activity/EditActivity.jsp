@@ -240,20 +240,6 @@
                                         </tr>
                                         </thead>
                                         <tbody id="productTbody">
-                                        <tr>
-                                            <td><input type="checkbox" name="checkProduct"
-                                                       id="checkProduct"></td>
-                                            <td>
-                                                <img alt="" width="50" height="50"
-                                                     src="${contextRoot}/static/back/universal/images/no-image.jpeg"/>
-                                            </td>
-                                            <td>Kolor Tea Shirt For Man</td>
-                                            <td>
-                                                <span class="badge badge-primary">Ongoing</span>
-                                            </td>
-                                            <td>January 22</td>
-                                            <td class="color-primary">$21.56</td>
-                                        </tr>
 
                                         </tbody>
                                     </table>

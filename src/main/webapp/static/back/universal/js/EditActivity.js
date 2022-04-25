@@ -2,9 +2,51 @@ $(function () {
   //用來儲存勾選的productID
   let checkProductArray = [];
 
+  // 先取得原本資料庫中，該活動以經有勾選的產品id
+  $.ajax({
+    type: 'GET',
+    url: '/Design/B/Activity/findAlreadyCheckedProductId/' + $(
+        '#activityID').text(),
+    success: function (res) {
+      checkProductArray = res;
+      console.log(checkProductArray)
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+
+  // 暫存勾選的product
+  function storeCheckProductArray() {
+    $.each($('input[id^="checkProduct"]'), function (index, product) {
+      // 先找到這個check的data-productid的值,並轉為int
+      let numProductId = parseInt(product.dataset.productid, 10);
+
+      // 檢查是否有勾選
+      if ($(this).prop('checked')) {
+        // 有勾選
+        // 檢查如果原本的Array中沒有，就加入
+        if (checkProductArray.indexOf(numProductId) === -1) {
+          checkProductArray.push(numProductId);
+        }
+      } else {
+        // 沒有被勾選的
+        // 先找找原本Array中有沒有這個id
+        let indexInArray = checkProductArray.indexOf(numProductId);
+        if (indexInArray > -1) {
+          // 原本有這個id的話刪除
+          checkProductArray.splice(indexInArray, 1);
+        }
+      } // end of if...else()
+    }); // end of $.each()
+  } // end f storeCheckProductArray()
+
   // 用品牌Id來刷新商品清單
   function freshProductList(brandId) {
 
+    storeCheckProductArray();
+
+    console.log(checkProductArray);
     // 先將產品清單清空
     $('#productTbody').html('');
 
@@ -18,8 +60,14 @@ $(function () {
           let tr = document.createElement('tr');
 
           let firstTd = document.createElement('td');
-          firstTd.innerHTML = `<input type="checkbox" name="checkProduct"
-                                                       id="checkProduct${product.id}">`;
+          if (checkProductArray.includes(parseInt(product.id, 10))) {
+            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
+                                       checked="checked" id="checkProduct${product.id}">`;
+          } else {
+            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
+                                      id="checkProduct${product.id}">`;
+          }
+
           let secondTd = document.createElement('td');
           if (product.image01 == null) {
             secondTd.innerHTML = `<img alt="" width="50" height="50"
@@ -68,7 +116,6 @@ $(function () {
       url: '/Design/B/Activity/getBrandsPage',
       type: 'GET',
       success: function (res) {
-
         // 取得品牌清單後，append在左側清單
         $.each(res.content, function (index, brand) {
           // 品牌外層div
@@ -123,22 +170,12 @@ $(function () {
   $('#brandContent').on('click', 'div[id^="selectBrand"]', function () {
     let brandId = $(this).attr('id').split('selectBrand')[1];
     freshProductList(brandId);
-
   });
-
-  $('#productListTable').on('change', 'input[id^="checkProduct"]',
-      function () {
-        // console.log($(this).attr('id'))
-        console.log($(this).attr('id').split('checkProduct')[1]);
-        let productId = $(this).attr('id').split('checkProduct')[1];
-        // SamWang to-do: product id 尚未收集起來送出
-      });
-
 
   // 編輯按鈕送出
   $('#updateBtn').click(
       function () {
-
+        storeCheckProductArray();
         // 準備要序列化的JavaScript物件
         let data = {
           id: $('#activityID').text(),
@@ -146,7 +183,8 @@ $(function () {
           content: $('#updateContent').val(),
           discountPercentage: $('#updatediscountPercentage').val(),
           startDate: $('#updateStartDate').val(),
-          endDate: $('#updateEndDate').val()
+          endDate: $('#updateEndDate').val(),
+          productId: checkProductArray
           // brands: brandsChecked
         }
 
