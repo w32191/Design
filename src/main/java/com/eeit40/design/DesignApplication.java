@@ -10,6 +10,7 @@ public class DesignApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DesignApplication.class, args);
+		System.out.println("Start OK!");
 	}
 
 }

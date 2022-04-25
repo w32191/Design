@@ -60,16 +60,20 @@
                                     <table id="table_id" class="display">
                                         <thead>
                                             <tr>
+                                                <th width="100px">序號
                                                 <th width="100px">問題類型
                                                 <th width="200px">問題
                                                 <th width="400px">回答
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             <c:forEach items="${cqs}" var="cq">
                                                 <tr>
-                                                    <td><p>${cq.questionType}</p>
+                                                    <td>${cq.id}
+                                                    <td>${cq.questionType.commonQuestionType}
                                                     <td>${cq.question}
                                                     <td>${cq.answer}
                                                     <td><button type="button" class="btn btn-info" name='edit'
@@ -159,7 +163,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">修改員工資料</h5>
+                        <h5 class="modal-title" id="editModalLabel">修改常見問題</h5>
                         <button type="button" class="close" data-dismiss="modal"
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -167,13 +171,11 @@
                     </div>
                     <div class="modal-body">
                         <!-- form -->
-                        <form id="editEmpForm" class="form-inline" method="post"
-                            action="${contextRoot}/admin/updateEmp"
+                        <form id="editCQForm" class="form-inline" method="post"
+                            action="${contextRoot}/B/CommonQuestion/updateQuestionContent"
                             enctype="multipart/form-data">
-                            <div class="col-sm-11">
-                                <input type="text" id="orphoto" name="orphoto"
-                                    hidden="">
-                                <h3>基本資料</h3>
+                            <div class="col-sm-11">                                
+                                <h3>常見問題</h3>
                             </div>                     
                                                 
 
@@ -182,10 +184,22 @@
                                     <label class="input-group-text" for="question_type"><span
                                         style="color: red">*</span>問題類型</label>
                                 </div>
-                                <input type="text" class="form-control" id="question_type_e"
-                                    name="question_type" size="30" aria-describedby="question_type"
-                                    autocomplete="off" required><br>
-                                <input type="text" name="id" id="id_e">
+                                <select class="form-control" aria-describedby="question_type"
+										name="question_type" id="question_type_e" required>
+										<option value="" style="display: none"></option>
+										<c:forEach items="${cqts}" var="cqt">
+											<c:choose>
+												<c:when test="${cq.questionType.commonQuestionType == cqt.commonQuestionType}">
+													<option value="${cqt.id}" selected="selected">${cqt.commonQuestionType}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${cqt.id}">${cqt.commonQuestionType}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</select>
+                                <br>
+                                
                                 </div>
                             
 
@@ -225,18 +239,37 @@
         <!--修改-->
 	
 	$('body').on('click','button[name="edit"]',function(){
-		let id = $(this).parent().parent().find("p").html();
+		let id = $(this).parent().parent().find("td").html();
+        console.log(id);
 		$.ajax({
-			url:"CommonQuestion/updateQuestion?id=" + id,
+			url:"CommonQuestion/updateQuestion?id=" + id, //這個url是用來呼叫controller裡面的方法
 			method:"get",
 			success: function(data){
-				$('#question_type_e').val(data.questionType);
+                $('#id_e').val(data.id);
+				$('#question_type_e').val(data.questionType.commonQuestionType);
 				$('#question_e').val(data.question);
 				$('#answer_e').val(data.answer);				
-				$('#id_e').val(data.id);
+				
 			}
 		});
 	});
+
+    <!--驗證並送出-->
+	$('#editBtn').click(function(){
+		let form = $('#editCQForm');
+		let reportValidity = form[0].reportValidity();
+		
+		if(reportValidity){
+			$('#editCQForm').submit();
+		}
+	});
+
+
+    $('#editBtn').click(function(){
+        console.log('testok');
+    });
+
+
         </script>
 
 

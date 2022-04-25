@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.eeit40.design.Entity.CommonQuestion;
+import com.eeit40.design.Entity.CommonQuestionType;
 import com.eeit40.design.Service.CommonQuestionService;
 
 @Controller
@@ -38,22 +39,14 @@ public class CommonQuestionBackController {
 	  public ModelAndView selectAllQuestion(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
 		mav.addObject("cqs", cq);		
+		List<CommonQuestionType> cqt = cqsService.findAllQuestionTypes();
+		mav.addObject("cqts", cqt);
 		mav.setViewName("/B/CommonQuestion/CommonQuestion");		
 	    return mav;
 	}
 	
 	
-	@PostMapping("/B/CommonQuestion/add")
-    public ModelAndView addMessage(ModelAndView mav, @Valid @ModelAttribute(name = "CommonQuestion") CommonQuestion msg,
-            BindingResult br) {
-
-        if (!br.hasErrors()) {
-            cqsService.insert(msg);
-            CommonQuestion newMsg = new CommonQuestion();
-            mav.getModel().put("CommonQuestion", newMsg);
-        }
-        return mav;
-    }
+	
 
 	
 	//刪除
@@ -76,15 +69,17 @@ public class CommonQuestionBackController {
     public ModelAndView updateMessage(ModelAndView mav, 
         @RequestParam(value = "question_type") String qty,
         @RequestParam(value = "question") String qt,
-        @RequestParam(value = "answer") String as
+        @RequestParam(value = "answer") String as,
+        @RequestParam(value = "id") Integer id
         ) {
-
-      
-        
+      cqsService.updateCommonQuestion(id, qty, qt, as);
+      mav.setViewName("redirect:/B/CommonQuestion");        
       return mav;
     }
 	
 	
+    
+    
 	
 	
 }

@@ -2,10 +2,13 @@ package com.eeit40.design.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +20,9 @@ public class CommonQuestion {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @Column(name = "question_type", length = 50)
-  private String questionType;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "question_type")
+  private CommonQuestionType questionType;
 
   @Column(name = "question")
   private String question;
@@ -30,12 +34,20 @@ public class CommonQuestion {
   public CommonQuestion() {
   }
 
-  public String getAnswer() {
-    return answer;
+  public Integer getId() {
+    return id;
   }
 
-  public void setAnswer(String answer) {
-    this.answer = answer;
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public CommonQuestionType getQuestionType() {
+    return questionType;
+  }
+
+  public void setQuestionType(CommonQuestionType questionType) {
+    this.questionType = questionType;
   }
 
   public String getQuestion() {
@@ -46,19 +58,13 @@ public class CommonQuestion {
     this.question = question;
   }
 
-  public String getQuestionType() {
-    return questionType;
+  public String getAnswer() {
+    return answer;
   }
 
-  public void setQuestionType(String questionType) {
-    this.questionType = questionType;
+  public void setAnswer(String answer) {
+    this.answer = answer;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  
 }
