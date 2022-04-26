@@ -66,7 +66,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>公告內容</h4>
+                                <h4>公告</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -74,8 +74,8 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>主題</th>                                         
-                                            <th>發布時間</th>
+                                            <th>內容</th>                                     
+                                            <th>發布日期</th>
                                             <th>編輯</th>
                                             <th>刪除</th>
                                         </tr>
@@ -138,18 +138,16 @@
                             <div class="card-body">
 
                                 <form method="POST" enctype="multipart/form-data"
-                                      id="insertActivityForm">
-                                    <label>公告名稱：
-                                        <input type="text" name="subject" id="insertSubject"/>
-                                    </label>
+                                      id="insertActivityForm">                                
                                     <br/>
                                     <label>公告內容：
                                         <textarea id="insertContent"></textarea>
                                     </label><br/>
-                                    <label>發布時間：
+                                   <label>發布日期：
                                         <input type="date" name="startDate"
                                                id="insertEndDate">
-                                    </label><br/>                                  
+                                    </label><br/>
+                               
                                 </form>
                                 <!-- button 不能放在form裏面 -->
                                 <button id="ajaxBtn">Submit</button>
@@ -174,7 +172,6 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
-
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 </body>
