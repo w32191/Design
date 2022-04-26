@@ -1,26 +1,27 @@
 package com.eeit40.design.Dao;
 
-import com.eeit40.design.Entity.Account;
-
+import java.util.List;
 import java.util.Optional;
 
-import com.eeit40.design.Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-public interface AccountRepository {
+import com.eeit40.design.Entity.Account;
 
-	public Integer update(Account account);
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Integer>{
 
-	public Integer insert(Account account);
+	public Account findAccountByemail(String email);
+	
+	public Account findAccountBypwd(String pwd);
+	
+	@Query(value = "select email , pwd from account where email pwd =  :email, :pwd", nativeQuery = true)
+	public boolean findAccountByemailandpwd(String email, String pwd);
+	
+	Optional<Account> findById(Integer id);
 
-	public Account findByemail(String email);
 
-
-//	@Query("from Account where id = :id")
-//	public Account findAccountById(@Param("id") Integer id );
-//
 
 
 }
