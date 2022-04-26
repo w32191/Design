@@ -1,13 +1,8 @@
 package com.eeit40.design.Dao;
 
-import com.eeit40.design.Entity.DiscountCoupon;
-import com.eeit40.design.Entity.Product;
-import com.eeit40.design.Entity.ProductImg;
 import com.eeit40.design.Entity.ShoppingCard;
 
 import java.util.List;
-
-
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -43,7 +38,4 @@ public interface ShoppingCardRepository extends JpaRepository<ShoppingCard, Inte
 	@Query(value="update shopping_card set temp_mount=:amount where fk_account_id = :accountId and fk_product_id = :productId",nativeQuery = true)
 	public void editAmountByProduct(@Param("amount") int tempMount,@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
 	
-	//查詢coupon使用日期
-	@Query(value="select * from discount_coupon where coupon=:coupon",nativeQuery = true)
-	public List<DiscountCoupon> checkCouponDate(@Param("coupon") String coupon);
 }

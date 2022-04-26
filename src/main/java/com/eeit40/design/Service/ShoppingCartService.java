@@ -1,12 +1,12 @@
 package com.eeit40.design.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.eeit40.design.Dao.DiscountCouponRepository;
 import com.eeit40.design.Dao.ShoppingCardRepository;
 import com.eeit40.design.Entity.DiscountCoupon;
 import com.eeit40.design.Entity.ShoppingCard;
@@ -16,6 +16,9 @@ public class ShoppingCartService {
 
 	@Autowired
 	private ShoppingCardRepository shoppingCardDao;
+
+	@Autowired
+	private DiscountCouponRepository discountCoupon;
 
 	// 查詢
 	public List<ShoppingCard> findShoppingCratByAccountId(int fkAccount) {
@@ -29,7 +32,7 @@ public class ShoppingCartService {
 	public void editAmountByCartId(int tempMount, int id) {
 		shoppingCardDao.editAmountByCartId(tempMount, id);
 	}
-	
+
 	// 刪除
 	public void deletById(int id) {
 		shoppingCardDao.deleteById(id);
@@ -56,7 +59,7 @@ public class ShoppingCartService {
 			shoppingCardDao.addProductToShoppingCart(tempMount, fkAccount, fkProduct);
 		}
 	}
-	
+
 	// 以購物車id修改數量
 //	public void checkShoppingCart(int fkAccount, int fkProduct, int tempMount, int id){
 //
@@ -75,19 +78,23 @@ public class ShoppingCartService {
 //				shoppingCardDao.addProductToShoppingCart(tempMount, fkAccount, fkProduct);
 //			}
 //		}
-	
-	
-	//查詢coupon使用日期
-	public DiscountCoupon checkCouponDate(String coupon){
-		
-		List<DiscountCoupon> couponData= shoppingCardDao.checkCouponDate(coupon);
-        
-		//判斷資料庫是否有此coupon
-		if(!CollectionUtils.isEmpty(couponData)) {
-		   return couponData.get(0);
-		}
-		return null;
+
+	// 查詢是否有coupon
+	public DiscountCoupon checkCoupon(String coupon) {
+		DiscountCoupon couponData = discountCoupon.checkCoupon(coupon);
+		return couponData;
 	}
 
-	
+	// 確認Coupon日期是否開始
+	public DiscountCoupon checkCouponStarDate(String coupon) {
+		DiscountCoupon couponStarDate = discountCoupon.checkCouponStarDate(coupon);
+		return couponStarDate;
+	}
+
+	// 確認Coupon日期是否開始
+	public DiscountCoupon checkCouponEndDate(String coupon) {
+		DiscountCoupon couponEndDate = discountCoupon.checkCouponEndDate(coupon);
+		return couponEndDate;
+	}
+
 }
