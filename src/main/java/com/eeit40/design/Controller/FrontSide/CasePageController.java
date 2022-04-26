@@ -1,8 +1,7 @@
 package com.eeit40.design.Controller.FrontSide;
 
 
-import com.eeit40.design.Dao.CaseRepository;
-import com.eeit40.design.Dto.CaseMessageDto;
+import com.eeit40.design.Dto.CaseDto;
 import com.eeit40.design.Entity.Case;
 import com.eeit40.design.Service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ public class CasePageController {
 
     @Autowired
     private CaseService caseService;
-    @Autowired
-    private CaseRepository dao;
 
     @GetMapping("/F/case")
     public ModelAndView casePage(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
@@ -43,20 +40,17 @@ public class CasePageController {
 
     @GetMapping("/F/api/postCaseMessageApi")
     @ResponseBody
-    public List<Case> postCaseMessageApi(@RequestBody CaseMessageDto dto) {
-
-        String message = dto.getMsg();
+    public List<Case> postCaseApi(@RequestBody CaseDto caseDto){
+        String text = caseDto.getTitleDto();
 
         Case caseMsg = new Case();
-        caseMsg.setMessage(message);
+        caseMsg.setTitle(text);
         caseService.insert(caseMsg);
 
         Page<Case> page = caseService.findByPage(1);
         List<Case> list = page.getContent();
 
         return list;
-
-
     }
 
 

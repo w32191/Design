@@ -52,7 +52,9 @@ public class Case {
   @PrePersist
   public void onCreate(){
     if(dateTime == null){
+
       dateTime = new Date();
+//      System.out.println(dateTime);
     }
   }
 
