@@ -59,7 +59,9 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
   public String insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
-    // SamWang To-Do: 產品未處理
+
+    // SamWang To-Do: 目前只能新增活動，新增產品要在編輯活動的時候新增
+
     log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     Activity insertResult = service.insertActivity(service.setImg(file, dto));

@@ -185,7 +185,8 @@ $(function () {
         }); // end of each()
 
 
-        // SamWang to-do : brands分頁未完成
+        // SamWang to-do : brands分頁的「前一頁」「後一頁」按鈕未完成
+        // 品牌列表的分頁按鈕
         let documentFragment = document.createDocumentFragment();
         let ul = document.createElement('ul');
         ul.classList.add('pagination');
