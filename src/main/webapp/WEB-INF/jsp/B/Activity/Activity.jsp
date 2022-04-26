@@ -189,6 +189,7 @@
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+<%-- jquery & Ajax & JS 都在裏面--%>
 <script src="${contextRoot}/static/back/universal/js/Activity.js"></script>
 </body>
 

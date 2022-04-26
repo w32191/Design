@@ -1,11 +1,8 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Entity.Activity;
-import com.eeit40.design.Entity.Brand;
-import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Service.ActivityService;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,21 +35,7 @@ public class ActivityController {
       throw new ActivityException("沒有找到該筆活動！！");
     }
 
-    // 所有品牌的list
-    List<Brand> brandAllList = service.getAllBrands();
-
-    List<Integer> checkedBrandsId = null;
-    // 如果原本產品已經有勾選折扣商品
-    if (!editActivity.getProducts().isEmpty()) {
-      checkedBrandsId = new ArrayList<>();  // 取得原本已經有勾選的品牌id
-      for (Product product : editActivity.getProducts()) {
-        checkedBrandsId.add(product.getFkBrand().getId());
-      }
-    }
-
     mav.addObject("activity", editActivity);
-    mav.addObject("brandAllList", brandAllList);
-    mav.addObject("checkedBrandsId", checkedBrandsId);
     mav.setViewName("/B/Activity/EditActivity");
     return mav;
   }
