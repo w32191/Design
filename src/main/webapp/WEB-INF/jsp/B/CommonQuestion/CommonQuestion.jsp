@@ -11,30 +11,13 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <title>CommonQuestion</title>
-
+            
+            <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css" rel="stylesheet" />
+            <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+                rel="stylesheet" />
             <!-- Common Styles -->
             <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp" />
 
-            <!-- JQuery 此src是讓DataTable最下方的function可以執行-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-            <!-- DataTable的外部連結 -->
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-
-            <script type="text/javascript" charset="utf8"
-                src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
-            <!-- RWD JavaScript 連結 -->
-            <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
-            <!-- RWD 的CSS連結-->
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-            <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-
-            <!-- DataTable的內部CSS連結（此連結需要放在RWD的CSS連結後，才不會衝突） -->
-            <link rel="stylesheet" href="dataTable.css">
-            
 
         </head>
 
@@ -74,29 +57,35 @@
                                 </div>
 
                                 <div class="container" align="center">
-                                    <table id="table_id" class="display" >
+                                    <table id="table_id" class="display">
                                         <thead>
                                             <tr>
+                                                <th width="100px">序號
                                                 <th width="100px">問題類型
                                                 <th width="200px">問題
                                                 <th width="400px">回答
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
-                                        
+
                                         <tbody>
-                                        <c:forEach items="${cqs}" var="cq"> 
-                                            <tr>
-                                                    <td>${cq.questionType}
+                                            <c:forEach items="${cqs}" var="cq">
+                                                <tr>
+                                                    <td>${cq.id}
+                                                    <td>${cq.questionType.commonQuestionType}
                                                     <td>${cq.question}
                                                     <td>${cq.answer}
-                                                    <td><a href=# ><button type="button">更新</button></a>
-                                                    <td><a href=# ><button id="deleteButton" type="button">刪除</button></a>
+                                                    <td><button type="button" class="btn btn-info" name='edit'
+                                                            data-toggle="modal" data-target="#editModal">更新</button></td>
+                                                    <td><button id="deleteButton" type="button"
+                                                                class="btn btn-cq-danger delete">刪除</button></a>
                                                 </tr>
-                                        </c:forEach>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
-                                
+
 
                                 <div class="container">
                                     <p />
@@ -105,37 +94,39 @@
                                             <div class="card">
                                                 <div class="card-header">新增問題</div>
                                                 <div class="card-body">
-                                
-                                                    <form:form class="form" method="POST" modelAttribute="commonQuestion">
-                                
+
+                                                    <form:form class="form" method="POST"
+                                                        modelAttribute="commonQuestion">
+
                                                         <!-- form:errors  bindingResult 回傳的物件 -->
                                                         <form:errors path="text" />
-                                
+
                                                         <div class="input-group">
-                                                            <form:textarea path="text" class="form-control"></form:textarea>
+                                                            <form:textarea path="text" class="form-control">
+                                                            </form:textarea>
                                                         </div>
-                                
+
                                                         <input type="submit" name="submit" value="新增問題">
                                                     </form:form>
-                                
-                                
+
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                
+
                                     <div class="row justify-content-center">
                                         <div class="col-9">
-                                            <div class="card">                                                
+                                            <div class="card">
                                                 <div class="card-body">
                                                     <c:out value="${lastMessage.text}" />
-                                
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+
 
 
                                 <!-- /# row -->
@@ -157,373 +148,219 @@
                     <!-- jQuery & Bootstrap-->
                     <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
 
-                    <!-- Calender -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/jquery-ui/jquery-ui.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/moment/moment.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/calendar/fullcalendar.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/calendar/fullcalendar-init.js"></script>
-
-                    <!--  Flot Chart -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/excanvas.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.pie.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.time.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.stack.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.resize.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/curvedLines.js"></script>
                     <script
-                        src="${contextRoot}/static/back/assets/js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/flot-chart/flot-chart-init.js"></script>
-
-                    <!--  Chartist -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/chartist/chartist.min.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/chartist/chartist-plugin-tooltip.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/chartist/chartist-init.js"></script>
-
-                    <!--  Chartjs -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/chart-js/Chart.bundle.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/chart-js/chartjs-init.js"></script>
-
-                    <!--  Knob -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/knob/jquery.knob.min.js "></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/knob/knob.init.js "></script>
-
-                    <!--  Morris -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/raphael-min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/morris.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/morris-chart/morris-init.js"></script>
-
-                    <!--  Peity -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/peitychart/jquery.peity.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/peitychart/peitychart.init.js"></script>
-
-                    <!--  Sparkline -->
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/sparklinechart/jquery.sparkline.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/sparklinechart/sparkline.init.js"></script>
-
-                    <!-- Select2 -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/select2/select2.full.min.js"></script>
-
-                    <!--  Validation -->
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/form-validation/jquery.validate.min.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/form-validation/jquery.validate-init.js"></script>
-
-                    <!--  Circle Progress -->
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/circle-progress/circle-progress.min.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/circle-progress/circle-progress-init.js"></script>
-
-                    <!--  Vector Map -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.algeria.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.argentina.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.brazil.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.france.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.germany.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.greece.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.iran.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.iraq.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.russia.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.tunisia.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.europe.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/vector-map/country/jquery.vmap.usa.js"></script>
-
-                    <!--  Simple Weather -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/weather/jquery.simpleWeather.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/weather/weather-init.js"></script>
-
-                    <!--  Owl Carousel -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
+                        src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+                    <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+                    <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 
 
-                    <!-- Datatable -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables-init.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.dataTables.min.js"></script>
+                    
+            <!-- 修改常見問題Modal -->
+			<div class="modal fade" id="editModal" tabindex="-1"
+            aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">修改常見問題</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form -->
+                        <form id="editCQForm" class="form-inline" method="post"
+                            action="${contextRoot}/B/CommonQuestion/updateQuestionContent"
+                            enctype="multipart/form-data">
+                            <div class="col-sm-11">                                
+                                <h3>常見問題</h3>
+                            </div>                     
+                                                
 
-                    <!-- JS Grid -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/db.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.core.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.load-indicator.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.load-strategies.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.sort-strategies.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid.field.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.text.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.number.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.select.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.checkbox.js"></script>
-                    <script
-                        src="${contextRoot}/static/back/assets/js/lib/jsgrid/fields/jsgrid.field.control.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/jsgrid/jsgrid-init.js"></script>
+                            <div class="input-group mb-3 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="question_type"><span
+                                        style="color: red">*</span>問題類型</label>
+                                </div>
+                                <select class="form-control" aria-describedby="question_type"
+										name="question_type" id="question_type_e" required>
+										<option value="" style="display: none"></option>
+										<c:forEach items="${cqts}" var="cqt">
+											<c:choose>
+												<c:when test="${cq.questionType.commonQuestionType == cqt.commonQuestionType}">
+													<option value="${cqt.id}" selected="selected">${cqt.commonQuestionType}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${cqt.id}">${cqt.commonQuestionType}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+								</select>
+                                
+                                </div>
+                            
 
-                    <!--  Datamap -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/datamap/d3.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/datamap/topojson.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/datamap/datamaps.world.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/datamap/datamap-init.js"></script>
+                            <div class="input-group mb-3 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="question"><span
+                                        style="color: red">*</span>問題</label>
+                                </div>
+                                <input type="text" class="form-control" id="question_e"
+                                    name="question" size="30" aria-describedby="question"
+                                    autocomplete="off" required><br>
+                            </div>
 
-                    <!--  Nestable -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/nestable/jquery.nestable.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/nestable/nestable.init.js"></script>
+                            <div class="textarea-group mb-12 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="answer"><span
+                                        style="color: red">*</span>答案</label>
+                                </div>
+                                <textarea rows="80" cols="80" type="text" class="form-control" id="answer_e"
+                                    name="answer" aria-describedby="answer"
+                                    autocomplete="off" required></textarea><br>
+                            </div>
+                            
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">關閉</button>
+                            <button id="editBtn" type="button" class="btn btn-primary">送出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of modal -->
 
-                    <!--ION Range Slider JS-->
-                    <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/ion.rangeSlider.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/moment.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/moment-with-locales.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/rangeSlider/rangeslider.init.js"></script>
+        <script>
+        <!--修改-->
+	
+	$('body').on('click','button[name="edit"]',function(){
+		let id = $(this).parent().parent().find("td").html();
+        console.log(id);
+		$.ajax({
+			url:"CommonQuestion/updateQuestion?id=" + id, //這個url是用來呼叫controller裡面的方法
+			method:"get",
+			success: function(data){
+                $('#id_e').val(data.id);
+				$('#question_type_e').val(data.questionType.commonQuestionType);
+                console.log(data.questionType.commonQuestionType);
+				$('#question_e').val(data.question);
+				$('#answer_e').val(data.answer);				
+				
+			}
+		});
+	});
 
-                    <!-- Bar Rating-->
-                    <script src="${contextRoot}/static/back/assets/js/lib/barRating/jquery.barrating.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/barRating/barRating.init.js"></script>
+    $("#question_type_e").change(function(){
+		ajaxSupervisor2();
+	})
 
-                    <!-- jRate -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/rating1/jRate.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/rating1/jRate.init.js"></script>
+    <!--ajax更新常見問題類型選項 (修改)-->
+	function ajaxSupervisor2(){
+		let departId = $("#fkDepartment_e").val();
+		let titleId = $("#fkTitleId_e").val();
+		let empID = $("#empId_e").val();
+		if(departId!="" || titleId!=""){
+			$.ajax({
+				url:'http://localhost:8080/GroupOne/api/getSupervisorEdit?departId=' + departId + '&titleId=' + titleId + '&empId=' + empID,
+				dataType:'json',
+				method:'get',
+				success:function(data){
+					$('#superiorName_e').html("");
+					let superiorOption = "";
+					superiorOption += '<option value="" style="display: none"></option>';
+					for(i=0; i<data.length;i++){
+						if(i==0){
+							superiorOption += '<option value= "'+ data[i].username + '" selected>' + data[i].username + '</option>';
+						}else{
+							superiorOption += '<option value= "'+ data[i].username + '">' + data[i].username + '</option>';
+						}
+					}
+					$('#superiorName_e').append(superiorOption);
+				},
+				error:function(err){
+					console.log(err)
+					alert('發生錯誤1')
+				}
+			})
+		} // end of if
+	}
 
-                    <!-- Sweet Alert -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/sweetalert/sweetalert.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/sweetalert/sweetalert.init.js"></script>
+    <!--驗證並送出-->
+	$('#editBtn').click(function(){
+		let form = $('#editCQForm');
+		let reportValidity = form[0].reportValidity();
+		
+		if(reportValidity){
+			$('#editCQForm').submit();
+		}
+	});
 
-                    <!-- Toastr -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/toastr/toastr.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/toastr/toastr.init.js"></script>
 
-                    <!--  Dashboard -->
-                    <script src="${contextRoot}/static/back/assets/js/dashboard1.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/dashboard2.js"></script>
+   
 
-                    <!-- Calender 2 -->
-                    <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/moment.latest.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/pignose.calendar.min.js"></script>
-                    <script src="${contextRoot}/static/back/assets/js/lib/calendar-2/pignose.init.js"></script>
 
-                    <script>
-                        $(document).ready(function () {
-                            $('#table_id').DataTable({
-                                //中文化
-                                "language": {
-                                    "processing": "處理中...",
-                                    "loadingRecords": "載入中...",
-                                    "lengthMenu": "顯示 _MENU_ 項結果",
-                                    "zeroRecords": "沒有符合的結果",
-                                    "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-                                    "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-                                    "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-                                    "search": "搜尋:",
-                                    "paginate": {
-                                        "first": "第一頁",
-                                        "previous": "上一頁",
-                                        "next": "下一頁",
-                                        "last": "最後一頁"
-                                    },
-                                    "aria": {
-                                        "sortAscending": ": 升冪排列",
-                                        "sortDescending": ": 降冪排列"
-                                    },
-                                    "emptyTable": "目前沒有資料",
-                                    "datetime": {
-                                        "previous": "上一頁",
-                                        "next": "下一頁",
-                                        "hours": "時",
-                                        "minutes": "分",
-                                        "seconds": "秒",
-                                        "amPm": [
-                                            "上午",
-                                            "下午"
-                                        ],
-                                        "unknown": "未知",
-                                        "weekdays": [
-                                            "週日",
-                                            "週一",
-                                            "週二",
-                                            "週三",
-                                            "週四",
-                                            "週五",
-                                            "週六"
-                                        ],
-                                        "months": [
-                                            "一月",
-                                            "二月",
-                                            "三月",
-                                            "四月",
-                                            "五月",
-                                            "六月",
-                                            "七月",
-                                            "八月",
-                                            "九月",
-                                            "十月",
-                                            "十一月",
-                                            "十二月"
-                                        ]
-                                    },
-                                    "searchBuilder": {
-                                        "add": "新增條件",
-                                        "condition": "條件",
-                                        "deleteTitle": "刪除過濾條件",
-                                        "button": {
-                                            "_": "複合查詢 (%d)",
-                                            "0": "複合查詢"
-                                        },
-                                        "clearAll": "清空",
-                                        "conditions": {
-                                            "array": {
-                                                "contains": "含有",
-                                                "empty": "為空",
-                                                "equals": "等於",
-                                                "not": "不為",
-                                                "notEmpty": "不為空",
-                                                "without": "排除"
-                                            },
-                                            "date": {
-                                                "after": "大於",
-                                                "before": "小於",
-                                                "between": "在其中",
-                                                "empty": "為空",
-                                                "equals": "等於",
-                                                "not": "不為",
-                                                "notBetween": "不在其中",
-                                                "notEmpty": "不為空"
-                                            },
-                                            "number": {
-                                                "between": "在其中",
-                                                "empty": "為空",
-                                                "equals": "等於",
-                                                "gt": "大於",
-                                                "gte": "大於等於",
-                                                "lt": "小於",
-                                                "lte": "小於等於",
-                                                "not": "不為",
-                                                "notBetween": "不在其中",
-                                                "notEmpty": "不為空"
-                                            },
-                                            "string": {
-                                                "contains": "含有",
-                                                "empty": "為空",
-                                                "endsWith": "字尾為",
-                                                "equals": "等於",
-                                                "not": "不為",
-                                                "notEmpty": "不為空",
-                                                "startsWith": "字首為",
-                                                "notContains": "不包含",
-                                                "notStarts": "不為開頭",
-                                                "notEnds": "不為結束"
-                                            }
-                                        },
-                                        "data": "欄位",
-                                        "leftTitle": "群組條件",
-                                        "logicAnd": "且",
-                                        "logicOr": "或",
-                                        "rightTitle": "取消群組",
-                                        "title": {
-                                            "_": "複合查詢 (%d)",
-                                            "0": "複合查詢"
-                                        },
-                                        "value": "內容"
-                                    },
-                                    "editor": {
-                                        "close": "關閉",
-                                        "create": {
-                                            "button": "新增",
-                                            "title": "建立新項目",
-                                            "submit": "建立"
-                                        },
-                                        "edit": {
-                                            "button": "編輯",
-                                            "title": "編輯項目",
-                                            "submit": "更新"
-                                        },
-                                        "remove": {
-                                            "button": "刪除",
-                                            "title": "刪除",
-                                            "submit": "刪除",
-                                            "confirm": {
-                                                "_": "您確定要刪除 %d 筆資料嗎？",
-                                                "1": "您確定要刪除 %d 筆資料嗎？"
-                                            }
-                                        },
-                                        "multi": {
-                                            "restore": "回復修改",
-                                            "title": "每行有不同的價值",
-                                            "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
-                                            "noMulti": "此列不容許同時編輯多個項目"
-                                        },
-                                        "error": {
-                                            "system": "系統發生錯誤(更多資訊)"
-                                        }
-                                    },
-                                    "autoFill": {
-                                        "cancel": "取消"
-                                    },
-                                    "buttons": {
-                                        "copySuccess": {
-                                            "_": "複製了 %d 筆資料",
-                                            "1": "複製了 1 筆資料"
-                                        },
-                                        "copyTitle": "已經複製到剪貼簿",
-                                        "excel": "Excel",
-                                        "pdf": "PDF",
-                                        "print": "列印",
-                                        "copy": "複製"
-                                    },
-                                    "searchPanes": {
-                                        "collapse": {
-                                            "_": "搜尋面版 (%d)",
-                                            "0": "搜尋面版"
-                                        },
-                                        "emptyPanes": "沒搜尋面版",
-                                        "loadMessage": "載入搜尋面版中...",
-                                        "clearMessage": "清空"
-                                    },
-                                    "select": {
-                                        "rows": {
-                                            "_": "%d 列已選擇",
-                                            "1": "%d 列已選擇"
-                                        }
-                                    },
-                                    "stateRestore": {
-                                        "emptyError": "名稱不能空白。"
-                                    }
-                                }
 
-                            });
-                        });
-                    </script>
+    // 刪除按鈕功能
+  $('.btn.btn-cq-danger.delete').click(function () {
+    let id = $(this).parent().parent().find("td").html();
+    let urlStr = "CommonQuestion/deleteQuestion?id=" + id;
+    swal.fire({
+      title: '你確定要刪除嗎？',
+      text: "此動作無法復原！",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定刪除',
+      cancelButtonText: '取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: urlStr,
+          method: 'get',
+          beforeSend: function () {
+            swal.fire({
+              html: '<h5>刪除中...</h5>',
+              showConfirmButton: false,
+              onRender: function () {
+                // there will only ever be one sweet alert open.
+                // $('.swal2-content').prepend(sweet_loader);
+              }
+            });
+          },
+          success: function (res) {
+            console.log(res);
+            swal.fire({
+              icon: 'success',
+              html: '<h5>刪除成功!</h5>'
+            }).then(function () {
+              location.reload();
+            });
+
+          },
+          error: function (res) {
+            console.log(res);
+            // window.alert('刪除失敗');
+            swal.fire({
+              icon: 'error',
+              html: '<h5>刪除失敗!</h5>'
+            }).then(function () {
+              location.reload();
+            });
+          }
+        });
+      }
+    })
+
+  });
+
+
+
+        </script>
+
+
 
         </body>
 

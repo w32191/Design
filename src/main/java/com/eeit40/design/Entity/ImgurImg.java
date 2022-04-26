@@ -58,10 +58,6 @@ public class ImgurImg {
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_brand_id")
-  private Brand fkBrand;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_design_service_id")
   private DesignService fkDesignService;
@@ -70,17 +66,6 @@ public class ImgurImg {
   @JoinColumn(name = "fk_case_id")
   private Case fkCase;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_product_id")
-  private Product fkProduct;
-
-  public Product getFkProduct() {
-    return fkProduct;
-  }
-
-  public void setFkProduct(Product fkProduct) {
-    this.fkProduct = fkProduct;
-  }
 
   public Case getFkCase() {
     return fkCase;
@@ -96,14 +81,6 @@ public class ImgurImg {
 
   public void setFkDesignService(DesignService fkDesignService) {
     this.fkDesignService = fkDesignService;
-  }
-
-  public Brand getFkBrand() {
-    return fkBrand;
-  }
-
-  public void setFkBrand(Brand fkBrand) {
-    this.fkBrand = fkBrand;
   }
 
   public Member getFkMember() {

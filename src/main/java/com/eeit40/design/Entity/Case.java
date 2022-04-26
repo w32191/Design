@@ -1,6 +1,8 @@
 package com.eeit40.design.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -16,9 +18,14 @@ public class Case {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
-  @ManyToOne(fetch = FetchType.LAZY)
+
+  @ManyToOne
+//  @JsonBackReference
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
+
+  @Column(name= "title", length = 10)
+  private String title;
 
   @Column(name = "name", length = 50)
   private String name;
@@ -37,6 +44,7 @@ public class Case {
   private String message;
 
   @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+  @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "date_time", columnDefinition = "datetime")
   private Date dateTime;
@@ -44,7 +52,9 @@ public class Case {
   @PrePersist
   public void onCreate(){
     if(dateTime == null){
+
       dateTime = new Date();
+//      System.out.println(dateTime);
     }
   }
 
@@ -63,6 +73,35 @@ public class Case {
   public Case() {
   }
 
+
+
+  @Override
+  public String toString() {
+    return "Case{" +
+            "id=" + id +
+            ", fkMember=" + fkMember +
+            ", title='" + title + '\'' +
+            ", name='" + name + '\'' +
+            ", classification='" + classification + '\'' +
+            ", location='" + location + '\'' +
+            ", caseEmail='" + caseEmail + '\'' +
+            ", message='" + message + '\'' +
+            ", dateTime=" + dateTime +
+            ", expiryDate=" + expiryDate +
+            ", viewingCount=" + viewingCount +
+            ", casesPhotos=" + casesPhotos +
+            ", imgurImgs=" + imgurImgs +
+            '}';
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
   public Case(Integer id, Member fkMember, String name, String classification, String location, String caseEmail, String message, Date dateTime, Date expiryDate, Integer viewingCount, Set<CasesPhoto> casesPhotos) {
     this.id = id;
     this.fkMember = fkMember;
@@ -75,23 +114,7 @@ public class Case {
     this.expiryDate = expiryDate;
     this.viewingCount = viewingCount;
     this.casesPhotos = casesPhotos;
-  }
-
-  @Override
-  public String toString() {
-    return "Case{" +
-            "id=" + id +
-            ", fkMember=" + fkMember +
-            ", name='" + name + '\'' +
-            ", classification='" + classification + '\'' +
-            ", location='" + location + '\'' +
-            ", caseEmail='" + caseEmail + '\'' +
-            ", message='" + message + '\'' +
-            ", dateTime=" + dateTime +
-            ", expiryDate=" + expiryDate +
-            ", viewingCount=" + viewingCount +
-            ", casesPhotos=" + casesPhotos +
-            '}';
+    this.title = title;
   }
 
   public Set<CasesPhoto> getCasesPhotos() {

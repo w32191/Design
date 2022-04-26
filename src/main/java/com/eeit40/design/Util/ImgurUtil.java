@@ -4,8 +4,7 @@ import com.eeit40.design.Entity.ImgurImg;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
@@ -49,9 +48,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @PropertySource("classpath:imgurConfigs.properties")
+@Slf4j
 public class ImgurUtil {
-
-  private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   // 設定值放在imgur.properties
   @Value("${UPLOAD_URL}")
@@ -97,6 +95,8 @@ public class ImgurUtil {
 
     result = restTemplate.postForObject(UPLOAD_URL, request, String.class);
     // 回傳範例：{"status":200,"success":true,"data":{"id":"s68wxgI","deletehash":"nZ6s4GOCYLzGwQM","account_id":112836003,"account_url":"w32191w32191","ad_type":null,"ad_url":null,"title":null,"description":null,"name":"平台.png","type":"image/png","width":6036,"height":976,"size":396218,"views":0,"section":null,"vote":null,"bandwidth":0,"animated":false,"favorite":false,"in_gallery":false,"in_most_viral":false,"has_sound":false,"is_ad":false,"nsfw":null,"link":"https://i.imgur.com/s68wxgI.png","tags":[],"datetime":1650097788,"mp4":"","hls":""}}
+    // 失敗的話會噴一個HttpClientErrorException
+
     // 讀取回傳結果的nodetree
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(result);
@@ -109,9 +109,6 @@ public class ImgurUtil {
       img.setType(jsonNode.get("data").get("type").asText());
       img.setDeleteHash(jsonNode.get("data").get("deletehash").asText());
       img.setAuthorizationAccount(jsonNode.get("data").get("account_url").asText());
-    } else {
-
-      // SamWang To-Do: 上傳失敗的Exception尚未處理
     }
 
     return img;
@@ -136,7 +133,6 @@ public class ImgurUtil {
     result = restTemplate.exchange(targetUrl, HttpMethod.DELETE, request,
         String.class);
 
-    // SamWang To-Do: 刪除失敗的Exception尚未處理
     return result.getStatusCodeValue() == 200;
   }
 

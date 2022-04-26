@@ -8,12 +8,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CaseService {
+
     @Autowired
     private CaseRepository caseDao;
 
@@ -30,16 +34,14 @@ public class CaseService {
         return null;
     }
 
-    public void deleteById(Integer id){
-        caseDao.deleteById(id);
+    //刪除
+    public Integer deleteCaseById(@PathVariable Integer id){
+       return caseDao.deleteCaseById(id);
     }
 
-    public List<Case> findAllCases(){
-        return caseDao.findAll();
-    }
 
     public Page<Case> findByPage(Integer pageNumber){
-        Pageable pgb = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"dateTime");
+        Pageable pgb = PageRequest.of(pageNumber-1,10,Sort.Direction.DESC,"dateTime");
 
         Page<Case> page = caseDao.findAll(pgb);
 
@@ -47,8 +49,32 @@ public class CaseService {
 
     }
 
-    public Case getLastest(){
-        return caseDao.findFirstByOrderByDateTimeAsc();
+    //列出全部資料
+    public List<Case> findAllCases(){
+        return caseDao.findAll();
+    }
+
+    //按"時間"尋找
+    //1.Desc
+    public List<Case> findAllByOrderByDateTimeDesc(){
+        return caseDao.findAllByOrderByDateTimeDesc();
+    }
+    //2.Asc
+    public List<Case> findAllByOrderByDateTimeAsc(){
+        return caseDao.findAllByOrderByDateTimeAsc();
+    }
+
+
+    //按"類別"尋找
+    public List<Case> orderByClassification(String classification){
+        List<Case> orderByClassificationList = caseDao.orderByClassification(classification);
+        return orderByClassificationList ;
+    }
+
+    //按"地區"尋找
+    public List<Case> orderByLocation(String location){
+        List<Case> orderByLocationList = caseDao.orderByLocation(location);
+        return orderByLocationList;
     }
 
 }
