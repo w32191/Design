@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller("BackActivityController")
 @Slf4j
-public class ActivityController {
+public class ActivityController { // 用來跳轉頁面用的controller
 
   @Autowired
   private ActivityService service;

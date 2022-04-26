@@ -11,9 +11,7 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -177,6 +175,12 @@ public class ActivityServiceImpl implements ActivityService {
   @Override
   public List<Brand> getAllBrands() {
     return brandRepository.findAll();
+  }
+
+  @Override
+  public Page<Brand> findAllBrandByPage(Integer pageNumber) {
+    Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
+    return brandRepository.findAll(pageable);
   }
 
   // 用productsId，去取得這些product的Set

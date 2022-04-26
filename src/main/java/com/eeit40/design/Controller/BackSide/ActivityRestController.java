@@ -4,17 +4,13 @@ import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
-import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Service.ActivityService;
-import com.eeit40.design.Service.BrandService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,13 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Slf4j
-public class ActivityRestController {
+public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestController
 
   @Autowired
   private ActivityService service;
-
-  @Autowired
-  private BrandService brandService;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -96,7 +89,7 @@ public class ActivityRestController {
   @GetMapping("/B/Activity/getBrandsPage")
   public Page<Brand> findBrandByPage(
       @RequestParam(name = "page", defaultValue = "1") String page) {
-    return brandService.findAllByPage(Integer.valueOf(page));
+    return service.findAllBrandByPage(Integer.valueOf(page));
   }
 
   @GetMapping("/B/Activity/findAlreadyCheckedProductId/{activityId}")
