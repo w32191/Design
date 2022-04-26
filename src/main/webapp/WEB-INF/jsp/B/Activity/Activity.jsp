@@ -12,12 +12,8 @@
 
     <title>活動</title>
 
-    <!-- Datatable -->
-    <link href="${contextRoot}/static/back/assets/css/lib/data-table/dataTables.bootstrap.min.css"
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
-    <link href="${contextRoot}/static/back/assets/css/lib/data-table/buttons.bootstrap.min.css"
-          rel="stylesheet"/>
-
     <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
           rel="stylesheet"/>
     <!-- Common Styles -->
@@ -109,15 +105,12 @@
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
                                                 <td>
-                                                    <button type="button"
-                                                            class="btn btn-warning">編輯
-                                                    </button>
+                                                    <a href="find/${ac.id}" class="btn btn-warning">編輯</a>
                                                 </td>
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-danger delete">刪除
                                                     </button>
-                                                        <%--                                                    <a href="" class="btn btn-danger delete">刪除</a>--%>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -132,48 +125,59 @@
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
-                <div class="row">
-                    <div class="col-lg-6" id="insertDialog">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>新增活動</h4>
-                            </div>
-                            <div class="card-body">
 
+                <%--   dialog--%>
+                <div class="" hidden="" id="insertDialog" title="新增活動">
+                    <div class="card">
+                        <div class="card-title">
+                        </div>
+
+                        <div class="card-body">
+                            <div class="basic-elements">
                                 <form method="POST" enctype="multipart/form-data"
                                       id="insertActivityForm">
-                                    <label>活動主題：
-                                        <input type="text" name="subject" id="insertSubject"/>
-                                    </label>
-                                    <br/>
-                                    <label>活動內容：
-                                        <textarea id="insertContent"></textarea>
-                                    </label><br/>
-                                    <label>折扣％：
-                                        <input type="number" placeholder="95％" step="10"
-                                               min="1" max="99" id="insertdiscountPercentage">
-                                    </label><br/>
+                                    <div class="form-group">
+                                        <label>活動主題：
+                                            <input type="text" class="form-control" name="subject"
+                                                   id="insertSubject"/>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>活動內容：
+                                            <textarea id="insertContent"
+                                                      class="form-control"
+                                                      rows="3"></textarea>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>折扣％：
+                                            <input type="number" placeholder="％"
+                                                   class="form-control"
+                                                   id="insertdiscountPercentage">
+                                        </label>
+                                    </div>
                                     <label>開始日：
                                         <input type="date" name="startDate"
-                                               id="insertStartDate">
+                                               id="insertStartDate" class="form-control">
                                     </label><br/>
                                     <label>結束日：
                                         <input type="date" name="startDate"
-                                               id="insertEndDate">
+                                               id="insertEndDate" class="form-control">
                                     </label><br/>
                                     <label>上傳圖片：
                                         <input type="file" name="files"
-                                               id="insertUploadFile">
+                                               id="insertUploadFile" class="form-control">
                                     </label><br/>
                                 </form>
                                 <!-- button 不能放在form裏面 -->
-                                <button id="ajaxBtn">Submit</button>
+                                <%--                                <button id="ajaxBtn">Submit</button>--%>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Footer -->
-                    <%--  <jsp:include page="../IncludePage/layoutPage/footerPage.jsp"/> --%>
+                <!-- Footer -->
+                <%--  <jsp:include page="../IncludePage/layoutPage/footerPage.jsp"/> --%>
             </section>
         </div>
     </div>
@@ -181,18 +185,10 @@
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/back/universal/Activity.js"></script>
 </body>
-
 
 </html>

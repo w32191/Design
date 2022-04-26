@@ -1,10 +1,5 @@
 package com.eeit40.design.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -19,8 +14,8 @@ public class Product {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "fk_brand_id")
     private Brand fkBrand;
     @Column(name = "product_id")
@@ -57,17 +52,19 @@ public class Product {
     @Column(name = "added")
     private LocalDate added;
 
-    @Column(name = "image01", columnDefinition = "VARBINARY(MAX)")
-    private byte[] image01;
 
-    @Column(name = "image02", columnDefinition = "VARBINARY(MAX)")
-    private byte[] image02;
+    @Column(name = "image01", columnDefinition = "varchar(255)")
+    private String image01;
 
-    @Column(name = "image03", columnDefinition = "VARBINARY(MAX)")
-    private byte[] image03;
+    @Column(name = "image02", columnDefinition = "varchar(255)")
+    private String image02;
 
-    @Column(name = "image04", columnDefinition = "VARBINARY(MAX)")
-    private byte[] image04;
+    @Column(name = "image03", columnDefinition = "varchar(255)")
+    private String image03;
+
+    @Column(name = "image04", columnDefinition = "varchar(255)")
+    private String image04;
+
 
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
@@ -92,17 +89,6 @@ public class Product {
         return shoppingCards;
     }
 
-
-  @OneToMany(mappedBy = "fkProduct")
-  private Set<ImgurImg> imgurImgs = new LinkedHashSet<>();
-
-  public Set<ImgurImg> getImgurImgs() {
-    return imgurImgs;
-  }
-
-  public void setImgurImgs(Set<ImgurImg> imgurImgs) {
-    this.imgurImgs = imgurImgs;
-  }
 
     public Set<OrderList> getOrderLists() {
         return orderLists;
@@ -244,37 +230,36 @@ public class Product {
         this.id = id;
     }
 
-    public byte[] getImage01() {
+    public String getImage01() {
         return image01;
     }
 
-    public void setImage01(byte[] image01) {
+    public void setImage01(String image01) {
         this.image01 = image01;
     }
 
-    public byte[] getImage02() {
+    public String getImage02() {
         return image02;
     }
 
-    public void setImage02(byte[] image02) {
+    public void setImage02(String image02) {
         this.image02 = image02;
     }
 
-    public byte[] getImage03() {
+    public String getImage03() {
         return image03;
     }
 
-    public void setImage03(byte[] image03) {
+    public void setImage03(String image03) {
         this.image03 = image03;
     }
 
-    public byte[] getImage04() {
+    public String getImage04() {
         return image04;
     }
 
 
-    public void setImage04(byte[] image04) {
+    public void setImage04(String image04) {
         this.image04 = image04;
     }
 }
-

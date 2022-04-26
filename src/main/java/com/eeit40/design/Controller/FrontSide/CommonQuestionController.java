@@ -18,13 +18,12 @@ public class CommonQuestionController {
 	
 	
 	
-	@GetMapping("/F/CommonQuestion.html")
+	@GetMapping("/F/CommonQuestion")
 	  public ModelAndView wishListPage2(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
 		//mav.getModel().put("cqs", cq); 
 		mav.addObject("cqs", cq); //addObject作用跟getModel().put()是一樣的
-		mav.setViewName("/F/CommonQuestion/CommonQuestion");
-		
+		mav.setViewName("/F/CommonQuestion/CommonQuestion");		
 	    return mav;
 	  }
 	
