@@ -2,14 +2,18 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.Brand;
+import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Slf4j
-public class ActivityRestController {
+public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestController
 
   @Autowired
   private ActivityService service;
@@ -33,6 +37,9 @@ public class ActivityRestController {
   @GetMapping("/B/Activity/findAllApi")
   public Map<String, List<Activity>> findAllAjax() {
     List<Activity> result = service.findAll();
+    for (Activity activity : result) {
+      log.info("Activity ID:" + activity.getId());
+    }
 
     Map<String, List<Activity>> map = new HashMap<>();
     map.put("data", result);
@@ -48,12 +55,14 @@ public class ActivityRestController {
     return "DeleteFail";
   }
 
-
   @PutMapping("/B/Activity/insertActivity")
   public String insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
-    // SamWang To-Do: 產品未處理
+
+    // SamWang To-Do: 目前只能新增活動，新增產品要在編輯活動的時候新增
+
+    log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     Activity insertResult = service.insertActivity(service.setImg(file, dto));
 
@@ -71,9 +80,7 @@ public class ActivityRestController {
 
     log.info("Update Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
-    // SamWang To-Do: 產品未處理
     Activity result = service.updateActivity(service.setImg(file, dto));
-
 
     if (result != null) {
       return "Update Success!";
@@ -81,5 +88,27 @@ public class ActivityRestController {
     return "Update Fail!";
   }
 
+  @GetMapping("/B/Activity/getBrandsPage")
+  public Page<Brand> findBrandByPage(
+      @RequestParam(name = "page", defaultValue = "1") String page) {
+    return service.findAllBrandByPage(Integer.valueOf(page));
+  }
+
+  @GetMapping("/B/Activity/findAlreadyCheckedProductId/{activityId}")
+  public List<Integer> findAlreadyCheckedProductId(@PathVariable("activityId") Integer id) {
+    Activity editActivity = service.findById(id);
+    List<Integer> checkedProductId = new ArrayList<>();
+    if (editActivity == null) {
+      return checkedProductId;
+    }
+    // 如果原本產品已經有勾選折扣商品
+    if (!editActivity.getProducts().isEmpty()) {
+      // 取得原本已經有勾選的品牌id
+      for (Product product : editActivity.getProducts()) {
+        checkedProductId.add(product.getId());
+      }
+    }
+    return checkedProductId;
+  }
 
 }

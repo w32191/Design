@@ -80,16 +80,21 @@
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-hibernate5</artifactId>
     </dependency>
-    
-    <!-- lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
 
-    
-  
+    <!-- lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Java Mail-->
+    <dependency>
+      <groupId>jakarta.mail</groupId>
+      <artifactId>jakarta.mail-api</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -100,6 +105,5 @@
       </plugin>
     </plugins>
   </build>
-
 
 </project>

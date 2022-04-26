@@ -159,8 +159,12 @@
                                                         <i class="ti-email"></i>編輯完成
                                                     </button>
                                                     <button class="btn btn-secondary btn-addon"
-                                                            type="button" id="chooseBrand">
-                                                        <i class="ti-layout-grid3-alt"></i>折扣商品
+                                                            type="button" id="openProducts">
+                                                        <i class="ti-layout-grid3-alt"></i>商品清單
+                                                    </button>
+                                                    <button class="btn btn-secondary btn-addon"
+                                                            type="button" id="closeProducts" hidden>
+                                                        <i class="ti-layout-grid3-alt"></i>關閉清單
                                                     </button>
                                                 </div>
                                                 <div class="custom-tab user-profile-tab">
@@ -199,61 +203,68 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
                 <!-- /# row -->
-<%--                <div class="row">--%>
-                <%--                    <div class="col-lg-6">--%>
-                <%--                        <div class="card">--%>
-                <%--                            <div class="card-title">--%>
-                <%--                                <h4>活動產品</h4>--%>
-                <%--                            </div>--%>
-                <%--                            <div class="card-body">--%>
-                <%--                                <div class="table-responsive">--%>
-                <%--                                    <table class="table table-hover ">--%>
-                <%--                                        <thead>--%>
-                <%--                                        <tr>--%>
-                <%--                                            <th>Name</th>--%>
-                <%--                                            <th>Status</th>--%>
-                <%--                                            <th>Date</th>--%>
-                <%--                                            <th>Price</th>--%>
-                <%--                                        </tr>--%>
-                <%--                                        </thead>--%>
-                <%--                                        <tbody>--%>
-                <%--                                        <c:forEach items="${activity.products}" var="product">--%>
-                <%--                                            <tr>--%>
-                <%--                                                <td>${product.fkBrand.name}</td>--%>
-                <%--                                                <td><img src="${product.fkBrand.img}">--%>
-                <%--                                                </td>--%>
-                <%--                                            </tr>--%>
-                <%--                                            &lt;%&ndash;  SamWang To-Do: 產品待處理&ndash;%&gt;--%>
-                <%--                                        </c:forEach>--%>
-                <%--                                        </tbody>--%>
-                <%--                                    </table>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
+                <div class="row">
+                    <div class="col-lg-4" id="brandsList" hidden>
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>品牌清單</h4>
+                            </div>
+                            <div class="recent-comment" id="brandContent">
+                                <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
+
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-8" id="productList" hidden>
+                        <div class="card">
+                            <div class="card-title">
+                                <h4 id="h4ProductTitle">產品清單</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="productListTable">
+                                        <thead>
+                                        <tr>
+
+                                            <th>
+                                                <button class="btn btn-primary" id="selectAllBtn">
+                                                    全選
+                                                </button>
+                                                <button class="btn btn-primary" id="unSelectAllBtn"
+                                                        hidden>取消全選
+                                                </button>
+                                            </th>
+                                            <th>圖片</th>
+                                            <th>名稱</th>
+                                            <th>分類</th>
+                                            <th>價格</th>
+                                            <th>庫存</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="productTbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+
+                </div>
             </section>
+
         </div>
     </div>
 </div>
-<div class="col-lg-8" id="brandDialog" title="品牌列表">
-    <div class="brandList">
-        <ul>
-            <c:forEach items="${brandAllList}" var="brand">
-                <li>
-                    <label for="myCheckbox${brand.id}">
-                    <input type="checkbox" id="myCheckbox${brand.id}" value="${brand.id}"
-                           name="brands"/>&nbsp ${brand.name}</label>
-                    <label><img src="${brand.img}"/></label>
-                </li>
-            </c:forEach>
-        </ul>
 
-    </div>
-</div>
+<%-- 折扣商品的品牌選單 --%>
 
 
 <!-- jQuery & Bootstrap-->
@@ -269,7 +280,8 @@
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="${contextRoot}/static/back/universal/EditActivity.js"></script>
+<%-- jquery & Ajax & JS 都在裏面--%>
+<script src="${contextRoot}/static/back/universal/js/EditActivity.js"></script>
 </body>
 
 </html>
