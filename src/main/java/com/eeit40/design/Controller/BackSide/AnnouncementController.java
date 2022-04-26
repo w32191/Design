@@ -30,7 +30,7 @@ public class AnnouncementController<publicAnnouncement> {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 //  @Autowired
-//  private AnnouncementService service;
+  private AnnouncementService service;
 
   @Autowired
   private EntityManager entityManager;

@@ -30,4 +30,6 @@ public interface ActivityService {
   ActivityDto setImg(MultipartFile file, ActivityDto dto) throws IOException;
 
   List<Brand> getAllBrands();
+
+  Page<Brand> findAllBrandByPage(Integer pageNumber);
 }

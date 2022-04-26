@@ -1,6 +1,7 @@
 package com.eeit40.design.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -50,18 +50,22 @@ public class ImgurImg {
   @JoinColumn(name = "fk_activity_id")
   private Activity fkActivity;
 
+  @JsonIgnore
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_account_id")
   private Account fkAccount;
 
+  @JsonIgnore
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_design_service_id")
   private DesignService fkDesignService;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_case_id")
   private Case fkCase;

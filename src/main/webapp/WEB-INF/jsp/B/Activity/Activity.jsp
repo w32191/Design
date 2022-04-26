@@ -105,7 +105,8 @@
                                                 <td>${ac.startDate}</td>
                                                 <td>${ac.endDate}</td>
                                                 <td>
-                                                    <a href="find/${ac.id}" class="btn btn-warning">編輯</a>
+                                                    <a href="editActivity/${ac.id}"
+                                                       class="btn btn-warning">編輯</a>
                                                 </td>
                                                 <td>
                                                     <button type="button"
@@ -188,7 +189,8 @@
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="${contextRoot}/static/back/universal/Activity.js"></script>
+<%-- jquery & Ajax & JS 都在裏面--%>
+<script src="${contextRoot}/static/back/universal/js/Activity.js"></script>
 </body>
 
 </html>
