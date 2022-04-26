@@ -8,13 +8,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CaseService {
+
     @Autowired
     private CaseRepository caseDao;
 
@@ -31,13 +34,14 @@ public class CaseService {
         return null;
     }
 
-    public void deleteById(Integer id){
-        caseDao.deleteById(id);
+    //刪除
+    public Integer deleteCaseById(@PathVariable Integer id){
+       return caseDao.deleteCaseById(id);
     }
 
 
     public Page<Case> findByPage(Integer pageNumber){
-        Pageable pgb = PageRequest.of(pageNumber-1,9,Sort.Direction.DESC,"dateTime");
+        Pageable pgb = PageRequest.of(pageNumber-1,10,Sort.Direction.DESC,"dateTime");
 
         Page<Case> page = caseDao.findAll(pgb);
 
@@ -62,11 +66,15 @@ public class CaseService {
 
 
     //按"類別"尋找
-    public List<Case> findByClassification(String classification){
+    public List<Case> orderByClassification(String classification){
+        List<Case> orderByClassificationList = caseDao.orderByClassification(classification);
+        return orderByClassificationList ;
+    }
 
-        List<Case> findByClassification = caseDao.findByClassification(classification);
-
-        return findByClassification ;
+    //按"地區"尋找
+    public List<Case> orderByLocation(String location){
+        List<Case> orderByLocationList = caseDao.orderByLocation(location);
+        return orderByLocationList;
     }
 
 }

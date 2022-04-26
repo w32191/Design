@@ -2,6 +2,7 @@ package com.eeit40.design.Dao;
 
 import com.eeit40.design.Entity.Case;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -19,10 +20,20 @@ public interface CaseRepository extends JpaRepository<Case, Integer> {
     //2.Acs
     public List<Case> findAllByOrderByDateTimeAsc();
 
-
-    //按"類別"尋找
+    //按"類別"搜尋
     @Query(value = "select * from cases where classification = :classification", nativeQuery = true)
-    public List<Case> findByClassification(String classification);
+    public List<Case> orderByClassification(String classification);
+
+    //按"地區"搜尋
+    @Query(value = "select * from cases where location = :location", nativeQuery = true)
+    public List<Case> orderByLocation(String location);
+
+    //新增案件
+
+    //刪除
+    @Modifying
+    @Query(value = "delete from cases where id=?1",nativeQuery = true)
+    public Integer deleteCaseById(Integer id);
 
 
 //    @Query("from Case where name = :name")
