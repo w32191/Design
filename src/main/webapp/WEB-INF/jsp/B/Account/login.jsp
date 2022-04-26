@@ -12,7 +12,7 @@
         <h1>會員登入</h1>
         <form:form class="form" method="POST" ModelAttribute="login" >      	
         <input type="hidden" id="account" value="${account}"/>
-        <form:errors type="text" name="pwd"/>
+        <form:errors type="text"/>
             <section class="form-input">
                 <label>帳號/email</label>
                 <div class="input-area">

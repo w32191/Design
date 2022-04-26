@@ -62,15 +62,15 @@ public class AccountService {
 	}
 	
 	
-	public Account login (String email, String pwd) {
+	public boolean login (String email, String pwd) {
 		
-		Account emailandpwd = accountRepository.findAccountByemailandpwd(email, pwd);
+		Account email1 = accountRepository.findAccountByemail(email);
 		
-		if(emailandpwd != null){
-			return emailandpwd;
+		if(email1 != null && email1.getPwd().equals(pwd)){
+			return true;
 		}
 		
-		return null;
+		return false;
 			
 	}
 			

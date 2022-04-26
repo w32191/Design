@@ -2,8 +2,6 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Service.AccountService;
-import com.eeit40.design.Util.Result;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,12 +38,14 @@ public class AccountController {
     //登入帳號中並存入session
     @PostMapping("/login")
     public ModelAndView doLogin(@Valid @ModelAttribute(name = "login")
-    		ModelAndView mav,Account account ,String email ,String pwd , HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
+    		ModelAndView mav,Account account ,@RequestParam(name = "email") String email ,@RequestParam(name = "pwd") String pwd ,
+    		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
     	
     	if(!br.hasErrors()) {
-    		Account login = accountService.login(email, pwd);
-    		if(login != null) {
+    		boolean login = accountService.login(email, pwd);
+    		if(login == true) {
     		session.setAttribute("account", account);
+    		System.out.println(account);
     		mav.setViewName("/B/Account/logout");
     		return mav;
     		}
