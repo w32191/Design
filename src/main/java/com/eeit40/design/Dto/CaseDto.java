@@ -9,6 +9,9 @@ public class CaseDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("idDto")
+    private Integer idDto;
+
     @JsonProperty("titleDto")
     private String titleDto;
 
@@ -27,13 +30,17 @@ public class CaseDto implements Serializable {
     @JsonProperty("messageDto")
     private String messageDto;
 
+    @JsonProperty("dateTimeDto")
+    private Date dateTimeDto;
+
     @JsonProperty("expiryDateDto")
     private Date expiryDateDto;
 
     public CaseDto() {
     }
 
-    public CaseDto(String titleDto, String nameDto, String classificationDto, String locationDto, String caseEmailDto, String messageDto, Date expiryDateDto) {
+    public CaseDto(Integer idDto, String titleDto, String nameDto, String classificationDto, String locationDto, String caseEmailDto, String messageDto, Date expiryDateDto) {
+        this.idDto = idDto;
         this.titleDto = titleDto;
         this.nameDto = nameDto;
         this.classificationDto = classificationDto;
@@ -41,6 +48,14 @@ public class CaseDto implements Serializable {
         this.caseEmailDto = caseEmailDto;
         this.messageDto = messageDto;
         this.expiryDateDto = expiryDateDto;
+    }
+
+    public Integer getIdDto() {
+        return idDto;
+    }
+
+    public void setIdDto(Integer idDto) {
+        this.idDto = idDto;
     }
 
     public String getTitleDto() {
@@ -99,16 +114,5 @@ public class CaseDto implements Serializable {
         this.expiryDateDto = expiryDateDto;
     }
 
-    @Override
-    public String toString() {
-        return "CaseDto{" +
-                "titleDto='" + titleDto + '\'' +
-                ", nameDto='" + nameDto + '\'' +
-                ", classificationDto='" + classificationDto + '\'' +
-                ", locationDto='" + locationDto + '\'' +
-                ", caseEmailDto='" + caseEmailDto + '\'' +
-                ", messageDto='" + messageDto + '\'' +
-                ", expiryDateDto=" + expiryDateDto +
-                '}';
-    }
+
 }

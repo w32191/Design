@@ -110,9 +110,7 @@
                                                                             value="${caseMessage.expiryDate}"/>
                                                         </td>
                                                         <td>
-                                                            <button type="button"
-                                                                    class="btn btn-warning">編輯
-                                                            </button>
+                                                            <a href="/Design/B/Case/edit/page?caseMessageId=${caseMessage.id}&CaseMessage" class="btn btn-warning">編輯</a>
                                                         </td>
                                                         <td>
                                                             <button type="button"
@@ -130,6 +128,9 @@
                                                     <th>類別</th>
                                                     <th>地區</th>
                                                     <th>E-mail</th>
+                                                    <th>資訊</th>
+                                                    <th>創案時間</th>
+                                                    <th>結案時間</th>
 
                                                 </tr>
                                                 </tfoot>
