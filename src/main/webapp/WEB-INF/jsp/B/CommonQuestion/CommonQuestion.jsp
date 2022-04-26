@@ -78,10 +78,8 @@
                                                     <td>${cq.answer}
                                                     <td><button type="button" class="btn btn-info" name='edit'
                                                             data-toggle="modal" data-target="#editModal">更新</button></td>
-                                                    <td><a
-                                                            href="${contextRoot}/B/CommonQuestion/deleteQuestion?id=${cq.id}"><button
-                                                                id="deleteButton" type="button"
-                                                                class="btn btn-danger delete">刪除</button></a>
+                                                    <td><button id="deleteButton" type="button"
+                                                                class="btn btn-cq-danger delete">刪除</button></a>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -157,7 +155,7 @@
 
 
                     
-            <!-- 修改員工Modal -->
+            <!-- 修改常見問題Modal -->
 			<div class="modal fade" id="editModal" tabindex="-1"
             aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -197,8 +195,7 @@
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-									</select>
-                                <br>
+								</select>
                                 
                                 </div>
                             
@@ -247,12 +244,48 @@
 			success: function(data){
                 $('#id_e').val(data.id);
 				$('#question_type_e').val(data.questionType.commonQuestionType);
+                console.log(data.questionType.commonQuestionType);
 				$('#question_e').val(data.question);
 				$('#answer_e').val(data.answer);				
 				
 			}
 		});
 	});
+
+    $("#question_type_e").change(function(){
+		ajaxSupervisor2();
+	})
+
+    <!--ajax更新常見問題類型選項 (修改)-->
+	function ajaxSupervisor2(){
+		let departId = $("#fkDepartment_e").val();
+		let titleId = $("#fkTitleId_e").val();
+		let empID = $("#empId_e").val();
+		if(departId!="" || titleId!=""){
+			$.ajax({
+				url:'http://localhost:8080/GroupOne/api/getSupervisorEdit?departId=' + departId + '&titleId=' + titleId + '&empId=' + empID,
+				dataType:'json',
+				method:'get',
+				success:function(data){
+					$('#superiorName_e').html("");
+					let superiorOption = "";
+					superiorOption += '<option value="" style="display: none"></option>';
+					for(i=0; i<data.length;i++){
+						if(i==0){
+							superiorOption += '<option value= "'+ data[i].username + '" selected>' + data[i].username + '</option>';
+						}else{
+							superiorOption += '<option value= "'+ data[i].username + '">' + data[i].username + '</option>';
+						}
+					}
+					$('#superiorName_e').append(superiorOption);
+				},
+				error:function(err){
+					console.log(err)
+					alert('發生錯誤1')
+				}
+			})
+		} // end of if
+	}
 
     <!--驗證並送出-->
 	$('#editBtn').click(function(){
@@ -265,9 +298,64 @@
 	});
 
 
-    $('#editBtn').click(function(){
-        console.log('testok');
-    });
+   
+
+
+
+    // 刪除按鈕功能
+  $('.btn.btn-cq-danger.delete').click(function () {
+    let id = $(this).parent().parent().find("td").html();
+    let urlStr = "CommonQuestion/deleteQuestion?id=" + id;
+    swal.fire({
+      title: '你確定要刪除嗎？',
+      text: "此動作無法復原！",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定刪除',
+      cancelButtonText: '取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: urlStr,
+          method: 'get',
+          beforeSend: function () {
+            swal.fire({
+              html: '<h5>刪除中...</h5>',
+              showConfirmButton: false,
+              onRender: function () {
+                // there will only ever be one sweet alert open.
+                // $('.swal2-content').prepend(sweet_loader);
+              }
+            });
+          },
+          success: function (res) {
+            console.log(res);
+            swal.fire({
+              icon: 'success',
+              html: '<h5>刪除成功!</h5>'
+            }).then(function () {
+              location.reload();
+            });
+
+          },
+          error: function (res) {
+            console.log(res);
+            // window.alert('刪除失敗');
+            swal.fire({
+              icon: 'error',
+              html: '<h5>刪除失敗!</h5>'
+            }).then(function () {
+              location.reload();
+            });
+          }
+        });
+      }
+    })
+
+  });
+
 
 
         </script>
