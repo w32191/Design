@@ -12,20 +12,18 @@ $(function () {
   // 品牌清單的div
   let brandContent = $('#brandContent');
 
-  let productCheckBoxes = $('input[id^="checkProduct"]');
-
   // 先取得原本資料庫中，該活動以經有勾選的產品id
   $.ajax({
     type: 'GET',
     url: '/Design/B/Activity/findAlreadyCheckedProductId/' +
         $('#activityID').text(),
-    beforeSend: function () {
-      swal.fire({
-        imageUrl: '/Design/static/back/universal/images/load-img.gif',
-        imageHeight: 300,
-        showConfirmButton: false
-      });
-    },
+    // beforeSend: function () {
+    //   swal.fire({
+    //     imageUrl: '/Design/static/back/universal/images/load-img.gif',
+    //     imageHeight: 300,
+    //     showConfirmButton: false
+    //   });
+    // },
     success: function (res) {
       checkProductArray = res;
       console.log(checkProductArray);
@@ -186,11 +184,8 @@ $(function () {
           $('#brandContent').append(divMedia);
         }); // end of each()
 
-        // console.log(res);
-        // console.log('totalPages:' + res.totalPages);
-        console.log('pageNumber:' + res.pageable.pageNumber);
-        // SamWang to-do : brands分頁未完成
 
+        // SamWang to-do : brands分頁未完成
         let documentFragment = document.createDocumentFragment();
         let ul = document.createElement('ul');
         ul.classList.add('pagination');
@@ -212,10 +207,9 @@ $(function () {
 
           li.append(btn);
           ul.append(li);
-        }
+        } // end of for()
 
         documentFragment.append(ul);
-
         brandContent.append(`<p></p>`).append(documentFragment);
 
         // 右側商品清單，載入第一筆品牌的所有商品
@@ -235,13 +229,13 @@ $(function () {
     let isAllChecked = true;
 
     // 只要其中一個沒有
-    productCheckBoxes.each(function () {
+    $('input[id^="checkProduct"]').each(function () {
       if (!$(this).prop('checked')) {
         isAllChecked = false;
       }
     });
     // 或根本沒有checkbox
-    if (productCheckBoxes.size() === 0) {
+    if ($('input[id^="checkProduct"]').size() === 0) {
       isAllChecked = false;
     }
     //  如果已經全勾，顯示(取消全選)按鈕
@@ -362,7 +356,7 @@ $(function () {
   });
 
   // 只要產品勾選有變化,就檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
-  productTbody.on('change', 'input[id^="checkProduct"]', isProductAllChecked);
+  $('#productTbody').on('change', 'input[id^="checkProduct"]', isProductAllChecked);
 
 
 

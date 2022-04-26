@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Controller("BackActivityController")
 @Slf4j
 public class ActivityController {
 

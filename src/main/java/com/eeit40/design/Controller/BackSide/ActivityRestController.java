@@ -67,6 +67,7 @@ public class ActivityRestController {
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
     // SamWang To-Do: 產品未處理
+    log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     Activity insertResult = service.insertActivity(service.setImg(file, dto));
 
@@ -83,9 +84,7 @@ public class ActivityRestController {
   ) throws IOException {
 
     log.info("Update Json:" + dataJsonStr);
-//    System.out.println(dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
-    // SamWang To-Do: 產品未處理
     Activity result = service.updateActivity(service.setImg(file, dto));
 
     if (result != null) {
