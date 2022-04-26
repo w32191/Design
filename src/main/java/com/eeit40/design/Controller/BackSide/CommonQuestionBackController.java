@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.eeit40.design.Entity.CommonQuestion;
+import com.eeit40.design.Entity.CommonQuestionType;
 import com.eeit40.design.Service.CommonQuestionService;
 
 @Controller
@@ -34,62 +35,51 @@ public class CommonQuestionBackController {
 	
 	
 	//後台顯示全QA
-	@GetMapping("/B/CommonQuestion.html")
+	@GetMapping("/B/CommonQuestion")
 	  public ModelAndView selectAllQuestion(ModelAndView mav) {
 		List<CommonQuestion> cq = cqsService.selectAll();
 		mav.addObject("cqs", cq);		
+		List<CommonQuestionType> cqt = cqsService.findAllQuestionTypes();
+		mav.addObject("cqts", cqt);
 		mav.setViewName("/B/CommonQuestion/CommonQuestion");		
 	    return mav;
 	}
 	
 	
-	@PostMapping("/B/CommonQuestion/add")
-    public ModelAndView addMessage(ModelAndView mav, @Valid @ModelAttribute(name = "CommonQuestion") CommonQuestion msg,
-            BindingResult br) {
+	
 
-        if (!br.hasErrors()) {
-            cqsService.insert(msg);
-            CommonQuestion newMsg = new CommonQuestion();
-            mav.getModel().put("CommonQuestion", newMsg);
-        }
-        return mav;
-    }
-
-    @GetMapping("/B/CommonQuestion/updateQuestion")
-    public String updateQuestion(Model model, @RequestParam(name="id") Integer id) {
-
-        CommonQuestion cq = cqsService.findById(id);
-        model.addAttribute("commonQuestion", cq);
-        
-        return "updateQuestion";
-    }
-    
-    @PostMapping("/B/CommonQuestion/updateQuestion")
-    public ModelAndView updateQuestion(ModelAndView mav, @Valid @ModelAttribute(name="commonQuestion") CommonQuestion cq, BindingResult br) {
-        
-        mav.setViewName("updateQuestion");
-        
-        if(!br.hasErrors()) {
-            https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.entity-persistence.saving-entites
-            cqsService.insert(cq); 
-            mav.setViewName("redirect:/B/CommonQuestion.html");
-        }
-        
-        return mav;
-        
-    }
 	
 	//刪除
 	@GetMapping("/B/CommonQuestion/deleteQuestion")
     public ModelAndView deleteQuestion(ModelAndView mav, @RequestParam(name="id") Integer id) {
 	  cqsService.deleteQA(id);        
-      mav.setViewName("redirect:/B/CommonQuestion.html");//為什麼這邊後面需要加.html?
+      mav.setViewName("redirect:/B/CommonQuestion");
       return mav;
     }
     
+	//顯示QA彈窗後的內容
+    @ResponseBody
+    @GetMapping("/B/CommonQuestion/updateQuestion")
+    public CommonQuestion findQuestionByID(@RequestParam(name = "id") Integer id) {
+        return cqsService.findById(id);
+    }
     
+    //把更新QA送出
+    @PostMapping("/B/CommonQuestion/updateQuestionContent")
+    public ModelAndView updateMessage(ModelAndView mav, 
+        @RequestParam(value = "question_type") String qty,
+        @RequestParam(value = "question") String qt,
+        @RequestParam(value = "answer") String as,
+        @RequestParam(value = "id") Integer id
+        ) {
+      cqsService.updateCommonQuestion(id, qty, qt, as);
+      mav.setViewName("redirect:/B/CommonQuestion");        
+      return mav;
+    }
 	
 	
+    
+    
 	
 	
 }

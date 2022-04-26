@@ -13,13 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eeit40.design.Dao.CommonQuestionRepository;
+import com.eeit40.design.Dao.CommonQuestionTypeRepository;
 import com.eeit40.design.Entity.CommonQuestion;
+import com.eeit40.design.Entity.CommonQuestionType;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class CommonQuestionService {
 
 	@Autowired
 	private CommonQuestionRepository cqrDao;
+	
+	@Autowired
+    private CommonQuestionTypeRepository cqrtDao;
 	
 	//顯示全部QA
 	public List<CommonQuestion> selectAll() {
@@ -28,8 +35,8 @@ public class CommonQuestionService {
 	}
 	
 	//修改QA
-    public void insert(CommonQuestion cq) {
-      cqrDao.save(cq);
+    public void updateCommonQuestion(Integer id, String question_type, String question, String answer) {
+      cqrDao.updateCommonQuestion(question_type, question, answer, id);
     }
     
     public CommonQuestion findById(Integer id) {
@@ -48,5 +55,10 @@ public class CommonQuestionService {
     }
 	
 	
+    public List<CommonQuestionType> findAllQuestionTypes(){
+      return cqrtDao.findAll();
+    }
+    
+    
 	
 }
