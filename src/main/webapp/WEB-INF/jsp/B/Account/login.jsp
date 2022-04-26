@@ -1,33 +1,64 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         import="org.springframework.util.Base64Utils" %>
-         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>會員登入</title>
+
+    <title>Focus Admin: Widget</title>
+
+    <!-- Common Styles -->
+    <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
 </head>
-<body>
-        <h1>會員登入</h1>
-        <form:form class="form" method="POST" ModelAttribute="login" >      	
-        <input type="hidden" id="account" value="${account}"/>
-        <form:errors type="text"/>
-            <section class="form-input">
-                <label>帳號/email</label>
-                <div class="input-area">
-                    <input type="text" name="email"  placeholder="請輸入email"/>
+
+<body class="bg-primary">
+
+<div class="unix-login">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-content">
+                    <div class="login-logo">
+                        <a href="index.html"><span>Focus</span></a>
+                    </div>
+                    <div class="login-form">
+                        <h4>Administratior Login</h4>
+                        <form>
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember Me
+                                </label>
+                                <label class="pull-right">
+                                    <a href="#">Forgotten Password?</a>
+                                </label>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
+                                Sign in
+                            </button>
+                            <div class="register-link m-t-15 text-center">
+                                <p>還不是會員嗎?<a href=""> Sign Up Here</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </section>
-            <section class="form-input">
-                <label>密碼</label>
-                <div class="input-area">
-                    <input type="password" name="pwd" maxlength="16" placeholder="請輸入密碼"/>
-                </div>
-            </section>
-            <button>登入</button>
-         </form:form>
-            <span>還不是會員嗎<a href="">立即加入</a></span>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
+
 </html>
