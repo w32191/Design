@@ -86,7 +86,7 @@
                         <li><a href="page-reset-password.html">Forgot password</a></li>
                     </ul>
                 </li>
-                <li><a><i class="ti-close"></i> Logout</a></li>
+                <li><a href="doLogout"><i class="ti-close"></i> Logout</a></li>
             </ul>
         </div>
     </div>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,35 +24,33 @@
             <div class="col-lg-6">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a href="index.html"><span>Focus</span></a>
+                        <a><span>後台系統</span></a>
                     </div>
                     <div class="login-form">
-                        <h4>Administratior Login</h4>
-                        <form>
+                        <h4>登入</h4>
+                        <form:form class="form" name="account" ModelAttribute="login">
                             <div class="form-group">
-                                <label>Email address</label>
-                                <input type="email" class="form-control" placeholder="Email">
+                                <label>信箱</label>
+                                <input type="email" name="email" class="form-control" placeholder="請輸入信箱 ">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password">
+                                <label>密碼</label>
+                                <input type="password" name="pwd" class="form-control" placeholder="請輸入密碼">
                             </div>
                             <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember Me
-                                </label>
                                 <label class="pull-right">
                                     <a href="#">Forgotten Password?</a>
-                                </label>
-
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
-                                Sign in
+                                </label>   
+                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
+                                登入
                             </button>
-                            <div class="register-link m-t-15 text-center">
-                                <p>還不是會員嗎?<a href=""> Sign Up Here</a></p>
                             </div>
-                        </form>
+                            </form:form>
+                            <p/>
+                            <div class="register-link m-t-15 text-center">
+                                <p>還不是會員嗎?<a href=""> 立即加入</a></p>
+                            </div>
+                        
                     </div>
                 </div>
             </div>

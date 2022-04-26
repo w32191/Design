@@ -205,9 +205,9 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="doLogout">
                                                 <i class="ti-power-off"></i>
-                                                <span>Logout</span>
+                                                Logout
                                             </a>
                                         </li>
                                     </ul>

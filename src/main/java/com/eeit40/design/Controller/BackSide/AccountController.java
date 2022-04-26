@@ -2,9 +2,6 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Service.AccountService;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
@@ -46,13 +42,20 @@ public class AccountController {
     		if(login == true) {
     		session.setAttribute("account", account);
     		System.out.println(account);
-    		mav.setViewName("B/Account/logout");
+    		mav.setViewName("B/Account/index");
     		return mav;
     		}
     	}
 			return null;
-    	
 
+    }
+    
+    @GetMapping("/index")
+    public ModelAndView index(ModelAndView mav) {
+    	
+    	mav.setViewName("B/Account/index");
+    	
+    	return mav;
     }
     
     //註冊帳號頁面
@@ -95,14 +98,6 @@ public class AccountController {
 //    	}
 //    }
     
-    
-    @GetMapping("/logout")
-    public ModelAndView logout(ModelAndView mav) {
-    	
-    	mav.setViewName("B/Account/logout");
-    	return mav;
-    }
-    
     @GetMapping("/doLogout")
     public ModelAndView doLogout(ModelAndView mav,HttpSession session, SessionStatus sessionStatus) {
     	
@@ -112,6 +107,13 @@ public class AccountController {
     	
 		mav.setViewName("B/Account/login");
 			return mav;
+    }
+    
+    @PostMapping("/doLogout")
+    public ModelAndView Returnlogin(ModelAndView mav) {
+    	
+    	mav.setViewName("B/Account/login");
+    	return mav;
     }
     
     
