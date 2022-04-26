@@ -6,6 +6,7 @@ import com.eeit40.design.Entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -19,6 +20,11 @@ public class BrandController {
         Brand resBnd = dao.save(bnd);
         return resBnd;
     }
+    @GetMapping("/B/brand/findALL")
+    public List<Brand> findAll(){
+        return dao.findAll();
+    }
+
 
 
 
