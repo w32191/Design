@@ -50,7 +50,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                              <form action="#" method="post">
+                              <form action="checkoutlist" method="post">
                                 <div class="table-content table-responsive">
                                     <table class="table">
                                         <thead>
@@ -74,7 +74,7 @@
                                                         </a>
                                                     </td>
 
-                                                    <td class="product-name">
+                                                    <td class="product-name" name="pname">
                                                         <a href="product-details.html">${cart.fkProduct.name}</a>
                                                     </td>
 
@@ -89,7 +89,7 @@
                                                     </td>
 
                                                     <td class="product-subtotal">
-                                                        $<span id="tprice">${cart.fkProduct.price*cart.tempMount}</span>
+                                                        $<span id="tprice" name="tprice">${cart.fkProduct.price*cart.tempMount}</span>
                                                     </td>
 
                                                     <td class="product-remove">
