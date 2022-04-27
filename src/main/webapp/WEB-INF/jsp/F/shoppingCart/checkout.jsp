@@ -343,7 +343,7 @@
                                     <tfoot>
                                         <!-- 金額 -->
                                     <tr class="cart-discount">
-                                        <th>Cart Discount</th>
+                                        <th>Discount</th>
                                         <td><span class="discount">${discount}</span></td>
                                     </tr>    
                                     <tr class="cart-subtotal">

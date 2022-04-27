@@ -50,7 +50,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                              <form action="checkoutorderlist" method="GET">
+                              <form action="checkoutorderlist" method="POST">
                                 <div class="table-content table-responsive">
                                     <table class="table">
                                         <thead>

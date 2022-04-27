@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit40.design.Dto.DiscountCouponDto;
+import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.DiscountCoupon;
 import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ShoppingCartService;
@@ -22,14 +23,32 @@ public class ShoppingCartController {
 
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+	
+	public int accountId() {
+		
+       Account account = new Account();
+	   account.setId(1);
+	   account.setEmail("admin@gmail.com");
+	   account.setPwd("admin");
+		   
+	   int fkAccount = account.getId();
+	   return fkAccount;
+			
+		}
 
 	// 查詢
 	@GetMapping("F/shoppingcart")
-	public ModelAndView findShoppingCratByAccountId(ModelAndView mav, @RequestParam(name = "fkAccount") int fkAccount) {
+	public ModelAndView findShoppingCratByAccountId(ModelAndView mav) {
 
 		mav.setViewName("F/shoppingCart/cart");
+		
+		// 假的account
+//		Account account = new Account();
+//		account.setId(1);
+//		account.setEmail("admin@gmail.com");
+//		account.setPwd("admin");
 
-		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(fkAccount);
+		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
 
 		mav.getModel().put("cart", cart);
 
@@ -47,11 +66,16 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int cartid = Integer.valueOf(id);
 		// 先給死的id
-		int fkAccount = 1;
+//		int fkAccount = 1;
+		// 假的account
+//		Account account = new Account();
+//		account.setId(1);
+//		account.setEmail("admin@gmail.com");
+//		account.setPwd("admin");
 
 		shoppingCartService.editAmountByCartId(amount, cartid);
 
-		mav.setViewName("redirect:/F/shoppingcart?fkAccount=" + fkAccount);
+		mav.setViewName("redirect:/F/shoppingcart?fkAccount=" + accountId());
 		return mav;
 
 	}
@@ -62,8 +86,13 @@ public class ShoppingCartController {
 
 		shoppingCartService.deletById(id);
 
-		int fkAccount = 2;
-		mav.setViewName("redirect:/F/shoppingcart?fkAccount=" + fkAccount);
+		// 假的account
+//		Account account = new Account();
+//		account.setId(1);
+//		account.setEmail("admin@gmail.com");
+//		account.setPwd("admin");
+//		int fkAccount = 2;
+		mav.setViewName("redirect:/F/shoppingcart?fkAccount=" + accountId());
 
 		return mav;
 
@@ -100,9 +129,14 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 
-		int fkAccount = 2;
+		// 假的account
+//		Account account = new Account();
+//		account.setId(1);
+//		account.setEmail("admin@gmail.com");
+//		account.setPwd("admin");
+//		int fkAccount = 2;
 
-		shoppingCartService.checkShoppingCart(amount, fkAccount, productId);
+		shoppingCartService.checkShoppingCart(amount, accountId(), productId);
 
 		return mav;
 	}
