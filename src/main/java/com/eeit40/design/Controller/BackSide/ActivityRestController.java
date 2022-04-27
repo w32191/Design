@@ -7,6 +7,8 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,8 +62,6 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
 
-    // SamWang To-Do: 目前只能新增活動，新增產品要在編輯活動的時候新增
-
     log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
     Activity insertResult = service.insertActivity(service.setImg(file, dto));
@@ -111,4 +111,21 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return checkedProductId;
   }
 
+  @PostMapping(value = "/B/Activity/findProductByBrand")
+  public List<Product> findProductByBrand(
+      @RequestParam(name = "brandId", required = false) String brandId,
+      @RequestParam(name = "startDate", required = false) String startDateStr,
+      @RequestParam(name = "endDate", required = false) String endDateStr,
+      @RequestParam(name = "activityID", required = false) String activityId) {
+
+//    log.info(brandId + startDate + endDate + activityId);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate startDate = LocalDate.parse(startDateStr, formatter);
+    LocalDate endDate = LocalDate.parse(endDateStr, formatter);
+
+    Brand brand = new Brand();
+    brand.setId(Integer.valueOf(brandId));
+
+    return service.findProductByFkBrand(brand);
+  }
 }

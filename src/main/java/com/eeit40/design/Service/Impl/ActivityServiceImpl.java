@@ -183,6 +183,12 @@ public class ActivityServiceImpl implements ActivityService {
     return brandRepository.findAll(pageable);
   }
 
+  @Override
+  public List<Product> findProductByFkBrand(Brand id) {
+    return productRepository.findProductByFkBrand(id);
+  }
+
+
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {
     Set<Product> productSet = new LinkedHashSet<>();

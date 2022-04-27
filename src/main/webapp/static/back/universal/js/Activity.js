@@ -2,11 +2,11 @@ $(function () {
 
   // SamWang to-do: DataTables尚未解決
   // 主要清單的DataTable
-  // $('#table_data').DataTable({
-  //   "searching": false,
-  //   "autoWidth": false,
-  //   "lengthMenu":false
-  // });
+  $('#table_data').DataTable({
+    "searching": false,
+    "autoWidth": false,
+    "lengthMenu":false
+  });
 
   // 刪除按鈕 按了觸發
   $('.btn.btn-danger.delete').click(function () {

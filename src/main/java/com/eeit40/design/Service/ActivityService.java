@@ -32,4 +32,6 @@ public interface ActivityService {
   List<Brand> getAllBrands();
 
   Page<Brand> findAllBrandByPage(Integer pageNumber);
+
+  List<Product> findProductByFkBrand(Brand id);
 }

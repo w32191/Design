@@ -68,10 +68,19 @@ $(function () {
 
     // 先將產品清單清空
     productTbody.html('');
+    let data = {
+      "startDate": $('#updateStartDate').val(),
+      "endDate": $('#updateEndDate').val(),
+      "activityID": $('#activityID').text(),
+      "brandId":brandId
+    }
 
     $.ajax({
-      url: '/Design/B/product/findProductByBrand/' + brandId,
-      type: 'GET',
+      url: '/Design/B/Activity/findProductByBrand',
+      type: 'POST',
+      data: data,
+      // processData: false, // 防止jquery將data變成query String
+      // contentType: false,
       beforeSend: function () {
         swal.fire({
           imageUrl: '/Design/static/back/universal/images/load-img.gif',
@@ -183,7 +192,6 @@ $(function () {
           divMedia.append(divMediaLeft, divMediaBody);
           $('#brandContent').append(divMedia);
         }); // end of each()
-
 
         // SamWang to-do : brands分頁的「前一頁」「後一頁」按鈕未完成
         // 品牌列表的分頁按鈕
@@ -357,9 +365,7 @@ $(function () {
   });
 
   // 只要產品勾選有變化,就檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
-  $('#productTbody').on('change', 'input[id^="checkProduct"]', isProductAllChecked);
-
-
-
+  $('#productTbody').on('change', 'input[id^="checkProduct"]',
+      isProductAllChecked);
 
 });
