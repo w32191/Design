@@ -25,6 +25,9 @@ public class CheckoutCartListDto implements Serializable {
 	  
 	  private String name;
 	  
+	  private Integer price;
+	  
+	  //新增小計
 	  private Integer tprice;
 	  
 	  public CheckoutCartListDto() {
@@ -85,6 +88,14 @@ public class CheckoutCartListDto implements Serializable {
 
 	public void setTprice(Integer tprice) {
 		this.tprice = tprice;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 	  
 }
