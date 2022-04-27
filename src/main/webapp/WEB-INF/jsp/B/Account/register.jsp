@@ -24,11 +24,12 @@
             <div class="col-lg-6">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a href="index.html"><span>Design</span></a>
+                        <a href="index.html"><span>註冊Design後台管理系統</span></a>
                     </div>
                     <div class="login-form">
-                        <h4>註冊商家</h4>
+                        <h4>成為Design設計師</h4>
                         <form:form class="form" name="register" ModelAttribute="doRegister">
+                        	<form:errors path="*"/>
                             <div class="form-group">
                                 <label>信箱</label>
                                 <input type="email" name="email" class="form-control" placeholder="請填入信箱">
@@ -44,7 +45,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">註冊</button>
                             <div class="register-link m-t-15 text-center">
-                                <p>已有帳號<a href="B/Account/login">登入</a></p>
+                                <p>已有帳號<a href="/Design/B/login">登入</a></p>
                             </div>
                         </form:form>
                     </div>

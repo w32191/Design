@@ -23,8 +23,8 @@ public class AccountController {
     private AccountService accountService;
     
     //登入帳號頁面
-    @GetMapping("/login")
-    public ModelAndView login(ModelAndView mav,@ModelAttribute Account account) {
+    @GetMapping("/B/login")
+    public ModelAndView login( ModelAndView mav,@ModelAttribute Account account ) {
 		
     	mav.setViewName("B/Account/login");
     	
@@ -32,7 +32,7 @@ public class AccountController {
     }
     
     //登入帳號中並存入session
-    @PostMapping("/login")
+    @PostMapping("/B/login")
     public ModelAndView doLogin(@Valid @ModelAttribute(name = "login")
     		ModelAndView mav, Account account, @RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd,
     		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
@@ -45,9 +45,9 @@ public class AccountController {
     		mav.setViewName("B/Account/index");
     		return mav;
     		}
-    		return null;
+    		return mav;
     	}
-			return null;
+			return mav;
 
     }
     
@@ -60,7 +60,7 @@ public class AccountController {
     }
     
     //註冊帳號頁面
-    @GetMapping("/register")
+    @GetMapping("/B/register")
     public ModelAndView register(ModelAndView mav) {
     	
     	Account account = new Account();
@@ -74,7 +74,7 @@ public class AccountController {
     }
     
     //註冊帳號中
-    @PostMapping("/register")
+    @PostMapping("/B/register")
     public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
     Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd, String permission, BindingResult br) {
     	
@@ -90,7 +90,7 @@ public class AccountController {
     }
     
     
-    @GetMapping("/dologout")
+    @GetMapping("/B/dologout")
     public ModelAndView doLogout(HttpSession session, ModelAndView mav, SessionStatus sessionStatus) {
 
     	session.invalidate();

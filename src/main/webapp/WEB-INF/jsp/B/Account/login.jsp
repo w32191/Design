@@ -24,19 +24,23 @@
             <div class="col-lg-6">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a><span>後台系統</span></a>
+                        <a><span>Design後台系統</span></a>
                     </div>
                     <div class="login-form">
-                        <h4>登入</h4>
-                        <form:form class="form" name="account" ModelAttribute="login" action="/Design/login">
+                        <h4>登入Design</h4>
+                        <form:form class="form" name="account" ModelAttribute="login" action="/Design/B/login">
+
                             <div class="form-group">
                                 <label>信箱</label>
                                 <input type="email" name="email" class="form-control" placeholder="請輸入信箱 ">
-                            </div>
+                            </div>                        
+                            <form:errors name="email"/>
+                            <br>
                             <div class="form-group">
                                 <label>密碼</label>
                                 <input type="password" name="pwd" class="form-control" placeholder="請輸入密碼">
                             </div>
+                            <form:errors name="pwd"/>
                             <div class="checkbox">
                                 <label class="pull-right">
                                     <a href="#">Forgotten Password?</a>
@@ -48,7 +52,7 @@
                             </form:form>
                             <p/>
                             <div class="register-link m-t-15 text-center">
-                                <p>還不是會員嗎?<a href=""> 立即加入</a></p>
+                                <p>還不是會員嗎?<a href="/Design/B/register"> 立即加入</a></p>
                             </div>
                         
                     </div>

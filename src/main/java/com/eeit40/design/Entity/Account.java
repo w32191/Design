@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "account")
@@ -31,6 +32,7 @@ public class Account {
 
 	@NotBlank(message = "密碼欄不可空白")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\w]{6,16}$", message = "密碼必須為長度6~16位碼大小寫英文加數字")
+	@Size(min = 6, max = 16)
 	@Column(name = "pwd", length = 60)
 	private String pwd;
 
