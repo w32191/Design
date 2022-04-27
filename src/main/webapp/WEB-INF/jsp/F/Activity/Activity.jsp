@@ -30,22 +30,30 @@
                         <section class="slider__area slider__area-4 p-relative">
                             <div class="slider-active">
                                 <c:forEach items="${allActivity}" var="ac">
-                                    <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0" step="1">
+                                    <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
+                                               step="1">
                                         <div class="single-slider single-slider-2 slider__height-4 d-flex align-items-center"
-                                             data-background="${img.link}" >
+                                             data-background="${img.link}">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-xl-7 col-lg-7 col-md-9 col-sm-11 col-12">
                                                         <div class="slider__content slider__content-4">
-                                                            <h2 data-animation="fadeInUp" data-delay=".2s">
-                                                                ${ac.subject}</h2>
-                                                            <p data-animation="fadeInUp" data-delay=".4s">As
-                                                                rich and unique as the coffee beans it is
-                                                                intended for, this little scoop will make
-                                                                your morning ritual a special occasion every
-                                                                day. </p>
+                                                            <h2 data-animation="fadeInUp"
+                                                                data-delay=".2s"
+                                                                class="text-danger">
+                                                                    ${ac.subject}</h2>
+                                                            <p data-animation="fadeInUp"
+                                                               data-delay=".4s"
+                                                               class="text-danger">${ac.content}</p>
+                                                            <p data-animation="fadeInUp"
+                                                               data-delay=".4s" class="text-danger">
+                                                                限時折扣：</p>
+                                                            <h2 data-animation="fadeInUp"
+                                                                data-delay=".4s"
+                                                                class="text-danger">${ac.discountPercentage}%</h2>
                                                             <a href="#" class="os-btn os-btn-2"
-                                                               data-animation="fadeInUp" data-delay=".6s">Discover
+                                                               data-animation="fadeInUp"
+                                                               data-delay=".6s">Discover
                                                                 now</a>
                                                         </div>
                                                     </div>
@@ -54,49 +62,6 @@
                                         </div>
                                     </c:forEach>
                                 </c:forEach>
-
-<%--                                <div class="single-slider single-slider-2 slider__height-4 d-flex align-items-center"--%>
-<%--                                     data-background="${contextRoot}/static/front/assets/img/slider/slider-2.jpg">--%>
-<%--                                    <div class="container">--%>
-<%--                                        <div class="row">--%>
-<%--                                            <div class="col-xl-7 col-lg-7 col-md-9 col-sm-11 col-12">--%>
-<%--                                                <div class="slider__content slider__content-4">--%>
-<%--                                                    <h2 data-animation="fadeInUp" data-delay=".2s">--%>
-<%--                                                        Think Different &<br> Do it otherwise</h2>--%>
-<%--                                                    <p data-animation="fadeInUp" data-delay=".4s">As--%>
-<%--                                                        rich and unique as the coffee beans it is--%>
-<%--                                                        intended for, this little scoop will make--%>
-<%--                                                        your morning ritual a special occasion every--%>
-<%--                                                        day. </p>--%>
-<%--                                                    <a href="#" class="os-btn os-btn-2"--%>
-<%--                                                       data-animation="fadeInUp" data-delay=".6s">Discover--%>
-<%--                                                        now</a>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="single-slider single-slider-2 slider__height-4 d-flex align-items-center"--%>
-<%--                                     data-background="${contextRoot}/static/front/assets/img/slider/slider-3.jpg">--%>
-<%--                                    <div class="container">--%>
-<%--                                        <div class="row">--%>
-<%--                                            <div class="col-xl-7 col-lg-7 col-md-9 col-sm-11 col-12">--%>
-<%--                                                <div class="slider__content slider__content-4">--%>
-<%--                                                    <h2 data-animation="fadeInUp" data-delay=".2s">--%>
-<%--                                                        Think Different &<br> Do it otherwise</h2>--%>
-<%--                                                    <p data-animation="fadeInUp" data-delay=".4s">As--%>
-<%--                                                        rich and unique as the coffee beans it is--%>
-<%--                                                        intended for, this little scoop will make--%>
-<%--                                                        your morning ritual a special occasion every--%>
-<%--                                                        day. </p>--%>
-<%--                                                    <a href="#" class="os-btn os-btn-2"--%>
-<%--                                                       data-animation="fadeInUp" data-delay=".6s">Discover--%>
-<%--                                                        now</a>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                             </div>
                         </section>
                         <!-- slider area end -->
@@ -105,48 +70,27 @@
                         <div class="banner__area pt-20">
                             <div class="container custom-container">
                                 <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <div class="banner__item mb-30 p-relative">
                                             <div class="banner__thumb fix">
-                                                <a href="product-details.html" class="w-img"><img
+                                                <a href="" class="w-img"><img
                                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-4.jpg"
                                                         alt="banner"></a>
                                             </div>
                                             <div class="banner__content p-absolute transition-3">
-                                                <h5><a href="product-details.html">British Made
-                                                    Pocket <br> Knife - Oak</a></h5>
-                                                <a href="product-details.html" class="link-btn">Discover
-                                                    now</a>
+                                                <h5><a href="">找ＣＡＳＥ？</a></h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <div class="banner__item mb-30 p-relative">
                                             <div class="banner__thumb fix">
-                                                <a href="product-details.html" class="w-img"><img
+                                                <a href="" class="w-img"><img
                                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-2.jpg"
                                                         alt="banner"></a>
                                             </div>
                                             <div class="banner__content p-absolute transition-3">
-                                                <h5><a href="product-details.html">Chair Kimi No Isu
-                                                    <br> Project</a></h5>
-                                                <a href="product-details.html" class="link-btn">Discover
-                                                    now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                        <div class="banner__item mb-30 p-relative">
-                                            <div class="banner__thumb fix">
-                                                <a href="product-details.html" class="w-img"><img
-                                                        src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-5.jpg"
-                                                        alt="banner"></a>
-                                            </div>
-                                            <div class="banner__content p-absolute transition-3">
-                                                <h5><a href="product-details.html">Merino Lambswool
-                                                    <br> Scarf Moss</a></h5>
-                                                <a href="product-details.html" class="link-btn">Discover
-                                                    now</a>
+                                                <h5><a href="">找Design？</a></h5>
                                             </div>
                                         </div>
                                     </div>
