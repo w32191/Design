@@ -4,6 +4,7 @@ import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -113,19 +114,31 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
 
   @PostMapping(value = "/B/Activity/findProductByBrand")
   public List<Product> findProductByBrand(
-      @RequestParam(name = "brandId", required = false) String brandId,
-      @RequestParam(name = "startDate", required = false) String startDateStr,
-      @RequestParam(name = "endDate", required = false) String endDateStr,
-      @RequestParam(name = "activityID", required = false) String activityId) {
+      @RequestParam(name = "brandId") String brandIdStr,
+      @RequestParam(name = "startDate") String startDateStr,
+      @RequestParam(name = "endDate") String endDateStr,
+      @RequestParam(name = "activityID") String activityIdStr) {
+    // SamWang to-do: 驗證尚未處理，如果輸入的結束日期比起始日早會有問題
 
-//    log.info(brandId + startDate + endDate + activityId);
+//    if ((startDateStr == null || startDateStr.length() == 0) && (endDateStr == null
+//        || endDateStr.length() == 0)) {
+//      throw new ActivityException("請輸入開始日期、結束日期");
+//    } else if (startDateStr == null || startDateStr.length() == 0) {
+//      throw new ActivityException("請輸入開始日期");
+//    } else if (endDateStr == null || endDateStr.length() == 0) {
+//      throw new ActivityException("請輸入結束日期");
+//    }
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate startDate = LocalDate.parse(startDateStr, formatter);
     LocalDate endDate = LocalDate.parse(endDateStr, formatter);
-
+    Integer activityId = Integer.valueOf(activityIdStr);
     Brand brand = new Brand();
-    brand.setId(Integer.valueOf(brandId));
+    brand.setId(Integer.valueOf(brandIdStr));
 
-    return service.findProductByFkBrand(brand);
+    // 確認新輸入的活動日期範圍，沒有重複的產品才可新增
+    // 若是原本已經有勾選的產品則可以讓他修改
+    return service.ableCheckProductListByBrand(startDate, endDate, brand, activityId);
   }
+
 }

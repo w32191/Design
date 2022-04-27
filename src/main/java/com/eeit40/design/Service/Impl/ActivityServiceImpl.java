@@ -11,6 +11,8 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -184,8 +186,79 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   @Override
-  public List<Product> findProductByFkBrand(Brand id) {
-    return productRepository.findProductByFkBrand(id);
+  public List<Product> findProductByFkBrand(Brand brand) {
+    return productRepository.findProductByFkBrand(brand);
+  }
+
+  // 確認新輸入的活動日期範圍，沒有重複的產品才可新增
+  // 若是原本已經有勾選的產品則可以讓他修改
+  @Override
+  public List<Product> ableCheckProductListByBrand(
+      LocalDate startDate, LocalDate endDate,
+      Brand brand, Integer activityId
+  ) {
+    // 要回傳的list
+    List<Product> returnList = new ArrayList<>();
+    // 取出該品牌全部產品
+    List<Product> dbList = productRepository.findProductByFkBrand(brand);
+
+    for (Product product : dbList) {
+      log.info("正在比對的Product id:" + product.getId());
+
+      if (!product.getActivities().isEmpty()) {
+        // 這個 產品已經有活動
+
+        // 取得這個產品原有的所有活動id
+        List<Integer> activityIdList = new ArrayList<>();
+
+        for (Activity ac : product.getActivities()) {
+          activityIdList.add(ac.getId());
+        }
+        log.info("資料庫原本已經有活動的活動id清單:" + activityIdList);
+        log.info("正在編輯的活動id:" + activityId);
+        // 判斷現在要編輯的活動，有沒有在資料庫取出的活動清單中
+        if (!activityIdList.contains(activityId)) {
+          // 原本這個活動沒有這個產品
+
+          boolean isTimeAble = true;
+          // 判斷時間
+          for (Activity ac : product.getActivities()) {
+            log.info("正在比對的Product id:" + product.getId());
+            log.info("原有的活動時間: " + ac.getStartDate() + " " + ac.getEndDate());
+            log.info("新增的活動時間: " + startDate + " " + endDate);
+            if (
+                (startDate.isBefore(ac.getEndDate()) && startDate.isAfter(ac.getStartDate())) ||
+                    (endDate.isAfter(ac.getStartDate()) && endDate.isBefore(ac.getEndDate())) ||
+                    (startDate.isBefore(ac.getStartDate()) && endDate.isAfter(ac.getEndDate()))
+            ) {
+              // 新輸入的日期，只要起始日或結束日其中一天有重複，就不行
+              isTimeAble = false;
+              log.info("product id:" + product.getId() + " 不能勾選");
+              break;
+            }
+          }
+
+          if (isTimeAble) {
+            log.info("product id:" + product.getId() + " 可以勾選");
+            returnList.add(product);
+          }
+
+        } else {
+          log.info("product id:" + product.getId() + " 可以勾選");
+          // 原本這個活動就有這個產品，所以要回傳這個產品讓他可以取消
+          returnList.add(product);
+        }
+
+
+      } else {
+        log.info("product id:" + product.getId() + " 可以勾選");
+        // 這個活動 已經有這個產品
+        returnList.add(product);
+      }
+
+
+    }
+    return returnList;
   }
 
 

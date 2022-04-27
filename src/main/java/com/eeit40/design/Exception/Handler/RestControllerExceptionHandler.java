@@ -1,5 +1,6 @@
 package com.eeit40.design.Exception.Handler;
 
+import com.eeit40.design.Exception.ActivityException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,5 +30,12 @@ public class RestControllerExceptionHandler {
     return ResponseEntity.status(res.get("status").asInt())
         .body("Error:" + res.get("data").get("error").asText());
   }
+
+  @ExceptionHandler(ActivityException.class)
+  public ResponseEntity<String> handle(ActivityException exception) {
+
+    return ResponseEntity.status(400).body(exception.getMessage());
+  }
+
 
 }

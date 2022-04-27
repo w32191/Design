@@ -79,8 +79,6 @@ $(function () {
       url: '/Design/B/Activity/findProductByBrand',
       type: 'POST',
       data: data,
-      // processData: false, // 防止jquery將data變成query String
-      // contentType: false,
       beforeSend: function () {
         swal.fire({
           imageUrl: '/Design/static/back/universal/images/load-img.gif',
@@ -137,8 +135,10 @@ $(function () {
         isProductAllChecked();
       },
       error: function (err) {
-        swal.close();
-        console.log(err);
+        swal.fire({
+          icon: 'error',
+          html: `<h5>${err.responseText}!</h5>`
+        });
       }
     });
   }
