@@ -327,14 +327,14 @@
                                     </thead>
                                     <tbody>
                                     <!--  商品明細 -->
-                                    <c:forEach var="ccl" items="checkoutCartList">
+                                    <c:forEach var="ccl" items="${checkoutCartList}">
                                     <tr class="cart_item">
                                         <td class="product-name">
-                                            Vestibulum suscipit <strong class="product-quantity"> ×
+                                            ${ccl.name} <strong class="product-quantity"> ×
                                             ${ccl.tempMount}</strong>
                                         </td>
                                         <td class="product-total">
-                                            <span class="amount">$165.00</span>
+                                            <span class="amount">$${ccl.tprice}</span>
                                         </td>
                                     </tr>
                                     </c:forEach>
@@ -342,6 +342,10 @@
                                     </tbody>
                                     <tfoot>
                                         <!-- 金額 -->
+                                    <tr class="cart-discount">
+                                        <th>Cart Discount</th>
+                                        <td><span class="discount">${discount}</span></td>
+                                    </tr>    
                                     <tr class="cart-subtotal">
                                         <th>Cart Subtotal</th>
                                         <td><span class="amount">$215.00</span></td>

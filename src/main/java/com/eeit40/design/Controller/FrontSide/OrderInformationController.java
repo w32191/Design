@@ -1,12 +1,13 @@
 package com.eeit40.design.Controller.FrontSide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,38 +21,57 @@ public class OrderInformationController {
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 	
-	//傳送shopping cart data 到 checkout頁面
-	@ResponseBody
-	@PostMapping("F/checkoutlist")
-	public List<CheckoutCartListDto> checkoutCartList(ModelAndView mav,HttpServletRequest request, List<CheckoutCartListDto> checkoutCartListDto) {
-
-//		mav.setViewName("F/shoppingCart/checkout");
-		// 先給死的id
-		int fkAccount = 1;
-		
-		String cartid = request.getParameter("cartid");
-		String productName = request.getParameter("pname");
-		String uamount = request.getParameter("uamount");
-		String tprice = request.getParameter("tprice");
-		
-		int productQuantity= Integer.valueOf(uamount);
-		int cartId= Integer.valueOf(cartid);
-		int productTotal= Integer.valueOf(tprice);
-		
-	    List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(fkAccount);
-	    CheckoutCartListDto checkoutCartList= new CheckoutCartListDto();
-		
-//		cart.get(cartId).getTempMount();
-//		checkoutCartListDto.setName(productName);
-//		checkoutCartListDto.setTempMount(productQuantity);
-	    checkoutCartList.setTempMount(cart.get(cartId).getTempMount());
-//		checkoutCartListDto.setTprice(productTotal);
-		
-		mav.getModel().put("checkoutCartList", checkoutCartList);
-		
-		return checkoutCartListDto;
-		
+	public int accountId() {
+		int fkAccount = 2;
+		return fkAccount;
 	}
 	
+	//傳送shoppingcart data 到 CheckoutCartListDto
+	public List<CheckoutCartListDto> checkoutCartList() {
+
+		// 先給死的id
+//		int fkAccount = 1;
+		
+		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
+		List<CheckoutCartListDto> checkoutCartList = new ArrayList<>();
+		
+		for(ShoppingCard sc : cart) {
+			
+			int cartId = sc.getId();
+			String productName = sc.getFkProduct().getName();
+			int productPrice = sc.getFkProduct().getPrice();
+			int quantity = sc.getTempMount();
+			int tPrice = productPrice*quantity;
+			
+			CheckoutCartListDto checkoutCartListDto = new CheckoutCartListDto();
+			
+			checkoutCartListDto.setName(productName);
+			checkoutCartListDto.setTempMount(quantity);
+			checkoutCartListDto.setPrice(productPrice);
+			checkoutCartListDto.setTprice(tPrice);
+			
+			checkoutCartList.add(checkoutCartListDto);
+			
+		}
+		return checkoutCartList;
+	}
+	
+	@ResponseBody
+	@GetMapping("F/checkoutorderlist")
+	public ModelAndView checkoutOrderList(ModelAndView mav, HttpServletRequest request) {
+		
+		// 先給死的id
+//		int fkAccount = 2;
+		
+		String discount = request.getParameter("discount");
+		
+		mav.getModel().put("discount", discount);
+		mav.getModel().put("checkoutCartList", checkoutCartList());
+		
+		
+		mav.setViewName("/F/shoppingCart/checkout");
+//		mav.setViewName("redirect:/F/checkout?fkAccount=" + accountId());
+		return mav;
+	}
 	
 }
