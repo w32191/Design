@@ -38,13 +38,14 @@ public class AccountController {
     		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
     	
     	if(!br.hasErrors()) {
-    		boolean login = accountService.login(email, pwd);
-    		if(login == true) {
-    		session.setAttribute("account", account);
-    		System.out.println(account);
+    		Account login = accountService.login(email, pwd);
+    		if(login != null) {
+    		session.setAttribute("account", login);
+    		System.out.println(login);
     		mav.setViewName("B/Account/index");
     		return mav;
     		}
+    		return null;
     	}
 			return null;
 
@@ -75,7 +76,7 @@ public class AccountController {
     //註冊帳號中
     @PostMapping("/register")
     public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
-    Account account, String email , String pwd, BindingResult br) {
+    Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd, String permission, BindingResult br) {
     	
     	if(!br.hasErrors()) {
     		accountService.register(account);
@@ -83,56 +84,24 @@ public class AccountController {
     		mav.setViewName("B/Account/login");
     		
     		return mav;
-    		
     	}
-    	
     	return null;
     	
     }
-//    public boolean registeremail(String email) {
-//    	boolean a = true;
-//    	if(accountService.findAccountByemail(email).) {
-//    		return a;
-//    	}else {
-//    		return false;
-//    	}
-//    }
     
-    @GetMapping("/doLogout")
-    public ModelAndView doLogout(ModelAndView mav,HttpSession session, SessionStatus sessionStatus) {
+    
+    @GetMapping("/dologout")
+    public ModelAndView doLogout(HttpSession session, ModelAndView mav, SessionStatus sessionStatus) {
+
+    	session.invalidate();
     	
-    	if(session.getAttribute("account") != null) {
-    		session.removeAttribute("account");
-		}
+    	Account account  = new Account();
     	
-		mav.setViewName("B/Account/login");
-			return mav;
+    	mav.addObject("login",account);
+    	mav.setViewName("/B/Account/login");
+    	return mav;	
+			
     }
-    
-    @PostMapping("/doLogout")
-    public ModelAndView Returnlogin(ModelAndView mav) {
-    	
-    	mav.setViewName("B/Account/login");
-    	return mav;
-    }
-    
-    
-//    @PostMapping("/logout")
-//    public ModelAndView logout(ModelAndView mav, @Valid @ModelAttribute(name = "logout") String str,
-//    		Account account, HttpSession session, SessionStatus sessionStatus ) {
-//    	
-//    	System.out.println(str);
-//    	if(session.getAttribute("account") != null) {
-//    		session.removeAttribute("account");
-//			mav.setViewName("B/Account/login");
-//			return mav;
-//		}
-//    	
-//    	mav.setViewName("/B/Account/register");
-//		return mav;		
-//		
-//    	
-//    }
 }
 
 

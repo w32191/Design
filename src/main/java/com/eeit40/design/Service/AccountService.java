@@ -1,8 +1,5 @@
 package com.eeit40.design.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -56,21 +53,33 @@ public class AccountService {
 			Account newacc = accountRepository.save(account);
 			if(newacc != null) {
 				newacc.setPwd("");
+
 			}
 			return newacc;
 		} 
 	}
 	
+//	public Account insertpermission (String email) {
+//		
+//		Account email1= accountRepository.findAccountByemail(email);
+//		
+//		if(email1.getPermission() == null) {
+//			email1.setPermission(2);
+//			
+//		}
+//		return null;
+//		
+//	}
 	
-	public boolean login (String email, String pwd) {
+	public Account login (String email, String pwd) {
 		
 		Account email1 = accountRepository.findAccountByemail(email);
 		
 		if(email1 != null && email1.getPwd().equals(pwd)){
-			return true;
+			return email1;
 		}
 		
-		return false;
+		return null;
 			
 	}
 			

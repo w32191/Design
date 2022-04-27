@@ -28,7 +28,7 @@
                     </div>
                     <div class="login-form">
                         <h4>登入</h4>
-                        <form:form class="form" name="account" ModelAttribute="login">
+                        <form:form class="form" name="account" ModelAttribute="login" action="/Design/login">
                             <div class="form-group">
                                 <label>信箱</label>
                                 <input type="email" name="email" class="form-control" placeholder="請輸入信箱 ">
