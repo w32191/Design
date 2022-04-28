@@ -17,14 +17,18 @@ public class ProductPageController {
 
     private ProductRepository dao;
 
-    @GetMapping("/B/Product/Product")
+    @GetMapping("/F/Product/Product")
     public ModelAndView findAllProduct(ModelAndView mav){
         Product pro = new Product();
 //        List<Product> ap = dao.findAll();
         mav.addObject("findAll",pro);
-        mav.setViewName("/B/Product/Product");
+        mav.setViewName("/F/Product/shop");
         return mav;
     }
+
+
+
+
 
 //    @PostMapping("/B/Product/Product")
 //    public ModelAndView dofindAll(ModelAndView mav, @ModelAttribute(name="findAll")

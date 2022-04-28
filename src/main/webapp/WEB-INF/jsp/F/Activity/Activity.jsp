@@ -650,7 +650,7 @@
                                             </div>
                                             <div class="banner__content-2 banner__content-4 p-absolute transition-3">
                                                 <span>Products Essentials</span>
-                                                <h4><a href="product-details.html">Bottle With
+                                                <h4><a href="product-details.html">Bottle With\
                                                     Wooden Cork</a></h4>
                                                 <p>Mirum est notare quam littera gothica<br> parum
                                                     claram, antep</p>
