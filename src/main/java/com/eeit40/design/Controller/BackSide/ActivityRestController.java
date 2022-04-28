@@ -18,6 +18,8 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -113,14 +115,24 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return checkedProductId;
   }
 
+  // 取得該品牌的全部產品
   @PostMapping(value = "/B/Activity/findProductByBrand")
   public List<Product> findProductByBrand(
-      @RequestParam(name = "brandId") String brandIdStr,
+      @RequestParam(name = "brandId") Integer brandId) {
+    Brand brand = new Brand();
+    brand.setId(brandId);
+
+    return service.findProductByFkBrand(brand);
+  }
+
+  // 勾選產品時，檢查是否與其他日期衝突
+  @PostMapping("/B/Activity/checkProductAbleCheck")
+  public ResponseEntity<String> checkProductAbleCheck(
       @RequestParam(name = "startDate") String startDateStr,
       @RequestParam(name = "endDate") String endDateStr,
-      @RequestParam(name = "activityID") String activityIdStr) {
-
-
+      @RequestParam(name = "activityID") Integer activityId,
+      @RequestParam(name = "productID") Integer productId
+  ) {
     if ((startDateStr == null || startDateStr.length() == 0) && (endDateStr == null
         || endDateStr.length() == 0)) {
       throw new NullInputException("請輸入開始日期、結束日期");
@@ -129,18 +141,21 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     } else if (endDateStr == null || endDateStr.length() == 0) {
       throw new NullInputException("請輸入結束日期");
     }
-
-
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate startDate = LocalDate.parse(startDateStr, formatter);
     LocalDate endDate = LocalDate.parse(endDateStr, formatter);
-    Integer activityId = Integer.valueOf(activityIdStr);
-    Brand brand = new Brand();
-    brand.setId(Integer.valueOf(brandIdStr));
 
-    // 確認新輸入的活動日期範圍，沒有重複的產品才可新增
-    // 若是原本已經有勾選的產品則可以讓他修改
-    return service.ableCheckProductListByBrand(startDate, endDate, brand, activityId);
+    Map<String, String> map = service.ableCheckProduct(startDate, endDate, productId, activityId);
+    ResponseEntity<String> result;
+
+    if (map.get("status").equals("OK")) {
+      result = new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      result = new ResponseEntity<>(map.get("content"), HttpStatus.BAD_REQUEST);
+    }
+
+    return result;
   }
+
 
 }

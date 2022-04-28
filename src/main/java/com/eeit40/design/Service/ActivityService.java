@@ -1,4 +1,5 @@
 package com.eeit40.design.Service;
+
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +38,9 @@ public interface ActivityService {
 
   List<Product> findProductByFkBrand(Brand id);
 
-  List<Product> ableCheckProductListByBrand(
-      LocalDate startDate, LocalDate endDate, Brand brand, Integer activityId
+
+  Map<String, String> ableCheckProduct(
+      LocalDate startDate, LocalDate endDate,
+      Integer productId, Integer activityId
   );
 }
