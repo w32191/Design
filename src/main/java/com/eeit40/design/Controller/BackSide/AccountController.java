@@ -68,7 +68,6 @@ public class AccountController {
     	
     	mav.getModel().put("doRegister", account);
     	
-    	
     	mav.setViewName("B/Account/register");
     	
     	return mav;
@@ -82,7 +81,7 @@ public class AccountController {
     	if(!br.hasErrors()) {
     		accountService.register(account);
     		
-    		mav.setViewName("B/Account/login");
+    		mav.setViewName("B/Member/memberregister");
     		
     		return mav;
     	}
@@ -100,7 +99,7 @@ public class AccountController {
     	
     	mav.addObject("login",account);
     	mav.setViewName("/B/Account/login");
-    	return mav;	
+    	return mav;
 			
     }
 }

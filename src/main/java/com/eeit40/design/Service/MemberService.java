@@ -11,43 +11,35 @@ import com.eeit40.design.Entity.Member;
 public class MemberService {
 
 	private MemberRepository memberDao;
-	
+
 	public void save(Member member) {
 		memberDao.save(member);
 	}
 	
-	
+
 	public Member findMemberById(Integer id) {
-		
+
 		return memberDao.findMemberById(id);
 	}
 	
+
+	public List<Member> findMemberAllId(Integer id) {
+
+		return memberDao.findAllById(id);
+
+	}
 	
+
 	public void deleteMemberId(Integer id) {
-		
+
 		memberDao.deleteById(id);
 	}
 	
-	
-	public List<Member> findMemberAllId(Integer id){
+	public Member memberRegister(Member member) {
+		Member savemember = memberDao.save(member);
 		
-		return memberDao.findAllById(id);
-		
+		return savemember;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 }

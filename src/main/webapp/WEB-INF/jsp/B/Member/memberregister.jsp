@@ -27,21 +27,24 @@
                         <a href="index.html"><span>註冊Design後台管理系統</span></a>
                     </div>
                     <div class="login-form">
-                        <h4>成為Design設計師</h4>
-                        <form:form class="form" name="register" ModelAttribute="doRegister">
+                        <h4>填寫詳細資料</h4>
+                        <form:form class="form" name="memberregister" ModelAttribute="memberregister">
                         	<form:errors path="*"/>
-                            <div class="form-group">
-                                <label>信箱</label>
-                                <input type="email" name="email" class="form-control" placeholder="請填入信箱">
+                             <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" name="names" class="form-control" placeholder="請填入姓名">
                             </div>
-                            <div class="form-group">
-                                <label>密碼</label>
-                                <input type="password" name="pwd" class="form-control" placeholder="請填入密碼">
+                             <div class="form-group">
+                                <label>電話</label>
+                                <input type="text" name="phone" class="form-control" placeholder="請填入電話">
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">同意相關條款
-                                </label>
+                             <div class="form-group">
+                                <label>服務地區</label>
+                                <input type="text" name="serviceArea" class="form-control" placeholder="請選擇服務地區">
+                            </div>
+                             <div class="form-group">
+                                <label>公司地址</label>
+                                <input type="text" name="address" class="form-control" placeholder="請填入公司地址">
                             </div>
                             <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">註冊</button>
                             <div class="register-link m-t-15 text-center">

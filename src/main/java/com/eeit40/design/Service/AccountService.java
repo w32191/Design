@@ -58,18 +58,7 @@ public class AccountService {
 			return newacc;
 		} 
 	}
-	
-//	public Account insertpermission (String email) {
-//		
-//		Account email1= accountRepository.findAccountByemail(email);
-//		
-//		if(email1.getPermission() == null) {
-//			email1.setPermission(2);
-//			
-//		}
-//		return null;
-//		
-//	}
+
 	
 	public Account login (String email, String pwd) {
 		

@@ -14,5 +14,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer>{
 
 	public List<Member> findAllById(Integer id);
 	
-	
+	public Member memberRegister(Member member);
 }
