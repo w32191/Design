@@ -181,7 +181,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
-    Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
+    Pageable pageable = PageRequest.of(pageNumber - 1, 5, Direction.ASC, "id");
     return brandRepository.findAll(pageable);
   }
 

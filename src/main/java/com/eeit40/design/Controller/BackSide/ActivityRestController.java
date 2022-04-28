@@ -5,6 +5,7 @@ import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Exception.ActivityException;
+import com.eeit40.design.Exception.NullInputException;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -118,16 +119,17 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
       @RequestParam(name = "startDate") String startDateStr,
       @RequestParam(name = "endDate") String endDateStr,
       @RequestParam(name = "activityID") String activityIdStr) {
-    // SamWang to-do: 驗證尚未處理，如果輸入的結束日期比起始日早會有問題
 
-//    if ((startDateStr == null || startDateStr.length() == 0) && (endDateStr == null
-//        || endDateStr.length() == 0)) {
-//      throw new ActivityException("請輸入開始日期、結束日期");
-//    } else if (startDateStr == null || startDateStr.length() == 0) {
-//      throw new ActivityException("請輸入開始日期");
-//    } else if (endDateStr == null || endDateStr.length() == 0) {
-//      throw new ActivityException("請輸入結束日期");
-//    }
+
+    if ((startDateStr == null || startDateStr.length() == 0) && (endDateStr == null
+        || endDateStr.length() == 0)) {
+      throw new NullInputException("請輸入開始日期、結束日期");
+    } else if (startDateStr == null || startDateStr.length() == 0) {
+      throw new NullInputException("請輸入開始日期");
+    } else if (endDateStr == null || endDateStr.length() == 0) {
+      throw new NullInputException("請輸入結束日期");
+    }
+
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate startDate = LocalDate.parse(startDateStr, formatter);
