@@ -33,8 +33,8 @@ public class AccountController {
     
     //登入帳號中並存入session
     @PostMapping("/B/login")
-    public ModelAndView doLogin(@Valid @ModelAttribute(name = "login")
-    		ModelAndView mav, Account account, @RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd,
+    public ModelAndView doLogin(ModelAndView mav, @Valid @ModelAttribute(name = "login") Account account, 
+    		@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd,
     		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
     	
     	if(!br.hasErrors()) {
@@ -47,7 +47,8 @@ public class AccountController {
     		}
     		return mav;
     	}
-			return mav;
+    	mav.setViewName("B/Account/login");
+    	return mav;
 
     }
     

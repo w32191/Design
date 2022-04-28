@@ -29,27 +29,25 @@
                     <div class="login-form">
                         <h4>登入Design</h4>
                         <form:form class="form" name="account" ModelAttribute="login" action="/Design/B/login">
-
+							<form:errors name="*"/>
                             <div class="form-group">
                                 <label>信箱</label>
-                                <input type="email" name="email" class="form-control" placeholder="請輸入信箱 ">
-                            </div>                        
-                            <form:errors name="email"/>
+                                <input type="email" name="email"  class="form-control" placeholder="請輸入信箱 "/>
+                            </div>
                             <br>
                             <div class="form-group">
                                 <label>密碼</label>
-                                <input type="password" name="pwd" class="form-control" placeholder="請輸入密碼">
+                                <input type="password" name="pwd"  class="form-control" placeholder="請輸入密碼"/>
                             </div>
-                            <form:errors name="pwd"/>
                             <div class="checkbox">
                                 <label class="pull-right">
                                     <a href="#">Forgotten Password?</a>
                                 </label>   
                                 <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
                                 登入
-                            </button>
+                            	</button>
                             </div>
-                            </form:form>
+                         </form:form>
                             <p/>
                             <div class="register-link m-t-15 text-center">
                                 <p>還不是會員嗎?<a href="/Design/B/register"> 立即加入</a></p>
