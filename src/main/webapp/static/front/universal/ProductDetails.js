@@ -4,10 +4,11 @@ $(function () {
     let url = new URL(getUrlString);
     let id = url.searchParams.get('id')
     console.log(id)
+    let qty;
 
     $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
         console.log(res.name);
-        let op = (res.price)*1.3;
+
         let txt = '';
 
         txt += `
@@ -121,10 +122,10 @@ $(function () {
                             </div>
                             <div class="product__price-2 mb-25">
                                 <span>$${res.price}</span>
-                                <span class="old-price">$${op}</span>
+                                <span class="old-price">$${res.price}</span>
                             </div>
                             <div class="product__modal-des mb-30">
-                                <p>品牌：<a>${res.fkBrand.name}</a></p>
+                                <p>品牌：<a href="/Design/F/product/productbybrand?brand=${res.fkBrand.id}" >${res.fkBrand.name}</a></p>
                                 <br>
                                 <p>${res.description}</p>
                             </div>
@@ -149,11 +150,11 @@ $(function () {
                                             <label>數量</label>
                                         </div>
                                         <div class="product-quantity mr-20 mb-20">
-                                            <div class="cart-plus-minus"><input type="text"
+                                            <div class="cart-plus-minus"><input type="text" id="Qty"
                                                                                 value="1"/></div>
                                         </div>
                                         <div class="pro-cart-btn">
-                                            <a href="#" class="add-cart-btn mb-20">+ Add to Cart</a>
+                                            <a href="" class="add-cart-btn mb-20" id="addToCartBtn">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </form>
@@ -185,14 +186,13 @@ $(function () {
                                          id="pro-details" role="tablist">
                                         <a class="nav-item nav-link active" id="des-tab"
                                            data-toggle="tab" href="#des" role="tab"
-                                           aria-controls="des" aria-selected="true">Description</a>
+                                           aria-controls="des" aria-selected="true">商品資訊</a>
                                         <a class="nav-item nav-link" id="add-tab" data-toggle="tab"
                                            href="#add" role="tab" aria-controls="add"
-                                           aria-selected="false">Additional Information</a>
+                                           aria-selected="false">規格/尺寸</a>
                                         <a class="nav-item nav-link" id="review-tab"
                                            data-toggle="tab" href="#review" role="tab"
-                                           aria-controls="review" aria-selected="false">Reviews
-                                            (4)</a>
+                                           aria-controls="review" aria-selected="false">評論</a>
                                     </div>
                                 </nav>
                             </div>
@@ -424,6 +424,7 @@ $(function () {
         $('#pd1').html(txt);
 
         $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
+
         $(".qtybutton").on("click", function () {
             var $button = $(this);
             var oldValue = $button.parent().find("input").val();
@@ -442,6 +443,153 @@ $(function () {
 
     });
 
+
+    $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
+        console.log(newa[0].id)
+        console.log(newa[0].name)
+        let natxt = ``;
+        natxt +=
+
+            `
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section__title-wrapper text-center mb-55">
+                        <div class="section__title mb-10">
+                            <h2>新品推薦</h2>
+                        </div>
+                        <div class="section__sub-title">
+                            <p>NEW ARRIVAL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__wrapper mb-60">
+                        <div class="product__thumb">
+                            <a href="product-details?id=${newa[0].id}" class="w-img">
+                                <img src="${newa[0].image01}" alt="product-img">
+                                <img class="product__thumb-2"
+                                     src="${newa[0].image02}" alt="product-img">
+                            </a>
+                            
+                            <div class="product__sale">
+                                <span class="new">new</span>
+                                
+                            </div>
+                        </div>
+                        <div class="product__content p-relative">
+                            <div class="product__content-inner">
+                                <h4><a href="product-details?id=${newa[0].id}">${newa[0].name}</a></h4>
+                                <div class="product__price transition-3">
+                                    <span>$${newa[0].price}</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="add-cart p-absolute transition-3">
+                                <a href="#">+ Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__wrapper mb-60">
+                        <div class="product__thumb">
+                            <a href="product-details?id=${newa[1].id}" class="w-img">
+                                <img src="${newa[1].image01}" alt="product-img">
+                                <img class="product__thumb-2"
+                                     src="${newa[1].image02}" alt="product-img">
+                            </a>
+                            
+                            <div class="product__sale">
+                                <span class="new">new</span>
+                            </div>
+                        </div>
+                        <div class="product__content p-relative">
+                            <div class="product__content-inner">
+                                <h4><a href="product-details?id=${newa[1].id}">${newa[1].name}</a></h4>
+                                <div class="product__price transition-3">
+                                    <span>$${newa[1].price}</span>
+                                </div>
+                            </div>
+                            <div class="add-cart p-absolute transition-3">
+                                <a href="#">+ Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__wrapper mb-60">
+                        <div class="product__thumb">
+                            <a href="product-details?id=${newa[2].id}" class="w-img">
+                                <img src="${newa[2].image01}" alt="product-img">
+                                <img class="product__thumb-2"
+                                     src="${newa[2].image02}" alt="product-img">
+                            </a>
+                            <div class="product__sale">
+                                <span class="new">new</span>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="product__content p-relative">
+                            <div class="product__content-inner">
+                                <h4><a href="product-details?id=${newa[2].id}">${newa[2].name}</a></h4>
+                                <div class="product__price transition-3">
+                                    <span>$${newa[2].price}</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="add-cart p-absolute transition-3">
+                                <a href="#">+ Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__wrapper mb-60">
+                        <div class="product__thumb">
+                            <a href="product-details?id=${newa[3].id}" class="w-img">
+                                <img src="${newa[3].image01}" alt="product-img">
+                                <img class="product__thumb-2"
+                                     src="${newa[3].image02}" alt="product-img">
+                            </a>
+                            
+                            <div class="product__sale">
+                                <span class="new">new</span>
+                            </div>
+                        </div>
+                        <div class="product__content p-relative">
+                            <div class="product__content-inner">
+                                <h4><a href="product-details?id=${newa[3].id}">${newa[3].name}</a></h4>
+                                <div class="product__price transition-3">
+                                    <span>$${newa[3].price}</span>
+                                </div>
+                            </div>
+                            <div class="add-cart p-absolute transition-3">
+                                <a href="#">+ Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+
+
+        $('#na').html(natxt);
+    })
+
+
+    $('body').on('click', '#addToCartBtn', function () {
+        //
+        console.log($('#Qty').val());
+        qty = $('#Qty').val();
+        $('#addToCartBtn').attr('href',`張姐的controller?id=${id}&qty=${qty}`);
+
+    });
 
 })
 

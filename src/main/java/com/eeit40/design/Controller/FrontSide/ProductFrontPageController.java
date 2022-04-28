@@ -19,6 +19,11 @@ public class ProductFrontPageController {
         return "F/Product/productbycategories";
     }
 
+    @GetMapping(path = {"/F/product/productbybrand"})
+    public String indexPage3() {
+        return "F/Product/productbybrand";
+    }
+
 
     @GetMapping("/F/Product/")
     public ModelAndView findAllProduct(ModelAndView mav){
