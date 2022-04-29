@@ -9,6 +9,7 @@ import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
@@ -253,34 +254,65 @@ public class ActivityServiceImpl implements ActivityService {
     return resultMap;
   }
 
+  // 用product id取得現在此產品的折扣%
+  // 給ajax呼叫的Controller用
   @Override
-  public Map<String, Integer> getCurrentDiscountByProduct(Integer productId) {
+  public Map<String, Integer> getCurrentDiscountStringMap(Integer productId) {
 
     Product product = productRepository.findProductById(productId);
-
+    // 選現在時間
     LocalDate now = LocalDate.now();
-
+    // 預設折扣為0
     Integer discount = 0;
+
     Map<String, Integer> result = new LinkedHashMap<>();
 
     if (product != null) {
 
       for (Activity activity : product.getActivities()) {
 
+        // 找到當日有活動的折扣
         if (
             (activity.getStartDate().isBefore(now) || activity.getStartDate().isEqual(now)) &&
                 (activity.getEndDate().isEqual(now) || activity.getEndDate().isAfter(now))
         ) {
           discount = activity.getDiscountPercentage();
-        }
-      }
+        } // end of if()
+      } // end of for()
       result.put("productId", productId);
       result.put("discount", discount);
     }
-
     return result;
   }
 
+  // 用product id 當Map 的 key
+  @Override
+  public Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart) {
+
+    Map<Integer, Integer> resultMap = new LinkedHashMap<>();
+    // 選現在時間
+    LocalDate now = LocalDate.now();
+
+    for (ShoppingCard shoppingCard : cart) {
+
+      //  如果這個產品有活動
+      if (shoppingCard.getFkProduct().getActivities() != null) {
+
+        for (Activity activity : shoppingCard.getFkProduct().getActivities()) {
+          // 遍歷所有活動，找看看是否現在的時間點
+          if (
+              (activity.getStartDate().isBefore(now) || activity.getStartDate().isEqual(now)) &&
+                  (activity.getEndDate().isEqual(now) || activity.getEndDate().isAfter(now))
+          ) {
+            // 有找到現在的活動
+            resultMap.put(shoppingCard.getFkProduct().getId(), activity.getDiscountPercentage());
+          } // end of inner if()
+        } // end of inner for()
+      } // end of outer if()
+    } // end of outer for()
+
+    return resultMap;
+  }
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

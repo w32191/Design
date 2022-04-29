@@ -79,10 +79,24 @@
                                             <a href="product-details.html">${cart.fkProduct.name}</a>
                                         </td>
 
+
                                         <td class="product-price product__price-2">
-                                                $<span
-                                                class="price currentPrice">${cart.fkProduct.price}</span>
-<%--                                            <span class="old-price">$96.00</span>--%>
+                                            <c:choose>
+                                                <c:when test='${discountMap.containsKey(cart.fkProduct.id)}'>
+                                                    $<span
+                                                    class="price currentPrice">${(cart.fkProduct.price*discountMap.get(cart.fkProduct.id)/100).intValue()}</span>
+                                                    <br>
+                                                    <span class="old-price">$${cart.fkProduct.price}</span>
+                                                    <br>
+                                                    <span class="text-danger">限時活動:</span>
+                                                    <br>
+                                                    <span class="text-danger">${discountMap.get(cart.fkProduct.id)}% OFF</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    $<span
+                                                    class="price currentPrice">${cart.fkProduct.price}</span>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
 
                                         <td class="product-quantity">

@@ -42,7 +42,7 @@ public class ActivityController {
 
     List<Map<String, Integer>> result = new ArrayList<>();
     for (Integer productId : productIdList) {
-      result.add(activityService.getCurrentDiscountByProduct(productId));
+      result.add(activityService.getCurrentDiscountStringMap(productId));
     }
 
     return result;

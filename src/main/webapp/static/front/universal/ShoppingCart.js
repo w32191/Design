@@ -2,7 +2,8 @@
 $(function () {
 
   carTotals();
-  getDiscountPercentage();
+
+  // getDiscountPercentage();   // ajax用
 
   function carTotals() {
 
