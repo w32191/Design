@@ -130,6 +130,8 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 
+		System.out.println("amount"+amount);
+		System.out.println("id"+productId);
 		// 假的account
 //		Account account = new Account();
 //		account.setId(1);

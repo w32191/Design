@@ -475,7 +475,7 @@ $(function () {
                                 </div>
                             </div>
                             <div class="add-cart p-absolute transition-3">
-                                <a id="newArrAddToCartBtn">+ Add to Cart</a>
+                                <a id="newArrAddToCartBtn${newa[i].id}">+ Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -497,6 +497,20 @@ $(function () {
             console.log($('#Qty').val());
         }
     });
+
+
+
+    $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
+
+        let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
+        console.log(id)
+        $.get("/Design/F/addshoppingcart", { "id":id, "qty": 1})
+        {
+            console.log($('#Qty').val());
+        }
+
+    })
+
 })
 
 
