@@ -78,8 +78,9 @@
                                                         <a href="product-details.html">${cart.fkProduct.name}</a>
                                                     </td>
 
-                                                    <td class="product-price">
+                                                    <td class="product-price product__price-2">
                                                         $<span class="price">${cart.fkProduct.price}</span>
+                                                        <span class="old-price">$96.00</span>
                                                     </td>
 
                                                     <td class="product-quantity">

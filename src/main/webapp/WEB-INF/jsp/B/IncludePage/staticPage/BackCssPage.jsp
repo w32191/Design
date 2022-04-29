@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
-<link rel="shortcut icon" type="image/x-icon" href="${contextRoot}/static/front/assets/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${contextRoot}/static/back/assets/favicon.ico">
 <!-- Toastr -->
 <link href="${contextRoot}/static/back/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
 <!-- Sweet Alert -->
