@@ -43,8 +43,9 @@
                                                 <h1>Hello,
                                                     <span>Welcome Here</span>
                                                 </h1>
-                                                <button type="button" id="insertBtn"
-                                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                                <button type="button"
+                                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
+                                                    data-toggle="modal" data-target="#insertModal">
                                                     <i class="ti-plus"></i>新增
                                                 </button>
                                             </div>
@@ -102,7 +103,9 @@
                                                                                     <td>
                                                                                         <button type="button"
                                                                                             class="btn btn-warning"
-                                                                                            name="edit" data-toggle="modal" data-target="#editModal">編輯
+                                                                                            name="edit"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#editModal">編輯
                                                                                         </button>
                                                                                     </td>
                                                                                     <td>
@@ -125,188 +128,233 @@
                                                                 </div>
                                                             </div>
 
-                                                            <%--新增問題的彈跳視窗--%>
-                                                                <div id="insertQuestionDialog" hidden title="新增">
-                                                                    <div class="card">
-                                                                        <div class="card-title">
+
+                                                            <!-- 新增Modal -->
+                                                            <div class="modal fade" id="insertModal" tabindex="-1"
+                                                                aria-labelledby="insertModalLabel" aria-hidden="true">
+                                                                <div
+                                                                    class="modal-dialog modal-dialog-scrollable modal-lg">
+                                                                    <div class="modal-content ">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="insertModalLabel">新增問題</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
                                                                         </div>
-                                                                        <div class="card-body">
-                                                                            <div class="basic-elements">
-                                                                                <form>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-6">
-                                                                                            <div class="form-group"
-                                                                                                name="classification">
-                                                                                                <label>問題類型：</label>
-                                                                                                <select
-                                                                                                    class="form-control"
-                                                                                                    id="classification">
-                                                                                                </select>
-                                                                                            </div>
-                                                                                            <div class="form-group">
-                                                                                                <label>問題：</label>
-                                                                                                <label
-                                                                                                    for="title"></label><input
-                                                                                                    name="title"
-                                                                                                    id="title"
-                                                                                                    type="text"
-                                                                                                    class="form-control"
-                                                                                                    value="">
-                                                                                            </div>
-                                                                                            <div class="form-group">
-                                                                                                <label>回答：</label>
-                                                                                                <input name="answer"
-                                                                                                    id="answer"
-                                                                                                    type="text"
-                                                                                                    class="form-control"
-                                                                                                    value="">
-                                                                                            </div>
+                                                                        <div class="modal-body">
+                                                                            <form id="addCQForm" class="form-inline"
+                                                                                method="post"
+                                                                                action="${contextRoot}/B/CommonQuestion/insertCommonQuestion"
+                                                                                enctype="multipart/form-data">
 
-                                                                                        </div>
+                                                                                <div class="input-group mb-3 col-sm-5">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="contact"><span
+                                                                                                style="color: red">*</span>問題類型</label>
                                                                                     </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- 修改常見問題Modal -->
-                                                                <div class="modal fade" id="editModal" tabindex="-1"
-                                                                    aria-labelledby="editModalLabel" aria-hidden="true">
-                                                                    <div
-                                                                        class="modal-dialog modal-dialog-scrollable modal-lg">
-                                                                        <div class="modal-content ">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title"
-                                                                                    id="editModalLabel">修改常見問題</h5>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-label="Close">
-                                                                                    <span
-                                                                                        aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- form -->
-                                                                                <form id="editCQForm"
-                                                                                    class="form-inline" method="post"
-                                                                                    action="${contextRoot}/B/CommonQuestion/updateQuestionContent"
-                                                                                    enctype="multipart/form-data">
-                                                                                    <div class="col-sm-11">
-                                                                                        <h3>常見問題</h3>
-                                                                                        <input type="text"
-                                                                                            name="id"
-                                                                                            id="id_e"
-                                                                                            hidden="">
-                                                                                    </div>
-                                                                                        
-
-                                                                                    <div
-                                                                                        class="input-group mb-3 col-sm-12">
-                                                                                        <div
-                                                                                            class="input-group-prepend">
-                                                                                            <label
-                                                                                                class="input-group-text"
-                                                                                                for="question_type"><span
-                                                                                                    style="color: red">*</span>問題類型</label>
-                                                                                        </div>
-                                                                                        <select class="form-control"
-                                                                                            aria-describedby="question_type"
-                                                                                            name="question_type"
-                                                                                            id="question_type_e"
-                                                                                            required>
-                                                                                            <option value=""
-                                                                                                style="display: none">
-                                                                                            </option>
-                                                                                            <c:forEach items="${cqts}"
-                                                                                                var="cqt">
-                                                                                                <c:choose>
-                                                                                                    <c:when
-                                                                                                        test="${cq.questionType.commonQuestionType == cqt.commonQuestionType}">
-                                                                                                        <option
-                                                                                                            value="${cqt.id}"
-                                                                                                            selected="selected">
-                                                                                                            ${cqt.commonQuestionType}
-                                                                                                        </option>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-                                                                                                        <option
-                                                                                                            value="${cqt.id}">
-                                                                                                            ${cqt.commonQuestionType}
-                                                                                                        </option>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
-                                                                                            </c:forEach>
-                                                                                        </select>
-
-                                                                                    </div>
-
-
-                                                                                    <div
-                                                                                        class="input-group mb-3 col-sm-12">
-                                                                                        <div
-                                                                                            class="input-group-prepend">
-                                                                                            <label
-                                                                                                class="input-group-text"
-                                                                                                for="question"><span
-                                                                                                    style="color: red">*</span>問題</label>
-                                                                                        </div>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="question_e"
-                                                                                            name="question" size="30"
-                                                                                            aria-describedby="question"
-                                                                                            autocomplete="off"
-                                                                                            required><br>
-                                                                                    </div>
-
-                                                                                    <div
-                                                                                        class="textarea-group mb-12 col-sm-12">
-                                                                                        <div
-                                                                                            class="input-group-prepend">
-                                                                                            <label
-                                                                                                class="input-group-text"
-                                                                                                for="answer"><span
-                                                                                                    style="color: red">*</span>答案</label>
-                                                                                        </div>
-                                                                                        <textarea rows="80" cols="80"
-                                                                                            type="text"
-                                                                                            class="form-control"
-                                                                                            id="answer_e" name="answer"
-                                                                                            aria-describedby="answer"
-                                                                                            autocomplete="off"
-                                                                                            required></textarea><br>
-                                                                                    </div>
-
-                                                                                </form>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-secondary"
-                                                                                        data-dismiss="modal">關閉</button>
-                                                                                    <button id="editBtn" type="button"
-                                                                                        class="btn btn-primary">送出</button>
+                                                                                    <select class="form-control"
+                                                                                        aria-describedby="question_type"
+                                                                                        name="question_type"
+                                                                                        id="question_type" required>
+                                                                                        <option value=""
+                                                                                            style="display: none">
+                                                                                        </option>
+                                                                                        <c:forEach items="${cqts}"
+                                                                                            var="cqt">
+                                                                                            <c:choose>
+                                                                                                <c:when
+                                                                                                    test="${cq.questionType.commonQuestionType == cqt.commonQuestionType}">
+                                                                                                    <option
+                                                                                                        value="${cqt.id}"
+                                                                                                        selected="selected">
+                                                                                                        ${cqt.commonQuestionType}
+                                                                                                    </option>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    <option
+                                                                                                        value="${cqt.id}">
+                                                                                                        ${cqt.commonQuestionType}
+                                                                                                    </option>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </c:forEach>
+                                                                                    </select>
                                                                                 </div>
+
+
+                                                                                <div class="input-group mb-3 col-sm-6">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="addQuestion"><span
+                                                                                                style="color: red">*</span>問題</label>
+                                                                                    </div>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="addQuestion"
+                                                                                        name="addQuestion" size="10"
+                                                                                        aria-describedby="addQuestion"
+                                                                                        autocomplete="off" required><br>
+                                                                                </div>
+
+                                                                                <div class="input-group mb-3 col-sm-6">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="addAnswer"><span
+                                                                                                style="color: red">*</span>回答</label>
+                                                                                    </div>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="addAnswer" name="addAnswer"
+                                                                                        size="10"
+                                                                                        aria-describedby="addAnswer"
+                                                                                        autocomplete="off" required><br>
+                                                                                </div>
+
+
+                                                                            </form>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-success"
+                                                                                    id="smartInput">一鍵輸入</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">關閉</button>
+                                                                                <button id="addBtn" name="addBtn" type="button"
+                                                                                    class="btn btn-primary">送出</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- end of modal -->
+                                                            </div>
+                                                            <!-- end of modal -->
+
+                                                            <!-- 修改常見問題Modal -->
+                                                            <div class="modal fade" id="editModal" tabindex="-1"
+                                                                aria-labelledby="editModalLabel" aria-hidden="true">
+                                                                <div
+                                                                    class="modal-dialog modal-dialog-scrollable modal-lg">
+                                                                    <div class="modal-content ">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="editModalLabel">
+                                                                                修改常見問題</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <!-- form -->
+                                                                            <form id="editCQForm" class="form-inline"
+                                                                                method="post"
+                                                                                action="${contextRoot}/B/CommonQuestion/updateQuestionContent"
+                                                                                enctype="multipart/form-data">
+                                                                                <div class="col-sm-11">
+                                                                                    <h3>常見問題</h3>
+                                                                                    <input type="text" name="id"
+                                                                                        id="id" hidden="">
+                                                                                </div>
+
+
+                                                                                <div class="input-group mb-3 col-sm-12">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="question_type"><span
+                                                                                                style="color: red">*</span>問題類型</label>
+                                                                                    </div>
+                                                                                    <select class="form-control"
+                                                                                        aria-describedby="question_type"
+                                                                                        name="question_type"
+                                                                                        id="question_type" required>
+                                                                                        <option value=""
+                                                                                            style="display: none">
+                                                                                        </option>
+                                                                                        <c:forEach items="${cqts}"
+                                                                                            var="cqt">
+                                                                                            <c:choose>
+                                                                                                <c:when
+                                                                                                    test="${cq.questionType.commonQuestionType == cqt.commonQuestionType}">
+                                                                                                    <option
+                                                                                                        value="${cqt.id}"
+                                                                                                        selected="selected">
+                                                                                                        ${cqt.commonQuestionType}
+                                                                                                    </option>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    <option
+                                                                                                        value="${cqt.id}">
+                                                                                                        ${cqt.commonQuestionType}
+                                                                                                    </option>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </c:forEach>
+                                                                                    </select>
+
+                                                                                </div>
+
+
+                                                                                <div class="input-group mb-3 col-sm-12">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="question"><span
+                                                                                                style="color: red">*</span>問題</label>
+                                                                                    </div>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="question" name="question"
+                                                                                        size="30"
+                                                                                        aria-describedby="question"
+                                                                                        autocomplete="off" required><br>
+                                                                                </div>
+
+                                                                                
+                                                                                <div class="input-group mb-3 col-sm-12">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text"
+                                                                                            for="answer"><span
+                                                                                                style="color: red">*</span>回答</label>
+                                                                                    </div>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="answer" name="answer"
+                                                                                        size="30"
+                                                                                        aria-describedby="answer"
+                                                                                        autocomplete="off" required><br>
+                                                                                </div>
 
 
 
-
-                                                                <!-- /# row -->
-                                                                <section id="main-content">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                            <div id="extra-area-chart"></div>
-                                                                            <div id="morris-line-chart"></div>
+                                                                            </form>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">關閉</button>
+                                                                                <button id="editBtn" type="button"
+                                                                                    class="btn btn-primary">送出</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <!-- Footer -->
-                                                                    <jsp:include
-                                                                        page="../IncludePage/layoutPage/footerPage.jsp" />
-                                                                </section>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end of modal -->
+
+
+
+
+                                                            <!-- /# row -->
+                                                            <section id="main-content">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div id="extra-area-chart"></div>
+                                                                        <div id="morris-line-chart"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Footer -->
+                                                                <jsp:include
+                                                                    page="../IncludePage/layoutPage/footerPage.jsp" />
+                                                            </section>
                                                     </div>
                                                 </div>
                                             </div>

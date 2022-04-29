@@ -154,7 +154,7 @@
                     <script
                         src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
                     <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-                    <script src="${contextRoot}/static/back/universal/Activity.js"></script>
+                    <script src="${contextRoot}/static/back/universal/Question.js"></script>
 
 
 
