@@ -1798,11 +1798,11 @@ $(function () {
                 $('#editCaseEmail').val(result.caseEmail);
                 $('#editMessage').val(result.message);
 
-                $('#editClassification > option').each(function (index, value) {
-                    if (value == result.classification) {
-                        $(this).attr('selected', 'selected');
-                    }
-                });
+                // $('#editClassification > option').each(function (index, value) {
+                //     if (value == result.classification) {
+                //         $(this).attr('selected', 'selected');
+                //     }
+                // });
 
                 $('#editExpiryDate').val(result.expiryDate);
 
@@ -1844,7 +1844,7 @@ $(function () {
     // 發送修改案件資料
     function editSend() {
         // 取得輸入的資料
-        const data = {
+        const editData = {
             title: $('#title').val(),
             name: $('#name').val(),
             classification: $('#classification> option:selected').text(),
@@ -1853,11 +1853,11 @@ $(function () {
             message: $('#message').val(),
             expiryDate: $('#expiryDate').val()
         }
-        console.log(data)
+        console.log(editData)
         //將輸入的文字資料,包進FormData
         const dataFile = new FormData();
         // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
-        dataFile.append("data", JSON.stringify(data));
+        dataFile.append("data", JSON.stringify(editData));
 
         $.ajax({
             type: "POST",
