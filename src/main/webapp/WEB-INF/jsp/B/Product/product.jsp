@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>活動</title>
+    <title>商品</title>
 
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
@@ -39,20 +39,33 @@
                 </div>
                 <!-- /# row -->
                 <div class="row">
-                    <div class="col-lg-4" id="brandsList" hidden>
+
+
+<%--                    品牌--%>
+
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-title">
-                                <h4>品牌清單</h4>
+                                <h4>品牌 Brand </h4>
+
                             </div>
-                            <div class="recent-comment" id="brandContent">
-                                <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
+                            <div class="recent-comment m-t-15" id="bnd">
+
+
+
+
+
+
+
 
                             </div>
                         </div>
                         <!-- /# card -->
                     </div>
+
+
                     <!-- /# column -->
-                    <div class="col-lg-8" id="productList" hidden>
+                    <div class="col-lg-8" id="productList" >
                         <div class="card">
                             <div class="card-title">
                                 <h4 id="h4ProductTitle">產品清單</h4>
@@ -78,8 +91,16 @@
                                             <th>庫存</th>
                                         </tr>
                                         </thead>
+
+
+<%--                                        點選品牌後商品顯示在這裡--%>
                                         <tbody id="productTbody">
                                         </tbody>
+
+
+
+
+
                                     </table>
                                 </div>
                             </div>
@@ -111,11 +132,11 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
-<script src="${contextRoot}/static/back/universal/js/EditActivity.js"></script>
+<script src="${contextRoot}/static/back/universal/js/Product.js"></script>
 <script>
 
 
-    /////////////////////////////下面務必記得填入替換的你的imgur token///////////////////////
+
 
     $("document").ready(function () {
         $('input[type=file]').on("change", function () {

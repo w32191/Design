@@ -500,6 +500,8 @@ $(function () {
 
 
 
+
+    // 下方新品推薦加入購物車
     $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
 
         let id = $(this).attr('id').split("newArrAddToCartBtn")[1];

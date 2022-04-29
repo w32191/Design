@@ -166,6 +166,8 @@
                             </div>
                             <div class="product__wrapper mb-40">
                                 <div class="row">
+
+
                                     <div class="col-xl-4 col-lg-4">
                                         <div class="product__thumb">
                                             <a href="product-details.html" class="w-img">

@@ -20,7 +20,7 @@ public class BrandController {
         Brand resBnd = dao.save(bnd);
         return resBnd;
     }
-    @GetMapping("/B/brand/findALL")
+    @GetMapping("/B/brand/findAll")
     public List<Brand> findAll(){
         return dao.findAll();
     }
