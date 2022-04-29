@@ -50,7 +50,7 @@ public class ShoppingCartController {
 
 		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
 
-		mav.getModel().put("cart", cart);
+		mav.getModel().put("cartList", cart);
 
 		return mav;
 

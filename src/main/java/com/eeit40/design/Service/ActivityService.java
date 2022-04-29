@@ -43,4 +43,6 @@ public interface ActivityService {
       LocalDate startDate, LocalDate endDate,
       Integer productId, Integer activityId
   );
+
+  Map<String, Integer> getCurrentDiscountByProduct(Integer productId);
 }

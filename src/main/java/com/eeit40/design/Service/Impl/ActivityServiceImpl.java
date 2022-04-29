@@ -13,8 +13,8 @@ import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -160,7 +160,6 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setEndDate(dto.getEndDate());
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
 
-
     //    如果有上傳照片
     if (imgs != null) {
       imgurUtil.delete(imgurImgRepository.findDeleteHashById(activity.getId()));
@@ -203,6 +202,7 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
 
+  // 檢查現在要加入活動的商品，活動時間是否與其他活動衝突
   @Override
   public Map<String, String> ableCheckProduct(
       LocalDate startDate, LocalDate endDate,
@@ -251,6 +251,34 @@ public class ActivityServiceImpl implements ActivityService {
     resultMap.put("status", resultStatus);
     resultMap.put("content", resultContent);
     return resultMap;
+  }
+
+  @Override
+  public Map<String, Integer> getCurrentDiscountByProduct(Integer productId) {
+
+    Product product = productRepository.findProductById(productId);
+
+    LocalDate now = LocalDate.now();
+
+    Integer discount = 0;
+    Map<String, Integer> result = new LinkedHashMap<>();
+
+    if (product != null) {
+
+      for (Activity activity : product.getActivities()) {
+
+        if (
+            (activity.getStartDate().isBefore(now) || activity.getStartDate().isEqual(now)) &&
+                (activity.getEndDate().isEqual(now) || activity.getEndDate().isAfter(now))
+        ) {
+          discount = activity.getDiscountPercentage();
+        }
+      }
+      result.put("productId", productId);
+      result.put("discount", discount);
+    }
+
+    return result;
   }
 
 
