@@ -85,13 +85,13 @@
                             <div class="card-body">
                                 <div class="categories__list">
                                     <ul>
-                                        <li><a href="#">生活配件 Accessories</a></li>
-                                        <li><a href="#">書房文具 Stationery</a></li>
-                                        <li><a href="#">家電音響 Electronics</a></li>
-                                        <li><a href="#">燭 台 Candleholders</a></li>
-                                        <li><a href="#">花 器 Vases</a></li>
-                                        <li><a href="#">衛 浴 Bathing</a></li>
-                                        <li><a href="#">鏡 子 Mirror</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Accessories">生活配件 Accessories</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Stationery">書房文具 Stationery</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Electronics">家電音響 Electronics</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Candleholders">燭 台 Candleholders</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Vases">花 器 Vases</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Bathing">衛 浴 Bathing</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Mirror">鏡 子 Mirror</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -114,10 +114,10 @@
                             <div class="card-body">
                                 <div class="categories__list">
                                     <ul>
-                                        <li><a href="#">珠寶首飾 Jewellery</a></li>
-                                        <li><a href="#">隨身用品 Pocket Items</a></li>
-                                        <li><a href="#">隨行器皿 Bottles</a></li>
-                                        <li><a href="#">圍 巾, 披肩 Scarves</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Jewellery">珠寶首飾 Jewellery</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Pocket_Items">隨身用品 Pocket Items</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Bottles">隨行器皿 Bottles</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Scarves">圍 巾, 披肩 Scarves</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -141,11 +141,11 @@
                             <div class="card-body">
                                 <div class="categories__list">
                                     <ul>
-                                        <li><a href="#">餐桌器皿 Tableware</a></li>
-                                        <li><a href="#">餐具刀叉 Cutlery</a></li>
-                                        <li><a href="#">水杯水瓶 Carafe</a></li>
-                                        <li><a href="#">保溫壺瓶 Thermo Jug</a></li>
-                                        <li><a href="#">咖 啡, 茶具 Teatime</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Tableware">餐桌器皿 Tableware</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Cutlery">餐具刀叉 Cutlery</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Carafe">水杯水瓶 Carafe</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Thermo_Jug">保溫壺瓶 Thermo Jug</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Teatime">咖 啡, 茶具 Teatime</a></li>
 
                                     </ul>
                                 </div>
@@ -169,8 +169,8 @@
                             <div class="card-body">
                                 <div class="categories__list">
                                     <ul>
-                                        <li><a href="#">燈飾, 消耗品 Supplies</a></li>
-                                        <li><a href="#">配件 Parts</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Supplies">燈飾, 消耗品 Supplies</a></li>
+                                        <li><a href="/Design/F/product/productbycategories?cate=Parts">配件 Parts</a></li>
                                     </ul>
                                 </div>
                             </div>
