@@ -1,27 +1,30 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dto.CaseDto;
+import com.eeit40.design.Dto.CaseQueryParams;
 import com.eeit40.design.Entity.Case;
 import com.eeit40.design.Service.CaseService;
+import com.eeit40.design.Util.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
+//@RequestMapping("/B/Case/Case")
 public class BackCasePageController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -35,14 +38,111 @@ public class BackCasePageController {
     @Autowired
     private CaseService caseService;
 
+    @GetMapping("/B/Case")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("/B/Case/Case");
+        return mav;
+    }
+
+    @Validated //使用@Max @Min 要加@Validated 才會真的生效
+    @GetMapping("/B/Cases")
+    public ResponseEntity<Page<Case>> getCases(
+//  public ResponseEntity<List<Case>> getCases(
+            //------查詢條件 Filtering------
+//            @RequestParam(required = false) CaseCaregory category,
+            @RequestParam(required = false) String search,
+
+            //------排序Sorting------
+            //根據什麼欄位來排序
+            @RequestParam(defaultValue = "date_time") String orderBy,
+            //使用何種排序
+            @RequestParam(defaultValue = "desc") String sort,
+
+            //------分頁 Pagination------
+            @RequestParam(defaultValue = "20") @Max(100) @Min(0) Integer fetchNext,
+            @RequestParam(defaultValue = "0") @Min(0) Integer offset
+    ) {
+
+        CaseQueryParams caseQueryParams = new CaseQueryParams();
+        caseQueryParams.setSearch(search);
+        caseQueryParams.setOrderBy(orderBy);
+        caseQueryParams.setSort(sort);
+        caseQueryParams.setFetchNext(fetchNext);
+        caseQueryParams.setOffset(offset);
+
+        // 取得 case list
+        List<Case> caseList = caseService.getCases(caseQueryParams);
+
+        // 取得 case 總數
+        Integer total = caseService.countCase(caseQueryParams);
+
+        // 分頁
+        Page<Case> page = new Page<>();
+        page.setFetchNext(fetchNext);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResults(caseList);
+
+//        return ResponseEntity.status(HttpStatus.OK).body(caseList);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+//        return "/B/Case/Case";
+
+    }
+
     @GetMapping("/B/Case/{id}")
-    public  ResponseEntity<Case> getCase(@PathVariable Integer id){
+    public ResponseEntity<Case> getCase(@PathVariable Integer id) {
         Case aCase = caseService.getCaseById(id);
-        if (aCase != null){
-            return  ResponseEntity.status(HttpStatus.OK).body(aCase);
-        }else {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if (aCase != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(aCase);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+//    @PostMapping("/B/Case/createCase")
+//    //@Valid DTO有@NOTNULL的註解時要加
+//    public ResponseEntity<Case> createCase(@RequestBody @Valid CaseDto caseDto){
+//        Integer id = caseService.createCase(caseDto);
+//
+//        Case acase = caseService.getCaseById(id);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(acase);
+//    }
+
+    @PostMapping("/B/Case/createCase")
+    //@Valid DTO有@NOTNULL的註解時要加
+    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr, @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
+
+        CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
+        Integer id = caseService.createCase(caseDto);
+
+        Case acase = caseService.getCaseById(id);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(acase);
+    }
+
+    @PutMapping("/B/Case/updatedCase/{id}")
+    public ResponseEntity<Case> updatedCase(@PathVariable Integer id,
+                                            @RequestBody @Valid CaseDto caseDto) {
+
+//        System.out.println(caseDto.getList());
+        //判定商品 id 是否存在
+        Case aCase = caseService.getCaseById(id);
+
+        if (aCase == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        //修改商品的數據
+        caseService.updatedCase(id, caseDto);
+        Case updatedCase = caseService.getCaseById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCase);
+    }
+
+    @DeleteMapping("/B/Case/deleteCase/{id}")
+    public ResponseEntity<?> deleteCase(@PathVariable Integer id) {
+        caseService.deleteCaseById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
@@ -160,27 +260,31 @@ public class BackCasePageController {
 
     //新增
 //    @PostMapping("/B/Case/api/postCase")
-//    @ResponseBody
-//    public List<Case> postCaseApi(@RequestParam("data") String dataStr) throws JsonProcessingException {
+////    @ResponseBody
+//    public List<Case> postCaseApi(@RequestParam("data") String dataStr,@RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
 //        log.info(dataStr);
 //        CaseDto caseDto = mapper.readValue(dataStr, CaseDto.class);
 //        // @RequestBody CaseDto caseDto
-//        String titleDto = caseDto.getTitleDto();
-//        String nameDto = caseDto.getNameDto();
-//        String classificationDto = caseDto.getClassificationDto();
-//        String locationDto = caseDto.getLocationDto();
-//        String caseEmailDto = caseDto.getCaseEmailDto();
-//        String messageDto = caseDto.getMessageDto();
-//        Date expiryDateDto = caseDto.getExpiryDateDto();
+//        String title = caseDto.getTitle();
+//        String name = caseDto.getName();
+//        String classification = caseDto.getClassification();
+//        String location = caseDto.getLocation();
+//        String caseEmail = caseDto.getCaseEmail();
+//        String message = caseDto.getMessage();
+//        Date expiryDate = caseDto.getExpiryDate();
+//
+//        Map<String ,byte[]> map= new HashMap<>();
+//        map.put(file.getOriginalFilename(), file.getBytes());
+//        caseDto.setInsertImg(map);
 //
 //        Case caseMsg = new Case();
-//        caseMsg.setTitle(titleDto);
-//        caseMsg.setName(nameDto);
-//        caseMsg.setClassification(classificationDto);
-//        caseMsg.setLocation(locationDto);
-//        caseMsg.setCaseEmail(caseEmailDto);
-//        caseMsg.setMessage(messageDto);
-//        caseMsg.setExpiryDate(expiryDateDto);
+//        caseMsg.setTitle(title);
+//        caseMsg.setName(name);
+//        caseMsg.setClassification(classification);
+//        caseMsg.setLocation(location);
+//        caseMsg.setCaseEmail(caseEmail);
+//        caseMsg.setMessage(message);
+//        caseMsg.setExpiryDate(expiryDate);
 //        caseService.insert(caseMsg);
 //
 //        Page<Case> page = caseService.findByPage(1);

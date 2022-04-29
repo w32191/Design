@@ -1,27 +1,27 @@
 package com.eeit40.design.Service;
 
-import com.eeit40.design.Dao.CaseRepository;
 import com.eeit40.design.Dto.CaseDto;
+import com.eeit40.design.Dto.CaseQueryParams;
 import com.eeit40.design.Entity.Case;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 
-//@Service
-//@Transactional
+
 //@Slf4j
 public interface CaseService {
 
+    Integer countCase(CaseQueryParams caseQueryParams);
+
+    List<Case> getCases(CaseQueryParams caseQueryParams);
+
     Case getCaseById(Integer id);
+
+    Integer createCase(CaseDto caseDto);
+
+    void updatedCase(Integer id, CaseDto caseDto);
+
+    void deleteCaseById(Integer id);
+
 
 //    @Autowired
 //    private CaseRepository caseDao;

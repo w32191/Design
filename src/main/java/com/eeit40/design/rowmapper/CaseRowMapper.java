@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class CaseRowMapper implements RowMapper<Case> {
     @Override
-    public Case mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Case mapRow(ResultSet rs, int i) throws SQLException {
         Case aCase = new Case();
 
         aCase.setId(rs.getInt("id"));

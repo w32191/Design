@@ -1648,13 +1648,45 @@ $(function () {
 
     doClassificationData();
     doLocationData();
+
+    $.ajax({
+        url: "/Design/B/Cases",
+        type: "get",
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+            case_data = '';
+            $.each(result.results, function (index, value) {
+
+                case_data += '<tr>'
+                case_data += '<td>' + value.id + '</td>'
+                case_data += '<td>' + value.title + '</td>'
+                case_data += '<td>' + value.name + '</td>'
+                case_data += '<td>' + value.classification + '</td>'
+                case_data += '<td>' + value.location + '</td>'
+                case_data += '<td>' + value.caseEmail + '</td>'
+                case_data += '<td>' + value.message + '</td>'
+                case_data += '<td>' + value.dateTime + '</td>'
+                case_data += '<td>' + value.expiryDate + '</td>'
+                case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'
+                case_data += '<td><button type="button" class="btn btn-danger deleteBtn" id="deleteBtn' + value.id + '">刪除</button></td>'
+                case_data += '</tr>'
+            })
+            $('#table_tbody').append(case_data);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+
+    //---------- 刪除開始 ----------
     //動態綁定 刪除
-    $('#row-select').on('click','.btn.btn-danger.deleteBtn',function(){
+    $('#table_tbody').on('click', 'button[id^=deleteBtn]', function () {
         let deleteBtn = $(this);
         let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
         swal.fire({
-            title:"確定要刪除？",
-            text:"此動作無法復原！",
+            title: "確定要刪除？",
+            text: "此動作無法復原！",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -1662,18 +1694,19 @@ $(function () {
             confirmButtonText: '確定刪除',
             cancelButtonText: '取消'
         }).then((result) => {
-            if(result.isConfirmed) {
+            if (result.isConfirmed) {
+                console.log(id);
                 $.ajax({
-                    url: "/Design/B/Case/delete/"+id,
-                    method: "GET",
+                    url: "/Design/B/Case/deleteCase/" + id,
+                    method: "DELETE",
                     beforeSend: function () {
                         swal.fire({
                             html: '<h5>刪除中...</h5>',
                             showConfirmButton: false,
                         });
                     },
-                    success: function (res) {
-                        console.log(res);
+                    success: function (result) {
+                        console.log(result);
                         swal.fire({
                             icon: 'success',
                             html: '<h5>刪除成功!</h5>'
@@ -1695,6 +1728,7 @@ $(function () {
             }
         });
     });
+
     //單一綁定原本的按鈕 因為remove會把所有的關聯都刪掉 刪除按鈕
     // $('.btn.btn-danger.deleteBtn').click(function(){
     //     let deleteBtn = $(this);
@@ -1742,8 +1776,127 @@ $(function () {
     //         }
     //     });
     // })
+    //---------- 刪除結束 ----------
+
+    //---------- 修改開始 ----------
+
+    //修改案件 按鈕
+    $('#table_tbody').on('click', 'button[id^=editBtn]', function () {
+        $('#editCaseDialog').removeAttr('hidden').dialog('open');
+        let editBtn = $(this);
+        let id = editBtn.parent('td').siblings('td:eq(0)').text();
+        console.log(id);
+        $.ajax({
+            url: "/Design/B/Case/" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $('#editTitle').val(result.title);
+                $('#editName').val(result.name);
+                $('#editClassification').val(result.classification);
+                $('#editLocation').val(result.location);
+                $('#editCaseEmail').val(result.caseEmail);
+                $('#editMessage').val(result.message);
+
+                $('#editClassification > option').each(function (index, value) {
+                    if (value == result.classification) {
+                        $(this).attr('selected', 'selected');
+                    }
+                });
+
+                $('#editExpiryDate').val(result.expiryDate);
+
+
+                // $.each(result.results, function (index, value) {
+                //     console.log('adsf');
+                //     edit_data += '<tr>'
+                //     edit_data += '<td>' + value.editTitle + '</td>'
+                //     edit_data += '<td>' + value.editName + '</td>'
+                //     edit_data += '<td>' + value.editClassification + '</td>'
+                //     edit_data += '<td>' + value.editLocation + '</td>'
+                //     edit_data += '<td>' + value.editCaseEmail + '</td>'
+                //     edit_data += '<td>' + value.editMessage + '</td>'
+                //     edit_data += '<td>' + value.editExpiryDate + '</td>'
+                //     edit_data += '</tr>'
+                //
+                // })
+            }
+
+        })
+    });
+
+    //修改案件 dialog設定
+    $('#editCaseDialog').dialog({
+        autoOpen: false,
+        width: 800,
+        modal: true,
+        buttons: {
+            "修改": function () {
+                editSend();
+                $(this).dialog('close');
+            },
+            "取消": function () {
+                $(this).dialog('close');
+            },
+        }
+    });
+
+    // 發送修改案件資料
+    function editSend() {
+        // 取得輸入的資料
+        const data = {
+            title: $('#title').val(),
+            name: $('#name').val(),
+            classification: $('#classification> option:selected').text(),
+            location: $('#location> option:selected').text(),
+            caseEmail: $('#caseEmail').val(),
+            message: $('#message').val(),
+            expiryDate: $('#expiryDate').val()
+        }
+        console.log(data)
+        //將輸入的文字資料,包進FormData
+        const dataFile = new FormData();
+        // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
+        dataFile.append("data", JSON.stringify(data));
+
+        $.ajax({
+            type: "POST",
+            url: "/Design/B/Case/updatedCase/" + id,
+            data: dataFile,
+            processData: false, // 防止jquery將data變成query String
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>修改中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (json) {
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>修改成功！</h5>",
+                }).then(function () {
+                    location.reload();
+                });
+            },
+            error: function (err) {
+                console.log(err);
+                swal.fire({
+                    icon: "error",
+                    html: "<h5>${err.responseText}!</h5>"
+                }).then(function () {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+
+    //---------- 修改結束 ----------
+
+    //---------- 新增開始 ----------
     //新增案件 按鈕
-    $('#insertBtn').click(function(){
+    $('#insertBtn').click(function () {
             $('#insertCaseDialog').removeAttr('hidden').dialog('open');
         }
     );
@@ -1762,18 +1915,20 @@ $(function () {
             },
         }
     });
+
     //發送新案件資料
     function insertSend() {
         // 取得輸入的資料
         const data = {
-            titleDto: $('#title').val(),
-            nameDto: $('#name').val(),
-            classificationDto: $('#classification> option:selected').text(),
-            locationDto: $('#location> option:selected').text(),
-            caseEmailDto: $('#caseEmail').val(),
-            messageDto: $('#message').val(),
-            expiryDateDto: $('#expiryDate').val()
+            title: $('#title').val(),
+            name: $('#name').val(),
+            classification: $('#classification> option:selected').text(),
+            location: $('#location> option:selected').text(),
+            caseEmail: $('#caseEmail').val(),
+            message: $('#message').val(),
+            expiryDate: $('#expiryDate').val()
         }
+        console.log(data)
         //將輸入的文字資料,包進FormData
         const dataFile = new FormData();
         // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
@@ -1781,7 +1936,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: "/Design/B/Case/api/postCase",
+            url: "/Design/B/Case/createCase",
             data: dataFile,
             processData: false, // 防止jquery將data變成query String
             contentType: false,
@@ -1810,6 +1965,10 @@ $(function () {
             }
         });
     }
+
+    //---------- 新增結束 ----------
+
+    //---------- 查詢開始 ----------
     //類別下拉選單
     function doClassificationData() {
         $.each(classificationData, function (index, value) {
@@ -1819,15 +1978,22 @@ $(function () {
             option.innerHTML = `${value.name}`;
             option.value = `${index}`;
             $('#classificationData').append(option);
+
+            option = document.createElement('option');
+            option.innerHTML = `${value.name}`;
+            // option.value = `${index}`;
+            $('#editClassification').append(option);
+
             // 新增dailog的下拉選單
             option = document.createElement('option');
-            if(value.name !== "所有工程"){
+            if (value.name !== "所有工程") {
                 option.innerHTML = `${value.name}`;
                 option.value = `${index}`;
                 $('#classification').append(option);
             }
         });
     }
+
     //類別 Ajax
     $("#classificationData").change(function () {
         // let classId =$(this).val();
@@ -1843,7 +2009,7 @@ $(function () {
 
         $.ajax({
             method: "GET",
-            url: "/Design/B/Case/orderByClassification?classification=" + classificationText,
+            url: "/Design/B/Cases?search=" + classificationText,
             contentType: "application/json; charset=UTF-8", //送過去的
             dataType: "json", //傳回來的
             // data: dataFile,
@@ -1855,10 +2021,11 @@ $(function () {
                     $('.table tr td').remove();
                     // console.log(JSON.parse(result));
                     classification_data = '';
-                    $.each(result, function (index, value) {
+                    $.each(result.results, function (index, value) {
                         classification_data += '<tr>'
                         classification_data += '<td>' + value.id + '</td>'
                         classification_data += '<td>' + value.title + '</td>'
+                        classification_data += '<td>' + value.name + '</td>'
                         classification_data += '<td>' + value.classification + '</td>'
                         classification_data += '<td>' + value.location + '</td>'
                         classification_data += '<td>' + value.caseEmail + '</td>'
@@ -1882,6 +2049,7 @@ $(function () {
             }
         })
     })
+
     //地區下拉選單
     function doLocationData() {
         $.each(locationData, function (index, value) {
@@ -1889,18 +2057,24 @@ $(function () {
             // 添加下拉選單
             let option = document.createElement('option');
             option.innerHTML = `${value.name}`;
-            option.value = `${index}`;
+            // option.value = `${index}`;
             $('#locationData').append(option);
 
             option = document.createElement('option');
-            if(value.name !== "所有地區"){
+            option.innerHTML = `${value.name}`;
+            // option.value = `${index}`;
+            $('#editLocation').append(option);
+
+            option = document.createElement('option');
+            if (value.name !== "所有地區") {
                 option.innerHTML = `${value.name}`;
-                option.value = `${index}`;
+                // option.value = `${index}`;
                 $('#location').append(option);
             }
             // 下拉選單結束----
         });
     }
+
     //地區 Ajax
     $("#locationData").change(function () {
         // let locationValue = $(this).val();
@@ -1912,7 +2086,7 @@ $(function () {
 
         $.ajax({
             method: "GET",
-            url: "/Design/B/Case/orderByLocation?location=" + locationText,
+            url: "/Design/B/Cases?search=" + locationText,
             contentType: "application/json; charset=UTF-8", //送過去的
             dataType: "json", //傳回來的
             success: function (result) {
@@ -1921,10 +2095,11 @@ $(function () {
                     $('.table tr td').remove();
                     // console.log(JSON.parse(result));
                     location_data = '';
-                    $.each(result, function (index, value) {
+                    $.each(result.results, function (index, value) {
                         location_data += '<tr>'
                         location_data += '<td>' + value.id + '</td>'
                         location_data += '<td>' + value.title + '</td>'
+                        location_data += '<td>' + value.name + '</td>'
                         location_data += '<td>' + value.classification + '</td>'
                         location_data += '<td>' + value.location + '</td>'
                         location_data += '<td>' + value.caseEmail + '</td>'
@@ -1934,7 +2109,7 @@ $(function () {
                         location_data += '</tr>'
                     })
                     $('.table').append(location_data);
-                }else{
+                } else {
                     location.reload();
                     // $('#findAll').append(caseMessage);
                     //待完成
@@ -1946,223 +2121,221 @@ $(function () {
         })
     })
 
+    //---------- 查詢結束 ----------
 
     // dataTable
-    $('#bootstrap-data-table').DataTable({
-        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
-    });
-
-    $('#row-select').DataTable( {
-
-        // 中文化
-        // language: {
-        //     "processing": "處理中...",
-        //     "loadingRecords": "載入中...",
-        //     "lengthMenu": "顯示 _MENU_ 項結果",
-        //     "zeroRecords": "沒有符合的結果",
-        //     "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-        //     "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-        //     "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-        //     "search": "search:",
-        //     "paginate": {
-        //         "first": "第一頁",
-        //         "previous": "上一頁",
-        //         "next": "下一頁",
-        //         "last": "最後一頁"
-        //     },
-        //     "aria": {
-        //         "sortAscending": ": 升冪排列",
-        //         "sortDescending": ": 降冪排列"
-        //     },
-        //     "emptyTable": "目前沒有資料",
-        //     "datetime": {
-        //         "previous": "上一頁",
-        //         "next": "下一頁",
-        //         "hours": "時",
-        //         "minutes": "分",
-        //         "seconds": "秒",
-        //         "amPm": [
-        //             "上午",
-        //             "下午"
-        //         ],
-        //         "unknown": "未知",
-        //         "weekdays": [
-        //             "週日",
-        //             "週一",
-        //             "週二",
-        //             "週三",
-        //             "週四",
-        //             "週五",
-        //             "週六"
-        //         ],
-        //         "months": [
-        //             "一月",
-        //             "二月",
-        //             "三月",
-        //             "四月",
-        //             "五月",
-        //             "六月",
-        //             "七月",
-        //             "八月",
-        //             "九月",
-        //             "十月",
-        //             "十一月",
-        //             "十二月"
-        //         ]
-        //     },
-        //     "searchBuilder": {
-        //         "add": "新增條件",
-        //         "condition": "條件",
-        //         "deleteTitle": "刪除過濾條件",
-        //         "button": {
-        //             "_": "複合查詢 (%d)",
-        //             "0": "複合查詢"
-        //         },
-        //         "clearAll": "清空",
-        //         "conditions": {
-        //             "array": {
-        //                 "contains": "含有",
-        //                 "empty": "為空",
-        //                 "equals": "等於",
-        //                 "not": "不為",
-        //                 "notEmpty": "不為空",
-        //                 "without": "排除"
-        //             },
-        //             "date": {
-        //                 "after": "大於",
-        //                 "before": "小於",
-        //                 "between": "在其中",
-        //                 "empty": "為空",
-        //                 "equals": "等於",
-        //                 "not": "不為",
-        //                 "notBetween": "不在其中",
-        //                 "notEmpty": "不為空"
-        //             },
-        //             "number": {
-        //                 "between": "在其中",
-        //                 "empty": "為空",
-        //                 "equals": "等於",
-        //                 "gt": "大於",
-        //                 "gte": "大於等於",
-        //                 "lt": "小於",
-        //                 "lte": "小於等於",
-        //                 "not": "不為",
-        //                 "notBetween": "不在其中",
-        //                 "notEmpty": "不為空"
-        //             },
-        //             "string": {
-        //                 "contains": "含有",
-        //                 "empty": "為空",
-        //                 "endsWith": "字尾為",
-        //                 "equals": "等於",
-        //                 "not": "不為",
-        //                 "notEmpty": "不為空",
-        //                 "startsWith": "字首為",
-        //                 "notContains": "不包含",
-        //                 "notStarts": "不為開頭",
-        //                 "notEnds": "不為結束"
-        //             }
-        //         },
-        //         "data": "欄位",
-        //         "leftTitle": "群組條件",
-        //         "logicAnd": "且",
-        //         "logicOr": "或",
-        //         "rightTitle": "取消群組",
-        //         "title": {
-        //             "_": "複合查詢 (%d)",
-        //             "0": "複合查詢"
-        //         },
-        //         "value": "內容"
-        //     },
-        //     "editor": {
-        //         "close": "關閉",
-        //         "create": {
-        //             "button": "新增",
-        //             "title": "建立新項目",
-        //             "submit": "建立"
-        //         },
-        //         "edit": {
-        //             "button": "編輯",
-        //             "title": "編輯項目",
-        //             "submit": "更新"
-        //         },
-        //         "remove": {
-        //             "button": "刪除",
-        //             "title": "刪除",
-        //             "submit": "刪除",
-        //             "confirm": {
-        //                 "_": "您確定要刪除 %d 筆資料嗎？",
-        //                 "1": "您確定要刪除 %d 筆資料嗎？"
-        //             }
-        //         },
-        //         "multi": {
-        //             "restore": "回復修改",
-        //             "title": "每行有不同的價值",
-        //             "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
-        //             "noMulti": "此列不容許同時編輯多個項目"
-        //         },
-        //         "error": {
-        //             "system": "系統發生錯誤(更多資訊)"
-        //         }
-        //     },
-        //     "autoFill": {
-        //         "cancel": "取消"
-        //     },
-        //     "buttons": {
-        //         "copySuccess": {
-        //             "_": "複製了 %d 筆資料",
-        //             "1": "複製了 1 筆資料"
-        //         },
-        //         "copyTitle": "已經複製到剪貼簿",
-        //         "excel": "Excel",
-        //         "pdf": "PDF",
-        //         "print": "列印",
-        //         "copy": "複製"
-        //     },
-        //     "searchPanes": {
-        //         "collapse": {
-        //             "_": "搜尋面版 (%d)",
-        //             "0": "搜尋面版"
-        //         },
-        //         "emptyPanes": "沒搜尋面版",
-        //         "loadMessage": "載入搜尋面版中...",
-        //         "clearMessage": "清空"
-        //     },
-        //     "select": {
-        //         "rows": {
-        //             "_": "%d 列已選擇",
-        //             "1": "%d 列已選擇"
-        //         }
-        //     },
-        //     "stateRestore": {
-        //         "emptyError": "名稱不能空白。"
-        //     }
-        // } ,
-
-
-
-
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select class="form-control"><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
+    // $('#bootstrap-data-table').DataTable({
+    //     lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    // });
+    //
+    // $('#row-select').DataTable( {
+    //
+    //     // 中文化
+    //     // language: {
+    //     //     "processing": "處理中...",
+    //     //     "loadingRecords": "載入中...",
+    //     //     "lengthMenu": "顯示 _MENU_ 項結果",
+    //     //     "zeroRecords": "沒有符合的結果",
+    //     //     "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+    //     //     "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+    //     //     "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+    //     //     "search": "search:",
+    //     //     "paginate": {
+    //     //         "first": "第一頁",
+    //     //         "previous": "上一頁",
+    //     //         "next": "下一頁",
+    //     //         "last": "最後一頁"
+    //     //     },
+    //     //     "aria": {
+    //     //         "sortAscending": ": 升冪排列",
+    //     //         "sortDescending": ": 降冪排列"
+    //     //     },
+    //     //     "emptyTable": "目前沒有資料",
+    //     //     "datetime": {
+    //     //         "previous": "上一頁",
+    //     //         "next": "下一頁",
+    //     //         "hours": "時",
+    //     //         "minutes": "分",
+    //     //         "seconds": "秒",
+    //     //         "amPm": [
+    //     //             "上午",
+    //     //             "下午"
+    //     //         ],
+    //     //         "unknown": "未知",
+    //     //         "weekdays": [
+    //     //             "週日",
+    //     //             "週一",
+    //     //             "週二",
+    //     //             "週三",
+    //     //             "週四",
+    //     //             "週五",
+    //     //             "週六"
+    //     //         ],
+    //     //         "months": [
+    //     //             "一月",
+    //     //             "二月",
+    //     //             "三月",
+    //     //             "四月",
+    //     //             "五月",
+    //     //             "六月",
+    //     //             "七月",
+    //     //             "八月",
+    //     //             "九月",
+    //     //             "十月",
+    //     //             "十一月",
+    //     //             "十二月"
+    //     //         ]
+    //     //     },
+    //     //     "searchBuilder": {
+    //     //         "add": "新增條件",
+    //     //         "condition": "條件",
+    //     //         "deleteTitle": "刪除過濾條件",
+    //     //         "button": {
+    //     //             "_": "複合查詢 (%d)",
+    //     //             "0": "複合查詢"
+    //     //         },
+    //     //         "clearAll": "清空",
+    //     //         "conditions": {
+    //     //             "array": {
+    //     //                 "contains": "含有",
+    //     //                 "empty": "為空",
+    //     //                 "equals": "等於",
+    //     //                 "not": "不為",
+    //     //                 "notEmpty": "不為空",
+    //     //                 "without": "排除"
+    //     //             },
+    //     //             "date": {
+    //     //                 "after": "大於",
+    //     //                 "before": "小於",
+    //     //                 "between": "在其中",
+    //     //                 "empty": "為空",
+    //     //                 "equals": "等於",
+    //     //                 "not": "不為",
+    //     //                 "notBetween": "不在其中",
+    //     //                 "notEmpty": "不為空"
+    //     //             },
+    //     //             "number": {
+    //     //                 "between": "在其中",
+    //     //                 "empty": "為空",
+    //     //                 "equals": "等於",
+    //     //                 "gt": "大於",
+    //     //                 "gte": "大於等於",
+    //     //                 "lt": "小於",
+    //     //                 "lte": "小於等於",
+    //     //                 "not": "不為",
+    //     //                 "notBetween": "不在其中",
+    //     //                 "notEmpty": "不為空"
+    //     //             },
+    //     //             "string": {
+    //     //                 "contains": "含有",
+    //     //                 "empty": "為空",
+    //     //                 "endsWith": "字尾為",
+    //     //                 "equals": "等於",
+    //     //                 "not": "不為",
+    //     //                 "notEmpty": "不為空",
+    //     //                 "startsWith": "字首為",
+    //     //                 "notContains": "不包含",
+    //     //                 "notStarts": "不為開頭",
+    //     //                 "notEnds": "不為結束"
+    //     //             }
+    //     //         },
+    //     //         "data": "欄位",
+    //     //         "leftTitle": "群組條件",
+    //     //         "logicAnd": "且",
+    //     //         "logicOr": "或",
+    //     //         "rightTitle": "取消群組",
+    //     //         "title": {
+    //     //             "_": "複合查詢 (%d)",
+    //     //             "0": "複合查詢"
+    //     //         },
+    //     //         "value": "內容"
+    //     //     },
+    //     //     "editor": {
+    //     //         "close": "關閉",
+    //     //         "create": {
+    //     //             "button": "新增",
+    //     //             "title": "建立新項目",
+    //     //             "submit": "建立"
+    //     //         },
+    //     //         "edit": {
+    //     //             "button": "編輯",
+    //     //             "title": "編輯項目",
+    //     //             "submit": "更新"
+    //     //         },
+    //     //         "remove": {
+    //     //             "button": "刪除",
+    //     //             "title": "刪除",
+    //     //             "submit": "刪除",
+    //     //             "confirm": {
+    //     //                 "_": "您確定要刪除 %d 筆資料嗎？",
+    //     //                 "1": "您確定要刪除 %d 筆資料嗎？"
+    //     //             }
+    //     //         },
+    //     //         "multi": {
+    //     //             "restore": "回復修改",
+    //     //             "title": "每行有不同的價值",
+    //     //             "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
+    //     //             "noMulti": "此列不容許同時編輯多個項目"
+    //     //         },
+    //     //         "error": {
+    //     //             "system": "系統發生錯誤(更多資訊)"
+    //     //         }
+    //     //     },
+    //     //     "autoFill": {
+    //     //         "cancel": "取消"
+    //     //     },
+    //     //     "buttons": {
+    //     //         "copySuccess": {
+    //     //             "_": "複製了 %d 筆資料",
+    //     //             "1": "複製了 1 筆資料"
+    //     //         },
+    //     //         "copyTitle": "已經複製到剪貼簿",
+    //     //         "excel": "Excel",
+    //     //         "pdf": "PDF",
+    //     //         "print": "列印",
+    //     //         "copy": "複製"
+    //     //     },
+    //     //     "searchPanes": {
+    //     //         "collapse": {
+    //     //             "_": "搜尋面版 (%d)",
+    //     //             "0": "搜尋面版"
+    //     //         },
+    //     //         "emptyPanes": "沒搜尋面版",
+    //     //         "loadMessage": "載入搜尋面版中...",
+    //     //         "clearMessage": "清空"
+    //     //     },
+    //     //     "select": {
+    //     //         "rows": {
+    //     //             "_": "%d 列已選擇",
+    //     //             "1": "%d 列已選擇"
+    //     //         }
+    //     //     },
+    //     //     "stateRestore": {
+    //     //         "emptyError": "名稱不能空白。"
+    //     //     }
+    //     // } ,
+    //
+    //     initComplete: function () {
+    //         this.api().columns().every( function () {
+    //             var column = this;
+    //             var select = $('<select class="form-control"><option value=""></option></select>')
+    //                 .appendTo( $(column.footer()).empty() )
+    //                 .on( 'change', function () {
+    //                     var val = $.fn.dataTable.util.escapeRegex(
+    //                         $(this).val()
+    //                     );
+    //
+    //                     column
+    //                         .search( val ? '^'+val+'$' : '', true, false )
+    //                         .draw();
+    //                 } );
+    //
+    //             column.data().unique().sort().each( function ( d, j ) {
+    //                 select.append( '<option value="'+d+'">'+d+'</option>' )
+    //             } );
+    //         } );
+    //     }
+    // } );
 
 
 });
