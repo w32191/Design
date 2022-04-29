@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Member;
 import com.eeit40.design.Service.MemberService;
 
@@ -28,7 +29,7 @@ public class MemberController {
 		
 		mav.getModel().put("memberregister", member);
 		
-		mav.setViewName("/B/Member/memberregister");
+		mav.setViewName("B/Member/memberregister");
 		
 		return mav;
 	}
@@ -36,12 +37,12 @@ public class MemberController {
 	@PostMapping("/B/memberregister")
 	public ModelAndView memberregister(ModelAndView mav, @Valid @ModelAttribute(name = "memberregister") Member member,
 		@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
-		@RequestParam(name = "address") String address, @RequestParam(name = "serviceArea") String serviceArea, BindingResult br) {
+		@RequestParam(name = "address") String address, @RequestParam(name = "serviceArea") String serviceArea, Account id,BindingResult br) {
 		
 		if(!br.hasErrors()) {
-			memberService.memberRegister(member);
+			memberService.memberRegister(member, id);
 			
-			mav.setViewName("/B/Account/login");
+			mav.setViewName("B/Account/login");
 			return mav;
 		}
 		return null;

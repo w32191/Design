@@ -1,6 +1,7 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Entity.Account;
+import com.eeit40.design.Entity.Member;
 import com.eeit40.design.Service.AccountService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -81,6 +82,9 @@ public class AccountController {
     	if(!br.hasErrors()) {
     		accountService.register(account);
     		
+    		
+    		Member member = new Member();
+    		mav.addObject(member);
     		mav.setViewName("B/Member/memberregister");
     		
     		return mav;
@@ -98,7 +102,7 @@ public class AccountController {
     	Account account  = new Account();
     	
     	mav.addObject("login",account);
-    	mav.setViewName("/B/Account/login");
+    	mav.setViewName("B/Account/login");
     	return mav;
 			
     }

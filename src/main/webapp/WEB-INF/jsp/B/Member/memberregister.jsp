@@ -28,7 +28,7 @@
                     </div>
                     <div class="login-form">
                         <h4>填寫詳細資料</h4>
-                        <form:form class="form" name="memberregister" ModelAttribute="memberregister">
+                        <form:form class="form" name="member" ModelAttribute="memberregister" action="/Design/B/memberregister">
                         	<form:errors path="*"/>
                              <div class="form-group">
                                 <label>姓名</label>
