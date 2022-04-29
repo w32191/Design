@@ -26,7 +26,7 @@
                                                 <i class="fal fa-map-marker-alt"></i>
                                             </div>
                                             <div class="text">
-                                                <span>Add: 1234 Heaven Stress, Beverly Hill, Melbourne, USA.</span>
+                                                <span>地址：</span>
                                             </div>
                                         </li>
                                         <li>

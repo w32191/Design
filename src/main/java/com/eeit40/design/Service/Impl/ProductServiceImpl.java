@@ -80,4 +80,51 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findProductByCategoriesOrderByPriceDesc(String categories) {
         return productRepository.findProductByCategoriesOrderByPriceDesc(categories);
     }
+
+    @Override
+    public List<Product> findProductByFkBrandOrderByPrice(Brand id) {
+        return productRepository.findProductByFkBrandOrderByPrice(id);
+    }
+
+
+    @Override
+    public List<Product> findProductByFkBrandOrderByPriceDesc(Brand id) {
+        return productRepository.findProductByFkBrandOrderByPriceDesc(id);
+    }
+
+
+    @Override
+    public List<Product> findProductOrderByPriceDesc() {
+        return productRepository.findProductOrderByPriceDesc();
+    }
+@Override
+    public List<Product> findProductOrderByAdded() {
+        return productRepository.findProductOrderByAdded();
+    }
+@Override
+    public List<Product> findProductOrderByAddedDesc() {
+        return productRepository.findProductOrderByAddedDesc();
+    }
+@Override
+    public List<Product> findProductByCategoriesOrderByAdded(String categories) {
+        return productRepository.findProductByCategoriesOrderByAdded(categories);
+    }
+
+    @Override
+    public List<Product> findProductByCategoriesOrderByAddedDesc(String categories) {
+        return productRepository.findProductByCategoriesOrderByAddedDesc(categories);
+    }
+
+
+
+    @Override
+    public List<Product> findProductByBrandOrderByAdded(Brand id) {
+        return productRepository.findProductByBrandOrderByAdded(id);
+    }
+
+    @Override
+    public List<Product> findProductByBrandOrderByAddedDesc(Brand id) {
+        return productRepository.findProductByBrandOrderByAddedDesc(id);
+    }
+
 }

@@ -44,15 +44,6 @@ public class ProductRestController {
         return dao.findProductByName(name);
     }
 
-    @GetMapping(value = "/B/product/findProductByCategories/{categories}")
-    public List<Product> findProductByCategories(@PathVariable String categories) {
-        return dao.findProductByCategories(categories);
-    }
-
-    @GetMapping(value = "/B/product/findProductByBrand/{id}")
-    public List<Product> findProductByBrand(@PathVariable Brand id) {
-        return dao.findProductByFkBrand(id);
-    }
 
     @GetMapping(value = "/B/product/findAllProduct")
     public List<Product> findAll() {
@@ -60,28 +51,101 @@ public class ProductRestController {
         return dao.findAll();
     }
 
+    @GetMapping(value = "/B/product/findProductOrderByPrice")
+    public List<Product> findProductOrderByPrice() {
+        return dao.findProductOrderByPrice();
+    }
+
+    @GetMapping(value = "/B/product/findProductOrderByPriceDesc")
+    public List<Product> findProductOrderByPriceDesc() {
+        return dao.findProductOrderByPriceDesc();
+    }
+
+
+
+    ////////日期排序/////////////////////
+
+    @GetMapping(value = "/B/product/findProductOrderByAdded")
+    public List<Product>findProductrOderByAdded(){
+        return dao.findProductOrderByAdded();
+    }
+    @GetMapping(value = "/B/product/findProductOrderByAddedDesc")
+    public List<Product>findProductOderByAddedDesc(){
+        return dao.findProductOrderByAddedDesc();
+    }
+
+
+
+
     //0庫存--> 無法購買
     @GetMapping(value = "/B/product/findProductOutOfStock")
     public List<Product> findProductOutOfStock() {
         return dao.findProductOutOfStock();
     }
 
-    @GetMapping(value = "/B/product/findProductOrderByPrice")
-    public List<Product> findProductOrderByPrice() {
-        return dao.findProductOrderByPrice();
 
+
+
+    //////////////依商品種類///////////////
+    @GetMapping(value = "/B/product/findProductByCategories/{categories}")
+    public List<Product> findProductByCategories(@PathVariable String categories) {
+        return dao.findProductByCategories(categories);
     }
 
-    //價格低至高
     @GetMapping(value = "/B/product/findProductByCategoriesOrderByPrice/{categories}")
     public List<Product> findProductByCategoriesOrderByPrice(@PathVariable String categories) {
         return dao.findProductByCategoriesOrderByPrice(categories);
     }
 
-    //價格高至低
     @GetMapping(value = "/B/product/findProductByCategoriesOrderByPriceDesc/{categories}")
     public List<Product> findProductByCategoriesOrderByPriceDesc(@PathVariable String categories) {
         return dao.findProductByCategoriesOrderByPriceDesc(categories);
     }
+
+    @GetMapping("/B/product/findProductByCategoriesOrderByAdded/{categories}")
+    public List<Product>findProductByCategoriesOrderByAdded(@PathVariable String categories){
+        return dao.findProductByCategoriesOrderByAdded(categories);
+    }
+
+    @GetMapping("/B/product/findProductByCategoriesOrderByAddedDesc/{categories}")
+    public List<Product>findProductByCategoriesOrderByAddedDesc(@PathVariable String categories){
+        return dao.findProductByCategoriesOrderByAddedDesc(categories);
+    }
+
+
+
+
+
+
+    //////////////依品牌////////////////
+
+    @GetMapping(value = "/B/product/findProductByBrand/{id}")
+    public List<Product> findProductByBrand(@PathVariable Brand id) {
+        return dao.findProductByFkBrand(id);
+    }
+
+    @GetMapping("/B/product/findProductByBrandOrderByPrice/{id}")
+    public List<Product> findProductByFkBrandOrderByPrice(@PathVariable Brand id) {
+        return dao.findProductByFkBrandOrderByPrice(id);
+    }
+
+    @GetMapping("/B/product/findProductByBrandOrderByPriceDesc/{id}")
+    public List<Product> findProductByBrandOdrerByPriceDesc(@PathVariable Brand id) {
+        return dao.findProductByFkBrandOrderByPriceDesc(id);
+    }
+
+
+    @GetMapping("/B/product/findProductByBrandOrderByAdded/{id}")
+    public List<Product> findProductByBrandOrderByAdded(@PathVariable Brand id) {
+        return dao.findProductByBrandOrderByAdded(id);
+    }
+
+    @GetMapping("/B/product/findProductByBrandOrderByAddedDesc/{id}")
+    public List<Product> findProductByBrandOrderByAddedDesc(@PathVariable Brand id) {
+        return dao.findProductByBrandOrderByAddedDesc(id);
+    }
+
+
+
 
 }

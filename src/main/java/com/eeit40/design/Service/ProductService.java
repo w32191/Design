@@ -27,4 +27,22 @@ public interface ProductService {
   List<Product> findProductByCategoriesOrderByPrice(String categories);
 
   List<Product> findProductByCategoriesOrderByPriceDesc(String categories);
+
+  List<Product> findProductByFkBrandOrderByPrice(Brand id);
+
+  List<Product> findProductByFkBrandOrderByPriceDesc(Brand id);
+
+  List<Product> findProductOrderByPriceDesc();
+
+  List<Product> findProductOrderByAdded();
+
+  List<Product> findProductOrderByAddedDesc();
+
+  List<Product> findProductByCategoriesOrderByAdded(String categories);
+
+  List<Product> findProductByCategoriesOrderByAddedDesc(String categories);
+
+  List<Product> findProductByBrandOrderByAdded(Brand id);
+
+  List<Product> findProductByBrandOrderByAddedDesc(Brand id);
 }

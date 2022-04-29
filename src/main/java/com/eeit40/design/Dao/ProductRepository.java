@@ -26,10 +26,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findAll();
 
+    @Query(value = "from Product ORDER BY price desc ")
+    List<Product> findProductOrderByPriceDesc();
+
     @Query(value = "select * from Product where stock <1", nativeQuery = true)
     List<Product> findProductOutOfStock();
 
-    @Query(value = "select * from Product ORDER BY price",nativeQuery = true)
+    @Query(value = "select * from Product ORDER BY price", nativeQuery = true)
     List<Product> findProductOrderByPrice();
 
     @Query(value = "from Product  where  categories= :categories order by price")
@@ -37,6 +40,30 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "from Product  where  categories= :categories order by price DESC ")
     List<Product> findProductByCategoriesOrderByPriceDesc(@Param("categories") String categories);
+
+    @Query(value = "from Product  where fkBrand= :fkBrand order by price")
+    List<Product> findProductByFkBrandOrderByPrice(@Param("fkBrand") Brand id);
+
+    @Query(value = "from Product  where fkBrand= :fkBrand order by price DESC ")
+    List<Product> findProductByFkBrandOrderByPriceDesc(@Param("fkBrand") Brand id);
+
+    @Query(value = "from Product order by added")
+    List<Product> findProductOrderByAdded();
+
+    @Query(value = "from Product order by added desc ")
+    List<Product> findProductOrderByAddedDesc();
+
+    @Query(value = "from  Product where categories = :categories order by added")
+    List<Product> findProductByCategoriesOrderByAdded(@Param("categories") String categories);
+
+    @Query(value = "from  Product where categories = :categories order by added desc ")
+    List<Product> findProductByCategoriesOrderByAddedDesc(@Param("categories") String categories);
+
+    @Query(value = "from Product  where fkBrand= :fkBrand order by added")
+    List<Product> findProductByBrandOrderByAdded(@Param("fkBrand") Brand id);
+
+    @Query(value = "from Product  where fkBrand= :fkBrand order by added desc ")
+    List<Product> findProductByBrandOrderByAddedDesc(@Param("fkBrand") Brand id);
 
 
 //  @Query("update from Product set name= :name ,  where id = :id")
