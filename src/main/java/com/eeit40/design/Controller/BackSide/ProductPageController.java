@@ -16,6 +16,12 @@ import java.util.List;
 public class ProductPageController {
 
 
+    @GetMapping(path = {"/B/Product/editProduct"})
+    public String indexPage() {
+        return "/B/Product/editProduct";
+    }
+
+
 
     @GetMapping("/B/Product/")
     public ModelAndView findAllProduct(ModelAndView mav){

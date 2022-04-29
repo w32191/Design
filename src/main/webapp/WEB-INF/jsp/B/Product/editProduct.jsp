@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>商品</title>
+    <title>編輯商品</title>
 
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
@@ -41,53 +41,14 @@
                 <div class="row">
 
 
-                    <%--                    品牌--%>
-
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>品牌 Brand </h4>
-
-                            </div>
-                            <div class="recent-comment m-t-15" id="bnd">
 
 
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
+
+
 
 
                     <!-- /# column -->
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-title pr">
-                                <h4>產品 Product</h4>
 
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table student-data-table ">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-
-                                            <th>圖片</th>
-                                            <th>名稱</th>
-                                            <th>庫存</th>
-                                            <th>編輯</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody id = pdlist>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- /# column -->
 
                 </div>
@@ -114,7 +75,7 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
-<script src="${contextRoot}/static/back/universal/js/Product.js"></script>
+<script src="${contextRoot}/static/back/universal/js/EditProduct.js"></script>
 <script>
 
     // imgur圖片上傳
