@@ -117,6 +117,7 @@ public class Case {
     this.title = title;
   }
 
+
   public Set<CasesPhoto> getCasesPhotos() {
     return casesPhotos;
   }

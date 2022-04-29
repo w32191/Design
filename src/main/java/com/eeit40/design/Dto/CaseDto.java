@@ -2,113 +2,101 @@ package com.eeit40.design.Dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class CaseDto implements Serializable {
+public class CaseDto {
 
-    private static final long serialVersionUID = 1L;
 
-    @JsonProperty("titleDto")
-    private String titleDto;
+    @NotNull
+    @JsonProperty("title")
+    private String title;
 
-    @JsonProperty("nameDto")
-    private String nameDto;
+    @JsonProperty("name")
+    private String name;
 
-    @JsonProperty("classificationDto")
-    private String classificationDto;
+    @NotNull
+    @JsonProperty("classification")
+    private String classification;
 
-    @JsonProperty("locationDto")
-    private String locationDto;
+    @NotNull
+    @JsonProperty("location")
+    private String location;
 
-    @JsonProperty("caseEmailDto")
-    private String caseEmailDto;
+    @JsonProperty("caseEmail")
+    private String caseEmail;
 
-    @JsonProperty("messageDto")
-    private String messageDto;
+    @JsonProperty("message")
+    private String message;
 
-    @JsonProperty("expiryDateDto")
-    private Date expiryDateDto;
+    @JsonProperty("expiryDate")
+    private Date expiryDate;
 
-    public CaseDto() {
+
+
+//    private List<String> list;
+//
+//    public List<String> getList() {
+//        return list;
+//    }
+//
+//    public void setList(List<String> list) {
+//        this.list = list;
+//    }
+
+    public String getTitle() {
+        return title;
     }
 
-    public CaseDto(String titleDto, String nameDto, String classificationDto, String locationDto, String caseEmailDto, String messageDto, Date expiryDateDto) {
-        this.titleDto = titleDto;
-        this.nameDto = nameDto;
-        this.classificationDto = classificationDto;
-        this.locationDto = locationDto;
-        this.caseEmailDto = caseEmailDto;
-        this.messageDto = messageDto;
-        this.expiryDateDto = expiryDateDto;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTitleDto() {
-        return titleDto;
+    public String getName() {
+        return name;
     }
 
-    public void setTitleDto(String titleDto) {
-        this.titleDto = titleDto;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNameDto() {
-        return nameDto;
+    public String getClassification() {
+        return classification;
     }
 
-    public void setNameDto(String nameDto) {
-        this.nameDto = nameDto;
+    public void setClassification(String classification) {
+        this.classification = classification;
     }
 
-    public String getClassificationDto() {
-        return classificationDto;
+    public String getLocation() {
+        return location;
     }
 
-    public void setClassificationDto(String classificationDto) {
-        this.classificationDto = classificationDto;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getLocationDto() {
-        return locationDto;
+    public String getCaseEmail() {
+        return caseEmail;
     }
 
-    public void setLocationDto(String locationDto) {
-        this.locationDto = locationDto;
+    public void setCaseEmail(String caseEmail) {
+        this.caseEmail = caseEmail;
     }
 
-    public String getCaseEmailDto() {
-        return caseEmailDto;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCaseEmailDto(String caseEmailDto) {
-        this.caseEmailDto = caseEmailDto;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getMessageDto() {
-        return messageDto;
+    public Date getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setMessageDto(String messageDto) {
-        this.messageDto = messageDto;
-    }
-
-    public Date getExpiryDateDto() {
-        return expiryDateDto;
-    }
-
-    public void setExpiryDateDto(Date expiryDateDto) {
-        this.expiryDateDto = expiryDateDto;
-    }
-
-    @Override
-    public String toString() {
-        return "CaseDto{" +
-                "titleDto='" + titleDto + '\'' +
-                ", nameDto='" + nameDto + '\'' +
-                ", classificationDto='" + classificationDto + '\'' +
-                ", locationDto='" + locationDto + '\'' +
-                ", caseEmailDto='" + caseEmailDto + '\'' +
-                ", messageDto='" + messageDto + '\'' +
-                ", expiryDateDto=" + expiryDateDto +
-                '}';
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }
