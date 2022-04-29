@@ -2,6 +2,7 @@ package com.eeit40.design.Service.Impl;
 
 import com.eeit40.design.Dao.ActivityRepository;
 import com.eeit40.design.Dao.BrandRepository;
+import com.eeit40.design.Dao.ImgurImgRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
@@ -11,6 +12,8 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -44,6 +47,9 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Autowired
   private BrandRepository brandRepository;
+
+  @Autowired
+  private ImgurImgRepository imgurImgRepository;
 
   @Autowired
   private ImgurUtil imgurUtil;
@@ -153,8 +159,16 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
-    activity.setImgurImgs(imgs);
 
+
+    //    如果有上傳照片
+    if (imgs != null) {
+      imgurUtil.delete(imgurImgRepository.findDeleteHashById(activity.getId()));
+      imgurImgRepository.deleteImgurImgByFkActivity(activity.getId());
+
+    }
+
+    activity.setImgurImgs(imgs);
     return activityRepository.save(activity);
   }
 
@@ -182,6 +196,63 @@ public class ActivityServiceImpl implements ActivityService {
     Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return brandRepository.findAll(pageable);
   }
+
+  @Override
+  public List<Product> findProductByFkBrand(Brand brand) {
+    return productRepository.findProductByFkBrand(brand);
+  }
+
+
+  @Override
+  public Map<String, String> ableCheckProduct(
+      LocalDate startDate, LocalDate endDate,
+      Integer productId, Integer activityId
+  ) {
+    Map<String, String> resultMap = new HashMap<>();
+    Product product = productRepository.findProductById(productId);
+    Set<Activity> activities = product.getActivities();
+    String resultStatus = "OK";
+    String resultContent = "";
+
+    if (!activities.isEmpty()) {
+      // 該產品有勾選活動了
+      log.info(productId + " 原本已有勾活動");
+
+      for (Activity ac : activities) {
+
+        log.info("正在比對的活動:" + ac.getId());
+        log.info("原有的活動時間: " + ac.getStartDate() + " " + ac.getEndDate());
+        log.info("新增的活動時間: " + startDate + " " + endDate);
+
+        if (
+            (startDate.isBefore(ac.getEndDate()) && startDate.isAfter(ac.getStartDate())) ||
+                (startDate.isEqual(ac.getStartDate())) || (startDate.isEqual(ac.getEndDate())) ||
+                (endDate.isAfter(ac.getStartDate()) && endDate.isBefore(ac.getEndDate())) ||
+                (startDate.isBefore(ac.getStartDate()) && endDate.isAfter(ac.getEndDate()))
+
+        ) {
+          //
+          if (!ac.getId().equals(activityId)) {
+            // 新輸入的日期，只要起始日或結束日其中一天有重複，就不行
+            log.info("與活動" + ac.getId() + " 時間衝突");
+            resultStatus = "Conflict";
+
+            resultContent = ac.getStartDate() + " " + ac.getEndDate();
+            break;
+          }
+
+        }
+        log.info("與活動" + ac.getId() + " 時間OK");
+        resultContent = "與活動" + ac.getId() + " 時間OK";
+      }  // end of for()
+
+
+    }
+    resultMap.put("status", resultStatus);
+    resultMap.put("content", resultContent);
+    return resultMap;
+  }
+
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

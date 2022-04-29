@@ -18,69 +18,7 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
-    <style>
-      .brandList ul {
-        list-style-type: none;
-      }
-
-      .brandList li {
-        display: inline-block;
-      }
-
-      /*input[type="checkbox"][id^="myCheckbox"] {*/
-      /*  display: none;*/
-      /*}*/
-
-      label {
-        border: 1px solid #fff;
-        padding: 10px;
-        display: block;
-        position: relative;
-        margin: 10px;
-        cursor: pointer;
-      }
-
-      label:before {
-        background-color: white;
-        color: white;
-        content: " ";
-        display: block;
-        border-radius: 50%;
-        border: 1px solid grey;
-        position: absolute;
-        top: -5px;
-        left: -5px;
-        width: 25px;
-        height: 25px;
-        text-align: center;
-        line-height: 28px;
-        transition-duration: 0.4s;
-        transform: scale(0);
-      }
-
-      label img {
-        height: 150px;
-        width: 150px;
-        transition-duration: 0.2s;
-        transform-origin: 50% 50%;
-      }
-
-      :checked + label {
-        border-color: #ddd;
-      }
-
-      /*:checked + label:before {*/
-      /*  content: "✓";*/
-      /*  background-color: grey;*/
-      /*  transform: scale(1);*/
-      /*}*/
-
-      :checked + label img {
-        transform: scale(0.9);
-        /* box-shadow: 0 0 5px #333; */
-        z-index: -1;
-      }
-    </style>
+    <link href="${contextRoot}/static/back/universal/css/EditActivity.css"  rel="stylesheet"/>
 </head>
 
 <body>
@@ -100,7 +38,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="user-profile">
-                                    <form id="updateForm">
+                                    <form id="updateForm" >
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <h4 id="activityID">${activity.id}</h4>
@@ -128,7 +66,7 @@
                                                         <input type="date"
                                                                value="${activity.startDate}"
                                                                name="startDate"
-                                                               id="updateStartDate">
+                                                               id="updateStartDate" class="form-control">
                                                     </p>
                                                 </div>
                                                 <div class="work-content">
@@ -136,13 +74,14 @@
                                                         <span>結束日期：</span>
                                                         <input type="date" name="endDate"
                                                                value="${activity.endDate}"
-                                                               id="updateEndDate">
+                                                               id="updateEndDate" class="form-control">
                                                     </p>
                                                 </div>
-                                                <div>
-                                                    <span>更換圖片:</span>
+                                                <div class="custom-file">
+<%--                                                    <span>更換圖片:</span>--%>
+                                                    <label class="custom-file-label" for="updateImg">更換圖片</label>
                                                     <input type="file" name="updateImg"
-                                                           id="updateImg">
+                                                           id="updateImg" class="custom-file-input">
                                                 </div>
                                             </div>
                                             <div class="col-lg-8">
@@ -182,12 +121,12 @@
                                                                 <div class="phone-content">
                                                                     <span class="contact-title">活動內容:</span>
                                                                     <textarea id="updateContent"
-                                                                              name="content"
+                                                                              name="content" class="form-control"
                                                                               rows="10">${activity.content}</textarea>
                                                                 </div>
                                                                 <div>
                                                                     <span class="contact-title">折扣％：</span>
-                                                                    <input type="number"
+                                                                    <input type="number" class="form-control"
                                                                            placeholder="%"
                                                                            name="discountPercentage"
                                                                            value="${activity.discountPercentage}"

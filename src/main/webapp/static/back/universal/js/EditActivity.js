@@ -26,7 +26,6 @@ $(function () {
     // },
     success: function (res) {
       checkProductArray = res;
-      console.log(checkProductArray);
       swal.close();
     },
     error: function (err) {
@@ -57,7 +56,9 @@ $(function () {
           checkProductArray.splice(indexInArray, 1);
         }
       } // end of if...else()
+
     }); // end of $.each()
+    console.log("checkProductArray:" + checkProductArray);
   } // end f storeCheckProductArray()
 
   // 用品牌Id來刷新商品清單
@@ -70,8 +71,9 @@ $(function () {
     productTbody.html('');
 
     $.ajax({
-      url: '/Design/B/product/findProductByBrand/' + brandId,
-      type: 'GET',
+      url: '/Design/B/Activity/findProductByBrand',
+      type: 'POST',
+      data: {"brandId": brandId},
       beforeSend: function () {
         swal.fire({
           imageUrl: '/Design/static/back/universal/images/load-img.gif',
@@ -87,12 +89,13 @@ $(function () {
           let tr = document.createElement('tr');
 
           let firstTd = document.createElement('td');
+          firstTd.setAttribute('id', `firstTd${product.id}`);
           if (checkProductArray.includes(parseInt(product.id, 10))) {
             firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
-                                       checked="checked" id="checkProduct${product.id}">`;
+                                       checked="checked" id="checkProduct${product.id}"><p></p>`;
           } else {
             firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
-                                      id="checkProduct${product.id}">`;
+                                      id="checkProduct${product.id}"><p></p>`;
             // isAllChecked = false;
           }
 
@@ -126,10 +129,13 @@ $(function () {
         }); // end of each()
 
         isProductAllChecked();
+        checkEachProductTime();
       },
       error: function (err) {
-        swal.close();
-        console.log(err);
+        swal.fire({
+          icon: 'error',
+          html: `<h5>${err.responseText}!</h5>`
+        });
       }
     });
   }
@@ -177,13 +183,12 @@ $(function () {
           let divMediaBody = document.createElement('div');
           divMediaBody.classList.add('media-body');
           let str = `<h4 class="media-heading">${brand.name}</h4>`;
-          str = str + `<p>${brand.description}</p>`;
+          // str = str + `<p>${brand.description}</p>`;
           divMediaBody.innerHTML = str;
 
           divMedia.append(divMediaLeft, divMediaBody);
           $('#brandContent').append(divMedia);
         }); // end of each()
-
 
         // SamWang to-do : brands分頁的「前一頁」「後一頁」按鈕未完成
         // 品牌列表的分頁按鈕
@@ -250,6 +255,44 @@ $(function () {
     }
   }
 
+  // 檢查單一產品的活動時間是否衝突
+  function isProductAbleToCheck(productId) {
+    let data = {
+      "startDate": $('#updateStartDate').val(),
+      "endDate": $('#updateEndDate').val(),
+      "activityID": $('#activityID').text(),
+      "productID": productId
+    }
+    $.ajax({
+      url: '/Design/B/Activity/checkProductAbleCheck',
+      type: 'POST',
+      data: data,
+      success: function (res) {
+        console.log(res);
+        // 如果沒有衝突活動，讓他可以勾選
+        $(`#checkProduct${productId}`).parent('td').find('input').removeAttr(
+            'disabled').end().find('p').html('');
+      },
+      error: function (err) {
+        console.log(err);
+        // 如果有衝突活動，讓他不能勾選，並顯示衝突時間
+        let txt = err.responseText.split(" ");
+        $(`#checkProduct${productId}`).parent('td').find('p')
+        .html(`${txt[0]}</br>至</br>${txt[1]}</br>已經有活動`).end()
+        .find('input').attr('disabled', 'disabled').removeAttr('checked');
+
+      }
+    })
+
+  }
+
+  // 檢查整個產品清單的產品的活動時間是否衝突
+  function checkEachProductTime() {
+    $('input[id^="checkProduct"]').each(function () {
+      isProductAbleToCheck($(this).attr('id').split('checkProduct')[1]);
+    });
+  }
+
   // 顯示商品列表按鈕
   $('#openProducts').click(function () {
     $(this).attr("hidden", "hidden");
@@ -266,7 +309,10 @@ $(function () {
     $('#openProducts').removeAttr("hidden");
     $('#brandsList').attr("hidden", "hidden");
     $('#productList').attr("hidden", "hidden");
+    storeCheckProductArray();
     $('#brandContent').html('');
+    $('#productTbody').html('');
+
   });
 
   // 點了品牌後，刷新產品
@@ -346,7 +392,7 @@ $(function () {
   selectAllBtn.click(function () {
     $(this).attr('hidden', 'hidden');
     unSelectAllBtn.removeAttr('hidden');
-    $('input[id^="checkProduct"]').prop('checked', 'checked');
+    $('input[id^="checkProduct"][disabled!="disabled"]').prop('checked', 'checked');
   });
 
   // 取消全選click時
@@ -356,10 +402,14 @@ $(function () {
     $('input[id^="checkProduct"]').removeAttr('checked');
   });
 
-  // 只要產品勾選有變化,就檢查是否有被全部勾選了，調整顯示的(全選)(取消全選)按鈕
-  $('#productTbody').on('change', 'input[id^="checkProduct"]', isProductAllChecked);
+  // 只要產品勾選有變化
+  $('#productTbody').on('change', 'input[id^="checkProduct"]',
+      function () {
+        isProductAllChecked();
+        // isProductAbleToCheck($(this).attr('id').split('checkProduct')[1]);
+      });
 
-
-
+  // 只要時間有改變
+  $('#updateStartDate,#updateEndDate').change(checkEachProductTime);
 
 });

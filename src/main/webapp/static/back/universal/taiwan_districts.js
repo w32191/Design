@@ -1,5 +1,5 @@
 locationData = [
-    {"name": "所有地區"},
+    {"name": ""},
     {
         "districts": [
             {

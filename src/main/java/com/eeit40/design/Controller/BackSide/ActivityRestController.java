@@ -4,9 +4,13 @@ import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Exception.ActivityException;
+import com.eeit40.design.Exception.NullInputException;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +18,8 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,8 +65,6 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
   public String insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
-
-    // SamWang To-Do: 目前只能新增活動，新增產品要在編輯活動的時候新增
 
     log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
@@ -110,5 +114,48 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     }
     return checkedProductId;
   }
+
+  // 取得該品牌的全部產品
+  @PostMapping(value = "/B/Activity/findProductByBrand")
+  public List<Product> findProductByBrand(
+      @RequestParam(name = "brandId") Integer brandId) {
+    Brand brand = new Brand();
+    brand.setId(brandId);
+
+    return service.findProductByFkBrand(brand);
+  }
+
+  // 勾選產品時，檢查是否與其他日期衝突
+  @PostMapping("/B/Activity/checkProductAbleCheck")
+  public ResponseEntity<String> checkProductAbleCheck(
+      @RequestParam(name = "startDate") String startDateStr,
+      @RequestParam(name = "endDate") String endDateStr,
+      @RequestParam(name = "activityID") Integer activityId,
+      @RequestParam(name = "productID") Integer productId
+  ) {
+    if ((startDateStr == null || startDateStr.length() == 0) && (endDateStr == null
+        || endDateStr.length() == 0)) {
+      throw new NullInputException("請輸入開始日期、結束日期");
+    } else if (startDateStr == null || startDateStr.length() == 0) {
+      throw new NullInputException("請輸入開始日期");
+    } else if (endDateStr == null || endDateStr.length() == 0) {
+      throw new NullInputException("請輸入結束日期");
+    }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate startDate = LocalDate.parse(startDateStr, formatter);
+    LocalDate endDate = LocalDate.parse(endDateStr, formatter);
+
+    Map<String, String> map = service.ableCheckProduct(startDate, endDate, productId, activityId);
+    ResponseEntity<String> result;
+
+    if (map.get("status").equals("OK")) {
+      result = new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      result = new ResponseEntity<>(map.get("content"), HttpStatus.BAD_REQUEST);
+    }
+
+    return result;
+  }
+
 
 }

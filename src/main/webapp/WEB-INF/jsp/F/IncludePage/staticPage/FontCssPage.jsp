@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
-<link rel="shortcut icon" type="image/x-icon"
-      href="${contextRoot}/static/front/assets/img/favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="${contextRoot}/static/front/assets/favicon.ico">
 <!-- CSS here -->
 <link rel="stylesheet" href="${contextRoot}/static/front/assets/css/preloader.css">
 <link rel="stylesheet" href="${contextRoot}/static/front/assets/css/bootstrap.min.css">

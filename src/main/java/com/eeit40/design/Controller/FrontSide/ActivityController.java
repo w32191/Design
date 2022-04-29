@@ -22,7 +22,7 @@ public class ActivityController {
     List<Activity> allActivity = activityService.findAll();
 
     mav.addObject("allActivity", allActivity);
-    mav.setViewName("/F/Activity/Activity");
+    mav.setViewName("/F/Activity/ActivityIndex");
     return mav;
   }
 

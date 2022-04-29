@@ -11,6 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>活動</title>
+    <!-- Datatable -->
+    <link href="${contextRoot}/static/back/assets/css/lib/data-table/dataTables.bootstrap.min.css"
+          rel="stylesheet"/>
+    <link href="${contextRoot}/static/back/assets/css/lib/data-table/buttons.bootstrap.min.css"
+          rel="stylesheet"/>
 
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
@@ -186,6 +191,16 @@
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
+<!-- DataTable -->
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables-init.js"></script>
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>

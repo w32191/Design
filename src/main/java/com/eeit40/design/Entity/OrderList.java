@@ -21,6 +21,12 @@ public class OrderList {
 
   @Column(name = "order_mount")
   private Integer orderMount;
+  
+  @Column(name = "price")
+  private Integer price;
+  
+  @Column(name = "subTotal")
+  private Integer subTotal;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_order_imformation_id")
@@ -64,4 +70,22 @@ public class OrderList {
   public void setId(Integer id) {
     this.id = id;
   }
+
+public Integer getPrice() {
+	return price;
+}
+
+public void setPrice(Integer price) {
+	this.price = price;
+}
+
+public Integer getSubTotal() {
+	return subTotal;
+}
+
+public void setSubTotal(Integer subTotal) {
+	this.subTotal = subTotal;
+}
+  
+  
 }

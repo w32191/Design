@@ -1,6 +1,6 @@
 package com.eeit40.design.Entity;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -12,7 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "order_information")
@@ -32,12 +37,24 @@ public class OrderInformation {
 
   @Column(name = "total")
   private Integer total;
+  
+  @Column(name = "discount")
+  private Integer discount;
 
-  @Column(name = "order_date")
-  private Instant orderDate;
+  @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name="order_date",columnDefinition = "datetime")
+  private Date orderDate;
+  
+  @PrePersist  
+  public void onCreate() {  
+	if(orderDate==null) {
+	  orderDate = new Date();
+	}
+   }
 
   @Column(name = "shipping_date")
-  private Instant shippingDate;
+  private Date shippingDate;
 
   @Column(name = "name", length = 30)
   private String name;
@@ -130,19 +147,19 @@ public class OrderInformation {
     this.name = name;
   }
 
-  public Instant getShippingDate() {
+  public Date getShippingDate() {
     return shippingDate;
   }
 
-  public void setShippingDate(Instant shippingDate) {
+  public void setShippingDate(Date shippingDate) {
     this.shippingDate = shippingDate;
   }
 
-  public Instant getOrderDate() {
+  public Date getOrderDate() {
     return orderDate;
   }
 
-  public void setOrderDate(Instant orderDate) {
+  public void setOrderDate(Date orderDate) {
     this.orderDate = orderDate;
   }
 
@@ -177,5 +194,13 @@ public class OrderInformation {
   public void setId(Integer id) {
     this.id = id;
   }
+
+public Integer getDiscount() {
+	return discount;
+}
+
+public void setDiscount(Integer discount) {
+	this.discount = discount;
+}
 
 }

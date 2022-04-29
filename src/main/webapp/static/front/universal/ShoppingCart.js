@@ -9,7 +9,7 @@
                         $("span[id='subtotal']").text("$"+subtotal);
 
                         let latestSubtotal=subtotal;
-                        let latestDiscount=Number($("span[id='discount']").text().slice(1));
+                        let latestDiscount=Number($("input[id='discount']").val().slice(1));
 
                         let latestTotal=latestSubtotal-latestDiscount
                         $("span[id='total']").text("$"+latestTotal);
@@ -81,7 +81,7 @@
                         let couponContext = $("span[id='couponContext']")
                         console.log(couponContext);
                         // let discount = $("li[id='discount']").children("span")
-                        let discount = $("span[id='discount']")
+                        let discount = $("input[id='discount']")
 
                         $.ajax({
                             url: "usecoupon",
@@ -97,17 +97,17 @@
 
                                     if(error !=null){
                                         couponContext.text(error);
-                                        discount.text("$0");
+                                        discount.val("$0");
                                         carTotals();
                                 	}else {
                                         couponContext.text("折扣 $"+result.discount+"元");
-                                        discount.text("$"+result.discount);
+                                        discount.val("$"+result.discount);
                                         carTotals();
                                     }
 
                                 }else{
                                 	couponContext.text(error);
-                                    discount.text("$0");
+                                    discount.val("$0");
                                     carTotals();
                                 }
                             },
