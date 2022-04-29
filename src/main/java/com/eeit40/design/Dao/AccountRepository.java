@@ -1,6 +1,5 @@
 package com.eeit40.design.Dao;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,9 +18,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
 	@Query(value = "select email , pwd from account where email pwd =  :email, :pwd", nativeQuery = true)
 	public boolean findAccountByemailandpwd(String email, String pwd);
 	
-	Optional<Account> findById(Integer id);
-
-
-
+	public Account findAccountById(Account id);
 
 }

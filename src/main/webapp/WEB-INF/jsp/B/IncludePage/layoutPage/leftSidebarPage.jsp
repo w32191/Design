@@ -34,7 +34,7 @@
                 </li>
                 <li><a href="app-event-calender.html"><i class="ti-calendar"></i> Calender </a></li>
                 <li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
-                <li><a href="app-profile.html"><i class="ti-user"></i> Profile</a></li>
+                <li><a href="/Design/B/Memberinsert"><i class="ti-user"></i> Profile</a></li>
                 <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a>
                 </li>
                 <li class="label">Features</li>
@@ -86,7 +86,8 @@
                         <li><a href="page-reset-password.html">Forgot password</a></li>
                     </ul>
                 </li>
-                <li><a><i class="ti-close"></i> Logout</a></li>
+<!--                 登出 -->
+                <li><a href="dologout"><i class="ti-close"></i> Logout</a></li>
             </ul>
         </div>
     </div>

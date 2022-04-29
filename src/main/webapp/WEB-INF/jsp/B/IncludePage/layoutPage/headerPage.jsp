@@ -205,9 +205,10 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+<!--                                         登出 -->
+                                            <a href="doLogout">
                                                 <i class="ti-power-off"></i>
-                                                <span>Logout</span>
+                                                Logout
                                             </a>
                                         </li>
                                     </ul>
