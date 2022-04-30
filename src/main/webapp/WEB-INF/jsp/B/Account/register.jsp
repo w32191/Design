@@ -14,6 +14,7 @@
 
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+   
 </head>
 
 <body class="bg-primary">
