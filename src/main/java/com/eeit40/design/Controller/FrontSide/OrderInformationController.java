@@ -36,7 +36,7 @@ public class OrderInformationController {
 	public int accountId() {
 		
 	   Account account = new Account();
-	   account.setId(2);
+	   account.setId(4);
 	   account.setEmail("admin@gmail.com");
 	   account.setPwd("admin");
 	   
@@ -82,12 +82,6 @@ public class OrderInformationController {
 	@PostMapping("F/checkoutorderlist")
 	public ModelAndView checkoutOrderList(ModelAndView mav, HttpServletRequest request,HttpSession session) {
 		
-		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
-		
 		String discount = request.getParameter("discount");
 		
 		mav.getModel().put("discount", discount);
@@ -100,25 +94,31 @@ public class OrderInformationController {
 	}
 	
 	//checkout data存到db
-	public ModelAndView addOrderImfor(ModelAndView mav,HttpServletRequest request) {
+	@ResponseBody
+	@PostMapping("F/orderimforlist")
+	public String addOrderImfor(ModelAndView mav,HttpServletRequest request) {
 		
+		// 假的account
+		   Account account = new Account();
+		   account.setId(4);
+
 		//新增OrderInformation
 		OrderInformation orderInfo = new OrderInformation();
+		orderInfo.setFkAccount(account);
 		orderInfo.setName(request.getParameter("recipient"));
 		orderInfo.setPhone(request.getParameter("phone"));
 		orderInfo.setAdd(request.getParameter("address"));
-		orderInfo.setNotes(request.getParameter("note"));
-		
+		orderInfo.setNotes(request.getParameter("notes"));
+		System.out.println("note"+request.getParameter("notes"));
 //		String coupondiscount = request.getParameter("discount");
 //		int discount = Integer.valueOf(coupondiscount);
 //		orderInfo.setDiscount(discount);
 		
-		//含discount
+		  //total有含discount
 		String orderTotal = request.getParameter("orderTotal");
 		int total = Integer.valueOf(orderTotal);
 		orderInfo.setTotal(total);
 		orderImformationService.addOrderImformation(orderInfo);
-		
 		
 		//新增orderList
 		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
@@ -143,10 +143,12 @@ public class OrderInformationController {
 		
 		}
 		
+		//訂單成立後刪除購物車
+		shoppingCartService.deleteByAccountId(accountId());
 		
 		
 		
-		return mav;
+		return "success";
 		
 	}
 	
