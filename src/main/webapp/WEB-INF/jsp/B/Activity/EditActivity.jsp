@@ -18,7 +18,7 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
-    <link href="${contextRoot}/static/back/universal/css/EditActivity.css"  rel="stylesheet"/>
+    <link href="${contextRoot}/static/back/universal/css/EditActivity.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="user-profile">
-                                    <form id="updateForm" >
+                                    <form id="updateForm">
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <h4 id="activityID">${activity.id}</h4>
@@ -66,7 +66,8 @@
                                                         <input type="date"
                                                                value="${activity.startDate}"
                                                                name="startDate"
-                                                               id="updateStartDate" class="form-control">
+                                                               id="updateStartDate"
+                                                               class="form-control">
                                                     </p>
                                                 </div>
                                                 <div class="work-content">
@@ -74,12 +75,14 @@
                                                         <span>結束日期：</span>
                                                         <input type="date" name="endDate"
                                                                value="${activity.endDate}"
-                                                               id="updateEndDate" class="form-control">
+                                                               id="updateEndDate"
+                                                               class="form-control">
                                                     </p>
                                                 </div>
                                                 <div class="custom-file">
-<%--                                                    <span>更換圖片:</span>--%>
-                                                    <label class="custom-file-label" for="updateImg">更換圖片</label>
+                                                    <%--                                                    <span>更換圖片:</span>--%>
+                                                    <label class="custom-file-label"
+                                                           for="updateImg">更換圖片</label>
                                                     <input type="file" name="updateImg"
                                                            id="updateImg" class="custom-file-input">
                                                 </div>
@@ -121,16 +124,19 @@
                                                                 <div class="phone-content">
                                                                     <span class="contact-title">活動內容:</span>
                                                                     <textarea id="updateContent"
-                                                                              name="content" class="form-control"
+                                                                              name="content"
+                                                                              class="form-control"
                                                                               rows="10">${activity.content}</textarea>
                                                                 </div>
-                                                                <div>
+                                                                <div class="contact-information">
                                                                     <span class="contact-title">折扣％：</span>
-                                                                    <input type="number" class="form-control"
+                                                                    <input type="number"
+                                                                           class="form-control-sm"
                                                                            placeholder="%"
                                                                            name="discountPercentage"
                                                                            value="${activity.discountPercentage}"
                                                                            id="updatediscountPercentage">
+                                                                    <span class="contact-website"> % OFF </span>
                                                                 </div>
                                                             </div>
                                                         </div>

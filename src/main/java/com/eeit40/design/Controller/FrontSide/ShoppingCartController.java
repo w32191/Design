@@ -59,12 +59,9 @@ public class ShoppingCartController {
 //		account.setPwd("admin");
 
     List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
-    Map<Integer, Integer> discountMap = activityService.getCurrentDiscountIntegerMap(cart);
 
-    for (Entry<Integer, Integer> integerIntegerEntry : discountMap.entrySet()) {
-      log.info(" " + integerIntegerEntry.getKey().toString());
-      log.info(" " + integerIntegerEntry.getValue().toString());
-    }
+    // <product id , discount>
+    Map<Integer, Integer> discountMap = activityService.getCurrentDiscountIntegerMap(cart);
 
 
     mav.addObject("discountMap", discountMap);

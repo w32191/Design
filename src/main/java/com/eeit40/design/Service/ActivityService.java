@@ -23,6 +23,8 @@ public interface ActivityService {
 
   boolean deleteByID(int id);
 
+  List<Activity> findActivitiesNow();
+
   Activity findById(Integer id);
 
   Activity insertActivity(ActivityDto dto) throws IOException;
@@ -39,6 +41,8 @@ public interface ActivityService {
 
   List<Product> findProductByFkBrand(Brand id);
 
+
+  List<Product> findProductsWithCurrentActivity();
 
   Map<String, String> ableCheckProduct(
       LocalDate startDate, LocalDate endDate,

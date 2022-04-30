@@ -342,6 +342,7 @@ $(function () {
           productId: checkProductArray
           // brands: brandsChecked
         }
+        console.log(data);
 
         // 將要送出的檔案＆序列化後的字串放入FormData
         const dataFile = new FormData();

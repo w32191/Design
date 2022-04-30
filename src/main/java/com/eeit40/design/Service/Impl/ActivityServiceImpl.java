@@ -14,6 +14,7 @@ import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -78,6 +79,11 @@ public class ActivityServiceImpl implements ActivityService {
   public Page<Activity> findByPage(Integer pageNumber) {
     Pageable page = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return activityRepository.findAll(page);
+  }
+
+  @Override
+  public List<Activity> findActivitiesNow() {
+    return activityRepository.findActivitiesCurrentTime();
   }
 
   @Override
@@ -159,6 +165,7 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setContent(dto.getContent());
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
+    activity.setDiscountPercentage(dto.getDiscountPercentage());
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
 
     //    如果有上傳照片
@@ -186,20 +193,39 @@ public class ActivityServiceImpl implements ActivityService {
     return dto;
   }
 
+  // 找全部的品牌
   @Override
   public List<Brand> getAllBrands() {
     return brandRepository.findAll();
   }
 
+  // 找分頁過後的品牌
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
     Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return brandRepository.findAll(pageable);
   }
 
+  // 找品牌的全部產品
   @Override
   public List<Product> findProductByFkBrand(Brand brand) {
     return productRepository.findProductByFkBrand(brand);
+  }
+
+  // 找現在時間，活動中的產品
+  @Override
+  public List<Product> findProductsWithCurrentActivity() {
+    // 先找到現在時間正在進行活動
+    List<Activity> activitiesNowList = activityRepository.findActivitiesCurrentTime();
+
+    List<Product> productList = new ArrayList<>();
+
+    for (Activity activity : activitiesNowList) {
+      if (activity.getProducts() != null) {
+        productList.addAll(activity.getProducts());
+      }
+    }
+    return productList;
   }
 
 
@@ -254,6 +280,7 @@ public class ActivityServiceImpl implements ActivityService {
     return resultMap;
   }
 
+
   // 用product id取得現在此產品的折扣%
   // 給ajax呼叫的Controller用
   @Override
@@ -286,6 +313,7 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   // 用product id 當Map 的 key
+  // ModelAndView的Controller呼叫用
   @Override
   public Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart) {
 

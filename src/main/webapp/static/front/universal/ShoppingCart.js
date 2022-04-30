@@ -22,17 +22,17 @@ $(function () {
     $("span[id='total']").text("$" + latestTotal);
   }
 
-// 計算折扣 %數
+// 計算折扣 %數 (暫無使用)
   function getDiscountPercentage() {
 
     // 用來存放當頁購物車中所有的product id 的 Array
     let productIdList = [];
 
-    $('#theTBody > tr > td> a[data-product-id]').each(function () {
+    $('#theTBody > tr > td > div > a[data-product-id]').each(function () {
       productIdList.push($(this)[0].dataset.productId);
     });
 
-    // console.log(`productIdList:${productIdList}`);
+    console.log(`productIdList:${productIdList}`);
 
     $.ajax({
       url: '/Design/F/Activity/checkDiscount',

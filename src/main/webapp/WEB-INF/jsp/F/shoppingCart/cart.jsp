@@ -69,10 +69,24 @@
                                 <c:forEach var="cart" items="${cartList}">
                                     <tr>
                                         <td class="product-thumbnail">
-                                            <a href="product-details.html"
-                                               data-product-id="${cart.fkProduct.id}">
-                                                <img src="${cart.fkProduct.image01}">
-                                            </a>
+                                                <%--   <a href="product-details.html"--%>
+                                                <%--   data-product-id="${cart.fkProduct.id}">--%>
+                                                <%--   <img src="${cart.fkProduct.image01}">--%>
+                                                <%--   </a>--%>
+                                            <div class="product__modal-img product__thumb w-img">
+                                                <a href="product-details.html"
+                                                   data-product-id="${cart.fkProduct.id}">
+                                                    <img src="${cart.fkProduct.image01}"
+                                                         style="border: 1px #0c0c0c solid"
+                                                         alt="圖片異常">
+                                                </a>
+                                                <c:if test='${discountMap.containsKey(cart.fkProduct.id)}'>
+                                                    <div class="product__sale ">
+                                                        <span class="new">活動</span>
+                                                        <span class="percent">-${discountMap.get(cart.fkProduct.id)}%</span>
+                                                    </div>
+                                                </c:if>
+                                            </div>
                                         </td>
 
                                         <td class="product-name" name="pname">
@@ -84,7 +98,7 @@
                                             <c:choose>
                                                 <c:when test='${discountMap.containsKey(cart.fkProduct.id)}'>
                                                     $<span
-                                                    class="price currentPrice">${(cart.fkProduct.price*discountMap.get(cart.fkProduct.id)/100).intValue()}</span>
+                                                    class="price currentPrice">${(cart.fkProduct.price*(100-discountMap.get(cart.fkProduct.id))/100).intValue()}</span>
                                                     <br>
                                                     <span class="old-price">$${cart.fkProduct.price}</span>
                                                     <br>
@@ -107,8 +121,16 @@
                                         </td>
 
                                         <td class="product-subtotal">
-                                            $<span id="tprice"
-                                                   name="tprice">${cart.fkProduct.price*cart.tempMount}</span>
+                                            <c:choose>
+                                                <c:when test='${discountMap.containsKey(cart.fkProduct.id)}'>
+                                                    $<span id="tprice"
+                                                    name="tprice">${(cart.fkProduct.price*(100-discountMap.get(cart.fkProduct.id))/100*cart.tempMount).intValue()}</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    $<span id="tprice"
+                                                    name="tprice">${cart.fkProduct.price*cart.tempMount}</span>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
 
                                         <td class="product-remove">
