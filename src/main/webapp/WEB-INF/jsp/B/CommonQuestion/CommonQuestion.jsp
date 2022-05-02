@@ -331,7 +331,7 @@
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-dismiss="modal">關閉</button>
-                                                                                <button id="editBtn" type="button"
+                                                                                <button id="editCommitBtn" type="button"
                                                                                     class="btn btn-primary">送出</button>
                                                                             </div>
                                                                         </div>

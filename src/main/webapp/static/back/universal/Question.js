@@ -54,20 +54,71 @@ $(function () {
         $('#insertQuestionDialog').removeAttr('hidden').dialog('open');
     });
 
-    //修改
+    //編輯 按鈕 
     $('body').on('click', 'button[name="edit"]', function () {
-        let question = $(this).parent('td').siblings('td:eq(2)').text();
-        $('#question').val(question);
-        
+        let editBtn = $(this);
+        let id = editBtn.parent('td').siblings('td:eq(0)').text();
+        let oldTypeStr = editBtn.parent('td').siblings('td:eq(1)').text();
+        let oldQuestion = editBtn.parent('td').siblings('td:eq(2)').text();
+        let oldAns = editBtn.parent('td').siblings('td:eq(3)').text();
+
+        console.log(editBtn);
+        console.log(id);
+        console.log(oldTypeStr);
+        console.log(oldQuestion);
+        console.log(oldAns);
+
+        $('#question').val(oldQuestion);
+        $('#answer').val(oldAns);
+
+        console.log(oldTypeStr.toString().indexOf('產品及服務')>= 0);
+        console.log(oldTypeStr.toString().indexOf('產品品質及維護')>= 0);
+        console.log(oldTypeStr.toString().indexOf('產品貨況')>= 0);
+        console.log(oldTypeStr.toString().indexOf('結帳')>= 0);
+        console.log(oldTypeStr.toString().indexOf('取消訂單') >= 0);
+
+        console.log(oldAns);
+
+        if (oldTypeStr.toString().indexOf('產品及服務') >= 0) {
+            // $('#question_type > option:eq(0)').prop('selected', true);
+            console.log(option:eq(1));
+        }
+        if(oldTypeStr.toString().indexOf('產品品質及維護') >= 0){
+            $('#question_type > option:eq(1)').attr('selected','selected');
+            console.log(1);
+        }
+        if(oldTypeStr.toString().indexOf('產品貨況') >= 0){
+            $('#question_type > option:eq(2)').attr('selected','selected');
+            console.log(2);
+        }
+        if(oldTypeStr.toString().indexOf('結帳') >= 0){
+            $('#question_type > option:eq(3)').attr('selected','selected');
+            console.log(3);
+        }
+        if(oldTypeStr.toString().indexOf('取消訂單') >= 0){
+            $('#question_type > option:eq(4)').attr('selected','selected');
+            console.log(4);
+        }
+
+
+        console.log($('#question_type > option:eq(0)').attr('selected', 'selected').val());
+    });
+
+    //送出按鈕（在編輯內層）
+    $('#editCommitBtn').click(function () {
+        console.log($('#question_type > option:selected').val());
+
         let data = {
             "question_type": $('#question_type > option:selected').val(),
-            "question": $('#question').val(),
-            "answer": $('#answer').val(),
-            "id": $('id').val()            
-        };console.log(data);
+            "question": $('#addQuestion').val(),
+            "answer": $('#addAnswer').val(),
+            "id": id
+        };
+        console.log(data);
+
         $.ajax({
             url: "/Design/B/CommonQuestion/updateQuestionContent", //這個url是用來呼叫controller裡面的方法
-            type: "POST",
+            type: "post",
             data: data,
             success: function (res) {
                 console.log(res);
@@ -91,6 +142,7 @@ $(function () {
 
             }
         });
+
     });
 
     //新增
