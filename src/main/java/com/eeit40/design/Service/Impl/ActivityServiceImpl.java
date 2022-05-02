@@ -5,6 +5,7 @@ import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ImgurImgRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
+import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
@@ -73,6 +74,17 @@ public class ActivityServiceImpl implements ActivityService {
   @Override
   public List<Activity> findAll() {
     return activityRepository.findAll();
+  }
+
+  @Override
+  public List<EventDto> findAllEvent() {
+    List<Activity> result = activityRepository.findAll();
+    List<EventDto> eventDtoList = new ArrayList<>();
+    for (Activity ac : result) {
+      EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
+      eventDtoList.add(dto);
+    }
+    return eventDtoList;
   }
 
   @Override

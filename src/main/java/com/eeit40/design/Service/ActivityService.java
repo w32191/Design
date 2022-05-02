@@ -1,6 +1,7 @@
 package com.eeit40.design.Service;
 
 import com.eeit40.design.Dto.ActivityDto;
+import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
@@ -18,6 +19,8 @@ public interface ActivityService {
 
 
   List<Activity> findAll();
+
+  List<EventDto> findAllEvent();
 
   Page<Activity> findByPage(Integer pageNumber);
 

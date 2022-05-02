@@ -1,6 +1,7 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dto.ActivityDto;
+import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
@@ -52,6 +53,10 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return map;
   }
 
+  @GetMapping("/B/Activity/findAllEventApi")
+  public List<EventDto> findEvents(){
+    return service.findAllEvent();
+  }
 
   @DeleteMapping("/B/Activity/delete/{id}")
   public String deleteById(@PathVariable Integer id) {
