@@ -216,7 +216,7 @@ public class ActivityServiceImpl implements ActivityService {
   @Override
   public List<Product> findProductsWithCurrentActivity() {
     // 先找到現在時間正在進行活動
-    List<Activity> activitiesNowList = activityRepository.findActivitiesCurrentTime();
+    List<Activity> activitiesNowList = findActivitiesNow();
 
     List<Product> productList = new ArrayList<>();
 

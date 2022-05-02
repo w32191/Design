@@ -33,6 +33,8 @@ public class ActivityController {
     // 當前時間正在活動中的產品
     List<Product> productList = activityService.findProductsWithCurrentActivity();
 
+    log.info("目前的productList size():" + productList.size());
+
     mav.addObject("productList", productList);
     mav.addObject("allActivity", allActivity);
     mav.setViewName("/F/Activity/ActivityIndex");

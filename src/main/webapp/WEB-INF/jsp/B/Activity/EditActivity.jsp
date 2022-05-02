@@ -40,7 +40,7 @@
                                 <div class="user-profile">
                                     <form id="updateForm">
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-5">
                                                 <h4 id="activityID">${activity.id}</h4>
                                                 <div class="user-photo m-b-30">
                                                     <c:choose>
@@ -60,25 +60,7 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
-                                                <div class="work-content">
-                                                    <p>
-                                                        <span>開始日期：</span>
-                                                        <input type="date"
-                                                               value="${activity.startDate}"
-                                                               name="startDate"
-                                                               id="updateStartDate"
-                                                               class="form-control">
-                                                    </p>
-                                                </div>
-                                                <div class="work-content">
-                                                    <p>
-                                                        <span>結束日期：</span>
-                                                        <input type="date" name="endDate"
-                                                               value="${activity.endDate}"
-                                                               id="updateEndDate"
-                                                               class="form-control">
-                                                    </p>
-                                                </div>
+
                                                 <div class="custom-file">
                                                     <%--                                                    <span>更換圖片:</span>--%>
                                                     <label class="custom-file-label"
@@ -87,7 +69,7 @@
                                                            id="updateImg" class="custom-file-input">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-8">
+                                            <div class="col-lg-7">
                                                 <div class="user-profile-name">
                                                     <h1><input type="text"
                                                                value="${activity.subject}"
@@ -139,6 +121,25 @@
                                                                     <span class="contact-website"> % OFF </span>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="work-content">
+                                                            <p>
+                                                                <span>開始日期：</span>
+                                                                <input type="date"
+                                                                       value="${activity.startDate}"
+                                                                       name="startDate"
+                                                                       id="updateStartDate"
+                                                                       class="form-control">
+                                                            </p>
+                                                        </div>
+                                                        <div class="work-content">
+                                                            <p>
+                                                                <span>結束日期：</span>
+                                                                <input type="date" name="endDate"
+                                                                       value="${activity.endDate}"
+                                                                       id="updateEndDate"
+                                                                       class="form-control">
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
