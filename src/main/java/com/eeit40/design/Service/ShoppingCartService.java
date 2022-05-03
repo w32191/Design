@@ -33,11 +33,16 @@ public class ShoppingCartService {
 		shoppingCardDao.editAmountByCartId(tempMount, id);
 	}
 
-	// 刪除
+	// 刪除by cartId
 	public void deletById(int id) {
 		shoppingCardDao.deleteById(id);
 	}
 
+	// 刪除by accountId
+	public void deleteByAccountId(int fkAccount) {
+		shoppingCardDao.deleteByAccountId(fkAccount);
+	}
+	
 	// 新增
 	public void addProductToShoppingCart(int tempMount, int fkAccount, int fkProduct) {
 		shoppingCardDao.addProductToShoppingCart(tempMount, fkAccount, fkProduct);
