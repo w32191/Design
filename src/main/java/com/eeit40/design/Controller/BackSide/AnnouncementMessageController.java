@@ -19,18 +19,23 @@ public class AnnouncementMessageController {
 	@Autowired
 	private AnnouncementWorkMessagesService messageService;
 	
-	@PostMapping("/B/Announcement/message/add")
+	@PostMapping("/B/Announcement/add")
 	public ModelAndView addMessage(ModelAndView mav,@Valid @ModelAttribute(name="announcementWorkMessages") AnnouncementWorkMessages msg, BindingResult br) {
+
+		
 		
 		if(!br.hasErrors()) {
+			System.out.println(msg.getContent());
 			messageService.insert(msg);
 			AnnouncementWorkMessages newMsg = new AnnouncementWorkMessages();
 			mav.getModel().put("announcementWorkMessages", newMsg);
 		}
 			
-		AnnouncementWorkMessages lastestMsg = messageService.getLastest();
-		mav.getModel().put("lastMessage", lastestMsg);
-		mav.setViewName("addMessage");
+		AnnouncementWorkMessages latestMsg = messageService.getLastest();
+		mav.getModel().put("lastMessage", latestMsg);
+		mav.setViewName("addMessage2");
+		
+		
 		
 		return mav;
 	}

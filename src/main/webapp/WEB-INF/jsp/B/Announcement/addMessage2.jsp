@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +21,7 @@
 </head>
 
 <body>
-<p />
-    
+
 	<%--Left SideBar--%>
 	<jsp:include page="../IncludePage/layoutPage/leftSidebarPage.jsp" />
 	<%--Header--%>
@@ -55,36 +55,35 @@
 				<section id="main-content">
 					<div class="row">
 						<div class="col-lg-12">
-
-
 							<div class="card">
-							<c:forEach var="announcementWorkMessages" items="${page.content}">
-								<div class="card-header">
-								
-									新增時間 <span> 
-										<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss EEEE"
-											value="${announcementWorkMessages.added}" />
-									</span>
-								</div>
+								<div class="card-header">新增公告</div>
 								<div class="card-body">
-									<c:out value="${announcementWorkMessages.content}" />
+
+
+									<form:form class="form" method="POST" action="/Design/B/Announcement/message/add"
+										modelAttribute="announcementWorkMessages">
+
+										<!-- form:errors  bindingResult 回傳的物件 -->
+									
+										<div class="input-group">
+											<form:textarea path="content" class="form-control"></form:textarea>
+										</div>
+
+										<input type="submit" name="submit" value="新增公告">
+									</form:form>
+
 
 								</div>
-								</c:forEach>
+
+
 							</div>
-
-
 						</div>
-
-
 					</div>
+					<!-- Footer -->
+					<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
+				</section>
 			</div>
 		</div>
-		<!-- Footer -->
-		<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
-		</section>
-	</div>
-	</div>
 	</div>
 
 	<!-- jQuery & Bootstrap-->
@@ -98,26 +97,6 @@
 	<script
 		src="${contextRoot}/static/back/assets/js/lib/form-validation/jquery.validate-init.js"></script>
 	<!-- scripit init-->
-
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

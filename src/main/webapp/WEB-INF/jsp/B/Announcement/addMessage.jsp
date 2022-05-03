@@ -20,10 +20,9 @@
 					<form:form class="form" method="POST" modelAttribute="announcementWorkMessages">
 
 						<!-- form:errors  bindingResult 回傳的物件 -->
-						<form:errors path="text" />
 
 						<div class="input-group">
-							<form:textarea path="text" class="form-control"></form:textarea>
+							<form:textarea path="content" class="form-control"></form:textarea>
 						</div>
 
 						<input type="submit" name="submit" value="新增訊息">

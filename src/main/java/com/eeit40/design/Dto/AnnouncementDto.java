@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.lang.Nullable;
 
 
-public class AnnouncementWorkMessagesDto implements Serializable {
+public class AnnouncementDto implements Serializable {
 
   private Integer id;
   private String content; 
@@ -16,10 +16,10 @@ public class AnnouncementWorkMessagesDto implements Serializable {
 //  private Map<String, byte[]> imgs; // <fileName,fileByte[]>
 //  private List<Integer> Id;
 
-  public AnnouncementWorkMessagesDto() {
+  public AnnouncementDto() {
   }
 
-  public AnnouncementWorkMessagesDto(
+  public AnnouncementDto(
       @Nullable Integer id, String content, Date added){
     this.id = id;
     this.content = content;

@@ -32,7 +32,6 @@ public class AnnouncementWorkMessages {
 	// 搭配 controller @Valid, BindingResult
 	// https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-builtin-constraints
 //	@Size(min = 2, max = 199, message = "請輸入 2 到 199 個字串")
-	@Email(message = "請輸入 Email")
 	@Column(name="content", columnDefinition = "nvarchar(200)")
 	private String content;
 	
@@ -77,7 +76,7 @@ public class AnnouncementWorkMessages {
 
 	@Override
 	public String toString() {
-		return "WorkMessages [id=" + id + ", content=" + content + ", added=" + added + "]";
+		return "announcementWorkMessages [id=" + id + ", content=" + content + ", added=" + added + "]";
 	}
 	
 	

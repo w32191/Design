@@ -22,20 +22,20 @@ public class AnnouncementPageController {
 		return "messageIndex";
 	}
 	
-	@GetMapping("/B/Announcement/message/addMessage")
+	@GetMapping("/B/Announcement/add")
 	public ModelAndView addMessagePage(ModelAndView mav) {
 		
 		AnnouncementWorkMessages message = new AnnouncementWorkMessages();
 		mav.getModel().put("announcementWorkMessages", message);
-		
+	
 		AnnouncementWorkMessages lastMag = messageService.getLastest();
 		mav.getModel().put("lastMessage", lastMag);
-		
-        mav.setViewName("B/Announcement/addMessage");
+		System.out.println(message);
+        mav.setViewName("B/Announcement/addMessage2");
 		return mav;
 	}
 	
-	@GetMapping("/B/Announcement/message/viewMessages")
+	@GetMapping("/B/Announcement/viewMessages")
 	public ModelAndView viewMessages(ModelAndView mav, @RequestParam(name="p", defaultValue = "1") Integer pageNumber) {
 		Page<AnnouncementWorkMessages> page = messageService.findByPage(pageNumber);
 		System.out.println(page.getContent());
