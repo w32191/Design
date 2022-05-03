@@ -34,7 +34,8 @@
         <div class="container-fluid">
             <section id="main-content">
                 <div class="row">
-                    <input type="file" class="imgur" accept="image/*" data-max-size="5000"/>
+
+                    <input type="file" class="imgur" accept="image/*" data-max-size="5000" />
 
                 </div>
                 <!-- /# row -->
@@ -60,6 +61,9 @@
 
                     <!-- /# column -->
                     <div class="col-lg-8">
+                        <div>
+                            <a href="/Design/B/Product/addProduct" class="btn btn-warning">＋新增商品</a>
+                        </div>
                         <div class="card">
                             <div class="card-title pr">
                                 <h4>產品 Product</h4>

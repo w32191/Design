@@ -21,6 +21,10 @@ public class ProductPageController {
         return "/B/Product/editProduct";
     }
 
+    @GetMapping(path = {"/B/Product/addProduct"})
+    public String indexPage4() {
+        return "/B/Product/addProduct";
+    }
 
 
     @GetMapping("/B/Product/")
