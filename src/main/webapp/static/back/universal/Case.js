@@ -1667,6 +1667,7 @@ $(function () {
                 case_data += '<td>' + value.location + '</td>'
                 case_data += '<td>' + value.caseEmail + '</td>'
                 case_data += '<td>' + value.message + '</td>'
+                case_data += '<td>' + value.coverPhoto + '</td>'
                 case_data += '<td>' + value.dateTime + '</td>'
                 case_data += '<td>' + value.expiryDate + '</td>'
                 case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'

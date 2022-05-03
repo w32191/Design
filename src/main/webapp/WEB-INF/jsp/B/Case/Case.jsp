@@ -153,6 +153,7 @@
                                                                 class="btn-group"></select></th>
                                                     <th>E-mail</th>
                                                     <th>資訊</th>
+                                                    <th>照片</th>
                                                     <th>
                                                         <a href="${contextRoot}/B/Case/CaseMessagedatetimeDesc">創建時間</a>
                                                     </th>
