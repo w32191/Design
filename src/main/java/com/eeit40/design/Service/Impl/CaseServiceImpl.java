@@ -29,7 +29,7 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
-    public Case getCaseById(Integer id) {
+    public List<Case> getCaseById(Integer id) {
         return caseRepository.getCaseById(id);
     }
 
@@ -46,6 +46,11 @@ public class CaseServiceImpl implements CaseService {
     @Override
     public void deleteCaseById(Integer id) {
         caseRepository.deleteCaseById(id);
+    }
+
+    @Override
+    public String uploadImg(CaseDto caseDto){
+        return caseRepository.uploadImg(caseDto);
     }
 
 }

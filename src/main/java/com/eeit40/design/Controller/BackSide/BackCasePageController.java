@@ -3,13 +3,17 @@ package com.eeit40.design.Controller.BackSide;
 import com.eeit40.design.Dto.CaseDto;
 import com.eeit40.design.Dto.CaseQueryParams;
 import com.eeit40.design.Entity.Case;
+import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Service.CaseService;
+import com.eeit40.design.Util.ImgurUtil;
 import com.eeit40.design.Util.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -21,13 +25,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
+@PropertySource("classpath:imgurConfigs.properties")
 //@RequestMapping("/B/Case/Case")
 public class BackCasePageController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Value("${AU_Kenny}")
+    private String authorization;
+
+    @Autowired
+    private ImgurUtil imgurUtil;
 
     @Autowired
     private ObjectMapper mapper;
@@ -43,11 +55,12 @@ public class BackCasePageController {
         mav.setViewName("/B/Case/Case");
         return mav;
     }
-
-    @Validated //使用@Max @Min 要加@Validated 才會真的生效
+    //使用@Max @Min 要加@Validated 才會真的生效
+    @Validated
     @GetMapping("/B/Cases")
-    public ResponseEntity<Page<Case>> getCases(
-//  public ResponseEntity<List<Case>> getCases(
+    //  public ResponseEntity<List<Case>> getCases(
+    public ResponseEntity<Page<Case>>  getCases(
+
             //------查詢條件 Filtering------
 //            @RequestParam(required = false) CaseCaregory category,
             @RequestParam(required = false) String search,
@@ -83,15 +96,17 @@ public class BackCasePageController {
         page.setTotal(total);
         page.setResults(caseList);
 
+
 //        return ResponseEntity.status(HttpStatus.OK).body(caseList);
         return ResponseEntity.status(HttpStatus.OK).body(page);
 //        return "/B/Case/Case";
 
+
     }
 
     @GetMapping("/B/Case/{id}")
-    public ResponseEntity<Case> getCase(@PathVariable Integer id) {
-        Case aCase = caseService.getCaseById(id);
+    public ResponseEntity<List<Case>> getCase(@PathVariable Integer id) {
+        List<Case> aCase = caseService.getCaseById(id);
         if (aCase != null) {
             return ResponseEntity.status(HttpStatus.OK).body(aCase);
         } else {
@@ -111,23 +126,26 @@ public class BackCasePageController {
 
     @PostMapping("/B/Case/createCase")
     //@Valid DTO有@NOTNULL的註解時要加
-    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr, @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
+    public ResponseEntity<List<Case>> createCase(@RequestParam("data") String jsonStr) throws JsonProcessingException {
 
         CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
         Integer id = caseService.createCase(caseDto);
 
-        Case acase = caseService.getCaseById(id);
+        List<Case> acase = caseService.getCaseById(id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(acase);
     }
 
-    @PutMapping("/B/Case/updatedCase/{id}")
-    public ResponseEntity<Case> updatedCase(@PathVariable Integer id,
-                                            @RequestBody @Valid CaseDto caseDto) {
+    @PostMapping("/B/Case/updatedCase/{id}")
+    public ResponseEntity<List<Case>> updatedCase(@PathVariable Integer id,
+                                            @RequestParam("data") String jsonStr,
+                                            @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
 
+        CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
+        caseService.updatedCase(id, caseDto);
 //        System.out.println(caseDto.getList());
         //判定商品 id 是否存在
-        Case aCase = caseService.getCaseById(id);
+        List<Case> aCase = caseService.getCaseById(id);
 
         if (aCase == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -135,7 +153,7 @@ public class BackCasePageController {
 
         //修改商品的數據
         caseService.updatedCase(id, caseDto);
-        Case updatedCase = caseService.getCaseById(id);
+        List<Case> updatedCase = caseService.getCaseById(id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCase);
     }
 
@@ -144,6 +162,19 @@ public class BackCasePageController {
         caseService.deleteCaseById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
+    //------新增照片開始------
+    @PostMapping("/B/Case/uploadImg")
+    public String uploadImg(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+
+        imgurUtil.setAuthorization(authorization);
+        ImgurImg img = imgurUtil.uploadImg(multipartFile.getOriginalFilename(), multipartFile.getBytes());
+
+        return  img.getLink();
+    }
+    //------新增照片結束------
+
 
 
 //    @GetMapping("/B/CaseMessage")

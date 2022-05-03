@@ -14,13 +14,15 @@ public interface CaseService {
 
     List<Case> getCases(CaseQueryParams caseQueryParams);
 
-    Case getCaseById(Integer id);
+    List<Case> getCaseById(Integer id);
 
     Integer createCase(CaseDto caseDto);
 
     void updatedCase(Integer id, CaseDto caseDto);
 
     void deleteCaseById(Integer id);
+
+    String uploadImg (CaseDto caseDto);
 
 
 //    @Autowired
