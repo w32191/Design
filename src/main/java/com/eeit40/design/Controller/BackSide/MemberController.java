@@ -56,6 +56,38 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/B/memberupdate")
+	public ModelAndView memberupdatejsp(ModelAndView mav) {
+		
+		Member member = new Member();
+		
+		mav.getModel().put("memberupdate", member);
+		
+		mav.setViewName("B/Member/member");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	@PostMapping("/B/memberupdate")
+	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member,
+			@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
+			@RequestParam(name = "address") String address,  HttpSession session, BindingResult br)  {
+		if(!br.hasErrors()) {
+			Account acc = (Account) session.getAttribute("account");
+			memberService.findMemberByfkAccount(acc);
+			
+			mav.setViewName("B/Member/member");
+			return mav;
+		}
+		
+		return null;
+		
+		
+	}
+	
 	
 	
 	

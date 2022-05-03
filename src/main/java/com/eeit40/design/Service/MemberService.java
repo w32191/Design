@@ -59,6 +59,11 @@ public class MemberService {
 
 		
 	}
+	
+	public Member findMemberByfkAccount(Account fkAccount){
+		
+		return  findMemberByfkAccount(fkAccount);
+	}
 
 
 }
