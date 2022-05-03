@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductRestController {
 
     @Autowired
-    private ProductServiceImpl dao;
+    private ProductRepository dao;
 
     @PostMapping("/B/product/insert")
     public Product insertProduct(@RequestBody Product pro) {
@@ -30,7 +30,7 @@ public class ProductRestController {
     @GetMapping("/B/product/findProductById/{id}")
     public Product findProductById(@PathVariable Integer id) {
         Product resPro = dao.findProductById(id);
-        return (Product) resPro;
+        return  resPro;
     }
 
     @GetMapping("/B/product/delete/{id}")

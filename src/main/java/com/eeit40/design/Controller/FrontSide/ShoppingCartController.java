@@ -1,15 +1,11 @@
 package com.eeit40.design.Controller.FrontSide;
 
-import com.eeit40.design.Service.ActivityService;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-
 import java.util.Map;
-import java.util.Map.Entry;
+
 import javax.servlet.http.HttpServletRequest;
 
-import lombok.extern.slf4j.Slf4j;
+import com.eeit40.design.Service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +21,13 @@ import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ShoppingCartService;
 
 @Controller
-@Slf4j
 public class ShoppingCartController {
 
 	@Autowired
-	private ShoppingCartService shoppingCartService;
+	private ActivityService activityService;
 
 	@Autowired
-	private ActivityService activityService;
+	private ShoppingCartService shoppingCartService;
 
 	public int accountId() {
 
@@ -46,6 +41,7 @@ public class ShoppingCartController {
 
 	}
 
+	// 查詢
 	// 查詢
 	@GetMapping("F/shoppingcart")
 	public ModelAndView findShoppingCratByAccountId(ModelAndView mav) {
@@ -70,6 +66,7 @@ public class ShoppingCartController {
 		return mav;
 
 	}
+
 
 	// 修改
 	@PostMapping("F/editshoppingcart")
@@ -97,8 +94,7 @@ public class ShoppingCartController {
 
 	// 刪除
 	@GetMapping("F/deleteshoppingcart")
-	public ModelAndView deleteShoppingCratByCartId(ModelAndView mav,
-			@RequestParam(name = "id") int id) {
+	public ModelAndView deleteShoppingCratByCartId(ModelAndView mav, @RequestParam(name = "id") int id) {
 
 		shoppingCartService.deletById(id);
 
@@ -136,8 +132,9 @@ public class ShoppingCartController {
 
 	// 新增(確認購物車品項是否重複)
 	// 以產品id修改數量
-	@PostMapping("F/addshoppingcart")
-	public ModelAndView addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
+	@GetMapping("F/addshoppingcart")
+	@ResponseBody
+	public String addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
 
 		String tempMount = request.getParameter("amount");
 		String fkProduct = request.getParameter("fkProduct");
@@ -145,6 +142,8 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 
+		System.out.println("amount"+amount);
+		System.out.println("id"+productId);
 		// 假的account
 //		Account account = new Account();
 //		account.setId(1);
@@ -154,7 +153,7 @@ public class ShoppingCartController {
 
 		shoppingCartService.checkShoppingCart(amount, accountId(), productId);
 
-		return mav;
+		return "success";
 	}
 
 	// 以購物車id修改數量
@@ -201,13 +200,13 @@ public class ShoppingCartController {
 
 					return discountCouponDto;
 				}
-				discountCouponDto.setErrMsg("優惠券已過期" + " , " + "請輸入正確優惠券代碼");
+				discountCouponDto.setErrMsg("優惠券已過期"+" , "+"請輸入正確優惠券代碼");
 				return discountCouponDto;
 			}
-			discountCouponDto.setErrMsg("優惠券活動時間尚未開始" + " , " + "請輸入正確優惠券代碼");
+			discountCouponDto.setErrMsg("優惠券活動時間尚未開始"+" , "+"請輸入正確優惠券代碼");
 			return discountCouponDto;
 		}
-		discountCouponDto.setErrMsg("查無此優惠券" + " , " + "請輸入正確優惠券代碼");
+		discountCouponDto.setErrMsg("查無此優惠券"+" , "+"請輸入正確優惠券代碼");
 		return discountCouponDto;
 	}
 
