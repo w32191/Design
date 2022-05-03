@@ -1,4 +1,4 @@
-package com.eeit40.design.Controller.BackSide;
+package com.eeit40.design.Controller.FrontSide;
 
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Member;
@@ -18,23 +18,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
-public class AccountController {
+public class AccountFrontController {
 
     @Autowired
     private AccountService accountService;
     
     //登入帳號頁面
-    @GetMapping("/B/login")
+    @GetMapping("/F/Flogin")
     public ModelAndView login( ModelAndView mav,@ModelAttribute Account account ) {
 		
-    	mav.setViewName("B/Account/login");
+    	mav.setViewName("F/Account/Flogin");
     	
     	return mav;
     }
     
     //登入帳號中並存入session
-    @PostMapping("/B/login")
-    public ModelAndView doLogin(ModelAndView mav, @Valid @ModelAttribute(name = "login") Account account, 
+    @PostMapping("/F/Flogin")
+    public ModelAndView doLogin(ModelAndView mav, @Valid @ModelAttribute(name = "Flogin") Account account, 
     		@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd,
     		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
     	
@@ -43,40 +43,40 @@ public class AccountController {
     		if(login != null) {
     		session.setAttribute("account", login);
     		System.out.println(login);
-    		mav.setViewName("B/Account/index");
+    		mav.setViewName("F/Account/Findex");
     		return mav;
     		}
     		return mav;
     	}
-    	mav.setViewName("B/Account/login");
+    	mav.setViewName("F/Account/Findex");
     	return mav;
 
     }
     
-    @GetMapping("/index")
+    @GetMapping("/F/Findex")
     public ModelAndView index(ModelAndView mav) {
     	
-    	mav.setViewName("B/Account/index");
+    	mav.setViewName("F/Account/Findex");
     	
     	return mav;
     }
     
     //註冊帳號頁面
-    @GetMapping("/B/register")
+    @GetMapping("/F/Fregister")
     public ModelAndView register(ModelAndView mav) {
     	
     	Account account = new Account();
     	
     	mav.getModel().put("doRegister", account);
     	
-    	mav.setViewName("B/Account/register");
+    	mav.setViewName("F/Account/Fregister");
     	
     	return mav;
     }
     
     //註冊帳號中
-    @PostMapping("/B/register")
-    public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
+    @PostMapping("/F/Fregister")
+    public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "FdoRegister")
     Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
     HttpSession session, BindingResult br) {
     	
@@ -87,7 +87,7 @@ public class AccountController {
     		
     		Member member = new Member();
     		mav.addObject(member);
-    		mav.setViewName("B/Member/memberregister");
+    		mav.setViewName("F/Member/Fmemberregister");
     		
     		return mav;
     	}
@@ -96,7 +96,7 @@ public class AccountController {
     }
     
     
-    @GetMapping("/B/dologout")
+    @GetMapping("/F/Fdologout")
     public ModelAndView doLogout(HttpSession session, ModelAndView mav, SessionStatus sessionStatus) {
 
     	session.invalidate();
@@ -104,7 +104,7 @@ public class AccountController {
     	Account account  = new Account();
     	
     	mav.addObject("login",account);
-    	mav.setViewName("B/Account/login");
+    	mav.setViewName("F/Account/Flogin");
     	return mav;
 			
     }

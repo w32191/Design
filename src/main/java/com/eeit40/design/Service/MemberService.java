@@ -44,20 +44,25 @@ public class MemberService {
 	
 	
 	
-	public Member memberRegister(Member member, Account id) {
+	public Member memberRegister(Member member) {
 		
-		Account Accountid = AccountDao.findAccountById(id);
-		Account getfkaccountid = member.getFkAccount();
-		
-		if(getfkaccountid == null) {
-			member.setFkAccount(Accountid);
+//		Account Accountid = AccountDao.findAccountById(id);
+//		Account getfkaccountid = member.getFkAccount();
+//		
+//		if(getfkaccountid == null) {
+//			member.setFkAccount(Accountid);
 			Member savemember = memberDao.save(member);
 			return savemember;
-		}
-		
-		return null;
+//		}
+//		
+//		return null;
 
 		
+	}
+	
+	public Member findMemberByfkAccount(Account fkAccount){
+		
+		return  findMemberByfkAccount(fkAccount);
 	}
 
 
