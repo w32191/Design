@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "order_list")
 public class OrderList {
@@ -28,6 +30,7 @@ public class OrderList {
   @Column(name = "subTotal")
   private Integer subTotal;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_order_imformation_id")
   private OrderInformation fkOrderImformation;

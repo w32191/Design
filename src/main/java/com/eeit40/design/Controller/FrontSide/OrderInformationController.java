@@ -1,13 +1,16 @@
 package com.eeit40.design.Controller.FrontSide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -150,6 +153,34 @@ public class OrderInformationController {
 		
 		return "success";
 		
+	}
+	
+	
+	//會員訂單查詢
+	@GetMapping("F/orderrecord")
+	public ModelAndView selectByAccountId(ModelAndView mav){
+		
+		mav.setViewName("F/shoppingCart/orderRecord");
+		
+		List<OrderInformation> orderRecord = orderImformationService.selectByAccountId(accountId());
+		System.out.println(orderRecord);
+	
+		mav.getModel().put("orderRecord", orderRecord);
+		return mav;
+	}
+	
+	//會員訂單明細查詢
+	@ResponseBody
+	@GetMapping("F/orderProduct")
+	public  List<OrderList> selectByImforId(HttpServletRequest request) {
+		
+		String fkOrderImformation = request.getParameter("fkOrderImformation");
+		
+		int imfroId = Integer.valueOf(fkOrderImformation);
+
+		List<OrderList> orderProduct = orderImformationService.selectByImforId(imfroId);
+		
+		return orderProduct;
 	}
 	
 }
