@@ -120,15 +120,18 @@ public class ShoppingCartController {
 
 	// 新增(確認購物車品項是否重複)
 	// 以產品id修改數量
-	@PostMapping("F/addshoppingcart")
-	public ModelAndView addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
+	@GetMapping("F/addshoppingcart")
+	@ResponseBody
+	public String addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
 
-		String tempMount = request.getParameter("amount");
-		String fkProduct = request.getParameter("fkProduct");
+		String tempMount = request.getParameter("qty");
+		String fkProduct = request.getParameter("id");
 
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 
+		System.out.println("amount"+amount);
+		System.out.println("id"+productId);
 		// 假的account
 //		Account account = new Account();
 //		account.setId(1);
@@ -138,7 +141,7 @@ public class ShoppingCartController {
 
 		shoppingCartService.checkShoppingCart(amount, accountId(), productId);
 
-		return mav;
+		return "success";
 	}
 
 	// 以購物車id修改數量
