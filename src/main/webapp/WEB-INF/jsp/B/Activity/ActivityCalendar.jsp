@@ -223,7 +223,7 @@
 <script src="${contextRoot}/static/back/universal/lib/fullcalendar-5.11.0/moment.min.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/fullcalendar-5.11.0/main.min.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/fullcalendar-5.11.0/locales-all.js"></script>
-<script src="${contextRoot}/static/back/universal/js/calendar2.js"></script>
+<script src="${contextRoot}/static/back/universal/js/ActivityCalendar.js"></script>
 
 </body>
 

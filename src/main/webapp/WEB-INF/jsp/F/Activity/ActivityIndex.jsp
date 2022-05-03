@@ -25,6 +25,7 @@
     <!-- slider area start -->
     <section class="slider__area p-relative">
         <div class="slider-active">
+            <%-- SamWang to-do: 點活動後，轉換的商品頁未完成 --%>
             <c:forEach items="${allActivity}" var="ac">
                 <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
                            step="1">
