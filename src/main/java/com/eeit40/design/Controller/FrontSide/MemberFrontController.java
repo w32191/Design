@@ -1,4 +1,4 @@
-package com.eeit40.design.Controller.BackSide;
+package com.eeit40.design.Controller.FrontSide;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,28 +17,28 @@ import com.eeit40.design.Entity.Member;
 import com.eeit40.design.Service.MemberService;
 
 @RestController
-public class MemberController {
+public class MemberFrontController {
 
 	@Autowired
 	private MemberService memberService;
 	
 	
-	@GetMapping("/B/memberregister")
+	@GetMapping("/F/Fmemberregister")
 	public ModelAndView member(ModelAndView mav) {
 		
 		Member member = new Member();
 		
 		mav.getModel().put("memberregister", member);
 		
-		mav.setViewName("B/Member/memberregister");
+		mav.setViewName("F/Member/Fmemberregister");
 		
 		return mav;
 	}
 	
-	@PostMapping("/B/memberregister")
-	public ModelAndView memberregister(ModelAndView mav, @Valid @ModelAttribute(name = "memberregister") Member member,
+	@PostMapping("/F/Fmemberregister")
+	public ModelAndView memberregister(ModelAndView mav, @Valid @ModelAttribute(name = "Fmemberregister") Member member,
 		@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
-		@RequestParam(name = "address") String address, Account id, HttpSession session , BindingResult br) {
+		@RequestParam(name = "address") String address,HttpSession session , BindingResult br) {
 		
 		if(!br.hasErrors()) {
 			Account accre = (Account) session.getAttribute("member");
@@ -49,7 +49,7 @@ public class MemberController {
 				session.invalidate();
 				System.out.println(session);
 			}
-			mav.setViewName("B/Account/login");
+			mav.setViewName("F/Account/Flogin");
 			return mav;
 		}
 		return null;

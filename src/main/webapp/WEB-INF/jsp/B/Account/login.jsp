@@ -40,7 +40,7 @@
                                             </div>
                                             <br>
                                             <div class="form-group">
-                                                <label>密碼</label> <input type="password" name="pwd" class="form-control"
+                                               <label>密碼</label> <input type="password" name="pwd" class="form-control"
                                                     placeholder="請輸入密碼" />
                                             </div>
                                             <div class="checkbox">
@@ -64,6 +64,11 @@
                         </div>
                     </div>
                 </div>
+                
+                
+            
+
+
 
                 <script>
                 
@@ -74,9 +79,6 @@
                             showConfirmButton: false,
                             timer: 1500
                     })})
-                    
-                    
-
                 </script>
 
 
