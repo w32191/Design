@@ -54,7 +54,7 @@ $(function () {
         $('#insertQuestionDialog').removeAttr('hidden').dialog('open');
     });
 
-    //編輯 按鈕 
+    //編輯 按鈕
     $('body').on('click', 'button[name="edit"]', function () {
         let editBtn = $(this);
         let id = editBtn.parent('td').siblings('td:eq(0)').text();
@@ -62,56 +62,37 @@ $(function () {
         let oldQuestion = editBtn.parent('td').siblings('td:eq(2)').text();
         let oldAns = editBtn.parent('td').siblings('td:eq(3)').text();
 
-        console.log(editBtn);
-        console.log(id);
-        console.log(oldTypeStr);
-        console.log(oldQuestion);
-        console.log(oldAns);
-
+        
+        $('#editId').val(id);
         $('#question').val(oldQuestion);
         $('#answer').val(oldAns);
-
-        console.log(oldTypeStr.toString().indexOf('產品及服務')>= 0);
-        console.log(oldTypeStr.toString().indexOf('產品品質及維護')>= 0);
-        console.log(oldTypeStr.toString().indexOf('產品貨況')>= 0);
-        console.log(oldTypeStr.toString().indexOf('結帳')>= 0);
-        console.log(oldTypeStr.toString().indexOf('取消訂單') >= 0);
-
-        console.log(oldAns);
-
+        
         if (oldTypeStr.toString().indexOf('產品及服務') >= 0) {
-            // $('#question_type > option:eq(0)').prop('selected', true);
-            console.log(option:eq(1));
+            $('#question_type_edit > option:eq(1)').prop('selected',true);
         }
         if(oldTypeStr.toString().indexOf('產品品質及維護') >= 0){
-            $('#question_type > option:eq(1)').attr('selected','selected');
-            console.log(1);
+            $('#question_type_edit > option:eq(2)').prop('selected',true);
         }
         if(oldTypeStr.toString().indexOf('產品貨況') >= 0){
-            $('#question_type > option:eq(2)').attr('selected','selected');
-            console.log(2);
+            $('#question_type_edit > option:eq(3)').prop('selected',true);
         }
         if(oldTypeStr.toString().indexOf('結帳') >= 0){
-            $('#question_type > option:eq(3)').attr('selected','selected');
-            console.log(3);
+            $('#question_type_edit > option:eq(4)').prop('selected',true);
         }
         if(oldTypeStr.toString().indexOf('取消訂單') >= 0){
-            $('#question_type > option:eq(4)').attr('selected','selected');
-            console.log(4);
+            $('#question_type_edit > option:eq(5)').prop('selected',true);
         }
 
-
-        console.log($('#question_type > option:eq(0)').attr('selected', 'selected').val());
     });
 
     //送出按鈕（在編輯內層）
     $('#editCommitBtn').click(function () {
-        console.log($('#question_type > option:selected').val());
-
+        let editBtn = $(this);
+        let id = $('#editId').val();
         let data = {
-            "question_type": $('#question_type > option:selected').val(),
-            "question": $('#addQuestion').val(),
-            "answer": $('#addAnswer').val(),
+            "question_type": parseInt($('#question_type_edit > option:selected').val()),
+            "question": $('#question').val(),
+            "answer": $('#answer').val(),
             "id": id
         };
         console.log(data);
