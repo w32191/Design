@@ -1,15 +1,11 @@
 package com.eeit40.design.Controller.FrontSide;
 
-import com.eeit40.design.Service.ActivityService;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-
 import java.util.Map;
-import java.util.Map.Entry;
+
 import javax.servlet.http.HttpServletRequest;
 
-import lombok.extern.slf4j.Slf4j;
+import com.eeit40.design.Service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +21,13 @@ import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ShoppingCartService;
 
 @Controller
-@Slf4j
 public class ShoppingCartController {
 
 	@Autowired
-	private ShoppingCartService shoppingCartService;
+	private ActivityService activityService;
 
 	@Autowired
-	private ActivityService activityService;
+	private ShoppingCartService shoppingCartService;
 
 	public int accountId() {
 
@@ -47,16 +42,17 @@ public class ShoppingCartController {
 	}
 
 	// 查詢
+	// 查詢
 	@GetMapping("F/shoppingcart")
 	public ModelAndView findShoppingCratByAccountId(ModelAndView mav) {
 
 		mav.setViewName("F/shoppingCart/cart");
 
 		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
+//    Account account = new Account();
+//    account.setId(1);
+//    account.setEmail("admin@gmail.com");
+//    account.setPwd("admin");
 
 		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
 
@@ -71,6 +67,7 @@ public class ShoppingCartController {
 
 	}
 
+
 	// 修改
 	@PostMapping("F/editshoppingcart")
 	public ModelAndView editAmountByCartId(ModelAndView mav, HttpServletRequest request) {
@@ -81,12 +78,12 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int cartid = Integer.valueOf(id);
 		// 先給死的id
-//		int fkAccount = 1;
+//    int fkAccount = 1;
 		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
+//    Account account = new Account();
+//    account.setId(1);
+//    account.setEmail("admin@gmail.com");
+//    account.setPwd("admin");
 
 		shoppingCartService.editAmountByCartId(amount, cartid);
 
@@ -97,17 +94,16 @@ public class ShoppingCartController {
 
 	// 刪除
 	@GetMapping("F/deleteshoppingcart")
-	public ModelAndView deleteShoppingCratByCartId(ModelAndView mav,
-			@RequestParam(name = "id") int id) {
+	public ModelAndView deleteShoppingCratByCartId(ModelAndView mav, @RequestParam(name = "id") int id) {
 
 		shoppingCartService.deletById(id);
 
 		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
-//		int fkAccount = 2;
+//    Account account = new Account();
+//    account.setId(1);
+//    account.setEmail("admin@gmail.com");
+//    account.setPwd("admin");
+//    int fkAccount = 2;
 		mav.setViewName("redirect:/F/shoppingcart?fkAccount=" + accountId());
 
 		return mav;
@@ -115,29 +111,30 @@ public class ShoppingCartController {
 	}
 
 	// 新增
-//	@PostMapping("F/addshoppingcart1")
-//	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
+// @PostMapping("F/addshoppingcart1")
+// public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
 //
-//		String tempMount = request.getParameter("amount");
-////		String  sessionId= request.getRequestedSessionId();
-//		String fkProduct = request.getParameter("fkProduct");
+//    String tempMount = request.getParameter("amount");
+////      String  sessionId= request.getRequestedSessionId();
+//    String fkProduct = request.getParameter("fkProduct");
 //
-//	    int amount = Integer.valueOf(tempMount);
-////	    int accountId = Integer.valueOf(sessionId);
-//	    int productId = Integer.valueOf(fkProduct);
+//     int amount = Integer.valueOf(tempMount);
+////       int accountId = Integer.valueOf(sessionId);
+//     int productId = Integer.valueOf(fkProduct);
 //
-//	    int fakesessionid=2;
+//     int fakesessionid=2;
 //
-//	    shoppingCartService.addProductToShoppingCart(amount, fakesessionid, productId);
+//     shoppingCartService.addProductToShoppingCart(amount, fakesessionid, productId);
 //
-//		return mav;
+//    return mav;
 //
-//	}
+// }
 
 	// 新增(確認購物車品項是否重複)
 	// 以產品id修改數量
-	@PostMapping("F/addshoppingcart")
-	public ModelAndView addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
+	@GetMapping("F/addshoppingcart")
+	@ResponseBody
+	public String addProductToShoppingCart(ModelAndView mav, HttpServletRequest request) {
 
 		String tempMount = request.getParameter("amount");
 		String fkProduct = request.getParameter("fkProduct");
@@ -145,36 +142,38 @@ public class ShoppingCartController {
 		int amount = Integer.valueOf(tempMount);
 		int productId = Integer.valueOf(fkProduct);
 
+		System.out.println("amount"+amount);
+		System.out.println("id"+productId);
 		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
-//		int fkAccount = 2;
+//    Account account = new Account();
+//    account.setId(1);
+//    account.setEmail("admin@gmail.com");
+//    account.setPwd("admin");
+//    int fkAccount = 2;
 
 		shoppingCartService.checkShoppingCart(amount, accountId(), productId);
 
-		return mav;
+		return "success";
 	}
 
 	// 以購物車id修改數量
-//	@PostMapping("F/addshoppingcart2")
-//	public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
+// @PostMapping("F/addshoppingcart2")
+// public ModelAndView addProductToShoppingCart(ModelAndView mav,HttpServletRequest request) {
 //
-//		String id = request.getParameter("id");
-//		String tempMount = request.getParameter("amount");
-//		String fkProduct = request.getParameter("fkProduct");
+//    String id = request.getParameter("id");
+//    String tempMount = request.getParameter("amount");
+//    String fkProduct = request.getParameter("fkProduct");
 //
-//		int cartId = Integer.valueOf(id);
-//		int amount = Integer.valueOf(tempMount);
-//		int productId = Integer.valueOf(fkProduct);
+//    int cartId = Integer.valueOf(id);
+//    int amount = Integer.valueOf(tempMount);
+//    int productId = Integer.valueOf(fkProduct);
 //
-//	    int fakesessionid=1;
+//     int fakesessionid=1;
 //
-//	    shoppingCartService.checkShoppingCart(fakesessionid, productId, amount, cartId);
+//     shoppingCartService.checkShoppingCart(fakesessionid, productId, amount, cartId);
 //
-//		return mav;
-//	}
+//    return mav;
+// }
 
 	// 確認coupon可否使用
 	@ResponseBody
@@ -201,13 +200,13 @@ public class ShoppingCartController {
 
 					return discountCouponDto;
 				}
-				discountCouponDto.setErrMsg("優惠券已過期" + " , " + "請輸入正確優惠券代碼");
+				discountCouponDto.setErrMsg("優惠券已過期"+" , "+"請輸入正確優惠券代碼");
 				return discountCouponDto;
 			}
-			discountCouponDto.setErrMsg("優惠券活動時間尚未開始" + " , " + "請輸入正確優惠券代碼");
+			discountCouponDto.setErrMsg("優惠券活動時間尚未開始"+" , "+"請輸入正確優惠券代碼");
 			return discountCouponDto;
 		}
-		discountCouponDto.setErrMsg("查無此優惠券" + " , " + "請輸入正確優惠券代碼");
+		discountCouponDto.setErrMsg("查無此優惠券"+" , "+"請輸入正確優惠券代碼");
 		return discountCouponDto;
 	}
 
