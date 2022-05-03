@@ -14,6 +14,7 @@
 
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+   
 </head>
 
 <body class="bg-primary">
@@ -38,12 +39,7 @@
                                 <label>密碼</label>
                                 <input type="password" name="pwd" class="form-control" placeholder="請填入密碼">
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">同意相關條款
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">註冊</button>
+                            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">下一步</button>
                             <div class="register-link m-t-15 text-center">
                                 <p>已有帳號<a href="/Design/B/login">登入</a></p>
                             </div>

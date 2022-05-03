@@ -97,27 +97,26 @@
                                              				
                                              				<div class="name-content">
                                                                 <span class="contact-title">姓名:</span>
-                                                                <input class="mail-address" type="text" name="names" >
+                                                                <input class="mail-address" type="text" name="names" value="${member.names}" >
                                                             </div>
                                                             <br>
                                                             <div class="phone-content">
                                                                 <span class="contact-title">電話:</span>
-                                                                <input class="phone-number" type="text" name="phone" >
-                                                            </div>
-                                                            <br>
-                                                            <div class="address-content">
-                                                                <span class="contact-title">服務地區:</span>
-                                                                <input class="mail-address" type="text" name="address">
+                                                                <input class="phone-number" type="tel" name="phone" value="${member.phone}">
                                                             </div>
                                                             <br>
                                                             <div class="address-content">
                                                                 <span class="contact-title">地址:</span>
-                                                                <input class="mail-address" type="text" name="address">
+                                                                <input class="mail-address" type="text" name="address" value="${member.address}">
                                                             </div>
                                                             <br>
                                                             <div class="email-content">
                                                                 <span class="contact-title">信箱:</span>
-                                                                <input class="contact-email" type="email" name="email">
+                                                                <input class="contact-email" type="email" name="email" value="${account.email}">
+                                                            </div>
+                                                             <div class="password-content">
+                                                                <span class="contact-title">密碼:</span>
+                                                                <input class="contact-email" type="text" name="pwd" value="${account.pwd}">
                                                             </div>
                                                             <br>
                                                         </div>

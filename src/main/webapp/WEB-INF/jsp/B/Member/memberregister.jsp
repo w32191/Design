@@ -14,6 +14,7 @@
 
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-primary">
@@ -24,7 +25,7 @@
             <div class="col-lg-6">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a href="index.html"><span>註冊Design後台管理系統</span></a>
+                        <a href="index.html"><span>Design後台管理系統</span></a>
                     </div>
                     <div class="login-form">
                         <h4>填寫詳細資料</h4>
@@ -36,17 +37,13 @@
                             </div>
                              <div class="form-group">
                                 <label>電話</label>
-                                <input type="text" name="phone" class="form-control" placeholder="請填入電話">
-                            </div>
-                             <div class="form-group">
-                                <label>服務地區</label>
-                                <input type="text" name="serviceArea" class="form-control" placeholder="請選擇服務地區">
+                                <input type="tel" name="phone" class="form-control" placeholder="請填入電話">
                             </div>
                              <div class="form-group">
                                 <label>公司地址</label>
                                 <input type="text" name="address" class="form-control" placeholder="請填入公司地址">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">註冊</button>
+                            <button type="submit" id="memberregister" class="btn btn-primary btn-flat m-b-30 m-t-30">完成</button>
                             <div class="register-link m-t-15 text-center">
                                 <p>已有帳號<a href="/Design/B/login">登入</a></p>
                             </div>
@@ -57,6 +54,18 @@
         </div>
     </div>
 </div>
+
+
+                <script>
+                
+                    document.getElementById('memberregister').addEventListener('click' ,function(){
+                        Swal.fire({
+                            icon: 'success',
+                            title: '填寫成功',
+                            showConfirmButton: false,
+                            timer: 1500
+                    })})
+                </script>
 
 </body>
 

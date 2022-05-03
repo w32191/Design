@@ -1,13 +1,16 @@
 package com.eeit40.design.Controller.FrontSide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +39,7 @@ public class OrderInformationController {
 	public int accountId() {
 		
 	   Account account = new Account();
-	   account.setId(2);
+	   account.setId(4);
 	   account.setEmail("admin@gmail.com");
 	   account.setPwd("admin");
 	   
@@ -82,12 +85,6 @@ public class OrderInformationController {
 	@PostMapping("F/checkoutorderlist")
 	public ModelAndView checkoutOrderList(ModelAndView mav, HttpServletRequest request,HttpSession session) {
 		
-		// 假的account
-//		Account account = new Account();
-//		account.setId(1);
-//		account.setEmail("admin@gmail.com");
-//		account.setPwd("admin");
-		
 		String discount = request.getParameter("discount");
 		
 		mav.getModel().put("discount", discount);
@@ -100,25 +97,31 @@ public class OrderInformationController {
 	}
 	
 	//checkout data存到db
-	public ModelAndView addOrderImfor(ModelAndView mav,HttpServletRequest request) {
+	@ResponseBody
+	@PostMapping("F/orderimforlist")
+	public String addOrderImfor(ModelAndView mav,HttpServletRequest request) {
 		
+		// 假的account
+		   Account account = new Account();
+		   account.setId(4);
+
 		//新增OrderInformation
 		OrderInformation orderInfo = new OrderInformation();
+		orderInfo.setFkAccount(account);
 		orderInfo.setName(request.getParameter("recipient"));
 		orderInfo.setPhone(request.getParameter("phone"));
 		orderInfo.setAdd(request.getParameter("address"));
-		orderInfo.setNotes(request.getParameter("note"));
-		
+		orderInfo.setNotes(request.getParameter("notes"));
+		System.out.println("note"+request.getParameter("notes"));
 //		String coupondiscount = request.getParameter("discount");
 //		int discount = Integer.valueOf(coupondiscount);
 //		orderInfo.setDiscount(discount);
 		
-		//含discount
+		  //total有含discount
 		String orderTotal = request.getParameter("orderTotal");
 		int total = Integer.valueOf(orderTotal);
 		orderInfo.setTotal(total);
 		orderImformationService.addOrderImformation(orderInfo);
-		
 		
 		//新增orderList
 		List<ShoppingCard> cart = shoppingCartService.findShoppingCratByAccountId(accountId());
@@ -143,11 +146,41 @@ public class OrderInformationController {
 		
 		}
 		
+		//訂單成立後刪除購物車
+		shoppingCartService.deleteByAccountId(accountId());
 		
 		
 		
+		return "success";
+		
+	}
+	
+	
+	//會員訂單查詢
+	@GetMapping("F/orderrecord")
+	public ModelAndView selectByAccountId(ModelAndView mav){
+		
+		mav.setViewName("F/shoppingCart/orderRecord");
+		
+		List<OrderInformation> orderRecord = orderImformationService.selectByAccountId(accountId());
+		System.out.println(orderRecord);
+	
+		mav.getModel().put("orderRecord", orderRecord);
 		return mav;
+	}
+	
+	//會員訂單明細查詢
+	@ResponseBody
+	@GetMapping("F/orderProduct")
+	public  List<OrderList> selectByImforId(HttpServletRequest request) {
 		
+		String fkOrderImformation = request.getParameter("fkOrderImformation");
+		
+		int imfroId = Integer.valueOf(fkOrderImformation);
+
+		List<OrderList> orderProduct = orderImformationService.selectByImforId(imfroId);
+		
+		return orderProduct;
 	}
 	
 }
