@@ -12,6 +12,12 @@
 
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
+
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
+          rel="stylesheet"/>
+    <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+          rel="stylesheet"/>
+
 </head>
 <body>
 
@@ -46,7 +52,7 @@
     <!-- page title area end -->
 
     <!-- coupon-area start -->
-    <!-- <section class="coupon-area pt-100 pb-30">
+    <section class="coupon-area pt-100 pb-30">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -107,12 +113,12 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
     <!-- coupon-area end -->
     <!-- checkout-area start -->
     <section class="checkout-area pb-70">
         <div class="container">
-            <form action="#">
+            <!-- <form action="#"> -->
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkbox-form ">
@@ -122,13 +128,13 @@
                                     <div class="checkout-form-list">
                                         <label>Recipient <span
                                                 class="required">*</span></label>
-                                        <input type="text" name="recipient" placeholder=""/>
+                                        <input type="text" name="recipient" id="recipient" placeholder=""/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Phone No <span class="required">*</span></label>
-                                        <input type="text" name="phone" placeholder=""/>
+                                        <input type="text" name="phone" id="phone" placeholder=""/>
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-12">
@@ -181,7 +187,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <input type="text" placeholder="Street address"/>
+                                        <input type="text" id="street" placeholder="Street address"/>
                                     </div>
                                 </div>
                                 <div style="display: none;">
@@ -348,14 +354,13 @@
                                     </div>
                                 </div>
                                 <div class="order-button-payment mt-20">
-                                    <button type="submit" class="os-btn os-btn-black">Place order
-                                    </button>
+                                    <button type="submit" class="os-btn os-btn-black" id="submit">Place order </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            <!-- </form> -->
         </div>
     </section>
     <!-- checkout-area end -->
@@ -433,9 +438,54 @@
         
     })
 
+    //結帳
+    $("#submit").on("change click",function(){
+
+        let country = $("#country>option:selected").text();
+        let district = $("#district>option:selected").text();
+        let street = $("#street").val();
+
+        let recipient = $("#recipient").val();
+        let phone = $(".phone").val();
+        let address = country+district+street
+        let note = $("#checkout-mess").val();
+        console.log(note);
+        let orderTotal = $("#order-total").text().slice(1);
+
+        $.ajax({
+            url:"orderimforlist",
+            type:"POST",
+            data:{
+                recipient:recipient,
+                phone:phone,
+                address:address,
+                notes:note,
+                orderTotal:orderTotal
+            },
+            success:function(result){
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>訂單已成立</h5>",
+                }).then(function () {
+                    // location.replace('/Design/F/Product/');
+                    window.location.href='/Design/F/Product/';
+                    console.log(result)
+                });
+            },
+            error:function(err){
+                console.log(err)
+
+            }
+        })
+        
+    })
+
+
 </script>
 
 <script src="${contextRoot}/static/back/universal/taiwan_districts.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 
 </body>
 

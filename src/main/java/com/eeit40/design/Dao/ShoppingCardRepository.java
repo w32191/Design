@@ -25,6 +25,8 @@ public interface ShoppingCardRepository extends JpaRepository<ShoppingCard, Inte
 	public void editAmountByCartId(@Param("amount") int tempMount,@Param("id") int id);
 	
 	//新增
+	@Transactional
+	@Modifying
 	@Query(value="insert into shopping_card(temp_mount,fk_account_id,fk_product_id) values(:amount,:accountId,:productId)",nativeQuery = true)
 	public void addProductToShoppingCart(@Param("amount") int tempMount,@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
 	
@@ -38,4 +40,9 @@ public interface ShoppingCardRepository extends JpaRepository<ShoppingCard, Inte
 	@Query(value="update shopping_card set temp_mount=:amount where fk_account_id = :accountId and fk_product_id = :productId",nativeQuery = true)
 	public void editAmountByProduct(@Param("amount") int tempMount,@Param("accountId") int fkAccount,@Param("productId") int fkProduct);
 	
+	//刪除by accountId
+	@Transactional
+	@Modifying
+	@Query(value="delete shopping_card where fk_account_id=:accountId",nativeQuery = true)
+	public void deleteByAccountId(@Param("accountId") int fkAccount);
 }
