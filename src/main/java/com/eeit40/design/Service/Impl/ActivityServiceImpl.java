@@ -5,16 +5,19 @@ import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ImgurImgRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
+import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Entity.ShoppingCard;
 import com.eeit40.design.Service.ActivityService;
 import com.eeit40.design.Util.ImgurUtil;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -74,9 +77,25 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   @Override
+  public List<EventDto> findAllEvent() {
+    List<Activity> result = activityRepository.findAll();
+    List<EventDto> eventDtoList = new ArrayList<>();
+    for (Activity ac : result) {
+      EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
+      eventDtoList.add(dto);
+    }
+    return eventDtoList;
+  }
+
+  @Override
   public Page<Activity> findByPage(Integer pageNumber) {
     Pageable page = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return activityRepository.findAll(page);
+  }
+
+  @Override
+  public List<Activity> findActivitiesNow() {
+    return activityRepository.findActivitiesCurrentTime();
   }
 
   @Override
@@ -158,8 +177,8 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setContent(dto.getContent());
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
+    activity.setDiscountPercentage(dto.getDiscountPercentage());
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
-
 
     //    如果有上傳照片
     if (imgs != null) {
@@ -186,23 +205,43 @@ public class ActivityServiceImpl implements ActivityService {
     return dto;
   }
 
+  // 找全部的品牌
   @Override
   public List<Brand> getAllBrands() {
     return brandRepository.findAll();
   }
 
+  // 找分頁過後的品牌
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
     Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
     return brandRepository.findAll(pageable);
   }
 
+  // 找品牌的全部產品
   @Override
   public List<Product> findProductByFkBrand(Brand brand) {
     return productRepository.findProductByFkBrand(brand);
   }
 
+  // 找現在時間，活動中的產品
+  @Override
+  public List<Product> findProductsWithCurrentActivity() {
+    // 先找到現在時間正在進行活動
+    List<Activity> activitiesNowList = findActivitiesNow();
 
+    List<Product> productList = new ArrayList<>();
+
+    for (Activity activity : activitiesNowList) {
+      if (activity.getProducts() != null) {
+        productList.addAll(activity.getProducts());
+      }
+    }
+    return productList;
+  }
+
+
+  // 檢查現在要加入活動的商品，活動時間是否與其他活動衝突
   @Override
   public Map<String, String> ableCheckProduct(
       LocalDate startDate, LocalDate endDate,
@@ -253,6 +292,67 @@ public class ActivityServiceImpl implements ActivityService {
     return resultMap;
   }
 
+
+  // 用product id取得現在此產品的折扣%
+  // 給ajax呼叫的Controller用
+  @Override
+  public Map<String, Integer> getCurrentDiscountStringMap(Integer productId) {
+
+    Product product = productRepository.findProductById(productId);
+    // 選現在時間
+    LocalDate now = LocalDate.now();
+    // 預設折扣為0
+    Integer discount = 0;
+
+    Map<String, Integer> result = new LinkedHashMap<>();
+
+    if (product != null) {
+
+      for (Activity activity : product.getActivities()) {
+
+        // 找到當日有活動的折扣
+        if (
+            (activity.getStartDate().isBefore(now) || activity.getStartDate().isEqual(now)) &&
+                (activity.getEndDate().isEqual(now) || activity.getEndDate().isAfter(now))
+        ) {
+          discount = activity.getDiscountPercentage();
+        } // end of if()
+      } // end of for()
+      result.put("productId", productId);
+      result.put("discount", discount);
+    }
+    return result;
+  }
+
+  // 用product id 當Map 的 key
+  // ModelAndView的Controller呼叫用
+  @Override
+  public Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart) {
+
+    Map<Integer, Integer> resultMap = new LinkedHashMap<>();
+    // 選現在時間
+    LocalDate now = LocalDate.now();
+
+    for (ShoppingCard shoppingCard : cart) {
+
+      //  如果這個產品有活動
+      if (shoppingCard.getFkProduct().getActivities() != null) {
+
+        for (Activity activity : shoppingCard.getFkProduct().getActivities()) {
+          // 遍歷所有活動，找看看是否現在的時間點
+          if (
+              (activity.getStartDate().isBefore(now) || activity.getStartDate().isEqual(now)) &&
+                  (activity.getEndDate().isEqual(now) || activity.getEndDate().isAfter(now))
+          ) {
+            // 有找到現在的活動
+            resultMap.put(shoppingCard.getFkProduct().getId(), activity.getDiscountPercentage());
+          } // end of inner if()
+        } // end of inner for()
+      } // end of outer if()
+    } // end of outer for()
+
+    return resultMap;
+  }
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

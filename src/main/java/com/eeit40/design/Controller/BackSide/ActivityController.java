@@ -41,5 +41,10 @@ public class ActivityController { // 用來跳轉頁面用的controller
     return mav;
   }
 
+  @GetMapping("/B/Activity/Calendar")
+  public ModelAndView calendarPage(ModelAndView mav) {
+    mav.setViewName("/B/Activity/ActivityCalendar");
+    return mav;
+  }
 
 }

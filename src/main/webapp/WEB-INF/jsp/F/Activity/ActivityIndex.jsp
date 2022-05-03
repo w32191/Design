@@ -21,9 +21,11 @@
 <jsp:include page="../IncludePage/layoutPage/headerPage.jsp"/>
 
 <main>
+    <%--    活動輪播圖--%>
     <!-- slider area start -->
     <section class="slider__area p-relative">
         <div class="slider-active">
+            <%-- SamWang to-do: 點活動後，轉換的商品頁未完成 --%>
             <c:forEach items="${allActivity}" var="ac">
                 <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
                            step="1">
@@ -62,7 +64,7 @@
         <div class="container">
             <div class="banner__inner p-relative mt--95">
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
                                 <a href="product-details.html" class="w-img"><img
@@ -70,13 +72,13 @@
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h5><a href="product-details.html">Sunflower Clock <br> Quartz Hands</a>
-                                </h5>
+                                <h2><a href="product-details.html">找設計？</a>
+                                </h2>
                                 <a href="product-details.html" class="link-btn">Discover now</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
                                 <a href="product-details.html" class="w-img"><img
@@ -84,22 +86,7 @@
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h5><a href="product-details.html">Chair Kimi No Isu <br>
-                                    Project</a></h5>
-                                <a href="product-details.html" class="link-btn">Discover now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="banner__item mb-30 p-relative">
-                            <div class="banner__thumb fix">
-                                <a href="product-details.html" class="w-img"><img
-                                        src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-3.jpg"
-                                        alt="banner"></a>
-                            </div>
-                            <div class="banner__content p-absolute transition-3">
-                                <h5><a href="product-details.html">Sweeper and Dustpan <br> by Jan
-                                    Kochanski </a></h5>
+                                <h2><a href="product-details.html">找案例？</a></h2>
                                 <a href="product-details.html" class="link-btn">Discover now</a>
                             </div>
                         </div>
@@ -129,436 +116,64 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="product__slider owl-carousel">
-                        <div class="product__item">
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-1.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-10.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
+                        <c:forEach begin="0" end="${productList.size()-1}" step="2" var="i">
+                            <div class="product__item">
+                                <div class="product__wrapper mb-60">
+                                    <div class="product__thumb">
+                                        <a href="product-details.html" class="w-img">
+                                            <img src="${productList.get(i).image01}"
+                                                 alt="product-img">
+                                            <img class="product__thumb-2"
+                                                 src="${productList.get(i).image02}"
+                                                 alt="product-img">
                                         </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
                                     </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
+                                    <div class="product__content p-relative">
+                                        <div class="product__content-inner">
+                                            <h4><a href="product-details.html">Wooden container
+                                                Bowl</a>
+                                            </h4>
+                                            <div class="product__price transition-3">
+                                                <span>$96.00</span>
+                                                <span class="old-price">$96.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="add-cart p-absolute transition-3">
+                                            <a href="#">+ Add to Cart</a>
                                         </div>
                                     </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-5.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-11.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                        <span class="percent">-16%</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
+                                <c:if test="${(i+1 )< productList.size()-1}">
+                                    <div class="product__wrapper mb-60">
+                                        <div class="product__thumb">
+                                            <a href="product-details.html" class="w-img">
+                                                <img src="${productList.get(i+1).image01}"
+                                                     alt="product-img">
+                                                <img class="product__thumb-2"
+                                                     src="${productList.get(i+1).image02}"
+                                                     alt="product-img">
+                                            </a>
+                                        </div>
+                                        <div class="product__content p-relative">
+                                            <div class="product__content-inner">
+                                                <h4><a href="product-details.html">Wooden container
+                                                    Bowl</a>
+                                                </h4>
+                                                <div class="product__price transition-3">
+                                                    <span>$96.00</span>
+                                                    <span class="old-price">$96.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="add-cart p-absolute transition-3">
+                                                <a href="#">+ Add to Cart</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
+                                </c:if>
                             </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-2.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-9.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                        <span class="percent">-16%</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-6.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-7.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-3.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-8.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-7.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-1.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                        <span class="percent">-16%</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-4.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-12.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                        <span class="percent">-16%</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-8.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-3.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-5.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-11.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__wrapper mb-60">
-                                <div class="product__thumb">
-                                    <a href="product-details.html" class="w-img">
-                                        <img src="${contextRoot}/static/front/assets/img/shop/product/product-4.jpg"
-                                             alt="product-img">
-                                        <img class="product__thumb-2"
-                                             src="${contextRoot}/static/front/assets/img/shop/product/product-1.jpg"
-                                             alt="product-img">
-                                    </a>
-                                    <div class="product__action transition-3">
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Add to Wishlist">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top"
-                                           title="Compare">
-                                            <i class="fal fa-sliders-h"></i>
-                                        </a>
-                                        <!-- Button trigger modal -->
-                                        <a href="#" data-toggle="modal"
-                                           data-target="#productModalId">
-                                            <i class="fal fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product__sale">
-                                        <span class="new">new</span>
-                                    </div>
-                                </div>
-                                <div class="product__content p-relative">
-                                    <div class="product__content-inner">
-                                        <h4><a href="product-details.html">Wooden container Bowl</a>
-                                        </h4>
-                                        <div class="product__price transition-3">
-                                            <span>$96.00</span>
-                                            <span class="old-price">$96.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-cart p-absolute transition-3">
-                                        <a href="#">+ Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
+
                 </div>
             </div>
             <div class="row">
@@ -572,46 +187,6 @@
     </section>
     <!-- product area end -->
 
-    <!-- banner area start -->
-    <div class="banner__area-2 pb-60">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
-                <div class="col-xl-6 col-lg-6">
-                    <div class="banner__item-2 banner-right p-relative mb-30 pr-15">
-                        <div class="banner__thumb fix">
-                            <a href="product-details.html" class="w-img"><img
-                                    src="${contextRoot}/static/front/assets/img/shop/banner/banner-big-1.jpg"
-                                    alt="banner"></a>
-                        </div>
-                        <div class="banner__content-2 p-absolute transition-3">
-                            <span>Products Essentials</span>
-                            <h4><a href="product-details.html">Bottle With Wooden Cork</a></h4>
-                            <p>Mirum est notare quam littera gothica, quam nunc putamus <br> parum
-                                claram, anteposuerit litterarum formas.</p>
-                            <a href="product-details.html" class="os-btn os-btn-2">buy now / <span>$59.25</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class=" banner__item-2 banner-left p-relative mb-30 pl-15">
-                        <div class="banner__thumb fix">
-                            <a href="product-details.html" class="w-img"><img
-                                    src="${contextRoot}/static/front/assets/img/shop/banner/banner-big-2.jpg"
-                                    alt="banner"></a>
-                        </div>
-                        <div class="banner__content-2 banner__content-2-right p-absolute transition-3">
-                            <span>Products Furniture</span>
-                            <h4><a href="product-details.html">Hauteville Plywood Chair</a></h4>
-                            <p>Mirum est notare quam littera gothica, quam nunc putamus <br> parum
-                                claram, anteposuerit litterarum formas.</p>
-                            <a href="product-details.html" class="os-btn os-btn-2">buy now / <span>$396.99</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner area end -->
 
     <!-- sale off area start -->
     <section class="sale__area pb-100">

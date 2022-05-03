@@ -17,7 +17,7 @@ public class CasesPhoto {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
+  @Column(name = "case_photo_id", nullable = false)
   private Integer id;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_cases_id")
