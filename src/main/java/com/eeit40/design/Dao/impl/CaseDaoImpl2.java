@@ -145,6 +145,7 @@ public class CaseDaoImpl2 {
     }
 
     public void deleteCaseById(Integer id) {
+
         String sql1 = "DELETE from cases_photo WHERE fk_cases_id=:fk_id";
         Map<String, Object> map2 = new HashMap<>();
         map2.put("fk_id", id);
