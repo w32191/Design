@@ -24,10 +24,10 @@
         <a class="nav-link" href="${contextRoot}/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/message/add">新增公告</a>
+        <a class="nav-link" href="${contextRoot}/add">新增公告</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/message/viewMessages">查看公告</a>
+        <a class="nav-link" href="${contextRoot}/viewMessages">查看公告</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled">Disabled</a>

@@ -7,9 +7,15 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.lang.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class AnnouncementDto implements Serializable {
-
+	
+  private static final long SerializableUID = 1L;
+  @JsonProperty("message")
+  private String msg;
+  
   private Integer id;
   private String content; 
   private Date added;
@@ -24,8 +30,17 @@ public class AnnouncementDto implements Serializable {
     this.id = id;
     this.content = content;
     this.added = added;  
+  
   }
 
+  public String getMsg() {
+	  return msg;
+  }
+  
+  public void setMsg(String msg) {
+	  this.msg = msg;
+  }
+  
   public Integer getId() {
     return id;
   }

@@ -31,12 +31,13 @@ public class AnnouncementPageController {
 		AnnouncementWorkMessages lastMag = messageService.getLastest();
 		mav.getModel().put("lastMessage", lastMag);
 		System.out.println(message);
-        mav.setViewName("B/Announcement/addMessage2");
+        mav.setViewName("addMessage2");
 		return mav;
 	}
 	
 	@GetMapping("/B/Announcement/viewMessages")
 	public ModelAndView viewMessages(ModelAndView mav, @RequestParam(name="p", defaultValue = "1") Integer pageNumber) {
+		System.out.println("pageNumber=" + pageNumber);
 		Page<AnnouncementWorkMessages> page = messageService.findByPage(pageNumber);
 		System.out.println(page.getContent());
 		mav.getModel().put("page", page);
@@ -45,4 +46,9 @@ public class AnnouncementPageController {
 		return mav;
 	}
 
+	@GetMapping("/B/Announcement/ajax")
+	public String ajaxPage() {
+		return "ajax-messages";
+	}
+	
 }

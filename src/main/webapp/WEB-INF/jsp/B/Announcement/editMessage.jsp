@@ -58,46 +58,30 @@
 							<div class="card">
 								<c:forEach var="announcementWorkMessages"
 									items="${page.content}">
-									<div class="card-header">
+										<div class="card-header">編輯訊息</div>
+				<div class="card-body">
 
-										新增時間 <span> <fmt:formatDate
-												pattern="yyyy-MM-dd HH:mm:ss EEEE"
-												value="${announcementWorkMessages.added}" />
-										</span>
-									</div>
-									<div class="card-body">
-										<c:out value="${announcementWorkMessages.content}" />
-										<div class="edit-link">
-											<a
-												href="${contextRoot}/editMessage?id=${announcementWorkMessage.id}">編輯
-											</a> | <a onclick="return confirm('確認刪除')"
-												href="${contextRoot}/deleteMessage?id=${announcementWorkMessage.id}">刪除</a>
-										</div>
-									</div>
+					<form:form class="form" method="POST" modelAttribute="announcementWorkMessage">
+					
+					 <form:input type="hidden" path="id" />
+					 <form:input type="hidden" path="added" />
+
+						<!-- form:errors  bindingResult 回傳的物件 -->
+						<form:errors path="text" />
+
+						<div class="input-group">
+							<form:textarea path="text" class="form-control"></form:textarea>
+						</div>
+
+						<input type="submit" name="submit" value="送出">
+					</form:form>
+
+
+				</div>
 								</c:forEach>
 
-								<div class="row justify-content-center">
-									<div class="col-9">
-										<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-
-											<c:choose>
-												<c:when test="${page.number != pageNumber-1 }">
-													<a
-														href="${contextRoot}/viewMessages?p=${pageNumber}"><c:out
-															value="${pageNumber}" /> </a>
-												</c:when>
-
-												<c:otherwise>
-													<c:out value="${pageNumber}" />
-												</c:otherwise>
-
-											</c:choose>
-
-											<c:if test="${pageNumber != page.totalPages}">
-		    |
-		   									</c:if>
-
-											</c:forEach>
+							
+					
 									</div>
 								</div>
 							</div>
@@ -127,10 +111,6 @@
 </body>
 
 </html>
-
-
-
-
 
 
 
