@@ -44,9 +44,14 @@ $(function () {
                                             </td>
                                             
                                             <td>
-                                            <a href="/Design/B/Product/editProduct?id=${pdres[i].id}"
-                                               <span class="ti-pencil-alt"></span>
+                                            <a href="/Design/B/Product/editProduct?id=${pdres[i].id}">
+                                               <span class="ti-pencil-alt"></span></a>
+                                              
+                                         
                                             </td>
+                                            
+                                            
+                                        </div>
                                         </tr>
 
                 `

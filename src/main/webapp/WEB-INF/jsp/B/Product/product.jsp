@@ -33,11 +33,7 @@
     <div class="main">
         <div class="container-fluid">
             <section id="main-content">
-                <div class="row">
 
-                    <input type="file" class="imgur" accept="image/*" data-max-size="5000" />
-
-                </div>
                 <!-- /# row -->
                 <div class="row">
 
@@ -63,6 +59,7 @@
                     <div class="col-lg-8">
                         <div>
                             <a href="/Design/B/Product/addProduct" class="btn btn-warning">＋新增商品</a>
+
                         </div>
                         <div class="card">
                             <div class="card-title pr">
@@ -121,29 +118,7 @@
 <script src="${contextRoot}/static/back/universal/js/Product.js"></script>
 <script>
 
-    // imgur圖片上傳
-    $("document").ready(function () {
-        $('input[type=file]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
 
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        });
-    })
-    ;
 
 </script>
 

@@ -1,6 +1,9 @@
 package com.eeit40.design.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -8,6 +11,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "product")
 public class Product {
 
@@ -51,6 +55,8 @@ public class Product {
     @Column(name = "avaliable")
     private Integer avaliable;
 
+    @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "added")
     private LocalDate added;
 

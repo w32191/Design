@@ -486,42 +486,27 @@ $(function () {
     })
 
 
-
-
     $('body').on('click', '#addToCartBtn', function () {
         console.log($('#amount').val());
         amount = $('#amount').val();
         // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&amount=${amount}`);
 
-        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount},function (res){
-
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount}, function (res) {
             console.log(res)
         })
-
-            // console.log($('#amount').val());
-
-
+        // console.log($('#amount').val());
     });
 
 
-
-
     // 下方新品推薦加入購物車
-    $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
+    $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
 
         let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
         console.log(id)
-        $.get("/Design/F/addshoppingcart", { "fkProduct":id, "amount": 1})
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
         {
             console.log($('#amount').val());
         }
-
     })
-
 })
-
-
-
-
-
-
+r
