@@ -1,17 +1,17 @@
 $(function () {
 
-    let getUrlString = location.href;
-    let url = new URL(getUrlString);
-    let id = url.searchParams.get('id')
-    console.log(id)
-    let qty;
+  let getUrlString = location.href;
+  let url = new URL(getUrlString);
+  let id = url.searchParams.get('id')
+  console.log(id)
+  let qty;
 
-    $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
-        console.log(res.name);
+  $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
+    console.log(res.name);
 
-        let txt = '';
+    let txt = '';
 
-        txt += `
+    txt += `
 <div class="shop__top grey-bg-6 pt-100 pb-90">
             <div class="container">
                 <div class="row">
@@ -60,12 +60,13 @@ $(function () {
                                      aria-labelledby="pro-one-tab">
                                     <div class="product__modal-img product__thumb ">
                                         <img src="${res.image01}"
-                                             alt="" width="400px">
-                                        <div class="product__sale ">
-                                            <span class="new">new</span>
-                                            <span class="percent">-16%</span>
-                                        </div>
-                                    </div>
+                                             alt="" width="400px">`;
+
+    if (res.discountPercentage != null) {
+      let dis = `<div class="product__sale"><span class="new">活動</span><span class="percent">-${res.discountPercentage}%</span></div>`;
+      txt += dis;
+    }
+    txt += `</div>
                                 </div>
                                 <div class="tab-pane fade" id="pro-two" role="tabpanel"
                                      aria-labelledby="pro-two-tab">
@@ -120,10 +121,17 @@ $(function () {
                                 <span class="review rating-left"><a
                                         href="#">Add your Review</a></span>
                             </div>
-                            <div class="product__price-2 mb-25">
-                                <span>$${res.price}</span>
-                                <span class="old-price">$${res.price}</span>
-                            </div>
+                            <div class="product__price-2 mb-25">`;
+
+    if (res.discountPercentage != null) {
+      txt += `<span>$${res.price * (100 - res.discountPercentage)
+      / 100}</span><span class="old-price">$${res.price}</span>`;
+
+    } else {
+      txt += `<span>$${res.price}</span>`;
+    }
+
+    txt += `</div>
                             <div class="product__modal-des mb-30">
                                 <p>品牌：<a href="/Design/F/product/productbybrand?brand=${res.fkBrand.id}" >${res.fkBrand.name}</a></p>
                                 <br>
@@ -421,37 +429,37 @@ $(function () {
         </div>
     `
 
-        $('#pd1').html(txt);
+    $('#pd1').html(txt);
 
-        $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
+    $(".cart-plus-minus").append(
+        '<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
 
-        $(".qtybutton").on("click", function () {
-            var $button = $(this);
-            var oldValue = $button.parent().find("input").val();
-            if ($button.text() == "+") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 0;
-                }
-            }
-            $button.parent().find("input").val(newVal);
-        });
-
+    $(".qtybutton").on("click", function () {
+      var $button = $(this);
+      var oldValue = $button.parent().find("input").val();
+      if ($button.text() == "+") {
+        var newVal = parseFloat(oldValue) + 1;
+      } else {
+        // Don't allow decrementing below zero
+        if (oldValue > 0) {
+          var newVal = parseFloat(oldValue) - 1;
+        } else {
+          newVal = 0;
+        }
+      }
+      $button.parent().find("input").val(newVal);
     });
 
+  });
 
-    $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
-        console.log(newa[0].id)
-        console.log(newa[0].name)
-        let natxt = '';
+  $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
+    console.log(newa[0].id)
+    console.log(newa[0].name)
+    let natxt = '';
 
-        for (let i = 0; i < 4; i++) {
-            natxt +=
-                `
+    for (let i = 0; i < 4; i++) {
+      natxt +=
+          `
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="product__wrapper mb-60">
                         <div class="product__thumb">
@@ -481,37 +489,31 @@ $(function () {
                     </div>
                 </div>
         `
-        }   //end of for
-        $('#na').html(natxt);
-    })
+    }   //end of for
+    $('#na').html(natxt);
+  })
 
+  $('body').on('click', '#addToCartBtn', function () {
+    console.log($('#Qty').val());
+    qty = $('#Qty').val();
+    // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&qty=${qty}`);
+    $.get("/Design/F/addshoppingcart", {"id": id, "qty": qty})
+    {
+      console.log($('#Qty').val());
+    }
+  });
 
+  // 下方新品推薦加入購物車
+  $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
 
+    let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
+    console.log(id)
+    $.get("/Design/F/addshoppingcart", {"id": id, "qty": 1})
+    {
+      console.log($('#Qty').val());
+    }
 
-    $('body').on('click', '#addToCartBtn', function () {
-        console.log($('#Qty').val());
-        qty = $('#Qty').val();
-        // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&qty=${qty}`);
-        $.get("/Design/F/addshoppingcart", {"id": id, "qty": qty})
-        {
-            console.log($('#Qty').val());
-        }
-    });
-
-
-
-
-    // 下方新品推薦加入購物車
-    $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
-
-        let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
-        console.log(id)
-        $.get("/Design/F/addshoppingcart", { "id":id, "qty": 1})
-        {
-            console.log($('#Qty').val());
-        }
-
-    })
+  })
 
 })
 

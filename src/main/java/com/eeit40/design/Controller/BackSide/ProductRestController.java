@@ -6,6 +6,7 @@ import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 
 import com.eeit40.design.Service.ActivityService;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.eeit40.design.Service.Impl.ProductServiceImpl;
@@ -33,9 +34,13 @@ public class ProductRestController {
   }
 
   @GetMapping("/B/product/findProductById/{id}")
-  public Product findProductById(@PathVariable Integer id) {
+  public ProductAndDiscount findProductById(@PathVariable Integer id) {
     Product resPro = dao.findProductById(id);
-    return (Product) resPro;
+    List<Product> productList = new ArrayList<>();
+    productList.add(resPro);
+    List<ProductAndDiscount> list = activityService.getProductsWithCurrentDiscount(productList);
+    return list.get(0);
+//    return (Product) resPro;
   }
 
   @GetMapping("/B/product/delete/{id}")
