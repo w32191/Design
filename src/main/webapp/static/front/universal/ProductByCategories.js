@@ -43,7 +43,7 @@ $(function () {
 
           if (res[i].discountPercentage != null) {
             txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
-            / 100}</span>`;
+            / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
           } else {
             txt += `<span>$${res[i].price}</span>`;
@@ -103,8 +103,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -163,8 +163,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -221,8 +221,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -280,8 +280,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -341,8 +341,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;

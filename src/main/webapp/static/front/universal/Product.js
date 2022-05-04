@@ -36,7 +36,7 @@ $(function () {
 
       if (res[i].discountPercentage != null) {
         txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
-        / 100}</span>`;
+        / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
       } else {
         txt += `<span>$${res[i].price}</span>`;
@@ -98,7 +98,7 @@ $(function () {
 
             if (res[i].discountPercentage != null) {
               txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
-              / 100}</span>`;
+              / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
             } else {
               txt += `<span>$${res[i].price}</span>`;
@@ -157,8 +157,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -214,7 +214,7 @@ $(function () {
 
             if (res[i].discountPercentage != null) {
               txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
-              / 100}</span>`;
+              / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
             } else {
               txt += `<span>$${res[i].price}</span>`;
@@ -270,8 +270,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100
-                      - res[i].discountPercentage) / 100}</span>`;
+                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
                   txt += `<span>$${res[i].price}</span>`;
@@ -327,10 +327,9 @@ $(function () {
                                         <div class="product__content-inner">
                                             <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
-
             if (res[i].discountPercentage != null) {
               txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
-              / 100}</span>`;
+              / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
             } else {
               txt += `<span>$${res[i].price}</span>`;
