@@ -29,7 +29,7 @@ public class CommonQuestionService {
 	//新增QA
 	public void insert(CommonQuestion cq){
 	  cqrDao.save(cq);
-  }
+    }
 	
 	//修改QA
     public void updateCommonQuestion(Integer id, String question_type, String question, String answer) {

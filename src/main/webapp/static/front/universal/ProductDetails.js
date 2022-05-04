@@ -6,6 +6,10 @@ $(function () {
     console.log(id)
     let qty;
 
+    $.getJSON(`/Design/F/ProductReview/ProductReview/${id}`, function (reviewres) {
+        console.log(reviewres);
+    });
+
     $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
         console.log(res.name);
 
@@ -230,149 +234,68 @@ $(function () {
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="review" role="tabpanel">
-                                    <div class="product__details-review">
-                                        <div class="postbox__comments">
-                                            <div class="postbox__comment-title mb-30">
-                                                <h3>Reviews (32)</h3>
-                                            </div>
-                                            <div class="latest-comments mb-30">
+                                    <div class="product__details-review" id="reviewStart">`;
+                                        
+                                    $.ajax({
+                                        url: `http://localhost:8080/Design/F/ProductReview/ProductReview/${id}`,
+                                        dataType: 'json',
+                                        method: 'get',
+                                        success: function (data) {
+                                            console.log("data.length:" + data.length);
+                                            let reviewMain = "";
+                                            reviewMain += `<div class="postbox__comments">
+                                                <div class="postbox__comment-title mb-30">
+                                                    <h3>`;
+                                            
+                                            reviewMain +=  `此商品有（` + data.length;
+                                                    
+                                            reviewMain +=  `）則評論</h3></div>`;
+                                            for (i = 0; i < data.length; i++) {
+                                                reviewMain += `<div class="latest-comments mb-30">
                                                 <ul>
                                                     <li>
                                                         <div class="comments-box">
                                                             <div class="comments-avatar">
-                                                                <img src="/Design/static/front/assets/img/blog/comments/avater-1.png"
-                                                                     alt="">
-                                                            </div>
+                                                                <img src="` + data[i].fkMember.images + `" alt="">
+                                                            </div>` ;
+                                    
+                                                reviewMain += `
                                                             <div class="comments-text">
-                                                                <div class="avatar-name">
-                                                                    <h5>Siarhei Dzenisenka</h5>
-                                                                    <span> - 3 months ago </span>
-                                                                    <a class="reply" href="#">Leave
-                                                                        Reply</a>
+                                                            <div class="avatar-name">
+                                                            <h5>` + data[i].fkMember.names + `</h5><span>`+ data[i].commentDate +`</span>
+                                                            </div>`;
+                                                
+                                                reviewMain += `
+                                                <div class="user-rating">
+                                                <ul>`;
+                                                for (j = 0; j < data[i].star; j++) {
+                                                    reviewMain += `<li><a href="#"><i
+                                                    class="fas fa-star"></i></a>
+                                                </li>
+                                                `;
+                                                }
+                                    
+                                                reviewMain += `</ul>
+                                                </div><p>` + data[i].comment + `</p>`;
+                                    
+                                                reviewMain += `</div>
                                                                 </div>
-                                                                <div class="user-rating">
-                                                                    <ul>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <p>Many desktop publishing packages
-                                                                    and web page editors now use
-                                                                    Lorem Ipsum as their default
-                                                                    model text, and a search for
-                                                                    <span>“lorem ipsum”</span> will
-                                                                    uncover many web sites still in
-                                                                    their infancy. Various versions
-                                                                    have evolved over the years,
-                                                                    sometimes by accident, sometimes
-                                                                    on purpose.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="children">
-                                                        <div class="comments-box">
-                                                            <div class="comments-avatar">
-                                                                <img src="/Design/static/front/assets/img/blog/comments/avater-2.png"
-                                                                     alt="">
-                                                            </div>
-                                                            <div class="comments-text">
-                                                                <div class="avatar-name">
-                                                                    <h5>Julias Roy</h5>
-                                                                    <span> - 6 months ago </span>
-                                                                    <a class="reply" href="#">Leave
-                                                                        Reply</a>
-                                                                </div>
-                                                                <div class="user-rating">
-                                                                    <ul>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <p>Many desktop publishing packages
-                                                                    and web page editors now use
-                                                                    Lorem Ipsum as their default
-                                                                    model text, and a search for
-                                                                    <span>“lorem ipsum”</span> will
-                                                                    uncover many web sites still in
-                                                                    their infancy. </p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="comments-box">
-                                                            <div class="comments-avatar">
-                                                                <img src="/Design/static/front/assets/img/blog/comments/avater-3.png"
-                                                                     alt="">
-                                                            </div>
-                                                            <div class="comments-text">
-                                                                <div class="avatar-name">
-                                                                    <h5>Arista Williamson</h5>
-                                                                    <span> - 6 months ago </span>
-                                                                    <a class="reply" href="#">Leave
-                                                                        Reply</a>
-                                                                </div>
-                                                                <div class="user-rating">
-                                                                    <ul>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                class="fal fa-star"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <p>Many desktop publishing packages
-                                                                    and web page editors now use
-                                                                    Lorem Ipsum as their default
-                                                                    model text, and a search for
-                                                                    <span>“lorem ipsum”</span> will
-                                                                    uncover many web sites still in
-                                                                    their infancy. Various versions
-                                                                    have evolved over the years,
-                                                                    sometimes by accident, sometimes
-                                                                    on purpose.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="post-comments-form mb-100">
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>`;
+                                    
+                                    
+                                            }
+                                            $('#reviewStart').html(reviewMain);
+                                        },
+                                        error: function (err) {
+                                            console.log(err)
+                                            alert('發生錯誤1')
+                                        }
+                                    });
+                                    
+                                    txt+=`<div class="post-comments-form mb-100">
                                             <div class="post-comments-title mb-30">
                                                 <h3>Your Review</h3>
                                             </div>
@@ -420,8 +343,8 @@ $(function () {
             </div>
         </div>
     `
-
         $('#pd1').html(txt);
+
 
         $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
 
