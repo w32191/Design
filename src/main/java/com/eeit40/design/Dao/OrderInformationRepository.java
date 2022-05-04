@@ -21,7 +21,7 @@ public interface OrderInformationRepository extends JpaRepository<OrderInformati
 	
 	//**********************************後台**********************************//
 	//商城所有訂單查詢
-	@Query(value="select * from order_information order by order_date desc",nativeQuery = true)
+	@Query(value="select * from order_information order by id desc",nativeQuery = true)
 	public List<OrderInformation> selectAllOrderByOrderDate();
 	
 	//商城訂單查詢-依ship_state
@@ -35,7 +35,7 @@ public interface OrderInformationRepository extends JpaRepository<OrderInformati
 	//商家修改訂單狀態
 	@Transactional
 	@Modifying
-	@Query(value="update order_information set ship_state = :shipState where id = :id ",nativeQuery = true)
-	public void editShipStateByOrderId(@Param("shipState") String shipState,@Param("id") int id);
+	@Query(value="update order_information set shipping_date = :shipDate ,ship_state = :shipState where id = :id ",nativeQuery = true)
+	public void editShipStateByOrderId(@Param("shipDate") Date shippingDate,@Param("shipState") String shipState,@Param("id") int id);
 	
 }

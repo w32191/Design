@@ -135,7 +135,7 @@
                                                         <th class="product-price">訂購總額</th>
                                                         <th class="product-quantity">訂單明細</th>
                                                         <th class="product-subtotal">配送方式</th>
-                                                        <th class="product-remove">配送狀態</th>
+                                                        <th class="product-remove">訂單狀態</th>
                                                     </tr>
                                                     <c:forEach var="record" items="${orderRecord}">
                                                         <tr>
@@ -167,6 +167,7 @@
                                                                 ${record.id}
                                                             </td>
                                                         </tr>
+                                                    <!-- show more star-->
                                                         <tr class="detail">
                                                             <td colspan="6">
                                                                 <div>
@@ -185,6 +186,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                    <!-- show more star-->
                                                     </c:forEach>
                                                 </table>
                                             </div>
@@ -216,7 +218,7 @@
                                     // We break and store the result so we can use it to hide
                                     // the row after the slideToggle is closed
                                     var targetrow = $(this).closest('tr').next('.detail');
-                                    targetrow.show().find("div").slideToggle("slow", function () {
+                                    targetrow.show().find("div").slideToggle("fast", function () {
                                         if (!$(this).is(":visible")) {
                                             targetrow.hide();
                                         }

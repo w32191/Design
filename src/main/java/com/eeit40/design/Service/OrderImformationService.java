@@ -76,8 +76,8 @@ public class OrderImformationService {
 	}
 	
 	//商家修改訂單狀態
-	public void editShipStateByOrderId(String shipState, int id) {
-		orderInformation.editShipStateByOrderId(shipState, id);
+	public void editShipStateByOrderId(Date shipDate, String shipState, int id) {
+		orderInformation.editShipStateByOrderId(shipDate,shipState, id);
 	}
 	
 	//商家刪除訂單
