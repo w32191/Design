@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
+  // SamWang to-do : select query 待改
   @Query(value = "SELECT * FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0", nativeQuery = true)
   List<Activity> findActivitiesCurrentTime();
 

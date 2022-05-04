@@ -1,5 +1,6 @@
 package com.eeit40.design.Controller.FrontSide;
 
+import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;

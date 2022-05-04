@@ -2,6 +2,7 @@ package com.eeit40.design.Service;
 
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Dto.EventDto;
+import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
@@ -57,4 +58,6 @@ public interface ActivityService {
 
   // 用product id 當Map 的 key
   Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart);
+
+  List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList);
 }

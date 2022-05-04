@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DemoPageController {
 
 
-  @GetMapping(path = {"/B/","B/index.html"})
+  @GetMapping(path = {"/B/Demo","B/index.html"})
   public String indexPage() {
     return "B/demoPage/index";
   }

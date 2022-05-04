@@ -1,11 +1,13 @@
 package com.eeit40.design.Service.Impl;
 
+import com.eeit40.design.Dao.ActivityProductDao;
 import com.eeit40.design.Dao.ActivityRepository;
 import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ImgurImgRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Dto.EventDto;
+import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
@@ -53,6 +55,9 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Autowired
   private ImgurImgRepository imgurImgRepository;
+
+  @Autowired
+  private ActivityProductDao activityProductDao;
 
   @Autowired
   private ImgurUtil imgurUtil;
@@ -353,6 +358,27 @@ public class ActivityServiceImpl implements ActivityService {
 
     return resultMap;
   }
+
+  @Override
+  public List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList) {
+    List<Map<Integer, Integer>>  discountMapList = activityProductDao.getProductsWithCurrentDiscount();
+    List<ProductAndDiscount> returnList = new ArrayList<>();
+
+    for (Product product : productList) {
+      ProductAndDiscount pad = new ProductAndDiscount(product);
+      for (Map<Integer, Integer> map : discountMapList) {
+        if(map.containsKey(product.getId())){
+          pad.setDiscountPercentage(map.get(product.getId()));
+        }
+      }//end of inner for()
+      returnList.add(pad);
+    }
+
+
+    return returnList;
+
+  }
+
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

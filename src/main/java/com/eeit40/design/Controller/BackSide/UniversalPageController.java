@@ -16,4 +16,6 @@ public class UniversalPageController {
         return "redirect:/B/Case";
     }
 
+
+
 }

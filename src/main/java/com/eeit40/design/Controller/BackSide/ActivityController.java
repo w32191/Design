@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 public class ActivityController { // 用來跳轉頁面用的controller
 
+
   @Autowired
   private ActivityService service;
 
@@ -25,6 +26,7 @@ public class ActivityController { // 用來跳轉頁面用的controller
     List<Activity> list = service.findAll();
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
+
     return modelAndView;
   }
 
