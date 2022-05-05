@@ -17,20 +17,24 @@ $(function () {
                     <div class="card">
                         <div class="row">
                             <div class="col-lg-3">
-                                <img src="${res.image01}" width="200px">
+                                <img src="${res.image01}" width="200px" id="img01">
                                     <p>圖片一(主圖)</p>
+                                    <input type="file" name="image01" id="image01">
                             </div>
                             <div class="col-lg-3">
-                                    <img src="${res.image02}" width="200px">
+                                    <img src="${res.image02}" width="200px" id="img02">
                                     <p>圖片二(副圖)</p>
+                                    <input type="file" name="image02" id="image02">
                                 </div>
                                 <div class="col-lg-3">
-                                    <img src="${res.image03}" width="200px">
+                                    <img src="${res.image03}" width="200px" id="img03">
                                     <p>圖片三</p>
+                                    <input type="file" name="image03" id="image03">
                                 </div>
                                 <div class="col-lg-3">
-                                    <img src="${res.image04}" width="200px">
+                                    <img src="${res.image04}" width="200px" id="img04">
                                     <p>圖片四</p>
+                                    <input type="file" name="image01" id="image04">
                                 </div>
                             </div>
                         </div>
@@ -47,42 +51,47 @@ $(function () {
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <p>名稱</p>
-                                                    <input type="text" class="form-control" name="name"
+                                                    <input type="text" class="form-control" name="name" id="name"
                                                            value="${res.name} ">
                                                 </div>
                                                 <div class="form-group">
                                                    
                                                     <p>品牌</p>
-                                                    <select class="form-control">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
+                                                     <input type="text" class="form-control" name="fkBrand" id="fkBrand"
+                                                           value="${res.fkBrand.name}" disabled>
                                                 
                                                 </div>
                                                 <div class="form-group">
                                                     <p>價格</p>
-                                                    <input type="text" class="form-control" name="price"
+                                                    <input type="text" class="form-control" name="price" id="price"
                                                            value="${res.price} ">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>種類</p>
-                                                    <input type="text" class="form-control" name="categories"
+                                                    <input type="text" class="form-control" name="categories" id="categories"
                                                            value="${res.categories} ">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>庫存</p>
-                                                    <input type="text" class="form-control" name="stock"
+                                                    <input type="text" class="form-control" name="stock" id="stock"
                                                            value="${res.stock} ">
+                                                </div>
+                                                <div class="form-group">
+                                                    <p>規格</p>
+                                                    <input type="text" class="form-control" name="model" id="model"
+                                                           value="${res.model}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <p>產品描述</p>
-                                                    <textarea class="form-control" rows="5" name="description"
-                                                              placeholder="Text input"></textarea>
+                                                    <textarea rows="5" name="description" id="description"
+                                                              value="${res.description}" placeholder="${res.description}"></textarea>
+                                                </div>
+                                                <div class="form-group" hidden>
+                                                    <p>品牌</p>
+                                                    <input type="text" class="form-control" name="model" id="fkBrandid"
+                                                           value="${res.fkBrand.id}" >
                                                 </div>
                                             </div>
                                         </div>
@@ -123,11 +132,11 @@ $(function () {
 
     })
 
-
-
-
-
 })
+
+
+
+
 $('#main-content').on('click','#deletebtn',function (){
     let getUrlString = location.href;
     let url = new URL(getUrlString);
@@ -183,8 +192,47 @@ $('#main-content').on('click','#deletebtn',function (){
 
 });
 
-$('#deletebtn').click(function () {
-    console.log("被按了")
 
 
-});
+$('#main-content').on('click','#savebtn',function (){
+    let name = $('#name').val();
+    let price = $('#price').val();
+    let stock = $('#stock').val();
+    let categories = $('#categories').val();
+    let model = $('#model').val();
+    let description = $('#description').val();
+    let fkBrand = $('#fkBrandid').val();
+    let img01 = $('#img01').attr('src');
+    let img02 = $('#img02').attr('src');
+    let img03 = $('#img03').attr('src');
+    let img04 = $('#img04').attr('src');
+    let datas = {
+        "name": name,
+        "price":price,
+        "stock":stock,
+        "categories":categories,
+        "model":model,
+
+        "fkBrand":{"id":fkBrand},
+        "description":description,
+        "image01":img01,
+        "image02":img02,
+        "image03":img03,
+        "image04":img04
+    }
+    console.log(datas);
+    // $.ajax({
+    //     url: "/Design/B/product/insert",
+    //     method: "POST",
+    //     data: JSON.stringify(datas),
+    //     // processData:false,
+    //     contentType:'application/json',
+    //     success: function (res) {
+    //         console.log(res);
+    //     },
+    //     error: function (err) {
+    //         console.log(err)
+    //     }
+
+
+})

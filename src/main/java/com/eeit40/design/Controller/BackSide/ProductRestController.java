@@ -2,6 +2,7 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ProductRepository;
+import com.eeit40.design.Dto.ProductDto;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 
@@ -22,10 +23,16 @@ import javax.servlet.http.HttpServletRequest;
 public class ProductRestController {
 
     @Autowired
-    private ProductRepository dao;
+    private ProductServiceImpl dao;
 
     @Autowired
     private BrandRepository brandRepository;
+
+//    @PostMapping("/B/product/updateById/{id}")
+//    public Product updateById(@PathVariable Integer id){
+//        Product resPro = dao.updateById(id);
+//        return resPro;
+//    }
 
     @GetMapping("/B/product/findByNameLike/{name}")
     public List<Product> findByNameLike(@PathVariable String name) {

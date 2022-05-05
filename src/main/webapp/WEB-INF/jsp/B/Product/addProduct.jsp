@@ -88,7 +88,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <p>種類</p>
-                                                    <input type="text" class="form-control" name="categories" id="categories"
+                                                    <input type="text" class="form-control" name="categories"
+                                                           id="categories"
                                                            value=" ">
                                                 </div>
                                                 <div class="form-group">
@@ -98,12 +99,17 @@
                                                 </div>
 
 
-
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
+                                                    <p>規格</p>
+                                                    <input type="text" class="form-control" name="model" id="model"
+                                                           value="">
+                                                </div>
+
+                                                <div class="form-group">
                                                     <p>產品描述</p>
-                                                    <textarea class="form-control" rows="5" name="description"
+                                                    <textarea  rows="10" cols="70" name="description"
                                                               placeholder="請輸入商品詳細描述"></textarea>
                                                 </div>
                                             </div>
@@ -118,6 +124,7 @@
 
                 </div>
                 <div class="row">
+
                     <div class="col-lg-4">
 
 
@@ -134,6 +141,7 @@
 
 
                     </div>
+
                 </div>
             </section>
 

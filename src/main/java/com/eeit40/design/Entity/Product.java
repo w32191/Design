@@ -1,5 +1,6 @@
 package com.eeit40.design.Entity;
 
+import com.eeit40.design.Dto.ProductDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
@@ -97,19 +98,21 @@ public class Product {
     public Product() {
     }
 
-//    public Product(String name, String description, Integer price, Brand brand, String categories, Integer stock, String image01, String image02, String image03, String image04) {
-//        this.name = name;
-//        this.description = description;
-//        this.price = price;
-//        this.categories = categories;
-//        this.stock = stock;
-//        this.image01 = image01;
-//        this.image02 = image02;
-//        this.image03 = image03;
-//        this.image04 = image04;
-//        this.fkBrand = brand;
-//        this.fkBrand = brand;
-//    }
+    public Product(ProductDto dto,Brand brand) {
+        this.id = dto.getId();
+        this.fkBrand = brand;
+        this.productId = dto.getProductId();
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.price = dto.getPrice();
+        this.categories = dto.getCategories();
+        this.stock = dto.getStock();
+        this.model = dto.getModel();
+        this.image01 = dto.getImage01();
+        this.image02 = dto.getImage02();
+        this.image03 = dto.getImage03();
+        this.image04 = dto.getImage04();
+    }
 
     public Set<ShoppingCard> getShoppingCards() {
         return shoppingCards;

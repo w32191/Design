@@ -97,15 +97,18 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findProductOrderByPriceDesc() {
         return productRepository.findProductOrderByPriceDesc();
     }
-@Override
+
+    @Override
     public List<Product> findProductOrderByAdded() {
         return productRepository.findProductOrderByAdded();
     }
-@Override
+
+    @Override
     public List<Product> findProductOrderByAddedDesc() {
         return productRepository.findProductOrderByAddedDesc();
     }
-@Override
+
+    @Override
     public List<Product> findProductByCategoriesOrderByAdded(String categories) {
         return productRepository.findProductByCategoriesOrderByAdded(categories);
     }
@@ -114,7 +117,6 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findProductByCategoriesOrderByAddedDesc(String categories) {
         return productRepository.findProductByCategoriesOrderByAddedDesc(categories);
     }
-
 
 
     @Override
@@ -126,5 +128,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findProductByBrandOrderByAddedDesc(Brand id) {
         return productRepository.findProductByBrandOrderByAddedDesc(id);
     }
+@Override
+    public List<Product> findByNameLike(String name) {
+        return productRepository.findByNameLike(name);
+    }
+
+
 
 }

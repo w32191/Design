@@ -68,6 +68,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByNameLike(String name);
 
 
+
 //  @Query("update from Product set name= :name ,  where id = :id")
 //  public Product updateProductById(Product pro);
 

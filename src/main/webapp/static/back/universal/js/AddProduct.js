@@ -105,39 +105,25 @@ $(function () {
 
 
     $('#savebtn').click(function () {
-        let formData = new FormData();
-
         let name = $('#inputName01').val();
         let price = $('#price').val();
         let stock = $('#stock').val();
         let categories = $('#categories').val();
+        let model = $('#model').val();
         let description = $('#description').val();
-        let fkBrand = $('#fkBrand').val();
+        // let fkBrand = $('#fkBrand').val();
         let img01 = $('#img01').attr('src');
         let img02 = $('#img02').attr('src');
         let img03 = $('#img03').attr('src');
         let img04 = $('#img04').attr('src');
-
-
-        formData.append("name", name);
-        // formData.append("fkBrand", fkBrand);
-        // formData.append("price", price);
-        // formData.append("stock", stock)
-        // formData.append("categories", categories)
-        // formData.append("description", description)
-        //
-        //
-        // formData.append("image01", img01);
-        // formData.append("image02", img02);
-        // formData.append("image03", $('#img03').attr('src'));
-        // formData.append("image04", $('#img04').attr('src'));
-
         let datas = {
             "name": name,
             "price":price,
             "stock":stock,
             "categories":categories,
-            "fkBrand":fkBrand,
+            "model":model,
+            // "fkBrand":fkBrand,
+            "fkBrand":{"id":fkBrand},
             "description":description,
             "image01":img01,
             "image02":img02,
@@ -148,10 +134,15 @@ $(function () {
         console.log(datas)
         console.log(JSON.stringify(datas))
 
+        // $.post("/Design/B/product/insert",datas,function (ires){
+        //     console.log(ires.name)
+        // })
+
+
         $.ajax({
             url: "/Design/B/product/insert",
             method: "POST",
-            data: datas,
+            data: JSON.stringify(datas),
             // processData:false,
             contentType:'application/json',
             success: function (res) {
