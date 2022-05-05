@@ -60,4 +60,6 @@ public interface ActivityService {
   Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart);
 
   List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList);
+
+  Activity getProductsWithCurrentDiscountByActivityId(Integer id);
 }

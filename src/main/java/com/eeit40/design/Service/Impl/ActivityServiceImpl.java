@@ -395,6 +395,10 @@ public class ActivityServiceImpl implements ActivityService {
     return returnList;
   }
 
+  @Override
+  public Activity getProductsWithCurrentDiscountByActivityId(Integer id) {
+    return activityRepository.findActivitiesCurrentTime(id);
+  }
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

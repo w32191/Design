@@ -44,7 +44,7 @@
                                         <p data-animation="fadeInUp"
                                            data-delay=".4s">${ac.discountPercentage}%</p>
 
-                                        <a href="" class="os-btn os-btn-2"
+                                        <a href="/Design/F/Activity/productList/${ac.id}" class="os-btn os-btn-2"
                                            data-animation="fadeInUp" data-delay=".6s">Discover
                                             now</a>
                                     </div>

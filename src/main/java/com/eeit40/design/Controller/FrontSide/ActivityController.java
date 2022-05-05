@@ -42,6 +42,15 @@ public class ActivityController {
     return mav;
   }
 
+  // 點輪播的活動，導向該活動的商品頁
+  @GetMapping("/F/Activity/productList/{id}")
+  public ModelAndView text(ModelAndView mav, @PathVariable Integer id) {
+    Activity activity = activityService.getProductsWithCurrentDiscountByActivityId(id);
+    mav.addObject("activity", activity);
+    mav.setViewName("/F/Activity/ActivityProducts");
+    return mav;
+  }
+
 
   // 購物車商品的折扣
   @PostMapping("/F/Activity/checkDiscount")
