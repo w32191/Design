@@ -50,8 +50,8 @@ public class ProductRestController {
   }
 
   @GetMapping(value = "/B/product/findProductByName/{name}")
-  public List<Product> findProductByName(@PathVariable String name) {
-    return dao.findProductByName(name);
+  public List<ProductAndDiscount> findProductByName(@PathVariable String name) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByName(name));
   }
 
 
