@@ -359,24 +359,28 @@ public class ActivityServiceImpl implements ActivityService {
     return resultMap;
   }
 
-  @Override
-  public List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList) {
-    List<Map<Integer, Integer>>  discountMapList = activityProductDao.getProductsWithCurrentDiscount();
-    List<ProductAndDiscount> returnList = new ArrayList<>();
 
-    for (Product product : productList) {
-      ProductAndDiscount pad = new ProductAndDiscount(product);
-      for (Map<Integer, Integer> map : discountMapList) {
-        if(map.containsKey(product.getId())){
-          pad.setDiscountPercentage(map.get(product.getId()));
-        }
-      }//end of inner for()
-      returnList.add(pad);
+  // 幫傳入的List<Product>，找到當前discount後，return List<ProductAndDiscount>
+  @Override
+  public List<ProductAndDiscount> getProductsWithCurrentDiscount(List<Product> productList) {
+    List<Map<Integer, Integer>> discountMapList = activityProductDao.getProductsWithCurrentDiscount();
+    List<ProductAndDiscount> returnList = null;
+
+    if (productList != null) {
+      returnList = new ArrayList<>();
+
+      for (Product product : productList) {
+        ProductAndDiscount pad = new ProductAndDiscount(product);
+        for (Map<Integer, Integer> map : discountMapList) {
+          if (map.containsKey(product.getId())) {
+            pad.setDiscountPercentage(map.get(product.getId()));
+          }
+        } //end of inner for()
+        returnList.add(pad);
+      } //end of outer for()
     }
 
-
     return returnList;
-
   }
 
 
