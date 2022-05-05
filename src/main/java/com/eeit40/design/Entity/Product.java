@@ -77,7 +77,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
 
-    @JsonIgnore    @OneToMany(mappedBy = "fkProduct")
+    @JsonIgnore
+    @OneToMany(mappedBy = "fkProduct")
     private Set<ProductImg> productImgs = new LinkedHashSet<>();
 
     @JsonIgnore
@@ -95,6 +96,20 @@ public class Product {
 
     public Product() {
     }
+
+//    public Product(String name, String description, Integer price, Brand brand, String categories, Integer stock, String image01, String image02, String image03, String image04) {
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.categories = categories;
+//        this.stock = stock;
+//        this.image01 = image01;
+//        this.image02 = image02;
+//        this.image03 = image03;
+//        this.image04 = image04;
+//        this.fkBrand = brand;
+//        this.fkBrand = brand;
+//    }
 
     public Set<ShoppingCard> getShoppingCards() {
         return shoppingCards;
@@ -273,4 +288,32 @@ public class Product {
     public void setImage04(String image04) {
         this.image04 = image04;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "id=" + id +
+//                ", fkBrand=" + fkBrand +
+//                ", productId=" + productId +
+//                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+//                ", price=" + price +
+//                ", categories='" + categories + '\'' +
+//                ", stock=" + stock +
+//                ", model='" + model + '\'' +
+//                ", barcode='" + barcode + '\'' +
+//                ", views=" + views +
+//                ", avaliable=" + avaliable +
+//                ", added=" + added +
+//                ", image01='" + image01 + '\'' +
+//                ", image02='" + image02 + '\'' +
+//                ", image03='" + image03 + '\'' +
+//                ", image04='" + image04 + '\'' +
+//                ", activities=" + activities +
+//                ", productImgs=" + productImgs +
+//                ", productReviews=" + productReviews +
+//                ", orderLists=" + orderLists +
+//                ", shoppingCards=" + shoppingCards +
+//                '}';
+//    }
 }

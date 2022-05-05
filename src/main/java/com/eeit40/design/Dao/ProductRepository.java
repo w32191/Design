@@ -65,6 +65,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "from Product  where fkBrand= :fkBrand order by added desc ")
     List<Product> findProductByBrandOrderByAddedDesc(@Param("fkBrand") Brand id);
 
+    List<Product> findByNameLike(String name);
+
 
 //  @Query("update from Product set name= :name ,  where id = :id")
 //  public Product updateProductById(Product pro);

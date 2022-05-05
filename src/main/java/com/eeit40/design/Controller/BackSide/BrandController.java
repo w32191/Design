@@ -25,6 +25,10 @@ public class BrandController {
         return dao.findAll();
     }
 
+    @GetMapping("/B/brand/findBrandById/{id}")
+    public Brand findBrandById(@PathVariable Integer id) {
+        return dao.findBrandById(id);
+    }
 
 
 

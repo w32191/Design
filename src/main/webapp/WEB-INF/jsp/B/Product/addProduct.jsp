@@ -74,26 +74,26 @@
                                                 <div class="form-group">
                                                     <p>名稱</p>
                                                     <input type="text" class="form-control" name="name"
-                                                           value="">
+                                                           value="" id="inputName01">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>品牌</p>
-                                                    <input type="text" class="form-control" name="fkBrand"
-                                                           value="">
+                                                    <input type="text" class="form-control" name="fkBrand" id="fkBrand"
+                                                           value="" disabled>
                                                 </div>
                                                 <div class="form-group">
                                                     <p>價格</p>
-                                                    <input type="text" class="form-control" name="price"
+                                                    <input type="text" class="form-control" name="price" id="price"
                                                            value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>種類</p>
-                                                    <input type="text" class="form-control" name="categories"
+                                                    <input type="text" class="form-control" name="categories" id="categories"
                                                            value=" ">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>庫存</p>
-                                                    <input type="text" class="form-control" name="stock"
+                                                    <input type="text" class="form-control" name="stock" id="stock"
                                                            value="">
                                                 </div>
 
@@ -109,13 +109,31 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <button id>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+
+
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <a id="savebtn" class="btn btn-warning">儲存變更</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                    <div class="col-lg-4">
+
+
+                    </div>
                 </div>
             </section>
 
@@ -128,125 +146,20 @@
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>--%>
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
 <script src="${contextRoot}/static/back/universal/js/AddProduct.js"></script>
 <script>
-
-    // imgur圖片上傳
-    $("document").ready(function () {
-        $('input[id=image01]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-<%--                    ${'#img01'}.attr("src",res)--%>
-                    $("#img01").attr("src",res)
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-
-        });
-        $('input[id=image02]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                    <%--                    ${'#img01'}.attr("src",res)--%>
-                    $("#img02").attr("src",res)
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-
-        });
-        $('input[id=image03]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                    <%--                    ${'#img01'}.attr("src",res)--%>
-                    $("#img03").attr("src",res)
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-
-        });
-        $('input[id=image04]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                    <%--                    ${'#img01'}.attr("src",res)--%>
-                    $("#img04").attr("src",res)
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-
-        });
-
-
-    })
-    function showValues() {
-        let str = $("form").serialize();
-        console.log(str)
-    }
-
-
-
-
-
-
-
 
 
 </script>

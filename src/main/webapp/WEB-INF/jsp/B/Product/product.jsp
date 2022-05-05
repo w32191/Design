@@ -57,14 +57,17 @@
 
                     <!-- /# column -->
                     <div class="col-lg-8">
-                        <div>
-                            <a href="/Design/B/Product/addProduct" class="btn btn-warning">＋新增商品</a>
 
-                        </div>
-                        <div class="card">
+                        <div class="card" id="productCard" >
                             <div class="card-title pr">
-                                <h4>產品 Product</h4>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h4>產品 Product</h4>
+                                    </div>
+                                    <div class="col-lg-2" id="addbtn">
 
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -80,7 +83,7 @@
 
                                         </tr>
                                         </thead>
-                                        <tbody id = pdlist>
+                                        <tbody id=pdlist>
 
 
                                         </tbody>
@@ -117,7 +120,6 @@
 <%-- jquery & Ajax & JS 都在裏面--%>
 <script src="${contextRoot}/static/back/universal/js/Product.js"></script>
 <script>
-
 
 
 </script>

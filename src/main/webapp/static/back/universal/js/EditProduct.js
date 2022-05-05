@@ -11,28 +11,16 @@ $(function () {
         console.log(res.name)
 
         txt += `
-<div class="row">
- <div class="col-lg-4">
- <div>
-                            <a class="btn btn-warning">＋新增商品</a>
-                        </div>
-                        
- </div>
- <div class="col-lg-4">
-                        <div>
-                            <a  id="deletebtn" class="btn btn-danger">- 刪除商品</a>
-                        </div>
- </div>
-</div>
-        <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <img src="${res.image01}" width="200px">
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <img src="${res.image01}" width="200px">
                                     <p>圖片一(主圖)</p>
-                                </div>
-                                <div class="col-lg-3">
+                            </div>
+                            <div class="col-lg-3">
                                     <img src="${res.image02}" width="200px">
                                     <p>圖片二(副圖)</p>
                                 </div>
@@ -48,8 +36,7 @@ $(function () {
                         </div>
                     </div>
                 </div>
-                <!-- /# row -->
-                <div class="row">
+            <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
@@ -64,9 +51,16 @@ $(function () {
                                                            value="${res.name} ">
                                                 </div>
                                                 <div class="form-group">
+                                                   
                                                     <p>品牌</p>
-                                                    <input type="text" class="form-control" name="brand"
-                                                           value="${res.fkBrand.name} ">
+                                                    <select class="form-control">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                
                                                 </div>
                                                 <div class="form-group">
                                                     <p>價格</p>
@@ -83,9 +77,6 @@ $(function () {
                                                     <input type="text" class="form-control" name="stock"
                                                            value="${res.stock} ">
                                                 </div>
-
-
-
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
@@ -95,6 +86,7 @@ $(function () {
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </form>
                                 </div>
                             </div>
@@ -103,6 +95,27 @@ $(function () {
 
 
                 </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    
+                        
+                </div>
+                <div class="col-lg-2">
+                    <div>
+                        <a id="savebtn" class="btn btn-warning">儲存變更</a>
+                    </div>
+                    </div>
+                    <div class="col-lg-2">
+                    <div>
+                        <a id="deletebtn" class="btn btn-danger">刪除</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    
+                        
+                </div>
+                </div>
+           
 `
         $('#main-content').html(txt);
 

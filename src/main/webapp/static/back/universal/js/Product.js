@@ -21,8 +21,13 @@ $(function () {
     });
 
     $('body').on('click','div[id^=brandBtn]',function(){
+
         let id = $(this).attr('id').split("brandBtn")[1];
         console.log(id)
+        $('#addbtn').html(`<div>
+                <a href="/Design/B/Product/addProduct?fkBrand=${id}" class="btn btn-warning">＋新增商品</a>
+            </div>`)
+
         $.getJSON(`/Design/B/product/findProductByBrand/${id}`,function(pdres){
             let pdtxt='';
             for (let i=0 ; i<pdres.length;i++){
@@ -57,9 +62,6 @@ $(function () {
                 `
             }
             $('#pdlist').html(pdtxt);
-
-
-
         })
 
 
