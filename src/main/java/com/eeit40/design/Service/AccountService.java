@@ -25,8 +25,8 @@ public class AccountService {
 	}
 	
 
-	public void save(Account account) {
-		accountRepository.save(account);
+	public Account save(Account account) {
+		return accountRepository.save(account);
 	}
 	
 	
@@ -70,6 +70,11 @@ public class AccountService {
 		
 		return null;
 			
+	}
+	
+	public Account findAccountById(Integer id) {
+		
+		return accountRepository.findAccountById(id);
 	}
 			
 		

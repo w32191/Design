@@ -34,7 +34,7 @@
                 </li>
                 <li><a href="app-event-calender.html"><i class="ti-calendar"></i> Calender </a></li>
                 <li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
-                <li><a href="/Design/B/Memberinsert"><i class="ti-user"></i> Profile</a></li>
+                <li><a href="/Design/B/memberupdate"><i class="ti-user"></i> Profile</a></li>
                 <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a>
                 </li>
                 <li class="label">Features</li>

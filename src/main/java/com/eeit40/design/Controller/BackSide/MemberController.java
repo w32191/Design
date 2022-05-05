@@ -14,14 +14,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Member;
+import com.eeit40.design.Service.AccountService;
 import com.eeit40.design.Service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private AccountService accountService;
 	
 	@GetMapping("/B/memberregister")
 	public ModelAndView member(ModelAndView mav) {
@@ -57,9 +63,12 @@ public class MemberController {
 	}
 	
 	@GetMapping("/B/memberupdate")
-	public ModelAndView memberupdatejsp(ModelAndView mav) {
+	public ModelAndView memberupdatejsp(ModelAndView mav,  HttpSession session) {
 		
-		Member member = new Member();
+		Account acc = (Account) session.getAttribute("account");
+		Integer accid = acc.getId();
+		Member member = memberService.findMemberById(accid);
+		
 		
 		mav.getModel().put("memberupdate", member);
 		
@@ -72,13 +81,23 @@ public class MemberController {
 	
 	
 	@PostMapping("/B/memberupdate")
-	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member,
-			@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
-			@RequestParam(name = "address") String address,  HttpSession session, BindingResult br)  {
+	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member, HttpSession session, BindingResult br)  {
+
+		
+		
 		if(!br.hasErrors()) {
 			Account acc = (Account) session.getAttribute("account");
-			memberService.findMemberByfkAccount(acc);
+			Integer accid = acc.getId();
+			Member member1 = memberService.findMemberById(accid);
 			
+			member.setId(member1.getId());
+			member.setFkAccount(acc);
+			Member newMember = memberService.save(member);
+			
+			Account accountid = accountService.findAccountById(accid);
+			
+			
+			mav.addObject("memberupdate",newMember);
 			mav.setViewName("B/Member/member");
 			return mav;
 		}
