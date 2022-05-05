@@ -168,7 +168,7 @@
                     </div>
                     <div class="dropdown dib">
                         <div class="header-icon" data-toggle="dropdown">
-                                <span class="user-avatar">John
+                                <span class="user-avatar">${member.names}
                                     <i class="ti-angle-down f-s-10"></i>
                                 </span>
                             <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
@@ -206,8 +206,8 @@
                                         </li>
                                         <li>
 <!--                                         登出 -->
-                                            <a href="doLogout">
-                                                <i class="ti-power-off"></i>
+                                            <a href="dologout"  id="dologout">
+                                                <i class="ti-logount"></i>
                                                 Logout
                                             </a>
                                         </li>

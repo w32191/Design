@@ -81,7 +81,8 @@ public class MemberController {
 	
 	
 	@PostMapping("/B/memberupdate")
-	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member, HttpSession session, BindingResult br)  {
+	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member, Account account,
+			HttpSession session, BindingResult br)  {
 
 		
 		
@@ -95,8 +96,10 @@ public class MemberController {
 			Member newMember = memberService.save(member);
 			
 			Account accountid = accountService.findAccountById(accid);
+			account.setId(accountid.getId());
+			Account newAccount = accountService.save(account);
 			
-			
+			mav.addObject("memberupdate",newAccount);
 			mav.addObject("memberupdate",newMember);
 			mav.setViewName("B/Member/member");
 			return mav;

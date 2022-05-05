@@ -131,13 +131,13 @@
 						<div class="email-content">
 							<span class="contact-title">信箱:</span> <input
 								class="contact-email" type="email" name="email"
-								value="${memberupdate.email}">
+								value="${account.email}">
 						</div>
 						<br>
 						<div class="password-content">
 							<span class="contact-title">密碼:</span> <input
 								class="contact-email" type="text" name="pwd"
-								value="${memberupdate.pwd}">
+								value="${account.pwd}">
 						</div>
 						<div class="user-send-message">
 							<input type="submit" id="update" value="更新資料">
