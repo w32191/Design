@@ -17,6 +17,7 @@ public class EventDto {
 
   private LocalDate end;
 
+  private String backgroundColor;
 
   public EventDto(Integer id, String title, LocalDate startDate, LocalDate endDate) {
     this.id = id;

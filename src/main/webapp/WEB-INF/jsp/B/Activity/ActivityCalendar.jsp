@@ -45,9 +45,9 @@
 
                                 <button data-toggle="modal" data-target="#add-category"
                                         class="btn btn-lg btn-primary waves-effect waves-light">
-                                    <i class="fa fa-plus"></i> Create New
+                                    <i class="fa fa-plus"></i> 新增活動
                                 </button>
-                                <a href="findAll" class="btn btn-lg btn-success">Table</a>
+<%--                                <a href="findAll" class="btn btn-lg btn-success">Table</a>--%>
 
                             </div>
                             <div class="card-body">

@@ -8,28 +8,41 @@
         <div class="nano-content">
             <ul>
                 <div class="logo">
-                    <a href="index.html"><span>Design</span></a>
+                    <a href=""><span>Design</span></a>
                 </div>
 
                 <li class="label">功能選單</li>
+
+                <li>
+                    <a href="/Design/B/Product/"><i class="ti-layout-tab"></i> 商品管理</a>
+                </li>
+                <li>
+                    <a href="/Design/B/allorder"><i class="ti-layout-tab"></i> 訂單管理</a>
+                </li>
+
                 <li>
                     <a href="/Design/B/Activity/Calendar" class="sidebar-sub-toggle">
                         <i class="ti-calendar"></i> 活動
                         <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li>
-                            <a href="/Design/B/Activity/">
-                                <i class="ti-view-list-alt"></i>活動管理
+                            <a href="/Design/B/Activity/Calendar">
+                                <i class="ti-view-list-alt"></i>行事曆
                             </a>
                         </li>
                         <li>
-                            <a href="/Design/B/Activity/Calendar">
-                                <i class="ti-view-list-alt"></i>活動管理
+                            <a href="/Design/B/Activity/findAll">
+                                <i class="ti-view-list-alt"></i>管理
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="label">訂單管理</li>
+
+                <li>
+                    <a href="/Design/B/Case"><i class="ti-layout-tab"></i> Case管理</a>
+                </li>
+
+                <li class="label">ＸＸ管理</li>
                 <li>
                     <a href="/Design/B/" class="sidebar-sub-toggle">
                         <i class="ti-calendar"></i> ＸＸＸＸ
@@ -42,9 +55,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="/Design/B/CasePage"><i class="ti-layout-tab"></i> Case管理</a>
-                </li>
+                <li class="label">模板DemoPage</li>
                 <li>
                     <a href="/Design/B/Demo"><i class="ti-agenda"></i> 模板DemoPage</a>
                 </li>
