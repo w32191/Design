@@ -19,7 +19,7 @@ $(function () {
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="product__wrapper mb-60">
                         <div class="product__thumb">
-                            <a href="product-details?id=${newa[i].id}" class="w-img">
+                            <a href="/Design/F/product/product-details?id=${newa[i].id}" class="w-img">
                                 <img src="${newa[i].image01}" alt="product-img">
                                 <img class="product__thumb-2"
                                      src="${newa[i].image02}" alt="product-img">
@@ -32,7 +32,7 @@ $(function () {
                         </div>
                         <div class="product__content p-relative">
                             <div class="product__content-inner">
-                                <h4><a href="product-details?id=${newa[i].id}">${newa[i].name}</a></h4>
+                                <h4><a href="/Design/F/product/product-details?id=${newa[i].id}">${newa[i].name}</a></h4>
                                 <div class="product__price transition-3">
                                     <span>$${newa[i].price}</span>
 

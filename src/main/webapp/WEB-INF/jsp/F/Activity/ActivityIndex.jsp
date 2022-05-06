@@ -219,32 +219,32 @@
                 <div class="col-xl-12">
                     <div class="client__slider owl-carousel text-center">
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=6"><img
                                     src="https://i.imgur.com/dftzIxn.jpg"
                                     alt="client"></a>
                         </div>
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=15"><img
                                     src="https://i.imgur.com/Aw91g70.jpg"
                                     alt="client"></a>
                         </div>
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=24"><img
                                     src="https://i.imgur.com/P3jjoZj.jpg"
                                     alt="client"></a>
                         </div>
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=4"><img
                                     src="https://i.imgur.com/jkzjZA2.jpg"
                                     alt="client"></a>
                         </div>
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=11"><img
                                     src="https://i.imgur.com/jAgPxzR.jpg"
                                     alt="client"></a>
                         </div>
                         <div class="client__thumb">
-                            <a href="#"><img
+                            <a href="/Design/F/product/productbybrand?brand=9"><img
                                     src="https://i.imgur.com/8eclJGq.jpg"
                                     alt="client"></a>
                         </div>
