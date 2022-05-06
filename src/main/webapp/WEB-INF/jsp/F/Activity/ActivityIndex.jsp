@@ -125,6 +125,10 @@
                                                  src="${productList.get(i).image02}"
                                                  alt="product-img">
                                         </a>
+                                        <div class="product__sale">
+                                            <span class="new">活動</span>
+                                            <span class="percent">-${productList.get(i).discountPercentage}%</span>
+                                        </div>
                                     </div>
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
@@ -152,7 +156,10 @@
                                                 <img class="product__thumb-2"
                                                      src="${productList.get(i+1).image02}"
                                                      alt="product-img">
-                                            </a>
+                                            </a><div class="product__sale">
+                                            <span class="new">new</span>
+                                            <span class="percent">-${productList.get(i+1).discountPercentage}%</span>
+                                        </div>
                                         </div>
                                         <div class="product__content p-relative">
                                             <div class="product__content-inner">
