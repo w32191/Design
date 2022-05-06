@@ -46,7 +46,7 @@ public class AnnouncementWorkMessagesService {
 		Pageable pgb = PageRequest.of(pageNumber-1, 3, Sort.Direction.DESC, "added");
 		
 		Page<AnnouncementWorkMessages> page = announcementWorkMessagesDao.findAll(pgb);
-		
+		System.out.println(page.getContent());
 		return page;
 	}
 	

@@ -34,7 +34,11 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1></h1>
+								<h1>Hello, <span>Welcome Here</span></h1>
+                            <button type="button" id="insertBtn"
+                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="${contextRoot}/add">
+                                <i class="ti-plus"></i>新增公告
+                            </button>
 							</div>
 						</div>
 					</div>
@@ -68,10 +72,8 @@
 									<div class="card-body">
 										<c:out value="${announcementWorkMessages.content}" />
 										<div class="edit-link">
-											<a
-												href="${contextRoot}/editMessage?id=${announcementWorkMessage.id}">編輯
-											</a> | <a onclick="return confirm('確認刪除')"
-												href="${contextRoot}/deleteMessage?id=${announcementWorkMessage.id}">刪除</a>
+											<a href="${contextRoot}/B/Announcement/editMessage?id=${announcementWorkMessages.id}">編輯</a> | 
+											<a onclick="return confirm('確認刪除')"href="${contextRoot}/B/Announcement/deleteMessage?id=${announcementWorkMessages.id}">刪除</a>
 										</div>
 									</div>
 								</c:forEach>
@@ -83,7 +85,7 @@
 											<c:choose>
 												<c:when test="${page.number != pageNumber-1 }">
 													<a
-														href="${contextRoot}/viewMessages?p=${pageNumber}"><c:out
+														href="${contextRoot}/B/Announcement/viewMessages?p=${pageNumber}"><c:out
 															value="${pageNumber}" /> </a>
 												</c:when>
 
@@ -105,12 +107,10 @@
 					</div>
 			</div>
 		</div>
-		<!-- Footer -->
-		<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
+		
 		</section>
-	</div>
-	</div>
-	</div>
+
+	
 
 	<!-- jQuery & Bootstrap-->
 	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />

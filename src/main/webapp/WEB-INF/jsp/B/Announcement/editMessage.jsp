@@ -56,42 +56,40 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="card">
-								<c:forEach var="announcementWorkMessages"
-									items="${page.content}">
-										<div class="card-header">編輯訊息</div>
-				<div class="card-body">
 
-					<form:form class="form" method="POST" modelAttribute="announcementWorkMessage">
-					
-					 <form:input type="hidden" path="id" />
-					 <form:input type="hidden" path="added" />
+								<div class="card-header">編輯訊息</div>
+								<div class="card-body">
 
-						<!-- form:errors  bindingResult 回傳的物件 -->
-						<form:errors path="text" />
+									<form:form class="form" method="POST"
+										modelAttribute="announcementWorkMessages">
 
-						<div class="input-group">
-							<form:textarea path="text" class="form-control"></form:textarea>
-						</div>
+										<form:input type="hidden" path="id" />
+										<form:input type="hidden" path="added" />
 
-						<input type="submit" name="submit" value="送出">
-					</form:form>
+										<!-- form:errors  bindingResult 回傳的物件 -->
+										
+
+										<div class="input-group">
+											<form:textarea path="content" class="form-control"></form:textarea>
+										</div>
+
+										<input type="submit" name="submit" value="送出">
+									</form:form>
 
 
-				</div>
-								</c:forEach>
-
-							
-					
-									</div>
 								</div>
+
+
 							</div>
 						</div>
 					</div>
 			</div>
 		</div>
-		<!-- Footer -->
-		<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
-		</section>
+	</div>
+	</div>
+	<!-- Footer -->
+	<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
+	</section>
 	</div>
 	</div>
 	</div>

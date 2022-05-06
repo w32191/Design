@@ -42,7 +42,7 @@ public class AnnouncementMessageController {
 			
 		AnnouncementWorkMessages latestMsg = messageService.getLastest();
 		mav.getModel().put("lastMessage", latestMsg);
-		mav.setViewName("addMessage2");
+		mav.setViewName("redirect:/B/Announcement/viewMessages");
 		
 		
 		
@@ -55,20 +55,20 @@ public class AnnouncementMessageController {
 public String editMessage(Model model, @RequestParam(name="id") Integer id) {
 
 	AnnouncementWorkMessages msg = messageService.findById(id);
-	model.addAttribute("workMessage", msg);
+	model.addAttribute("announcementWorkMessages", msg);
 	
-	return "editMessage";
+	return "/B/Announcement/editMessage";
 }
 
 @PostMapping("/B/Announcement/editMessage")
-public ModelAndView editMessage(ModelAndView mav, @Valid @ModelAttribute(name="workMessage") AnnouncementWorkMessages msg, BindingResult br) {
+public ModelAndView editMessage(ModelAndView mav, @Valid @ModelAttribute(name="announcementWorkMessage") AnnouncementWorkMessages msg, BindingResult br) {
 	
-	mav.setViewName("/B/Announcement/editMessage");
+	mav.setViewName("editMessage");
 	
 	if(!br.hasErrors()) {
 		https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.entity-persistence.saving-entites
 		messageService.insert(msg);
-		mav.setViewName("redirect:/viewMessages");
+		mav.setViewName("redirect:/B/Announcement/viewMessages");
 	}
 	
 	return mav;
@@ -79,7 +79,7 @@ public ModelAndView editMessage(ModelAndView mav, @Valid @ModelAttribute(name="w
 public ModelAndView deleteMessage(ModelAndView mav, @RequestParam(name="id") Integer id) {
 	messageService.deleteById(id);
 	
-	mav.setViewName("redirect:/viewMessages");
+	mav.setViewName("redirect:/B/Announcement/viewMessages");
 	
 	return mav;
 }

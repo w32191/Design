@@ -60,7 +60,7 @@
 								<div class="card-body">
 
 
-									<form:form class="form" method="POST" action="/Design/B/Announcement/message/add"
+									<form:form class="form" method="POST" action="/Design/B/Announcement/add"
 										modelAttribute="announcementWorkMessages">
 
 										<!-- form:errors  bindingResult 回傳的物件 -->
@@ -79,8 +79,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- Footer -->
-					<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
+					
 				</section>
 			</div>
 		</div>
