@@ -48,39 +48,7 @@
     <!-- page title area end -->
 
     <%-- 品牌商品頁面--%>
-    <section>
-        <div class="container" >
-            <div class="row">
-                <div class="col-lg-12">
-                    <div>
-                        <img src="https://i.imgur.com/N4ssfO5.jpg" class="imggggg">
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6">
-                        <br>
-                        <br>
-                        <br>
-                        <p>
-                            TOM DIXON<br>
-                            <br>
-                            品牌國家：英國<br>
-                            2002 年由設計師 Tom Dixon 和 David Begg 所創立，主要設計和生產英國的傢俱和燈飾，打從成立之初，公司便開始發展自己的燈具和家具，如廣受好評的 Copper
-                            Shade, Mirror Ball 以及近期的 Beat Light, Slouch 沙發椅等等。2007 年 5 月於美國紐約 International Contemporary
-                            Furniture Fair 參展，並獲得最佳燈具編輯獎。公司理念以傳遞和復興英國傢俱工業精神，和個人主義的創新和茁壯為圭臬。
-                        </p>
-                    </div>
-                    <div class="col-xl-6 col-lg-6">
-                        <br>
-                        <img src="https://i.imgur.com/dC7OHsj.jpg">
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    <section id="brandbanner">
     </section>
 
 
