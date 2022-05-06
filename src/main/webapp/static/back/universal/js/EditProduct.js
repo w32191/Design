@@ -255,6 +255,7 @@ $('#main-content').on('click','#savebtn',function (){
                     console.log(deres);
                     swal.fire({
                         icon: 'success',
+                        text: 'Something went wrong!',
                         html: '<h5>修改成功!</h5>'
                     }).then(function () {
                         window.location.href="/Design/B/Product/"
