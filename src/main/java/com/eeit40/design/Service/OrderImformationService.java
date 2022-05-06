@@ -52,11 +52,16 @@ public class OrderImformationService {
 	
 	//**********************************訂單成立-後台查詢修改**********************************//
 	//商城所有訂單查詢
-	public List<OrderInformation> selectAllOrderByOrderDate(){
+	public List<OrderInformation> selectAllOrderByOrderId(){
 		
-		List<OrderInformation> orderDetail = orderInformation.selectAllOrderByOrderDate();
+		List<OrderInformation> orderDetail = orderInformation.selectAllOrderByOrderId();
 		
 		return orderDetail;
+	}
+	
+	//商城訂單查詢-依id
+	public List<OrderInformation> selectOrderById(int id) {
+		return orderInformation.selectById(id);
 	}
 	
 	//商城訂單查詢-依ship_state
@@ -75,10 +80,15 @@ public class OrderImformationService {
 		return orderDateDetail;
 	}
 	
-	//商家修改訂單狀態
-	public void editShipStateByOrderId(Date shipDate, String shipState, int id) {
-		orderInformation.editShipStateByOrderId(shipDate,shipState, id);
+	//商家修改訂單出貨日期
+	public void editShipStateByShipDate(Date shipDate, int id) {
+		orderInformation.editShipStateByShipDate(shipDate, id);
 	}
+	
+	//商家修改訂單出貨狀態
+	public void editShipStateByShipState(String shipState, int id) {
+		orderInformation.editShipStateByShipState(shipState, id);
+		}
 	
 	//商家刪除訂單
 	public void deleteByOrderId(int id) {

@@ -60,7 +60,17 @@
         th {
             text-align: center;
         }  
-        
+        .input-group-prepend {
+            margin: 20px;
+            height: 45px;
+        }
+
+        input.form-control{
+            height: 45px;
+        }
+        /* div.input-group-text{
+            height: 60px;
+        } */
     </style>
 
 </head>
@@ -125,8 +135,10 @@
                                                                 class="btn-group"></select></th> -->
                                                     <th style="width: 280px;">出貨日期</th>                
                                                     <th>
-                                                        <select style="border: none;">
+                                
+                                                        <select id="selectShippingState" style="border: none;">
                                                            <option value="">訂單狀態</option>
+                                                           <option value="">所有訂單</option>
                                                            <option value="">未付款</option>
                                                            <option value="">備貨中</option>
                                                            <option value="">已出貨</option>
@@ -140,7 +152,6 @@
                                                 <tbody id="table_tbody">
                                                    <c:forEach var="allOrder" items="${allOrder}"> 
                                                       <tr>
-                                                         <!-- <td></td> -->
                                                          <td class="product-name" id="imforId">${allOrder.id}</td>
                                                          <td>
                                                              <fmt:formatDate pattern="yyyy-MM-dd" value="${allOrder.orderDate}" />
@@ -150,15 +161,27 @@
                                                              <a class="showmore" style="color: #337ab7;">Show More</a>
                                                          </td>
                                                          <td>
-                                                            <button type="button" class="btn btn-warning">明細</button>
+                                                            <button type="button" class="btn btn-warning detailBtn">明細</button>
+                                                         </td>
+                                                         <td id="editShipDate">  
+                                                            <span id="showdate" class="showdate">
+                                                               <c:choose>
+                                                                <c:when test="${allOrder.shippingDate != null}">
+                                                                    <fmt:formatDate pattern="yyyy-MM-dd" value="${allOrder.shippingDate}"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    選擇日期
+                                                                </c:otherwise>
+                                                             </c:choose>
+                                                            </span> 
+                                                        <!-- </td> -->
+                                                            <input type="date" name="editExpiryDateInput" hidden
+                                                               class="form-control shipDate"  value="${allOrder.shippingDate}">
                                                          </td>
                                                          <td>
-                                                            <input type="date" name="editExpiryDate" id="editExpiryDate" 
-                                                               class="form-control" >
-                                                         </td>
-                                                         <td>
-                                                            <select id="selectState">
-                                                               <option id="op1" value="" selected>未付款</option>
+                                                            <select class="shipStateSelect" style="border:none;">
+                                                               <option id="op0">${allOrder.shipState}</option>
+                                                               <option id="op1" value="">未付款</option>
                                                                <option id="op2" value="">備貨中</option>
                                                                <option id="op3" value="">已出貨</option>
                                                                <option id="op4" value="">已取消</option>
@@ -212,15 +235,14 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- /# card -->
                 </div>
                 <!-- /# column -->
             </div>
             <!-- /# row -->
 
-            <%--新增案件的彈跳視窗--%>
-            <div id="insertCaseDialog" hidden title="新增案件">
+            <%--明細按件的彈跳視窗--%>
+            <div id="ckShipDetail" hidden title="配送明細">
                 <div class="card">
                     <div class="card-title">
                     </div>
@@ -229,93 +251,31 @@
                             <form>
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>標題：</label>
-                                            <label for="title"></label><input name="title" id="title" type="text"
-                                                                              class="form-control"
-                                                                              value="">
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="inputGroup-sizing-lg">收件人</span><input type="text" disabled="true"  id="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>名字：</label>
-                                            <input name="name" id="name" type="text" class="form-control"
-                                                   value="">
-                                        </div>
-                                        <div class="form-group" name="classification">
-                                            <label>類別：</label>
-                                            <select class="form-control" id="classification">
-                                            </select>
-                                        </div>
-                                        <div class="form-group" name="location">
-                                            <label>地區：</label>
-                                            <select class="form-control" id="location">
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email：</label>
-                                            <input id="caseEmail" class="form-control"
-                                                   type="email" placeholder="Email"
-                                                   name="caseEmail">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>結案時間：</label>
-                                            <input type="date" name="startDate"
-                                                   id="expiryDate" class="form-control">
-                                        </div>
-                                    </div>
+                                    </div>    
                                     <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>資訊：</label>
-                                            <textarea name="message" id="message" class="form-control" rows="3"
-                                                      placeholder="Text input"></textarea>
-                                        </div>
-                                        <div class="form-group" id="imgDiv">
-                                            <input type="file" class="imgur" accept="image/*" data-max-size="5000"/>
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="inputGroup-sizing-lg">聯絡電話</span><input type="text" disabled="true"  id="phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <%--編輯按件的彈跳視窗--%>
-            <div id="editCaseDialog" hidden title="修改案件">
-                <div class="card">
-                    <div class="card-title">
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-elements">
-                            <form>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>：</label>
-                                            <input name="editTitle" id="editTitle" type="text" class="form-control" value="">
+                                    <div class="col-lg-12">
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="inputGroup-sizing-lg">收件地址</span><input type="text" disabled="true" id="add" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>名字：</label>
-                                            <input name="editName" id="editName" type="text" class="form-control" value="">
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="inputGroup-sizing-lg">備註</span><input type="text" disabled="true" id="notes" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>標題：</label>
-                                            <input name="editTitle" id="editTitle" type="text" class="form-control" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>名字：</label>
-                                            <input name="editName" id="editName" type="text" class="form-control" value="">
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>資訊：</label>
-                                            <textarea name="editMessage" id="editMessage" class="form-control" rows="3"
-                                                      placeholder="Text input"></textarea>
-                                        </div>
-                                    </div>
-                                    <input type="text" hidden id="updateCaseId">
+                                    </div>    
                                 </div>
                             </form>
                         </div>
@@ -329,69 +289,6 @@
     </div>
 </div>
 </div>
-
-<!-- JavaScript -->
- <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-   <script src="http://code.jquery.com/jquery.js"></script>
-   <script src="js/jquery-ui.min.js"></script>
- <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-    <script>
-
-        // Show Order Record 
-        $(function () {
-            $("a.showmore").click(function (e) {
-                e.preventDefault();
-                // We break and store the result so we can use it to hide
-                // the row after the slideToggle is closed
-                var targetrow = $(this).closest('tr').next('.detail');
-                targetrow.show().find("div").slideToggle("fast", function () {
-
-                    if (!$(this).is(":visible")) {
-                            targetrow.hide();
-                    }
-                });
-            });
-        });
-
-        $(".showmore").on("click", function (e) {
-                                
-            let orderList = $(this).closest("tr").next("tr").find("tbody");
-            $(orderList).html('');
-
-            let id = $(this).parent("td").prevAll().filter("#imforId").text();
-            let imforId = Number(id);
-            console.log(imforId);
-            // console.log(typeof imforId);
-            // console.log(id);
-             $.ajax({
-                url: "orderProduct?fkOrderImformation=" + imforId,
-                type: "GET",
-                // data:{
-                //     fkOrderImformation:imforId
-                // },
-                success: function (result) {
-
-                   product_data="";
-
-                  $.each(result, function (index, product) {
-                    console.log(product.fkProduct.name);
-                    product_data +="<tr>"
-                    product_data +="<td class='product-thumbnail' ><img style='width:125px;' src='"+product.fkProduct.image01+"'></td>"
-                    product_data +="<td class='product-name'>"+product.fkProduct.name+"</td>"
-                    product_data +="<td class='product-price product__price-2'>"+product.orderMount+"</td>"
-                    product_data +="<td class='product-price product__price-2'>$"+product.price+"</td>"
-                    product_data += "</tr>"
-                    });
-                  $(orderList).append(product_data);
-                },
-                error: function (err) {
-                    console.log(err);
-                        }
-                    })
-                })
-
-
-    </script>
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
@@ -413,9 +310,185 @@
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- <script src="${contextRoot}/static/back/universal/Case.js"></script> -->
 
-<%--<script>--%>
-<%--    console.log(Taiwan_districts);--%>
-<%--</script>--%>
+<script>
+
+    // Show Order Record 
+    $(function () {
+        $("a.showmore").click(function (e) {
+            e.preventDefault();
+            // We break and store the result so we can use it to hide
+            // the row after the slideToggle is closed
+            var targetrow = $(this).closest('tr').next('.detail');
+            targetrow.show().find("div").slideToggle("fast", function () {
+
+                if (!$(this).is(":visible")) {
+                        targetrow.hide();
+                }
+            });
+        });
+    });
+
+    $(".showmore").on("click", function (e) {
+                            
+        let orderList = $(this).closest("tr").next("tr").find("tbody");
+        $(orderList).html('');
+
+        let id = $(this).parent("td").prevAll().filter("#imforId").text();
+        let imforId = Number(id);
+        console.log(imforId);
+        // console.log(typeof imforId);
+        // console.log(id);
+         $.ajax({
+            url: "orderProduct?fkOrderImformation=" + imforId,
+            type: "GET",
+            // data:{
+            //     fkOrderImformation:imforId
+            // },
+            success: function (result) {
+
+               product_data="";
+
+              $.each(result, function (index, product) {
+                console.log(product.fkProduct.name);
+                product_data +="<tr>"
+                product_data +="<td class='product-thumbnail' ><img style='width:125px;' src='"+product.fkProduct.image01+"'></td>"
+                product_data +="<td class='product-name'>"+product.fkProduct.name+"</td>"
+                product_data +="<td class='product-price product__price-2'>"+product.orderMount+"</td>"
+                product_data +="<td class='product-price product__price-2'>$"+product.price+"</td>"
+                product_data += "</tr>"
+                });
+              $(orderList).append(product_data);
+            },
+            error: function (err) {
+                console.log(err);
+                    }
+                })
+            })
+
+    //配送明細
+    $("#table_tbody").on("change click", ".btn.btn-warning.detailBtn" ,function () {
+      
+      $("#ckShipDetail").removeAttr('hidden').dialog('open');
+
+        // this為觸發的button, 若button由c:foreach產生,不能用id抓
+        let id=$(this).closest('tr').children('td:eq(0)').text();
+        let imforId = Number(id);
+        console.log(id);
+
+        $.ajax({
+            url: "iddetail?imforId=" + imforId,
+            // url:"iddetail",
+            type: "GET",
+            // data:{
+            //     imforId:imforId
+            // },
+            success: function (result) {
+                // console.log(result); // 字串
+                let res = JSON.parse(result); // 字串轉成javascript物件
+                // console.log(res);
+                $("input[id='name']").val(res.name);
+                $("input[id='phone']").val(res.phone);
+                $("input[id='add']").val(res.add);
+                $("input[id='notes']").val(res.notes);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    })
+
+
+    $("#ckShipDetail").dialog({
+        autoOpen: false,
+        width: 800,
+        modal: true,
+        // buttons: {
+        //     "新增": function () {
+        //     $(this).dialog("close");
+        //    },
+        //    "取消": function () {
+        //     $(this).dialog('close');
+        //    },
+        // }
+    }); 
+
+    //點選日期
+
+
+    //修改出貨日期
+    $(".form-control.shipDate").on("change",function(){
+        console.log($(".form-control.shipDate"));
+        console.log($(this));   
+        let id=$(this).closest('tr').children('td:eq(0)').text();
+        console.log(id);
+        let shipDate = $(this).val();
+        console.log(shipDate); 
+        console.log(typeof shipDate);  
+
+        $.ajax({
+            url:"editordershipdate",
+            type:"POST",
+            data:{
+                shipDate:shipDate,
+                id:id
+            },
+            success:function(result){
+                console.log(result);
+                let date = Date.parse(result);
+                console.log(date);
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>修改成功</h5>",
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });  
+
+
+
+    //修改出貨狀態
+    $(".shipStateSelect").on("change",function(){
+        // console.log($(".shipStateSelect"));
+        let id=$(this).closest('tr').children('td:eq(0)').text();
+        console.log($(id));
+        let shipState = $(this).children('option:selected').text()
+        console.log(shipState);
+        
+        $.ajax({
+            url:"editordershipstate",
+            type:"POST",
+            data:{
+                shipState:shipState,
+                id:id
+            },
+            success:function(result){
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>修改成功</h5>",
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    })
+
+    //依出貨狀態搜尋
+    $("#selectShippingState").on("change",function(){
+        console.log($("#selectShippingState"));
+        let shipState = $("#selectShippingState>option:selected").text();
+        console.log(shipState);
+        let url = 'allorder?shipState='+shipState;
+        if(shipState !="所有訂單"){
+            window.location.href=url;
+        }else{
+          window.location.href='/Design/B/allorder';
+        }
+    })
+</script>
 
 </body>
 

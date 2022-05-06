@@ -1,14 +1,17 @@
 package com.eeit40.design.Controller.BackSide;
 
+//import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,97 +22,151 @@ import org.springframework.web.servlet.ModelAndView;
 import com.eeit40.design.Entity.OrderInformation;
 import com.eeit40.design.Entity.OrderList;
 import com.eeit40.design.Service.OrderImformationService;
-import com.eeit40.design.Service.ShoppingCartService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class OrderInformationBackController {
 
 	@Autowired
 	private OrderImformationService orderImformationService;
+
+	@Autowired
+	private Jackson2ObjectMapperBuilder builder;
+
+	// 查詢所有訂單
+//	@GetMapping("B/allorder")
+//	public ModelAndView selectAllOrderByOrderId(ModelAndView mav) {
+//
+//		mav.setViewName("B/ShoppingCart/OrderImforBack");
+//
+//		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
+//		
+//		
+//		mav.getModel().put("allOrder", allOrder);
+//
+//		return mav;
+//	}
 	
-	
-	//查詢所有訂單
 	@GetMapping("B/allorder")
-	public ModelAndView selectAllOrderByOrderDate(ModelAndView mav){
-		
+	public ModelAndView selectAllOrderByOrderId(ModelAndView mav,HttpServletRequest request) {
+
 		mav.setViewName("B/ShoppingCart/OrderImforBack");
+
+		String shipState = request.getParameter("shipState");
 		
-		List<OrderInformation> allOrder= orderImformationService.selectAllOrderByOrderDate();
+		if(shipState !=null) {
+			
+		// 商城訂單查詢-依ship_state
+		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
+		mav.getModel().put("allOrder", shipStateDetail);
+		System.out.println(shipStateDetail);
 		
+		}else {
+		
+		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
 		mav.getModel().put("allOrder", allOrder);
 		
+		}
+		
 		return mav;
 	}
-	
-	///商城訂單查詢-依ship_state
+
+	// 商城訂單查詢-依id
+	@ResponseBody
+	@GetMapping("B/iddetail")
+	public String selectOrderById(HttpServletRequest request) throws JsonProcessingException {
+
+		String imforId = request.getParameter("imforId");
+		int id = Integer.valueOf(imforId);
+
+		List<OrderInformation> imfor = orderImformationService.selectOrderById(id);
+
+		//解決json會在orderimfor和loderlist兩個table無限尋找的狀況
+		ObjectMapper mapper = builder.build();
+		//將陣列的值先轉成字串
+		return mapper.writeValueAsString(imfor.get(0));
+	}
+
+	// 商城訂單查詢-依ship_state
 	@GetMapping("B/shipStatedetail")
-	public ModelAndView selectByShipState(ModelAndView mav, HttpServletRequest request){
-		
+	public ModelAndView selectByShipState(ModelAndView mav, HttpServletRequest request) {
+
 		String shipState = request.getParameter("shipState");
-		List<OrderInformation> shipStateDetail= orderImformationService.selectByShipState(shipState);
+		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
 		mav.getModel().put("shipStateDetail", shipStateDetail);
 		
-//		mav.setViewName("/B/ShoppingCart/OrderImformation");
-		
 		return mav;
 	}
-	
-	//商城訂單查詢-依order_date
+
+	// 商城訂單查詢-依order_date
 	@GetMapping("B/orderdatedetail")
-	public ModelAndView selectByOrderDate(ModelAndView mav, HttpServletRequest request) throws ParseException{
-		
+	public ModelAndView selectByOrderDate(ModelAndView mav, HttpServletRequest request) throws ParseException {
+
 		String date = request.getParameter("orderDate");
-		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
-	    Date orderDate = fmt.parse(date);
-	    
+		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date orderDate = fmt.parse(date);
+
 		List<OrderInformation> orderDateDetail = orderImformationService.selectByOrderDate(orderDate);
 		mav.getModel().put("shipStateDetail", orderDateDetail);
-		
+
 //		mav.setViewName("/B/ShoppingCart/OrderImformation");
 		
 		return mav;
 	}
-	
-	//商城訂單明細查詢
+
+	// 商城訂單明細查詢
 	@ResponseBody
 	@GetMapping("B/orderProduct")
-	public  List<OrderList> selectByImforId(HttpServletRequest request) {
-			
+	public List<OrderList> selectByImforId(HttpServletRequest request) {
+
 		String fkOrderImformation = request.getParameter("fkOrderImformation");
-			
+
 		int imfroId = Integer.valueOf(fkOrderImformation);
 
 		List<OrderList> orderProduct = orderImformationService.selectByImforId(imfroId);
-			
+
 		return orderProduct;
-	}	
-	
-	//商家修改訂單狀態
-	@PostMapping("B/editorder")
-	public ModelAndView editShipStateByOrderId(ModelAndView mav,HttpServletRequest request) throws ParseException {
-		
+	}
+
+	// 商家修改訂單日期
+	@PostMapping("B/editordershipdate")
+	public ModelAndView editShipStateByShipDate(ModelAndView mav, HttpServletRequest request) throws ParseException {
+
 		String date = request.getParameter("shipDate");
-		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
-	    Date shipDate = fmt.parse(date);
-	    
-		String shipState = request.getParameter("shipState");
+		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date shipDate = fmt.parse(date);
+
 		String id = request.getParameter("id");
 		int imforId = Integer.valueOf(id);
-		
-		orderImformationService.editShipStateByOrderId(shipDate, shipState, imforId);
-		
-		mav.setViewName("B/allorder");
-		return mav;
-	} 
-	
-	//商家刪除訂單
-	public ModelAndView deleteByOrderId(ModelAndView mav,@RequestParam(name = "id") int id) {
-		
-		orderImformationService.deleteByOrderId(id);
-		
+
+		orderImformationService.editShipStateByShipDate(shipDate,imforId);
+
 		mav.setViewName("redirect:/B/allorder");
 		return mav;
 	}
 	
-	
+	// 商家修改訂單出貨狀態
+		@PostMapping("B/editordershipstate")
+		public ModelAndView editShipStateByShipState(ModelAndView mav, HttpServletRequest request) throws ParseException {
+
+			String shipState = request.getParameter("shipState");
+			String id = request.getParameter("id");
+			int imforId = Integer.valueOf(id);
+
+			 orderImformationService.editShipStateByShipState(shipState, imforId);
+
+			mav.setViewName("redirect:/B/allorder");
+			return mav;
+		}
+
+	// 商家刪除訂單
+	public ModelAndView deleteByOrderId(ModelAndView mav, @RequestParam(name = "id") int id) {
+
+		orderImformationService.deleteByOrderId(id);
+
+		mav.setViewName("redirect:/B/allorder");
+		return mav;
+	}
+
 }
