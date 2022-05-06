@@ -74,7 +74,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-title">
-                                                            <h4>常見問題</h4>
+                                                            <h4>常見問題列表</h4>
                                                         </div>
                                                         <%-- dataTable--%>
                                                             <div class="bootstrap-data-table-panel">
