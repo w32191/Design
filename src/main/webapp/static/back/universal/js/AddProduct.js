@@ -138,21 +138,68 @@ $(function () {
         //     console.log(ires.name)
         // })
 
+        swal.fire({   // swal.fire 都是在設定sweetalert
+            title: '你確定要新增嗎？',
+            text: "新增後會直接上架商品",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7dbefc',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定更新',
+            cancelButtonText: '取消'
+        }).then((result) => {   // 按了任何一個按鈕後
+            if (result.isConfirmed) {   // 如果是按確定
+                $.ajax({
+                    url: `/Design/B/product/insert`,
+                    data: JSON.stringify(datas),
+                    method: 'POST',
+                    contentType:'application/json',
+                    beforeSend: function () {
+                        swal.fire({
+                            imageUrl: '/Design/static/back/universal/images/load-img.gif',
+                            imageHeight: 300,
+                            showConfirmButton: false
+                        });
+                    },
+                    success: function (deres) {
+                        console.log(deres);
+                        swal.fire({
+                            icon: 'success',
+                            html: '<h5>新增成功!</h5>'
+                        }).then(function () {
+                            window.location.href="/Design/B/Product/"
+                        });
 
-        $.ajax({
-            url: "/Design/B/product/insert",
-            method: "POST",
-            data: JSON.stringify(datas),
-            // processData:false,
-            contentType:'application/json',
-            success: function (res) {
-                console.log(res);
-            },
-            error: function (err) {
-                console.log(err)
-            }
+                    },
+                    error: function (deres) {
+                        console.log(deres);
+                        // window.alert('刪除失敗');
+                        swal.fire({
+                            icon: 'error',
+                            html: '<h5>修改失敗!</h5>'
+                        }).then(function () {
+                            location.reload();
+                        });
 
-        })
+                    } // end of error:
+                }); // end of $.ajax()
+            } // end of if (result.isConfirmed)
+        }); //end of then((result)
+
+        // $.ajax({
+        //     url: "/Design/B/product/insert",
+        //     method: "POST",
+        //     data: JSON.stringify(datas),
+        //     // processData:false,
+        //     contentType:'application/json',
+        //     success: function (res) {
+        //         console.log(res);
+        //     },
+        //     error: function (err) {
+        //         console.log(err)
+        //     }
+        //
+        // })
     })
 
 

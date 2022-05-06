@@ -28,11 +28,12 @@ public class ProductRestController {
     @Autowired
     private BrandRepository brandRepository;
 
-//    @PostMapping("/B/product/updateById/{id}")
-//    public Product updateById(@PathVariable Integer id){
-//        Product resPro = dao.updateById(id);
-//        return resPro;
-//    }
+    @PostMapping("/B/product/updateById/{id}")
+    public Product updateById(@PathVariable Integer id ,@RequestBody Product pro){
+        pro.setId(id);
+        Product resPro = dao.save(pro);
+        return resPro;
+    }
 
     @GetMapping("/B/product/findByNameLike/{name}")
     public List<Product> findByNameLike(@PathVariable String name) {

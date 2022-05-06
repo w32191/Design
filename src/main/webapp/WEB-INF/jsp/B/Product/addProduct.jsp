@@ -112,6 +112,9 @@
                                                     <textarea  rows="10" cols="70" name="description"
                                                               placeholder="請輸入商品詳細描述"></textarea>
                                                 </div>
+                                                <div class="form-group">
+
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -131,7 +134,7 @@
                     </div>
                     <div class="col-lg-2">
                         <div>
-                            <a id="savebtn" class="btn btn-warning">儲存變更</a>
+                            <a id="savebtn" class="btn btn-warning">送出</a>
                         </div>
                     </div>
                     <div class="col-lg-2">

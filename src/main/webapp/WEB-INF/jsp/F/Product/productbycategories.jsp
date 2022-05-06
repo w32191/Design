@@ -12,11 +12,11 @@
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
 </head>
-<body>
+<div>
 <%--Header Page--%>
 <jsp:include page="../IncludePage/layoutPage/headerPage.jsp"/>
 
-<main>
+<section>
 
     <!-- page title area start -->
     <section class="page__title p-relative d-flex align-items-center"
@@ -41,7 +41,22 @@
         </div>
     </section>
     <!-- page title area end -->
+    </section>
+        <div>
+            <img src="https://i.imgur.com/r5DUYEd.jpg">
+        </div>
+<div>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6">
+        </div>
+        <div class="col-xl-6 col-lg-6">
+            <img src="https://i.imgur.com/dC7OHsj.jpg">
+        </div>
 
+    </div>
+</div>
+
+    </section>
     <!-- shop area start -->
     <section class="shop__area pt-100 pb-100">
         <div class="container">
