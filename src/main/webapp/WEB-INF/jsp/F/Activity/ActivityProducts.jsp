@@ -19,20 +19,24 @@
 <jsp:include page="../IncludePage/layoutPage/headerPage.jsp"/>
 
 <main>
+    <c:forEach items="${activity.imgurImgs}" var="img">
+        <section class="page__title p-relative d-flex align-items-center"
+                 data-background="${img.link}">
+    </c:forEach>
 
     <!-- page title area start -->
-    <section class="page__title p-relative d-flex align-items-center"
-             data-background="${contextRoot}/static/front/assets/img/page-title/page-title-1.jpg">
+<%--    <section class="page__title p-relative d-flex align-items-center"--%>
+<%--             data-background="">--%>
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Shop</h1>
+                        <h1>${activity.subject}</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Shop
+                                    <li class="breadcrumb-item">${activity.startDate}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">${activity.endDate}
                                     </li>
                                 </ol>
                             </nav>
@@ -100,10 +104,10 @@
                                                             <span class="old-price">$${product.price}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="add-cart p-absolute transition-3">
-                                                            <%-- SamWang to-do: 加入購物車連結未解決--%>
-                                                        <a href="">+ Add to Cart</a>
-                                                    </div>
+<%--                                                    <div class="add-cart p-absolute transition-3">--%>
+<%--                                                            &lt;%&ndash; SamWang to-do: 加入購物車連結未解決&ndash;%&gt;--%>
+<%--                                                        <a href="">+ Add to Cart</a>--%>
+<%--                                                    </div>--%>
                                                 </div>
                                             </div>
                                         </div>

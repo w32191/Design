@@ -41,7 +41,7 @@ public class AccountController {
     	if(!br.hasErrors()) {
     		Account login = accountService.login(email, pwd);
     		if(login != null) {
-    		session.setAttribute("account", login);
+    		session.setAttribute("Baccount", login);
     		System.out.println(login);
     		mav.setViewName("B/Account/index");
     		return mav;
