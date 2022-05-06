@@ -47,7 +47,7 @@
                                         class="btn btn-lg btn-primary waves-effect waves-light">
                                     <i class="fa fa-plus"></i> 新增活動
                                 </button>
-<%--                                <a href="findAll" class="btn btn-lg btn-success">Table</a>--%>
+                                <%--                                <a href="findAll" class="btn btn-lg btn-success">Table</a>--%>
 
                             </div>
                             <div class="card-body">
@@ -59,36 +59,36 @@
                                     </div>
                                     <!-- end col -->
                                     <!-- BEGIN MODAL -->
-                                    <div class="modal fade none-border" id="event-modal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close"
-                                                            data-dismiss="modal" aria-hidden="true">
-                                                        &times;
-                                                    </button>
-                                                    <h4 class="modal-title">
-                                                        <strong>Add New Event</strong>
-                                                    </h4>
-                                                </div>
-                                                <div class="modal-body"></div>
-                                                <div class="modal-footer">
-                                                    <button type="button"
-                                                            class="btn btn-default waves-effect"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="button"
-                                                            class="btn btn-success save-event waves-effect waves-light">
-                                                        Create event
-                                                    </button>
-                                                    <button type="button"
-                                                            class="btn btn-danger delete-event waves-effect waves-light"
-                                                            data-dismiss="modal">Delete
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<%--                                    <div class="modal fade none-border" id="event-modal">--%>
+<%--                                        <div class="modal-dialog">--%>
+<%--                                            <div class="modal-content">--%>
+<%--                                                <div class="modal-header">--%>
+<%--                                                    <button type="button" class="close"--%>
+<%--                                                            data-dismiss="modal" aria-hidden="true">--%>
+<%--                                                        &times;--%>
+<%--                                                    </button>--%>
+<%--                                                    <h4 class="modal-title">--%>
+<%--                                                        <strong>Add New Event</strong>--%>
+<%--                                                    </h4>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="modal-body"></div>--%>
+<%--                                                <div class="modal-footer">--%>
+<%--                                                    <button type="button"--%>
+<%--                                                            class="btn btn-default waves-effect"--%>
+<%--                                                            data-dismiss="modal">Close--%>
+<%--                                                    </button>--%>
+<%--                                                    <button type="button"--%>
+<%--                                                            class="btn btn-success save-event waves-effect waves-light">--%>
+<%--                                                        Create event--%>
+<%--                                                    </button>--%>
+<%--                                                    <button type="button"--%>
+<%--                                                            class="btn btn-danger delete-event waves-effect waves-light"--%>
+<%--                                                            data-dismiss="modal">Delete--%>
+<%--                                                    </button>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
 
                                     <!-- Modal Add Category -->
                                     <div class="modal fade none-border" id="add-category"
@@ -98,7 +98,7 @@
                                                 <div class="modal-header">
 
                                                     <h4 class="modal-title">
-                                                        <strong>Add a category </strong>
+                                                        <strong>新增活動</strong>
                                                     </h4>
                                                     <button type="button" class="btn btn-warning"
                                                             data-dismiss="modal" aria-hidden="true">
@@ -106,84 +106,78 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
-                                                        <div class="row">
-                                                            <%--                                                            <div class="col-md-6">--%>
-                                                            <%--                                                                <label class="control-label">Category--%>
-                                                            <%--                                                                    Name</label>--%>
-                                                            <%--                                                                <input class="form-control form-white"--%>
-                                                            <%--                                                                       placeholder="Enter name"--%>
-                                                            <%--                                                                       type="text"--%>
-                                                            <%--                                                                       name="category-name"/>--%>
-                                                            <%--                                                            </div>--%>
-                                                            <%--                                                            <div class="col-md-6">--%>
-                                                            <%--                                                                <label class="control-label">Choose--%>
-                                                            <%--                                                                    Category Color</label>--%>
-                                                            <%--                                                                <select class="form-control form-white"--%>
-                                                            <%--                                                                        data-placeholder="Choose a color..."--%>
-                                                            <%--                                                                        name="category-color">--%>
-                                                            <%--                                                                    <option value="success">--%>
-                                                            <%--                                                                        Success--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                    <option value="danger">Danger--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                    <option value="info">Info--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                    <option value="pink">Pink--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                    <option value="primary">--%>
-                                                            <%--                                                                        Primary--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                    <option value="warning">--%>
-                                                            <%--                                                                        Warning--%>
-                                                            <%--                                                                    </option>--%>
-                                                            <%--                                                                </select>--%>
-                                                            <%--                                                            </div>--%>
-                                                            <form enctype="multipart/form-data"
-                                                                  id="insertActivityForm">
-                                                                <div class="form-group">
-                                                                    <label>活動主題：
-                                                                        <input type="text"
-                                                                               class="form-control"
-                                                                               name="subject"
-                                                                               id="insertSubject"/>
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>活動內容：
-                                                                        <textarea id="insertContent"
-                                                                                  class="form-control"
-                                                                                  rows="3"></textarea>
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>折扣％：
-                                                                        <input type="number"
-                                                                               placeholder="％"
-                                                                               class="form-control"
-                                                                               id="insertdiscountPercentage">
-                                                                    </label>
-                                                                </div>
-                                                                <label>開始日：
-                                                                    <input type="date"
-                                                                           name="startDate"
-                                                                           id="insertStartDate"
-                                                                           class="form-control">
-                                                                </label><br/>
-                                                                <label>結束日：
-                                                                    <input type="date"
-                                                                           name="startDate"
-                                                                           id="insertEndDate"
-                                                                           class="form-control">
-                                                                </label><br/>
-                                                                <label>上傳圖片：
-                                                                    <input type="file" name="files"
-                                                                           id="insertUploadFile"
-                                                                           class="form-control">
-                                                                </label><br/>
-                                                            </form>
+
+                                                    <form enctype="multipart/form-data"
+                                                          id="insertActivityForm" class="form">
+                                                        <div class="form-group">
+                                                            <label for="insertSubject">活動主題：</label>
+                                                            <input type="text"
+                                                                   class="form-control form-control-lg"
+                                                                   name="subject"
+                                                                   id="insertSubject"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="insertContent">活動內容：</label>
+                                                            <textarea id="insertContent"
+                                                                      class="form-control" style="height:100%"
+                                                                      rows="5"></textarea>
+
+                                                        </div>
+                                                        <%--                                                        <div class="form-group">--%>
+                                                        <%--                                                            <label for="insertdiscountPercentage">折扣％：--%>
+                                                        <%--                                                                <input type="number"--%>
+                                                        <%--                                                                       placeholder="％"--%>
+                                                        <%--                                                                       class="form-control form-control-lg"--%>
+                                                        <%--                                                                       id="insertdiscountPercentage">--%>
+                                                        <%--                                                            </label>--%>
+                                                        <%--                                                        </div>--%>
+                                                        <div class="form-group">
+                                                            <label for="insertdiscountPercentage">折扣％：
+                                                                <span class="text-danger text-lg"
+                                                                    id="disSpan">50%</span></label>
+                                                            <div>
+                                                            <button class="btn btn-primary" type="submit">Button</button>
+                                                            <input type="number" value="50"
+                                                                   class="form-control"
+                                                                   min="1" max="99"
+                                                                   id="insertdiscountPercentage">
+                                                            <button class="btn btn-primary" type="submit">Button</button></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>開始日：
+                                                                <input type="date"
+                                                                       name="startDate"
+                                                                       id="insertStartDate"
+                                                                       class="form-control form-control-lg">
+                                                            </label>
+                                                            <label>結束日：
+                                                                <input type="date"
+                                                                       name="startDate"
+                                                                       id="insertEndDate"
+                                                                       class="form-control form-control-lg">
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                        </div>
+                                                        <%--                                                        <div class="form-group">--%>
+                                                        <%--                                                            <label>上傳圖片：--%>
+                                                        <%--                                                                <input type="file" name="files"--%>
+                                                        <%--                                                                       id="insertUploadFile"--%>
+                                                        <%--                                                                       class="form-control">--%>
+                                                        <%--                                                            </label>--%>
+                                                        <%--                                                        </div>--%>
+                                                        <div class="custom-file">
+
+                                                            <input type="file"
+                                                                   class="custom-file-input"
+                                                                   id="insertUploadFile">
+                                                            <label class="custom-file-label"
+                                                                   for="insertUploadFile">選擇檔案...</label>
+                                                            <%--                                                            <div class="invalid-feedback">Example invalid custom file feedback</div>--%>
                                                         </div>
                                                     </form>
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" id="insertBtn"

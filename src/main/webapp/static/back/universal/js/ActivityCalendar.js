@@ -1,6 +1,11 @@
 $(function () {
   setCalender();
   $('#insertBtn').on('click',insertSend);
+
+  $('#insertdiscountPercentage').on('change',function (){
+    let value = $('#insertdiscountPercentage').val();
+    $('#disSpan').text(`${value}%`);
+  });
 });
 
 function setCalender() {
@@ -32,6 +37,8 @@ function setCalender() {
     }
   });
   calendar.render();
+  document.getElementById('insertStartDate').valueAsDate = new Date();
+
 }
 
 function insertSend() {

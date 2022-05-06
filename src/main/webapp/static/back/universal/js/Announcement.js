@@ -1,6 +1,6 @@
 $(function () {
 
-  // SamWang to-do: DataTables尚未解決
+
   // 主要清單的DataTable
   // $('#table_data').DataTable({
   //   "searching": false,
