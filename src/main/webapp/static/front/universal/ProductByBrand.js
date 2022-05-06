@@ -4,7 +4,7 @@ $(function () {
     let url = new URL(getUrlString);
     console.log(url);
     let brand = url.searchParams.get('brand')
-    console.log(brand)
+    // console.log(brand)
     brandSwitch(brand);
 
     $.getJSON(`/Design/B/product/findProductByBrand/${brand}`, function (res) {
@@ -157,7 +157,6 @@ $(function () {
                 break;
 
 
-
             case "3" :
                 console.log(3);
                 $.getJSON(`/Design/B/product/findProductByBrandOrderByPrice/${brand}`, function (res) {
@@ -261,8 +260,6 @@ $(function () {
             case "5" :
 
 
-
-
                 $.getJSON(`/Design/B/product/findProductByBrandOrderByAdded/${brand}`, function (res) {
                     let txt = '';
                     console.log(res.length);
@@ -315,27 +312,20 @@ $(function () {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
     })
 
-function brandSwitch(brand) {
-    switch (brand) {
+    function brandSwitch(brand) {
+        console.log(brand);
+        $('#brandbanner').html('');
 
-        //Tom Dixon
-        case '6' :{
 
-            console.log("有喔是6")
-            let txt =`
+        switch (brand) {
+
+            //Tom Dixon
+            case '6' : {
+
+                console.log("有喔是6")
+               let txt1 = `
                             <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
@@ -371,15 +361,18 @@ function brandSwitch(brand) {
         </div>
 `;
 
-            $('#brandbanner').html(txt);
+                $('#brandbanner').html(txt1);
 
 
-        }
+            }
+            break;
 
 
 
-        //MENU
-        case '4':{let txt =`
+            //MENU
+            case '4': {
+                console.log("有喔是4")
+               let  txt2 = `
                             <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
@@ -411,13 +404,16 @@ function brandSwitch(brand) {
                 </div>
             </div>
         </div>
-`;
+                `
 
-            $('#brandbanner').html(txt);
-        }
+                $('#brandbanner').html(txt2);
+            }
+                break;
 
-        //FLOS
-        case '15':{let txt =`
+            //FLOS
+            case '15': {
+                console.log("有喔是15")
+                let txt3 = `
                             <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
@@ -447,14 +443,17 @@ function brandSwitch(brand) {
                 </div>
             </div>
         </div>
-`;
+`
 
-            $('#brandbanner').html(txt);
-        }
+                $('#brandbanner').html(txt3);
+            }
+                break;
 
 
-        //BROKIS
-        case '9':{let txt =`
+            //BROKIS
+            case '9': {
+                console.log("有喔是9")
+              let  txt4 = `
                             <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
@@ -484,14 +483,17 @@ function brandSwitch(brand) {
                 </div>
             </div>
         </div>
-`;
+`
 
-            $('#brandbanner').html(txt);
-        }
+                $('#brandbanner').html(txt4);
+            }
+                break;
 
 
-        //Foscarini
-        case '11':{let txt =`
+            //Foscarini
+            case '11': {
+                console.log("有喔是11")
+                let txt5 = `
                             <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
@@ -522,44 +524,54 @@ function brandSwitch(brand) {
                 </div>
             </div>
         </div>
-`;
+`
 
-            $('#brandbanner').html(txt);
+                $('#brandbanner').html(txt5);
+            }
+                break;
+
+            //louis
+            case '24': {
+                console.log("有喔是24")
+                let txt6 = `
+                            <div class="container" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <img src="https://i.imgur.com/Gj7sGjA.jpg" class="imggggg">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <br>
+                        <br>
+                        
+                        
+                            <h2>Louis Poulsen</h2>
+                            <br>
+                            <p>
+                            品牌國家：丹麥<br>
+                            來自丹麥的國際燈具品牌，成立於 1874 年，悠久的經營歷史，至今旗下員工超過 1,000 名，於法國、德國、日本、美國、香港及北歐各國均有其分公司，多年來 Louis Poulsen 積極致力於視覺藝術品的創作，對於燈飾品的創新，更是其設計師群不斷努力的目標，對於作品的優雅外型的要求上，和使用機能如何完美搭配，是其最驕傲出眾的 優勢，對於簡潔風格的訴求，使 Louis Poulsen 更加永垂不朽，也讓其成為國際上第一流的知名品牌。</p>
+                            </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <br>
+                        <img src="https://i.imgur.com/FBbtQMR.jpg">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+`
+                $('#brandbanner').html(txt6);
+            }
+                break;
+
+
         }
-
-
-
-
-
-
-
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 })
