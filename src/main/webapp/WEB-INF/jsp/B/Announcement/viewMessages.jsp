@@ -35,10 +35,10 @@
 						<div class="page-header">
 							<div class="page-title">
 								<h1>Hello, <span>Welcome Here</span></h1>
-                            <button type="button" id="insertBtn"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="${contextRoot}/add">
+                            <a type="button" id="insertBtn"
+                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="${contextRoot}/B/Announcement/add">
                                 <i class="ti-plus"></i>新增公告
-                            </button>
+                            </a>
 							</div>
 						</div>
 					</div>

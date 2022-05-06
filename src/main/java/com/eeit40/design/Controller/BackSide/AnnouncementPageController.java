@@ -16,11 +16,7 @@ public class AnnouncementPageController {
 	
 	@Autowired
 	private AnnouncementWorkMessagesService messageService;
-	
-	@GetMapping("/")
-	public String welcomIndex() {
-		return "messageIndex";
-	}
+
 	
 	@GetMapping("/B/Announcement/add")
 	public ModelAndView addMessagePage(ModelAndView mav) {
