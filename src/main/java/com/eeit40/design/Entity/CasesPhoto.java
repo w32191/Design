@@ -17,36 +17,35 @@ public class CasesPhoto {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Integer id;
+  @Column(name = "case_photo_id", nullable = false)
+  private Integer case_photo_id;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_cases_id")
   private Case fkCases;
 
-  @Column(name = "photo")
-  private byte[] photo;
+  @Column(name = "case_photo_url")
+  private String case_photo_url;
 
   @Lob
-  @Column(name = "message")
-  private String message;
+  @Column(name = "case_photo_message")
+  private String case_photo_message;
 
   public CasesPhoto() {
   }
 
-  public String getMessage() {
-    return message;
+  public CasesPhoto(Integer case_photo_id, Case fkCases, String case_photo_url, String case_photo_message) {
+    this.case_photo_id = case_photo_id;
+    this.fkCases = fkCases;
+    this.case_photo_url = case_photo_url;
+    this.case_photo_message = case_photo_message;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public Integer getCase_photo_id() {
+    return case_photo_id;
   }
 
-  public byte[] getPhoto() {
-    return photo;
-  }
-
-  public void setPhoto(byte[] photo) {
-    this.photo = photo;
+  public void setCase_photo_id(Integer case_photo_id) {
+    this.case_photo_id = case_photo_id;
   }
 
   public Case getFkCases() {
@@ -57,12 +56,19 @@ public class CasesPhoto {
     this.fkCases = fkCases;
   }
 
-  public Integer getId() {
-    return id;
+  public String getCase_photo_url() {
+    return case_photo_url;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setCase_photo_url(String case_photo_url) {
+    this.case_photo_url = case_photo_url;
   }
 
+  public String getCase_photo_message() {
+    return case_photo_message;
+  }
+
+  public void setCase_photo_message(String case_photo_message) {
+    this.case_photo_message = case_photo_message;
+  }
 }

@@ -1,9 +1,11 @@
 package com.eeit40.design.Dto;
 
+import com.eeit40.design.Entity.CasesPhoto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 public class CaseDto {
 
@@ -32,6 +34,10 @@ public class CaseDto {
     @JsonProperty("expiryDate")
     private Date expiryDate;
 
+    @JsonProperty("casesPhoto")
+    private List<CasesPhoto> casesPhoto;
+
+    private String coverPhoto;
 
 
 //    private List<String> list;
@@ -43,6 +49,23 @@ public class CaseDto {
 //    public void setList(List<String> list) {
 //        this.list = list;
 //    }
+
+
+    public String getCoverPhoto() {
+        return coverPhoto;
+    }
+
+    public void setCoverPhoto(String coverPhoto) {
+        this.coverPhoto = coverPhoto;
+    }
+
+    public List<CasesPhoto> getCasesPhoto() {
+        return casesPhoto;
+    }
+
+    public void setCasesPhoto(List<CasesPhoto> casesPhoto) {
+        this.casesPhoto = casesPhoto;
+    }
 
     public String getTitle() {
         return title;

@@ -77,11 +77,13 @@ public class AccountController {
     //註冊帳號中
     @PostMapping("/B/register")
     public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
-    Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd, String permission, BindingResult br) {
+    Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
+    HttpSession session, BindingResult br) {
     	
     	if(!br.hasErrors()) {
-    		accountService.register(account);
-    		
+    	 	Account accountregister = accountService.register(account);
+    	 	session.setAttribute("member", accountregister);
+    	 	System.out.println(accountregister);
     		
     		Member member = new Member();
     		mav.addObject(member);

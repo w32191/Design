@@ -62,12 +62,12 @@ public class CommonQuestionBackController {
   @PostMapping("/B/CommonQuestion/updateQuestionContent")
   @ResponseBody
   public String updateCommonQuestionContent(
-      @RequestParam(value = "question_type") String qty,
-      @RequestParam(value = "question") String qt, 
-      @RequestParam(value = "answer") String as,
+      @RequestParam(value = "question_type") String question_type,
+      @RequestParam(value = "question") String question, 
+      @RequestParam(value = "answer") String answer,
       @RequestParam(value = "id") Integer id) {
-    log.info(id+" "+qty+" "+qt+" "+as);
-    cqsService.updateCommonQuestion(id, qty, qt, as);
+    log.info(id+" "+question_type+" "+question+" "+answer);
+    cqsService.updateCommonQuestion(id, question_type, question, answer);
     
     return "success";
   }

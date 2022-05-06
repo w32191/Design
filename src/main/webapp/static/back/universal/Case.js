@@ -1649,6 +1649,7 @@ $(function () {
     doClassificationData();
     doLocationData();
 
+    //---------- 載入頁面資料開始 ---------
     $.ajax({
         url: "/Design/B/Cases",
         type: "get",
@@ -1678,9 +1679,9 @@ $(function () {
             console.log(err);
         }
     })
+    //---------- 載入頁面資料結束 ---------
 
-    //---------- 刪除開始 ----------
-    //動態綁定 刪除
+    //---------- 刪除開始 ---------
     $('#table_tbody').on('click', 'button[id^=deleteBtn]', function () {
         let deleteBtn = $(this);
         let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
@@ -1797,31 +1798,9 @@ $(function () {
                 $('#editLocation').val(result.location);
                 $('#editCaseEmail').val(result.caseEmail);
                 $('#editMessage').val(result.message);
-
-                // $('#editClassification > option').each(function (index, value) {
-                //     if (value == result.classification) {
-                //         $(this).attr('selected', 'selected');
-                //     }
-                // });
-
                 $('#editExpiryDate').val(result.expiryDate);
-
-
-                // $.each(result.results, function (index, value) {
-                //     console.log('adsf');
-                //     edit_data += '<tr>'
-                //     edit_data += '<td>' + value.editTitle + '</td>'
-                //     edit_data += '<td>' + value.editName + '</td>'
-                //     edit_data += '<td>' + value.editClassification + '</td>'
-                //     edit_data += '<td>' + value.editLocation + '</td>'
-                //     edit_data += '<td>' + value.editCaseEmail + '</td>'
-                //     edit_data += '<td>' + value.editMessage + '</td>'
-                //     edit_data += '<td>' + value.editExpiryDate + '</td>'
-                //     edit_data += '</tr>'
-                //
-                // })
+                $('#updateCaseId').val(id);
             }
-
         })
     });
 
@@ -1845,13 +1824,13 @@ $(function () {
     function editSend() {
         // 取得輸入的資料
         const editData = {
-            title: $('#title').val(),
-            name: $('#name').val(),
-            classification: $('#classification> option:selected').text(),
-            location: $('#location> option:selected').text(),
-            caseEmail: $('#caseEmail').val(),
-            message: $('#message').val(),
-            expiryDate: $('#expiryDate').val()
+            title: $('#editTitle').val(),
+            name: $('#editName').val(),
+            classification: $('#editClassification> option:selected').text(),
+            location: $('#editLocation> option:selected').text(),
+            caseEmail: $('#editCaseEmail').val(),
+            message: $('#editMessage').val(),
+            expiryDate: $('#editExpiryDate').val()
         }
         console.log(editData)
         //將輸入的文字資料,包進FormData
@@ -1859,6 +1838,7 @@ $(function () {
         // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
         dataFile.append("data", JSON.stringify(editData));
 
+        let id = $('#updateCaseId').val();
         $.ajax({
             type: "POST",
             url: "/Design/B/Case/updatedCase/" + id,
@@ -1891,15 +1871,16 @@ $(function () {
         });
     }
 
-
     //---------- 修改結束 ----------
 
     //---------- 新增開始 ----------
+
     //新增案件 按鈕
     $('#insertBtn').click(function () {
             $('#insertCaseDialog').removeAttr('hidden').dialog('open');
         }
     );
+
     //新增案件 dialog設定
     $('#insertCaseDialog').dialog({
         autoOpen: false,
@@ -1926,7 +1907,8 @@ $(function () {
             location: $('#location> option:selected').text(),
             caseEmail: $('#caseEmail').val(),
             message: $('#message').val(),
-            expiryDate: $('#expiryDate').val()
+            expiryDate: $('#expiryDate').val(),
+            coverPhoto:$('#coverPhoto').attr('src')
         }
         console.log(data)
         //將輸入的文字資料,包進FormData
@@ -2336,6 +2318,35 @@ $(function () {
     //         } );
     //     }
     // } );
+
+
+    //上傳圖片
+    $('input[type=file]').on("change", function () {
+        var $files = $(this).get(0).files;
+        var formData = new FormData();
+        formData.append("file", $files[0]);
+        $.ajax({
+            url: '/Design/B/Case/uploadImg',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>新增中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (res) {
+                swal.close();
+                console.log(res);
+                $('#imgDiv').append(`<img src="${res}" width="200" id="coverPhoto"/>`);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });
 
 
 });

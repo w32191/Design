@@ -154,7 +154,7 @@ $(function () {
                                                                                 value="1"/></div>
                                         </div>
                                         <div class="pro-cart-btn">
-                                            <a href="" class="add-cart-btn mb-20" id="addToCartBtn">+ Add to Cart</a>
+                                            <a class="add-cart-btn mb-20" id="addToCartBtn">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </form>
@@ -447,149 +447,71 @@ $(function () {
     $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
         console.log(newa[0].id)
         console.log(newa[0].name)
-        let natxt = ``;
-        natxt +=
+        let natxt = '';
 
-            `
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="section__title-wrapper text-center mb-55">
-                        <div class="section__title mb-10">
-                            <h2>新品推薦</h2>
-                        </div>
-                        <div class="section__sub-title">
-                            <p>NEW ARRIVAL</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+        for (let i = 0; i < 4; i++) {
+            natxt +=
+                `
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="product__wrapper mb-60">
                         <div class="product__thumb">
-                            <a href="product-details?id=${newa[0].id}" class="w-img">
-                                <img src="${newa[0].image01}" alt="product-img">
+                            <a href="product-details?id=${newa[i].id}" class="w-img">
+                                <img src="${newa[i].image01}" alt="product-img">
                                 <img class="product__thumb-2"
-                                     src="${newa[0].image02}" alt="product-img">
+                                     src="${newa[i].image02}" alt="product-img">
                             </a>
-                            
+
                             <div class="product__sale">
                                 <span class="new">new</span>
-                                
+
                             </div>
                         </div>
                         <div class="product__content p-relative">
                             <div class="product__content-inner">
-                                <h4><a href="product-details?id=${newa[0].id}">${newa[0].name}</a></h4>
+                                <h4><a href="product-details?id=${newa[i].id}">${newa[i].name}</a></h4>
                                 <div class="product__price transition-3">
-                                    <span>$${newa[0].price}</span>
-                                    
+                                    <span>$${newa[i].price}</span>
+
                                 </div>
                             </div>
                             <div class="add-cart p-absolute transition-3">
-                                <a href="#">+ Add to Cart</a>
+                                <a id="newArrAddToCartBtn${newa[i].id}">+ Add to Cart</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__wrapper mb-60">
-                        <div class="product__thumb">
-                            <a href="product-details?id=${newa[1].id}" class="w-img">
-                                <img src="${newa[1].image01}" alt="product-img">
-                                <img class="product__thumb-2"
-                                     src="${newa[1].image02}" alt="product-img">
-                            </a>
-                            
-                            <div class="product__sale">
-                                <span class="new">new</span>
-                            </div>
-                        </div>
-                        <div class="product__content p-relative">
-                            <div class="product__content-inner">
-                                <h4><a href="product-details?id=${newa[1].id}">${newa[1].name}</a></h4>
-                                <div class="product__price transition-3">
-                                    <span>$${newa[1].price}</span>
-                                </div>
-                            </div>
-                            <div class="add-cart p-absolute transition-3">
-                                <a href="#">+ Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__wrapper mb-60">
-                        <div class="product__thumb">
-                            <a href="product-details?id=${newa[2].id}" class="w-img">
-                                <img src="${newa[2].image01}" alt="product-img">
-                                <img class="product__thumb-2"
-                                     src="${newa[2].image02}" alt="product-img">
-                            </a>
-                            <div class="product__sale">
-                                <span class="new">new</span>
-                                
-                            </div>
-                            
-                        </div>
-                        <div class="product__content p-relative">
-                            <div class="product__content-inner">
-                                <h4><a href="product-details?id=${newa[2].id}">${newa[2].name}</a></h4>
-                                <div class="product__price transition-3">
-                                    <span>$${newa[2].price}</span>
-                                    
-                                </div>
-                            </div>
-                            <div class="add-cart p-absolute transition-3">
-                                <a href="#">+ Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__wrapper mb-60">
-                        <div class="product__thumb">
-                            <a href="product-details?id=${newa[3].id}" class="w-img">
-                                <img src="${newa[3].image01}" alt="product-img">
-                                <img class="product__thumb-2"
-                                     src="${newa[3].image02}" alt="product-img">
-                            </a>
-                            
-                            <div class="product__sale">
-                                <span class="new">new</span>
-                            </div>
-                        </div>
-                        <div class="product__content p-relative">
-                            <div class="product__content-inner">
-                                <h4><a href="product-details?id=${newa[3].id}">${newa[3].name}</a></h4>
-                                <div class="product__price transition-3">
-                                    <span>$${newa[3].price}</span>
-                                </div>
-                            </div>
-                            <div class="add-cart p-absolute transition-3">
-                                <a href="#">+ Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         `
-
-
+        }   //end of for
         $('#na').html(natxt);
     })
 
 
+
+
     $('body').on('click', '#addToCartBtn', function () {
-        //
         console.log($('#Qty').val());
         qty = $('#Qty').val();
-        $('#addToCartBtn').attr('href',`張姐的controller?id=${id}&qty=${qty}`);
-
+        // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&qty=${qty}`);
+        $.get("/Design/F/addshoppingcart", {"id": id, "qty": qty})
+        {
+            console.log($('#Qty').val());
+        }
     });
+
+
+
+
+    // 下方新品推薦加入購物車
+    $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
+
+        let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
+        console.log(id)
+        $.get("/Design/F/addshoppingcart", { "id":id, "qty": 1})
+        {
+            console.log($('#Qty').val());
+        }
+
+    })
 
 })
 

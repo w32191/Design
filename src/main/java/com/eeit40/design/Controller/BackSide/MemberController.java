@@ -1,5 +1,6 @@
 package com.eeit40.design.Controller.BackSide;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +38,53 @@ public class MemberController {
 	@PostMapping("/B/memberregister")
 	public ModelAndView memberregister(ModelAndView mav, @Valid @ModelAttribute(name = "memberregister") Member member,
 		@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
-		@RequestParam(name = "address") String address, @RequestParam(name = "serviceArea") String serviceArea, Account id,BindingResult br) {
+		@RequestParam(name = "address") String address, Account id, HttpSession session , BindingResult br) {
 		
 		if(!br.hasErrors()) {
-			memberService.memberRegister(member, id);
-			
+			Account accre = (Account) session.getAttribute("member");
+			member.setFkAccount(accre);
+			memberService.memberRegister(member);
+			System.out.println(member);
+			if(session != null) {
+				session.invalidate();
+				System.out.println(session);
+			}
 			mav.setViewName("B/Account/login");
 			return mav;
 		}
 		return null;
+		
+	}
+	
+	@GetMapping("/B/memberupdate")
+	public ModelAndView memberupdatejsp(ModelAndView mav) {
+		
+		Member member = new Member();
+		
+		mav.getModel().put("memberupdate", member);
+		
+		mav.setViewName("B/Member/member");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	@PostMapping("/B/memberupdate")
+	public ModelAndView memberupdate(ModelAndView mav, @Valid @ModelAttribute(name = "memberupdate") Member member,
+			@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
+			@RequestParam(name = "address") String address,  HttpSession session, BindingResult br)  {
+		if(!br.hasErrors()) {
+			Account acc = (Account) session.getAttribute("account");
+			memberService.findMemberByfkAccount(acc);
+			
+			mav.setViewName("B/Member/member");
+			return mav;
+		}
+		
+		return null;
+		
 		
 	}
 	

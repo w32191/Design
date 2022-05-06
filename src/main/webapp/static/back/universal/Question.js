@@ -54,20 +54,52 @@ $(function () {
         $('#insertQuestionDialog').removeAttr('hidden').dialog('open');
     });
 
-    //修改
+    //編輯 按鈕
     $('body').on('click', 'button[name="edit"]', function () {
-        let question = $(this).parent('td').siblings('td:eq(2)').text();
-        $('#question').val(question);
+        let editBtn = $(this);
+        let id = editBtn.parent('td').siblings('td:eq(0)').text();
+        let oldTypeStr = editBtn.parent('td').siblings('td:eq(1)').text();
+        let oldQuestion = editBtn.parent('td').siblings('td:eq(2)').text();
+        let oldAns = editBtn.parent('td').siblings('td:eq(3)').text();
+
         
+        $('#editId').val(id);
+        $('#question').val(oldQuestion);
+        $('#answer').val(oldAns);
+        
+        if (oldTypeStr.toString().indexOf('產品及服務') >= 0) {
+            $('#question_type_edit > option:eq(1)').prop('selected',true);
+        }
+        if(oldTypeStr.toString().indexOf('產品品質及維護') >= 0){
+            $('#question_type_edit > option:eq(2)').prop('selected',true);
+        }
+        if(oldTypeStr.toString().indexOf('產品貨況') >= 0){
+            $('#question_type_edit > option:eq(3)').prop('selected',true);
+        }
+        if(oldTypeStr.toString().indexOf('結帳') >= 0){
+            $('#question_type_edit > option:eq(4)').prop('selected',true);
+        }
+        if(oldTypeStr.toString().indexOf('取消訂單') >= 0){
+            $('#question_type_edit > option:eq(5)').prop('selected',true);
+        }
+
+    });
+
+    //送出按鈕（在編輯內層）
+    $('#editCommitBtn').click(function () {
+        let editBtn = $(this);
+        let id = $('#editId').val();
         let data = {
-            "question_type": $('#question_type > option:selected').val(),
+            "question_type": parseInt($('#question_type_edit > option:selected').val()),
             "question": $('#question').val(),
             "answer": $('#answer').val(),
-            "id": $('id').val()            
-        };console.log(data);
+            "id": id
+        };
+        console.log(data);
+
         $.ajax({
             url: "/Design/B/CommonQuestion/updateQuestionContent", //這個url是用來呼叫controller裡面的方法
-            type: "POST",
+            type: "post",
             data: data,
             success: function (res) {
                 console.log(res);
@@ -91,6 +123,7 @@ $(function () {
 
             }
         });
+
     });
 
     //新增

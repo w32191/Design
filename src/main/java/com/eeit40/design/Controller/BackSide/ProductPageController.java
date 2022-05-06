@@ -15,16 +15,34 @@ import java.util.List;
 @Controller
 public class ProductPageController {
 
-    private ProductRepository dao;
 
-    @GetMapping("/F/Product/Product")
+    @GetMapping(path = {"/B/Product/editProduct"})
+    public String indexPage() {
+        return "/B/Product/editProduct";
+    }
+
+    @GetMapping(path = {"/B/Product/addProduct"})
+    public String indexPage4() {
+        return "/B/Product/addProduct";
+    }
+
+
+    @GetMapping("/B/Product/")
     public ModelAndView findAllProduct(ModelAndView mav){
         Product pro = new Product();
 //        List<Product> ap = dao.findAll();
         mav.addObject("findAll",pro);
-        mav.setViewName("/F/Product/shop");
+        mav.setViewName("/B/Product/product");
         return mav;
     }
+
+
+
+
+
+
+
+
 
 
 

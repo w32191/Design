@@ -268,6 +268,9 @@
                                             <textarea name="message" id="message" class="form-control" rows="3"
                                                       placeholder="Text input"></textarea>
                                         </div>
+                                        <div class="form-group" id="imgDiv">
+                                            <input type="file" class="imgur" accept="image/*" data-max-size="5000"/>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -328,6 +331,7 @@
                                                       placeholder="Text input"></textarea>
                                         </div>
                                     </div>
+                                    <input type="text" hidden id="updateCaseId">
                                 </div>
                             </form>
                         </div>

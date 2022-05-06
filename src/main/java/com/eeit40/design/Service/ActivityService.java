@@ -1,9 +1,11 @@
 package com.eeit40.design.Service;
 
 import com.eeit40.design.Dto.ActivityDto;
+import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
+import com.eeit40.design.Entity.ShoppingCard;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
@@ -18,9 +20,13 @@ public interface ActivityService {
 
   List<Activity> findAll();
 
+  List<EventDto> findAllEvent();
+
   Page<Activity> findByPage(Integer pageNumber);
 
   boolean deleteByID(int id);
+
+  List<Activity> findActivitiesNow();
 
   Activity findById(Integer id);
 
@@ -39,8 +45,16 @@ public interface ActivityService {
   List<Product> findProductByFkBrand(Brand id);
 
 
+  List<Product> findProductsWithCurrentActivity();
+
   Map<String, String> ableCheckProduct(
       LocalDate startDate, LocalDate endDate,
       Integer productId, Integer activityId
   );
+
+  Map<String, Integer> getCurrentDiscountStringMap(Integer productId);
+
+
+  // 用product id 當Map 的 key
+  Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart);
 }

@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller("BackUniversalPageController")
 public class UniversalPageController {
 
-  @GetMapping("/B/Activity")
-  public String activityPage(){
-    return "redirect:/B/Activity/findAll";
-  }
+    @GetMapping("/B/Activity")
+    public String activityPage() {
+        return "redirect:/B/Activity/findAll";
+    }
+
+    @GetMapping("/B/CasePage")
+    public String CasePage() {
+        return "redirect:/B/Case";
+    }
 
 }

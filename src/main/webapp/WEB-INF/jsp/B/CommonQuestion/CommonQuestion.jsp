@@ -83,7 +83,7 @@
                                                                         class="display table table-borderd table-hover">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th>序號</th>
+                                                                                <th hidden="">序號</th>
                                                                                 <th>問題類型</th>
                                                                                 <th>問題</th>
                                                                                 <th>回答</th>
@@ -95,7 +95,7 @@
                                                                         <tbody id="findAll">
                                                                             <c:forEach var="cq" items="${cqs}">
                                                                                 <tr>
-                                                                                    <td>${cq.id}</td>
+                                                                                    <td hidden="">${cq.id}</td>
                                                                                     <td>${cq.questionType.commonQuestionType}
                                                                                     </td>
                                                                                     <td>${cq.question}</td>
@@ -119,7 +119,7 @@
                                                                         </tbody>
                                                                         <tfoot>
                                                                             <tr>
-                                                                                <th>ID</th>
+                                                                                <th hidden="">ID</th>
                                                                                 <th>標題</th>
 
                                                                             </tr>
@@ -254,20 +254,20 @@
                                                                                 <div class="col-sm-11">
                                                                                     <h3>常見問題</h3>
                                                                                     <input type="text" name="id"
-                                                                                        id="id" hidden="">
+                                                                                        id="editId" hidden="">
                                                                                 </div>
 
 
                                                                                 <div class="input-group mb-3 col-sm-12">
                                                                                     <div class="input-group-prepend">
                                                                                         <label class="input-group-text"
-                                                                                            for="question_type"><span
+                                                                                            for="question_type_edit"><span
                                                                                                 style="color: red">*</span>問題類型</label>
                                                                                     </div>
                                                                                     <select class="form-control"
-                                                                                        aria-describedby="question_type"
-                                                                                        name="question_type"
-                                                                                        id="question_type" required>
+                                                                                        aria-describedby="question_type_edit"
+                                                                                        name="question_type_edit"
+                                                                                        id="question_type_edit" required>
                                                                                         <option value=""
                                                                                             style="display: none">
                                                                                         </option>
@@ -327,11 +327,11 @@
 
 
                                                                             </form>
-                                                                            <div class="modal-footer">
+                                                                            <div class="modal-footer">                                                                                
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-dismiss="modal">關閉</button>
-                                                                                <button id="editBtn" type="button"
+                                                                                <button id="editCommitBtn" type="button"
                                                                                     class="btn btn-primary">送出</button>
                                                                             </div>
                                                                         </div>
