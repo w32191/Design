@@ -42,6 +42,13 @@
                     <a href="/Design/B/Case"><i class="ti-layout-tab"></i> Case管理</a>
                 </li>
 
+                <li>
+                    <a href="/Design/B/CommonQuestion"><i class="ti-layout-tab"></i> 常見問題管理</a>
+                </li>
+                <li>
+                    <a href="/Design/B/Announcement/viewMessage"><i class="ti-layout-tab"></i> 公告管理</a>
+                </li>
+
                 <li class="label">ＸＸ管理</li>
                 <li>
                     <a href="/Design/B/" class="sidebar-sub-toggle">
