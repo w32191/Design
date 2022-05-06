@@ -103,11 +103,10 @@
                 <div class="col-xl-12">
                     <div class="section__title-wrapper text-center mb-55">
                         <div class="section__title mb-10">
-                            <h2>Trending Products</h2>
+                            <h2>折扣中商品</h2>
                         </div>
                         <div class="section__sub-title">
-                            <p>Mirum est notare quam littera gothica quam nunc putamus parum
-                                claram!</p>
+                            <p>限時促銷買到賺到！！！</p>
                         </div>
                     </div>
                 </div>
@@ -119,7 +118,7 @@
                             <div class="product__item">
                                 <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${productList.get(i).id}" class="w-img">
                                             <img src="${productList.get(i).image01}"
                                                  alt="product-img">
                                             <img class="product__thumb-2"
@@ -129,23 +128,25 @@
                                     </div>
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">Wooden container
-                                                Bowl</a>
+                                            <h4><a href="/Design/F/product/product-details?id=${productList.get(i).id}"></a>
+                                                ${productList.get(i).name}
                                             </h4>
                                             <div class="product__price transition-3">
-                                                <span>$96.00</span>
-                                                <span class="old-price">$96.00</span>
+                                                <c:set var="dis"
+                                                       value="${(100-productList.get(i).discountPercentage)/100}"/>
+                                                <span>$${(productList.get(i).price*dis).intValue()}</span>
+                                                <span class="old-price">$${productList.get(i).price}</span>
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="newArrAddToCartBtn${productList.get(i).id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
                                 <c:if test="${(i+1 )< productList.size()-1}">
                                     <div class="product__wrapper mb-60">
                                         <div class="product__thumb">
-                                            <a href="product-details.html" class="w-img">
+                                            <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}" class="w-img">
                                                 <img src="${productList.get(i+1).image01}"
                                                      alt="product-img">
                                                 <img class="product__thumb-2"
@@ -155,16 +156,17 @@
                                         </div>
                                         <div class="product__content p-relative">
                                             <div class="product__content-inner">
-                                                <h4><a href="product-details.html">Wooden container
-                                                    Bowl</a>
+                                                <h4><a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"></a>${productList.get(i+1).name}
                                                 </h4>
                                                 <div class="product__price transition-3">
-                                                    <span>$96.00</span>
-                                                    <span class="old-price">$96.00</span>
+                                                    <c:set var="dis2"
+                                                           value="${(100-productList.get(i+1).discountPercentage)/100}"/>
+                                                    <span>$${(productList.get(i+1).price*dis2).intValue()}</span>
+                                                    <span class="old-price">$${productList.get(i+1).price}</span>
                                                 </div>
                                             </div>
                                             <div class="add-cart p-absolute transition-3">
-                                                <a href="#">+ Add to Cart</a>
+                                                <a id="newArrAddToCartBtn${productList.get(i+1).id}">+ Add to Cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -175,13 +177,13 @@
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="product__load-btn text-center mt-25">
-                        <a href="#" class="os-btn os-btn-3">Load More</a>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="row">--%>
+<%--                <div class="col-xl-12">--%>
+<%--                    <div class="product__load-btn text-center mt-25">--%>
+<%--                        <a href="#" class="os-btn os-btn-3">Load More</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
     </section>
     <!-- product area end -->

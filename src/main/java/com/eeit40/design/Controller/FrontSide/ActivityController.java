@@ -33,10 +33,11 @@ public class ActivityController {
 
     // 當前時間正在活動中的產品
     List<Product> productList = activityService.findProductsWithCurrentActivity();
+    List<ProductAndDiscount> padList = activityService.getProductsWithCurrentDiscount(productList);
 
-    log.info("目前的productList size():" + productList.size());
+//    log.info("目前的productList size():" + productList.size());
 
-    mav.addObject("productList", productList);
+    mav.addObject("productList", padList);
     mav.addObject("allActivity", allActivity);
     mav.setViewName("/F/Activity/ActivityIndex");
     return mav;
@@ -44,7 +45,7 @@ public class ActivityController {
 
   // 點輪播的活動，導向該活動的商品頁
   @GetMapping("/F/Activity/productList/{id}")
-  public ModelAndView text(ModelAndView mav, @PathVariable Integer id) {
+  public ModelAndView productList(ModelAndView mav, @PathVariable Integer id) {
     Activity activity = activityService.getProductsWithCurrentDiscountByActivityId(id);
     mav.addObject("activity", activity);
     mav.setViewName("/F/Activity/ActivityProducts");
