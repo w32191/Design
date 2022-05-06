@@ -89,6 +89,7 @@ public class MemberController {
 		if(!br.hasErrors()) {
 			Account acc = (Account) session.getAttribute("account");
 			Integer accid = acc.getId();
+			Integer accpre = acc.getPermission();
 			Member member1 = memberService.findMemberById(accid);
 			
 			member.setId(member1.getId());
@@ -97,6 +98,7 @@ public class MemberController {
 			
 			Account accountid = accountService.findAccountById(accid);
 			account.setId(accountid.getId());
+			account.setPermission(accpre);
 			Account newAccount = accountService.save(account);
 			
 			mav.addObject("memberupdate",newAccount);

@@ -81,6 +81,7 @@ public class AccountController {
     HttpSession session, BindingResult br) {
     	
     	if(!br.hasErrors()) {
+    		account.setPermission(2);
     	 	Account accountregister = accountService.register(account);
     	 	session.setAttribute("member", accountregister);
     	 	System.out.println(accountregister);
