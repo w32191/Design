@@ -41,22 +41,7 @@
         </div>
     </section>
     <!-- page title area end -->
-    </section>
-        <div>
-            <img src="https://i.imgur.com/r5DUYEd.jpg">
-        </div>
-<div>
-    <div class="row">
-        <div class="col-xl-6 col-lg-6">
-        </div>
-        <div class="col-xl-6 col-lg-6">
-            <img src="https://i.imgur.com/dC7OHsj.jpg">
-        </div>
 
-    </div>
-</div>
-
-    </section>
     <!-- shop area start -->
     <section class="shop__area pt-100 pb-100">
         <div class="container">

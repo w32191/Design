@@ -54,8 +54,16 @@ $(function () {
 
         let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
         console.log(id)
+
+
+
         $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
         {
+            Swal.fire({
+                text: '已加入購物車',
+                showConfirmButton: false,
+                timer: 1000
+            })
             console.log($('#amount').val());
         }
     })

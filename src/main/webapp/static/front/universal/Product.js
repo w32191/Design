@@ -45,7 +45,7 @@ $(function () {
       txt += `</div>
                 </div>
                 <div class="add-cart p-absolute transition-3">
-                    <a href="#">+ Add to Cart</a>
+                    <a href="newArrAddToCartBtn${res[i].id}">+ Add to Cart</a>
                 </div>
             </div>
         </div>
@@ -354,6 +354,9 @@ $(function () {
     }
 
   })
+
+
+    
 
 });
 
