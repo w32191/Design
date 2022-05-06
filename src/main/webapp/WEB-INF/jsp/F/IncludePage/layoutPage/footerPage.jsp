@@ -95,7 +95,7 @@
 <%--                    <div class="col-xl-6 col-lg-7">--%>
 <%--                        <div class="footer__copyright">--%>
 <%--                            <p>Copyright &copy; 2021.Company name All rights reserved.<a--%>
-<%--                                    href="http://bootstrap.fans/" title="狮王素材-官网" target="_blank">来之狮王素材-淘宝店</a>--%>
+<%--                                    href="" title=""</a>--%>
 <%--                            </p>--%>
 <%--                        </div>--%>
 <%--                    </div>--%>
