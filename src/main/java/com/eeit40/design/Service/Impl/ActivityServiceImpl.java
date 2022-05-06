@@ -1,11 +1,13 @@
 package com.eeit40.design.Service.Impl;
 
+import com.eeit40.design.Dao.ActivityProductDao;
 import com.eeit40.design.Dao.ActivityRepository;
 import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ImgurImgRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ActivityDto;
 import com.eeit40.design.Dto.EventDto;
+import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.ImgurImg;
@@ -55,6 +57,9 @@ public class ActivityServiceImpl implements ActivityService {
   private ImgurImgRepository imgurImgRepository;
 
   @Autowired
+  private ActivityProductDao activityProductDao;
+
+  @Autowired
   private ImgurUtil imgurUtil;
 
   // 認證放在imgur.properties，class上方要加 @PropertySource("classpath:imgur.properties")
@@ -80,8 +85,20 @@ public class ActivityServiceImpl implements ActivityService {
   public List<EventDto> findAllEvent() {
     List<Activity> result = activityRepository.findAll();
     List<EventDto> eventDtoList = new ArrayList<>();
+    //設定顯示顏色
+    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF"};
+    int a = 0;
     for (Activity ac : result) {
       EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
+
+      if (a == 4) {
+        dto.setBackgroundColor(colors[a]);
+        a = 0;
+      } else {
+        dto.setBackgroundColor(colors[a]);
+        a++;
+      }
+
       eventDtoList.add(dto);
     }
     return eventDtoList;
@@ -352,6 +369,35 @@ public class ActivityServiceImpl implements ActivityService {
     } // end of outer for()
 
     return resultMap;
+  }
+
+
+  // 幫傳入的List<Product>，找到當前discount後，return List<ProductAndDiscount>
+  @Override
+  public List<ProductAndDiscount> getProductsWithCurrentDiscount(List<Product> productList) {
+    List<Map<Integer, Integer>> discountMapList = activityProductDao.getProductsWithCurrentDiscount();
+    List<ProductAndDiscount> returnList = null;
+
+    if (productList != null) {
+      returnList = new ArrayList<>();
+
+      for (Product product : productList) {
+        ProductAndDiscount pad = new ProductAndDiscount(product);
+        for (Map<Integer, Integer> map : discountMapList) {
+          if (map.containsKey(product.getId())) {
+            pad.setDiscountPercentage(map.get(product.getId()));
+          }
+        } //end of inner for()
+        returnList.add(pad);
+      } //end of outer for()
+    }
+
+    return returnList;
+  }
+
+  @Override
+  public Activity getProductsWithCurrentDiscountByActivityId(Integer id) {
+    return activityRepository.findActivitiesCurrentTime(id);
   }
 
   // 用productsId，去取得這些product的Set

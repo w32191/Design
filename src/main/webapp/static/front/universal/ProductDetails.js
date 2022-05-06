@@ -10,12 +10,12 @@ $(function () {
         console.log(reviewres);
     });
 
-    $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
-        console.log(res.name);
+  $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
+    console.log(res.name);
 
-        let txt = '';
+    let txt = '';
 
-        txt += `
+    txt += `
 <div class="shop__top grey-bg-6 pt-100 pb-90">
             <div class="container">
                 <div class="row">
@@ -64,12 +64,13 @@ $(function () {
                                      aria-labelledby="pro-one-tab">
                                     <div class="product__modal-img product__thumb ">
                                         <img src="${res.image01}"
-                                             alt="" width="400px">
-                                        <div class="product__sale ">
-                                            <span class="new">new</span>
-                                            <span class="percent">-16%</span>
-                                        </div>
-                                    </div>
+                                             alt="" width="400px">`;
+
+    if (res.discountPercentage != null) {
+      let dis = `<div class="product__sale"><span class="new">活動</span><span class="percent">-${res.discountPercentage}%</span></div>`;
+      txt += dis;
+    }
+    txt += `</div>
                                 </div>
                                 <div class="tab-pane fade" id="pro-two" role="tabpanel"
                                      aria-labelledby="pro-two-tab">
@@ -124,10 +125,17 @@ $(function () {
                                 <span class="review rating-left"><a
                                         href="#">Add your Review</a></span>
                             </div>
-                            <div class="product__price-2 mb-25">
-                                <span>$${res.price}</span>
-                                <span class="old-price">$${res.price}</span>
-                            </div>
+                            <div class="product__price-2 mb-25">`;
+
+    if (res.discountPercentage != null) {
+      txt += `<span>$${res.price * (100 - res.discountPercentage)
+      / 100}</span><span class="old-price">$${res.price}</span>`;
+
+    } else {
+      txt += `<span>$${res.price}</span>`;
+    }
+
+    txt += `</div>
                             <div class="product__modal-des mb-30">
                                 <p>品牌：<a href="/Design/F/product/productbybrand?brand=${res.fkBrand.id}" >${res.fkBrand.name}</a></p>
                                 <br>
@@ -235,7 +243,7 @@ $(function () {
                                 </div>
                                 <div class="tab-pane fade" id="review" role="tabpanel">
                                     <div class="product__details-review" id="reviewStart">`;
-                                        
+
                                     $.ajax({
                                         url: `http://localhost:8080/Design/F/ProductReview/ProductReview/${id}`,
                                         dataType: 'json',
@@ -246,9 +254,9 @@ $(function () {
                                             reviewMain += `<div class="postbox__comments">
                                                 <div class="postbox__comment-title mb-30">
                                                     <h3>`;
-                                            
+
                                             reviewMain +=  `此商品有（` + data.length;
-                                                    
+
                                             reviewMain +=  `）則評論</h3></div>`;
                                             for (i = 0; i < data.length; i++) {
                                                 reviewMain += `<div class="latest-comments mb-30">
@@ -258,13 +266,13 @@ $(function () {
                                                             <div class="comments-avatar">
                                                                 <img src="` + data[i].fkMember.images + `" alt="">
                                                             </div>` ;
-                                    
+
                                                 reviewMain += `
                                                             <div class="comments-text">
                                                             <div class="avatar-name">
                                                             <h5>` + data[i].fkMember.names + `</h5><span>`+ data[i].commentDate +`</span>
                                                             </div>`;
-                                                
+
                                                 reviewMain += `
                                                 <div class="user-rating">
                                                 <ul>`;
@@ -274,16 +282,16 @@ $(function () {
                                                 </li>
                                                 `;
                                                 }
-                                    
+
                                                 reviewMain += `</ul>
                                                 </div><p>` + data[i].comment + `</p>`;
-                                    
+
                                                 reviewMain += `</div>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>`;         
+                                                </div>`;
                                             }
                                             reviewMain +=`
                                                 <div class="post-comments-form mb-100">
@@ -324,8 +332,8 @@ $(function () {
                                             alert('發生錯誤1')
                                         }
                                     });
-                                    
-                                    
+
+
                                     txt+=`
                                     </div>
                                 </div>
@@ -341,33 +349,32 @@ $(function () {
 
         $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
 
-        $(".qtybutton").on("click", function () {
-            var $button = $(this);
-            var oldValue = $button.parent().find("input").val();
-            if ($button.text() == "+") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 0;
-                }
-            }
-            $button.parent().find("input").val(newVal);
-        });
-
+    $(".qtybutton").on("click", function () {
+      var $button = $(this);
+      var oldValue = $button.parent().find("input").val();
+      if ($button.text() == "+") {
+        var newVal = parseFloat(oldValue) + 1;
+      } else {
+        // Don't allow decrementing below zero
+        if (oldValue > 0) {
+          var newVal = parseFloat(oldValue) - 1;
+        } else {
+          newVal = 0;
+        }
+      }
+      $button.parent().find("input").val(newVal);
     });
 
+  });
 
-    $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
-        console.log(newa[0].id)
-        console.log(newa[0].name)
-        let natxt = '';
+  $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
+    console.log(newa[0].id)
+    console.log(newa[0].name)
+    let natxt = '';
 
-        for (let i = 0; i < 4; i++) {
-            natxt +=
-                `
+    for (let i = 0; i < 4; i++) {
+      natxt +=
+          `
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="product__wrapper mb-60">
                         <div class="product__thumb">
@@ -397,9 +404,9 @@ $(function () {
                     </div>
                 </div>
         `
-        }   //end of for
-        $('#na').html(natxt);
-    })
+    }   //end of for
+    $('#na').html(natxt);
+  })
 
 
     $('body').on('click', '#addToCartBtn', function () {

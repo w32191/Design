@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller("BackActivityController")
 @Slf4j
 public class ActivityController { // 用來跳轉頁面用的controller
+
 
   @Autowired
   private ActivityService service;
@@ -25,6 +27,7 @@ public class ActivityController { // 用來跳轉頁面用的controller
     List<Activity> list = service.findAll();
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
+
     return modelAndView;
   }
 

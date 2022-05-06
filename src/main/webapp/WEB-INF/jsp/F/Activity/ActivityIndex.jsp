@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>Design & Decor </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +25,6 @@
     <!-- slider area start -->
     <section class="slider__area p-relative">
         <div class="slider-active">
-            <%-- SamWang to-do: 點活動後，轉換的商品頁未完成 --%>
             <c:forEach items="${allActivity}" var="ac">
                 <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
                            step="1">
@@ -44,7 +43,7 @@
                                         <p data-animation="fadeInUp"
                                            data-delay=".4s">${ac.discountPercentage}%</p>
 
-                                        <a href="" class="os-btn os-btn-2"
+                                        <a href="/Design/F/Activity/productList/${ac.id}" class="os-btn os-btn-2"
                                            data-animation="fadeInUp" data-delay=".6s">Discover
                                             now</a>
                                     </div>

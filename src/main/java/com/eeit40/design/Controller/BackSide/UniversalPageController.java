@@ -16,4 +16,10 @@ public class UniversalPageController {
         return "redirect:/B/Case";
     }
 
+    @GetMapping("/B/")
+    public String login(){
+        return "redirect:/B/login";
+    }
+
+
 }

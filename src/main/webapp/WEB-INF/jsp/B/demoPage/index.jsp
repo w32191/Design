@@ -30,7 +30,7 @@
 <body>
 
 <%--Left SideBar--%>
-<jsp:include page="../IncludePage/layoutPage/leftSidebarPage.jsp"/>
+<jsp:include page="../IncludePage/layoutPage/DemoleftSidebarPage.jsp"/>
 <%--Header--%>
 <jsp:include page="../IncludePage/layoutPage/headerPage.jsp"/>
 

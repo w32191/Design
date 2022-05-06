@@ -2,11 +2,14 @@ package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.BrandRepository;
 import com.eeit40.design.Dao.ProductRepository;
+import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Dto.ProductDto;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
 
 import java.net.http.HttpRequest;
+import com.eeit40.design.Service.ActivityService;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.eeit40.design.Service.Impl.ProductServiceImpl;
@@ -22,177 +25,146 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class ProductRestController {
 
-    @Autowired
-    private ProductServiceImpl dao;
+  @Autowired
+  private ProductServiceImpl dao;
 
-    @Autowired
-    private BrandRepository brandRepository;
+  @Autowired
+  private ActivityService activityService;
 
-    @PostMapping("/B/product/updateById/{id}")
-    public Product updateById(@PathVariable Integer id ,@RequestBody Product pro){
-        pro.setId(id);
-        Product resPro = dao.save(pro);
-        return resPro;
-    }
+  @Autowired
+  private BrandRepository brandRepository;
 
-    @GetMapping("/B/product/findByNameLike/{name}")
-    public List<Product> findByNameLike(@PathVariable String name) {
-        return dao.findByNameLike("%" + name + "%");
-    }
+  @PostMapping("/B/product/updateById/{id}")
+  public Product updateById(@PathVariable Integer id, @RequestBody Product pro) {
+    pro.setId(id);
+    Product resPro = dao.save(pro);
+    return resPro;
+  }
 
-
-    @PostMapping("/B/product/insert")
-    public Product insertProduct(@RequestBody Product pro) {
-        Product resPro = dao.save(pro);
-        return resPro;
-    }
-
-    @GetMapping("/B/product/findProductById/{id}")
-    public Product findProductById(@PathVariable Integer id) {
-        Product resPro = dao.findProductById(id);
-        return resPro;
-    }
-
-    @GetMapping("/B/product/delete/{id}")
-    public boolean deleteProductById(@PathVariable Integer id) {
-        dao.deleteById(id);
-        return true;
-    }
-
-    @GetMapping(value = "/B/product/findProductByName/{name}")
-    public List<Product> findProductByName(@PathVariable String name) {
-        return dao.findProductByName(name);
-    }
+  @GetMapping("/B/product/findByNameLike/{name}")
+  public List<Product> findByNameLike(@PathVariable String name) {
+    return dao.findByNameLike("%" + name + "%");
+  }
 
 
-    @GetMapping(value = "/B/product/findAllProduct")
-    public List<Product> findAll() {
-        System.out.println(dao.findAll());
-        return dao.findAll();
-    }
+  @PostMapping("/B/product/insert")
+  public Product insertProduct(@RequestBody Product pro) {
+    Product resPro = dao.save(pro);
+    return resPro;
+  }
 
-    @GetMapping(value = "/B/product/findProductOrderByPrice")
-    public List<Product> findProductOrderByPrice() {
-        return dao.findProductOrderByPrice();
-    }
+  @GetMapping("/B/product/findProductById/{id}")
+  public ProductAndDiscount findProductById(@PathVariable Integer id) {
+    Product resPro = dao.findProductById(id);
+    List<Product> productList = new ArrayList<>();
+    productList.add(resPro);
+    List<ProductAndDiscount> list = activityService.getProductsWithCurrentDiscount(productList);
+    return list.get(0);
+//    return (Product) resPro;
+  }
 
-    @GetMapping(value = "/B/product/findProductOrderByPriceDesc")
-    public List<Product> findProductOrderByPriceDesc() {
-        return dao.findProductOrderByPriceDesc();
-    }
+  @GetMapping("/B/product/delete/{id}")
+  public boolean deleteProductById(@PathVariable Integer id) {
+    dao.deleteById(id);
+    return true;
+  }
 
-
-    ////////日期排序/////////////////////
-
-    @GetMapping(value = "/B/product/findProductOrderByAdded")
-    public List<Product> findProductrOderByAdded() {
-        return dao.findProductOrderByAdded();
-    }
-
-    @GetMapping(value = "/B/product/findProductOrderByAddedDesc")
-    public List<Product> findProductOderByAddedDesc() {
-        return dao.findProductOrderByAddedDesc();
-    }
+  @GetMapping(value = "/B/product/findProductByName/{name}")
+  public List<ProductAndDiscount> findProductByName(@PathVariable String name) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByName(name));
+  }
 
 
-    //0庫存--> 無法購買
-    @GetMapping(value = "/B/product/findProductOutOfStock")
-    public List<Product> findProductOutOfStock() {
-        return dao.findProductOutOfStock();
-    }
+  @GetMapping(value = "/B/product/findAllProduct")
+    public List<ProductAndDiscount> findAll() {
+    System.out.println(dao.findAll());
+       return activityService.getProductsWithCurrentDiscount(dao.findAll());
+  }
+
+  @GetMapping(value = "/B/product/findProductOrderByPrice")
+  public List<ProductAndDiscount> findProductOrderByPrice() {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductOrderByPrice());
+  }
+
+  @GetMapping(value = "/B/product/findProductOrderByPriceDesc")
+  public List<ProductAndDiscount> findProductOrderByPriceDesc() {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductOrderByPriceDesc());
+  }
+
+  ////////日期排序/////////////////////
+
+  @GetMapping(value = "/B/product/findProductOrderByAdded")
+  public List<ProductAndDiscount> findProductrOderByAdded() {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductOrderByAdded());
+  }
+
+  @GetMapping(value = "/B/product/findProductOrderByAddedDesc")
+  public List<ProductAndDiscount> findProductOderByAddedDesc() {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductOrderByAddedDesc());
+  }
 
 
-    //////////////依商品種類///////////////
-    @GetMapping(value = "/B/product/findProductByCategories/{categories}")
-    public List<Product> findProductByCategories(@PathVariable String categories) {
-        return dao.findProductByCategories(categories);
-    }
-
-    @GetMapping(value = "/B/product/findProductByCategoriesOrderByPrice/{categories}")
-    public List<Product> findProductByCategoriesOrderByPrice(@PathVariable String categories) {
-        return dao.findProductByCategoriesOrderByPrice(categories);
-    }
-
-    @GetMapping(value = "/B/product/findProductByCategoriesOrderByPriceDesc/{categories}")
-    public List<Product> findProductByCategoriesOrderByPriceDesc(@PathVariable String categories) {
-        return dao.findProductByCategoriesOrderByPriceDesc(categories);
-    }
-
-    @GetMapping("/B/product/findProductByCategoriesOrderByAdded/{categories}")
-    public List<Product> findProductByCategoriesOrderByAdded(@PathVariable String categories) {
-        return dao.findProductByCategoriesOrderByAdded(categories);
-    }
-
-    @GetMapping("/B/product/findProductByCategoriesOrderByAddedDesc/{categories}")
-    public List<Product> findProductByCategoriesOrderByAddedDesc(@PathVariable String categories) {
-        return dao.findProductByCategoriesOrderByAddedDesc(categories);
-    }
+  //0庫存--> 無法購買
+  @GetMapping(value = "/B/product/findProductOutOfStock")
+  public List<Product> findProductOutOfStock() {
+    return dao.findProductOutOfStock();
+  }
 
 
-    //////////////依品牌////////////////
+  //////////////依商品種類///////////////
+  @GetMapping(value = "/B/product/findProductByCategories/{categories}")
+  public List<ProductAndDiscount> findProductByCategories(@PathVariable String categories) {
 
-    @GetMapping(value = "/B/product/findProductByBrand/{id}")
-    public List<Product> findProductByBrand(@PathVariable Brand id) {
-        return dao.findProductByFkBrand(id);
-    }
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByCategories(categories));
+  }
 
-    @GetMapping("/B/product/findProductByBrandOrderByPrice/{id}")
-    public List<Product> findProductByFkBrandOrderByPrice(@PathVariable Brand id) {
-        return dao.findProductByFkBrandOrderByPrice(id);
-    }
+  @GetMapping(value = "/B/product/findProductByCategoriesOrderByPrice/{categories}")
+  public List<ProductAndDiscount> findProductByCategoriesOrderByPrice(@PathVariable String categories) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByCategoriesOrderByPrice(categories));
+  }
 
-    @GetMapping("/B/product/findProductByBrandOrderByPriceDesc/{id}")
-    public List<Product> findProductByBrandOdrerByPriceDesc(@PathVariable Brand id) {
-        return dao.findProductByFkBrandOrderByPriceDesc(id);
-    }
+  @GetMapping(value = "/B/product/findProductByCategoriesOrderByPriceDesc/{categories}")
+  public List<ProductAndDiscount> findProductByCategoriesOrderByPriceDesc(@PathVariable String categories) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByCategoriesOrderByPriceDesc(categories));
+  }
 
+  @GetMapping("/B/product/findProductByCategoriesOrderByAdded/{categories}")
+  public List<ProductAndDiscount> findProductByCategoriesOrderByAdded(@PathVariable String categories) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByCategoriesOrderByAdded(categories));
+  }
 
-    @GetMapping("/B/product/findProductByBrandOrderByAdded/{id}")
-    public List<Product> findProductByBrandOrderByAdded(@PathVariable Brand id) {
-        return dao.findProductByBrandOrderByAdded(id);
-    }
+  @GetMapping("/B/product/findProductByCategoriesOrderByAddedDesc/{categories}")
+  public List<ProductAndDiscount> findProductByCategoriesOrderByAddedDesc(@PathVariable String categories) {
+    return activityService.getProductsWithCurrentDiscount(dao.findProductByCategoriesOrderByAddedDesc(categories));
+  }
 
-    @GetMapping("/B/product/findProductByBrandOrderByAddedDesc/{id}")
-    public List<Product> findProductByBrandOrderByAddedDesc(@PathVariable Brand id) {
-        return dao.findProductByBrandOrderByAddedDesc(id);
-    }
+  //////////////依品牌////////////////
 
+  @GetMapping(value = "/B/product/findProductByBrand/{id}")
+  public List<Product> findProductByBrand(@PathVariable Brand id) {
+    return dao.findProductByFkBrand(id);
+  }
 
-//    @PostMapping("tesssssss")
-//    public Product texttt(@RequestParam("name") String name,
-//                          @RequestParam(value = "categories", required = false) String categories,
-//                          @RequestParam(value = "stock", required = false) Integer stock,
-//                          @RequestParam(value = "fkBrand", required = false) Integer fkBrand,
-//                          @RequestParam(value = "description", required = false) String description,
-//                          @RequestParam(value = "price", required = false) Integer price,
-//                          @RequestParam(value = "image01", required = false) String image01,
-//                          @RequestParam(value = "image02", required = false) String image02,
-//                          @RequestParam(value = "image03", required = false) String image03,
-//                          @RequestParam(value = "image04", required = false) String image04, HttpServletRequest request) {
-//
-//        System.out.println(request.getContentType());
-//        System.out.println(name);
-//        Brand brand = brandRepository.findBrandById(fkBrand);
-//
-//        Product pro = new Product(name, categories, stock, brand, description, price, image01, image02, image03, image04);
-//
-//        Product resPro = dao.save(pro);
-//        return resPro;
-//    }
+  @GetMapping("/B/product/findProductByBrandOrderByPrice/{id}")
+  public List<Product> findProductByFkBrandOrderByPrice(@PathVariable Brand id) {
+    return dao.findProductByFkBrandOrderByPrice(id);
+  }
 
-    @PostMapping("tesssssss")
-    public Product texttt(@RequestParam("name") String name, HttpServletRequest request) throws JsonProcessingException {
+  @GetMapping("/B/product/findProductByBrandOrderByPriceDesc/{id}")
+  public List<Product> findProductByBrandOdrerByPriceDesc(@PathVariable Brand id) {
+    return dao.findProductByFkBrandOrderByPriceDesc(id);
+  }
 
 
-        System.out.println(request.getContentType());
-        System.out.println(name);
-//        Brand brand = brandRepository.findBrandById(fkBrand);
+  @GetMapping("/B/product/findProductByBrandOrderByAdded/{id}")
+  public List<Product> findProductByBrandOrderByAdded(@PathVariable Brand id) {
+    return dao.findProductByBrandOrderByAdded(id);
+  }
 
-//        Product pro = new Product(name, categories, stock, brand, description, price, image01, image02, image03, image04);
+  @GetMapping("/B/product/findProductByBrandOrderByAddedDesc/{id}")
+  public List<Product> findProductByBrandOrderByAddedDesc(@PathVariable Brand id) {
+    return dao.findProductByBrandOrderByAddedDesc(id);
+  }
 
-//        Product resPro = dao.save(pro);
-//        return resPro;
-        return null;
-    }
 
 }

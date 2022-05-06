@@ -5,10 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
-  @Query(value = "SELECT * FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0", nativeQuery = true)
+  @Query(value = "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo] FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0", nativeQuery = true)
   List<Activity> findActivitiesCurrentTime();
+
+  @Query(value = "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo] FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0 AND [id]=:id", nativeQuery = true)
+  Activity findActivitiesCurrentTime(@Param("id") Integer id);
 
 }
