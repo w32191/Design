@@ -4,7 +4,7 @@ $(function () {
     let url = new URL(getUrlString);
     let id = url.searchParams.get('id')
     console.log(id)
-    let qty;
+    let amount;
 
     $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
         console.log(res.name);
@@ -150,7 +150,7 @@ $(function () {
                                             <label>數量</label>
                                         </div>
                                         <div class="product-quantity mr-20 mb-20">
-                                            <div class="cart-plus-minus"><input type="text" id="Qty"
+                                            <div class="cart-plus-minus"><input type="text" id="amount"
                                                                                 value="1"/></div>
                                         </div>
                                         <div class="pro-cart-btn">
@@ -486,37 +486,27 @@ $(function () {
     })
 
 
-
-
     $('body').on('click', '#addToCartBtn', function () {
-        console.log($('#Qty').val());
-        qty = $('#Qty').val();
-        // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&qty=${qty}`);
-        $.get("/Design/F/addshoppingcart", {"id": id, "qty": qty})
-        {
-            console.log($('#Qty').val());
-        }
+        console.log($('#amount').val());
+        amount = $('#amount').val();
+        // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&amount=${amount}`);
+
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount}, function (res) {
+            console.log(res)
+        })
+        // console.log($('#amount').val());
     });
 
 
-
-
     // 下方新品推薦加入購物車
-    $('body').on('click','a[id^=newArrAddToCartBtn]',function(){
+    $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
 
         let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
         console.log(id)
-        $.get("/Design/F/addshoppingcart", { "id":id, "qty": 1})
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
         {
-            console.log($('#Qty').val());
+            console.log($('#amount').val());
         }
-
     })
-
 })
-
-
-
-
-
-
+r

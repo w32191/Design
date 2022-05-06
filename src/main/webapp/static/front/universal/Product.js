@@ -2,6 +2,8 @@ $(function () {
 
     // 商品pill
     $.getJSON("/Design/B/product/findAllProduct", function (res) {
+
+
         let txt = '';
         console.log(res.length);
         for (let i = 0; i < res.length; i++) {

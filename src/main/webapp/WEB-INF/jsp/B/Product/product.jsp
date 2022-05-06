@@ -33,11 +33,7 @@
     <div class="main">
         <div class="container-fluid">
             <section id="main-content">
-                <div class="row">
 
-                    <input type="file" class="imgur" accept="image/*" data-max-size="5000" />
-
-                </div>
                 <!-- /# row -->
                 <div class="row">
 
@@ -61,13 +57,17 @@
 
                     <!-- /# column -->
                     <div class="col-lg-8">
-                        <div>
-                            <a href="/Design/B/Product/addProduct" class="btn btn-warning">＋新增商品</a>
-                        </div>
-                        <div class="card">
-                            <div class="card-title pr">
-                                <h4>產品 Product</h4>
 
+                        <div class="card" id="productCard" >
+                            <div class="card-title pr">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <h4>產品 Product</h4>
+                                    </div>
+                                    <div class="col-lg-2" id="addbtn">
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -83,7 +83,7 @@
 
                                         </tr>
                                         </thead>
-                                        <tbody id = pdlist>
+                                        <tbody id=pdlist>
 
 
                                         </tbody>
@@ -121,29 +121,6 @@
 <script src="${contextRoot}/static/back/universal/js/Product.js"></script>
 <script>
 
-    // imgur圖片上傳
-    $("document").ready(function () {
-        $('input[type=file]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        });
-    })
-    ;
 
 </script>
 

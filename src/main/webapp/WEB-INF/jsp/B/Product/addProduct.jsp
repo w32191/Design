@@ -32,26 +32,30 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <section id="main-content" id="edit">
+            <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px">
+                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px" id="img01" class="img01">
                                     <p>圖片一(主圖)</p>
+                                    <input type="file" name="image01" id="image01">
                                 </div>
                                 <div class="col-lg-3">
-                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px">
+                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px" id="img02">
                                     <p>圖片二(副圖)</p>
+                                    <input type="file" name="image02" id="image02">
                                 </div>
                                 <div class="col-lg-3">
-                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px">
+                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px" id="img03">
                                     <p>圖片三</p>
+                                    <input type="file" name="image03" id="image03">
                                 </div>
                                 <div class="col-lg-3">
-                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px">
+                                    <img src="https://i.imgur.com/5tsTQt8.jpg" width="200px" id="img04">
                                     <p>圖片四</p>
+                                    <input type="file" name="image01" id="image04">
                                 </div>
                             </div>
                         </div>
@@ -69,47 +73,77 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <p>名稱</p>
-                                                    <input type="text" class="form-control"
-                                                           value="">
+                                                    <input type="text" class="form-control" name="name"
+                                                           value="" id="inputName01">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>品牌</p>
-                                                    <input type="text" class="form-control"
-                                                           value="">
+                                                    <input type="text" class="form-control" name="fkBrand" id="fkBrand"
+                                                           value="" disabled>
                                                 </div>
                                                 <div class="form-group">
                                                     <p>價格</p>
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" name="price" id="price"
                                                            value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>種類</p>
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" name="categories"
+                                                           id="categories"
                                                            value=" ">
                                                 </div>
                                                 <div class="form-group">
                                                     <p>庫存</p>
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" name="stock" id="stock"
                                                            value="">
                                                 </div>
-
 
 
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
+                                                    <p>規格</p>
+                                                    <input type="text" class="form-control" name="model" id="model"
+                                                           value="">
+                                                </div>
+
+                                                <div class="form-group">
                                                     <p>產品描述</p>
-                                                    <textarea class="form-control" rows="5"
+                                                    <textarea  rows="10" cols="70" name="description"
                                                               placeholder="請輸入商品詳細描述"></textarea>
+                                                </div>
+                                                <div class="form-group">
+
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+
+
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <a id="savebtn" class="btn btn-warning">送出</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                    <div class="col-lg-4">
+
+
+                    </div>
 
                 </div>
             </section>
@@ -123,44 +157,21 @@
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>--%>
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
-<script src="${contextRoot}/static/back/universal/js/EditProduct.js"></script>
+<script src="${contextRoot}/static/back/universal/js/AddProduct.js"></script>
 <script>
 
-    // imgur圖片上傳
-    $("document").ready(function () {
-        $('input[type=file]').on("change", function () {
-            var $files = $(this).get(0).files;
-            var formData = new FormData();
-            formData.append("file", $files[0]);
-
-            $.ajax({
-                url: '/Design/F/Product/uploadImg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (res) {
-                    console.log(res);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        });
-    })
-    ;
 
 </script>
 

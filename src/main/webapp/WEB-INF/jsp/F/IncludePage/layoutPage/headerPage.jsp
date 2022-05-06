@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+<script>
 
+</script>
 <!-- prealoder area start (進入畫面的動畫) -->
 <div id="loading">
     <div id="loading-center">
@@ -126,7 +128,7 @@
                         <div class="header__action">
                             <ul>
                                 <li><a href="#" class="search-toggle"><i
-                                        class="ion-ios-search-strong"></i> Search</a></li>
+                                        class="ion-ios-search-strong"></i> 搜尋</a></li>
                                 <li><a href="javascript:void(0);" class="cart"><i
                                         class="ion-bag"></i> Cart <span>(01)</span></a>
                                     <ul class="mini-cart">
@@ -245,12 +247,11 @@
                         </div>
                         <div class="header__search-categories">
                             <ul class="search-category">
-                                <li><a href="shop.html">All Categories</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
-                                <li><a href="shop.html">Chair</a></li>
-                                <li><a href="shop.html">Tablet</a></li>
-                                <li><a href="shop.html">Men</a></li>
-                                <li><a href="shop.html">Women</a></li>
+                                <li><a href="shop.html">所有商品</a></li>
+                                <li><a href="shop.html">Tom Dixon</a></li>
+                                <li><a href="shop.html">Menu</a></li>
+                                <li><a href="shop.html">BROKIS</a></li>
+
 
                             </ul>
                         </div>

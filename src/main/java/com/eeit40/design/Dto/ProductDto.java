@@ -1,14 +1,19 @@
 package com.eeit40.design.Dto;
 
-import com.eeit40.design.Entity.Brand;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class ProductDto implements Serializable {
 
     private Integer id;
+
+    private Integer fkBrand;
 
     private Integer productId;
 
@@ -24,51 +29,13 @@ public class ProductDto implements Serializable {
 
     private String model;
 
-    private String barcode;
+    private String image01;
 
-    private Integer views;
+    private String image02;
 
-    private Integer avaliable;
+    private String image03;
 
-    private LocalDate added;
+    private String image04;
 
-    private Brand fkBrand;
 
-    public ProductDto() {
-    }
-
-    public ProductDto(Integer id, Integer productId, String name, String description, Integer price, String categories, Integer stock, String model, String barcode, Integer views, Integer avaliable, LocalDate added, Brand fkBrand) {
-        this.id = id;
-        this.productId = productId;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.categories = categories;
-        this.stock = stock;
-        this.model = model;
-        this.barcode = barcode;
-        this.views = views;
-        this.avaliable = avaliable;
-        this.added = added;
-        this.fkBrand = fkBrand;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductDto{" +
-                "id=" + id +
-                ", productId=" + productId +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", categories='" + categories + '\'' +
-                ", stock=" + stock +
-                ", model='" + model + '\'' +
-                ", barcode='" + barcode + '\'' +
-                ", views=" + views +
-                ", avaliable=" + avaliable +
-                ", added=" + added +
-                ", fkBrand=" + fkBrand +
-                '}';
-    }
 }

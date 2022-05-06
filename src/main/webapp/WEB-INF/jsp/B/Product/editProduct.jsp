@@ -19,6 +19,7 @@
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
     <link href="${contextRoot}/static/back/universal/css/EditActivity.css" rel="stylesheet"/>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

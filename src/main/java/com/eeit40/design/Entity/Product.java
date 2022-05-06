@@ -1,6 +1,10 @@
 package com.eeit40.design.Entity;
 
+import com.eeit40.design.Dto.ProductDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -8,6 +12,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "product")
 public class Product {
 
@@ -51,6 +56,8 @@ public class Product {
     @Column(name = "avaliable")
     private Integer avaliable;
 
+    @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "added")
     private LocalDate added;
 
@@ -71,7 +78,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private Set<Activity> activities = new LinkedHashSet<>();
 
-    @JsonIgnore    @OneToMany(mappedBy = "fkProduct")
+    @JsonIgnore
+    @OneToMany(mappedBy = "fkProduct")
     private Set<ProductImg> productImgs = new LinkedHashSet<>();
 
     @JsonIgnore
@@ -88,6 +96,22 @@ public class Product {
 
 
     public Product() {
+    }
+
+    public Product(ProductDto dto,Brand brand) {
+        this.id = dto.getId();
+        this.fkBrand = brand;
+        this.productId = dto.getProductId();
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.price = dto.getPrice();
+        this.categories = dto.getCategories();
+        this.stock = dto.getStock();
+        this.model = dto.getModel();
+        this.image01 = dto.getImage01();
+        this.image02 = dto.getImage02();
+        this.image03 = dto.getImage03();
+        this.image04 = dto.getImage04();
     }
 
     public Set<ShoppingCard> getShoppingCards() {
@@ -267,4 +291,32 @@ public class Product {
     public void setImage04(String image04) {
         this.image04 = image04;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "id=" + id +
+//                ", fkBrand=" + fkBrand +
+//                ", productId=" + productId +
+//                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+//                ", price=" + price +
+//                ", categories='" + categories + '\'' +
+//                ", stock=" + stock +
+//                ", model='" + model + '\'' +
+//                ", barcode='" + barcode + '\'' +
+//                ", views=" + views +
+//                ", avaliable=" + avaliable +
+//                ", added=" + added +
+//                ", image01='" + image01 + '\'' +
+//                ", image02='" + image02 + '\'' +
+//                ", image03='" + image03 + '\'' +
+//                ", image04='" + image04 + '\'' +
+//                ", activities=" + activities +
+//                ", productImgs=" + productImgs +
+//                ", productReviews=" + productReviews +
+//                ", orderLists=" + orderLists +
+//                ", shoppingCards=" + shoppingCards +
+//                '}';
+//    }
 }
