@@ -1,95 +1,112 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- sidebar start -->
-<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-    <div class="nano">
-        <div class="nano-content">
-            <ul>
-                <div class="logo">
-                    <a href="index.html"><span>Focus</span></a>
-                </div>
-                <li class="label">Main</li>
-                <li>
-                    <a class="sidebar-sub-toggle"><i class="ti-home"></i> Dashboard
-                        <span class="badge badge-primary">2</span>
-                        <span class="sidebar-collapse-icon ti-angle-down"></span>
-                    </a>
-                    <ul>
-                        <li><a href="index.html">Dashboard 1</a></li>
-                        <li><a href="index.html">Dashboard 2</a></li>
-                    </ul>
-                </li>
+<div
+	class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+	<div class="nano">
+		<div class="nano-content">
+			<ul>
+				<div class="logo">
+					<a href="index.html"><span>Focus</span></a>
+				</div>
+				<li class="label">Main</li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-home"></i>
+						Dashboard <span class="badge badge-primary">2</span> <span
+						class="sidebar-collapse-icon ti-angle-down"></span> </a>
+					<ul>
+						<li><a href="index.html">Dashboard 1</a></li>
+						<li><a href="index.html">Dashboard 2</a></li>
+					</ul></li>
 
-                <li class="label">Apps</li>
-                <li>
-                    <a class="sidebar-sub-toggle">
-                        <i class="ti-bar-chart-alt"></i> Charts
-                        <span class="sidebar-collapse-icon ti-angle-down"></span>
-                    </a>
-                    <ul>
-                        <li><a href="chart-flot.html">Flot</a></li>
-                    </ul>
-                </li>
-                <li><a href="app-event-calender.html"><i class="ti-calendar"></i> Calender </a></li>
-                <li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
-                <li><a href="/Design/B/Memberinsert"><i class="ti-user"></i> Profile</a></li>
-                <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a>
-                </li>
-                <li class="label">Features</li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-layout"></i> UI Elements <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="ui-typography.html">Typography</a></li>
-                        <li><a href="ui-alerts.html">Alerts</a></li>
-                        <li><a href="ui-button.html">Button</a></li>
-                        <li><a href="ui-dropdown.html">Dropdown</a></li>
-                        <li><a href="ui-progressbar.html">Progressbar</a></li>
-                    </ul>
-                </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> Components <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="uc-calendar.html">Calendar</a></li>
-                    </ul>
-                </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-layout-grid4-alt"></i> Table <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="table-basic.html">Basic</a></li>
-                        <li><a href="table-export.html">Datatable Export</a></li>
-                        <li><a href="table-row-select.html">Datatable Row Select</a></li>
-                        <li><a href="table-jsgrid.html">Editable </a></li>
-                    </ul>
-                </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-heart"></i> Icons <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="font-themify.html">Themify</a></li>
-                    </ul>
-                </li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-map"></i> Maps
-                    <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="vector-map.html">Vector Map</a></li>
-                    </ul>
-                </li>
-                <li class="label">Form</li>
-                <li><a href="form-basic.html"><i class="ti-view-list-alt"></i> Basic Form </a></li>
-                <li class="label">Extra</li>
-                <li><a class="sidebar-sub-toggle"><i class="ti-target"></i> Pages <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="page-login.html">Login</a></li>
-                        <li><a href="page-register.html">Register</a></li>
-                        <li><a href="page-reset-password.html">Forgot password</a></li>
-                    </ul>
-                </li>
-<!--                 登出 -->
-                <li><a href="dologout"><i class="ti-close"></i> Logout</a></li>
-            </ul>
-        </div>
-    </div>
+				<li class="label">Apps</li>
+				<li><a class="sidebar-sub-toggle"> <i
+						class="ti-bar-chart-alt"></i> Charts <span
+						class="sidebar-collapse-icon ti-angle-down"></span>
+				</a>
+					<ul>
+						<li><a href="chart-flot.html">Flot</a></li>
+					</ul></li>
+				<li><a href="app-event-calender.html"><i
+						class="ti-calendar"></i> Calender </a></li>
+				<li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
+				<li><a href="/Design/B/memberupdate"><i class="ti-user"></i>
+						Profile</a></li>
+				<li><a href="app-widget-card.html"><i
+						class="ti-layout-grid2-alt"></i> Widget</a></li>
+				<li class="label">Features</li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-layout"></i>
+						UI Elements <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="ui-typography.html">Typography</a></li>
+						<li><a href="ui-alerts.html">Alerts</a></li>
+						<li><a href="ui-button.html">Button</a></li>
+						<li><a href="ui-dropdown.html">Dropdown</a></li>
+						<li><a href="ui-progressbar.html">Progressbar</a></li>
+					</ul></li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-panel"></i>
+						Components <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="uc-calendar.html">Calendar</a></li>
+					</ul></li>
+				<li><a class="sidebar-sub-toggle"><i
+						class="ti-layout-grid4-alt"></i> Table <span
+						class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="table-basic.html">Basic</a></li>
+						<li><a href="table-export.html">Datatable Export</a></li>
+						<li><a href="table-row-select.html">Datatable Row Select</a></li>
+						<li><a href="table-jsgrid.html">Editable </a></li>
+					</ul></li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-heart"></i>
+						Icons <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="font-themify.html">Themify</a></li>
+					</ul></li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-map"></i>
+						Maps <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="vector-map.html">Vector Map</a></li>
+					</ul></li>
+				<li class="label">Form</li>
+				<li><a href="form-basic.html"><i class="ti-view-list-alt"></i>
+						Basic Form </a></li>
+				<li class="label">Extra</li>
+				<li><a class="sidebar-sub-toggle"><i class="ti-target"></i>
+						Pages <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+					<ul>
+						<li><a href="page-login.html">Login</a></li>
+						<li><a href="page-register.html">Register</a></li>
+						<li><a href="page-reset-password.html">Forgot password</a></li>
+					</ul></li>
+				<!--                 登出 -->
+				<li><a type="submit" href="dologout" id="dologout"><i class="ti-close"></i>
+						Logout</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
 <!-- sidebar end -->
+<script>
+		document.getElementById('dologout').addEventListener('click',
+				function() {
+					Swal.fire({
+				  	title: '確定要登出嗎?',
+				 	 text: "",
+				  	icon: 'warning',
+				  	showCancelButton: true,
+				 	confirmButtonColor: '#3085d6',
+				 	cancelButtonColor: '#d33',
+				  	confirmButtonText: '是的'
+						}).then((result) => {
+				  	if (result.isConfirmed) {
+				   	 Swal.fire(
+				      '登出成功',
+				      'success'
+				    )
+				  }
+				})
+				})
+	</script>

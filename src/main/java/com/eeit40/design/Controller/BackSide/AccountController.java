@@ -97,7 +97,7 @@ public class AccountController {
     
     
     @GetMapping("/B/dologout")
-    public ModelAndView doLogout(HttpSession session, ModelAndView mav, SessionStatus sessionStatus) {
+    public ModelAndView doLogout(HttpSession session, ModelAndView mav) {
 
     	session.invalidate();
     	
