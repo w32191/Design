@@ -55,6 +55,7 @@ public class BackCasePageController {
         mav.setViewName("/B/Case/Case");
         return mav;
     }
+
     //使用@Max @Min 要加@Validated 才會真的生效
     @Validated
     @GetMapping("/B/Cases")
@@ -72,7 +73,7 @@ public class BackCasePageController {
             @RequestParam(defaultValue = "desc") String sort,
 
             //------分頁 Pagination------
-            @RequestParam(defaultValue = "20") @Max(100) @Min(0) Integer fetchNext,
+            @RequestParam(defaultValue = "10") @Max(100) @Min(0) Integer fetchNext,
             @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
@@ -105,8 +106,8 @@ public class BackCasePageController {
     }
 
     @GetMapping("/B/Case/{id}")
-    public ResponseEntity<List<Case>> getCase(@PathVariable Integer id) {
-        List<Case> aCase = caseService.getCaseById(id);
+    public ResponseEntity<Case> getCase(@PathVariable Integer id) {
+        Case aCase = caseService.getCaseById(id);
         if (aCase != null) {
             return ResponseEntity.status(HttpStatus.OK).body(aCase);
         } else {
@@ -126,18 +127,18 @@ public class BackCasePageController {
 
     @PostMapping("/B/Case/createCase")
     //@Valid DTO有@NOTNULL的註解時要加
-    public ResponseEntity<List<Case>> createCase(@RequestParam("data") String jsonStr) throws JsonProcessingException {
+    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr) throws JsonProcessingException {
 
         CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
         Integer id = caseService.createCase(caseDto);
 
-        List<Case> acase = caseService.getCaseById(id);
+        Case acase = caseService.getCaseById(id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(acase);
     }
 
     @PostMapping("/B/Case/updatedCase/{id}")
-    public ResponseEntity<List<Case>> updatedCase(@PathVariable Integer id,
+    public ResponseEntity<Case> updatedCase(@PathVariable Integer id,
                                             @RequestParam("data") String jsonStr,
                                             @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
 
@@ -145,7 +146,7 @@ public class BackCasePageController {
         caseService.updatedCase(id, caseDto);
 //        System.out.println(caseDto.getList());
         //判定商品 id 是否存在
-        List<Case> aCase = caseService.getCaseById(id);
+        Case aCase = caseService.getCaseById(id);
 
         if (aCase == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -153,7 +154,7 @@ public class BackCasePageController {
 
         //修改商品的數據
         caseService.updatedCase(id, caseDto);
-        List<Case> updatedCase = caseService.getCaseById(id);
+        Case updatedCase = caseService.getCaseById(id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCase);
     }
 

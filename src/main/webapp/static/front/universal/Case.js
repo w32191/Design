@@ -1643,44 +1643,93 @@ classificationData = [
 
 
 $(function () {
-    // $('#table_id').DataTable();
-
 
     doClassificationData();
     doLocationData();
+    loadData();
 
-    //---------- 載入頁面資料開始 ---------
-    $.ajax({
-        url: "/Design/F/Cases",
-        type: "get",
-        dataType: "json",
-        success: function (result) {
-            console.log(result);
-            case_data = '';
-            $.each(result.results, function (index, value) {
-                case_data += '<div class="col-xl-4 col-lg-4 col-md-6">' +
-                    '<div class="blog__wrapper">' +
-                    '<div class="blog__item blog__border-bottom mb-60 pb-60">' +
-                    '<div class="blog__thumb fix">' +
-                    '<div class="blog__thumb fix"<a href="blog-details.html" class="w-img">'
-                case_data += '<img src=' + "${contextRoot}/static/front/assets/img/blog/blog-big-2.jpg" + 'alt="blog"></a></div>'
-                case_data += '<h4><a href="blog-details.html">' + value.title + '</a></h4>'
-                case_data += '<div class="blog__meta"><span><a href="#">' + value.classification + '</a></span></div>'
-                case_data += '<div class="blog__meta"><span><a href="#">' + value.location + '</a></span><br/></div>'
-                case_data += '<p>' + value.message + '</p>'
-                case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
-                case_data += '<span>  ' + value.dateTime + '</span></div>'
-                case_data += '<a href="blog-details.html" class="os-btn">read more</a></div>'
-                case_data += '</div></div></div></div>'
-            })
-            $('#blogCase').append(case_data);
 
-        },
-        error: function (err) {
-            console.log(err);
-        }
+    $('#SearchAllCases').click(function () {
+        loadData();
     })
-    //---------- 載入頁面資料結束 ---------
+
+    //---------- 新增開始 ----------
+
+    //新增案件 按鈕
+    $('#addCaseBtn').click(function () {
+            insertSend();
+        }
+    );
+
+    //新增案件 dialog設定
+    $('#insertCaseDialog').dialog({
+        autoOpen: false,
+        width: 800,
+        modal: true,
+        buttons: {
+            "新增": function () {
+                insertSend();
+                $(this).dialog('close');
+            },
+            "取消": function () {
+                $(this).dialog('close');
+            },
+        }
+    });
+
+    //發送新案件資料
+    function insertSend() {
+        // 取得輸入的資料
+        const data = {
+            title: $('#casetitle').val(),
+            name: $('#caseName').val(),
+            classification: $('#classification> option:selected').text(),
+            location: $('#location> option:selected').text(),
+            caseEmail: $('#Email').val(),
+            message: $('#message').val(),
+            expiryDate: $('#stopCaseTime').val(),
+            coverPhoto: $('#insertCoverPhoto').attr('src')
+        }
+        console.log(data)
+        //將輸入的文字資料,包進FormData
+        const dataFile = new FormData();
+        // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
+        dataFile.append("data", JSON.stringify(data));
+
+        $.ajax({
+            type: "POST",
+            url: "/Design/F/Case/createCase",
+            data: dataFile,
+            processData: false, // 防止jquery將data變成query String
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>新增中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (json) {
+                console.log(json);
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>新增成功！</h5>",
+                }).then(function () {
+                    window.location.href = "/Design/F/Case";
+                });
+            },
+            error: function (err) {
+                console.log(err);
+                swal.fire({
+                    icon: "error",
+                    html: "<h5>${err.responseText}!</h5>"
+                }).then(function () {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+    //---------- 新增結束 ----------
 
     //---------- 查詢開始 ----------
     //類別下拉選單
@@ -1713,6 +1762,7 @@ $(function () {
         // let classId =$(this).val();
         // console.log(classId);
 
+
         let classificationText = $("#classificationData > option:selected").text();
         let classificationValue = $("#classificationData > option:selected").val();
         console.log(classificationText);
@@ -1723,7 +1773,7 @@ $(function () {
 
         $.ajax({
             method: "GET",
-            url: "/Design/B/Cases?search=" + classificationText,
+            url: "/Design/F/Cases?search=" + classificationText,
             contentType: "application/json; charset=UTF-8", //送過去的
             dataType: "json", //傳回來的
             // data: dataFile,
@@ -1744,6 +1794,7 @@ $(function () {
                         classification_data += '<td>' + value.location + '</td>'
                         classification_data += '<td>' + value.caseEmail + '</td>'
                         classification_data += '<td>' + value.message + '</td>'
+                        classification_data += '<td>' + value.coverPhoto + '</td>'
                         classification_data += '<td>' + value.dateTime + '</td>'
                         classification_data += '<td>' + value.expiryDate + '</td>'
                         classification_data += '<td>' + '<button type="button"  class="btn btn-warning">編輯</button>' + '</td>'
@@ -1800,7 +1851,7 @@ $(function () {
 
         $.ajax({
             method: "GET",
-            url: "/Design/B/Cases?search=" + locationText,
+            url: "/Design/F/Cases?search=" + locationText,
             contentType: "application/json; charset=UTF-8", //送過去的
             dataType: "json", //傳回來的
             success: function (result) {
@@ -1818,6 +1869,7 @@ $(function () {
                         location_data += '<td>' + value.location + '</td>'
                         location_data += '<td>' + value.caseEmail + '</td>'
                         location_data += '<td>' + value.message + '</td>'
+                        location_data += '<td>' + value.coverPhoto + '</td>'
                         location_data += '<td>' + value.dateTime + '</td>'
                         location_data += '<td>' + value.expiryDate + '</td>'
                         location_data += '</tr>'
@@ -1836,5 +1888,227 @@ $(function () {
     })
 
     //---------- 查詢結束 ----------
+    //---------- 修改開始 ----------
+
+    //修改案件 按鈕
+    $('#table_tbody').on('click', 'button[id^=editBtn]', function () {
+        $('#editCaseDialog').removeAttr('hidden').dialog('open');
+        let editBtn = $(this);
+        // let id = editBtn.parent('td').siblings('td:eq(0)').text();
+        // console.log(id);
+        let id = $('#spanId').text();
+        $.ajax({
+            url: "/Design/F/Case/" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $('#editTitle').val(result.title);
+                $('#editName').val(result.name);
+                $('#editClassification').val(result.classification);
+                $('#editLocation').val(result.location);
+                $('#editCaseEmail').val(result.caseEmail);
+                $('#editMessage').val(result.message);
+                $('#editCoverPhoto').attr('src', result.coverPhoto);
+                $('#editExpiryDate').val(result.expiryDate);
+
+
+                $('#updateCaseId').val(id);
+            }
+        })
+    });
+
+    //修改案件 dialog設定
+    $('#editCaseDialog').dialog({
+        autoOpen: false,
+        width: 1200,
+        modal: true,
+        buttons: {
+            "修改": function () {
+                editSend();
+                $(this).dialog('close');
+            },
+            "取消": function () {
+                $(this).dialog('close');
+            },
+        }
+    });
+
+    // 發送修改案件資料
+    function editSend() {
+        // 取得輸入的資料
+        const editData = {
+            title: $('#editTitle').val(),
+            name: $('#editName').val(),
+            classification: $('#editClassification> option:selected').text(),
+            location: $('#editLocation> option:selected').text(),
+            caseEmail: $('#editCaseEmail').val(),
+            message: $('#editMessage').val(),
+            expiryDate: $('#editExpiryDate').val(),
+            coverPhoto: $('#editCoverPhoto').attr('src')
+        }
+        console.log(editData)
+        //將輸入的文字資料,包進FormData
+        const dataFile = new FormData();
+        // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
+        dataFile.append("data", JSON.stringify(editData));
+
+        let id = $('#spanId').text();
+        $.ajax({
+            type: "POST",
+            url: "/Design/F/updatedCase/" + id,
+            data: dataFile,
+            processData: false, // 防止jquery將data變成query String
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>修改中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (json) {
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>修改成功！</h5>",
+                }).then(function () {
+                    location.reload();
+                });
+            },
+            error: function (err) {
+                console.log(err);
+                swal.fire({
+                    icon: "error",
+                    html: "<h5>${err.responseText}!</h5>"
+                }).then(function () {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+    //---------- 修改結束 ----------
+
+    //新增時 上傳圖片
+    $('#insertFile').on("change", function () {
+        var $files = $(this).get(0).files;
+        var formData = new FormData();
+        formData.append("file", $files[0]);
+        $.ajax({
+            url: '/Design/F/Case/uploadImg',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>新增中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (res) {
+                swal.close();
+                console.log(res);
+                $('#insertCoverPhoto').attr('src', `${res}`);
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });
+
+    $('body').on('click', 'a[class*=classificationSearch],a[class*=locationSearch]', function () {
+        console.log($(this).text());
+        $('#blogCase').html('');
+        //---------- 載入頁面資料開始 ---------
+        $.ajax({
+            url: "/Design/F/Cases?search=" + $(this).text(),
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                case_data = '';
+                $.each(result.results, function (index, value) {
+                    let imgStr;
+                    if (value.coverPhoto != null) {
+                        imgStr = `<img src=" ${value.coverPhoto}" style='width: 100% ' alt="blog">`;
+                    } else {
+                        imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" style='width: 100%' alt="blog">`;
+                    }
+
+                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6">' +
+                        '<div class="blog__wrapper">' +
+                        '<div class="blog__item blog__border-bottom mb-60 pb-60">'
+                    case_data += '<div class="blog__thumb fix">' +
+                        '<a href="viewCase/${value.id}" class="w-img">' + imgStr +
+                        '</a>' +
+                        '</div>'
+                    case_data += '<div className="blog__content">' +
+                        '<h4><a href="blog-details.html">' + value.title + '</a></h4>'
+                    case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
+                    case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
+                    case_data += '<p>' + value.message + '</p>'
+                    case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
+                    case_data += '<span>  ' + value.dateTime + '</span></div>'
+                    case_data += '<a href="blog-details.html" class="os-btn">read more</a></div>'
+                    case_data += '</div></div></div>'
+
+                })
+                $('#blogCase').append(case_data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        //---------- 載入頁面資料結束 ---------
+
+    });
+
+    function loadData() {
+        $('#blogCase').html('');
+        //---------- 載入頁面資料開始 ---------
+        $.ajax({
+            url: "/Design/F/Cases",
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+
+                case_data = '';
+                $.each(result.results, function (index, value) {
+                    let imgStr;
+                    if (value.coverPhoto != null) {
+                        imgStr = `<img src=" ${value.coverPhoto} " alt="blog">`;
+                    } else {
+                        imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                    }
+
+                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6">' +
+                        '<div class="blog__wrapper">' +
+                        '<div class="blog__item blog__border-bottom mb-60 pb-60">'
+                    case_data += '<div class="blog__thumb fix">' +
+                        '<a href="viewCase/' + value.id + '" class="w-img">' + imgStr +
+                        '</a>' +
+                        '</div>'
+                    case_data += '<div className="blog__content">' +
+                        '<h4><a href="viewCase/' + value.id + '" >' + value.title + '</a></h4>'
+                    case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
+                    case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
+                    case_data += '<p>' + value.message + '</p>'
+                    case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
+                    case_data += '<span>  ' + value.dateTime + '</span></div>'
+                    case_data += '<a href="viewCase/' + value.id + '" class="os-btn">read more</a></div>'
+                    case_data += '</div></div></div>'
+
+                })
+                $('#blogCase').append(case_data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        //---------- 載入頁面資料結束 ---------
+    }
 
 })

@@ -21,7 +21,7 @@ public class ServicePhoto {
   private Integer id;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_service_id")
-  private DesignService fkService;
+  private Design fkService;
 
   @Column(name = "photo")
   private byte[] photo;
@@ -60,11 +60,11 @@ public class ServicePhoto {
     this.photo = photo;
   }
 
-  public DesignService getFkService() {
+  public Design getFkService() {
     return fkService;
   }
 
-  public void setFkService(DesignService fkService) {
+  public void setFkService(Design fkService) {
     this.fkService = fkService;
   }
 
