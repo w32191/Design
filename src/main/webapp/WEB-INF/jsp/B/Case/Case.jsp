@@ -153,6 +153,7 @@
                                                                 class="btn-group"></select></th>
                                                     <th>E-mail</th>
                                                     <th>資訊</th>
+                                                    <th>照片</th>
                                                     <th>
                                                         <a href="${contextRoot}/B/Case/CaseMessagedatetimeDesc">創建時間</a>
                                                     </th>
@@ -188,22 +189,14 @@
                                                 <%--                                                    </c:forEach>--%>
                                                 </tbody>
                                             </table>
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a class="page-link">Previous</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link">1</a></li>
-                                                <li class="page-item active">
-                                                        <span class="page-link">${findAllPage.number+1}
-                                                             <span class="sr-only">(current)</span>
-                                                        </span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link"
-                                                                         href="/Design/B/Cases?offset=${findAllPage.number+2}">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link">Next</a>
-                                                </li>
+                                            <ul class="pagination" id="pageBtn">
+<%--                                                <li class="page-item">--%>
+<%--                                                    <a class="page-link" id="previousPage">Previous</a>--%>
+<%--                                                </li>--%>
+<%--                                                <li class="page-item" id="pages"><a class="page-link"></a></li>--%>
+<%--                                                <li class="page-item">--%>
+<%--                                                    <a class="page-link" id="nextPage">Next</a>--%>
+<%--                                                </li>--%>
                                             </ul>
                                         </div>
                                     </div>
@@ -265,12 +258,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>資訊：</label>
-                                            <textarea name="message" id="message" class="form-control" rows="3"
+                                            <textarea name="message" id="message" class="form-control" style="height:100px"
                                                       placeholder="Text input"></textarea>
                                         </div>
-                                        <div class="form-group" id="imgDiv">
-                                            <input type="file" class="imgur" accept="image/*" data-max-size="5000"/>
-                                        </div>
+                                            <div class="form-group" id="imgDiv">
+                                                <input type="file" id="insertFile" class="imgur" accept="image/*" data-max-size="5000"/>
+                                                <img src="" id="insertCoverPhoto" width="200"/>
+                                            </div>
                                     </div>
                                 </div>
                             </form>
@@ -327,8 +321,12 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>資訊：</label>
-                                            <textarea name="editMessage" id="editMessage" class="form-control" rows="3"
+                                            <textarea name="editMessage" id="editMessage" class="form-control" rows="3" style="height:100px"
                                                       placeholder="Text input"></textarea>
+                                        </div>
+                                        <div class="form-group" id="editimgDiv">
+                                            <input type="file"  id="editFile" class="imgur" accept="image/*" data-max-size="5000"/>
+                                            <img src="" id="editCoverPhoto" width="200"/>
                                         </div>
                                     </div>
                                     <input type="text" hidden id="updateCaseId">

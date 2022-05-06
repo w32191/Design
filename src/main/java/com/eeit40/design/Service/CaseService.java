@@ -14,7 +14,7 @@ public interface CaseService {
 
     List<Case> getCases(CaseQueryParams caseQueryParams);
 
-    List<Case> getCaseById(Integer id);
+    Case getCaseById(Integer id);
 
     Integer createCase(CaseDto caseDto);
 

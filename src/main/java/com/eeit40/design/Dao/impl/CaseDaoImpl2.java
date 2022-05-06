@@ -43,6 +43,7 @@ public class CaseDaoImpl2 {
 
         return total;
     }
+
     //改完
     public List<Case> getCases(CaseQueryParams caseQueryParams) {
 
@@ -76,21 +77,21 @@ public class CaseDaoImpl2 {
 
         return caseList;
     }
-    //改完
-    public List<Case> getCaseById(Integer id){
-            String sql = "select * " +
-                    " from cases " +
-                    " left join cases_photo on cases_photo.fk_cases_id = cases.id " +
-                    " where id= :id";
-        Map<String, Object> map = new HashMap();
-        map.put("id" , id);
 
-        List<Case> caseList = namedParameterJdbcTemplate.query(sql,map, new CaseRowMapper());
+    //改完
+    public Case getCaseById(Integer id) {
+        String sql = "select * " +
+                " from cases " +
+                " where id= :id";
+        Map<String, Object> map = new HashMap();
+        map.put("id", id);
+
+        List<Case> caseList = namedParameterJdbcTemplate.query(sql, map, new CaseRowMapper());
 //        System.out.println(caseList);
 
-        if(caseList.size() > 0){
-            return caseList;
-        }else {
+        if (caseList.size() > 0) {
+            return caseList.get(0);
+        } else {
             return null;
         }
     }
@@ -98,7 +99,7 @@ public class CaseDaoImpl2 {
     public Integer createCase(CaseDto caseDto) {
         String sql =
                 "INSERT INTO cases (name,title,classification, location,  case_email,  message, date_time, expiry_date,cover_photo) " +
-                "VALUES (:name, :title, :classification, :location, :caseEmail, :message, :dateTime, :expiryDate,:coverPhoto)";
+                        "VALUES (:name, :title, :classification, :location, :caseEmail, :message, :dateTime, :expiryDate,:coverPhoto)";
 
         Map<String, Object> map = new HashMap<>();
         map.put("title", caseDto.getTitle());
@@ -108,7 +109,11 @@ public class CaseDaoImpl2 {
         map.put("location", caseDto.getLocation());
         map.put("message", caseDto.getMessage());
         map.put("expiryDate", caseDto.getExpiryDate());
-        map.put("coverPhoto", caseDto.getCoverPhoto());
+        if (caseDto.getCoverPhoto().length() < 10) {
+            map.put("coverPhoto", null);
+        } else {
+            map.put("coverPhoto", caseDto.getCoverPhoto());
+        }
 
         Date now = new Date();
         map.put("dateTime", now);
@@ -126,7 +131,7 @@ public class CaseDaoImpl2 {
 
     public void updatedCase(Integer id, CaseDto caseDto) {
         String sql = "UPDATE cases " +
-                "SET name = :name, title = :title ,classification = :classification , location = :location,  case_email = :caseEmail,  message = :message " +
+                "SET name = :name, title = :title ,classification = :classification , location = :location,  case_email = :caseEmail, message = :message, cover_photo = :coverPhoto " + //冒號後的文字要跟ＭＡＰ的ＫＥＹ是一樣
                 "WHERE id = :id";
 
         //  "Update imgurImg Set link=:link WHERE fk_case_id =:caseId and id=:id'
@@ -140,15 +145,17 @@ public class CaseDaoImpl2 {
         map.put("location", caseDto.getLocation());
         map.put("message", caseDto.getMessage());
         map.put("expiryDate", caseDto.getExpiryDate());
+        map.put("coverPhoto", caseDto.getCoverPhoto());
 
         namedParameterJdbcTemplate.update(sql, map);
     }
 
     public void deleteCaseById(Integer id) {
+
         String sql1 = "DELETE from cases_photo WHERE fk_cases_id=:fk_id";
         Map<String, Object> map2 = new HashMap<>();
         map2.put("fk_id", id);
-        namedParameterJdbcTemplate.update(sql1,map2);
+        namedParameterJdbcTemplate.update(sql1, map2);
 
         String sql = "DELETE FROM cases WHERE id = :id";
 
@@ -158,9 +165,9 @@ public class CaseDaoImpl2 {
         namedParameterJdbcTemplate.update(sql, map);
     }
 
-    public String uploadImg(CaseDto caseDto){
+    public String uploadImg(CaseDto caseDto) {
         String sql = "INSERT INTO cases_photo (fk_cases_id, case_photo_url, case_photo_message) " +
-       " VALUES (:fk_cases_id, :case_photo_url, :case_photo_message ) ";
+                " VALUES (:fk_cases_id, :case_photo_url, :case_photo_message ) ";
 
         Map<String, Object> map = new HashMap<>();
         map.put("fk_cases_id", caseDto.getCasesPhoto());
@@ -174,16 +181,19 @@ public class CaseDaoImpl2 {
         int id = keyHolder.getKey().intValue();
 
         return null;
-    };
+    }
 
+    ;
 
 
     //提煉程式 將 sql 重複利用
-    private String addFilteringSql(String sql, Map<String, Object> map, CaseQueryParams caseQueryParams){
+    private String addFilteringSql(String sql, Map<String, Object> map, CaseQueryParams caseQueryParams) {
 
         // 查詢條件
-        if(caseQueryParams.getSearch() != null){
+        if (caseQueryParams.getSearch() != null) {
             sql = sql + " WHERE CONCAT (classification , location , title) LIKE :search";
+
+//            map.put("search", caseQueryParams.getSearch());
             map.put("search", "%" + caseQueryParams.getSearch() + "%");
         }
 

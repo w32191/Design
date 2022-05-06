@@ -1,11 +1,14 @@
 package com.eeit40.design.Controller.FrontSide;
 
 
+import com.eeit40.design.Dto.CaseDto;
 import com.eeit40.design.Dto.CaseQueryParams;
 import com.eeit40.design.Entity.Case;
+import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Service.CaseService;
 import com.eeit40.design.Util.ImgurUtil;
 import com.eeit40.design.Util.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,17 +19,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
-//@PropertySource("classpath:imgurConfigs.properties")
+@PropertySource("classpath:imgurConfigs.properties")
 public class CasePageController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Value("${AU_Kenny}")
+    private String authorization;
 
 //    @Value("${AU_Kenny}")
 //    private String authorization;
@@ -40,10 +48,58 @@ public class CasePageController {
     @Autowired
     private CaseService caseService;
 
+    @PostMapping("/F/updatedCase/{id}")
+    public ResponseEntity<Case> updatedCase(@PathVariable Integer id,
+                                            @RequestParam("data") String jsonStr,
+                                            @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
+
+        log.info(jsonStr);
+        CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
+        caseService.updatedCase(id, caseDto);
+//        System.out.println(caseDto.getList());
+        //判定商品 id 是否存在
+        Case aCase = caseService.getCaseById(id);
+
+        if (aCase == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        //修改商品的數據
+        caseService.updatedCase(id, caseDto);
+        Case updatedCase = caseService.getCaseById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCase);
+    }
+
 
     @GetMapping("/F/Case")
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("F/Case/Case");
+        return mav;
+    }
+
+    @GetMapping("/F/viewCase/{id}")
+    public ModelAndView viewCase(ModelAndView mav, @PathVariable Integer id) {
+        Case aCase = caseService.getCaseById(id);
+        mav.addObject("aCase", aCase);
+        mav.setViewName("F/Case/viewCase");
+        return mav;
+    }
+
+    @PostMapping("/F/Case/createCase")
+    //@Valid DTO有@NOTNULL的註解時要加
+    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr) throws JsonProcessingException {
+        log.info(jsonStr);
+        CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
+        Integer id = caseService.createCase(caseDto);
+
+        Case acase = caseService.getCaseById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(acase);
+    }
+
+    @GetMapping("/F/UpdateCase")
+    public ModelAndView UpdateCase(ModelAndView mav) {
+        mav.setViewName("F/Case/UpdateCase");
         return mav;
     }
 
@@ -62,7 +118,7 @@ public class CasePageController {
             @RequestParam(defaultValue = "desc") String sort,
 
             //------分頁 Pagination------
-            @RequestParam(defaultValue = "20") @Max(100) @Min(0) Integer fetchNext,
+            @RequestParam(defaultValue = "99") @Max(100) @Min(0) Integer fetchNext,
             @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
@@ -75,7 +131,6 @@ public class CasePageController {
 
         // 取得 case list
         List<Case> caseList = caseService.getCases(caseQueryParams);
-        System.out.println("caseList:" + caseList);
         // 取得 case 總數
         Integer total = caseService.countCase(caseQueryParams);
 
@@ -93,8 +148,8 @@ public class CasePageController {
     }
 
     @GetMapping("/F/Case/{id}")
-    public ResponseEntity<List<Case>> getCase(@PathVariable Integer id) {
-        List<Case> aCase = caseService.getCaseById(id);
+    public ResponseEntity<Case> getCase(@PathVariable Integer id) {
+        Case aCase = caseService.getCaseById(id);
         if (aCase != null) {
             return ResponseEntity.status(HttpStatus.OK).body(aCase);
         } else {
@@ -102,6 +157,16 @@ public class CasePageController {
         }
     }
 
+    //------新增照片開始------
+    @PostMapping("/F/Case/uploadImg")
+    public String uploadImg(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+
+        imgurUtil.setAuthorization(authorization);
+        ImgurImg img = imgurUtil.uploadImg(multipartFile.getOriginalFilename(), multipartFile.getBytes());
+
+        return img.getLink();
+    }
+    //------新增照片結束------
 
 //    @GetMapping("/F/Case")
 //    public ModelAndView casePage(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {

@@ -39,17 +39,17 @@ public class DesignReview {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_design_service_id")
-  private DesignService fkDesignService;
+  private Design fkDesign;
 
   public DesignReview() {
   }
 
-  public DesignService getFkDesignService() {
-    return fkDesignService;
+  public Design getFkDesignService() {
+    return fkDesign;
   }
 
-  public void setFkDesignService(DesignService fkDesignService) {
-    this.fkDesignService = fkDesignService;
+  public void setFkDesignService(Design fkDesign) {
+    this.fkDesign = fkDesign;
   }
 
   public Integer getScore() {

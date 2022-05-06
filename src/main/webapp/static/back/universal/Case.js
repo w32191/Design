@@ -1645,6 +1645,9 @@ classificationData = [
 $(function () {
     // $('#table_id').DataTable();
 
+    let total,page;
+    let offset = 0 ;
+    let fetchNext = 10;
 
     doClassificationData();
     doLocationData();
@@ -1657,6 +1660,7 @@ $(function () {
         success: function (result) {
             console.log(result);
             case_data = '';
+
             $.each(result.results, function (index, value) {
 
                 case_data += '<tr>'
@@ -1667,6 +1671,7 @@ $(function () {
                 case_data += '<td>' + value.location + '</td>'
                 case_data += '<td>' + value.caseEmail + '</td>'
                 case_data += '<td>' + value.message + '</td>'
+                case_data += '<td>' + value.coverPhoto + '</td>'
                 case_data += '<td>' + value.dateTime + '</td>'
                 case_data += '<td>' + value.expiryDate + '</td>'
                 case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'
@@ -1674,6 +1679,30 @@ $(function () {
                 case_data += '</tr>'
             })
             $('#table_tbody').append(case_data);
+
+            total= result.total
+            page = Math.ceil(total / fetchNext);
+            console.log(page);
+
+            $("#pageBtn").append(`<li class="page-item">
+                                                    <a class="page-link" id="previousPage">Previous</a>
+                                                </li>`);
+            for(let i = 1; i<=page ; i++){
+
+                $("#pageBtn").append(`<li class="page-item"><a class="page-link">${i}</a></li>`);
+
+            }
+            $("#pageBtn").append(`<li class="page-item">
+                                                    <a class="page-link" id="nextPage">Next</a>
+                                                </li>`);
+
+
+            // $("#pageBtn").html(txt);
+
+
+            // $("#page").on("click" , function(){
+            //
+            // })
         },
         error: function (err) {
             console.log(err);
@@ -1792,13 +1821,17 @@ $(function () {
             type: "GET",
             dataType: "json",
             success: function (result) {
+                console.log(result);
                 $('#editTitle').val(result.title);
                 $('#editName').val(result.name);
                 $('#editClassification').val(result.classification);
                 $('#editLocation').val(result.location);
                 $('#editCaseEmail').val(result.caseEmail);
                 $('#editMessage').val(result.message);
+                $('#editCoverPhoto').attr('src',result.coverPhoto);
                 $('#editExpiryDate').val(result.expiryDate);
+
+
                 $('#updateCaseId').val(id);
             }
         })
@@ -1830,7 +1863,8 @@ $(function () {
             location: $('#editLocation> option:selected').text(),
             caseEmail: $('#editCaseEmail').val(),
             message: $('#editMessage').val(),
-            expiryDate: $('#editExpiryDate').val()
+            expiryDate: $('#editExpiryDate').val(),
+            coverPhoto:$('#editCoverPhoto').attr('src')
         }
         console.log(editData)
         //將輸入的文字資料,包進FormData
@@ -1908,7 +1942,7 @@ $(function () {
             caseEmail: $('#caseEmail').val(),
             message: $('#message').val(),
             expiryDate: $('#expiryDate').val(),
-            coverPhoto:$('#coverPhoto').attr('src')
+            coverPhoto:$('#insertCoverPhoto').attr('src')
         }
         console.log(data)
         //將輸入的文字資料,包進FormData
@@ -2012,6 +2046,7 @@ $(function () {
                         classification_data += '<td>' + value.location + '</td>'
                         classification_data += '<td>' + value.caseEmail + '</td>'
                         classification_data += '<td>' + value.message + '</td>'
+                        classification_data += '<td>' + value.coverPhoto + '</td>'
                         classification_data += '<td>' + value.dateTime + '</td>'
                         classification_data += '<td>' + value.expiryDate + '</td>'
                         classification_data += '<td>' + '<button type="button"  class="btn btn-warning">編輯</button>' + '</td>'
@@ -2086,6 +2121,7 @@ $(function () {
                         location_data += '<td>' + value.location + '</td>'
                         location_data += '<td>' + value.caseEmail + '</td>'
                         location_data += '<td>' + value.message + '</td>'
+                        location_data += '<td>' + value.coverPhoto + '</td>'
                         location_data += '<td>' + value.dateTime + '</td>'
                         location_data += '<td>' + value.expiryDate + '</td>'
                         location_data += '</tr>'
@@ -2320,8 +2356,8 @@ $(function () {
     // } );
 
 
-    //上傳圖片
-    $('input[type=file]').on("change", function () {
+    //新增時 上傳圖片
+    $('#insertFile').on("change", function () {
         var $files = $(this).get(0).files;
         var formData = new FormData();
         formData.append("file", $files[0]);
@@ -2340,7 +2376,8 @@ $(function () {
             success: function (res) {
                 swal.close();
                 console.log(res);
-                $('#imgDiv').append(`<img src="${res}" width="200" id="coverPhoto"/>`);
+                $('#insertCoverPhoto').attr('src',`${res}`);
+
             },
             error: function (err) {
                 console.log(err);
@@ -2349,4 +2386,56 @@ $(function () {
     });
 
 
+    // 編輯時上傳圖片
+    $('#editFile').on("change", function () {
+        var $files = $(this).get(0).files;
+        var formData = new FormData();
+        formData.append("file", $files[0]);
+        $.ajax({
+            url: '/Design/B/Case/uploadImg',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>新增中...</h5>',
+                    showConfirmButton: false,
+                });
+            },
+            success: function (res) {
+                swal.close();
+                console.log(res);
+                $('#editCoverPhoto').attr('src',`${res}`);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });
+
+
+    //---------- 頁面開始 ----------
+
+    //下一頁
+    $('#nextPage').on("click", function () {
+        $.ajax({
+            url: "/Design/B/Cases",
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                offset +=  fetchNext;
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });
+
+    //頁碼
+
+
+
+    //---------- 頁面結束 ---------
 });

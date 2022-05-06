@@ -16,6 +16,11 @@
 
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
+
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
+          rel="stylesheet"/>
+    <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+          rel="stylesheet"/>
 </head>
 <body>
 
@@ -27,59 +32,57 @@
     <section class="blog__area pt-55">
         <div class="container">
             <div class="row">
+                <span hidden id="spanId">${aCase.id}</span>
                 <div class="col-xl-9 col-lg-8">
+                    <div class="row">
+                        <div class="col-12">
+                        </div>
+                    </div>
                     <div class="postbox__title mb-55">
+                        <div id="table_tbody" class="coupon2">
+                            <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
+                                <button id="editBtn" class="os-btn os-btn-black" name="add_cart" type="submit">
+                                    編輯案件
+                                </button>
+                            </div>
+                        </div>
                         <h1><a href="blog.html">${aCase.title}</a></h1>
                         <div class="blog__meta">
-                            <span>By <a href="#">Shahnewaz Sakil</a></span>
-                            <span>/ September 14, 2017</span>
+                            <span>${aCase.location}</span><br/>
+                            <span>${aCase.classification}</span><br/>
+                            <span>By <a href="#">${aCase.name}</a></span>
+                            <span>/ ${aCase.dateTime}</span>
                         </div>
                     </div>
                     <div class="postbox__thumb w-img">
-                        <img src="${contextRoot}/static/front/assets/img/blog/blog-big.jpg" alt="">
+                        <img src="${aCase.coverPhoto}" alt="">
                     </div>
                     <div class="postbox__wrapper mb-70">
                         <div class="postbox__text mt-65">
-                            <p>Diga, Koma and Torus are three kitchen utensils designed for <span
-                                    class="highlight theme">Ommo</span>, a new design-oriented brand
-                                introduced at the Ambiente show in February 2016. <span
-                                        class="highlight">Minimalist approach, bright colors, stainless steel and matte plastic</span>,
-                                abstract shapes and curved lines are the defining features of these
-                                products designed to be extremely functional, user-friendly and fun.
+                            <p>
                             </p>
                         </div>
                         <div class="postbox__text">
-                            <p>Diga is a two-color melamine salad bowl where vegetables can be
-                                washed, drained and served. The disk at the bottom of the bowl can
-                                be turned counterclockwise to drain water when washing vegetables
-                                and it can be turned clockwise to lock the drain and hold condiments
-                                in the bowl when serving.</p>
+                            <p>
+
+                            </p>
                         </div>
                         <article class="postbox format-quote mt-45 mb-50">
                             <div class="postbox__quote">
                                 <blockquote>
-                                    <p><i class="fas fa-quote-right"></i> Many desktop publishing
-                                        packages and web page editors now use Lorem Ipsum as their
-                                        default model text, and a search for 'lorem ipsum' will
-                                        uncover many web sites still in their infancy. </p>
+                                    <p><i class="fas fa-quote-right"></i>${aCase.message}</p>
                                 </blockquote>
                             </div>
                         </article>
                         <div class="postbox__details-img w-img mb-60">
-                            <img src="${contextRoot}/static/front/assets/img/blog/blog-details-sm.jpg" alt="">
+                            <img src="" alt="">
                         </div>
                         <div class="postbox__text">
-                            <p>Koma and Torus are two tea infusers, each with an original design and
-                                a concealed function. Koma has a round base and a long stainless
-                                steel-trimmed handle which offers a comfortable grip and allows.
+                            <p>
                             </p>
                         </div>
                         <div class="postbox__text">
-                            <p>And the brushed steel cover opens and closes at the touch of a finger
-                                to easily fill and empty the infuser. The perfect way to enjoy
-                                brewing tea. Torus is donut-shaped and can cling to any cup. It is
-                                accompanied by a case that can contain up to three different
-                                diffusers and can be used for dry storage of loose tea.
+                            <p>
                             </p>
                         </div>
                     </div>
@@ -156,7 +159,8 @@
                                 <li>
                                     <div class="comments-box">
                                         <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-1.png" alt="">
+                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-1.png"
+                                                 alt="">
                                         </div>
                                         <div class="comments-text">
                                             <div class="avatar-name">
@@ -176,7 +180,8 @@
                                 <li class="children">
                                     <div class="comments-box">
                                         <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-2.png" alt="">
+                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-2.png"
+                                                 alt="">
                                         </div>
                                         <div class="comments-text">
                                             <div class="avatar-name">
@@ -194,7 +199,8 @@
                                 <li>
                                     <div class="comments-box">
                                         <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png" alt="">
+                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
+                                                 alt="">
                                         </div>
                                         <div class="comments-text">
                                             <div class="avatar-name">
@@ -585,8 +591,70 @@
                 </div>
             </div>
         </div>
+
     </section>
     <!-- blog area end -->
+
+    <!-- Cart Area Strat-->
+    <section id="editCaseDialog" class="cart-area pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg">
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="product-thumbnail">標題</th>
+                                    <th class="cart-product-name">名字</th>
+                                    <th class="product-price">工程類別</th>
+                                    <th class="product-quantity">所在地區</th>
+                                    <th class="product-subtotal">E-mail</th>
+                                    <th class="product-remove">資訊</th>
+                                    <th class="product-remove">照片</th>
+                                    <th class="product-remove">結案時間</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input id="editTitle" type="text"/>
+                                    </td>
+                                    <td><input id="editName" type="text"/></td>
+                                    <td><select id="editClassification"></select></td>
+                                    <td><select id="editLocation"></select></td>
+                                    <td><input id="editEmail" type="email"></td>
+                                    <td>
+                                        <textarea name="editMessage" id="editMessage" class="form-control" rows="3"
+                                                  placeholder="Text input" style="width: 300px"></textarea>
+                                    </td>
+                                    <td class="product-thumbnail" id="editImgDiv">
+                                        <input type="file" id="editFile" class="imgur" accept="image/*"
+                                               data-max-size="5000"/>
+                                        <img src="" id="editCoverPhoto" width="200"/>
+                                    </td>
+                                    <%--                                    <td class="product-thumbnail"><a href="product-details.html"><img src="${contextRoot}/static/front/assets/img/shop/product/product-2.jpg" alt=""></a></td>--%>
+                                    <td><input id="editExpiryDate" type="date"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="coupon2">
+                                    <button id="editCaseBtn" class="os-btn os-btn-black" style="margin-top: 25px"
+                                            name="add_case" type="submit">編輯案件
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cart Area End-->
+
 </main>
 
 <%-- footer page --%>
@@ -594,5 +662,8 @@
 
 <!-- JavaScript -->
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
+<script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="${contextRoot}/static/front/universal/Case.js"></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.eeit40.design.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -63,7 +62,7 @@ public class Member {
 
   @JsonIgnore
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkMember")
-  private DesignService designServices;
+  private Design designServices;
 
   @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
@@ -91,11 +90,11 @@ public class Member {
     this.designReviews = designReviews;
   }
 
-  public DesignService getDesignServices() {
+  public Design getDesignServices() {
     return designServices;
   }
 
-  public void setDesignServices(DesignService designServices) {
+  public void setDesignServices(Design designServices) {
     this.designServices = designServices;
   }
 
