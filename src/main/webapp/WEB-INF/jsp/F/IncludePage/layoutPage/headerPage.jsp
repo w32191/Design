@@ -107,7 +107,7 @@
                                     </li>
                                     <li class="has-dropdown"><a href="shop.html">Pages</a>
                                         <ul class="submenu transition-3">
-                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
                                             <li><a href="cart.html">Shopping Cart</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
                                             <li><a href="register.html">Register</a></li>
@@ -116,7 +116,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="/Design/F/CommonQuestion">常見問題</a></li>
-                                    <li><a href="">常見問題</a></li>
+                                    <li><a href="">公告</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -248,12 +248,11 @@
                         </div>
                         <div class="header__search-categories">
                             <ul class="search-category">
-                                <li><a href="shop.html">All Categories</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
-                                <li><a href="shop.html">Chair</a></li>
-                                <li><a href="shop.html">Tablet</a></li>
-                                <li><a href="shop.html">Men</a></li>
-                                <li><a href="shop.html">Women</a></li>
+                                <li><a href="shop.html">所有商品</a></li>
+                                <li><a href="shop.html">Tom Dixon</a></li>
+                                <li><a href="shop.html">Menu</a></li>
+                                <li><a href="shop.html">BROKIS</a></li>
+
 
                             </ul>
                         </div>
