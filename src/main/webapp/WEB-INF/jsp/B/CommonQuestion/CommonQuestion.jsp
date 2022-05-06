@@ -74,7 +74,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-title">
-                                                            <h4>常見問題</h4>
+                                                            <h4>常見問題列表</h4>
                                                         </div>
                                                         <%-- dataTable--%>
                                                             <div class="bootstrap-data-table-panel">
@@ -205,12 +205,16 @@
                                                                                             for="addAnswer"><span
                                                                                                 style="color: red">*</span>回答</label>
                                                                                     </div>
-                                                                                    <input type="text"
+                                                                                    <textarea name="addAnswer"
+                                                                                            id="addAnswer" cols="100"
+                                                                                            rows="10"
+                                                                                            placeholder=""></textarea>
+                                                                                    <!-- <input type="text"
                                                                                         class="form-control"
                                                                                         id="addAnswer" name="addAnswer"
                                                                                         size="10"
                                                                                         aria-describedby="addAnswer"
-                                                                                        autocomplete="off" required><br>
+                                                                                        autocomplete="off" required><br> -->
                                                                                 </div>
 
 
@@ -222,7 +226,8 @@
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-dismiss="modal">關閉</button>
-                                                                                <button id="addBtn" name="addBtn" type="button"
+                                                                                <button id="addBtn" name="addBtn"
+                                                                                    type="button"
                                                                                     class="btn btn-primary">送出</button>
                                                                             </div>
                                                                         </div>
@@ -267,7 +272,8 @@
                                                                                     <select class="form-control"
                                                                                         aria-describedby="question_type_edit"
                                                                                         name="question_type_edit"
-                                                                                        id="question_type_edit" required>
+                                                                                        id="question_type_edit"
+                                                                                        required>
                                                                                         <option value=""
                                                                                             style="display: none">
                                                                                         </option>
@@ -309,25 +315,28 @@
                                                                                         autocomplete="off" required><br>
                                                                                 </div>
 
-                                                                                
+
                                                                                 <div class="input-group mb-3 col-sm-12">
                                                                                     <div class="input-group-prepend">
                                                                                         <label class="input-group-text"
                                                                                             for="answer"><span
                                                                                                 style="color: red">*</span>回答</label>
                                                                                     </div>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="answer" name="answer"
-                                                                                        size="30"
+                                                                                    <textarea name="answer"
+                                                                                            id="answer" cols="100"
+                                                                                            rows="10"
+                                                                                            placeholder=""></textarea>
+                                                                                    <!-- <input type="text"
+                                                                                        class="form-control" id="answer"
+                                                                                        name="answer" size="30"
                                                                                         aria-describedby="answer"
-                                                                                        autocomplete="off" required><br>
+                                                                                        autocomplete="off" required><br> -->
                                                                                 </div>
 
 
 
                                                                             </form>
-                                                                            <div class="modal-footer">                                                                                
+                                                                            <div class="modal-footer">
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-dismiss="modal">關閉</button>
