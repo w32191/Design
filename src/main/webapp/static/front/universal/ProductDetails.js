@@ -298,31 +298,63 @@ $(function () {
                                                     <div class="post-comments-title mb-30">
                                                         <h3>撰寫評論</h3>
                                                     </div>
-                                                    <form id="contacts-form" class="conatct-post-form" action="http://localhost:8080/Design/F/ProductReview/insertProductReview" method="post">
+                                                    <form id="contacts-form" class="conatct-post-form" method="post"
+                                                        action="/Design/F/ProductReview/insertProductReview"
+                                                        enctype="multipart/form-data">
                                                         <div class="row">
+                                                            
                                                             <div class="col-xl-6 col-lg-6 col-md-6">
                                                                 <div class="contact-icon p-relative contacts-name">
-                                                                    <input type="text" placeholder="Name" name="comment">
+                                                                    <input type="text" placeholder="姓名">
                                                                 </div>
                                                             </div>
-                                                    
+
+                                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                                <div class="contact-icon p-relative contacts-name">
+                                                                    <input type="text" placeholder="日期">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                                <div class="user-rating">
+                                                                    <ul>
+                                                                        <li><a href="#"><i
+                                                                            class="fas fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                            class="fas fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                            class="fas fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                            class="fas fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i
+                                                                            class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="col-xl-12">
                                                                 <div class="contact-icon p-relative contacts-message">
                                                                     <textarea name="comments"
-                                                                    id="comments"
-                                                                    cols="30" rows="10"
-                                                                    placeholder="Comments"></textarea>
+                                                                        id="comments"
+                                                                        cols="30" rows="10"
+                                                                        placeholder="評論內容"></textarea>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                             <div class="col-xl-12">
                                                                 <button class="os-btn os-btn-black"
-                                                                    type="submit">Post comment
+                                                                    type="submit">送出
                                                                 </button>
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>`;
+                                                </div>
+                                            `;
 
 
                                             $('#reviewStart').html(reviewMain);
