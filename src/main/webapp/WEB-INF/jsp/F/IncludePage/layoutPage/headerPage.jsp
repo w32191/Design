@@ -21,7 +21,7 @@
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                     <div class="logo">
-                        <a href="index.html"><img style="width: 50%"
+                        <a href="/Design/F/Activity/index"><img style="width: 50%"
                                                   src="${contextRoot}/static/front/assets/img/logo/黑字.svg"
                                                   alt="logo"></a>
                     </div>
@@ -31,7 +31,7 @@
                         <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li class="active has-dropdown"><a href="/Design/F/Activity/index">首頁</a>
+                                    <li class="active "><a href="/Design/F/Activity/index">首頁</a>
                                         <%--                                        <ul class="submenu transition-3">--%>
                                         <%--                                            <li><a href="index.html">Home Style 1</a></li>--%>
                                         <%--                                            <li><a href="index-2.html">Home Style 2</a></li>--%>
@@ -41,7 +41,7 @@
                                         <%--                                            <li><a href="index-6.html">Home Style 6</a></li>--%>
                                         <%--                                        </ul>--%>
                                     </li>
-                                    <li class="mega-menu has-dropdown"><a href="/Design/F/Product/">Shop</a>
+                                    <li class="mega-menu "><a href="/Design/F/Product/">Shop</a>
                                         <%--                                        <ul class="submenu transition-3"--%>
                                         <%--                                            data-background="static/front/assets/img/bg/mega-menu-bg.jpg">--%>
                                         <%--                                            <li class="has-dropdown">--%>
