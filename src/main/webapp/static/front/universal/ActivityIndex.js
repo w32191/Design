@@ -7,13 +7,13 @@ $(function () {
     console.log(id)
     let amount;
 
-
+    // 新品推薦 NEW ARRIVAL
     $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
         console.log(newa[0].id)
         console.log(newa[0].name)
         let natxt = '';
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 8; i++) {
             natxt +=
                 `
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -48,5 +48,17 @@ $(function () {
         }   //end of for
         $('#na').html(natxt);
     })
+
+    // 下方新品推薦加入購物車
+    $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
+
+        let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
+        console.log(id)
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
+        {
+            console.log($('#amount').val());
+        }
+    })
+
 
 })
