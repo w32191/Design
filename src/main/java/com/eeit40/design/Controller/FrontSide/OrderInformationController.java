@@ -112,7 +112,8 @@ public class OrderInformationController {
 		orderInfo.setPhone(request.getParameter("phone"));
 		orderInfo.setAdd(request.getParameter("address"));
 		orderInfo.setNotes(request.getParameter("notes"));
-		System.out.println("note"+request.getParameter("notes"));
+		orderInfo.setShipState("未付款");
+//		System.out.println("note"+request.getParameter("notes"));
 //		String coupondiscount = request.getParameter("discount");
 //		int discount = Integer.valueOf(coupondiscount);
 //		orderInfo.setDiscount(discount);

@@ -468,7 +468,7 @@
                     html: "<h5>訂單已成立</h5>",
                 }).then(function () {
                     // location.replace('/Design/F/Product/');
-                    window.location.href='/Design/F/Product/';
+                    window.location.href='/Design/F/orderrecord';
                     console.log(result)
                 });
             },
