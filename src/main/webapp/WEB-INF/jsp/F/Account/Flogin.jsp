@@ -51,11 +51,15 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="basic-login">
                         <h3 class="text-center mb-60">Login</h3>
-                        <form:form class="form" method="POST" ModelAttribute="Flogin" action="/Design/F/Flogin">
+                        <form:form class="form" method="POST" modelAttribute="Flogin" action="/Design/F/Flogin">
                             <label for="email">信箱</label>
-                            <input name="email" type="email" placeholder="請輸入信箱"/>
+<%--                            <input name="email" type="email" placeholder="請輸入信箱"/>--%>
+                            <form:input path="email" type="email" placeholder="請輸入信箱" />
+                            <form:errors path="email" cssClass="error"/>
                             <label for="pwd">密碼</label>
-                            <input name="pwd" type="password" placeholder="請輸入密碼"/>
+<%--                            <input name="pwd" type="password" placeholder="請輸入密碼"/>--%>
+                            <form:input path="pwd" type="password" placeholder="請輸入密碼" />
+                            <form:errors path="pwd" cssClass="error"/>
                             <div class="login-action mb-20 fix">
                                 <span class="forgot-login f-right">
                                         <a href="#">忘記密碼</a>
