@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.eeit40.design.Dao.OrderInformationRepository;
@@ -93,6 +96,14 @@ public class OrderImformationService {
 	//商家刪除訂單
 	public void deleteByOrderId(int id) {
 		orderInformation.deleteById(id);
+	}
+	
+	//分頁
+	public Page<OrderInformation> findByPage(Integer pageNumber) {
+
+		Pageable request = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "id");
+		Page<OrderInformation> page = orderInformation.findAll(request);
+		return page;
 	}
 	
 	

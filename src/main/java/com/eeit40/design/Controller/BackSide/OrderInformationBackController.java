@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,7 @@ public class OrderInformationBackController {
 //	}
 	
 	@GetMapping("B/allorder")
-	public ModelAndView selectAllOrderByOrderId(ModelAndView mav,HttpServletRequest request) {
+	public ModelAndView selectAllOrderByOrderId(ModelAndView mav,HttpServletRequest request, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 
 		mav.setViewName("B/ShoppingCart/OrderImforBack");
 
@@ -64,11 +65,15 @@ public class OrderInformationBackController {
 		
 		}else {
 		
-		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
-		mav.getModel().put("allOrder", allOrder);
+	    // 查詢所有訂單
+//		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
+//		mav.getModel().put("allOrder", allOrder);
 		
+		Page<OrderInformation> page = orderImformationService.findByPage(pageNumber);
+		List<OrderInformation> pageContent = page.getContent();
+		mav.getModel().put("allOrder", pageContent);
+		mav.getModel().put("page", page);
 		}
-		
 		return mav;
 	}
 
@@ -88,7 +93,7 @@ public class OrderInformationBackController {
 		return mapper.writeValueAsString(imfor.get(0));
 	}
 
-	// 商城訂單查詢-依ship_state
+	// 商城訂單查詢-依ship_state（暫與全部查詢一起使用）
 	@GetMapping("B/shipStatedetail")
 	public ModelAndView selectByShipState(ModelAndView mav, HttpServletRequest request) {
 
@@ -99,7 +104,7 @@ public class OrderInformationBackController {
 		return mav;
 	}
 
-	// 商城訂單查詢-依order_date
+	// 商城訂單查詢-依order_date（目前尚未使用）
 	@GetMapping("B/orderdatedetail")
 	public ModelAndView selectByOrderDate(ModelAndView mav, HttpServletRequest request) throws ParseException {
 
@@ -129,7 +134,7 @@ public class OrderInformationBackController {
 		return orderProduct;
 	}
 
-	// 商家修改訂單日期
+	// 商家修改訂單出貨日期
 	@PostMapping("B/editordershipdate")
 	public ModelAndView editShipStateByShipDate(ModelAndView mav, HttpServletRequest request) throws ParseException {
 
@@ -147,8 +152,8 @@ public class OrderInformationBackController {
 	}
 	
 	// 商家修改訂單出貨狀態
-		@PostMapping("B/editordershipstate")
-		public ModelAndView editShipStateByShipState(ModelAndView mav, HttpServletRequest request) throws ParseException {
+	@PostMapping("B/editordershipstate")
+	public ModelAndView editShipStateByShipState(ModelAndView mav, HttpServletRequest request) throws ParseException {
 
 			String shipState = request.getParameter("shipState");
 			String id = request.getParameter("id");
@@ -160,7 +165,7 @@ public class OrderInformationBackController {
 			return mav;
 		}
 
-	// 商家刪除訂單
+	// 商家刪除訂單（目前尚未使用）
 	public ModelAndView deleteByOrderId(ModelAndView mav, @RequestParam(name = "id") int id) {
 
 		orderImformationService.deleteByOrderId(id);
@@ -169,4 +174,17 @@ public class OrderInformationBackController {
 		return mav;
 	}
 
+	//分頁
+//	@ResponseBody
+	@GetMapping("B/page")
+	public ModelAndView viewOrder(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
+		
+		mav.setViewName("/B/ShoppingCart/OrderImforBack");
+		Page<OrderInformation> page = orderImformationService.findByPage(pageNumber);
+		mav.getModel().put("page", page);
+//		mav.setViewName("");
+//		mav.setViewName("redirect:/B/allorder");
+//		mav.setViewName("/B/allorder");
+		return mav;
+	}
 }
