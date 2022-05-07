@@ -134,5 +134,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-
+    @Override
+    public List<Product> findByNameLikeT(String name) {
+        return productRepository.findByNameLikeT(name);
+    }
 }

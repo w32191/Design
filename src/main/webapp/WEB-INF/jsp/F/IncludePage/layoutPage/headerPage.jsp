@@ -260,6 +260,7 @@
                             <div class="ui-widget">
                                 <input type="text" placeholder="Search for products... " id="tags">
                                 <button type="submit"><i class="far fa-search"></i></button>
+                                <ul id="seachList"></ul>
                             </div>
                         </div>
                     </form>

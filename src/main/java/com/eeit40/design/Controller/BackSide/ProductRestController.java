@@ -47,6 +47,10 @@ public class ProductRestController {
     return dao.findByNameLike("%" + name + "%");
   }
 
+  @PostMapping("")
+  public  List<Product>findByNameLikeT(@RequestParam("name")String name){
+    return dao.findByNameLikeT("%" + name + "%");
+  }
 
   @PostMapping("/B/product/insert")
   public Product insertProduct(@RequestBody Product pro) {
