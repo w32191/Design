@@ -43,10 +43,10 @@
                             <div class="card-title">
                                 <h4>活動</h4>
 
-                                <button data-toggle="modal" data-target="#add-category"
-                                        class="btn btn-lg btn-primary waves-effect waves-light">
-                                    <i class="fa fa-plus"></i> 新增活動
-                                </button>
+                                <%--                                <button data-toggle="modal" data-target="#add-category"--%>
+                                <%--                                        class="btn btn-lg btn-primary waves-effect waves-light">--%>
+                                <%--                                    <i class="fa fa-plus"></i> 新增活動--%>
+                                <%--                                </button>--%>
                                 <%--                                <a href="findAll" class="btn btn-lg btn-success">Table</a>--%>
 
                             </div>
@@ -58,37 +58,6 @@
                                         </div>
                                     </div>
                                     <!-- end col -->
-                                    <!-- BEGIN MODAL -->
-<%--                                    <div class="modal fade none-border" id="event-modal">--%>
-<%--                                        <div class="modal-dialog">--%>
-<%--                                            <div class="modal-content">--%>
-<%--                                                <div class="modal-header">--%>
-<%--                                                    <button type="button" class="close"--%>
-<%--                                                            data-dismiss="modal" aria-hidden="true">--%>
-<%--                                                        &times;--%>
-<%--                                                    </button>--%>
-<%--                                                    <h4 class="modal-title">--%>
-<%--                                                        <strong>Add New Event</strong>--%>
-<%--                                                    </h4>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="modal-body"></div>--%>
-<%--                                                <div class="modal-footer">--%>
-<%--                                                    <button type="button"--%>
-<%--                                                            class="btn btn-default waves-effect"--%>
-<%--                                                            data-dismiss="modal">Close--%>
-<%--                                                    </button>--%>
-<%--                                                    <button type="button"--%>
-<%--                                                            class="btn btn-success save-event waves-effect waves-light">--%>
-<%--                                                        Create event--%>
-<%--                                                    </button>--%>
-<%--                                                    <button type="button"--%>
-<%--                                                            class="btn btn-danger delete-event waves-effect waves-light"--%>
-<%--                                                            data-dismiss="modal">Delete--%>
-<%--                                                    </button>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
 
                                     <!-- Modal Add Category -->
                                     <div class="modal fade none-border" id="add-category"
@@ -119,29 +88,20 @@
                                                         <div class="form-group">
                                                             <label for="insertContent">活動內容：</label>
                                                             <textarea id="insertContent"
-                                                                      class="form-control" style="height:100%"
-                                                                      rows="5"></textarea>
+                                                                      class="form-control"
+                                                                      style="height:100%"
+                                                                      rows="4"></textarea>
 
                                                         </div>
-                                                        <%--                                                        <div class="form-group">--%>
-                                                        <%--                                                            <label for="insertdiscountPercentage">折扣％：--%>
-                                                        <%--                                                                <input type="number"--%>
-                                                        <%--                                                                       placeholder="％"--%>
-                                                        <%--                                                                       class="form-control form-control-lg"--%>
-                                                        <%--                                                                       id="insertdiscountPercentage">--%>
-                                                        <%--                                                            </label>--%>
-                                                        <%--                                                        </div>--%>
                                                         <div class="form-group">
                                                             <label for="insertdiscountPercentage">折扣％：
-                                                                <span class="text-danger text-lg"
-                                                                    id="disSpan">50%</span></label>
+                                                            </label>
                                                             <div>
-                                                            <button class="btn btn-primary" type="submit">Button</button>
-                                                            <input type="number" value="50"
-                                                                   class="form-control"
-                                                                   min="1" max="99"
-                                                                   id="insertdiscountPercentage">
-                                                            <button class="btn btn-primary" type="submit">Button</button></div>
+                                                                <input type="number" value="50"
+                                                                       class="form-control"
+                                                                       min="1" max="99"
+                                                                       id="insertdiscountPercentage">
+                                                            </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>開始日：
@@ -168,20 +128,23 @@
                                                         <%--                                                            </label>--%>
                                                         <%--                                                        </div>--%>
                                                         <div class="custom-file">
-
                                                             <input type="file"
                                                                    class="custom-file-input"
                                                                    id="insertUploadFile">
                                                             <label class="custom-file-label"
                                                                    for="insertUploadFile">選擇檔案...</label>
-                                                            <%--                                                            <div class="invalid-feedback">Example invalid custom file feedback</div>--%>
+
                                                         </div>
                                                     </form>
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" id="insertBtn"
+                                                    <button id="oneKeyInputBtn"
                                                             class="btn btn-danger waves-effect waves-light save-category"
+                                                            >一鍵輸入
+                                                    </button>
+                                                    <button type="button" id="insertBtn"
+                                                            class="btn btn-primary waves-effect waves-light save-category"
                                                             data-dismiss="modal">新增活動
                                                     </button>
                                                 </div>

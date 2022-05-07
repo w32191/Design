@@ -74,13 +74,13 @@ $(function () {
       url: '/Design/B/Activity/findProductByBrand',
       type: 'POST',
       data: {"brandId": brandId},
-      beforeSend: function () {
-        swal.fire({
-          imageUrl: '/Design/static/back/universal/images/load-img.gif',
-          imageHeight: 300,
-          showConfirmButton: false
-        });
-      },
+      // beforeSend: function () {
+      //   swal.fire({
+      //     imageUrl: '/Design/static/back/universal/images/load-img.gif',
+      //     imageHeight: 300,
+      //     showConfirmButton: false
+      //   });
+      // },
       success: function (res) {
         swal.close();
         // res為該品牌的所有產品
@@ -91,10 +91,10 @@ $(function () {
           let firstTd = document.createElement('td');
           firstTd.setAttribute('id', `firstTd${product.id}`);
           if (checkProductArray.includes(parseInt(product.id, 10))) {
-            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
+            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}" class="form-control"
                                        checked="checked" id="checkProduct${product.id}"><p></p>`;
           } else {
-            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}"
+            firstTd.innerHTML = `<input type="checkbox" name="checkProduct" data-productId="${product.id}" class="form-control"
                                       id="checkProduct${product.id}"><p></p>`;
             // isAllChecked = false;
           }
@@ -108,7 +108,7 @@ $(function () {
                                                      src="${product.image01}"/>`;
           }
           let thirdTd = document.createElement('td');
-          thirdTd.innerText = `${product.name}`;
+          thirdTd.innerHTML = `<a href="/Design/B/Product/editProduct?id=${product.id}">${product.name}</a><h6 class="text-danger"></h6>`;
 
           let fourthTd = document.createElement('td');
           fourthTd.innerText = `${product.categories}`;
@@ -271,15 +271,19 @@ $(function () {
         console.log(res);
         // 如果沒有衝突活動，讓他可以勾選
         $(`#checkProduct${productId}`).parent('td').find('input').removeAttr(
-            'disabled').end().find('p').html('');
+            'disabled').end().siblings('td:eq(1)').children('h6').text('');
       },
       error: function (err) {
         console.log(err);
         // 如果有衝突活動，讓他不能勾選，並顯示衝突時間
         let txt = err.responseText.split(" ");
-        $(`#checkProduct${productId}`).parent('td').find('p')
-        .html(`${txt[0]}</br>至</br>${txt[1]}</br>已經有活動`).end()
-        .find('input').attr('disabled', 'disabled').removeAttr('checked');
+        // $(`#checkProduct${productId}`).parent('td').find('p')
+        // .html(`${txt[0]}</br>至</br>${txt[1]}</br>已經有活動`).end()
+        // .find('input').attr('disabled', 'disabled').removeAttr('checked');
+        $(`#checkProduct${productId}`).attr('disabled', 'disabled').removeAttr(
+            'checked')
+        .parent('td').siblings('td:eq(1)').children('h6').text(`${txt[0]} ~ ${txt[1]}已經有活動`);
+
 
       }
     })
@@ -370,7 +374,8 @@ $(function () {
               icon: 'success',
               html: '<h5>更新成功!</h5>'
             }).then(function () {
-              location.reload();
+              // location.reload();
+              freshBrandList(brandPageNumber);
             });
 
           },
@@ -393,7 +398,8 @@ $(function () {
   selectAllBtn.click(function () {
     $(this).attr('hidden', 'hidden');
     unSelectAllBtn.removeAttr('hidden');
-    $('input[id^="checkProduct"][disabled!="disabled"]').prop('checked', 'checked');
+    $('input[id^="checkProduct"][disabled!="disabled"]').prop('checked',
+        'checked');
   });
 
   // 取消全選click時

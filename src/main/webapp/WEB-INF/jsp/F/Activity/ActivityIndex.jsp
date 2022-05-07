@@ -29,34 +29,58 @@
     <section class="slider__area p-relative">
         <div class="slider-active">
             <c:forEach items="${allActivity}" var="ac">
-                <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
-                           step="1">
-
-                    <div class="single-slider slider__height d-flex align-items-center"
-                         data-background="${img.link}">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
-                                    <div class="slider__content">
-                                        <h2 data-animation="fadeInUp"
-                                            data-delay=".2s">${ac.subject}</h2>
-                                        <p data-animation="fadeInUp"
-                                           data-delay=".4s">${ac.content}</p>
-                                        <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：</p>
-                                        <p data-animation="fadeInUp"
-                                           data-delay=".4s">${ac.discountPercentage}%</p>
-
-                                        <a href="/Design/F/Activity/productList/${ac.id}"
-                                           class="os-btn os-btn-2"
-                                           data-animation="fadeInUp" data-delay=".6s">Discover
-                                            now</a>
+                <c:choose>
+                    <c:when test="${ac.imgurImgs.size() == 0}">
+                        <div class="single-slider slider__height d-flex align-items-center"
+                             data-background="${contextRoot}/static/back/universal/images/no-image.jpeg">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
+                                        <div class="slider__content">
+                                            <h2 data-animation="fadeInUp"
+                                                data-delay=".2s">${ac.subject}</h2>
+                                            <p data-animation="fadeInUp"
+                                               data-delay=".4s">${ac.content}</p>
+                                            <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="text-lg text-danger">${ac.discountPercentage}%</span></p>
+                                            <p data-animation="fadeInUp"
+                                               data-delay=".4s">${ac.startDate} ~ ${ac.endDate}</p>
+                                            <a href="/Design/F/Activity/productList/${ac.id}"
+                                               class="os-btn os-btn-2"
+                                               data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
+                                   step="1">
+                            <div class="single-slider slider__height d-flex align-items-center"
+                                 data-background="${img.link}">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
+                                            <div class="slider__content">
+                                                <h2 data-animation="fadeInUp"
+                                                    data-delay=".2s">${ac.subject}</h2>
+                                                <p data-animation="fadeInUp"
+                                                   data-delay=".4s">${ac.content}</p>
+                                                <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
+                                                <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                                   data-delay=".4s">${ac.startDate} ~ ${ac.endDate}</p>
+                                                <a href="/Design/F/Activity/productList/${ac.id}"
+                                                   class="os-btn os-btn-2"
+                                                   data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                </c:forEach>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </div>
     </section>

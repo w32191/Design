@@ -6,6 +6,8 @@ $(function () {
     let value = $('#insertdiscountPercentage').val();
     $('#disSpan').text(`${value}%`);
   });
+
+  $('#oneKeyInputBtn').click(oneKeyInput);
 });
 
 function setCalender() {
@@ -91,3 +93,11 @@ function insertSend() {
     }
   });
 }
+
+function oneKeyInput(){
+  $('#insertSubject').val('Tom Dixon. 週年慶');
+  $('#insertContent').val('全品牌限時特價！！\n只要三折！！！\n通通三折，要買要快！！');
+  $('#insertdiscountPercentage').val(30);
+  $('#insertEndDate').val('2022-05-30');
+}
+

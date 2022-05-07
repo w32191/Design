@@ -36,48 +36,61 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8 p-r-0 title-margin-right">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <h1>Hello, <span>Welcome Here</span></h1>
-                            <button type="button" id="insertBtn"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
-                                <i class="ti-plus"></i>新增活動
-                            </button>
-<%--                            <a href="Calendar"--%>
-<%--                                    class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">--%>
-<%--                                <i class="ti-plus"></i>Calendar--%>
-<%--                            </a>--%>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-                <div class="col-lg-4 p-l-0 title-margin-left">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Table-Basic</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-            </div>
+            <%--            <div class="row">--%>
+            <%--                <div class="col-lg-8 p-r-0 title-margin-right">--%>
+            <%--                    <div class="page-header">--%>
+            <%--                        <div class="page-title">--%>
+            <%--                            <button type="button" id="insertBtn"--%>
+            <%--                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">--%>
+            <%--                                <i class="ti-plus"></i>新增活動--%>
+            <%--                            </button>--%>
+            <%--&lt;%&ndash;                            <a href="Calendar"&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                    class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                                <i class="ti-plus"></i>Calendar&ndash;%&gt;--%>
+            <%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--                <!-- /# column -->--%>
+            <%--                <div class="col-lg-4 p-l-0 title-margin-left">--%>
+            <%--                    <div class="page-header">--%>
+            <%--                        <div class="page-title">--%>
+            <%--                            <ol class="breadcrumb">--%>
+            <%--                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>--%>
+            <%--                                <li class="breadcrumb-item active">Table-Basic</li>--%>
+            <%--                            </ol>--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--                <!-- /# column -->--%>
+            <%--            </div>--%>
             <!-- /# row -->
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>折扣活動</h4>
+                                <div class="row">
+                                    <div class="col-lg-10 p-r-0 title-margin-right">
+                                        <h2>折扣活動</h2>
+                                    </div>
+                                    <div class="col-lg-2 p-l-0 title-margin-left">
+                                        <button type="button" id="insertBtn"
+                                                class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                            <i class="ti-plus"></i>新增活動
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover" id="table_data">
                                         <thead>
                                         <tr>
+                                            <th>
+                                                <button class="btn btn-primary" id="selectBtn">全選
+                                                </button>
+                                            <th>
                                             <th>#</th>
                                             <th>主題</th>
                                             <th>圖片</th>
@@ -91,6 +104,9 @@
                                         <tbody>
                                         <c:forEach items="${activities}" var="ac">
                                             <tr>
+                                                <td><input type="checkbox" id="checkbox${ac.id}"
+                                                           class="form-control checks">
+                                                <td>
                                                 <td class="showId">${ac.id}</td>
                                                 <td>${ac.subject}</td>
                                                 <c:choose>
@@ -105,7 +121,9 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <td>
-                                                            <img src="" alt="沒有圖片" width="500"/>
+                                                            <img src="${contextRoot}/static/back/universal/images/no-image.jpeg"
+                                                                 alt="沒有圖片" width="400"
+                                                                 height="200"/>
                                                         </td>
                                                     </c:otherwise>
                                                 </c:choose>

@@ -11,7 +11,7 @@ $(function () {
   // 刪除按鈕 按了觸發
   $('.btn.btn-danger.delete').click(function () {
     let deleteBtn = $(this);
-    let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
+    let id = deleteBtn.parent('td').siblings('td:eq(1)').text();
     let urlStr = "delete/" + id;
     swal.fire({   // swal.fire 都是在設定sweetalert
       title: '你確定要刪除嗎？',
@@ -137,4 +137,21 @@ $(function () {
     });
   }
 
+  // 全選跟取消全選
+  $('#selectBtn').click(function () {
+    let txt = $(this).text();
+
+    if(txt==='全選'){
+      $(this).text('取消全選');
+      $('.form-control.checks').prop('checked',true);
+    }else {
+      $(this).text('全選');
+      $('.form-control.checks').prop('checked',false);
+    }
+
+  });
+
+  function deleteSend(){
+
+  }
 });

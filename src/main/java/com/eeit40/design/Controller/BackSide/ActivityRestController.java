@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,6 +66,16 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     }
     return "DeleteFail";
   }
+
+  @PostMapping("/B/Activity/deleteBatch")
+  public String deleteBatch(@RequestBody List<Integer> idList){
+    for (Integer integer : idList) {
+      service.deleteByID(integer);
+    }
+    return "DeleteSuccess";
+  }
+
+
 
   @PutMapping("/B/Activity/insertActivity")
   public String insertActivity(
