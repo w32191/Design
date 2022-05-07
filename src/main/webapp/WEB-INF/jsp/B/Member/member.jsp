@@ -134,11 +134,6 @@
 								value="${account.email}">
 						</div>
 						<br>
-						<div class="password-content">
-							<span class="contact-title">密碼:</span> <input
-								class="contact-email" type="text" name="pwd"
-								value="${account.pwd}">
-						</div>
 						<div class="user-send-message">
 							<input type="submit" id="update" value="更新資料">
 

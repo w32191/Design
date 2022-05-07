@@ -40,13 +40,14 @@ public class AccountController {
     	
     	if(!br.hasErrors()) {
     		Account login = accountService.login(email, pwd);
-    		if(login != null) {
+    		Integer accper = login.getPermission();
+    		if(login != null && accper == 2) {
     		session.setAttribute("account", login);
     		System.out.println(login);
     		mav.setViewName("B/Account/index");
     		return mav;
     		}
-    		return mav;
+    		return null;
     	}
     	mav.setViewName("B/Account/login");
     	return mav;

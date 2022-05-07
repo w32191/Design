@@ -31,7 +31,6 @@ public class AccountService {
 	
 	
 	public Account findAccountBypwd(String pwd) {
-		Account pwd1 = accountRepository.findAccountBypwd(pwd);
 	
 		return accountRepository.findAccountBypwd(pwd);
 
