@@ -194,10 +194,13 @@
                     <li><a href="/Design/F/product/productbybrand?brand=6">Tom Dixon</a></li>
                     <li><a href="/Design/F/product/productbybrand?brand=15">Flos</a></li>
                     <li><a href="/Design/F/product/productbybrand?brand=9">BROKIS</a></li>
-                    <li><a href="/Design/F/product/productbybrand?brand=8">B-Line</a></li>
-                    <li><a href="/Design/F/product/productbybrand?brand=10">GRORG JESNSEN</a></li>
+                    <li><a href="/Design/F/product/productbybrand?brand=11">FOSCARINI</a></li>
+                    <li><a href="/Design/F/product/productbybrand?brand=24">Louis Poulsen</a></li>
                     <li><a href="/Design/F/product/productbybrand?brand=12">ClassiCon</a></li>
                     <li><a href="/Design/F/product/productbybrand?brand=3">Rogaska</a></li>
+                    <li><a href="/Design/F/product/productbybrand?brand=10">GRORG JESNSEN</a></li>
+                    <li><a href="/Design/F/product/productbybrand?brand=14">BONDI WASH</a></li>
+                    <li><a href="/Design/F/product/productbybrand?brand=16">CASAMANIA</a></li>
                 </ul>
             </div>
         </div>

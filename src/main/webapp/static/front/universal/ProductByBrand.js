@@ -41,7 +41,7 @@ $(function () {
                     </div>
                 </div>
                 <div class="add-cart p-absolute transition-3">
-                    <a href="#">+ Add to Cart</a>
+                    <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@ $(function () {
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@ $(function () {
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@ $(function () {
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +242,7 @@ $(function () {
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -294,7 +294,7 @@ $(function () {
                                             </div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +330,7 @@ $(function () {
             <div class="row">
                 <div class="col-lg-12">
                     <div>
-                        <img src="https://i.imgur.com/N4ssfO5.jpg" class="imggggg">
+                        <a href="/Design/F/product/product-details?id=123"><img src="https://i.imgur.com/N4ssfO5.jpg" class="imggggg"></a> 
                     </div>
                 </div>
             </div>
@@ -377,7 +377,7 @@ $(function () {
             <div class="row">
                 <div class="col-lg-12">
                     <div>
-                        <img src="https://i.imgur.com/IfLc4TH.jpg" class="imggggg">
+                         <a href="/Design/F/product/product-details?id=31"> <img src="https://i.imgur.com/IfLc4TH.jpg" class="imggggg"></a>
                     </div>
                 </div>
             </div>
@@ -573,5 +573,20 @@ $(function () {
         }
     }
 
+    $('body').on('click', 'a[id^=addToCartBtn]', function () {
+        console.log("喔齁")
+
+        let id = $(this).attr('id').split("addToCartBtn")[1];
+        console.log(id)
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
+        {
+            Swal.fire({
+                text: '已加入購物車',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+        }
+    })
 
 })

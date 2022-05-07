@@ -45,7 +45,7 @@ $(function () {
       txt += `</div>
                 </div>
                 <div class="add-cart p-absolute transition-3">
-                    <a href="newArrAddToCartBtn${res[i].id}">+ Add to Cart</a>
+                    <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ $(function () {
             txt += `</div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@ $(function () {
                 txt += `</div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@ $(function () {
             txt += `</div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@ $(function () {
                 txt += `</div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -337,7 +337,7 @@ $(function () {
             txt += `</div>
                                         </div>
                                         <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
+                                            <a id="addToCartBtn${res[i].id}">+ Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -356,10 +356,25 @@ $(function () {
   })
 
 
-    
+
+    $('body').on('click', 'a[id^=addToCartBtn]', function () {
+        console.log("喔齁")
+
+        let id = $(this).attr('id').split("addToCartBtn")[1];
+        console.log(id)
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
+        {
+            Swal.fire({
+                text: '已加入購物車',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+        }
+    })
+
 
 });
-
 
 
 
