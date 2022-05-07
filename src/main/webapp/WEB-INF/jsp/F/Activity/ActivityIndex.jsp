@@ -46,7 +46,8 @@
                                         <p data-animation="fadeInUp"
                                            data-delay=".4s">${ac.discountPercentage}%</p>
 
-                                        <a href="/Design/F/Activity/productList/${ac.id}" class="os-btn os-btn-2"
+                                        <a href="/Design/F/Activity/productList/${ac.id}"
+                                           class="os-btn os-btn-2"
                                            data-animation="fadeInUp" data-delay=".6s">Discover
                                             now</a>
                                     </div>
@@ -116,84 +117,104 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <div class="product__slider owl-carousel">
-                        <c:forEach begin="0" end="${productList.size()-1}" step="2" var="i">
-                            <div class="product__item">
-                                <div class="product__wrapper mb-60">
-                                    <div class="product__thumb">
-                                        <a href="/Design/F/product/product-details?id=${productList.get(i).id}" class="w-img">
-                                            <img src="${productList.get(i).image01}"
-                                                 alt="product-img">
-                                            <img class="product__thumb-2"
-                                                 src="${productList.get(i).image02}"
-                                                 alt="product-img">
-                                        </a>
-                                        <div class="product__sale">
-                                            <span class="new">活動</span>
-                                            <span class="percent">-${productList.get(i).discountPercentage}%</span>
-                                        </div>
-                                    </div>
-                                    <div class="product__content p-relative">
-                                        <div class="product__content-inner">
-                                            <h4><a href="/Design/F/product/product-details?id=${productList.get(i).id}"></a>
-                                                ${productList.get(i).name}
-                                            </h4>
-                                            <div class="product__price transition-3">
-                                                <c:set var="dis"
-                                                       value="${(100-productList.get(i).discountPercentage)/100}"/>
-                                                <span>$${(productList.get(i).price*dis).intValue()}</span>
-                                                <span class="old-price">$${productList.get(i).price}</span>
-                                            </div>
-                                        </div>
-                                        <div class="add-cart p-absolute transition-3">
-                                            <a id="newArrAddToCartBtn${productList.get(i).id}">+ Add to Cart</a>
-                                        </div>
-                                    </div>
+                    <c:choose>
+                        <c:when test="${productList.size()==0}">
+                            <div class="section__title-wrapper text-center mb-55">
+                                <div class="section__title mb-10">
+                                    <h2>現在暫無折扣中商品</h2>
                                 </div>
-                                <c:if test="${(i+1 )< productList.size()-1}">
-                                    <div class="product__wrapper mb-60">
-                                        <div class="product__thumb">
-                                            <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}" class="w-img">
-                                                <img src="${productList.get(i+1).image01}"
-                                                     alt="product-img">
-                                                <img class="product__thumb-2"
-                                                     src="${productList.get(i+1).image02}"
-                                                     alt="product-img">
-                                            </a><div class="product__sale">
-                                            <span class="new">new</span>
-                                            <span class="percent">-${productList.get(i+1).discountPercentage}%</span>
-                                        </div>
-                                        </div>
-                                        <div class="product__content p-relative">
-                                            <div class="product__content-inner">
-                                                <h4><a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"></a>${productList.get(i+1).name}
-                                                </h4>
-                                                <div class="product__price transition-3">
-                                                    <c:set var="dis2"
-                                                           value="${(100-productList.get(i+1).discountPercentage)/100}"/>
-                                                    <span>$${(productList.get(i+1).price*dis2).intValue()}</span>
-                                                    <span class="old-price">$${productList.get(i+1).price}</span>
+                                <div class="section__sub-title">
+                                    <p>沒有活動中商品！！！</p>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="product__slider owl-carousel">
+                                <c:forEach begin="0" end="${productList.size()-1}" step="2" var="i">
+                                    <div class="product__item">
+                                        <div class="product__wrapper mb-60">
+                                            <div class="product__thumb">
+                                                <a href="/Design/F/product/product-details?id=${productList.get(i).id}"
+                                                   class="w-img">
+                                                    <img src="${productList.get(i).image01}"
+                                                         alt="product-img">
+                                                    <img class="product__thumb-2"
+                                                         src="${productList.get(i).image02}"
+                                                         alt="product-img">
+                                                </a>
+                                                <div class="product__sale">
+                                                    <span class="new">活動</span>
+                                                    <span class="percent">-${productList.get(i).discountPercentage}%</span>
                                                 </div>
                                             </div>
-                                            <div class="add-cart p-absolute transition-3">
-                                                <a id="newArrAddToCartBtn${productList.get(i+1).id}">+ Add to Cart</a>
+                                            <div class="product__content p-relative">
+                                                <div class="product__content-inner">
+                                                    <h4>
+                                                        <a href="/Design/F/product/product-details?id=${productList.get(i).id}"></a>
+                                                            ${productList.get(i).name}
+                                                    </h4>
+                                                    <div class="product__price transition-3">
+                                                        <c:set var="dis"
+                                                               value="${(100-productList.get(i).discountPercentage)/100}"/>
+                                                        <span>$${(productList.get(i).price*dis).intValue()}</span>
+                                                        <span class="old-price">$${productList.get(i).price}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-cart p-absolute transition-3">
+                                                    <a id="newArrAddToCartBtn${productList.get(i).id}">+
+                                                        Add to Cart</a>
+                                                </div>
                                             </div>
                                         </div>
+                                        <c:if test="${(i+1 )< productList.size()-1}">
+                                            <div class="product__wrapper mb-60">
+                                                <div class="product__thumb">
+                                                    <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"
+                                                       class="w-img">
+                                                        <img src="${productList.get(i+1).image01}"
+                                                             alt="product-img">
+                                                        <img class="product__thumb-2"
+                                                             src="${productList.get(i+1).image02}"
+                                                             alt="product-img">
+                                                    </a>
+                                                    <div class="product__sale">
+                                                        <span class="new">new</span>
+                                                        <span class="percent">-${productList.get(i+1).discountPercentage}%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content p-relative">
+                                                    <div class="product__content-inner">
+                                                        <h4>
+                                                            <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"></a>${productList.get(i+1).name}
+                                                        </h4>
+                                                        <div class="product__price transition-3">
+                                                            <c:set var="dis2"
+                                                                   value="${(100-productList.get(i+1).discountPercentage)/100}"/>
+                                                            <span>$${(productList.get(i+1).price*dis2).intValue()}</span>
+                                                            <span class="old-price">$${productList.get(i+1).price}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-cart p-absolute transition-3">
+                                                        <a id="newArrAddToCartBtn${productList.get(i+1).id}">+
+                                                            Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
                                     </div>
-                                </c:if>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                    </div>
-
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
-<%--            <div class="row">--%>
-<%--                <div class="col-xl-12">--%>
-<%--                    <div class="product__load-btn text-center mt-25">--%>
-<%--                        <a href="#" class="os-btn os-btn-3">Load More</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--            <div class="row">--%>
+            <%--                <div class="col-xl-12">--%>
+            <%--                    <div class="product__load-btn text-center mt-25">--%>
+            <%--                        <a href="#" class="os-btn os-btn-3">Load More</a>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
         </div>
     </section>
     <!-- product area end -->

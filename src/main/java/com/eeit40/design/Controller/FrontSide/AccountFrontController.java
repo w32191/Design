@@ -46,7 +46,7 @@ public class AccountFrontController {
       if (login != null) {
         session.setAttribute("Faccount", login);
         System.out.println(login);
-        mav.setViewName("/F/Activity/ActivityIndex");
+        mav.setViewName("redirect:/F/Activity/index");
         return mav;
       }
       br.addError(new FieldError("Flogin","email","無此帳號"));
