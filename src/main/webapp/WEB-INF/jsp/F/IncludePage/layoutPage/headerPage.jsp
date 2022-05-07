@@ -22,8 +22,8 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                     <div class="logo">
                         <a href="/Design/F/Activity/index"><img style="width: 50%"
-                                                  src="${contextRoot}/static/front/assets/img/logo/黑字.svg"
-                                                  alt="logo"></a>
+                                                                src="${contextRoot}/static/front/assets/img/logo/黑字.svg"
+                                                                alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8">
@@ -257,8 +257,10 @@
                             </ul>
                         </div>
                         <div class="header__search-input p-relative">
-                            <input type="text" placeholder="Search for products... ">
-                            <button type="submit"><i class="far fa-search"></i></button>
+                            <div class="ui-widget">
+                                <input type="text" placeholder="Search for products... " id="tags">
+                                <button type="submit"><i class="far fa-search"></i></button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -356,3 +358,12 @@
 </section>
 <div class="body-overlay transition-3"></div>
 <!-- extra info area end -->
+
+<script>
+
+
+
+
+
+
+</script>

@@ -41,8 +41,9 @@ public class ProductRestController {
     return resPro;
   }
 
-  @GetMapping("/B/product/findByNameLike/{name}")
-  public List<Product> findByNameLike(@PathVariable String name) {
+  @PostMapping("/B/product/findByNameLike")
+  public List<Product> findByNameLike(@RequestParam("name") String name) {
+    System.out.println(name);
     return dao.findByNameLike("%" + name + "%");
   }
 
