@@ -15,13 +15,12 @@ public class LoginConfig implements WebMvcConfigurer {
     //註冊TestInterceptor攔截器
     InterceptorRegistration registrationFront = registry.addInterceptor(new FrontUserLoginInterceptor());
     registrationFront.addPathPatterns("/F/shoppingcart"); // 攔截 路徑
-    registrationFront.excludePathPatterns(    // 新增不攔截路徑
-        "/F/Flogin",                    // 登入路徑
-        "/F/*.html",                // html靜態資源
-        "/static/**"              // 靜態資源
-
-
-    );
+    registrationFront.addPathPatterns("/F/orderrecord");
+//    registrationFront.excludePathPatterns(    // 新增不攔截路徑
+//        "/F/Flogin",                    // 登入路徑
+//        "/F/*.html",                // html靜態資源
+//        "/static/**"              // 靜態資源
+//    );
 
     InterceptorRegistration registrationBack = registry.addInterceptor(new BackUserLoginInterceptor());
     registrationBack.addPathPatterns("/B/*"); // 攔截 路徑

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 
@@ -29,6 +30,8 @@
     <section class="slider__area p-relative">
         <div class="slider-active">
             <c:forEach items="${allActivity}" var="ac">
+                <fmt:parseDate value="${ac.startDate}" pattern="yyyy-MM-dd" var="parsedStartDate" type="date"/>
+                <fmt:parseDate value="${ac.endDate}" pattern="yyyy-MM-dd" var="parsedEndDate" type="date"/>
                 <c:choose>
                     <c:when test="${ac.imgurImgs.size() == 0}">
                         <div class="single-slider slider__height d-flex align-items-center"
@@ -41,9 +44,12 @@
                                                 data-delay=".2s">${ac.subject}</h2>
                                             <p data-animation="fadeInUp"
                                                data-delay=".4s">${ac.content}</p>
-                                            <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="text-lg text-danger">${ac.discountPercentage}%</span></p>
-                                            <p data-animation="fadeInUp"
-                                               data-delay=".4s">${ac.startDate} ~ ${ac.endDate}</p>
+                                            <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
+                                            <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                               data-delay=".4s">
+                                                <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
+                                                <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
+                                                    </p>
                                             <a href="/Design/F/Activity/productList/${ac.id}"
                                                class="os-btn os-btn-2"
                                                data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
@@ -68,7 +74,10 @@
                                                    data-delay=".4s">${ac.content}</p>
                                                 <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
                                                 <p data-animation="fadeInUp" class="text-danger font-weight-bold"
-                                                   data-delay=".4s">${ac.startDate} ~ ${ac.endDate}</p>
+                                                   data-delay=".4s">
+                                                    <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
+                                                    <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
+                                                </p>
                                                 <a href="/Design/F/Activity/productList/${ac.id}"
                                                    class="os-btn os-btn-2"
                                                    data-animation="fadeInUp" data-delay=".6s">手刀前往</a>

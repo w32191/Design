@@ -8,6 +8,7 @@ import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Exception.NullInputException;
 import com.eeit40.design.Service.ActivityService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,6 +20,9 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -55,7 +59,7 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
   }
 
   @GetMapping("/B/Activity/findAllEventApi")
-  public List<EventDto> findEvents(){
+  public List<EventDto> findEvents() {
     return service.findAllEvent();
   }
 
@@ -67,14 +71,14 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return "DeleteFail";
   }
 
-  @PostMapping("/B/Activity/deleteBatch")
-  public String deleteBatch(@RequestBody List<Integer> idList){
+  @DeleteMapping("/B/Activity/deleteBatch")
+  public String deleteBatch(@RequestParam("dataArray") List<Integer> idList) {
+    log.info(idList.toString());
     for (Integer integer : idList) {
       service.deleteByID(integer);
     }
     return "DeleteSuccess";
   }
-
 
 
   @PutMapping("/B/Activity/insertActivity")
@@ -171,6 +175,33 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     }
 
     return result;
+  }
+
+
+  // 用時間名字搜尋 並分頁
+  @PostMapping("/B/Activity/searchByTime")
+  public Page<Activity> searchByTime(
+      @RequestParam(value = "start", defaultValue = "2000-01-01") String start,
+      @RequestParam(value = "end", defaultValue = "2100-12-30") String end,
+      @RequestParam(value = "subject", required = false) String subject,
+      @RequestParam(value = "page", defaultValue = "1") Integer pageNumber) {
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate startDate = LocalDate.parse(start, formatter);
+    LocalDate endDate = LocalDate.parse(end, formatter);
+    if (subject == null) {
+      return service.findActivitiesByTimePaged(startDate, endDate, pageNumber);
+    } else {
+      return service.findActivitiesByTimePaged(startDate, endDate, subject, pageNumber);
+    }
+
+  }
+
+
+  // 取得名字
+  @GetMapping("/B/Activity/searchBySubject/{subject}")
+  public List<String> getSubject(@PathVariable String subject) {
+    return service.findActivitiesSubBySubject(subject);
   }
 
 
