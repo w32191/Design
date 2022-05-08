@@ -111,20 +111,20 @@ $(function () {
                     <div class="col-xl-6 col-lg-6">
                         <div class="product__modal-content product__modal-content-2">
                             <h4><a href="product-details?id=${res.id}">${res.name}</a></h4>
-                            <div class="rating rating-shop mb-15">
-                                <ul>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fal fa-star"></i></span></li>
-                                </ul>
-                                <span class="rating-no ml-10 rating-left">
-                                            3 rating(s)
-                                        </span>
-                                <span class="review rating-left"><a
-                                        href="#">Add your Review</a></span>
-                            </div>
+<!--                            <div class="rating rating-shop mb-15">-->
+<!--                                <ul>-->
+<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
+<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
+<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
+<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
+<!--                                    <li><span><i class="fal fa-star"></i></span></li>-->
+<!--                                </ul>-->
+<!--                                <span class="rating-no ml-10 rating-left">-->
+<!--                                            3 rating(s)-->
+<!--                                        </span>-->
+<!--                                <span class="review rating-left"><a-->
+<!--                                        href="#">Add your Review</a></span>-->
+<!--                            </div>-->
                             <div class="product__price-2 mb-25">`;
 
     if (res.discountPercentage != null) {
@@ -155,7 +155,8 @@ $(function () {
                                     </div>
                                     
                                     <div class="product__modal-required mb-5">
-                                        <span>請選擇商品數量</span>
+                                        <span>庫存：${res.stock}
+                                        <br>請選擇商品數量</span>
                                     </div>
                                     <div class="pro-quan-area d-sm-flex align-items-center">
                                         <div class="product-quantity-title">
@@ -170,6 +171,14 @@ $(function () {
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="product__modal-des mb-30">
+                                <p>商品出貨與期貨等候時間說明：</p>
+                                <ul>
+                                    <li>。若庫存顯示有現貨，約 1 - 2 工作天，即可出貨</li>
+                                    <li>。若庫存顯示為預購，需向國外原廠客訂預購，期貨時間約 4 - 6 個月左右到台灣</li>
+                                    <li>。庫存查詢或其他訂購問題，歡迎利用客服專線</li>
+                                </ul>
                             </div>
                           
 <!--                            <div class="product__share">-->
@@ -219,7 +228,7 @@ $(function () {
                                         <div class="product__details-des-list mb-20">
                                             <br>
                                             <br>
-                                            <img src="${res.fkBrand.img}" alt="" srcset="" height="100%">
+                                            <img src="${res.fkBrand.img}" alt=""  height="100%" style="float:left">
                                             <a>${res.fkBrand.description}</a>
                                         
                                             
