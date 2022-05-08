@@ -7,15 +7,14 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+//@Configuration
 public class LoginConfig implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     //註冊TestInterceptor攔截器
     InterceptorRegistration registrationFront = registry.addInterceptor(new FrontUserLoginInterceptor());
-    registrationFront.addPathPatterns("/F/shoppingcart"); // 攔截 路徑
-    registrationFront.addPathPatterns("/F/orderrecord");
+    registrationFront.addPathPatterns("/F/shoppingcart","/F/orderrecord"); // 攔截 路徑
 //    registrationFront.excludePathPatterns(    // 新增不攔截路徑
 //        "/F/Flogin",                    // 登入路徑
 //        "/F/*.html",                // html靜態資源
@@ -23,7 +22,7 @@ public class LoginConfig implements WebMvcConfigurer {
 //    );
 
     InterceptorRegistration registrationBack = registry.addInterceptor(new BackUserLoginInterceptor());
-    registrationBack.addPathPatterns("/B/*"); // 攔截 路徑
+    registrationBack.addPathPatterns("/B/**"); // 攔截 路徑
     registrationBack.excludePathPatterns(    // 新增不攔截路徑
         "/B/login",                    // 登入路徑
         "/B/register",                // 註冊路徑

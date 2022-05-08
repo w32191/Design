@@ -58,6 +58,7 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return map;
   }
 
+  // fullcalendar 用events
   @GetMapping("/B/Activity/findAllEventApi")
   public List<EventDto> findEvents() {
     return service.findAllEvent();
@@ -180,7 +181,7 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
 
   // 用時間名字搜尋 並分頁
   @PostMapping("/B/Activity/searchByTime")
-  public Page<Activity> searchByTime(
+  public Page<Activity> searchByTimeOrSubject(
       @RequestParam(value = "start", defaultValue = "2000-01-01") String start,
       @RequestParam(value = "end", defaultValue = "2100-12-30") String end,
       @RequestParam(value = "subject", required = false) String subject,

@@ -11,13 +11,14 @@ public class FrontUserLoginInterceptor implements HandlerInterceptor {
 
   // 在請求處理之前進行呼叫(Controller方法呼叫之前)
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
-//    System.out.println("執行了攔截器的preHandle方法");
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+      Object handler) {
+    //    System.out.println("執行了攔截器的preHandle方法");
     try {
       HttpSession session = request.getSession();
       //統一攔截（查詢當前session是否存在user）(這裡user會在每次登入成功後，寫入session)
       Account account = (Account) session.getAttribute("Faccount");
+      // SamWang to-do: 待與家原確認 attribute name
       if (account != null) {
         return true;
       }
