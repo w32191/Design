@@ -65,7 +65,7 @@ function insertSend() {
     contentType: false,
     beforeSend: function () {
       swal.fire({
-        imageUrl: '/Design/static/back/universal/images/load-img.gif',
+        imageUrl: '/Design/static/back/universal/images/load-img-color.gif',
         imageHeight: 300,
         showConfirmButton: false
       });
