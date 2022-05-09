@@ -87,12 +87,12 @@ public class ActivityServiceImpl implements ActivityService {
     List<Activity> result = activityRepository.findAll();
     List<EventDto> eventDtoList = new ArrayList<>();
     //設定顯示顏色
-    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF"};
+    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF", "#FF5151"};
     int a = 0;
     for (Activity ac : result) {
       EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
 
-      if (a == 4) {
+      if (a == 5) {
         dto.setBackgroundColor(colors[a]);
         a = 0;
       } else {

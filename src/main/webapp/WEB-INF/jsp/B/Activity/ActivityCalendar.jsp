@@ -39,119 +39,120 @@
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>活動</h4>
-
-<%--                                                                <button data-toggle="modal" data-target="#add-category"--%>
-<%--                                                                        class="btn btn-lg btn-primary waves-effect waves-light">--%>
-<%--                                                                    <i class="fa fa-plus"></i> 新增活動--%>
-<%--                                                                </button>--%>
-                                <%--                                <a href="findAll" class="btn btn-lg btn-success">Table</a>--%>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card-box">
-                                            <div id="calendar"></div>
-                                        </div>
+                        <div class="card bg-dark mb-3">
+                            <div class="col-lg-12">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-title">
+                                        <h4>活動</h4>
                                     </div>
-                                    <!-- end col -->
-
-                                    <!-- Modal Add Category -->
-                                    <div class="modal fade none-border" id="add-category"
-                                         data-backdrop="static">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-
-                                                    <h4 class="modal-title">
-                                                        <strong>新增活動</strong>
-                                                    </h4>
-                                                    <button type="button" class="btn btn-warning"
-                                                            data-dismiss="modal" aria-hidden="true">
-                                                        X
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <form enctype="multipart/form-data"
-                                                          id="insertActivityForm" class="form">
-                                                        <div class="form-group">
-                                                            <label for="insertSubject">活動主題：</label>
-                                                            <input type="text"
-                                                                   class="form-control form-control-lg"
-                                                                   name="subject"
-                                                                   id="insertSubject"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="insertContent">活動內容：</label>
-                                                            <textarea id="insertContent"
-                                                                      class="form-control"
-                                                                      style="height:100%"
-                                                                      rows="4"></textarea>
-
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="insertdiscountPercentage">折扣％：
-                                                            </label>
-                                                            <div>
-                                                                <input type="number" value="50"
-                                                                       class="form-control"
-                                                                       min="1" max="99"
-                                                                       id="insertdiscountPercentage">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>開始日：
-                                                                <input type="date"
-                                                                       name="startDate"
-                                                                       id="insertStartDate"
-                                                                       class="form-control form-control-lg">
-                                                            </label>
-                                                            <label>結束日：
-                                                                <input type="date"
-                                                                       name="startDate"
-                                                                       id="insertEndDate"
-                                                                       class="form-control form-control-lg">
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-group">
-
-                                                        </div>
-                                                        <%--                                                        <div class="form-group">--%>
-                                                        <%--                                                            <label>上傳圖片：--%>
-                                                        <%--                                                                <input type="file" name="files"--%>
-                                                        <%--                                                                       id="insertUploadFile"--%>
-                                                        <%--                                                                       class="form-control">--%>
-                                                        <%--                                                            </label>--%>
-                                                        <%--                                                        </div>--%>
-                                                        <div class="custom-file">
-                                                            <input type="file"
-                                                                   class="custom-file-input"
-                                                                   id="insertUploadFile">
-                                                            <label class="custom-file-label"
-                                                                   for="insertUploadFile">選擇檔案...</label>
-
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button id="oneKeyInputBtn"
-                                                            class="btn btn-danger waves-effect waves-light save-category"
-                                                            >一鍵輸入
-                                                    </button>
-                                                    <button type="button" id="insertBtn"
-                                                            class="btn btn-primary waves-effect waves-light save-category"
-                                                            data-dismiss="modal">新增活動
-                                                    </button>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card-box">
+                                                    <div id="calendar"></div>
                                                 </div>
                                             </div>
+                                            <!-- end col -->
+
+                                            <!-- Modal Add Category -->
+                                            <div class="modal fade none-border" id="add-category"
+                                                 data-backdrop="static">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+
+                                                            <h4 class="modal-title">
+                                                                <strong>新增活動</strong>
+                                                            </h4>
+                                                            <button type="button"
+                                                                    class="btn btn-warning"
+                                                                    data-dismiss="modal"
+                                                                    aria-hidden="true">
+                                                                X
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form enctype="multipart/form-data"
+                                                                  id="insertActivityForm"
+                                                                  class="form">
+                                                                <div class="form-group">
+                                                                    <label for="insertSubject">活動主題：</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-lg"
+                                                                           name="subject"
+                                                                           id="insertSubject"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="insertContent">活動內容：</label>
+                                                                    <textarea id="insertContent"
+                                                                              class="form-control"
+                                                                              style="height:100%"
+                                                                              rows="4"></textarea>
+
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="insertdiscountPercentage">折扣％：
+                                                                    </label>
+                                                                    <div>
+                                                                        <input type="number"
+                                                                               value="50"
+                                                                               class="form-control"
+                                                                               min="1" max="99"
+                                                                               id="insertdiscountPercentage">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>開始日：
+                                                                        <input type="date"
+                                                                               name="startDate"
+                                                                               id="insertStartDate"
+                                                                               class="form-control form-control-lg">
+                                                                    </label>
+                                                                    <label>結束日：
+                                                                        <input type="date"
+                                                                               name="startDate"
+                                                                               id="insertEndDate"
+                                                                               class="form-control form-control-lg">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+
+                                                                </div>
+                                                                <%--                                                        <div class="form-group">--%>
+                                                                <%--                                                            <label>上傳圖片：--%>
+                                                                <%--                                                                <input type="file" name="files"--%>
+                                                                <%--                                                                       id="insertUploadFile"--%>
+                                                                <%--                                                                       class="form-control">--%>
+                                                                <%--                                                            </label>--%>
+                                                                <%--                                                        </div>--%>
+                                                                <div class="custom-file">
+                                                                    <input type="file"
+                                                                           class="custom-file-input"
+                                                                           id="insertUploadFile">
+                                                                    <label class="custom-file-label"
+                                                                           for="insertUploadFile">選擇檔案...</label>
+
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="oneKeyInputBtn"
+                                                                    class="btn btn-danger waves-effect waves-light save-category"
+                                                            >一鍵輸入
+                                                            </button>
+                                                            <button type="button" id="insertBtn"
+                                                                    class="btn btn-primary waves-effect waves-light save-category"
+                                                                    data-dismiss="modal">新增活動
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- END MODAL -->
                                         </div>
                                     </div>
-                                    <!-- END MODAL -->
                                 </div>
                             </div>
                         </div>
