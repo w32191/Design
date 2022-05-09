@@ -46,29 +46,62 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table student-data-table ">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>圖片</th>
-                                            <th>名稱</th>
-                                            <th>庫存</th>
-                                            <th>缺量</th>
-                                            <th>聯絡</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id=pdlist>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table student-data-table ">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th></th>
+                                                    <th>廠商名稱</th>
+                                                    <th>缺貨品項</th>
+                                                    <th>聯絡</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id=bdlist>
 
 
-                                        </tbody>
-                                    </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /# row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table student-data-table ">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>圖片</th>
+                                                    <th>產品名稱</th>
+                                                    <th>庫存</th>
+                                                    <th>缺少數量</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="plist">
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </section>
 
