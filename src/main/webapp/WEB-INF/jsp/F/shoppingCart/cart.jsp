@@ -74,7 +74,7 @@
                                                 <%--   <img src="${cart.fkProduct.image01}">--%>
                                                 <%--   </a>--%>
                                             <div class="product__modal-img product__thumb w-img">
-                                                <a href="product-details.html"
+                                                <a href="product/product-details?id=${cart.fkProduct.id}"
                                                    data-product-id="${cart.fkProduct.id}">
                                                     <img src="${cart.fkProduct.image01}"
                                                          style="border: 1px #0c0c0c solid"
@@ -86,11 +86,11 @@
                                                         <span class="percent">-${discountMap.get(cart.fkProduct.id)}%</span>
                                                     </div>
                                                 </c:if>
-                                            </div>
+                                            </div>s
                                         </td>
 
                                         <td class="product-name" name="pname">
-                                            <a href="product-details.html">${cart.fkProduct.name}</a>
+                                            <a href="product/product-details?id=${cart.fkProduct.id}">${cart.fkProduct.name}</a>
                                         </td>
 
 

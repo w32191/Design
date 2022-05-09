@@ -446,7 +446,7 @@
         let street = $("#street").val();
 
         let recipient = $("#recipient").val();
-        let phone = $(".phone").val();
+        let phone = $("#phone").val();
         let address = country+district+street
         let note = $("#checkout-mess").val();
         console.log(note);

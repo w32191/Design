@@ -1,11 +1,15 @@
 package com.eeit40.design.Controller.FrontSide;
 
 import com.eeit40.design.Service.ActivityService;
+import com.eeit40.design.Service.MailService;
+import com.eeit40.design.Service.MemberService;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,13 +43,19 @@ public class OrderInformationController {
 
   @Autowired
   private ActivityService activityService;
+  
+  @Autowired
+  private MailService mailService;
+  
+  @Autowired
+  private MemberService member;
 
   public int accountId() {
 
     Account account = new Account();
-    account.setId(2);
-    account.setEmail("admin@gmail.com");
-    account.setPwd("admin");
+    account.setId(45);
+//    account.setEmail("admin@gmail.com");
+//    account.setPwd("admin");
 
     int fkAccount = account.getId();
     return fkAccount;
@@ -108,23 +118,24 @@ public class OrderInformationController {
     return mav;
   }
 
-  //checkout data存到db
+  //checkout data存到資料庫
   @ResponseBody
   @PostMapping("F/orderimforlist")
-  public String addOrderImfor(ModelAndView mav, HttpServletRequest request) {
+  public String addOrderImfor(ModelAndView mav, HttpServletRequest request) throws MessagingException, Exception {
 
     // 假的account
     Account account = new Account();
-    account.setId(4);
+    account.setId(45);
+//    int fkAccount = account.getId();
 
-		//新增OrderInformation
-		OrderInformation orderInfo = new OrderInformation();
-		orderInfo.setFkAccount(account);
-		orderInfo.setName(request.getParameter("recipient"));
-		orderInfo.setPhone(request.getParameter("phone"));
-		orderInfo.setAdd(request.getParameter("address"));
-		orderInfo.setNotes(request.getParameter("notes"));
-		orderInfo.setShipState("未付款");
+	//新增OrderInformation
+	OrderInformation orderInfo = new OrderInformation();
+	orderInfo.setFkAccount(account);
+	orderInfo.setName(request.getParameter("recipient"));
+	orderInfo.setPhone(request.getParameter("phone"));
+	orderInfo.setAdd(request.getParameter("address"));
+	orderInfo.setNotes(request.getParameter("notes"));
+	orderInfo.setShipState("未付款");
 //		System.out.println("note"+request.getParameter("notes"));
 //		String coupondiscount = request.getParameter("discount");
 //		int discount = Integer.valueOf(coupondiscount);
@@ -161,6 +172,10 @@ public class OrderInformationController {
 
     //訂單成立後刪除購物車
     shoppingCartService.deleteByAccountId(accountId());
+    
+    //訂單成立後寄送mail通知客戶
+//    int id = member.findMemberByfkAccount(accountId()).getId();
+    mailService.sendMailAfterOrder(accountId());
 
     return "success";
 
