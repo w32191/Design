@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- sidebar start -->
@@ -15,7 +15,21 @@
                 <li class="label">功能選單</li>
 
                 <li>
-                    <a href="/Design/B/Product/"><i class="ti-layout-tab"></i> 商品管理</a>
+                    <a href="/Design/B/Product/" class="sidebar-sub-toggle">
+                        <i class="ti-layout-tab"></i> 商品管理
+                        <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li>
+                            <a href="/Design/B/Product/">
+                                <i class="ti-view-list-alt"></i>商品管理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Design/B/Product/stockManage">
+                                <i class="ti-view-list-alt"></i>庫存管理
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="/Design/B/allorder"><i class="ti-layout-tab"></i> 訂單管理</a>
@@ -78,23 +92,23 @@
 </div>
 <!-- sidebar end -->
 <script>
-		document.getElementById('dologout').addEventListener('click',
-				function() {
-					Swal.fire({
-				  	title: '確定要登出嗎?',
-				 	 text: "",
-				  	icon: 'warning',
-				  	showCancelButton: true,
-				 	confirmButtonColor: '#3085d6',
-				 	cancelButtonColor: '#d33',
-				  	confirmButtonText: '是的'
-						}).then((result) => {
-				  	if (result.isConfirmed) {
-				   	 Swal.fire(
-				      '登出成功',
-				      'success'
-				    )
-				  }
-				})
-				})
-	</script>
+    document.getElementById('dologout').addEventListener('click',
+        function () {
+            Swal.fire({
+                title: '確定要登出嗎?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '登出成功',
+                        'success'
+                    )
+                }
+            })
+        })
+</script>

@@ -111,20 +111,20 @@ $(function () {
                     <div class="col-xl-6 col-lg-6">
                         <div class="product__modal-content product__modal-content-2">
                             <h4><a href="product-details?id=${res.id}">${res.name}</a></h4>
-<!--                            <div class="rating rating-shop mb-15">-->
-<!--                                <ul>-->
-<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
-<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
-<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
-<!--                                    <li><span><i class="fas fa-star"></i></span></li>-->
-<!--                                    <li><span><i class="fal fa-star"></i></span></li>-->
-<!--                                </ul>-->
-<!--                                <span class="rating-no ml-10 rating-left">-->
-<!--                                            3 rating(s)-->
-<!--                                        </span>-->
-<!--                                <span class="review rating-left"><a-->
-<!--                                        href="#">Add your Review</a></span>-->
-<!--                            </div>-->
+                            <div class="rating rating-shop mb-15">
+                                <ul>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fal fa-star"></i></span></li>
+                                </ul>
+                                <span class="rating-no ml-10 rating-left">
+                                            3 rating(s)
+                                        </span>
+                                <span class="review rating-left"><a
+                                        href="#">Add your Review</a></span>
+                            </div>
                             <div class="product__price-2 mb-25">`;
 
     if (res.discountPercentage != null) {
@@ -338,7 +338,7 @@ $(function () {
                                         },
                                         error: function (err) {
                                             console.log(err)
-                                            alert('發生錯誤1')
+                                            // alert('發生錯誤1')
                                         }
                                     });
 

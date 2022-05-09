@@ -82,7 +82,7 @@ $(function () {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10" >
                             <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${res[i].id}" class="w-img">
                                             <img src="${res[i].image01}"
                                             height=""
                                                  alt="product-img">
@@ -99,7 +99,7 @@ $(function () {
 
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${res[i].name}</a></h4>
+                                            <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
@@ -142,7 +142,7 @@ $(function () {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10" >
                             <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${res[i].id}" class="w-img">
                                             <img src="${res[i].image01}"
                                             height=""
                                                  alt="product-img">
@@ -159,7 +159,7 @@ $(function () {
 
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${res[i].name}</a></h4>
+                                            <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
@@ -200,7 +200,7 @@ $(function () {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10" >
                             <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${res[i].id}" class="w-img">
                                             <img src="${res[i].image01}"
                                             height=""
                                                  alt="product-img">
@@ -217,7 +217,7 @@ $(function () {
 
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${res[i].name}</a></h4>
+                                            <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
@@ -258,7 +258,7 @@ $(function () {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10" >
                             <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${res[i].id}" class="w-img">
                                             <img src="${res[i].image01}"
                                             height=""
                                                  alt="product-img">
@@ -276,7 +276,7 @@ $(function () {
 
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${res[i].name}</a></h4>
+                                            <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
@@ -319,7 +319,7 @@ $(function () {
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10" >
                             <div class="product__wrapper mb-60">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
+                                        <a href="/Design/F/product/product-details?id=${res[i].id}" class="w-img">
                                             <img src="${res[i].image01}"
                                             height=""
                                                  alt="product-img">
@@ -337,7 +337,7 @@ $(function () {
 
                                     <div class="product__content p-relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${res[i].name}</a></h4>
+                                            <h4><a href="/Design/F/product/product-details?id=${res[i].id}">${res[i].name}</a></h4>
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {

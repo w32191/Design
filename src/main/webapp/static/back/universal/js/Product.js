@@ -2,7 +2,7 @@ $(function () {
     $.getJSON("/Design/B/brand/findAll", function (res) {
         let txt = '';
         console.log(res.length);
-        for (let i = 0; i < res.length; i++) {
+        for (let i = 0; i <= res.length; i++) {
             console.log(res[i].name);
             txt += `
                                 <div class="media" id="brandBtn${res[i].id}">

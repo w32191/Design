@@ -1,6 +1,7 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.BrandRepository;
+import com.eeit40.design.Dao.OrderListRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Dto.ProductDto;
@@ -11,6 +12,7 @@ import java.net.http.HttpRequest;
 import com.eeit40.design.Service.ActivityService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.eeit40.design.Service.Impl.ProductServiceImpl;
 import com.eeit40.design.Service.ProductService;
@@ -33,6 +35,19 @@ public class ProductRestController {
 
   @Autowired
   private BrandRepository brandRepository;
+
+  @Autowired
+  private OrderListRepository orderListRepository;
+
+
+
+  //找出備貨中的訂單商品
+  @GetMapping("/B/product/doSomething")
+  public List<Map<Integer, Map<Integer, Integer>>> doSomething(){
+    return orderListRepository.doSomething();
+  }
+
+
 
   @PostMapping("/B/product/updateById/{id}")
   public Product updateById(@PathVariable Integer id, @RequestBody Product pro) {

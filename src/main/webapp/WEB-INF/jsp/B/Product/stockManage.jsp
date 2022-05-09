@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>商品</title>
+    <title>庫存管理</title>
 
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
@@ -33,39 +33,15 @@
     <div class="main">
         <div class="container-fluid">
             <section id="main-content">
-
-                <!-- /# row -->
                 <div class="row">
-
-
-                    <%--                    品牌--%>
-
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-title">
-                                <h4>品牌 Brand </h4>
-
-                            </div>
-                            <div class="recent-comment m-t-15" id="bnd">
-
-
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
-
-
-                    <!-- /# column -->
-                    <div class="col-lg-8">
-
-                        <div class="card" id="productCard" >
                             <div class="card-title pr">
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4>產品 Product</h4>
                                     </div>
                                     <div class="col-lg-3" id="addbtn">
-
                                     </div>
                                 </div>
                             </div>
@@ -75,12 +51,11 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-
                                             <th>圖片</th>
                                             <th>名稱</th>
                                             <th>庫存</th>
-                                            <th>編輯</th>
-
+                                            <th>缺量</th>
+                                            <th>聯絡</th>
                                         </tr>
                                         </thead>
                                         <tbody id=pdlist>
@@ -92,9 +67,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /# column -->
-
                 </div>
+                <!-- /# row -->
+
             </section>
 
         </div>
@@ -106,19 +81,19 @@
 
 <!-- jQuery & Bootstrap-->
 <jsp:include page="../IncludePage/staticPage/BackJsPage.jsp"/>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/dataTables.buttons.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.flash.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/jszip.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/pdfmake.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/vfs_fonts.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>--%>
+<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>--%>
 
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
-<script src="${contextRoot}/static/back/universal/js/Product.js"></script>
+<script src="${contextRoot}/static/back/universal/js/StockManage.js"></script>
 <script>
 
 

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>Design & Decor </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
@@ -55,9 +55,9 @@
                     <div class="shop__content-area">
                         <div class="shop__header d-sm-flex justify-content-between align-items-center mb-40">
                             <div class="shop__header-left">
-                                <div class="show-text">
-                                    <span>Showing 1–12 of 20 results</span>
-                                </div>
+<%--                                <div class="show-text">--%>
+<%--                                    <span>Showing 1–12 of 20 results</span>--%>
+<%--                                </div>--%>
                             </div>
                             <div class="shop__header-right d-flex align-items-center justify-content-between justify-content-sm-end">
                                 <div class="sort-wrapper mr-30 pr-25 p-relative">
