@@ -5,10 +5,8 @@ import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
-import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Exception.NullInputException;
 import com.eeit40.design.Service.ActivityService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,9 +18,6 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -83,34 +77,44 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
 
 
   @PutMapping("/B/Activity/insertActivity")
-  public String insertActivity(
+  public ResponseEntity<String> insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
 
     log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    ResponseEntity<String> check = checkInputData(dto);
+    if (check.getStatusCodeValue() != 200) {
+      return check;
+    }
     Activity insertResult = service.insertActivity(service.setImg(file, dto));
 
     if (insertResult != null) {
-      return "Insert Success!";
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return "Insert Fail!";
+    return new ResponseEntity<>("新增時發生錯誤！", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @PostMapping("/B/Activity/updateActivity")
-  public String updateActivity(
+  public ResponseEntity<String> updateActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr
   ) throws IOException {
 
     log.info("Update Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    ResponseEntity<String> check = checkInputData(dto);
+    if (check.getStatusCodeValue() != 200) {
+      return check;
+    }
+
     Activity result = service.updateActivity(service.setImg(file, dto));
+    System.out.println(new ResponseEntity<>(HttpStatus.OK).getStatusCode().value());
 
     if (result != null) {
-      return "Update Success!";
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return "Update Fail!";
+    return new ResponseEntity<>("更新時發生錯誤！", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @GetMapping("/B/Activity/getBrandsPage")
@@ -205,5 +209,21 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return service.findActivitiesSubBySubject(subject);
   }
 
+
+  // 檢查新增、更新時輸入的資料是否完善
+  private ResponseEntity<String> checkInputData(ActivityDto dto) {
+
+    if (dto.getSubject() == null) {
+      return new ResponseEntity<>("請輸入活動主題！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate() == null) {
+      return new ResponseEntity<>("請輸入開始日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getEndDate() == null) {
+      return new ResponseEntity<>("請輸入結束日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate().isAfter(dto.getEndDate())) {
+      return new ResponseEntity<>("開始日期不可晚於結束日期！", HttpStatus.BAD_REQUEST);
+    } else {
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+  }
 
 }

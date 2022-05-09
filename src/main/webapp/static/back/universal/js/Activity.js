@@ -10,7 +10,14 @@ $(function () {
       idList.push(parseInt($(this).attr('id').split('checkbox')[1]));
     });
     console.log(idList)
-    deleteSend(urlStr, idList);
+    if (idList.length > 0) {
+      deleteSend(urlStr, idList);
+    } else {
+      swal.fire({
+        icon: 'error',
+        html: '<h5>請至少勾選一項!</h5>'
+      })
+    }
   });
 
   // 刪除按鈕 按了觸發
@@ -86,7 +93,19 @@ $(function () {
     pageAndSearch(page);
   });
 
-  // 換業已及search時 更新資料
+  // 後一頁按鈕
+  pageUl.on('click', '#nextPageBtn', function () {
+    let page = $('.page-item.active').children('button').text();
+    pageAndSearch(parseInt(page) + 1);
+  });
+
+  // 前一頁按鈕
+  pageUl.on('click', '#prePageBtn', function () {
+    let page = $('.page-item.active').children('button').text();
+    pageAndSearch(parseInt(page) - 1);
+  });
+
+  // 換頁以及search時 更新資料
   function pageAndSearch(page) {
     let start = $('#searchStart').val();
     let end = $('#searchEnd').val();
@@ -179,7 +198,7 @@ $(function () {
         $.ajax({
           url: urlStr,
           method: 'DELETE',
-          data: {dataArray:datalist},
+          data: {dataArray: datalist},
           traditional: true,
           beforeSend: function () {
             swal.fire({

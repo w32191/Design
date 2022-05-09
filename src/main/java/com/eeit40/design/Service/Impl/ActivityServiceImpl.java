@@ -199,10 +199,9 @@ public class ActivityServiceImpl implements ActivityService {
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
 
     //    如果有上傳照片
-    if (imgs != null) {
+    if (imgs != null && activity.getImgurImgs().size() > 0) {
       imgurUtil.delete(imgurImgRepository.findDeleteHashById(activity.getId()));
       imgurImgRepository.deleteImgurImgByFkActivity(activity.getId());
-
     }
 
     activity.setImgurImgs(imgs);

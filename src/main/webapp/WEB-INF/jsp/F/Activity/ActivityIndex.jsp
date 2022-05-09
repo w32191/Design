@@ -176,7 +176,7 @@
                                                          alt="product-img">
                                                 </a>
                                                 <div class="product__sale">
-                                                    <span class="new">活動</span>
+                                                    <span class="new">折扣</span>
                                                     <span class="percent">-${productList.get(i).discountPercentage}%</span>
                                                 </div>
                                             </div>
@@ -211,7 +211,7 @@
                                                              alt="product-img">
                                                     </a>
                                                     <div class="product__sale">
-                                                        <span class="new">new</span>
+                                                        <span class="new">折扣</span>
                                                         <span class="percent">-${productList.get(i+1).discountPercentage}%</span>
                                                     </div>
                                                 </div>

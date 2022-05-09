@@ -374,7 +374,7 @@ $(function () {
               icon: 'success',
               html: '<h5>更新成功!</h5>'
             }).then(function () {
-              // location.reload();
+              location.reload();
               freshBrandList(brandPageNumber);
             });
 
@@ -384,7 +384,7 @@ $(function () {
             console.log(`失敗的回傳值：${res}`);
             swal.fire({
               icon: 'error',
-              html: `<h5>發生錯誤！</h5>`
+              html: `<h5>${res.responseText}</h5>`
             }).then(function () {
               location.reload();
             });
