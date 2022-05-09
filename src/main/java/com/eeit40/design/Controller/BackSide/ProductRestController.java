@@ -41,10 +41,17 @@ public class ProductRestController {
 
 
 
-  //找出備貨中的訂單商品
-  @GetMapping("/B/product/doSomething")
+  //備貨中訂單的商品數量表
+  @GetMapping("/B/product/doSomethingGetBrand")
   public List<Map<Integer, Map<Integer, Integer>>> doSomething(){
-    return orderListRepository.doSomething();
+    return orderListRepository.doSomethingGetBrand();
+  }
+
+
+  //備貨中訂單的缺貨商品品牌內的商品
+  @GetMapping("/B/product/doSomethingGetPorduct/{id}")
+  public List<Map<Integer, Map<Integer, Integer>>> doSomethingGetPorduct(@PathVariable Integer id){
+    return orderListRepository.doSomethingGetPorduct(id);
   }
 
 
