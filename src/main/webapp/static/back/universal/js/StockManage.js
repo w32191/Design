@@ -1,11 +1,12 @@
 $(function () {
 
     $.getJSON("/Design/B/product/doSomethingGetBrand", function (res) {
+
         let txt = '';
         console.log(res.length);
         for (let i = 0; i < res.length; i++) {
             console.log(res[i].name)
-            let k =
+
                 txt += `
            
             <tr>
@@ -15,15 +16,16 @@ $(function () {
                 </td>
                 <td>${res[i].name}</td>
                 <td><a class="showmore" id="smbtn${res[i].id}" style="color: #337ab7;">Show More</a></td>
-                <td></td>
-                <td></td>
+                <td><span class="ti-mobile">&emsp; ${res[i].phone}</span><br>
+                <a href="mailto:${res[i].mail}" ><span class="ti-email">&emsp; ${res[i].mail}</span></a> </td>
+                <td><a id="excelbtn"><span class="ti-receipt"></span></a> </td>
             </tr>
-            
             `
         }
         $('#bdlist').html(txt);
 
     })
+
 
 
     $('body').on('click', 'a[id^=smbtn]', function () {
@@ -33,6 +35,11 @@ $(function () {
 
         let pdtxt = '';
         $.getJSON(`/Design/B/product/doSomethingGetPorduct/${id}`, function (pdres) {
+
+
+
+            let exdata = [["序號","產品名稱","目前庫存","缺少數量"]]
+
             for (let i = 0; i < pdres.length; i++) {
                 let j = pdres[i].stock;
                 let k = pdres[i].amount;
@@ -40,6 +47,7 @@ $(function () {
                 console.log(k)
                 let m = (k - j);
 
+                exdata.push([(i+1),pdres[i].name,pdres[i].stock,m])
 
                 pdtxt += `
                 <tr>
@@ -47,16 +55,58 @@ $(function () {
                     <td><img src="${pdres[i].image01}" width="50px"></td>
                     <td>${pdres[i].name}</td>
                     <td>${pdres[i].stock}</td>
-                    <td>${m}</td>
+                    <td ><span class="badge badge-primary">${m}</span></td>
+                    <td></td>
                 </tr>
                 `
             }
 
             $('#plist').html(pdtxt);
+            console.log(exdata)
+
+            let data = {
+                "success":true,
+                "errorCode":"-1",
+                "msg":"匯出成功",
+                "body":{
+                    "title":"庫存缺項明細",
+                    "excelData": exdata
+                }
+            };
+            $('body').on('click','a[id=excelbtn]',function (){
+                console.log("88")
+                excelExport();
+            })
+
+            function excelExport(){
+                if(data.success){
+                    if(null != data.body && undefined != data.body){
+                        // 調取封裝方法-匯出excel
+                        XSExport.excelExport(
+                            data.body.excelData,
+                            data.body.title
+                        );
+                    }
+                }
+            }
+
         })
 
 
     })
 
 
+
+
+
+
+
+
+
+
+
 })
+
+
+
+

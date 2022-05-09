@@ -19,6 +19,7 @@
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
     <link href="${contextRoot}/static/back/universal/css/EditActivity.css" rel="stylesheet"/>
+
 </head>
 
 <body>
@@ -49,14 +50,15 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="table-responsive">
-                                            <table class="table student-data-table ">
+                                            <table class="table student-data-table " id="excellist">
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
                                                     <th></th>
                                                     <th>廠商名稱</th>
                                                     <th>缺貨品項</th>
-                                                    <th>聯絡</th>
+                                                    <th>聯絡方式</th>
+                                                    <th>表單</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id=bdlist>
@@ -87,6 +89,7 @@
                                                     <th>產品名稱</th>
                                                     <th>庫存</th>
                                                     <th>缺少數量</th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="plist">
@@ -127,6 +130,10 @@
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <%-- jquery & Ajax & JS 都在裏面--%>
 <script src="${contextRoot}/static/back/universal/js/StockManage.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sheetjs/xlsx.core.min.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sheetjs/xlsxExport.utils.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sheetjs/xlsxStyle.core.min.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sheetjs/xlsxStyle.utils.js"></script>
 <script>
 
 

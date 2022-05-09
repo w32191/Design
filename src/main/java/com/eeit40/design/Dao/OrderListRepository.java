@@ -20,7 +20,7 @@ public interface OrderListRepository extends JpaRepository<OrderList, Integer> {
     public List<OrderList> selectByImforId(@Param("imforId") int fkOrderImformation);
 
     //備貨中訂單的缺貨商品品牌列表
-    @Query(value = "SELECT DISTINCT  b.id,b.name,b.img " +
+    @Query(value = "SELECT DISTINCT  b.id,b.name,b.img,b.phone,b.mail " +
             "from (" +
             "select p.id,p.name,p.image01,p.stock,p.fk_brand_id,temp.amount " +
             "from product p " +
