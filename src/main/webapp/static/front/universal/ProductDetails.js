@@ -292,7 +292,8 @@ $(function () {
                                                     </div>
                                                 </div>`;
                 }
-
+                
+                
 
 
                 $('#reviewStart').html(reviewMain);
@@ -325,11 +326,11 @@ $(function () {
                                                             <div class="col-xl-6 col-lg-6 col-md-6">
                                                                 <div class="user-rating">
                                                                     <ul>
-                                                                        <li><i class="fal fa-star" id="star01" name="star"></i></li>
-                                                                        <li><i class="fal fa-star" id="star02" name="star" ></i></li>
-                                                                        <li><i class="fal fa-star" id="star03" name="star" ></i></li>
-                                                                        <li><i class="fal fa-star" id="star04" name="star"></i></li>
-                                                                        <li><i class="fal fa-star" id="star05" name="star" ></i></li>
+                                                                        <li><i class="fal fa-star" id="star01" style='color:#bc8246'></i></li>
+                                                                        <li><i class="fal fa-star" id="star02" style='color:#bc8246'></i></li>
+                                                                        <li><i class="fal fa-star" id="star03" style='color:#bc8246'></i></li>
+                                                                        <li><i class="fal fa-star" id="star04" style='color:#bc8246'></i></li>
+                                                                        <li><i class="fal fa-star" id="star05" style='color:#bc8246'></i></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
