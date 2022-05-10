@@ -38,7 +38,7 @@ public class ProductReviewController {
   @PostMapping("/F/ProductReview/insertProductReview")
   public ModelAndView insertProductReview(ModelAndView mav, HttpSession session,
       @RequestParam("comments") String comments,
-      @RequestParam(name = "star", defaultValue = "5") Integer star,
+      @RequestParam(name = "star") Integer star,
       @RequestParam("productId") Integer fk_product_id) {
 
     // LocalDate date = LocalDate.now();
@@ -49,7 +49,7 @@ public class ProductReviewController {
     Account account = (Account) session.getAttribute("Faccount");
     // Member member = account.getMembers();
     Member member = new Member();
-    member.setId(1);
+    member.setId(account.getId());
 
     log.info(comments);
     Product product = new Product();

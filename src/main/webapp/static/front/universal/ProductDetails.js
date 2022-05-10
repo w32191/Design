@@ -123,11 +123,6 @@ $(function () {
                                     <li><span><i class="fas fa-star"></i></span></li>
                                     <li><span><i class="fal fa-star"></i></span></li>
                                 </ul>
-                                <span class="rating-no ml-10 rating-left">
-                                            3 rating(s)
-                                        </span>
-                                <span class="review rating-left"><a
-                                        href="#">Add your Review</a></span>
                             </div>
                             <div class="product__price-2 mb-25">`;
 
@@ -325,26 +320,16 @@ $(function () {
                                                                 <div class="contact-icon p-relative contacts-name">
                                                                     <input type="text" placeholder="姓名" id="insertName" name="reviewName" value="" readonly>
                                                                 </div>
-                                                            </div>
+                                                            </div>                                                            
                                                             
                                                             <div class="col-xl-6 col-lg-6 col-md-6">
                                                                 <div class="user-rating">
                                                                     <ul>
-                                                                        <li><a href="#"><i
-                                                                            class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                            class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                            class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                            class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                            class="fal fa-star"></i></a>
-                                                                        </li>
+                                                                        <li><a><i class="fal fa-star" id="star01" name="star" value="1"></i></a></li>
+                                                                        <li><a><i class="fal fa-star" id="star02" name="star" value="2"></i></a></li>
+                                                                        <li><a><i class="fal fa-star" id="star03" name="star" value="3"></i></a></li>
+                                                                        <li><a><i class="fal fa-star" id="star04" name="star" value="4"></i></a></li>
+                                                                        <li><a><i class="fal fa-star" id="star05" name="star" value="5"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -494,6 +479,95 @@ $(function () {
 
     //     });
     // });
+
+    //五星判斷
+    $('body').on('click', '#star01', function () {
+        $('#star01').removeClass('fal fa-star');
+        $('#star01').addClass('fas fa-star');
+        $('#star02').removeClass('fas fa-star');
+        $('#star02').addClass('fal fa-star');   
+        $('#star03').removeClass('fas fa-star');
+        $('#star03').addClass('fal fa-star');
+        $('#star04').removeClass('fas fa-star');
+        $('#star04').addClass('fal fa-star');  
+        $('#star05').removeClass('fas fa-star');
+        $('#star05').addClass('fal fa-star');
+        console.log(star01);
+    });
+    $('body').on('click', '#star02', function () {
+        $('#star01').removeClass('fal fa-star');
+        $('#star01').addClass('fas fa-star');
+        $('#star02').removeClass('fal fa-star');
+        $('#star02').addClass('fas fa-star');   
+        $('#star03').removeClass('fas fa-star');
+        $('#star03').addClass('fal fa-star');
+        $('#star04').removeClass('fas fa-star');
+        $('#star04').addClass('fal fa-star');  
+        $('#star05').removeClass('fas fa-star');
+        $('#star05').addClass('fal fa-star');       
+    });
+    $('body').on('click', '#star03', function () {
+        $('#star01').removeClass('fal fa-star');
+        $('#star01').addClass('fas fa-star');
+        $('#star02').removeClass('fal fa-star');
+        $('#star02').addClass('fas fa-star');   
+        $('#star03').removeClass('fal fa-star');
+        $('#star03').addClass('fas fa-star');
+        $('#star04').removeClass('fas fa-star');
+        $('#star04').addClass('fal fa-star');  
+        $('#star05').removeClass('fas fa-star');
+        $('#star05').addClass('fal fa-star');       
+    });
+    $('body').on('click', '#star04', function () {
+        $('#star01').removeClass('fal fa-star');
+        $('#star01').addClass('fas fa-star');
+        $('#star02').removeClass('fal fa-star');
+        $('#star02').addClass('fas fa-star');   
+        $('#star03').removeClass('fal fa-star');
+        $('#star03').addClass('fas fa-star');
+        $('#star04').removeClass('fal fa-star');
+        $('#star04').addClass('fas fa-star');
+        $('#star05').removeClass('fas fa-star');
+        $('#star05').addClass('fal fa-star');        
+    });
+    $('body').on('click', '#star05', function () {
+        $('#star01').removeClass('fal fa-star');
+        $('#star01').addClass('fas fa-star');
+        $('#star02').removeClass('fal fa-star');
+        $('#star02').addClass('fas fa-star');   
+        $('#star03').removeClass('fal fa-star');
+        $('#star03').addClass('fas fa-star');
+        $('#star04').removeClass('fal fa-star');
+        $('#star04').addClass('fas fa-star');  
+        $('#star05').removeClass('fal fa-star');
+        $('#star05').addClass('fas fa-star');      
+    });
+    
+
+    
+
+    // $(document).ready(function(){
+    //     $('li').mouseover(function(){
+    //         console.log(123456);
+    //         // var current = $(this);
+    //         // $("li").each(function(index){
+    //         //     $(this).addClass("fas fa-star");
+    //         //     if(index == current.index()){
+    //         //         return false;
+    //         //     }
+    //         // });
+    //     });
+    // });
+    // $("li").mouseleave(function(){
+    //     $("li").removeClass("fas fa-star")
+    // });
+    // $("li").click(function(){
+    //     $("li").removeClass("clicked-stars");
+    //     $("fas fa-star").addClass("clicked-stars");
+    // });
+     
+    
+             
 
 })
 
