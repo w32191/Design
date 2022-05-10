@@ -108,35 +108,41 @@
 							role="tab" data-toggle="tab">個人資料</a></li>
 					</ul>
 					<br> <br>
-					<form:form class="form" name="member" ModelAttribute="editMember"
-						action="/Design/B/edit">
-						
-						<input type="text" hidden value="${member.fkAccount.id}" name="accountId"/>
-						<div class="name-content">
-							<span class="contact-title">姓名:</span> <input
-								class="mail-address" type="text" name="names"
-								value="${member.names}">
-						</div>
-						<br>
-						<div class="phone-content">
-							<span class="contact-title">電話:</span> <input
-								class="phone-number" type="tel" name="phone"
-								value="${member.phone}">
-						</div>
-						<br>
-						<div class="address-content">
-							<span class="contact-title">地址:</span> <input
-								class="mail-address" type="text" name="address"
-								value="${member.address}">
-						</div>
-						<br>
-						
-						<div class="user-send-message">
-							<input type="submit" id="update" value="更新資料">
+					<div class="card">
+						<div class="card">
+							<form:form class="form" name="member" ModelAttribute="editMember"
+								action="/Design/B/edit">
 
+								<input type="text" hidden value="${member.fkAccount.id}"
+									name="accountId" />
+								<div class="name-content">
+									<span class="contact-title">姓名:</span> <input
+										class="mail-address" type="text" id="names" name="names"
+										value="${member.names}">
+								</div>
+								<br>
+								<div class="phone-content">
+									<span class="contact-title">電話:</span> <input
+										class="phone-number" type="tel" id="phone" name="phone"
+										value="${member.phone}">
+								</div>
+								<br>
+								<div class="address-content">
+									<span class="contact-title">地址:</span> <input
+										class="mail-address" type="text" id="address" name="address"
+										value="${member.address}">
+								</div>
+								<br>
 
+								<div class="user-send-message">
+									<input type="submit" id="update" value="更新資料">
+								</div>
+							</form:form>
 						</div>
-					</form:form>
+						
+					</div>
+					<button id="ShowAllUpdate1">一鍵修改個資</button>
+					<button id="ReShowAllUpdate2">一鍵恢復個資</button>
 				</div>
 			</div>
 		</div>
@@ -144,17 +150,28 @@
 
 	</div>
 
-
+	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
 	<script>
-		document.getElementById('update').addEventListener('click',
-				function() {
-					Swal.fire({
-						icon : 'success',
-						title : '更新成功',
-						showConfirmButton : false,
-						timer : 1500
-					})
-				})
+		document.getElementById('update').addEventListener('click', function() {
+			Swal.fire({
+				icon : 'success',
+				title : '更新成功',
+				showConfirmButton : false,
+				timer : 1500
+			})
+		})
+
+		$('#ShowAllUpdate1').on("click", function() {
+			$('#names').val('陳阿寶');
+			$('#phone').val('09322234099');
+			$('#address').val('台北市內湖區舊宗路一段268號');
+		})
+		
+		$('#ReShowAllUpdate2').on("click", function() {
+			$('#names').val('王阿九');
+			$('#phone').val('0932234567');
+			$('#address').val('新北市三重區五華街282號');
+		})
 	</script>
 
 
@@ -162,7 +179,7 @@
 
 
 	<!-- jQuery & Bootstrap-->
-	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
+
 	<!-- Calender -->
 	<script
 		src="${contextRoot}/static/back/assets/js/lib/jquery-ui/jquery-ui.min.js"></script>

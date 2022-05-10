@@ -64,10 +64,10 @@
 
 						</div>
                         <div class="card">
-                            <p>
-                            <button id="one" class="btn btn-danger">超級帳號</button>
-                            <button id="two" class="btn btn-success">超級帳號</button>
-                            <button id="three" class="btn btn-warning">超級帳號</button>
+                         <p>
+                            <button id="one">超級帳號</button>
+                            <button id="two">一般帳號</button>
+                            <button id="three">修改個資後帳號</button>
                         </p>
                         </div>
 					</div>
@@ -80,6 +80,16 @@
 	<script type="text/javascript">
 		$('#one').on("click", function() {
 			$('#email').val('admin@gmail.com');
+			$('#pwd').val('Passw0rd');
+		})
+
+        $('#two').on("click", function() {
+			$('#email').val('Abcd1234@gmail.com');
+			$('#pwd').val('Passw0rd');
+		})
+
+        $('#three').on("click", function() {
+			$('#email').val('1234Abcd@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
 	</script>
