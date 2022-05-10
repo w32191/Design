@@ -41,7 +41,7 @@
                                         <%--                                            <li><a href="index-6.html">Home Style 6</a></li>--%>
                                         <%--                                        </ul>--%>
                                     </li>
-                                    <li class="mega-menu "><a href="/Design/F/Product/">Shop</a>
+                                    <li class="mega-menu "><a href="/Design/F/Product/">設計品</a>
                                         <%--                                        <ul class="submenu transition-3"--%>
                                         <%--                                            data-background="static/front/assets/img/bg/mega-menu-bg.jpg">--%>
                                         <%--                                            <li class="has-dropdown">--%>
@@ -127,7 +127,7 @@
                         <div class="header__action">
                             <ul>
                                 <li><a href="#" class="search-toggle"><i
-                                        class="ion-ios-search-strong"></i> Search</a></li>
+                                        class="ion-ios-search-strong"></i> 搜尋</a></li>
                                 <li><a href="/Design/F/shoppingcart" class="cart"><i
                                         class="ion-bag"></i> 購物車 <span></span></a>
                                     <%--                                    <a href="javascript:void(0);" class="cart"><i--%>
@@ -244,14 +244,17 @@
                                 <i class="fal fa-times"></i></a>
                         </div>
                         <div class="header__search-header">
-                            <h3>Search</h3>
+                            <h3>搜尋</h3>
                         </div>
                         <div class="header__search-categories">
                             <ul class="search-category">
-                                <li><a href="shop.html">所有商品</a></li>
-                                <li><a href="shop.html">Tom Dixon</a></li>
-                                <li><a href="shop.html">Menu</a></li>
-                                <li><a href="shop.html">BROKIS</a></li>
+                                <li><a href="/Design/F/Product/">所有商品</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=6">Tom Dixon</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=4">Menu</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=9">BROKIS</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=24">Louis Poulsen</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=11">FOSCARINI</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=15">FLOS</a></li>
 
 
                             </ul>

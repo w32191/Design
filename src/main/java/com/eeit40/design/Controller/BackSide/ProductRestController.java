@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class ProductRestController {
-
   @Autowired
   private ProductServiceImpl dao;
 

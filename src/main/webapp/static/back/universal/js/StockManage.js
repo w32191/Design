@@ -1,5 +1,6 @@
 $(function () {
 
+
     $.getJSON("/Design/B/product/doSomethingGetBrand", function (res) {
 
         let txt = '';
@@ -7,7 +8,7 @@ $(function () {
         for (let i = 0; i < res.length; i++) {
             console.log(res[i].name)
 
-                txt += `
+            txt += `
            
             <tr>
                 <td>${i + 1}</td>
@@ -27,18 +28,18 @@ $(function () {
     })
 
 
-
     $('body').on('click', 'a[id^=smbtn]', function () {
-        console.log("喔齁")
+        let brandName = $(this).parent('td').prev('td').text();
+        let brandPhone = $(this).parent('td').next('td').text();
+        console.log(brandName);
+        console.log(brandPhone)
         let id = $(this).attr('id').split("smbtn")[1];
         console.log(id)
 
         let pdtxt = '';
         $.getJSON(`/Design/B/product/doSomethingGetPorduct/${id}`, function (pdres) {
 
-
-
-            let exdata = [["序號","產品名稱","目前庫存","缺少數量"]]
+            let exdata = [["序號", "產品名稱", "目前庫存", "缺少數量"]]
 
             for (let i = 0; i < pdres.length; i++) {
                 let j = pdres[i].stock;
@@ -47,15 +48,15 @@ $(function () {
                 console.log(k)
                 let m = (k - j);
 
-                exdata.push([(i+1),pdres[i].name,pdres[i].stock,m])
+                exdata.push([(i + 1), pdres[i].name, pdres[i].stock, m])
 
                 pdtxt += `
                 <tr>
-                    <td>${i+1}</td>
+                    <td>${i + 1}</td>
                     <td><img src="${pdres[i].image01}" width="50px"></td>
                     <td>${pdres[i].name}</td>
                     <td>${pdres[i].stock}</td>
-                    <td ><span class="badge badge-primary">${m}</span></td>
+                    <td ><span class="badge badge-danger">${m}</span></td>
                     <td></td>
                 </tr>
                 `
@@ -65,23 +66,22 @@ $(function () {
             console.log(exdata)
 
             let data = {
-                "success":true,
-                "errorCode":"-1",
-                "msg":"匯出成功",
-                "body":{
-                    "title":"庫存缺項明細",
+                "success": true,
+                "errorCode": "-1",
+                "msg": "匯出成功",
+                "body": {
+                    "title": `庫存缺項明細(${brandName} ${brandPhone})`,
                     "excelData": exdata
                 }
             };
-            $('body').on('click','a[id=excelbtn]',function (){
+            $('body').on('click', 'a[id=excelbtn]', function () {
                 console.log("88")
                 excelExport();
             })
 
-            function excelExport(){
-                if(data.success){
-                    if(null != data.body && undefined != data.body){
-                        // 調取封裝方法-匯出excel
+            function excelExport() {
+                if (data.success) {
+                    if (null != data.body && undefined != data.body) {
                         XSExport.excelExport(
                             data.body.excelData,
                             data.body.title
@@ -94,15 +94,6 @@ $(function () {
 
 
     })
-
-
-
-
-
-
-
-
-
 
 
 })
