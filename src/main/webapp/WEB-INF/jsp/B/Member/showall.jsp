@@ -92,6 +92,8 @@
 
 		<div class="main">
 			<div class="container-fluid">
+			<div class="card">
+			<div class="card">
 				<div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
@@ -150,6 +152,8 @@
 						</c:forEach>
 					</div>
 				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>
