@@ -103,27 +103,27 @@
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="product-details.html" class="w-img"><img
+                                <a href="${contextRoot}/F/Design" class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-1.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="product-details.html">找設計？</a>
+                                <h2><a href="${contextRoot}/F/Design">找設計？</a>
                                 </h2>
-                                <a href="product-details.html" class="link-btn">Discover now</a>
+                                <a href="${contextRoot}/F/Design" class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="product-details.html" class="w-img"><img
+                                <a href="${contextRoot}/F/Case" class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-2.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="product-details.html">找案例？</a></h2>
-                                <a href="product-details.html" class="link-btn">Discover now</a>
+                                <h2><a href="${contextRoot}/F/Case">找案例？</a></h2>
+                                <a href="${contextRoot}/F/Case" class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
@@ -416,28 +416,28 @@
     <!-- blog area end -->
 
     <!-- subscribe area start -->
-    <section class="subscribe__area pb-100">
-        <div class="container">
-            <div class="subscribe__inner pt-95">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">
-                        <div class="subscribe__content text-center">
-                            <h2>Get Discount Info</h2>
-                            <p>Subscribe to the Outstock mailing list to receive updates on new
-                                arrivals, special offers and other discount information.</p>
-                            <div class="subscribe__form">
-                                <form action="#">
-                                    <input type="email"
-                                           placeholder="Subscribe to our newsletter...">
-                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<%--    <section class="subscribe__area pb-100">--%>
+<%--        <div class="container">--%>
+<%--            <div class="subscribe__inner pt-95">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">--%>
+<%--                        <div class="subscribe__content text-center">--%>
+<%--                            <h2>Get Discount Info</h2>--%>
+<%--                            <p>Subscribe to the Outstock mailing list to receive updates on new--%>
+<%--                                arrivals, special offers and other discount information.</p>--%>
+<%--                            <div class="subscribe__form">--%>
+<%--                                <form action="#">--%>
+<%--                                    <input type="email"--%>
+<%--                                           placeholder="Subscribe to our newsletter...">--%>
+<%--                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
     <!-- subscribe area end -->
 
     <!-- shop modal start -->

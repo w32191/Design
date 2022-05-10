@@ -23,6 +23,8 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+    <link href="${contextRoot}/static/back/universal/css/Activity.css"
+          rel="stylesheet"/>
 </head>
 
 <body>
@@ -39,7 +41,7 @@
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card bg-dark mb-3">
+                        <div class="card outCard">
                             <div class="col-lg-12">
                                 <div class="card bg-light mb-3">
                                     <div class="card-title">

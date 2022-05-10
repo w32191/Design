@@ -1,6 +1,7 @@
 package com.eeit40.design.Interceptor;
 
 import com.eeit40.design.Entity.Account;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,10 @@ public class BackUserLoginInterceptor implements HandlerInterceptor {
       if (account != null) {
         return true;
       }
-      response.sendRedirect(request.getContextPath() + "/B/login");
+      request.setAttribute("errorMsg", "請先登入！");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/B/login");
+      dispatcher.forward( request, response );
+//      response.sendRedirect(request.getContextPath() + "/B/login");
     } catch (Exception e) {
       e.printStackTrace();
     }

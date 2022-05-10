@@ -13,6 +13,8 @@
 
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
+          rel="stylesheet"/>
 </head>
 <body>
 <%--Header Page--%>
@@ -51,14 +53,15 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="basic-login">
                         <h3 class="text-center mb-60">Login</h3>
-                        <form:form class="form" method="POST" modelAttribute="Flogin" action="/Design/F/Flogin">
+                        <form:form class="form" method="POST" modelAttribute="Flogin"
+                                   action="/Design/F/Flogin">
                             <label for="email">信箱</label>
-<%--                            <input name="email" type="email" placeholder="請輸入信箱"/>--%>
-                            <form:input path="email" type="email" placeholder="請輸入信箱" />
+                            <%--                            <input name="email" type="email" placeholder="請輸入信箱"/>--%>
+                            <form:input path="email" type="email" placeholder="請輸入信箱"/>
                             <form:errors path="email" cssClass="error"/>
                             <label for="pwd">密碼</label>
-<%--                            <input name="pwd" type="password" placeholder="請輸入密碼"/>--%>
-                            <form:input path="pwd" type="password" placeholder="請輸入密碼" />
+                            <%--                            <input name="pwd" type="password" placeholder="請輸入密碼"/>--%>
+                            <form:input path="pwd" type="password" placeholder="請輸入密碼"/>
                             <form:errors path="pwd" cssClass="error"/>
                             <div class="login-action mb-20 fix">
                                 <span class="forgot-login f-right">
@@ -67,7 +70,7 @@
                             </div>
                             <button class="os-btn w-100">登入</button>
                             <div class="or-divide"><span>or</span></div>
-                            <a href="/Design/F/Fregister" class="os-btn os-btn-black w-100">       註冊</a>
+                            <a href="/Design/F/Fregister" class="os-btn os-btn-black w-100"> 註冊</a>
                         </form:form>
                     </div>
                 </div>
@@ -82,6 +85,21 @@
 
 <!-- JavaScript -->
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+<c:choose>
+    <c:when test="${errorMsg!=null}">
+        <script>
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: '請先登入！！',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        </script>
+    </c:when>
+</c:choose>
+
 </body>
 
 </html>

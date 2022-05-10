@@ -1,6 +1,7 @@
 package com.eeit40.design.Interceptor;
 
 import com.eeit40.design.Entity.Account;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,11 +19,13 @@ public class FrontUserLoginInterceptor implements HandlerInterceptor {
       HttpSession session = request.getSession();
       //統一攔截（查詢當前session是否存在user）(這裡user會在每次登入成功後，寫入session)
       Account account = (Account) session.getAttribute("Faccount");
-      // SamWang to-do: 待與家原確認 attribute name
       if (account != null) {
         return true;
       }
-      response.sendRedirect(request.getContextPath() + "/F/Flogin");
+      request.setAttribute("errorMsg", "請先登入！");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/F/Flogin");
+      dispatcher.forward( request, response );
+//      response.sendRedirect(request.getContextPath() + "/F/Flogin");
     } catch (Exception e) {
       e.printStackTrace();
     }

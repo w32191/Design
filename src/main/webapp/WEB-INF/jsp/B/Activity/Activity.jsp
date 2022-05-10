@@ -23,6 +23,8 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+    <link href="${contextRoot}/static/back/universal/css/Activity.css"
+          rel="stylesheet"/>
 </head>
 
 <body>
@@ -40,7 +42,7 @@
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card bg-dark mb-3">
+                        <div class="card outCard">
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-title">
@@ -55,10 +57,6 @@
                                                         id="deleteBatchBtn">
                                                     <i class="fa fa-minus"></i> 批次刪除
                                                 </button>
-                                                <%--                                        <button type="button" id="insertBtn"--%>
-                                                <%--                                                class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">--%>
-                                                <%--                                            <i class="ti-plus"></i>新增活動--%>
-                                                <%--                                        </button>--%>
                                             </div>
                                             <div class="col-lg-2">
                                                 <h2>活動管理</h2>
