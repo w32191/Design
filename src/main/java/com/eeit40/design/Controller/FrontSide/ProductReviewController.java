@@ -38,7 +38,7 @@ public class ProductReviewController {
   @PostMapping("/F/ProductReview/insertProductReview")
   public ModelAndView insertProductReview(ModelAndView mav, HttpSession session,
       @RequestParam("comments") String comments,
-      @RequestParam(name = "star") Integer star,
+      @RequestParam(name = "star", defaultValue = "5") Integer star,
       @RequestParam("productId") Integer fk_product_id) {
 
     // LocalDate date = LocalDate.now();

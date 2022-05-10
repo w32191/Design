@@ -325,14 +325,19 @@ $(function () {
                                                             <div class="col-xl-6 col-lg-6 col-md-6">
                                                                 <div class="user-rating">
                                                                     <ul>
-                                                                        <li><a><i class="fal fa-star" id="star01" name="star" value="1"></i></a></li>
-                                                                        <li><a><i class="fal fa-star" id="star02" name="star" value="2"></i></a></li>
-                                                                        <li><a><i class="fal fa-star" id="star03" name="star" value="3"></i></a></li>
-                                                                        <li><a><i class="fal fa-star" id="star04" name="star" value="4"></i></a></li>
-                                                                        <li><a><i class="fal fa-star" id="star05" name="star" value="5"></i></a></li>
+                                                                        <li><i class="fal fa-star" id="star01" name="star"></i></li>
+                                                                        <li><i class="fal fa-star" id="star02" name="star" ></i></li>
+                                                                        <li><i class="fal fa-star" id="star03" name="star" ></i></li>
+                                                                        <li><i class="fal fa-star" id="star04" name="star"></i></li>
+                                                                        <li><i class="fal fa-star" id="star05" name="star" ></i></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+                                                            <input type="radio" name="star" value="1" hidden id="radio1"/>
+                                                            <input type="radio" name="star" value="2" hidden id="radio2"/>
+                                                            <input type="radio" name="star" value="3" hidden id="radio3"/>
+                                                            <input type="radio" name="star" value="4" hidden id="radio4"/>
+                                                            <input type="radio" name="star" value="5" hidden id="radio5"/>
 
                                                             <div class="col-xl-12">
                                                                 <div class="contact-icon p-relative contacts-message">
@@ -480,6 +485,7 @@ $(function () {
     //     });
     // });
 
+
     //五星判斷
     $('body').on('click', '#star01', function () {
         $('#star01').removeClass('fal fa-star');
@@ -492,7 +498,7 @@ $(function () {
         $('#star04').addClass('fal fa-star');  
         $('#star05').removeClass('fas fa-star');
         $('#star05').addClass('fal fa-star');
-        console.log(star01);
+        $('#radio1').prop('checked',true);
     });
     $('body').on('click', '#star02', function () {
         $('#star01').removeClass('fal fa-star');
@@ -504,7 +510,8 @@ $(function () {
         $('#star04').removeClass('fas fa-star');
         $('#star04').addClass('fal fa-star');  
         $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');       
+        $('#star05').addClass('fal fa-star'); 
+        $('#radio2').prop('checked',true);
     });
     $('body').on('click', '#star03', function () {
         $('#star01').removeClass('fal fa-star');
@@ -516,7 +523,8 @@ $(function () {
         $('#star04').removeClass('fas fa-star');
         $('#star04').addClass('fal fa-star');  
         $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');       
+        $('#star05').addClass('fal fa-star');   
+        $('#radio3').prop('checked',true);  
     });
     $('body').on('click', '#star04', function () {
         $('#star01').removeClass('fal fa-star');
@@ -528,7 +536,8 @@ $(function () {
         $('#star04').removeClass('fal fa-star');
         $('#star04').addClass('fas fa-star');
         $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');        
+        $('#star05').addClass('fal fa-star');  
+        $('#radio4').prop('checked',true);      
     });
     $('body').on('click', '#star05', function () {
         $('#star01').removeClass('fal fa-star');
@@ -540,31 +549,13 @@ $(function () {
         $('#star04').removeClass('fal fa-star');
         $('#star04').addClass('fas fa-star');  
         $('#star05').removeClass('fal fa-star');
-        $('#star05').addClass('fas fa-star');      
+        $('#star05').addClass('fas fa-star');    
+        $('#radio5').prop('checked',true);  
     });
     
 
     
 
-    // $(document).ready(function(){
-    //     $('li').mouseover(function(){
-    //         console.log(123456);
-    //         // var current = $(this);
-    //         // $("li").each(function(index){
-    //         //     $(this).addClass("fas fa-star");
-    //         //     if(index == current.index()){
-    //         //         return false;
-    //         //     }
-    //         // });
-    //     });
-    // });
-    // $("li").mouseleave(function(){
-    //     $("li").removeClass("fas fa-star")
-    // });
-    // $("li").click(function(){
-    //     $("li").removeClass("clicked-stars");
-    //     $("fas fa-star").addClass("clicked-stars");
-    // });
      
     
              
