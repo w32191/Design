@@ -95,7 +95,7 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>會員管理</h1>
+								<h1>編輯</h1>
 							</div>
 						</div>
 					</div>
@@ -108,32 +108,29 @@
 							role="tab" data-toggle="tab">個人資料</a></li>
 					</ul>
 					<br> <br>
-					<form:form class="form" name="member" ModelAttribute="memberupdate"
-						action="/Design/B/memberupdate">
+					<form:form class="form" name="member" ModelAttribute="editMember"
+						action="/Design/B/edit">
+						
+						<input type="text" hidden value="${member.fkAccount.id}" name="accountId"/>
 						<div class="name-content">
 							<span class="contact-title">姓名:</span> <input
 								class="mail-address" type="text" name="names"
-								value="${memberupdate.names}">
+								value="${member.names}">
 						</div>
 						<br>
 						<div class="phone-content">
 							<span class="contact-title">電話:</span> <input
 								class="phone-number" type="tel" name="phone"
-								value="${memberupdate.phone}">
+								value="${member.phone}">
 						</div>
 						<br>
 						<div class="address-content">
 							<span class="contact-title">地址:</span> <input
 								class="mail-address" type="text" name="address"
-								value="${memberupdate.address}">
+								value="${member.address}">
 						</div>
 						<br>
-						<div class="email-content">
-							<span class="contact-title">信箱:</span> <input
-								class="contact-email" type="email" name="email"
-								value="${Baccount.email}">
-						</div>
-						<br>
+						
 						<div class="user-send-message">
 							<input type="submit" id="update" value="更新資料">
 

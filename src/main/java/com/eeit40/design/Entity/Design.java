@@ -33,7 +33,7 @@ public class Design {
   @Column(name = "name", length = 50)
   private String name;
 
-  @Column(name = "classification", length = 10)
+  @Column(name = "style", length = 10)
   private String classification;
 
   @Column(name = "price")

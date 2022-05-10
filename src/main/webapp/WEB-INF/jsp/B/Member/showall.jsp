@@ -89,6 +89,7 @@
 	<jsp:include page="../IncludePage/layoutPage/headerPage.jsp" />
 
 	<div class="content-wrap">
+
 		<div class="main">
 			<div class="container-fluid">
 				<div class="row">
@@ -102,66 +103,58 @@
 				</div>
 				<!-- /# row -->
 
-				<div class="custom-tab user-profile-tab">
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a aria-controls="1"
-							role="tab" data-toggle="tab">個人資料</a></li>
-					</ul>
-					<br> <br>
-					<form:form class="form" name="member" ModelAttribute="memberupdate"
-						action="/Design/B/memberupdate">
-						<div class="name-content">
-							<span class="contact-title">姓名:</span> <input
-								class="mail-address" type="text" name="names"
-								value="${memberupdate.names}">
-						</div>
-						<br>
-						<div class="phone-content">
-							<span class="contact-title">電話:</span> <input
-								class="phone-number" type="tel" name="phone"
-								value="${memberupdate.phone}">
-						</div>
-						<br>
-						<div class="address-content">
-							<span class="contact-title">地址:</span> <input
-								class="mail-address" type="text" name="address"
-								value="${memberupdate.address}">
-						</div>
-						<br>
-						<div class="email-content">
-							<span class="contact-title">信箱:</span> <input
-								class="contact-email" type="email" name="email"
-								value="${Baccount.email}">
-						</div>
-						<br>
-						<div class="user-send-message">
-							<input type="submit" id="update" value="更新資料">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">姓名</th>
+							<th scope="col">電話</th>
+							<th>地址</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<c:forEach var="Member" items="${page.content}">
+						<tbody>
+							<tr>
 
+								<td>${Member.names}</td>
+								<td>${Member.phone}</td>
+								<td>${Member.address}</td>
 
-						</div>
-					</form:form>
+								<td><a href="/Design/B/edit?id=${Member.id}">編輯</a></td>
+
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+
+				<div class="row justify-content-center">
+					<div class="col-9">
+						<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+
+							<c:choose>
+								<c:when test="${page.number != pageNumber-1 }">
+									<a href="${contextRoot}/B/view?p=${pageNumber}"><c:out
+											value="${pageNumber}" /> </a>
+								</c:when>
+
+								<c:otherwise>
+									<c:out value="${pageNumber}" />
+								</c:otherwise>
+
+							</c:choose>
+
+							<c:if test="${pageNumber != page.totalPages}">
+	   </c:if>
+
+						</c:forEach>
+					</div>
 				</div>
 			</div>
+
 		</div>
 
-
 	</div>
-
-
-	<script>
-		document.getElementById('update').addEventListener('click',
-				function() {
-					Swal.fire({
-						icon : 'success',
-						title : '更新成功',
-						showConfirmButton : false,
-						timer : 1500
-					})
-				})
-	</script>
-
-
-
 
 
 	<!-- jQuery & Bootstrap-->

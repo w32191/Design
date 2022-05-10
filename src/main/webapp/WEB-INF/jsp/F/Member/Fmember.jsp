@@ -53,7 +53,7 @@
                         <h3 class="text-center mb-60">會員資料</h3>
                         <form:form class="form" name="member" ModelAttribute="Fmemberupdate" action="/Design/F/Fmemberupdate">
                             <label for="email">信箱</label>
-                            <input name="email" type="email" value="${account.email}" />
+                            <input name="email" type="email" value="${Faccount.email}" />
                             <label for="names">姓名</label>
                             <input name="names" type="text" value="${Fmemberupdate.names}"/>
                             <label for="phone">電話</label>

@@ -65,21 +65,6 @@
                     </div>
                 </div>
                 
-                
-            
-
-
-
-                <script>
-                
-                    document.getElementById('loginbutton').addEventListener('click' ,function(){
-                        Swal.fire({
-                            icon: 'success',
-                            title: '登入成功',
-                            showConfirmButton: false,
-                            timer: 1500
-                    })})
-                </script>
 
 
             </body>
