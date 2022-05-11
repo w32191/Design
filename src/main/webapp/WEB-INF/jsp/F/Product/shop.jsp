@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>商品</title>
+    <title>Design & Decor</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
@@ -27,11 +27,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Shop</h1>
+                        <h1>DECOR</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/Design/F/Activity/index">首頁</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"> Shop
                                     </li>
                                 </ol>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>Design & Decor</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
@@ -29,13 +29,12 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Product Details</h1>
+                        <h1>商品詳細</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Product
-                                        details
+                                    <li class="breadcrumb-item"><a href="/Design/F/Activity/index">首頁</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"> 商品詳細
                                     </li>
                                 </ol>
                             </nav>
