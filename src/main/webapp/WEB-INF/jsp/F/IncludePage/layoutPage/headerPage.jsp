@@ -179,11 +179,12 @@
                                                     <h5>My Account</h5>
                                                 </div>
                                                 <ul>
-                                                    <li><a href="login.html">My Account</a></li>
+                                                    <li><a href="/Design/F/Fmemberupdate">My Account</a></li>
                                                     <li><a href="wishlist.html">Wishlist</a></li>
                                                     <li><a href="cart.html">Cart</a></li>
                                                     <li><a href="checkout.html">Checkout</a></li>
                                                     <li><a href="register.html">Create Account</a>
+                                                    <li><a href="/Design/F/Fdologout">登出</a></li>
                                                     </li>
                                                 </ul>
                                             </div>

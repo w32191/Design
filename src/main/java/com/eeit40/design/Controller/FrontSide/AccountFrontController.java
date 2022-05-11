@@ -43,12 +43,12 @@ public class AccountFrontController {
     		if(login != null) {
     		session.setAttribute("Faccount", login);
     		System.out.println(login);
-    		mav.setViewName("F/Account/Findex");
+    		mav.setViewName("redirect:/F/Activity/index");
     		return mav;
     		}
     		return mav;
     	}
-    	mav.setViewName("F/Account/Findex");
+    	mav.setViewName("redirect:/F/Activity/index");
     	return mav;
 
     }
@@ -81,6 +81,7 @@ public class AccountFrontController {
     HttpSession session, BindingResult br) {
     	
     	if(!br.hasErrors()) {
+    		account.setPermission(1);
     	 	Account accountregister = accountService.register(account);
     	 	session.setAttribute("member", accountregister);
     	 	System.out.println(accountregister);

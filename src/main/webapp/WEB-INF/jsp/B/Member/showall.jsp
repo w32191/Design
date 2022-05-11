@@ -89,103 +89,80 @@
 	<jsp:include page="../IncludePage/layoutPage/headerPage.jsp" />
 
 	<div class="content-wrap">
+
 		<div class="main">
 			<div class="container-fluid">
+			<div class="card" style="background-color: rgb(230, 230, 230);">
+			<div class="card">
 				<div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>個人資料修改</h1>
+								<h1>會員管理</h1>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /# row -->
-				<div class="card" style="background-color: rgb(230, 230, 230);">
-					<div class="card">
-						<div class="custom-tab user-profile-tab">
-							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a aria-controls="1"
-									role="tab" data-toggle="tab">個人資料</a></li>
-							</ul>
-							<br> <br>
 
-							<form:form class="form" name="member"
-								ModelAttribute="memberupdate" action="/Design/B/memberupdate">
-								<div class="name-content">
-									<span class="contact-title">姓名:</span> <input
-										class="mail-address" type="text" id="names" name="names"
-										value="${memberupdate.names}">
-								</div>
-								<br>
-								<div class="phone-content">
-									<span class="contact-title">電話:</span> <input
-										class="phone-number" type="tel" id="phone" name="phone"
-										value="${memberupdate.phone}">
-								</div>
-								<br>
-								<div class="address-content">
-									<span class="contact-title">地址:</span> <input
-										class="mail-address" type="text" id="address" name="address"
-										value="${memberupdate.address}">
-								</div>
-								<br>
-								<div class="email-content">
-									<span class="contact-title">信箱:</span> <input
-										class="contact-email" type="email" id="email" name="email"
-										value="${Baccount.email}">
-								</div>
-								<br>
-								<div class="user-send-message">
-									<input type="submit" id="update" value="更新資料">
-								</div>
-							</form:form>
-						</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">姓名</th>
+							<th scope="col">電話</th>
+							<th>地址</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<c:forEach var="Member" items="${page.content}">
+						<tbody>
+							<tr>
+
+								<td>${Member.names}</td>
+								<td>${Member.phone}</td>
+								<td>${Member.address}</td>
+
+								<td><a href="/Design/B/edit?id=${Member.id}">編輯</a></td>
+
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+
+				<div class="row justify-content-center">
+					<div class="col-9">
+						<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+
+							<c:choose>
+								<c:when test="${page.number != pageNumber-1 }">
+									<a href="${contextRoot}/B/view?p=${pageNumber}"><c:out
+											value="${pageNumber}" /> </a>
+								</c:when>
+
+								<c:otherwise>
+									<c:out value="${pageNumber}" />
+								</c:otherwise>
+
+							</c:choose>
+
+							<c:if test="${pageNumber != page.totalPages}">
+	   </c:if>
+
+						</c:forEach>
 					</div>
 				</div>
-				<br>
-				<p>
-					<button id="MemberUpdate1">一鍵修改個資</button>
-					<button id="ReMemberUpdate2">一鍵恢復個資</button>
-				</p>
 			</div>
-		</div>
+			</div>
+			</div>
 
+		</div>
 
 	</div>
 
-	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
-	<script>
-		document.getElementById('update').addEventListener('click', function() {
-			Swal.fire({
-				icon : 'success',
-				title : '更新成功',
-				showConfirmButton : false,
-				timer : 1500
-			})
-		})
-
-		$('#MemberUpdate1').on("click", function() {
-			$('#names').val('葉阿寶');
-			$('#phone').val('0932446738');
-			$('#address').val('新北市五股區五福路11號');
-			$('#email').val('1234Abcd@gmail.com');
-		})
-
-		$('#ReMemberUpdate2').on("click", function() {
-			$('#names').val('王阿九');
-			$('#phone').val('0932234567');
-			$('#address').val('新北市三重區五華街282號');
-			$('#email').val('Abcd1234@gmail.com');
-		})
-	</script>
-
-
-
-
 
 	<!-- jQuery & Bootstrap-->
-
+	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
 	<!-- Calender -->
 	<script
 		src="${contextRoot}/static/back/assets/js/lib/jquery-ui/jquery-ui.min.js"></script>
