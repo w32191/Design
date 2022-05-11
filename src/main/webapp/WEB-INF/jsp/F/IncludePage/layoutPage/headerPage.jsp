@@ -185,6 +185,7 @@
                                                     <li><a href="checkout.html">Checkout</a></li>
                                                     <li><a href="register.html">Create Account</a>
                                                     <li><a href="/Design/F/Fdologout">登出</a></li>
+
                                                     </li>
                                                 </ul>
                                             </div>

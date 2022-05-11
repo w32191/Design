@@ -59,6 +59,7 @@
         }
         th {
             text-align: center;
+            vertical-align:middle;
         }  
         .input-group-prepend {
             margin: 20px;
@@ -89,10 +90,6 @@
                     <div class="page-header">
                         <div class="page-title">
                             <h1>Hello, <span>Welcome Here</span></h1>
-                            <!-- <button type="button" id="insertBtn"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
-                                <i class="ti-plus"></i>新增案件
-                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -100,10 +97,10 @@
                 <div class="col-lg-4 p-l-0 title-margin-left">
                     <div class="page-header">
                         <div class="page-title">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Table-Jsgrid</li>
-                            </ol>
+                            </ol> -->
                         </div>
                     </div>
                 </div>
@@ -129,13 +126,8 @@
                                                     <th>訂購總額</th>
                                                     <th>訂購明細</th>
                                                     <th>配送明細</th>
-                                                    <!-- <th><select style="border: none" id="classificationData"
-                                                                class="btn-group"></select></th>
-                                                    <th><select style="border: none" id="locationData"
-                                                                class="btn-group"></select></th> -->
                                                     <th style="width: 280px;">出貨日期</th>                
                                                     <th>
-                                
                                                         <select id="selectShippingState" style="border: none;">
                                                            <option value="">訂單狀態</option>
                                                            <option value="">所有訂單</option>
@@ -145,8 +137,6 @@
                                                            <option value="">已取消</option>
                                                        </select>
                                                     </th>
-                                                    <!-- <th>編輯</th>
-                                                    <th>刪除</th> -->
                                                 </tr>
                                                 </thead>
                                                 <tbody id="table_tbody">
@@ -161,9 +151,9 @@
                                                              <a class="showmore" style="color: #337ab7;">Show More</a>
                                                          </td>
                                                          <td>
-                                                            <button type="button" class="btn btn-warning detailBtn">明細</button>
+                                                            <button type="button" class="btn btn-warning detailBtn" style="background-color: #eca354;">明細</button>
                                                          </td>
-                                                         <td id="editShipDate">  
+                                                         <td class="editShipDate">  
                                                             <span id="showdate" class="showdate">
                                                                <c:choose>
                                                                 <c:when test="${allOrder.shippingDate != null}">
@@ -175,10 +165,10 @@
                                                              </c:choose>
                                                             </span> 
                                                         <!-- </td> -->
-                                                            <input type="date" name="editExpiryDateInput" hidden
+                                                            <input type="date" name="editExpiryDateInput" style="display: none;"
                                                                class="form-control shipDate"  value="${allOrder.shippingDate}">
                                                          </td>
-                                                         <td>
+                                                         <td class="editShipState"> 
                                                             <select class="shipStateSelect" style="border:none;">
                                                                <option id="op0">${allOrder.shipState}</option>
                                                                <option id="op1" value="">未付款</option>
@@ -197,8 +187,9 @@
                                                                         <tr>
                                                                             <th class="product-thumbnail">商品照</th>
                                                                             <th class="cart-product-name">商品</th>
+                                                                            <th class="cart-product-name">規則</th>
                                                                             <th class="product-quantity">數量</th>
-                                                                            <th class="product-price">單價</th>
+                                                                            <th class="product-price" style="text-align: center;">單價</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="orderList">
@@ -211,24 +202,31 @@
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
-
+                                        <!------分頁 ------->
+                                        <div class="container" style="text-align: center;">
                                             <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a class="page-link">Previous</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link">1</a></li>
-                                                <li class="page-item active">
-                                                        <span class="page-link">${findAllPage.number+1}
-                                                             <span class="sr-only">(current)</span>
-                                                        </span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link"
-                                                                         href="/Design/B/Cases?offset=${findAllPage.number+2}">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link">Next</a>
-                                                </li>
+                                                <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+                                                   <c:choose>
+                                                    <c:when test="${shipState !='所有訂單'}">
+
+                                                        <li class="page-item">
+                                                            <a href="/Design/B/allorder?shipState=${shipState}&p=${pageNumber}">
+                                                             <c:out value="${pageNumber}"></c:out>
+                                                            </a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item">
+                                                            <a href="/Design/B/allorder?p=${pageNumber}">
+                                                             <c:out value="${pageNumber}"></c:out>
+                                                            </a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                   </c:choose>
+                                                </c:forEach>
                                             </ul>
+                                        </div>
+                                        <!------分頁 ------->
                                         </div>
                                     </div>
                                 </div>
@@ -302,13 +300,10 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.colVis.min.js"></script>
-<%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables-init.js"></script>--%>
-
 
 <script src="${contextRoot}/static/back/universal/taiwan_districts.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<!-- <script src="${contextRoot}/static/back/universal/Case.js"></script> -->
 
 <script>
 
@@ -352,9 +347,10 @@
                 console.log(product.fkProduct.name);
                 product_data +="<tr>"
                 product_data +="<td class='product-thumbnail' ><img style='width:125px;' src='"+product.fkProduct.image01+"'></td>"
-                product_data +="<td class='product-name'>"+product.fkProduct.name+"</td>"
-                product_data +="<td class='product-price product__price-2'>"+product.orderMount+"</td>"
-                product_data +="<td class='product-price product__price-2'>$"+product.price+"</td>"
+                product_data +="<td class='product-name' style='vertical-align:middle; text-align:center;'>"+product.fkProduct.name+"</td>"
+                product_data +="<td class='product-name' style='vertical-align:middle; text-align:center;'>"+product.fkProduct.model+"</td>"
+                product_data +="<td class='product-price product__price-2' style='vertical-align:middle; text-align:center;'>"+product.orderMount+"</td>"
+                product_data +="<td class='product-price product__price-2' style='vertical-align:middle; text-align:center;'>$"+product.price+"</td>"
                 product_data += "</tr>"
                 });
               $(orderList).append(product_data);
@@ -413,7 +409,24 @@
     }); 
 
     //點選日期
+    $(".editShipDate").on("click",function(){
+        $(this).children("span").hide();
+        
+        // $(this).children("input").removeAttr("hidden");
+        $(this).children("input").css("display","block");
+    })
+    
+    $(".editShipState").on("click",function(){
+        // $(this).children("span").show();
+        $(this).closest('tr').children('td:eq(5)').children("span").show();
+        $(this).closest('tr').children('td:eq(5)').children("input").css("display","none");
+        // $(this).children("input").css("display","none");
+    })
 
+    // $(".editShipDate").on("mouseleave",function(){
+    //     $(this).children("span").show();
+    //     $(this).children("input").css("display","none");
+    // })
 
     //修改出貨日期
     $(".form-control.shipDate").on("change",function(){
@@ -440,14 +453,17 @@
                     icon: "success",
                     html: "<h5>修改成功</h5>",
                 })
+                .then(function () {
+                    location.reload();
+                //     // window.location.href='/Design/F/orderrecord';
+                //     // console.log(result)
+                });
             },
             error: function (err) {
                 console.log(err);
             }
         })
     });  
-
-
 
     //修改出貨狀態
     $(".shipStateSelect").on("change",function(){
