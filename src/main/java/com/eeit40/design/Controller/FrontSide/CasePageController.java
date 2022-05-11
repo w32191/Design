@@ -3,6 +3,7 @@ package com.eeit40.design.Controller.FrontSide;
 
 import com.eeit40.design.Dto.CaseDto;
 import com.eeit40.design.Dto.CaseQueryParams;
+import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Case;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Service.CaseService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.IOException;
@@ -72,16 +74,26 @@ public class CasePageController {
 
 
     @GetMapping("/F/Case")
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(ModelAndView mav, HttpSession session) {
+        Account account = (Account) session.getAttribute("Faccount");
+        mav.addObject("account", account);
         mav.setViewName("F/Case/Case");
         return mav;
     }
 
-    @GetMapping("/F/viewCase/{id}")
-    public ModelAndView viewCase(ModelAndView mav, @PathVariable Integer id) {
+    @GetMapping("/F/ViewCase/{id}")
+    public ModelAndView viewCase(ModelAndView mav,
+                                 @PathVariable Integer id,
+                                 HttpSession session) {
         Case aCase = caseService.getCaseById(id);
+        Account account = (Account) session.getAttribute("Faccount");
+        if (account != null) {
+            mav.addObject("memberId", account.getMembers().getId());
+        } else {
+            mav.addObject("memberId", -1);
+        }
         mav.addObject("aCase", aCase);
-        mav.setViewName("F/Case/viewCase");
+        mav.setViewName("F/Case/ViewCase");
         return mav;
     }
 
@@ -150,6 +162,16 @@ public class CasePageController {
     @GetMapping("/F/Case/{id}")
     public ResponseEntity<Case> getCase(@PathVariable Integer id) {
         Case aCase = caseService.getCaseById(id);
+        if (aCase != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(aCase);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/F/CaseByMemberId/{fk_member_id}")
+    public ResponseEntity<List<Case>> getCaseByMemberId(@PathVariable Integer fk_member_id) {
+        List<Case> aCase = caseService.getCaseByMemberId(fk_member_id);
         if (aCase != null) {
             return ResponseEntity.status(HttpStatus.OK).body(aCase);
         } else {

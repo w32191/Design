@@ -44,7 +44,7 @@ public class DesignDaoImpl {
         return total;
     }
 
-    public List<Design> getDesigns(DesignQueryParams designQueryParams){
+    public List<Design> getDesigns(DesignQueryParams designQueryParams) {
 
         String sql = " SELECT * FROM design_service ";
 
@@ -54,7 +54,7 @@ public class DesignDaoImpl {
 
         sql = sql + " ORDER BY " + designQueryParams.getOrderBy() + " " + designQueryParams.getSort();
 
-        sql = sql + " OFFSET :offset ROWS FETCH NEXT :fetchNext ROWS ONLY " ;
+        sql = sql + " OFFSET :offset ROWS FETCH NEXT :fetchNext ROWS ONLY ";
         map.put("fetchNext", designQueryParams.getFetchNext());
         map.put("offset", designQueryParams.getOffset());
 
@@ -78,19 +78,53 @@ public class DesignDaoImpl {
         }
     }
 
+    public List<Design> getDesignByMemberId(Integer fk_member_id){
+        String sql = " SELECT * FROM design_service WHERE fk_member_id=:memberId ORDER BY create_time desc ";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("memberId",fk_member_id);
+
+        List<Design> designList = namedParameterJdbcTemplate.query(sql, map, new DesignRowMapper());
+
+        if (designList.size() > 0) {
+            return designList;
+        } else {
+            return null;
+        }
+    }
+
     public Integer createDesign(DesignDto designDto) {
-        String sql = " INSERT INTO design_service (name, classification, message, price, cover_photo, title, create_time, photo_1, photo_2) " +
-                " VALUES (:name, :classification, :message, :price, :coverPhoto, :title ,:createTime ,:photo_1 ,:photo_2 ) ";
+        String sql = " INSERT INTO design_service (name, style, location, message, price, cover_photo, title, create_time, photo_1, photo_2, fk_member_id) " +
+                " VALUES (:name, :style, :location, :message, :price, :coverPhoto, :title ,:createTime ,:photo_1 ,:photo_2 ,:memberId ) ";
         Map<String, Object> map = new HashMap<>();
         map.put("name", designDto.getName());
-        map.put("classification", designDto.getClassification());
+        map.put("style", designDto.getStyle());
         map.put("message", designDto.getMessage());
         map.put("price", designDto.getPrice());
-        map.put("coverPhoto", designDto.getCoverPhoto());
         map.put("title", designDto.getTitle());
         map.put("createTime", designDto.getCreateTime());
-        map.put("photo_1", designDto.getPhoto_1());
-        map.put("photo_2", designDto.getPhoto_2());
+
+        if (designDto.getCoverPhoto().length() < 10) {
+            map.put("coverPhoto", null);
+        } else {
+            map.put("coverPhoto", designDto.getCoverPhoto());
+        }
+        if (designDto.getPhoto_1().length() < 10) {
+            map.put("photo_1", null);
+        } else {
+            map.put("photo_1", designDto.getPhoto_1());
+        }
+        if (designDto.getPhoto_2().length() < 10) {
+            map.put("photo_2", null);
+        } else {
+            map.put("photo_2", designDto.getPhoto_2());
+        }
+        if (designDto.getFk_member_id() != null) {
+            map.put("memberId", designDto.getFk_member_id());
+        } else {
+            map.put("memberId", null);
+        }
+        map.put("location", designDto.getLocation());
 
 //        if (designDto.getCoverPhoto().length() < 10) {
 //            map.put("coverPhoto", null);
@@ -115,15 +149,15 @@ public class DesignDaoImpl {
         String sql = " DELETE FROM design_service WHERE id=:id ";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("id",id);
+        map.put("id", id);
 
-        namedParameterJdbcTemplate.update(sql,map);
+        namedParameterJdbcTemplate.update(sql, map);
     }
 
-    public void updateDesign(Integer id, DesignDto designDto){
+    public void updateDesign(Integer id, DesignDto designDto) {
 
         String sql = "UPDATE design_service " +
-                " SET name = :name, title = :title ,classification = :classification , message = :message, " +
+                " SET name = :name, title = :title ,style = :style ,location = :location ,message = :message, " +
                 " price = :price, cover_photo = :coverPhoto, photo_1 = :photo_1, photo_2 = :photo_2 " + //冒號後的文字要跟ＭＡＰ的ＫＥＹ是一樣
                 " WHERE id = :id ";
 
@@ -131,12 +165,25 @@ public class DesignDaoImpl {
         map.put("id", id);
         map.put("name", designDto.getName());
         map.put("title", designDto.getTitle());
-        map.put("classification", designDto.getClassification());
+        map.put("style", designDto.getStyle());
         map.put("message", designDto.getMessage());
         map.put("price", designDto.getPrice());
-        map.put("coverPhoto", designDto.getCoverPhoto());
-        map.put("photo_1", designDto.getPhoto_1());
-        map.put("photo_2", designDto.getPhoto_2());
+        if (designDto.getCoverPhoto().length() < 10) {
+            map.put("coverPhoto", null);
+        } else {
+            map.put("coverPhoto", designDto.getCoverPhoto());
+        }
+        if (designDto.getPhoto_1().length() < 10) {
+            map.put("photo_1", null);
+        } else {
+            map.put("photo_1", designDto.getPhoto_1());
+        }
+        if (designDto.getPhoto_2().length() < 10) {
+            map.put("photo_2", null);
+        } else {
+            map.put("photo_2", designDto.getPhoto_2());
+        }
+        map.put("location", designDto.getLocation());
 
         namedParameterJdbcTemplate.update(sql, map);
     }
@@ -146,7 +193,7 @@ public class DesignDaoImpl {
 
         // 查詢條件
         if (designQueryParams.getSearch() != null) {
-            sql = sql + " WHERE CONCAT (classification , name ) LIKE :search ";
+            sql = sql + " WHERE CONCAT (style , location , name ) LIKE :search ";
 
 //            map.put("search", caseQueryParams.getSearch());
             map.put("search", "%" + designQueryParams.getSearch() + "%");
