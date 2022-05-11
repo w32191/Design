@@ -59,9 +59,13 @@ public class OrderInformationBackController {
 		if(shipState !=null) {
 			
 		// 商城訂單查詢-依ship_state
-		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
-		mav.getModel().put("allOrder", shipStateDetail);
-		System.out.println(shipStateDetail);
+		Page<OrderInformation> statePage = orderImformationService.findByShipState(shipState,pageNumber);	
+		List<OrderInformation> shipPageContent = statePage.getContent();
+		mav.getModel().put("allOrder", shipPageContent);
+		mav.getModel().put("page", statePage);
+//		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
+//		mav.getModel().put("allOrder", shipStateDetail);
+//		System.out.println(shipStateDetail);
 		
 		}else {
 		
@@ -94,15 +98,15 @@ public class OrderInformationBackController {
 	}
 
 	// 商城訂單查詢-依ship_state（暫與全部查詢一起使用）
-	@GetMapping("B/shipStatedetail")
-	public ModelAndView selectByShipState(ModelAndView mav, HttpServletRequest request) {
-
-		String shipState = request.getParameter("shipState");
-		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
-		mav.getModel().put("shipStateDetail", shipStateDetail);
-		
-		return mav;
-	}
+//	@GetMapping("B/shipStatedetail")
+//	public ModelAndView selectByShipState(ModelAndView mav, HttpServletRequest request) {
+//
+//		String shipState = request.getParameter("shipState");
+//		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
+//		mav.getModel().put("shipStateDetail", shipStateDetail);
+//		
+//		return mav;
+//	}
 
 	// 商城訂單查詢-依order_date（目前尚未使用）
 	@GetMapping("B/orderdatedetail")
@@ -181,10 +185,8 @@ public class OrderInformationBackController {
 		
 		mav.setViewName("/B/ShoppingCart/OrderImforBack");
 		Page<OrderInformation> page = orderImformationService.findByPage(pageNumber);
+		
 		mav.getModel().put("page", page);
-//		mav.setViewName("");
-//		mav.setViewName("redirect:/B/allorder");
-//		mav.setViewName("/B/allorder");
 		return mav;
 	}
 }

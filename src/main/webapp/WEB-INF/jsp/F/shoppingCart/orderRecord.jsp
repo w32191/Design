@@ -97,11 +97,22 @@
                                             <div class="page__title-breadcrumb">
                                                 <nav aria-label="breadcrumb">
                                                     <ol class="breadcrumb justify-content-center">
-                                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                        <li class="breadcrumb-item"><a href="index.html" style="color: #323232;">Home</a></li>
                                                         <li class="breadcrumb-item active" aria-current="page">
                                                             Order Record
                                                         </li>
                                                     </ol>
+                                                    <c:choose>
+										                <c:when test="${orderRecord.size() < 1}">
+										                   <div style="margin-top: 10px; color: #bc8246; font-weight: 400;font-size: 14px; font-family: Poppins, sans-serif;">
+										                    <span>查無訂購紀錄</span> |
+										                    <a href="Product/"><button type="button" style="padding: 5px; color: #bc8246;">
+                                                            回到商城<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                                            </svg></button></a>
+										                   </div>
+										                </c:when>
+									                </c:choose>
                                                 </nav>
                                             </div>
                                         </div>
@@ -118,16 +129,9 @@
                                     <div class="col-12">
                                         <!-- <form action="#"> -->
                                         <div class="table-content table-responsive">
-                                            <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-                                            <!-- <div class="col-12"> -->
-                                            <div class="wrapper">
-                                                <!-- <header>
-                                            <div class="container">
-                                            <h1 class="col-lg-9">How to slideToggle a table row</h1>
-                                            </div>
-                                            </header>
-                                           <div class="container">
-                                            <h5>Author: Julian Hansen</h5> -->
+                                           <c:choose>
+                                             <c:when test="${orderRecord.size() > 0}">
+                                              <div class="wrapper">
                                                 <table class="table mytable" width="100%" style="table-layout:fixed">
                                                     <tr>
                                                         <th class="product-thumbnail">訂單編號</th>
@@ -176,6 +180,7 @@
                                                                             <tr>
                                                                                 <th class="product-thumbnail">商品照</th>
                                                                                 <th class="cart-product-name">商品</th>
+                                                                                <th class="cart-product-name">規格</th>
                                                                                 <th class="product-quantity">數量</th>
                                                                                 <th class="product-price">單價</th>
                                                                             </tr>
@@ -190,8 +195,23 @@
                                                     </c:forEach>
                                                 </table>
                                             </div>
+                                        </c:when>
+                                    </c:choose>
+                                            <!------分頁 ------->
+                                            <div class="container" style="text-align: center;">
+                                                <ul class="pagination">
+                                                    <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+
+                                                            <li class="page-item">
+                                                                <a href="/Design/F/orderrecord?p=${pageNumber}">
+                                                                 <c:out value="${pageNumber}"></c:out>
+                                                                </a>
+                                                            </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                            <!------分頁 ------->
                                         </div>
-                                        <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
                                     </div>
                                     <!-- </form> -->
                                 </div>
@@ -250,9 +270,10 @@
                                             console.log(product.fkProduct.name);
                                             product_data +="<tr>"
                                             product_data +="<td class='product-thumbnail'><img src='"+product.fkProduct.image01+"'></td>"
-                                            product_data +="<td class='product-name'>"+product.fkProduct.name+"</td>"
-                                            product_data +="<td class='product-price product__price-2'>"+product.orderMount+"</td>"
-                                            product_data +="<td class='product-price product__price-2'>$"+product.price+"</td>"
+                                            product_data +="<td class='product-name' style='vertical-align:middle;'>"+product.fkProduct.name+"</td>"
+                                            product_data +="<td class='product-name'style='vertical-align:middle;'>"+product.fkProduct.model+"</td>"
+                                            product_data +="<td class='product-price product__price-2'style='vertical-align:middle;'>"+product.orderMount+"</td>"
+                                            product_data +="<td class='product-price product__price-2'style='vertical-align:middle;'>$"+product.price+"</td>"
                                             product_data += "</tr>"
                                             });
                                         $(orderList).append(product_data);

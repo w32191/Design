@@ -52,62 +52,20 @@
     <!-- page title area end -->
 
     <!-- coupon-area start -->
-    <section class="coupon-area pt-100 pb-30">
+    <section class="coupon-area pt-100 pb-30" style="padding-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="coupon-accordion">
                         <!-- ACCORDION START -->
-                        <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
-                        <div id="checkout-login" class="coupon-content">
-                            <div class="coupon-info">
-                                <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere
-                                    lacinia. Cras sed est
-                                    sit amet ipsum luctus.</p>
-                                <form action="#">
-                                    <p class="form-row-first">
-                                        <label>Username or email <span
-                                                class="required">*</span></label>
-                                        <input type="text"/>
-                                    </p>
-                                    <p class="form-row-last">
-                                        <label>Password <span class="required">*</span></label>
-                                        <input type="text"/>
-                                    </p>
-                                    <p class="form-row">
-                                        <button class="os-btn os-btn-black" type="submit">Login
-                                        </button>
-                                        <label>
-                                            <input type="checkbox"/>
-                                            Remember me
-                                        </label>
-                                    </p>
-                                    <p class="lost-password">
-                                        <a href="#">Lost your password?</a>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
+                        <h3></h3>
                         <!-- ACCORDION END -->
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="coupon-accordion">
                         <!-- ACCORDION START -->
-                        <h3>Have a coupon? <span
-                                id="showcoupon">Click here to enter your code</span></h3>
-                        <div id="checkout_coupon" class="coupon-checkout-content">
-                            <div class="coupon-info">
-                                <form action="#">
-                                    <p class="checkout-coupon">
-                                        <input type="text" placeholder="Coupon Code"/>
-                                        <button class="os-btn os-btn-black" type="submit">Apply
-                                            Coupon
-                                        </button>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
+                        <h3></h3>
                         <!-- ACCORDION END -->
                     </div>
                 </div>
@@ -122,54 +80,31 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="checkbox-form ">
-                            <h3>Billing Details</h3>
+                            <h3>寄送資訊</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>Recipient <span
+                                        <label>收件人 <span
                                                 class="required">*</span></label>
                                         <input type="text" name="recipient" id="recipient" placeholder=""/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>Phone No <span class="required">*</span></label>
+                                        <label>聯絡電話 <span class="required">*</span></label>
                                         <input type="text" name="phone" id="phone" placeholder=""/>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Email <span class="required">*</span></label>
-                                        <input type="email" placeholder=""/>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-12" style="height: 30px;">
                                     <div class="checkout-form-list">
-                                        <label>Address 
+                                        <label>收件地址 
                                             <span class="required">*</span>
                                         </label>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Postcode / Zip 
-                                            <span class="required">*</span>
-                                        </label>
-                                        <select id="zip"></select> -->
-                                        <!-- <input type="text" placeholder="Postcode / Zip"/> -->
-                                    <!-- </div>
-                                </div>
-                                <div class="col-md-6" style="visibility: hidden;">
-                                    <div class="checkout-form-list">
-                                        <label>
-                                            <span class="required">*</span>
-                                        </label>
-                                        <input type="text" placeholder=""/>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-6">
                                     <div class="country-select">
-                                        <label>State / County  
+                                        <label>市/縣 
                                             <!-- <span class="required">*</span> -->
                                         </label>
                                         <select id="country"></select>
@@ -178,7 +113,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="country-select">
-                                        <label>Town / City
+                                        <label>鄉/鎮
                                             <!-- <span class="required">*</span> -->
                                         </label>
                                         <select id="district"></select>
@@ -187,19 +122,12 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <input type="text" id="street" placeholder="Street address"/>
+                                        <input type="text" id="street" placeholder="街道鄰里"/>
                                     </div>
                                 </div>
                                 <div style="display: none;">
                                     <input type="text" id="address" name="address">
                                 </div>
-
-                                <!-- <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)"/>
-                                    </div>
-                                </div> -->
-                                
                             </div>
                             <div class="different-address" style="visibility: hidden;">
                                 <div id="ship-box-info">
@@ -209,22 +137,22 @@
                             </div>
                             <div class="order-notes">
                                 <div class="checkout-form-list">
-                                    <label>Order Notes</label>
+                                    <label>訂單備註</label>
                                     <textarea id="checkout-mess" name="notes" cols="30" rows="10"
-                                              placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                              placeholder=""></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="your-order mb-30 ">
-                            <h3>Your order</h3>
+                            <h3>訂購明細</h3>
                             <div class="your-order-table table-responsive">
                                 <table>
                                     <thead>
                                     <tr>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-total" style="text-align:center">Total</th>
+                                        <th class="product-name">商品</th>
+                                        <th class="product-total" style="text-align:center">小計</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -232,7 +160,7 @@
                                     <c:forEach var="ccl" items="${checkoutCartList}">
                                     <tr class="cart_item">
                                         <td class="product-name">
-                                            ${ccl.name} <strong class="product-quantity"> ×
+                                            ${ccl.name}[${ccl.model}] <strong class="product-quantity"> ×
                                             ${ccl.tempMount}</strong>
                                         </td>
                                         <td class="product-total" style="text-align:center">
@@ -245,33 +173,15 @@
                                     <tfoot>
                                         <!-- 金額 -->
                                         <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
+                                            <th>購物車小計</th>
                                             <td style="text-align:center"><span class="amount" id="cart-subtotal" ></span></td>
                                         </tr>
                                         <tr class="cart-discount">
-                                            <th>Discount</th>
+                                            <th>折扣</th>
                                             <td style="text-align:center"><span class="discount" id="cart-discount">${discount}</span></td>
                                         </tr>    
-                                        <!-- <tr class="shipping">
-                                        <th>Shipping</th>
-                                        <td>
-                                            <ul>
-                                                <li>
-                                                    <input type="radio"/>
-                                                    <label>
-                                                        Flat Rate: <span class="amount">$7.00</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <input type="radio"/>
-                                                    <label>Free Shipping:</label>
-                                                </li>
-                                                <li></li>
-                                            </ul>
-                                        </td>
-                                    </tr> -->
                                     <tr class="order-total">
-                                        <th>Order Total</th>
+                                        <th>總金額</th>
                                         <td style="text-align:center"><strong><span class="amount" id="order-total" ></span></strong>
                                         </td>
                                     </tr>
@@ -282,7 +192,7 @@
 
                             <div class="payment-method">
                                 <div class="accordion" id="accordionExample">
-                                    <!-- <div class="card">
+                                    <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h5 class="mb-0">
                                                 <button class="btn-link" type="button"
@@ -290,7 +200,7 @@
                                                         data-target="#collapseOne"
                                                         aria-expanded="true"
                                                         aria-controls="collapseOne">
-                                                    Direct Bank Transfer
+                                                    轉帳
                                                 </button>
                                             </h5>
                                         </div>
@@ -299,15 +209,13 @@
                                              aria-labelledby="headingOne"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                                Make your payment directly into our bank account.
-                                                Please use your Order ID
-                                                as the payment
-                                                reference. Your order won’t be
-                                                shipped until the funds have cleared in our account.
+                                                ***轉帳後請告知匯款帳號後五碼及匯款日期***<br>
+                                                ***對帳完成後立即出貨***
+                                                
                                             </div>
                                         </div>
-                                    </div> -->
-                                    <div class="card">
+                                    </div>
+                                    <!-- <div class="card">
                                         <div class="card-header" id="headingTwo">
                                             <h5 class="mb-0">
                                                 <button class="btn-link collapsed" type="button"
@@ -319,7 +227,7 @@
                                                 </button>
                                             </h5>
                                         </div>
-                                        <!-- <div id="collapseTwo" class="collapse"
+                                        <div id="collapseTwo" class="collapse"
                                              aria-labelledby="headingTwo"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
@@ -328,9 +236,9 @@
                                                 State / County, Store
                                                 Postcode.
                                             </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="card">
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="card">
                                         <div class="card-header" id="headingThree">
                                             <h5 class="mb-0">
                                                 <button class="btn-link collapsed" type="button"
@@ -342,7 +250,7 @@
                                                 </button>
                                             </h5>
                                         </div>
-                                        <!-- <div id="collapseThree" class="collapse"
+                                        <div id="collapseThree" class="collapse"
                                              aria-labelledby="headingThree"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
@@ -350,11 +258,11 @@
                                                 you don’t have a
                                                 PayPal account.
                                             </div>
-                                        </div> -->
-                                    </div>
+                                        </div>
+                                    </div> -->
                                 </div>
                                 <div class="order-button-payment mt-20">
-                                    <button type="submit" class="os-btn os-btn-black" id="submit">Place order </button>
+                                    <button type="submit" class="os-btn os-btn-black" id="submit"style="font-size:14px;">送出訂單</button>
                                 </div>
                             </div>
                         </div>
@@ -462,6 +370,12 @@
                 notes:note,
                 orderTotal:orderTotal
             },
+            beforeSend: function () {
+                swal.fire({
+                    html: '<h5>訂單送出...</h5>',
+                    showConfirmButton: false,
+                });
+            },
             success:function(result){
                 swal.fire({
                     icon: "success",
@@ -480,6 +394,22 @@
         
     })
 
+    //一鍵輸入
+    $("#recipient").click(function(){
+        $(this).val("洪大寶");
+    })
+    
+    $("#phone").click(function(){
+        $(this).val("0983145678");
+    })
+
+    $("#street").click(function(){
+        $(this).val("復興南路一段390號15樓");
+    })
+
+    $("#checkout-mess").click(function(){
+        $(this).val("送貨前請先電話聯絡! 謝謝~");
+    })
 
 </script>
 

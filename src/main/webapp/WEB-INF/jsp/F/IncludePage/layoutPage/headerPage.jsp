@@ -184,6 +184,8 @@
                                                     <li><a href="cart.html">Cart</a></li>
                                                     <li><a href="checkout.html">Checkout</a></li>
                                                     <li><a href="register.html">Create Account</a>
+                                                     <li><a href="/Design/F/Fdologout">Log Out</a>
+                                                    
                                                     </li>
                                                 </ul>
                                             </div>

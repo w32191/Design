@@ -41,7 +41,7 @@ public class AccountFrontController {
     	if(!br.hasErrors()) {
     		Account login = accountService.login(email, pwd);
     		if(login != null) {
-    		session.setAttribute("account", login);
+    		session.setAttribute("Faccount", login);
     		System.out.println(login);
     		mav.setViewName("F/Account/Findex");
     		return mav;

@@ -59,6 +59,7 @@
         }
         th {
             text-align: center;
+            vertical-align:middle;
         }  
         .input-group-prepend {
             margin: 20px;
@@ -96,10 +97,10 @@
                 <div class="col-lg-4 p-l-0 title-margin-left">
                     <div class="page-header">
                         <div class="page-title">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Table-Jsgrid</li>
-                            </ol>
+                            </ol> -->
                         </div>
                     </div>
                 </div>
@@ -150,7 +151,7 @@
                                                              <a class="showmore" style="color: #337ab7;">Show More</a>
                                                          </td>
                                                          <td>
-                                                            <button type="button" class="btn btn-warning detailBtn">明細</button>
+                                                            <button type="button" class="btn btn-warning detailBtn" style="background-color: #eca354;">明細</button>
                                                          </td>
                                                          <td class="editShipDate">  
                                                             <span id="showdate" class="showdate">
@@ -186,8 +187,9 @@
                                                                         <tr>
                                                                             <th class="product-thumbnail">商品照</th>
                                                                             <th class="cart-product-name">商品</th>
+                                                                            <th class="cart-product-name">規則</th>
                                                                             <th class="product-quantity">數量</th>
-                                                                            <th class="product-price">單價</th>
+                                                                            <th class="product-price" style="text-align: center;">單價</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="orderList">
@@ -204,13 +206,23 @@
                                         <div class="container" style="text-align: center;">
                                             <ul class="pagination">
                                                 <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+                                                   <c:choose>
+                                                    <c:when test="${shipState !='所有訂單'}">
 
-                                                    <li class="page-item">
-                                                        <a href="/Design/B/allorder?p=${pageNumber}">
-                                                        <c:out value="${pageNumber}"></c:out>
-                                                        </a>
-                                                    </li>
-
+                                                        <li class="page-item">
+                                                            <a href="/Design/B/allorder?shipState=${shipState}&p=${pageNumber}">
+                                                             <c:out value="${pageNumber}"></c:out>
+                                                            </a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item">
+                                                            <a href="/Design/B/allorder?p=${pageNumber}">
+                                                             <c:out value="${pageNumber}"></c:out>
+                                                            </a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                   </c:choose>
                                                 </c:forEach>
                                             </ul>
                                         </div>
@@ -335,9 +347,10 @@
                 console.log(product.fkProduct.name);
                 product_data +="<tr>"
                 product_data +="<td class='product-thumbnail' ><img style='width:125px;' src='"+product.fkProduct.image01+"'></td>"
-                product_data +="<td class='product-name'>"+product.fkProduct.name+"</td>"
-                product_data +="<td class='product-price product__price-2'>"+product.orderMount+"</td>"
-                product_data +="<td class='product-price product__price-2'>$"+product.price+"</td>"
+                product_data +="<td class='product-name' style='vertical-align:middle; text-align:center;'>"+product.fkProduct.name+"</td>"
+                product_data +="<td class='product-name' style='vertical-align:middle; text-align:center;'>"+product.fkProduct.model+"</td>"
+                product_data +="<td class='product-price product__price-2' style='vertical-align:middle; text-align:center;'>"+product.orderMount+"</td>"
+                product_data +="<td class='product-price product__price-2' style='vertical-align:middle; text-align:center;'>$"+product.price+"</td>"
                 product_data += "</tr>"
                 });
               $(orderList).append(product_data);

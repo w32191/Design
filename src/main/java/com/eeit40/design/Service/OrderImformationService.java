@@ -45,6 +45,15 @@ public class OrderImformationService {
 		return orderDetail;
 	}
 	
+	//會員訂單查詢分頁
+	public Page<OrderInformation> findByAccountId(int fkAccount,Integer pageNumber) {
+			
+		Pageable request = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "id");
+		Page<OrderInformation> page = orderInformation.findByAccountId(fkAccount,request);
+		
+		return page;
+		}
+	
 	//會員訂單明細查詢
 	public List<OrderList> selectByImforId(int fkOrderImformation) {
 
@@ -68,12 +77,12 @@ public class OrderImformationService {
 	}
 	
 	//商城訂單查詢-依ship_state
-	public List<OrderInformation> selectByShipState(String shipState){
-		
-		List<OrderInformation> shipStateDetail= orderInformation.selectByShipState(shipState);
-		
-		return shipStateDetail;
-	}
+//	public List<OrderInformation> selectByShipState(String shipState){
+//		
+//		List<OrderInformation> shipStateDetail= orderInformation.selectByShipState(shipState);
+//		
+//		return shipStateDetail;
+//	}
 	
 	//商城訂單查詢-依order_date
 	public List<OrderInformation> selectByOrderDate(Date orderDate){
@@ -106,5 +115,11 @@ public class OrderImformationService {
 		return page;
 	}
 	
-	
+	//商家訂單狀態分頁
+	public Page<OrderInformation> findByShipState(String shipState ,Integer pageNumber){
+		
+		Pageable request = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "id");
+		Page<OrderInformation> page = orderInformation.findByShipState(shipState,request);
+		return page;
+	}
 }
