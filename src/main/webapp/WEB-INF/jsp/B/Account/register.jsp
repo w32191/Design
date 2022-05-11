@@ -18,8 +18,7 @@
 </head>
 
 <body class="bg-primary">
-
-	<div class="unix-login">
+<div class="unix-login">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
@@ -65,7 +64,7 @@
 	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
 	<script type="text/javascript">
 		$('#putemailpwd').on("click", function() {
-			$('#email').val('Asdf1234gmail.com');
+			$('#email').val('Asdf1234@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
 	</script>

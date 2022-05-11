@@ -29,10 +29,10 @@
 				<div class="col-lg-6">
 					<div class="login-content">
 						<div class="login-logo">
-							<a><span>Design後台系統</span></a>
+							<a><span>DESIGN & DECOR 後台系統</span></a>
 						</div>
 						<div class="login-form">
-							<h4>登入Design</h4>
+							<h4>登入 DESIGN & DECOR 後台</h4>
 							<form:form class="form" name="account" ModelAttribute="login"
 								action="/Design/B/login">
 								<form:errors name="*" />
@@ -53,27 +53,27 @@
 										class="btn btn-primary btn-flat m-b-30 m-t-30">登入</button>
 								</div>
 							</form:form>
-							
+
 							<p></p>
 							<div class="register-link m-t-15 text-center">
 								<p>
-									還不是會員嗎?<a href="/Design/B/register"> 立即加入</a>
+									註冊員工<a href="/Design/B/register"> 立即加入</a>
 								</p>
-                                
-                                    
-                                
+
+
+
 							</div>
 
 						</div>
-                        <div class="card">
-                         <p>
-                            <button id="one">超級帳號</button>
-                            <button id="two">一般帳號</button>
-                            <button id="three">修改個資後帳號</button>
-                        </p>
-                        </div>
+						<div class="card">
+							<p>
+								<button id="one">超級帳號</button>
+								<button id="two">一般帳號</button>
+								<button id="three">修改個資後帳號</button>
+							</p>
+						</div>
 					</div>
-                    
+
 				</div>
 			</div>
 		</div>
@@ -85,39 +85,63 @@
 			$('#pwd').val('Passw0rd');
 		})
 
-        $('#two').on("click", function() {
+		$('#two').on("click", function() {
 			$('#email').val('Abcd1234@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
 
-        $('#three').on("click", function() {
+		$('#three').on("click", function() {
 			$('#email').val('1234Abcd@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
-    
-  document.getElementById('loginbutton').addEventListener('click', function () {
-    Swal.fire({
-      icon: 'success',
-      title: '登入成功',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  })
-</script>
-  
-<c:choose>
-    <c:when test="${errorMsg!=null}">
-        <script>
-          Swal.fire({
-            position: 'top',
-            icon: 'error',
-            title: '請先登入！！',
-            showConfirmButton: false,
-            timer: 1500
-          });
-        </script>
-    </c:when>
-</c:choose>
+
+		document.getElementById('loginbutton').addEventListener('click',
+				function() {
+					Swal.fire({
+						icon : 'success',
+						title : '登入成功',
+						showConfirmButton : false,
+						timer : 1500
+					})
+				})
+	</script>
+
+	<c:choose>
+		<c:when test="${errorMsg!=null}">
+			<script>
+				Swal.fire({
+					position : 'top',
+					icon : 'error',
+					title : '請先登入！！',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+		</c:when>
+		<c:when test="${RegisterResult == 'Success'}">
+			<script>
+				Swal.fire({
+					position : 'top',
+					icon : 'success',
+					title : '註冊成功！！',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+		</c:when>
+		<c:when test="${RegisterResult == 'Error'}">
+		<script>
+				Swal.fire({
+					position : 'top',
+					icon : 'error',
+					title : '註冊失敗！！',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+		</c:when>
+	
+	</c:choose>
 
 </body>
 
