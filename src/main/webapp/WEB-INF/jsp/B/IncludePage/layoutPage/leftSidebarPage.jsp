@@ -50,6 +50,8 @@
 
 				<li><a href="/Design/B/Case"><i class="ti-layout-tab"></i>
 						Case管理</a></li>
+				<li><a href="/Design/B/Design"><i class="ti-layout-tab"></i>
+					Design管理</a></li>
 
 				<li><a href="/Design/B/CommonQuestion"><i
 						class="ti-layout-tab"></i> 常見問題管理</a></li>
