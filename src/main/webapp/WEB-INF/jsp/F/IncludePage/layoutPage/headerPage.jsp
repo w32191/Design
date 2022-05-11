@@ -173,14 +173,22 @@
                                                     <h6>My Account</h6>
                                                 </div>
                                                 <ul>
-                                                    <li><a href="/Design/F/Fmemberupdate">會員資料</a></li>
-                                                    <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
-<%--                                                    <li><a href="wishlist.html">Wishlist</a></li>--%>
-<%--                                                    <li><a href="cart.html">Cart</a></li>--%>
-<%--                                                    <li><a href="checkout.html">Checkout</a></li>--%>
-<%--                                                    <li><a href="register.html">Create Account</a>--%>
-                                                    <li><a href="/Design/F/Fregister">註冊</a></li>
-                                                    <li><a href="/Design/F/Fdologout">登出</a></li>
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.Faccount == null}">
+                                                            <li><a href="/Design/F/Flogin">登入</a></li>
+                                                            <li><a href="/Design/F/Fregister">註冊</a></li>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <li><a href="/Design/F/Fmemberupdate">會員資料</a></li>
+                                                            <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
+                                                            <%--                                                    <li><a href="wishlist.html">Wishlist</a></li>--%>
+                                                            <%--                                                    <li><a href="cart.html">Cart</a></li>--%>
+                                                            <%--                                                    <li><a href="checkout.html">Checkout</a></li>--%>
+                                                            <%--                                                    <li><a href="register.html">Create Account</a>--%>
+                                                            <li><a href="/Design/F/Fdologout">登出</a></li>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
                                                 </ul>
                                             </div>
                                         </li>
