@@ -81,7 +81,7 @@
 													<c:choose>
 														<c:when test="${page.number != pageNumber-1 }">
 															<a
-																href="${contextRoot}/B/Announcement/viewMessages?p=${pageNumber}"><c:out
+																href="${contextRoot}/F/Announcement/viewMessages?p=${pageNumber}"><c:out
 																	value="${pageNumber}" /> </a>
 														</c:when>
 
