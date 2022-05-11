@@ -34,6 +34,11 @@ public class DesignServiceImpl implements DesignService {
     }
 
     @Override
+    public List<Design> getDesignByMemberId(Integer fk_member_id) {
+        return designRepository.getDesignByMemberId(fk_member_id);
+    }
+
+    @Override
     public Integer createDesign(DesignDto designDto) {
         return designRepository.createDesign(designDto);
     }

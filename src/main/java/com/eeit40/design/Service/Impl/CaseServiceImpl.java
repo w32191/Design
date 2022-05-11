@@ -34,6 +34,11 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
+    public List<Case> getCaseByMemberId(Integer fk_member_id) {
+        return caseRepository.getCaseByMemberId(fk_member_id);
+    }
+
+    @Override
     public Integer createCase(CaseDto caseDto) {
         return caseRepository.createCase(caseDto);
     }

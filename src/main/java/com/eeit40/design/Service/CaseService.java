@@ -24,6 +24,8 @@ public interface CaseService {
 
     String uploadImg (CaseDto caseDto);
 
+    List<Case> getCaseByMemberId(Integer fk_member_id);
+
 
 //    @Autowired
 //    private CaseRepository caseDao;
