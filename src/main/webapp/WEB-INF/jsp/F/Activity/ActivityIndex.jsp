@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 
@@ -31,33 +32,66 @@
     <section class="slider__area p-relative">
         <div class="slider-active">
             <c:forEach items="${allActivity}" var="ac">
-                <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
-                           step="1">
-
-                    <div class="single-slider slider__height d-flex align-items-center"
-                         data-background="${img.link}">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
-                                    <div class="slider__content">
-                                        <h2 data-animation="fadeInUp"
-                                            data-delay=".2s">${ac.subject}</h2>
-                                        <p data-animation="fadeInUp"
-                                           data-delay=".4s">${ac.content}</p>
-                                        <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：</p>
-                                        <p data-animation="fadeInUp"
-                                           data-delay=".4s">${ac.discountPercentage}%</p>
-
-                                        <a href="/Design/F/Activity/productList/${ac.id}" class="os-btn os-btn-2"
-                                           data-animation="fadeInUp" data-delay=".6s">Discover
-                                            now</a>
+                <fmt:parseDate value="${ac.startDate}" pattern="yyyy-MM-dd" var="parsedStartDate" type="date"/>
+                <fmt:parseDate value="${ac.endDate}" pattern="yyyy-MM-dd" var="parsedEndDate" type="date"/>
+                <c:choose>
+                    <c:when test="${ac.imgurImgs.size() == 0}">
+                        <div class="single-slider slider__height d-flex align-items-center"
+                             data-background="${contextRoot}/static/back/universal/images/no-image.jpeg">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
+                                        <div class="slider__content">
+                                            <h2 data-animation="fadeInUp"
+                                                data-delay=".2s">${ac.subject}</h2>
+                                            <p data-animation="fadeInUp"
+                                               data-delay=".4s">${ac.content}</p>
+                                            <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
+                                            <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                               data-delay=".4s">
+                                                <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
+                                                <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
+                                                    </p>
+                                            <a href="/Design/F/Activity/productList/${ac.id}"
+                                               class="os-btn os-btn-2"
+                                               data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${ac.imgurImgs}" var="img" begin="0" end="0"
+                                   step="1">
+                            <div class="single-slider slider__height d-flex align-items-center"
+                                 data-background="${img.link}">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12">
+                                            <div class="slider__content">
+                                                <h2 data-animation="fadeInUp"
+                                                    data-delay=".2s">${ac.subject}</h2>
+                                                <p data-animation="fadeInUp"
+                                                   data-delay=".4s">${ac.content}</p>
+                                                <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
+                                                <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                                   data-delay=".4s">
+                                                    <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
+                                                    <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
+                                                </p>
+                                                <a href="/Design/F/Activity/productList/${ac.id}"
+                                                   class="os-btn os-btn-2"
+                                                   data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                </c:forEach>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </div>
     </section>
@@ -71,27 +105,27 @@
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="product-details.html" class="w-img"><img
+                                <a href="${contextRoot}/F/Design" class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-1.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="product-details.html">找設計？</a>
+                                <h2><a href="${contextRoot}/F/Design">找設計？</a>
                                 </h2>
-                                <a href="product-details.html" class="link-btn">Discover now</a>
+                                <a href="${contextRoot}/F/Design" class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="product-details.html" class="w-img"><img
+                                <a href="${contextRoot}/F/Case" class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-2.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="product-details.html">找案例？</a></h2>
-                                <a href="product-details.html" class="link-btn">Discover now</a>
+                                <h2><a href="${contextRoot}/F/Case">找案例？</a></h2>
+                                <a href="${contextRoot}/F/Case" class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
@@ -108,85 +142,114 @@
                 <div class="col-xl-12">
                     <div class="section__title-wrapper text-center mb-55">
                         <div class="section__title mb-10">
-                            <h2>Trending Products</h2>
+                            <h2>折扣中商品</h2>
                         </div>
                         <div class="section__sub-title">
-                            <p>Mirum est notare quam littera gothica quam nunc putamus parum
-                                claram!</p>
+                            <p>限時促銷買到賺到！！！</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <div class="product__slider owl-carousel">
-                        <c:forEach begin="0" end="${productList.size()-1}" step="2" var="i">
-                            <div class="product__item">
-                                <div class="product__wrapper mb-60">
-                                    <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img">
-                                            <img src="${productList.get(i).image01}"
-                                                 alt="product-img">
-                                            <img class="product__thumb-2"
-                                                 src="${productList.get(i).image02}"
-                                                 alt="product-img">
-                                        </a>
-                                    </div>
-                                    <div class="product__content p-relative">
-                                        <div class="product__content-inner">
-                                            <h4><a href="product-details.html">Wooden container
-                                                Bowl</a>
-                                            </h4>
-                                            <div class="product__price transition-3">
-                                                <span>$96.00</span>
-                                                <span class="old-price">$96.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="add-cart p-absolute transition-3">
-                                            <a href="#">+ Add to Cart</a>
-                                        </div>
-                                    </div>
+                    <c:choose>
+                        <c:when test="${productList.size()==0}">
+                            <div class="section__title-wrapper text-center mb-55">
+                                <div class="section__title mb-10">
+                                    <h2>現在暫無折扣中商品</h2>
                                 </div>
-                                <c:if test="${(i+1 )< productList.size()-1}">
-                                    <div class="product__wrapper mb-60">
-                                        <div class="product__thumb">
-                                            <a href="product-details.html" class="w-img">
-                                                <img src="${productList.get(i+1).image01}"
-                                                     alt="product-img">
-                                                <img class="product__thumb-2"
-                                                     src="${productList.get(i+1).image02}"
-                                                     alt="product-img">
-                                            </a>
-                                        </div>
-                                        <div class="product__content p-relative">
-                                            <div class="product__content-inner">
-                                                <h4><a href="product-details.html">Wooden container
-                                                    Bowl</a>
-                                                </h4>
-                                                <div class="product__price transition-3">
-                                                    <span>$96.00</span>
-                                                    <span class="old-price">$96.00</span>
+                                <div class="section__sub-title">
+                                    <p>沒有活動中商品！！！</p>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="product__slider owl-carousel">
+                                <c:forEach begin="0" end="${productList.size()-1}" step="2" var="i">
+                                    <div class="product__item">
+                                        <div class="product__wrapper mb-60">
+                                            <div class="product__thumb">
+                                                <a href="/Design/F/product/product-details?id=${productList.get(i).id}"
+                                                   class="w-img">
+                                                    <img src="${productList.get(i).image01}"
+                                                         alt="product-img">
+                                                    <img class="product__thumb-2"
+                                                         src="${productList.get(i).image02}"
+                                                         alt="product-img">
+                                                </a>
+                                                <div class="product__sale">
+                                                    <span class="new">折扣</span>
+                                                    <span class="percent">-${productList.get(i).discountPercentage}%</span>
                                                 </div>
                                             </div>
-                                            <div class="add-cart p-absolute transition-3">
-                                                <a href="#">+ Add to Cart</a>
+                                            <div class="product__content p-relative">
+                                                <div class="product__content-inner">
+                                                    <h4>
+                                                        <a href="/Design/F/product/product-details?id=${productList.get(i).id}"></a>
+                                                            ${productList.get(i).name}
+                                                    </h4>
+                                                    <div class="product__price transition-3">
+                                                        <c:set var="dis"
+                                                               value="${(100-productList.get(i).discountPercentage)/100}"/>
+                                                        <span>$${(productList.get(i).price*dis).intValue()}</span>
+                                                        <span class="old-price">$${productList.get(i).price}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-cart p-absolute transition-3">
+                                                    <a id="newArrAddToCartBtn${productList.get(i).id}">+
+                                                        Add to Cart</a>
+                                                </div>
                                             </div>
                                         </div>
+                                        <c:if test="${(i+1 )< productList.size()-1}">
+                                            <div class="product__wrapper mb-60">
+                                                <div class="product__thumb">
+                                                    <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"
+                                                       class="w-img">
+                                                        <img src="${productList.get(i+1).image01}"
+                                                             alt="product-img">
+                                                        <img class="product__thumb-2"
+                                                             src="${productList.get(i+1).image02}"
+                                                             alt="product-img">
+                                                    </a>
+                                                    <div class="product__sale">
+                                                        <span class="new">折扣</span>
+                                                        <span class="percent">-${productList.get(i+1).discountPercentage}%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content p-relative">
+                                                    <div class="product__content-inner">
+                                                        <h4>
+                                                            <a href="/Design/F/product/product-details?id=${productList.get(i+1).id}"></a>${productList.get(i+1).name}
+                                                        </h4>
+                                                        <div class="product__price transition-3">
+                                                            <c:set var="dis2"
+                                                                   value="${(100-productList.get(i+1).discountPercentage)/100}"/>
+                                                            <span>$${(productList.get(i+1).price*dis2).intValue()}</span>
+                                                            <span class="old-price">$${productList.get(i+1).price}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-cart p-absolute transition-3">
+                                                        <a id="newArrAddToCartBtn${productList.get(i+1).id}">+
+                                                            Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
                                     </div>
-                                </c:if>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                    </div>
-
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="product__load-btn text-center mt-25">
-                        <a href="#" class="os-btn os-btn-3">Load More</a>
-                    </div>
-                </div>
-            </div>
+            <%--            <div class="row">--%>
+            <%--                <div class="col-xl-12">--%>
+            <%--                    <div class="product__load-btn text-center mt-25">--%>
+            <%--                        <a href="#" class="os-btn os-btn-3">Load More</a>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
         </div>
     </section>
     <!-- product area end -->
@@ -355,28 +418,28 @@
     <!-- blog area end -->
 
     <!-- subscribe area start -->
-    <section class="subscribe__area pb-100">
-        <div class="container">
-            <div class="subscribe__inner pt-95">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">
-                        <div class="subscribe__content text-center">
-                            <h2>Get Discount Info</h2>
-                            <p>Subscribe to the Outstock mailing list to receive updates on new
-                                arrivals, special offers and other discount information.</p>
-                            <div class="subscribe__form">
-                                <form action="#">
-                                    <input type="email"
-                                           placeholder="Subscribe to our newsletter...">
-                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<%--    <section class="subscribe__area pb-100">--%>
+<%--        <div class="container">--%>
+<%--            <div class="subscribe__inner pt-95">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">--%>
+<%--                        <div class="subscribe__content text-center">--%>
+<%--                            <h2>Get Discount Info</h2>--%>
+<%--                            <p>Subscribe to the Outstock mailing list to receive updates on new--%>
+<%--                                arrivals, special offers and other discount information.</p>--%>
+<%--                            <div class="subscribe__form">--%>
+<%--                                <form action="#">--%>
+<%--                                    <input type="email"--%>
+<%--                                           placeholder="Subscribe to our newsletter...">--%>
+<%--                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
     <!-- subscribe area end -->
 
     <!-- shop modal start -->

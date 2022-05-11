@@ -5,7 +5,6 @@ import com.eeit40.design.Dto.EventDto;
 import com.eeit40.design.Entity.Activity;
 import com.eeit40.design.Entity.Brand;
 import com.eeit40.design.Entity.Product;
-import com.eeit40.design.Exception.ActivityException;
 import com.eeit40.design.Exception.NullInputException;
 import com.eeit40.design.Service.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,8 +52,9 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return map;
   }
 
+  // fullcalendar 用events
   @GetMapping("/B/Activity/findAllEventApi")
-  public List<EventDto> findEvents(){
+  public List<EventDto> findEvents() {
     return service.findAllEvent();
   }
 
@@ -66,35 +66,55 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return "DeleteFail";
   }
 
+  @DeleteMapping("/B/Activity/deleteBatch")
+  public String deleteBatch(@RequestParam("dataArray") List<Integer> idList) {
+    log.info(idList.toString());
+    for (Integer integer : idList) {
+      service.deleteByID(integer);
+    }
+    return "DeleteSuccess";
+  }
+
+
   @PutMapping("/B/Activity/insertActivity")
-  public String insertActivity(
+  public ResponseEntity<String> insertActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr) throws IOException {
 
     log.info("Insert Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    ResponseEntity<String> check = checkInputData(dto);
+    if (check.getStatusCodeValue() != 200) {
+      return check;
+    }
     Activity insertResult = service.insertActivity(service.setImg(file, dto));
 
     if (insertResult != null) {
-      return "Insert Success!";
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return "Insert Fail!";
+    return new ResponseEntity<>("新增時發生錯誤！", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @PostMapping("/B/Activity/updateActivity")
-  public String updateActivity(
+  public ResponseEntity<String> updateActivity(
       @RequestParam(name = "file", required = false) MultipartFile file,
       @RequestParam("data") String dataJsonStr
   ) throws IOException {
 
     log.info("Update Json:" + dataJsonStr);
     ActivityDto dto = objectMapper.readValue(dataJsonStr, ActivityDto.class);
+    ResponseEntity<String> check = checkInputData(dto);
+    if (check.getStatusCodeValue() != 200) {
+      return check;
+    }
+
     Activity result = service.updateActivity(service.setImg(file, dto));
+    System.out.println(new ResponseEntity<>(HttpStatus.OK).getStatusCode().value());
 
     if (result != null) {
-      return "Update Success!";
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return "Update Fail!";
+    return new ResponseEntity<>("更新時發生錯誤！", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @GetMapping("/B/Activity/getBrandsPage")
@@ -162,5 +182,48 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
     return result;
   }
 
+
+  // 用時間名字搜尋 並分頁
+  @PostMapping("/B/Activity/searchByTime")
+  public Page<Activity> searchByTimeOrSubject(
+      @RequestParam(value = "start", defaultValue = "2000-01-01") String start,
+      @RequestParam(value = "end", defaultValue = "2100-12-30") String end,
+      @RequestParam(value = "subject", required = false) String subject,
+      @RequestParam(value = "page", defaultValue = "1") Integer pageNumber) {
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate startDate = LocalDate.parse(start, formatter);
+    LocalDate endDate = LocalDate.parse(end, formatter);
+    if (subject == null) {
+      return service.findActivitiesByTimePaged(startDate, endDate, pageNumber);
+    } else {
+      return service.findActivitiesByTimePaged(startDate, endDate, subject, pageNumber);
+    }
+
+  }
+
+
+  // 取得名字
+  @GetMapping("/B/Activity/searchBySubject/{subject}")
+  public List<String> getSubject(@PathVariable String subject) {
+    return service.findActivitiesSubBySubject(subject);
+  }
+
+
+  // 檢查新增、更新時輸入的資料是否完善
+  private ResponseEntity<String> checkInputData(ActivityDto dto) {
+
+    if (dto.getSubject() == null) {
+      return new ResponseEntity<>("請輸入活動主題！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate() == null) {
+      return new ResponseEntity<>("請輸入開始日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getEndDate() == null) {
+      return new ResponseEntity<>("請輸入結束日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate().isAfter(dto.getEndDate())) {
+      return new ResponseEntity<>("開始日期不可晚於結束日期！", HttpStatus.BAD_REQUEST);
+    } else {
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+  }
 
 }

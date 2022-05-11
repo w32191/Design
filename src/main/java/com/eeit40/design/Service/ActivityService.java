@@ -62,4 +62,13 @@ public interface ActivityService {
   List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList);
 
   Activity getProductsWithCurrentDiscountByActivityId(Integer id);
+
+  Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
+      Integer pageNumber);
+
+  Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
+      String subejct, Integer pageNumber);
+
+
+  List<String> findActivitiesSubBySubject(String subject);
 }

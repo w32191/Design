@@ -37,9 +37,11 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
+
                                 <div class="user-profile">
                                     <form id="updateForm">
                                         <div class="row">
+
                                             <div class="col-lg-5">
                                                 <h4 id="activityID">${activity.id}</h4>
                                                 <div class="user-photo m-b-30">
@@ -48,13 +50,13 @@
                                                             <c:forEach items="${activity.imgurImgs}"
                                                                        var="img"
                                                                        begin="0" end="0" step="1">
-                                                                <img class="img-fluid"
+                                                                <img class="img-fluid" id="activityImg"
                                                                      src="${img.link}"
                                                                      alt="Image Error"/>
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img class="img-fluid"
+                                                            <img class="img-fluid" id="activityImg"
                                                                  src="${contextRoot}/static/back/universal/images/no-image.jpeg"
                                                                  alt="Image Error"/>
                                                         </c:otherwise>
@@ -75,6 +77,7 @@
                                                                value="${activity.subject}"
                                                                name="subject"
                                                                id="updateSubject">
+
                                                     </h1>
                                                 </div>
                                                 <div class="user-send-message">
@@ -90,6 +93,10 @@
                                                             type="button" id="closeProducts" hidden>
                                                         <i class="ti-layout-grid3-alt"></i>關閉清單
                                                     </button>
+                                                    <a class="btn btn-warning btn-addon"
+                                                            href="${contextRoot}/B/Activity/findAll" >
+                                                        <i class="ti-back-left"></i>回活動清單
+                                                    </a>
                                                 </div>
                                                 <div class="custom-tab user-profile-tab">
                                                     <ul class="nav nav-tabs" role="tablist">
@@ -106,9 +113,9 @@
                                                                 <div class="phone-content">
                                                                     <span class="contact-title">活動內容:</span>
                                                                     <textarea id="updateContent"
-                                                                              name="content"
+                                                                              name="content"  style="height:100%"
                                                                               class="form-control"
-                                                                              rows="10">${activity.content}</textarea>
+                                                                              rows="4">${activity.content}</textarea>
                                                                 </div>
                                                                 <div class="contact-information">
                                                                     <span class="contact-title">折扣％：</span>

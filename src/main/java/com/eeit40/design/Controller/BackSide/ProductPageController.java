@@ -1,16 +1,9 @@
 package com.eeit40.design.Controller.BackSide;
 
-import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Entity.Product;
-import com.eeit40.design.Service.ProductService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class ProductPageController {

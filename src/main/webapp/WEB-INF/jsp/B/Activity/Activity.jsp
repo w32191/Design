@@ -23,6 +23,8 @@
           rel="stylesheet"/>
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>
+    <link href="${contextRoot}/static/back/universal/css/Activity.css"
+          rel="stylesheet"/>
 </head>
 
 <body>
@@ -36,155 +38,242 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8 p-r-0 title-margin-right">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <h1>Hello, <span>Welcome Here</span></h1>
-                            <button type="button" id="insertBtn"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
-                                <i class="ti-plus"></i>新增活動
-                            </button>
-<%--                            <a href="Calendar"--%>
-<%--                                    class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">--%>
-<%--                                <i class="ti-plus"></i>Calendar--%>
-<%--                            </a>--%>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-                <div class="col-lg-4 p-l-0 title-margin-left">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Table-Basic</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-            </div>
             <!-- /# row -->
             <section id="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>折扣活動</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover" id="table_data">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>主題</th>
-                                            <th>圖片</th>
-                                            <th>折扣</th>
-                                            <th>起始日</th>
-                                            <th>結束日</th>
-                                            <th>編輯</th>
-                                            <th>刪除</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${activities}" var="ac">
-                                            <tr>
-                                                <td class="showId">${ac.id}</td>
-                                                <td>${ac.subject}</td>
-                                                <c:choose>
-                                                    <c:when test="${ac.imgurImgs.size() != 0 }">
-                                                        <c:forEach items="${ac.imgurImgs}" var="img"
-                                                                   begin="0" end="0">
-                                                            <td>
-                                                                <img src="${img.link}" alt=""
-                                                                     width="400"/>
-                                                            </td>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <td>
-                                                            <img src="" alt="沒有圖片" width="500"/>
+                        <div class="card outCard">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-title">
+                                        <div class="row">
+                                            <div class="col-lg-3 p-r-0 title-margin-right">
+                                                <button data-toggle="modal"
+                                                        data-target="#add-category"
+                                                        class="btn btn-primary waves-effect waves-light">
+                                                    <i class="fa fa-plus"></i> 新增活動
+                                                </button>
+                                                <button class="btn btn-danger waves-effect waves-light"
+                                                        id="deleteBatchBtn">
+                                                    <i class="fa fa-minus"></i> 批次刪除
+                                                </button>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <h2>活動管理</h2>
+                                            </div>
+                                            <div class="col-lg-7 .bg-light rounded text-primary p-l-0 title-margin-left">
+                                                篩選：
+                                                <label>主題:
+                                                    <input type="text"
+                                                           class="form-control border border-primary"
+                                                           id="searchName">
+                                                </label>
+                                                <label> 開始日期：
+                                                    <input type="date"
+                                                           class="form-control border border-primary"
+                                                           id="searchStart"/>
+                                                </label>
+                                                <label> 結束日期：
+                                                    <input type="date"
+                                                           class="form-control border border-primary"
+                                                           id="searchEnd"/>
+                                                </label>
+                                                <button class="btn btn-success" id="cleanSearch"><i
+                                                        class="fa fa-minus"></i> 清空篩選
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="table_data">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <button class="btn btn-primary"
+                                                                id="selectBtn">
+                                                            全選
+                                                        </button>
+                                                    </th>
+                                                    <th>#</th>
+                                                    <th>主題</th>
+                                                    <th>圖片</th>
+                                                    <th>折扣</th>
+                                                    <th>起始日</th>
+                                                    <th>結束日</th>
+                                                    <th>編輯</th>
+                                                    <th>刪除</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="theTbody">
+                                                <c:forEach items="${activities.content}" var="ac">
+                                                    <tr>
+                                                        <td><input type="checkbox"
+                                                                   id="checkbox${ac.id}"
+                                                                   class="form-control checks">
                                                         </td>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                        <td class="showId">${ac.id}</td>
+                                                        <td>${ac.subject}</td>
+                                                        <c:choose>
+                                                            <c:when test="${ac.imgurImgs.size() != 0 }">
+                                                                <c:forEach items="${ac.imgurImgs}"
+                                                                           var="img"
+                                                                           begin="0" end="0">
+                                                                    <td>
+                                                                        <img src="${img.link}"
+                                                                             alt=""
+                                                                             width="100"/>
+                                                                    </td>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <td>
+                                                                    <img src="${contextRoot}/static/back/universal/images/no-image.jpeg"
+                                                                         alt="沒有圖片" width="100"
+                                                                         height="100"/>
+                                                                </td>
+                                                            </c:otherwise>
+                                                        </c:choose>
 
-                                                <td class="color-danger">${ac.discountPercentage}%</td>
-                                                <td>${ac.startDate}</td>
-                                                <td>${ac.endDate}</td>
-                                                <td>
-                                                    <a href="editActivity/${ac.id}"
-                                                       class="btn btn-warning">編輯</a>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                            class="btn btn-danger delete">刪除
+                                                        <td class="color-danger">${ac.discountPercentage}%</td>
+                                                        <td>${ac.startDate}</td>
+                                                        <td>${ac.endDate}</td>
+                                                        <td>
+                                                            <a href="editActivity/${ac.id}"
+                                                               class="btn btn-warning">編輯</a>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button"
+                                                                    class="btn btn-danger delete">刪除
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <nav aria-label="...">
+                                            <ul class="pagination" id="pageUl">
+                                                <li class="page-item disabled">
+                                                    <button class="page-link" id="prePageBtn">前一頁
                                                     </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-
-                                    </table>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <button class="page-link numBtn">1</button>
+                                                </li>
+                                                <c:forEach begin="2" end="${activities.totalPages}"
+                                                           var="i">
+                                                    <li class="page-item">
+                                                        <button class="page-link numBtn">${i}</button>
+                                                    </li>
+                                                </c:forEach>
+                                                <li class="page-item">
+                                                    <button class="page-link" id="nextPageBtn">後一頁
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
+                                <!-- /# card -->
                             </div>
                         </div>
-                        <!-- /# card -->
                     </div>
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
 
-                <%--   dialog--%>
-                <div class="" hidden="" id="insertDialog" title="新增活動">
-                    <div class="card">
-                        <div class="card-title">
-                        </div>
 
-                        <div class="card-body">
-                            <div class="basic-elements">
-                                <form method="POST" enctype="multipart/form-data"
-                                      id="insertActivityForm">
+                <!-- Modal Add Category -->
+                <div class="modal fade none-border" id="add-category"
+                     data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title">
+                                    <strong>新增活動</strong>
+                                </h4>
+                                <button type="button" class="btn btn-warning"
+                                        data-dismiss="modal" aria-hidden="true">
+                                    X
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form enctype="multipart/form-data"
+                                      id="insertActivityForm" class="form">
                                     <div class="form-group">
-                                        <label>活動主題：
-                                            <input type="text" class="form-control" name="subject"
-                                                   id="insertSubject"/>
-                                        </label>
+                                        <label for="insertSubject">活動主題：</label>
+                                        <input type="text"
+                                               class="form-control form-control-lg"
+                                               name="subject"
+                                               id="insertSubject"/>
                                     </div>
                                     <div class="form-group">
-                                        <label>活動內容：
-                                            <textarea id="insertContent"
-                                                      class="form-control"
-                                                      rows="3"></textarea>
-                                        </label>
+                                        <label for="insertContent">活動內容：</label>
+                                        <textarea id="insertContent"
+                                                  class="form-control"
+                                                  style="height:100%"
+                                                  rows="4"></textarea>
+
                                     </div>
                                     <div class="form-group">
-                                        <label>折扣％：
-                                            <input type="number" placeholder="％"
+                                        <label for="insertdiscountPercentage">折扣％：
+                                        </label>
+                                        <div>
+                                            <input type="number" value="50"
                                                    class="form-control"
+                                                   min="1" max="99"
                                                    id="insertdiscountPercentage">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>開始日：
+                                            <input type="date"
+                                                   name="startDate"
+                                                   id="insertStartDate"
+                                                   class="form-control form-control-lg">
+                                        </label>
+                                        <label>結束日：
+                                            <input type="date"
+                                                   name="startDate"
+                                                   id="insertEndDate"
+                                                   class="form-control form-control-lg">
                                         </label>
                                     </div>
-                                    <label>開始日：
-                                        <input type="date" name="startDate"
-                                               id="insertStartDate" class="form-control">
-                                    </label><br/>
-                                    <label>結束日：
-                                        <input type="date" name="startDate"
-                                               id="insertEndDate" class="form-control">
-                                    </label><br/>
-                                    <label>上傳圖片：
-                                        <input type="file" name="files"
-                                               id="insertUploadFile" class="form-control">
-                                    </label><br/>
+                                    <div class="form-group">
+
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file"
+                                               class="custom-file-input"
+                                               id="insertUploadFile">
+                                        <label class="custom-file-label"
+                                               for="insertUploadFile">選擇檔案...</label>
+
+                                    </div>
                                 </form>
-                                <!-- button 不能放在form裏面 -->
-                                <%--                                <button id="ajaxBtn">Submit</button>--%>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="oneKeyInputBtn"
+                                        class="btn btn-danger waves-effect waves-light save-category"
+                                >一鍵輸入
+                                </button>
+                                <button type="button" id="insertBtn"
+                                        class="btn btn-primary waves-effect waves-light save-category"
+                                        data-dismiss="modal">新增活動
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- END MODAL -->
 
                 <!-- Footer -->
                 <%--  <jsp:include page="../IncludePage/layoutPage/footerPage.jsp"/> --%>

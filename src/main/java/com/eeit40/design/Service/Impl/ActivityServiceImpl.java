@@ -34,6 +34,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,12 +87,12 @@ public class ActivityServiceImpl implements ActivityService {
     List<Activity> result = activityRepository.findAll();
     List<EventDto> eventDtoList = new ArrayList<>();
     //設定顯示顏色
-    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF"};
+    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF", "#FF5151"};
     int a = 0;
     for (Activity ac : result) {
       EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
 
-      if (a == 4) {
+      if (a == 5) {
         dto.setBackgroundColor(colors[a]);
         a = 0;
       } else {
@@ -106,7 +107,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findByPage(Integer pageNumber) {
-    Pageable page = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
+    Pageable page = PageRequest.of(pageNumber - 1, 5, Direction.DESC, "id");
     return activityRepository.findAll(page);
   }
 
@@ -198,10 +199,9 @@ public class ActivityServiceImpl implements ActivityService {
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
 
     //    如果有上傳照片
-    if (imgs != null) {
+    if (imgs != null && activity.getImgurImgs().size() > 0) {
       imgurUtil.delete(imgurImgRepository.findDeleteHashById(activity.getId()));
       imgurImgRepository.deleteImgurImgByFkActivity(activity.getId());
-
     }
 
     activity.setImgurImgs(imgs);
@@ -399,6 +399,37 @@ public class ActivityServiceImpl implements ActivityService {
   public Activity getProductsWithCurrentDiscountByActivityId(Integer id) {
     return activityRepository.findActivitiesCurrentTime(id);
   }
+
+  @Override
+  public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
+      Integer pageNumber) {
+    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
+//    return activityRepository.findActivitiesByTime(startDate, endDate, page);
+    return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetween(startDate, endDate,
+        startDate, endDate, page);
+  }
+
+  @Override
+  public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
+      String subject,
+      Integer pageNumber) {
+
+    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
+    return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetweenAndSubjectContaining(
+        startDate, endDate, startDate, endDate, subject, page);
+  }
+
+  @Override
+  public List<String> findActivitiesSubBySubject(String subject) {
+    List<Activity> list = activityRepository.findActivitiesBySubjectContaining(subject);
+    List<String> result = new ArrayList<>(list.size());
+    for (Activity activity : list) {
+      result.add(activity.getSubject());
+    }
+
+    return result;
+  }
+
 
   // 用productsId，去取得這些product的Set
   private Set<Product> checkedProductSet(ActivityDto dto) {

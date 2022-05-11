@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +53,35 @@ public class AccountFrontController {
     	mav.setViewName("redirect:/F/Activity/index");
     	return mav;
 
+
+  //登入帳號頁面
+  @GetMapping("/F/Flogin")
+  public ModelAndView login(ModelAndView mav, @ModelAttribute("Flogin") Account account) {
+
+    mav.setViewName("F/Account/Flogin");
+
+    return mav;
+  }
+
+  //登入帳號中並存入session
+  @PostMapping("/F/Flogin")
+  public ModelAndView doLogin(ModelAndView mav,
+      @Valid @ModelAttribute(name = "Flogin") Account account,
+      BindingResult br, HttpSession session) {
+    mav.setViewName("F/Account/Flogin");
+
+    if (!br.hasErrors()) {
+      Account login = accountService.login(account.getEmail(), account.getPwd());
+      if (login != null) {
+        session.setAttribute("Faccount", login);
+        System.out.println(login);
+        mav.setViewName("redirect:/F/Activity/index");
+        return mav;
+      }
+      br.addError(new FieldError("Flogin","email","無此帳號"));
+      return mav;
     }
-    
+
     @GetMapping("/F/Findex")
     public ModelAndView index(ModelAndView mav) {
     	
@@ -109,6 +138,23 @@ public class AccountFrontController {
     	return mav;
 			
     }
+    return null;
+
+  }
+
+
+  @GetMapping("/F/Fdologout")
+  public ModelAndView doLogout(HttpSession session, ModelAndView mav, SessionStatus sessionStatus) {
+
+    session.invalidate();
+
+    Account account = new Account();
+
+    mav.addObject("login", account);
+    mav.setViewName("F/Account/Flogin");
+    return mav;
+
+  }
 }
 
 

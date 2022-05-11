@@ -7,9 +7,11 @@ import com.eeit40.design.Service.ActivityService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,8 +25,10 @@ public class ActivityController { // 用來跳轉頁面用的controller
 
   // 活動全部資料table
   @GetMapping("/B/Activity/findAll")
-  public ModelAndView findAll(ModelAndView modelAndView) {
-    List<Activity> list = service.findAll();
+  public ModelAndView findAll(ModelAndView modelAndView,
+      @RequestParam(name = "page", defaultValue = "1") String page) {
+    Page<Activity> list = service.findByPage(Integer.valueOf(page));
+//    List<Activity> list = service.findAll();
     modelAndView.addObject("activities", list);
     modelAndView.setViewName("/B/Activity/Activity");
 
@@ -44,6 +48,7 @@ public class ActivityController { // 用來跳轉頁面用的controller
     return mav;
   }
 
+  // 行事曆頁
   @GetMapping("/B/Activity/Calendar")
   public ModelAndView calendarPage(ModelAndView mav) {
     mav.setViewName("/B/Activity/ActivityCalendar");

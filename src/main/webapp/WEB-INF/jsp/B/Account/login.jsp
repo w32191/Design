@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +21,7 @@
 </head>
 
 <body class="bg-primary">
+
 
 	<div class="unix-login">
 		<div class="container-fluid">
@@ -92,12 +94,32 @@
 			$('#email').val('1234Abcd@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
-	</script>
-
-
+    
+  document.getElementById('loginbutton').addEventListener('click', function () {
+    Swal.fire({
+      icon: 'success',
+      title: '登入成功',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  })
+</script>
+  
+<c:choose>
+    <c:when test="${errorMsg!=null}">
+        <script>
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: '請先登入！！',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        </script>
+    </c:when>
+</c:choose>
 
 </body>
 
-
-
 </html>
+

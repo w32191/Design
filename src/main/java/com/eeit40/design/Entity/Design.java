@@ -39,6 +39,7 @@ public class Design {
   private String style;
 
 
+
   @Column(name = "price")
   private Integer price;
 
