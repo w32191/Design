@@ -101,7 +101,7 @@
 					</div>
 				</div>
 				<!-- /# row -->
-				<div class="card">
+				<div class="card" style="background-color: rgb(230, 230, 230);">
 					<div class="card">
 						<div class="custom-tab user-profile-tab">
 							<ul class="nav nav-tabs" role="tablist">

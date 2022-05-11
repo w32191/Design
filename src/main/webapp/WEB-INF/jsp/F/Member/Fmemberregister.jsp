@@ -83,6 +83,7 @@
 	<!-- JavaScript -->
 	<jsp:include page="../IncludePage/staticPage/FontJsPage.jsp" />
 	<script type="text/javascript">
+	
 		$('#Fmemberinsert').on("click", function() {
 			$('#names').val('黃小明');
 			$('#phone').val('0932345679');

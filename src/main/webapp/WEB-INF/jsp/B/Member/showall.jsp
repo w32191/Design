@@ -92,7 +92,7 @@
 
 		<div class="main">
 			<div class="container-fluid">
-			<div class="card">
+			<div class="card" style="background-color: rgb(230, 230, 230);">
 			<div class="card">
 				<div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
