@@ -109,7 +109,8 @@
 
                                                 <div class="form-group">
                                                     <p>產品描述</p>
-                                                    <textarea  rows="10" cols="70" name="description"
+                                                    <textarea rows="10" name="description" class="form-control"
+                                                              style="height:100%" id="description"
                                                               placeholder="請輸入商品詳細描述"></textarea>
                                                 </div>
                                                 <div class="form-group">
@@ -138,7 +139,9 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-
+                        <div>
+                            <a id="onekey" class="btn btn-default">一鍵</a>
+                        </div>
                     </div>
                     <div class="col-lg-4">
 
@@ -171,6 +174,9 @@
 <%-- jquery & Ajax & JS 都在裏面--%>
 <script src="${contextRoot}/static/back/universal/js/AddProduct.js"></script>
 <script>
+
+
+
 
 
 </script>

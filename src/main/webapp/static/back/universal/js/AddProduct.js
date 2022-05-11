@@ -202,6 +202,14 @@ $(function () {
         // })
     })
 
+    $('#onekey').on("click",function () {
+        $('#inputName01').val('Tom Dixon 圓形吊燈');
+        $('#price').val('1000');
+        $('#categories').val('Suspensions');
+        $('#stock').val('1');
+        $('#model').val('大理石白');
+        $('#description').val('2015 年，Tom Dixon 將這個獨特高雅的大理石之美');
+    })
 
 });
 
