@@ -115,7 +115,7 @@ public class OrderInformationController {
 
     // 假的account
     Account account = new Account();
-    account.setId(4);
+    account.setId(2);
 
 		//新增OrderInformation
 		OrderInformation orderInfo = new OrderInformation();

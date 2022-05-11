@@ -22,10 +22,14 @@ public class ProductPageController {
     }
 
     @GetMapping(path = {"/B/Product/addProduct"})
-    public String indexPage4() {
+    public String indexPage2() {
         return "/B/Product/addProduct";
     }
 
+    @GetMapping(path = {"/B/Product/stockManage"})
+    public String indexPage3() {
+        return "/B/Product/stockManage";
+    }
 
     @GetMapping("/B/Product/")
     public ModelAndView findAllProduct(ModelAndView mav){

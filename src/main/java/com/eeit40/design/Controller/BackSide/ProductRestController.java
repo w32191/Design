@@ -1,6 +1,7 @@
 package com.eeit40.design.Controller.BackSide;
 
 import com.eeit40.design.Dao.BrandRepository;
+import com.eeit40.design.Dao.OrderListRepository;
 import com.eeit40.design.Dao.ProductRepository;
 import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Dto.ProductDto;
@@ -11,6 +12,7 @@ import java.net.http.HttpRequest;
 import com.eeit40.design.Service.ActivityService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.eeit40.design.Service.Impl.ProductServiceImpl;
 import com.eeit40.design.Service.ProductService;
@@ -24,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class ProductRestController {
-
   @Autowired
   private ProductServiceImpl dao;
 
@@ -34,6 +35,26 @@ public class ProductRestController {
   @Autowired
   private BrandRepository brandRepository;
 
+  @Autowired
+  private OrderListRepository orderListRepository;
+
+
+
+  //備貨中訂單的商品數量表
+  @GetMapping("/B/product/doSomethingGetBrand")
+  public List<Map<Integer, Map<Integer, Integer>>> doSomething(){
+    return orderListRepository.doSomethingGetBrand();
+  }
+
+
+  //備貨中訂單的缺貨商品品牌內的商品
+  @GetMapping("/B/product/doSomethingGetPorduct/{id}")
+  public List<Map<Integer, Map<Integer, Integer>>> doSomethingGetPorduct(@PathVariable Integer id){
+    return orderListRepository.doSomethingGetPorduct(id);
+  }
+
+
+
   @PostMapping("/B/product/updateById/{id}")
   public Product updateById(@PathVariable Integer id, @RequestBody Product pro) {
     pro.setId(id);
@@ -41,11 +62,16 @@ public class ProductRestController {
     return resPro;
   }
 
-  @GetMapping("/B/product/findByNameLike/{name}")
-  public List<Product> findByNameLike(@PathVariable String name) {
+  @PostMapping("/B/product/findByNameLike")
+  public List<Product> findByNameLike(@RequestParam("name") String name) {
+    System.out.println(name);
     return dao.findByNameLike("%" + name + "%");
   }
 
+  @PostMapping("")
+  public  List<Product>findByNameLikeT(@RequestParam("name")String name){
+    return dao.findByNameLikeT("%" + name + "%");
+  }
 
   @PostMapping("/B/product/insert")
   public Product insertProduct(@RequestBody Product pro) {

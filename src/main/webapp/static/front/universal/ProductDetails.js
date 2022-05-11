@@ -154,7 +154,8 @@ $(function () {
                                     </div>
                                     
                                     <div class="product__modal-required mb-5">
-                                        <span>請選擇商品數量</span>
+                                        <span>庫存：${res.stock}
+                                        <br>請選擇商品數量</span>
                                     </div>
                                     <div class="pro-quan-area d-sm-flex align-items-center">
                                         <div class="product-quantity-title">
@@ -169,6 +170,14 @@ $(function () {
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="product__modal-des mb-30">
+                                <p>商品出貨與期貨等候時間說明：</p>
+                                <ul>
+                                    <li>。若庫存顯示有現貨，約 1 - 2 工作天，即可出貨</li>
+                                    <li>。若庫存顯示為預購，需向國外原廠客訂預購，期貨時間約 4 - 6 個月左右到台灣</li>
+                                    <li>。庫存查詢或其他訂購問題，歡迎利用客服專線</li>
+                                </ul>
                             </div>
                           
 <!--                            <div class="product__share">-->
@@ -218,7 +227,7 @@ $(function () {
                                         <div class="product__details-des-list mb-20">
                                             <br>
                                             <br>
-                                            <img src="${res.fkBrand.img}" alt="" srcset="" height="100%">
+                                            <img src="${res.fkBrand.img}" alt=""  height="100%" style="float:left">
                                             <a>${res.fkBrand.description}</a>
                                         
                                             
@@ -356,7 +365,20 @@ $(function () {
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div>`;
+
+
+                                            $('#reviewStart').html(reviewMain);
+                                        },
+                                        error: function (err) {
+                                            console.log(err)
+                                            // alert('發生錯誤1')
+                                        }
+                                    });
+
+
+                                    txt+=`
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -435,7 +457,13 @@ $(function () {
         amount = $('#amount').val();
         // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&amount=${amount}`);
 
-        $.get("/Design/F/addshoppingcart", { "fkProduct": id, "amount": amount }, function (res) {
+
+        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount}, function (res) {
+            Swal.fire({
+                text: '已加入購物車',
+                showConfirmButton: false,
+                timer: 1000
+            })
             console.log(res)
         })
         // console.log($('#amount').val());
@@ -449,6 +477,11 @@ $(function () {
         console.log(id)
         $.get("/Design/F/addshoppingcart", { "fkProduct": id, "amount": 1 })
         {
+            Swal.fire({
+                text: '已加入購物車',
+                showConfirmButton: false,
+                timer: 1000
+            })
             console.log($('#amount').val());
         }
     })

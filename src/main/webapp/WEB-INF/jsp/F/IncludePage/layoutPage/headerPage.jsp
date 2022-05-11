@@ -21,9 +21,9 @@
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                     <div class="logo">
-                        <a href="index.html"><img style="width: 50%"
-                                                  src="${contextRoot}/static/front/assets/img/logo/黑字.svg"
-                                                  alt="logo"></a>
+                        <a href="/Design/F/Activity/index"><img style="width: 50%"
+                                                                src="${contextRoot}/static/front/assets/img/logo/黑字.svg"
+                                                                alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8">
@@ -31,7 +31,7 @@
                         <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li class="active has-dropdown"><a href="/Design/F/Activity/index">首頁</a>
+                                    <li class="active "><a href="/Design/F/Activity/index">首頁</a>
                                         <%--                                        <ul class="submenu transition-3">--%>
                                         <%--                                            <li><a href="index.html">Home Style 1</a></li>--%>
                                         <%--                                            <li><a href="index-2.html">Home Style 2</a></li>--%>
@@ -41,7 +41,7 @@
                                         <%--                                            <li><a href="index-6.html">Home Style 6</a></li>--%>
                                         <%--                                        </ul>--%>
                                     </li>
-                                    <li class="mega-menu has-dropdown"><a href="/Design/F/Product/">Shop</a>
+                                    <li class="mega-menu "><a href="/Design/F/Product/">設計品</a>
                                         <%--                                        <ul class="submenu transition-3"--%>
                                         <%--                                            data-background="static/front/assets/img/bg/mega-menu-bg.jpg">--%>
                                         <%--                                            <li class="has-dropdown">--%>
@@ -127,7 +127,7 @@
                         <div class="header__action">
                             <ul>
                                 <li><a href="#" class="search-toggle"><i
-                                        class="ion-ios-search-strong"></i> Search</a></li>
+                                        class="ion-ios-search-strong"></i> 搜尋</a></li>
                                 <li><a href="/Design/F/shoppingcart" class="cart"><i
                                         class="ion-bag"></i> 購物車 <span></span></a>
                                     <%--                                    <a href="javascript:void(0);" class="cart"><i--%>
@@ -244,21 +244,27 @@
                                 <i class="fal fa-times"></i></a>
                         </div>
                         <div class="header__search-header">
-                            <h3>Search</h3>
+                            <h3>搜尋</h3>
                         </div>
                         <div class="header__search-categories">
                             <ul class="search-category">
-                                <li><a href="shop.html">所有商品</a></li>
-                                <li><a href="shop.html">Tom Dixon</a></li>
-                                <li><a href="shop.html">Menu</a></li>
-                                <li><a href="shop.html">BROKIS</a></li>
+                                <li><a href="/Design/F/Product/">所有商品</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=6">Tom Dixon</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=4">Menu</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=9">BROKIS</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=24">Louis Poulsen</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=11">FOSCARINI</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=15">FLOS</a></li>
 
 
                             </ul>
                         </div>
                         <div class="header__search-input p-relative">
-                            <input type="text" placeholder="Search for products... ">
-                            <button type="submit"><i class="far fa-search"></i></button>
+                            <div class="ui-widget">
+                                <input type="text" placeholder="Search for products... " id="tags">
+                                <button type="submit"><i class="far fa-search"></i></button>
+                                <ul id="seachList"></ul>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -356,3 +362,12 @@
 </section>
 <div class="body-overlay transition-3"></div>
 <!-- extra info area end -->
+
+<script>
+
+
+
+
+
+
+</script>

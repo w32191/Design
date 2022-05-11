@@ -9,6 +9,8 @@
     <title>商品</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
+          rel="stylesheet"/>
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
 </head>
@@ -616,5 +618,7 @@
 
 </script>
 <script src="${contextRoot}/static/front/universal/Product.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+
 </body>
 </html>
