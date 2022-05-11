@@ -13,6 +13,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
+          rel="stylesheet"/>
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
 
@@ -595,6 +597,7 @@
 <!-- JavaScript -->
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/front/universal/ActivityIndex.js"></script>
 </body>
 </html>

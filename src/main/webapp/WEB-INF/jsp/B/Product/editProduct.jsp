@@ -33,7 +33,7 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <section id="main-content" >
+            <section id="main-content">
 
             </section>
 

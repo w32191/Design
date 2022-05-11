@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>
+
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
 </head>
@@ -45,12 +46,12 @@
         </div>
     </section>
     <!-- page title area end -->
-
+    
 
     <!-- shop details area start -->
     <section class="shop__area pb-65" id="pd1">
 
-
+    
     </section>
     <!-- shop details area end -->
 

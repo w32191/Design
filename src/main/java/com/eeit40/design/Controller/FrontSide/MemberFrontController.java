@@ -63,7 +63,7 @@ public class MemberFrontController {
 	@GetMapping("/F/Fmemberupdate")
 	public ModelAndView memberupdatejsp(ModelAndView mav,  HttpSession session) {
 		
-		Account acc = (Account) session.getAttribute("account");
+		Account acc = (Account) session.getAttribute("Faccount");
 		Integer accid = acc.getId();
 		Member member = memberService.findMemberById(accid);
 		
@@ -85,8 +85,9 @@ public class MemberFrontController {
 		
 		
 		if(!br.hasErrors()) {
-			Account acc = (Account) session.getAttribute("account");
+			Account acc = (Account) session.getAttribute("Faccount");
 			Integer accid = acc.getId();
+			Integer accpre = acc.getPermission();
 			String accpwd = acc.getPwd();
 			Member member1 = memberService.findMemberById(accid);
 			
@@ -98,8 +99,10 @@ public class MemberFrontController {
 			//前台 account 修改
 			Account accountid = accountService.findAccountById(accid);
 			account.setId(accountid.getId());
+			account.setPermission(accpre);
 			account.setPwd(accpwd);
 			Account newAccount = accountService.save(account);
+			session.setAttribute("Faccount", newAccount);
 			
 			mav.addObject("Fmemberupdate",newAccount);
 			mav.addObject("Fmemberupdate",newMember);

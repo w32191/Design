@@ -11,7 +11,7 @@ import com.eeit40.design.Entity.AnnouncementWorkMessages;
 import com.eeit40.design.Service.AnnouncementWorkMessagesService;
 
 
-@Controller
+@Controller("BackAnnouncementPageController")
 public class AnnouncementPageController {
 	
 	@Autowired

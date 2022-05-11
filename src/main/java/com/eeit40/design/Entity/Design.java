@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,7 +27,8 @@ public class Design {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
-  @OneToOne(fetch = FetchType.LAZY)
+  
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
 
@@ -34,7 +36,9 @@ public class Design {
   private String name;
 
   @Column(name = "style", length = 10)
-  private String classification;
+  private String style;
+
+
 
   @Column(name = "price")
   private Integer price;
@@ -61,30 +65,41 @@ public class Design {
 
   @Column(name = "create_time")
   @JsonFormat(pattern = "yyyy/MM/dd",timezone = "Asia/Taipei")
-  public Date creatTime;
+  public Date createTime;
 
   public String title;
+
+  public String location;
 
 
 
   public Design() {
   }
 
-  public Design(Integer id, Member fkMember, String name, String classification, Integer price, String message, Set<ServicePhoto> servicePhotos, Set<DesignReview> designReviews, Set<ImgurImg> imgurImgs, String coverPhoto, Date creatTime, String title) {
+  public Design(Integer id, Member fkMember, String name, String style, Integer price, String message, Set<ServicePhoto> servicePhotos, Set<DesignReview> designReviews, Set<ImgurImg> imgurImgs, String coverPhoto, Date createTime, String title, String location) {
     this.id = id;
     this.fkMember = fkMember;
     this.name = name;
-    this.classification = classification;
+    this.style = style;
     this.price = price;
     this.message = message;
     this.servicePhotos = servicePhotos;
     this.designReviews = designReviews;
     this.imgurImgs = imgurImgs;
     this.coverPhoto = coverPhoto;
-    this.creatTime = creatTime;
+    this.createTime = createTime;
     this.title = title;
     this.photo_1 = photo_1;
     this.photo_2 = photo_2;
+    this.location = location;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
   }
 
   public String getPhoto_1() {
@@ -103,12 +118,12 @@ public class Design {
     this.photo_2 = photo_2;
   }
 
-  public Date getCreatTime() {
-    return creatTime;
+  public Date getCreateTime() {
+    return createTime;
   }
 
-  public void setCreatTime(Date creatTime) {
-    this.creatTime = creatTime;
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
   }
 
   public String getTitle() {
@@ -167,12 +182,12 @@ public class Design {
     this.price = price;
   }
 
-  public String getClassification() {
-    return classification;
+  public String getStyle() {
+    return style;
   }
 
-  public void setClassification(String classification) {
-    this.classification = classification;
+  public void setStyle(String style) {
+    this.style = style;
   }
 
   public String getName() {

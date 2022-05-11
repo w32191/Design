@@ -47,4 +47,6 @@ public interface ProductService {
   List<Product> findProductByBrandOrderByAddedDesc(Brand id);
 
     List<Product> findByNameLike(String name);
+
+    List<Product> findByNameLikeT(String name);
 }

@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +22,6 @@ import com.eeit40.design.Service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@Slf4j
 public class MemberController {
 
 	@Autowired
@@ -65,7 +66,7 @@ public class MemberController {
 	@GetMapping("/B/memberupdate")
 	public ModelAndView memberupdatejsp(ModelAndView mav,  HttpSession session) {
 		
-		Account acc = (Account) session.getAttribute("account");
+		Account acc = (Account) session.getAttribute("Baccount");
 		Integer accid = acc.getId();
 		Member member = memberService.findMemberById(accid);
 		
@@ -87,8 +88,10 @@ public class MemberController {
 		
 		
 		if(!br.hasErrors()) {
-			Account acc = (Account) session.getAttribute("account");
+			Account acc = (Account) session.getAttribute("Baccount");
 			Integer accid = acc.getId();
+			Integer accpre = acc.getPermission();
+			String accpwd = acc.getPwd();
 			Member member1 = memberService.findMemberById(accid);
 			
 			member.setId(member1.getId());
@@ -97,7 +100,10 @@ public class MemberController {
 			
 			Account accountid = accountService.findAccountById(accid);
 			account.setId(accountid.getId());
+			account.setPermission(accpre);
+			account.setPwd(accpwd);
 			Account newAccount = accountService.save(account);
+			session.setAttribute("Baccount", newAccount);
 			
 			mav.addObject("memberupdate",newAccount);
 			mav.addObject("memberupdate",newMember);
@@ -107,8 +113,74 @@ public class MemberController {
 		
 		return null;
 		
+	}
+	
+	
+	@GetMapping("/B/add2")
+	public ModelAndView addMemberPage(ModelAndView mav) {
+		
+		Member message = new Member(); 
+		mav.getModel().put("Member", message);
+		
+		Member lastmag = memberService.getLastest();
+		mav.getModel().put("lastmag", lastmag);
+		
+		mav.setViewName("/B/Member/showall");
+		return mav;
+		
 		
 	}
+	
+	
+	
+	@GetMapping("/B/view")
+	public ModelAndView viewMember(ModelAndView mav, @RequestParam(name= "p", defaultValue = "1") Integer PageNumber) {
+		
+		Page<Member> page = memberService.findByPage(PageNumber);
+		
+		
+		mav.getModel().put("page", page);
+		mav.setViewName("/B/Member/showall");
+		
+		return mav;
+		
+	}
+	
+	
+	
+	@GetMapping("/B/edit")
+	public ModelAndView edit(ModelAndView mav, Model model, @RequestParam(name = "id") Integer id, HttpSession session) {
+		Member mem = memberService.findMemberById(id);
+		
+		model.addAttribute("member", mem);
+		session.setAttribute("Bmember", mem);
+		mav.setViewName("/B/Member/edit");
+		
+		return mav;
+	}
+	
+	@PostMapping("/B/edit")
+	public ModelAndView edit(ModelAndView mav, Model model, @ModelAttribute(name = "editMember") Member inputMember,
+			@RequestParam("accountId") Integer accountId ,HttpSession session ) {
+		
+
+		
+		Account account  = new Account();
+		account.setId(accountId);
+		
+		Member oldMember = (Member) session.getAttribute("Bmember");
+
+		inputMember.setId(oldMember.getId());
+		inputMember.setFkAccount(account);
+		
+		
+		memberService.save(inputMember);
+		mav.setViewName("redirect:/B/view");
+		
+		return mav;
+		
+	}
+	
 	
 	
 	

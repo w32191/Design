@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -43,7 +44,11 @@ public class DesignController {
     @Autowired
     private  ObjectMapper mapper;
 
-
+    @GetMapping("/B/Design")
+    public ModelAndView index(ModelAndView mav){
+        mav.setViewName("/B/DesignService/DesignService");
+        return mav;
+    }
 
 
     @Validated
@@ -56,7 +61,7 @@ public class DesignController {
 
             //------排序Sorting------
             //根據什麼欄位來排序
-            @RequestParam(defaultValue = "date_time") String orderBy,
+            @RequestParam(defaultValue = "create_time") String orderBy,
             //使用何種排序
             @RequestParam(defaultValue = "desc") String sort,
 
@@ -96,9 +101,22 @@ public class DesignController {
         }
     }
 
-    @PostMapping("B/createDesign")
-    public ResponseEntity<Design> createDesign(@RequestBody String jsonStr) throws JsonProcessingException {
+    @GetMapping("B/getDesignByMember/{fk_member_id}")
+    public ResponseEntity<List<Design>> getDesignByMemberId(@PathVariable Integer fk_member_id) {
+        List<Design> design = designService.getDesignByMemberId(fk_member_id);
+//        System.out.println(design);
+        if (design != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(design);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
+
+    @PostMapping("B/createDesign")
+    public ResponseEntity<Design> createDesign(@RequestParam("data") String jsonStr) throws JsonProcessingException {
+
+        log.info(jsonStr);
         DesignDto designDto = mapper.readValue(jsonStr, DesignDto.class);
         Integer id = designService.createDesign(designDto);
 
@@ -115,7 +133,8 @@ public class DesignController {
 
     @PostMapping("B/updateDesign/{id}")
     public ResponseEntity<Design> updateDesign(@PathVariable Integer id,
-                                               @RequestBody String jsonStr) throws JsonProcessingException {
+                                               @RequestParam("data") String jsonStr,
+                                               @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
 
         DesignDto designDto = mapper.readValue(jsonStr, DesignDto.class);
         designService.updateDesign(id, designDto);

@@ -1661,22 +1661,6 @@ $(function () {
         }
     );
 
-    //新增案件 dialog設定
-    $('#insertCaseDialog').dialog({
-        autoOpen: false,
-        width: 800,
-        modal: true,
-        buttons: {
-            "新增": function () {
-                insertSend();
-                $(this).dialog('close');
-            },
-            "取消": function () {
-                $(this).dialog('close');
-            },
-        }
-    });
-
     //發送新案件資料
     function insertSend() {
         // 取得輸入的資料
@@ -2036,11 +2020,11 @@ $(function () {
                         imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" style='width: 100%' alt="blog">`;
                     }
 
-                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6">' +
+                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6" style="padding-top: 24px">' +
                         '<div class="blog__wrapper">' +
                         '<div class="blog__item blog__border-bottom mb-60 pb-60">'
                     case_data += '<div class="blog__thumb fix">' +
-                        '<a href="viewCase/${value.id}" class="w-img">' + imgStr +
+                        '<a href="ViewCase/${value.id}" class="w-img">' + imgStr +
                         '</a>' +
                         '</div>'
                     case_data += '<div className="blog__content">' +
@@ -2084,21 +2068,21 @@ $(function () {
                         imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
                     }
 
-                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6">' +
+                    case_data += '<div class="col-xl-4 col-lg-4 col-md-6" style="padding-top: 24px">' +
                         '<div class="blog__wrapper">' +
                         '<div class="blog__item blog__border-bottom mb-60 pb-60">'
                     case_data += '<div class="blog__thumb fix">' +
-                        '<a href="viewCase/' + value.id + '" class="w-img">' + imgStr +
+                        '<a href="ViewCase/' + value.id + '" class="w-img">' + imgStr +
                         '</a>' +
                         '</div>'
                     case_data += '<div className="blog__content">' +
-                        '<h4><a href="viewCase/' + value.id + '" >' + value.title + '</a></h4>'
+                        '<h4><a href="ViewCase/' + value.id + '" >' + value.title + '</a></h4>'
                     case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
                     case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
                     case_data += '<p>' + value.message + '</p>'
                     case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
                     case_data += '<span>  ' + value.dateTime + '</span></div>'
-                    case_data += '<a href="viewCase/' + value.id + '" class="os-btn">read more</a></div>'
+                    case_data += '<a href="ViewCase/' + value.id + '" class="os-btn">read more</a></div>'
                     case_data += '</div></div></div>'
 
                 })
