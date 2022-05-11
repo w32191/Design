@@ -115,6 +115,16 @@ public class BackCasePageController {
         }
     }
 
+    @GetMapping("/B/CaseByMemberId/{fk_member_id}")
+    public ResponseEntity<List<Case>> getCaseByMemberId(@PathVariable Integer fk_member_id) {
+        List<Case> aCase = caseService.getCaseByMemberId(fk_member_id);
+        if (aCase != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(aCase);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 //    @PostMapping("/B/Case/createCase")
 //    //@Valid DTO有@NOTNULL的註解時要加
 //    public ResponseEntity<Case> createCase(@RequestBody @Valid CaseDto caseDto){

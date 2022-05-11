@@ -1617,362 +1617,145 @@ locationData = [
         "name": "花蓮縣"
     }
 ];
-classificationData = [
-    {"name": "所有工程"},
-    {"name": "拆除工程"},
-    {"name": "泥作工程"},
-    {"name": "防水止漏工程"},
-    {"name": "鋁門窗工程"},
-    {"name": "水電工程"},
-    {"name": "電訊工程"},
-    {"name": "石材工程"},
-    {"name": "木作工程"},
-    {"name": "空調系統"},
-    {"name": "衛浴設備"},
-    {"name": "廚房設備"},
-    {"name": "窗簾壁紙"},
-    {"name": "油漆工程"},
-    {"name": "五金工程"},
-    {"name": "鐵件工程"},
-    {"name": "其他設備"},
-    {"name": "玻璃明鏡"},
-    {"name": "地板工程"},
-    {"name": "清潔工程"},
-    {"name": "雜項工程"}
-]
+styleList = [
+    {"name": "所有風格"},
+    {"name": "現代風格"},
+    {"name": "工業風格"},
+    {"name": "北歐風格"},
+    {"name": "鄉村風格"},
+    {"name": "地中海風"},
+    {"name": "古典風格"},
+    {"name": "奢華風格"},
+    {"name": "美式風格"},
+    {"name": "日式風格"},
+    {"name": "中式風格"},
+    {"name": "其他風格"}
+];
 
 
 $(function () {
-    // $('#table_id').DataTable();
 
-    let total, page;
-    let offset = 0;
-    let fetchNext = 10;
-
-    doClassificationData();
+    let charLimit = 200;
     doLocationData();
-
-    //---------- 載入頁面資料開始 ---------
-    $.ajax({
-        url: "/Design/B/Cases",
-        type: "get",
-        dataType: "json",
-        success: function (result) {
-            console.log(result);
-            case_data = '';
-
-            $.each(result.results, function (index, value) {
-
-                case_data += '<tr>'
-                case_data += '<td>' + value.id + '</td>'
-                case_data += '<td>' + value.title + '</td>'
-                case_data += '<td>' + value.name + '</td>'
-                case_data += '<td>' + value.classification + '</td>'
-                case_data += '<td>' + value.location + '</td>'
-                case_data += '<td>' + value.caseEmail + '</td>'
-                case_data += '<td>' + value.message + '</td>'
-                case_data += '<td>' + value.coverPhoto + '</td>'
-                case_data += '<td>' + value.dateTime + '</td>'
-                case_data += '<td>' + value.expiryDate + '</td>'
-                case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'
-                case_data += '<td><button type="button" class="btn btn-danger deleteBtn" id="deleteBtn' + value.id + '">刪除</button></td>'
-                case_data += '</tr>'
-            })
-            $('#table_tbody').append(case_data);
-
-            total = result.total
-            page = Math.ceil(total / fetchNext);
-            console.log(page);
-
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="previousPage">Previous</a>
-                                                </li>`);
-            for (let i = 1; i <= page; i++) {
-
-                $("#pageBtn").append(`<li class="page-item"><a class="page-link" id="page${i}">${i}</a></li>`);
-
-            }
+    doAddLocationData();
+    doStyleList();
+    doAddStyleList();
+    loadData();
 
 
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="nextPage">Next</a>
-                                                </li>`);
-
-
-            // $("#pageBtn").html(txt);
-
-
-            // $("#page").on("click" , function(){
-            //
-            // })
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    })
-
-    //跳頁
-    $('#pageBtn').on('click', 'a[id^=page]', function () {
-
-        $(this).closest('li').siblings('li').removeClass('active');
-        $(this).closest('li').addClass('active');
-        console.log();
-        let offset = 0;
-        let fetchNext = 10;
-        let page = $(this).text();
-        offset = offset + fetchNext * (page - 1);
+//---------- 載入頁面資料開始 ---------
+    function loadData() {
+        $('#designBlog').html('');
+        //---------- 載入頁面資料開始 ---------
         $.ajax({
-            type: "GET",
-            url: "/Design/B/Cases?fetchNext=" + fetchNext + "&offset=" + offset,
-            success: function (result) {
-                $('#table_tbody').html('');
-                console.log(result);
-                case_data = '';
-
-                $.each(result.results, function (index, value) {
-
-                    case_data += '<tr>'
-                    case_data += '<td>' + value.id + '</td>'
-                    case_data += '<td>' + value.title + '</td>'
-                    case_data += '<td>' + value.name + '</td>'
-                    case_data += '<td>' + value.classification + '</td>'
-                    case_data += '<td>' + value.location + '</td>'
-                    case_data += '<td>' + value.caseEmail + '</td>'
-                    case_data += '<td>' + value.message + '</td>'
-                    case_data += '<td>' + value.coverPhoto + '</td>'
-                    case_data += '<td>' + value.dateTime + '</td>'
-                    case_data += '<td>' + value.expiryDate + '</td>'
-                    case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'
-                    case_data += '<td><button type="button" class="btn btn-danger deleteBtn" id="deleteBtn' + value.id + '">刪除</button></td>'
-                    case_data += '</tr>'
-                })
-                $('#table_tbody').append(case_data);
-
-            }
-        })
-
-    });
-    //---------- 載入頁面資料結束 ---------
-
-    //---------- 刪除開始 ---------
-    $('#table_tbody').on('click', 'button[id^=deleteBtn]', function () {
-        let deleteBtn = $(this);
-        let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
-        swal.fire({
-            title: "確定要刪除？",
-            text: "此動作無法復原！",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '確定刪除',
-            cancelButtonText: '取消'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log(id);
-                $.ajax({
-                    url: "/Design/B/Case/deleteCase/" + id,
-                    method: "DELETE",
-                    beforeSend: function () {
-                        swal.fire({
-                            html: '<h5>刪除中...</h5>',
-                            showConfirmButton: false,
-                        });
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        swal.fire({
-                            icon: 'success',
-                            html: '<h5>刪除成功!</h5>'
-                        }).then(function () {
-                            location.reload();
-                        });
-                    },
-                    error: function (res) {
-                        console.log(res);
-                        // window.alert('刪除失敗');
-                        swal.fire({
-                            icon: 'error',
-                            html: '<h5>刪除失敗!</h5>'
-                        }).then(function () {
-                            location.reload();
-                        });
-                    }
-                });
-            }
-        });
-    });
-
-    //單一綁定原本的按鈕 因為remove會把所有的關聯都刪掉 刪除按鈕
-    // $('.btn.btn-danger.deleteBtn').click(function(){
-    //     let deleteBtn = $(this);
-    //     let id = deleteBtn.parent('td').siblings('td:eq(0)').text();
-    //     swal.fire({
-    //         title:"確定要刪除？",
-    //         text:"此動作無法復原！",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: '確定刪除',
-    //         cancelButtonText: '取消'
-    //     }).then((result) => {
-    //         if(result.isConfirmed) {
-    //             $.ajax({
-    //                 url: "/Design/B/Case/delete/"+id,
-    //                 method: "GET",
-    //                 beforeSend: function () {
-    //                     swal.fire({
-    //                         html: '<h5>刪除中...</h5>',
-    //                         showConfirmButton: false,
-    //                     });
-    //                 },
-    //                 success: function (res) {
-    //                     console.log(res);
-    //                     swal.fire({
-    //                         icon: 'success',
-    //                         html: '<h5>刪除成功!</h5>'
-    //                     }).then(function () {
-    //                         location.reload();
-    //                     });
-    //                 },
-    //                 error: function (res) {
-    //                     console.log(res);
-    //                     // window.alert('刪除失敗');
-    //                     swal.fire({
-    //                         icon: 'error',
-    //                         html: '<h5>刪除失敗!</h5>'
-    //                     }).then(function () {
-    //                         location.reload();
-    //                     });
-    //                 }
-    //             });
-    //         }
-    //     });
-    // })
-    //---------- 刪除結束 ----------
-
-    //---------- 修改開始 ----------
-
-    //修改案件 按鈕
-    $('#table_tbody').on('click', 'button[id^=editBtn]', function () {
-        $('#editCaseDialog').removeAttr('hidden').dialog('open');
-        let editBtn = $(this);
-        let id = editBtn.parent('td').siblings('td:eq(0)').text();
-        console.log(id);
-        $.ajax({
-            url: "/Design/B/Case/" + id,
-            type: "GET",
+            url: "/Design/F/Designs",
+            type: "get",
             dataType: "json",
-            success: function (result) {
-                console.log(result);
-                $('#editTitle').val(result.title);
-                $('#editName').val(result.name);
-                $('#editClassification').val(result.classification);
-                $('#editLocation').val(result.location);
-                $('#editCaseEmail').val(result.caseEmail);
-                $('#editMessage').val(result.message);
-                $('#editCoverPhoto').attr('src', result.coverPhoto);
-                $('#editExpiryDate').val(result.expiryDate);
+            success: function f1(result) {
+                Design_data = '';
+                $.each(result.results, function (index, value) {
+                    let imgStr;
 
+                    if (value.coverPhoto != null) {
+                        imgStr = `<img src=" ${value.coverPhoto} " alt="blog">`;
+                    } else {
+                        imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                    }
 
-                $('#updateCaseId').val(id);
-            }
-        })
-    });
+                    // Design_data += '<div className="blog__wrapper">'
+                    // Design_data += '<div class="blog__item blog__border-bottom mb-60 pb-60">'
+                    // Design_data += '<div class="blog__thumb fix">'
+                    // Design_data += '<a href="blog-details.html" class="w-img" id="designCoverPhoto"><img' +
+                    //                'src="/Design/static/front/assets/img/blog/blog-big-2.jpg" alt="blog"></a></div>'
+                    // Design_data += '<div class="blog__content">'
+                    // Design_data += '<h4 class="blog__title" id="designTitle"><a href="blog-details.html">' +
+                    //                 value.title + '</a></h4>'
+                    // Design_data += '<div class="blog__meta">'
+                    // Design_data += '<span>By <a href="#" id="designName">' + value.name +'</a></span>'
+                    // Design_data += '<span id="designCreateTime">/ ' + value.createTime + '</span></div>'
+                    // Design_data += '<p id="designMessage">' + value.message + '</p>' +
+                    //         '<a href="blog-details.html" class="os-btn" id="designReadMoreBtn">read more</a></div></div>'
 
-    //修改案件 dialog設定
-    $('#editCaseDialog').dialog({
-        autoOpen: false,
-        width: 800,
-        modal: true,
-        buttons: {
-            "修改": function () {
-                editSend();
-                $(this).dialog('close');
-            },
-            "取消": function () {
-                $(this).dialog('close');
-            },
-        }
-    });
+                    Design_data += `<div class="blog__item blog__border-bottom mb-60 pb-60">
+                        <div class="blog__thumb fix">
+                            <a href="viewDesignService/${value.id}" class="w-img">`;
 
-    // 發送修改案件資料
-    function editSend() {
-        // 取得輸入的資料
-        const editData = {
-            title: $('#editTitle').val(),
-            name: $('#editName').val(),
-            classification: $('#editClassification> option:selected').text(),
-            location: $('#editLocation> option:selected').text(),
-            caseEmail: $('#editCaseEmail').val(),
-            message: $('#editMessage').val(),
-            expiryDate: $('#editExpiryDate').val(),
-            coverPhoto: $('#editCoverPhoto').attr('src')
-        }
-        console.log(editData)
-        //將輸入的文字資料,包進FormData
-        const dataFile = new FormData();
-        // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
-        dataFile.append("data", JSON.stringify(editData));
+                    if (value.coverPhoto != null) {
 
-        let id = $('#updateCaseId').val();
-        $.ajax({
-            type: "POST",
-            url: "/Design/B/Case/updatedCase/" + id,
-            data: dataFile,
-            processData: false, // 防止jquery將data變成query String
-            contentType: false,
-            beforeSend: function () {
-                swal.fire({
-                    html: '<h5>修改中...</h5>',
-                    showConfirmButton: false,
-                });
-            },
-            success: function (json) {
-                swal.fire({
-                    icon: "success",
-                    html: "<h5>修改成功！</h5>",
-                }).then(function () {
-                    location.reload();
+                        Design_data += `<img src=" ${value.coverPhoto} " alt="blog">`
+
+                    } else {
+
+                        Design_data += `<img src=" ${value.photo_1} " alt="blog">`
+
+                    }
+                    Design_data += `</a>
+                </div>
+                    <div class="blog__content">
+                        <h4 class="blog__title"><a href="viewDesignService/${value.id}">${value.title}</a></h4>
+                        <div class="blog__meta">
+                            <span>By <a href="viewDesignService/${value.id}">${value.name}</a></span>
+                            <span>${value.createTime}</span>
+                        </div>
+                        <div class="truncate">
+                            <p>${value.message}</p>
+                        </div>
+                        <div>
+                            <a href="viewDesignService/${value.id}" class="os-btn">read more</a>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                })
+                $('#designBlog').append(Design_data);
+                $(".truncate").each(function () {
+                    truncate($(this));
                 });
             },
             error: function (err) {
                 console.log(err);
-                swal.fire({
-                    icon: "error",
-                    html: "<h5>${err.responseText}!</h5>"
-                }).then(function () {
-                    location.reload();
-                });
             }
-        });
+        })
+
+
+
+        //---------- 載入頁面資料結束 ---------
     }
 
-    //---------- 修改結束 ----------
+    function truncate(el) {
+        let clone = el.children().first(),
+            originalContent = el.html(),
+            text = clone.text();
 
-    //---------- 新增開始 ----------
+        if (clone[0].innerHTML.trim().length > charLimit) {
+            el.attr("data-originalContent", originalContent);
+            el.addClass('hasHidden');
+            clone.text(text.substring(0, charLimit) + "  [...]。")
+            el.empty().append(clone);
+            // el.append($("<div class='read-more'><a href='#' class='more'>Read More</a>"));
+        }
+
+    }
+        $("body").on("click", 'a.more', function (e) {
+            e.preventDefault();
+            let truncateElement = $(this).parent().parent();
+            if (truncateElement.hasClass('hasHidden')) {
+                $(truncateElement).html(truncateElement.attr("data-originalContent"));
+                $(truncateElement).append($("<div class='read-more'><a href='#' class='more'>Read Less</a>"));
+                truncateElement.removeClass('hasHidden');
+            } else {
+                $('.read-more', truncateElement).remove();
+                truncate(truncateElement);
+            }
+        });
+
+
+
+//---------- 載入頁面資料結束 新增開始 ---------
 
     //新增案件 按鈕
-    $('#insertBtn').click(function () {
-            $('#insertCaseDialog').removeAttr('hidden').dialog('open');
-        }
-    );
-
-    //新增案件 dialog設定
-    $('#insertCaseDialog').dialog({
-        autoOpen: false,
-        width: 800,
-        modal: true,
-        buttons: {
-            "新增": function () {
-                insertSend();
-                $(this).dialog('close');
-            },
-            "取消": function () {
-                $(this).dialog('close');
-            },
-        }
+    $('#addDesignServiceBtn').click(function () {
+        insertSend()
     });
 
     //發送新案件資料
@@ -1981,14 +1764,15 @@ $(function () {
         const data = {
             title: $('#title').val(),
             name: $('#name').val(),
-            classification: $('#classification> option:selected').text(),
-            location: $('#location> option:selected').text(),
-            caseEmail: $('#caseEmail').val(),
+            style: $('#addStyleList> option:selected').text(),
+            location: $('#addLocation> option:selected').text(),
+            price: $('#price').val(),
             message: $('#message').val(),
-            expiryDate: $('#expiryDate').val(),
-            coverPhoto: $('#insertCoverPhoto').attr('src')
+            coverPhoto: $('#insertCoverPhoto').attr('src'),
+            photo_1: $('#insertPhoto_1').attr('src'),
+            photo_2: $('#insertPhoto_2').attr('src')
         }
-        console.log(data)
+        // console.log(data)
         //將輸入的文字資料,包進FormData
         const dataFile = new FormData();
         // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
@@ -1996,7 +1780,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: "/Design/B/Case/createCase",
+            url: "/Design/F/createDesign",
             data: dataFile,
             processData: false, // 防止jquery將data變成query String
             contentType: false,
@@ -2026,389 +1810,21 @@ $(function () {
         });
     }
 
-    //---------- 新增結束 ----------
-
-    //---------- 查詢開始 ----------
-    //類別下拉選單
-    function doClassificationData() {
-        $.each(classificationData, function (index, value) {
-            // console.log(value.name);
-            //添加下拉選單
-            let option = document.createElement('option');
-            option.innerHTML = `${value.name}`;
-            option.value = `${index}`;
-            $('#classificationData').append(option);
-
-            option = document.createElement('option');
-            option.innerHTML = `${value.name}`;
-            // option.value = `${index}`;
-            $('#editClassification').append(option);
-
-            // 新增dailog的下拉選單
-            option = document.createElement('option');
-            if (value.name !== "所有工程") {
-                option.innerHTML = `${value.name}`;
-                option.value = `${index}`;
-                $('#classification').append(option);
-            }
-        });
-    }
-
-    //類別 Ajax
-    $("#classificationData").change(function () {
-        // let classId =$(this).val();
-        // console.log(classId);
-
-        let classificationText = $("#classificationData > option:selected").text();
-        let classificationValue = $("#classificationData > option:selected").val();
-        console.log(classificationText);
-        console.log(classificationValue);
-        // const dataFile = new FormData();
-        // dataFile.append("classificationText",JSON.stringify(classificationText));
-        // console.log("送出json內容：" + JSON.stringify(classificationText) );
-
-        $.ajax({
-            method: "GET",
-            url: "/Design/B/Cases?search=" + classificationText,
-            contentType: "application/json; charset=UTF-8", //送過去的
-            dataType: "json", //傳回來的
-            // data: dataFile,
-            // processData: false, //防止jQuery將data變成query String
-            // contentType: false,
-            success: function (result) {
-                console.log(result);
-                if (classificationValue != 0) {
-                    $('.table tr td').remove();
-                    // console.log(JSON.parse(result));
-                    classification_data = '';
-                    $.each(result.results, function (index, value) {
-                        classification_data += '<tr>'
-                        classification_data += '<td>' + value.id + '</td>'
-                        classification_data += '<td>' + value.title + '</td>'
-                        classification_data += '<td>' + value.name + '</td>'
-                        classification_data += '<td>' + value.classification + '</td>'
-                        classification_data += '<td>' + value.location + '</td>'
-                        classification_data += '<td>' + value.caseEmail + '</td>'
-                        classification_data += '<td>' + value.message + '</td>'
-                        classification_data += '<td>' + value.coverPhoto + '</td>'
-                        classification_data += '<td>' + value.dateTime + '</td>'
-                        classification_data += '<td>' + value.expiryDate + '</td>'
-                        classification_data += '<td>' + '<button type="button"  class="btn btn-warning">編輯</button>' + '</td>'
-                        classification_data += '<td>' + '<button type="button" class="btn btn-danger deleteBtn" id="deleteBtn">刪除</button>' + '</td>'
-                        classification_data += '</tr>'
-                    })
-                    $('.table').append(classification_data);
-                } else {
-                    //重新展入
-                    location.reload();
-                    // $('#findAll').append(caseMessage);
-                    //待完成
-                }
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
-    })
-
-    //地區下拉選單
-    function doLocationData() {
-        $.each(locationData, function (index, value) {
-            // console.log(value.name);
-            // 添加下拉選單
-            let option = document.createElement('option');
-            option.innerHTML = `${value.name}`;
-            // option.value = `${index}`;
-            $('#locationData').append(option);
-
-            option = document.createElement('option');
-            option.innerHTML = `${value.name}`;
-            // option.value = `${index}`;
-            $('#editLocation').append(option);
-
-            option = document.createElement('option');
-            if (value.name !== "所有地區") {
-                option.innerHTML = `${value.name}`;
-                // option.value = `${index}`;
-                $('#location').append(option);
-            }
-            // 下拉選單結束----
-        });
-    }
-
-    //地區 Ajax
-    $("#locationData").change(function () {
-        // let locationValue = $(this).val();
-        // console.log(locationValue);
-        let locationText = $("#locationData > option:selected").text();
-        let locationValue = $('#locationData > option:selected').val();
-        console.log(locationText);
-        console.log(locationValue);
-
-        $.ajax({
-            method: "GET",
-            url: "/Design/B/Cases?search=" + locationText,
-            contentType: "application/json; charset=UTF-8", //送過去的
-            dataType: "json", //傳回來的
-            success: function (result) {
-                console.log(result);
-                if (locationValue != 0) {
-                    $('.table tr td').remove();
-                    // console.log(JSON.parse(result));
-                    location_data = '';
-                    $.each(result.results, function (index, value) {
-                        location_data += '<tr>'
-                        location_data += '<td>' + value.id + '</td>'
-                        location_data += '<td>' + value.title + '</td>'
-                        location_data += '<td>' + value.name + '</td>'
-                        location_data += '<td>' + value.classification + '</td>'
-                        location_data += '<td>' + value.location + '</td>'
-                        location_data += '<td>' + value.caseEmail + '</td>'
-                        location_data += '<td>' + value.message + '</td>'
-                        location_data += '<td>' + value.coverPhoto + '</td>'
-                        location_data += '<td>' + value.dateTime + '</td>'
-                        location_data += '<td>' + value.expiryDate + '</td>'
-                        location_data += '</tr>'
-                    })
-                    $('.table').append(location_data);
-                } else {
-                    location.reload();
-                    // $('#findAll').append(caseMessage);
-                    //待完成
-                }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
-    })
-
-    //---------- 查詢結束 ----------
-
-    // dataTable
-    // $('#bootstrap-data-table').DataTable({
-    //     lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
-    // });
-    //
-    // $('#row-select').DataTable( {
-    //
-    //     // 中文化
-    //     // language: {
-    //     //     "processing": "處理中...",
-    //     //     "loadingRecords": "載入中...",
-    //     //     "lengthMenu": "顯示 _MENU_ 項結果",
-    //     //     "zeroRecords": "沒有符合的結果",
-    //     //     "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-    //     //     "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-    //     //     "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-    //     //     "search": "search:",
-    //     //     "paginate": {
-    //     //         "first": "第一頁",
-    //     //         "previous": "上一頁",
-    //     //         "next": "下一頁",
-    //     //         "last": "最後一頁"
-    //     //     },
-    //     //     "aria": {
-    //     //         "sortAscending": ": 升冪排列",
-    //     //         "sortDescending": ": 降冪排列"
-    //     //     },
-    //     //     "emptyTable": "目前沒有資料",
-    //     //     "datetime": {
-    //     //         "previous": "上一頁",
-    //     //         "next": "下一頁",
-    //     //         "hours": "時",
-    //     //         "minutes": "分",
-    //     //         "seconds": "秒",
-    //     //         "amPm": [
-    //     //             "上午",
-    //     //             "下午"
-    //     //         ],
-    //     //         "unknown": "未知",
-    //     //         "weekdays": [
-    //     //             "週日",
-    //     //             "週一",
-    //     //             "週二",
-    //     //             "週三",
-    //     //             "週四",
-    //     //             "週五",
-    //     //             "週六"
-    //     //         ],
-    //     //         "months": [
-    //     //             "一月",
-    //     //             "二月",
-    //     //             "三月",
-    //     //             "四月",
-    //     //             "五月",
-    //     //             "六月",
-    //     //             "七月",
-    //     //             "八月",
-    //     //             "九月",
-    //     //             "十月",
-    //     //             "十一月",
-    //     //             "十二月"
-    //     //         ]
-    //     //     },
-    //     //     "searchBuilder": {
-    //     //         "add": "新增條件",
-    //     //         "condition": "條件",
-    //     //         "deleteTitle": "刪除過濾條件",
-    //     //         "button": {
-    //     //             "_": "複合查詢 (%d)",
-    //     //             "0": "複合查詢"
-    //     //         },
-    //     //         "clearAll": "清空",
-    //     //         "conditions": {
-    //     //             "array": {
-    //     //                 "contains": "含有",
-    //     //                 "empty": "為空",
-    //     //                 "equals": "等於",
-    //     //                 "not": "不為",
-    //     //                 "notEmpty": "不為空",
-    //     //                 "without": "排除"
-    //     //             },
-    //     //             "date": {
-    //     //                 "after": "大於",
-    //     //                 "before": "小於",
-    //     //                 "between": "在其中",
-    //     //                 "empty": "為空",
-    //     //                 "equals": "等於",
-    //     //                 "not": "不為",
-    //     //                 "notBetween": "不在其中",
-    //     //                 "notEmpty": "不為空"
-    //     //             },
-    //     //             "number": {
-    //     //                 "between": "在其中",
-    //     //                 "empty": "為空",
-    //     //                 "equals": "等於",
-    //     //                 "gt": "大於",
-    //     //                 "gte": "大於等於",
-    //     //                 "lt": "小於",
-    //     //                 "lte": "小於等於",
-    //     //                 "not": "不為",
-    //     //                 "notBetween": "不在其中",
-    //     //                 "notEmpty": "不為空"
-    //     //             },
-    //     //             "string": {
-    //     //                 "contains": "含有",
-    //     //                 "empty": "為空",
-    //     //                 "endsWith": "字尾為",
-    //     //                 "equals": "等於",
-    //     //                 "not": "不為",
-    //     //                 "notEmpty": "不為空",
-    //     //                 "startsWith": "字首為",
-    //     //                 "notContains": "不包含",
-    //     //                 "notStarts": "不為開頭",
-    //     //                 "notEnds": "不為結束"
-    //     //             }
-    //     //         },
-    //     //         "data": "欄位",
-    //     //         "leftTitle": "群組條件",
-    //     //         "logicAnd": "且",
-    //     //         "logicOr": "或",
-    //     //         "rightTitle": "取消群組",
-    //     //         "title": {
-    //     //             "_": "複合查詢 (%d)",
-    //     //             "0": "複合查詢"
-    //     //         },
-    //     //         "value": "內容"
-    //     //     },
-    //     //     "editor": {
-    //     //         "close": "關閉",
-    //     //         "create": {
-    //     //             "button": "新增",
-    //     //             "title": "建立新項目",
-    //     //             "submit": "建立"
-    //     //         },
-    //     //         "edit": {
-    //     //             "button": "編輯",
-    //     //             "title": "編輯項目",
-    //     //             "submit": "更新"
-    //     //         },
-    //     //         "remove": {
-    //     //             "button": "刪除",
-    //     //             "title": "刪除",
-    //     //             "submit": "刪除",
-    //     //             "confirm": {
-    //     //                 "_": "您確定要刪除 %d 筆資料嗎？",
-    //     //                 "1": "您確定要刪除 %d 筆資料嗎？"
-    //     //             }
-    //     //         },
-    //     //         "multi": {
-    //     //             "restore": "回復修改",
-    //     //             "title": "每行有不同的價值",
-    //     //             "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
-    //     //             "noMulti": "此列不容許同時編輯多個項目"
-    //     //         },
-    //     //         "error": {
-    //     //             "system": "系統發生錯誤(更多資訊)"
-    //     //         }
-    //     //     },
-    //     //     "autoFill": {
-    //     //         "cancel": "取消"
-    //     //     },
-    //     //     "buttons": {
-    //     //         "copySuccess": {
-    //     //             "_": "複製了 %d 筆資料",
-    //     //             "1": "複製了 1 筆資料"
-    //     //         },
-    //     //         "copyTitle": "已經複製到剪貼簿",
-    //     //         "excel": "Excel",
-    //     //         "pdf": "PDF",
-    //     //         "print": "列印",
-    //     //         "copy": "複製"
-    //     //     },
-    //     //     "searchPanes": {
-    //     //         "collapse": {
-    //     //             "_": "搜尋面版 (%d)",
-    //     //             "0": "搜尋面版"
-    //     //         },
-    //     //         "emptyPanes": "沒搜尋面版",
-    //     //         "loadMessage": "載入搜尋面版中...",
-    //     //         "clearMessage": "清空"
-    //     //     },
-    //     //     "select": {
-    //     //         "rows": {
-    //     //             "_": "%d 列已選擇",
-    //     //             "1": "%d 列已選擇"
-    //     //         }
-    //     //     },
-    //     //     "stateRestore": {
-    //     //         "emptyError": "名稱不能空白。"
-    //     //     }
-    //     // } ,
-    //
-    //     initComplete: function () {
-    //         this.api().columns().every( function () {
-    //             var column = this;
-    //             var select = $('<select class="form-control"><option value=""></option></select>')
-    //                 .appendTo( $(column.footer()).empty() )
-    //                 .on( 'change', function () {
-    //                     var val = $.fn.dataTable.util.escapeRegex(
-    //                         $(this).val()
-    //                     );
-    //
-    //                     column
-    //                         .search( val ? '^'+val+'$' : '', true, false )
-    //                         .draw();
-    //                 } );
-    //
-    //             column.data().unique().sort().each( function ( d, j ) {
-    //                 select.append( '<option value="'+d+'">'+d+'</option>' )
-    //             } );
-    //         } );
-    //     }
-    // } );
-
-
     //新增時 上傳圖片
-    $('#insertFile').on("change", function () {
-        var $files = $(this).get(0).files;
+    $('#insertFile, #insertFile1, #insertFile2').on("change", function () {
+        uploadFile($(this).get(0).files[0], $(this));
+    });
+
+    function uploadFile(file, $this) {
+        // var $files = $(this).get(0).files;
         var formData = new FormData();
-        formData.append("file", $files[0]);
+        formData.append("file", file);
+        let link;
         $.ajax({
-            url: '/Design/B/Case/uploadImg',
+            url: '/Design/B/uploadImg',
             type: 'POST',
             data: formData,
+            // async: false,
             processData: false,
             contentType: false,
             beforeSend: function () {
@@ -2419,27 +1835,294 @@ $(function () {
             },
             success: function (res) {
                 swal.close();
-                console.log(res);
-                $('#insertCoverPhoto').attr('src', `${res}`);
-
+                console.log(`res: ${res}`);
+                $this.siblings('img').attr('src', `${res}`);
             },
             error: function (err) {
                 console.log(err);
             }
+
+        });
+    }
+
+//---------- 新增結束 查詢開始 ----------
+
+    //風格下拉選單
+
+    function doStyleList() {
+        $.each(styleList, function (index, value) {
+            // console.log(value.name);
+            //添加下拉選單
+            let li = document.createElement('li');
+            li.innerHTML = `${value.name}`;
+            li.value = `${index}`;
+
+            // let a = document.createElement('a');
+
+            // li.append(a)
+
+            $('#styleList').append(li);
+            // console.log(li);
+        });
+    }
+
+    function doAddStyleList() {
+        $.each(styleList, function (index, value) {
+
+            option = document.createElement('option');
+            if (value.name !== "所有風格") {
+                option.innerHTML = `${value.name}`;
+                // option.value = `${index}`;
+                $('#editStyleList').append(option);
+            }
+
+            // 新增的下拉選單
+            option = document.createElement('option');
+            if (value.name !== "所有風格") {
+                option.innerHTML = `${value.name}`;
+                option.value = `${index}`;
+                $('#addStyleList').append(option);
+            }
+        });
+    }
+
+    //類別 Ajax
+    $("#styleList").on('click', 'li', function () {
+        console.log($(this).text());
+
+        if ($(this).text() == "所有風格") {
+
+            loadData();
+
+        } else {
+            console.log($(this).text())
+            $.ajax({
+                method: "GET",
+                url: "/Design/F/Designs?search=" + $(this).text(),
+                contentType: "application/json; charset=UTF-8", //送過去的
+                dataType: "json", //傳回來的
+                // data: dataFile,
+                // processData: false, //防止jQuery將data變成query String
+                // contentType: false,
+                success: function (result) {
+
+                    $('#designBlog').html('');
+                    Design_data = '';
+                    $.each(result.results, function (index, value) {
+
+                        let imgStr;
+                        if (value.coverPhoto != null) {
+                            imgStr = `<img src=" ${value.coverPhoto} " alt="blog">`;
+                        } else {
+                            imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                        }
+
+                        Design_data += `<div class="blog__item blog__border-bottom mb-60 pb-60">
+                        <div class="blog__thumb fix">
+                            <a href="blog-details.html" class="w-img">`;
+
+                        if (value.coverPhoto != null) {
+
+                            Design_data += `<img src=" ${value.coverPhoto} " alt="blog">`
+
+                        } else {
+
+                            Design_data += `<img src=" ${value.photo_1} " alt="blog">`
+
+                        }
+                        Design_data += `</a>
+                </div>
+                    <div class="blog__content">
+                        <h4 class="blog__title"><a href="blog-details.html">${value.title}</a></h4>
+                        <div class="blog__meta">
+                            <span>By <a href="#">${value.name}</a></span>
+                            <span>${value.createTime}</span>
+                        </div>
+                        <p>${value.message}</p>
+                        <a href="blog-details.html" class="os-btn">read more</a>
+                    </div>
+                </div>
+                    `;
+
+                    })
+                    $('#designBlog').append(Design_data);
+                    // console.log(Design_data);
+
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        }
+
+
+    })
+
+    //地區下拉選單
+    function doLocationData() {
+        $.each(locationData, function (index, value) {
+            // console.log(value.name);
+            //添加下拉選單
+            let li = document.createElement('li');
+            li.innerHTML = `${value.name}`;
+            li.value = `${index}`;
+
+            let a = document.createElement('a');
+
+            li.append(a)
+
+            $('#locationList').append(li);
+
+        });
+    }
+
+    function doAddLocationData() {
+        $.each(locationData, function (index, value) {
+
+            option = document.createElement('option');
+            if (value.name !== "所有地區") {
+                option.innerHTML = `${value.name}`;
+                // option.value = `${index}`;
+                $('#editLocation').append(option);
+            }
+
+            option = document.createElement('option');
+            if (value.name !== "所有地區") {
+                option.innerHTML = `${value.name}`;
+                // option.value = `${index}`;
+                $('#addLocation').append(option);
+            }
+            // 下拉選單結束----
+        });
+    }
+
+    //地區 Ajax
+    $("#locationList").on('click', 'li', function () {
+        console.log($(this).text());
+
+        if ($(this).text() == "所有地區") {
+
+            loadData();
+
+        } else {
+            console.log($(this).text())
+            $.ajax({
+                method: "GET",
+                url: "/Design/F/Designs?search=" + $(this).text(),
+                contentType: "application/json; charset=UTF-8", //送過去的
+                dataType: "json", //傳回來的
+                // data: dataFile,
+                // processData: false, //防止jQuery將data變成query String
+                // contentType: false,
+                success: function (result) {
+
+                    $('#designBlog').html('');
+                    Design_data = '';
+                    $.each(result.results, function (index, value) {
+
+                        let imgStr;
+                        if (value.coverPhoto != null) {
+                            imgStr = `<img src=" ${value.coverPhoto} " alt="blog">`;
+                        } else {
+                            imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                        }
+
+                        Design_data += `<div class="blog__item blog__border-bottom mb-60 pb-60">
+                        <div class="blog__thumb fix">
+                            <a href="blog-details.html" class="w-img">`;
+
+                        if (value.coverPhoto != null) {
+
+                            Design_data += `<img src=" ${value.coverPhoto} " alt="blog">`
+
+                        } else {
+
+                            Design_data += `<img src=" ${value.photo_1} " alt="blog">`
+
+                        }
+                        Design_data += `</a>
+                </div>
+                    <div class="blog__content">
+                        <h4 class="blog__title"><a href="blog-details.html">${value.title}</a></h4>
+                        <div class="blog__meta">
+                            <span>By <a href="#">${value.name}</a></span>
+                            <span>${value.createTime}</span>
+                        </div>
+                        <p>${value.message}</p>
+                        <a href="blog-details.html" class="os-btn">read more</a>
+                    </div>
+                </div>
+                    `;
+
+                    })
+                    $('#designBlog').append(Design_data);
+                    // console.log(Design_data);
+
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        }
+
+
+    })
+
+//---------- 查詢結束 修改開始 ----------
+
+
+    //修改 按鈕
+    $('#editDesignServiceBtn').click(function () {
+
+        let id = $('#spanEditId').text();
+        console.log(id);
+        editSend(id);
+        $.ajax({
+            url: "/Design/F/getDesign/" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $('#editTitle').val(result.title);
+                $('#editName').val(result.name);
+                $('#editStyleList').val(result.style);
+                $('#editLocation').val(result.location);
+                $('#editPrice').val(result.price);
+                $('#editMessage').val(result.message);
+                $('#editCoverPhoto').attr('src', result.coverPhoto);
+                $('#editPhoto_1').attr('src', result.photo_1);
+                $('#editPhoto_2').attr('src', result.photo_2);
+
+                $('#updateCaseId').val(id);
+            }
         })
     });
 
+    //發送修改設計資料
+    function editSend(id) {
+        // 取得輸入的資料
+        const editData = {
+            title: $('#editTitle').val(),
+            name: $('#editName').val(),
+            style: $('#editStyleList> option:selected').text(),
+            location: $('#editLocation> option:selected').text(),
+            price: $('#editPrice').val(),
+            message: $('#editMessage').val(),
+            coverPhoto: $('#editCoverPhoto').attr('src'),
+            photo_1: $('#editPhoto_1').attr('src'),
+            photo_2: $('#editPhoto_2').attr('src')
+        }
+        console.log(editData)
+        //將輸入的文字資料,包進FormData
+        const dataFile = new FormData();
+        // dataFile.append("file",$('#insertUploadFile')[0],files[0]);
+        dataFile.append("data", JSON.stringify(editData));
 
-    // 編輯時上傳圖片
-    $('#editFile').on("change", function () {
-        var $files = $(this).get(0).files;
-        var formData = new FormData();
-        formData.append("file", $files[0]);
         $.ajax({
-            url: '/Design/B/Case/uploadImg',
-            type: 'POST',
-            data: formData,
-            processData: false,
+            type: "POST",
+            url: "/Design/F/updateDesign/" + id,
+            data: dataFile,
+            processData: false, // 防止jquery將data變成query String
             contentType: false,
             beforeSend: function () {
                 swal.fire({
@@ -2447,38 +2130,24 @@ $(function () {
                     showConfirmButton: false,
                 });
             },
-            success: function (res) {
-                swal.close();
-                console.log(res);
-                $('#editCoverPhoto').attr('src', `${res}`);
+            success: function (json) {
+                swal.fire({
+                    icon: "success",
+                    html: "<h5>修改成功！</h5>",
+                }).then(function () {
+                    location.reload();
+                });
             },
             error: function (err) {
                 console.log(err);
+                swal.fire({
+                    icon: "error",
+                    html: "<h5>${err.responseText}!</h5>"
+                }).then(function () {
+                    location.reload();
+                });
             }
-        })
-    });
+        });
+    }
 
-
-    //---------- 頁面開始 ----------
-
-    //下一頁
-    $('#nextPage').on("click", function () {
-        $.ajax({
-            url: "/Design/B/Cases",
-            type: "GET",
-            dataType: "json",
-            success: function (result) {
-                console.log(result);
-                offset += fetchNext;
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
-    });
-
-    //頁碼
-
-
-    //---------- 頁面結束 ---------
-});
+})

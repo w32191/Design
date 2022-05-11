@@ -45,12 +45,12 @@
         </div>
     </section>
     <!-- page title area end -->
-
+    
 
     <!-- shop details area start -->
     <section class="shop__area pb-65" id="pd1">
 
-
+    
     </section>
     <!-- shop details area end -->
 
