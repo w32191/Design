@@ -22,8 +22,13 @@ public class ProductReviewService {
   }
   
   //新增QA
-  public void insert(ProductReview pr){
-    prrDao.save(pr);
+  public ProductReview insert(ProductReview pr){
+   return prrDao.save(pr);
+  }
+
+  public void save(ProductReview pr) {
+    // TODO Auto-generated method stub
+    
   }
   
   

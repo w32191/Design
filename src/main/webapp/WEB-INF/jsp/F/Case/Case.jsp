@@ -42,22 +42,30 @@
             </div>
         </div>
     </section>
-    <!-- page title area end -->
-
-    <!-- blog area start -->
-    <section class="blog__area pt-0 pb-100" style="padding-top: 0">
-        <div class="row">
-            <div class="col-12">
-                <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
-                    <div class="coupon2">
-                        <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有案件</button>
-                        <button onclick="location.href='${contextRoot}/F/UpdateCase'" class="os-btn os-btn-black" name="add_cart" type="submit">新增案件</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
+                        <div class="coupon2">
+                            <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有案件
+                            </button>
+<%--                            <c:if test="${account != null}">--%>
+                                <button onclick="location.href='${contextRoot}/F/UpdateCase'"
+                                        class="os-btn os-btn-black"
+                                        name="add_cart" type="submit">新增案件
+                                </button>
+<%--                            </c:if>--%>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    <!-- page title area end -->
+
+    <!-- blog area start -->
+    <section class="blog__area pt-0 pb-100">
         <div class="container">
-            <div class="row" id = "blogCase">
+            <div class="row" id="blogCase">
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__wrapper">
                         <div class="blog__item blog__border-bottom mb-60 pb-60">
@@ -118,6 +126,7 @@
             </div>
         </div>
     </section>
+
     <!-- blog area end -->
 </main>
 

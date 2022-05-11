@@ -16,3 +16,5 @@
 <script src="${contextRoot}/static/front/assets/js/wow.min.js"></script>
 <script src="${contextRoot}/static/front/assets/js/imagesloaded.pkgd.min.js"></script>
 <script src="${contextRoot}/static/front/assets/js/main.js"></script>
+<script src="${contextRoot}/static/front/universal/headerPage.js"></script>
+

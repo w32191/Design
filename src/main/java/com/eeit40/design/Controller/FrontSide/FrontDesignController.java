@@ -1,7 +1,9 @@
-package com.eeit40.design.Controller.BackSide;
+package com.eeit40.design.Controller.FrontSide;
+
 
 import com.eeit40.design.Dto.DesignDto;
 import com.eeit40.design.Dto.DesignQueryParams;
+import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Design;
 import com.eeit40.design.Entity.ImgurImg;
 import com.eeit40.design.Service.DesignService;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.IOException;
@@ -28,7 +31,7 @@ import java.util.List;
 
 @RestController
 @PropertySource("classpath:imgurConfigs.properties")
-public class DesignController {
+public class FrontDesignController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -39,20 +42,51 @@ public class DesignController {
     private ImgurUtil imgurUtil;
 
     @Autowired
-    private DesignService designService;
+    private ObjectMapper mapper;
 
     @Autowired
-    private  ObjectMapper mapper;
+    private DesignService designService;
 
-    @GetMapping("/B/Design")
-    public ModelAndView index(ModelAndView mav){
-        mav.setViewName("/B/DesignService/DesignService");
-        return mav;
+    @GetMapping("/F/Design")
+    public ModelAndView getDesigns(ModelAndView modelAndView, HttpSession session) {
+        Account account = (Account) session.getAttribute("Faccount");
+        modelAndView.addObject("account", account);
+        modelAndView.setViewName("/F/DesignService/DesignService");
+        return modelAndView;
     }
 
+    @GetMapping("/F/addDesignService")
+    public ModelAndView addDesignService(ModelAndView modelAndView) {
+        modelAndView.setViewName("/F/DesignService/AddDesignService");
+        return modelAndView;
+    }
+
+    @GetMapping("/F/editDesignService/{id}")
+    public ModelAndView editDesignService(ModelAndView modelAndView, @PathVariable Integer id) {
+        Design design = designService.getDesignById(id);
+        modelAndView.addObject("Design", design);
+        modelAndView.setViewName("/F/DesignService/EditDesignService");
+        return modelAndView;
+    }
+
+    @GetMapping("/F/viewDesignService/{id}")
+    public ModelAndView viewDesignService(ModelAndView modelAndView, @PathVariable Integer id, HttpSession session) {
+        Design design = designService.getDesignById(id);
+        Account account = (Account) session.getAttribute("Faccount");
+        if (account != null) {
+            modelAndView.addObject("memberId", account.getMembers().getId());
+        } else {
+            modelAndView.addObject("memberId", -1);
+        }
+
+        modelAndView.addObject("Design", design);
+
+        modelAndView.setViewName("/F/DesignService/ViewDesignService");
+        return modelAndView;
+    }
 
     @Validated
-    @GetMapping("/B/Designs")
+    @GetMapping("/F/Designs")
     public ResponseEntity<Page<Design>> getDesigns(
 
             //------查詢條件 Filtering------
@@ -68,7 +102,7 @@ public class DesignController {
             //------分頁 Pagination------
             @RequestParam(defaultValue = "10") @Max(100) @Min(0) Integer fetchNext,
             @RequestParam(defaultValue = "0") @Min(0) Integer offset
-    ){
+    ) {
         DesignQueryParams designQueryParams = new DesignQueryParams();
         designQueryParams.setSearch(search);
         designQueryParams.setOrderBy(orderBy);
@@ -90,21 +124,10 @@ public class DesignController {
     }
 
 
-    @GetMapping("B/getDesign/{id}")
-    public ResponseEntity<Design> getDesign(@PathVariable Integer id){
+    @GetMapping("F/getDesign/{id}")
+    public ResponseEntity<Design> getDesign(@PathVariable Integer id) {
         Design design = designService.getDesignById(id);
 
-        if(design != null){
-            return ResponseEntity.status(HttpStatus.OK).body(design);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
-
-    @GetMapping("B/getDesignByMember/{fk_member_id}")
-    public ResponseEntity<List<Design>> getDesignByMemberId(@PathVariable Integer fk_member_id) {
-        List<Design> design = designService.getDesignByMemberId(fk_member_id);
-//        System.out.println(design);
         if (design != null) {
             return ResponseEntity.status(HttpStatus.OK).body(design);
         } else {
@@ -112,26 +135,44 @@ public class DesignController {
         }
     }
 
+    @GetMapping("F/getDesignByMember/{fk_member_id}")
+    public ResponseEntity<List<Design>> getDesignByMemberId(@PathVariable Integer fk_member_id) {
+        List<Design> design = designService.getDesignByMemberId(fk_member_id);
 
-    @PostMapping("B/createDesign")
-    public ResponseEntity<Design> createDesign(@RequestParam("data") String jsonStr) throws JsonProcessingException {
+        if (design != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(design);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PostMapping("F/createDesign")
+    public ResponseEntity<Design> createDesign(@RequestParam("data") String jsonStr, HttpSession session) throws JsonProcessingException {
 
         log.info(jsonStr);
         DesignDto designDto = mapper.readValue(jsonStr, DesignDto.class);
+
+        // 取當前帳號資料
+        Account account = (Account) session.getAttribute("Faccount");
+        if (account != null) {
+            designDto.setFk_member_id(account.getMembers().getId());
+        }
+
         Integer id = designService.createDesign(designDto);
+
 
         Design design = designService.getDesignById(id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(design);
     }
 
-    @DeleteMapping("B/deleteDesign/{id}")
-    public ResponseEntity<?> deleteDesign(@PathVariable Integer id){
+    @DeleteMapping("F/deleteDesign/{id}")
+    public ResponseEntity<?> deleteDesign(@PathVariable Integer id) {
         designService.deleteDesign(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping("B/updateDesign/{id}")
+    @PostMapping("F/updateDesign/{id}")
     public ResponseEntity<Design> updateDesign(@PathVariable Integer id,
                                                @RequestParam("data") String jsonStr,
                                                @RequestParam(name = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
@@ -141,27 +182,27 @@ public class DesignController {
 
         Design design = designService.getDesignById(id);
 
-        if(design == null){
+        if (design == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         designService.updateDesign(id, designDto);
         Design updateDesign = designService.getDesignById(id);
         return ResponseEntity.status(HttpStatus.OK).body(updateDesign);
-    };
+    }
 
+    ;
 
 
     //------新增照片開始------
-    @PostMapping("B/uploadImg")
+    @PostMapping("F/uploadImg")
     public String uploadImg(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 
         imgurUtil.setAuthorization(authorization);
         ImgurImg img = imgurUtil.uploadImg(multipartFile.getOriginalFilename(), multipartFile.getBytes());
 
-        return  img.getLink();
+        return img.getLink();
     }
     //------新增照片結束------
-
 
 
 }

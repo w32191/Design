@@ -34,66 +34,73 @@
         <div class="container-fluid">
             <section id="main-content">
 
-                <!-- /# row -->
-                <div class="row">
+                <div class="card" style="background-color: rgb(180,180,180)">
+
+                    <!-- /# row -->
+                    <div class="row">
 
 
-                    <%--                    品牌--%>
+                        <%--                    品牌--%>
 
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>品牌 Brand </h4>
+                        <div class="col-lg-4">
 
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4>品牌 Brand </h4>
+
+                                </div>
+                                <div class="recent-comment m-t-15" id="bnd">
+
+
+                                </div>
                             </div>
-                            <div class="recent-comment m-t-15" id="bnd">
 
-
-                            </div>
+                            <!-- /# card -->
                         </div>
-                        <!-- /# card -->
-                    </div>
 
 
-                    <!-- /# column -->
-                    <div class="col-lg-8">
+                        <!-- /# column -->
+                        <div class="col-lg-8">
 
-                        <div class="card" id="productCard" >
-                            <div class="card-title pr">
-                                <div class="row">
-                                    <div class="col-lg-10">
-                                        <h4>產品 Product</h4>
+                            <div class="card" id="productCard">
+                                <div class="card-title pr">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <h4>產品 Product</h4>
+                                        </div>
+                                        <div class="col-lg-3" id="addbtn">
+
+                                        </div>
                                     </div>
-                                    <div class="col-lg-2" id="addbtn">
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table student-data-table ">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
 
+                                                <th>圖片</th>
+                                                <th>名稱</th>
+                                                <th>庫存</th>
+                                                <th>編輯</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody id=pdlist>
+
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table student-data-table ">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
 
-                                            <th>圖片</th>
-                                            <th>名稱</th>
-                                            <th>庫存</th>
-                                            <th>編輯</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody id=pdlist>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <!-- /# column -->
 
+                        <!-- /# column -->
+
+                    </div>
                 </div>
             </section>
 

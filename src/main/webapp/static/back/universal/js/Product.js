@@ -38,10 +38,13 @@ $(function () {
                                             </td>
                                            
                                             <td>
-                                            <img src="${pdres[i].image01}" width="60px" height="60px">
+                                            <a href="http://localhost:8080/Design/F/product/product-details?id=${id}">
+                                            <img src="${pdres[i].image01}" width="60px" height="60px"></a>
                                                 
                                             </td>
-                                            <td>${pdres[i].name}
+                                            
+                                            <td> <a href="http://localhost:8080/Design/F/product/product-details?id=${id}">
+                                                ${pdres[i].name}</a>
                                             </td>
                                           
                                             <td>
