@@ -3,6 +3,7 @@ package com.eeit40.design.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,8 +62,8 @@ public class Member {
   private Set<ProductReview> productReviews = new LinkedHashSet<>();
 
   @JsonIgnore
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "fkMember")
-  private Design designServices;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "fkMember")
+  private List<Design> designServices;
 
   @JsonIgnore
   @OneToMany(mappedBy = "fkMember")
@@ -90,11 +91,11 @@ public class Member {
     this.designReviews = designReviews;
   }
 
-  public Design getDesignServices() {
+  public List<Design> getDesignServices() {
     return designServices;
   }
 
-  public void setDesignServices(Design designServices) {
+  public void setDesignServices(List<Design> designServices) {
     this.designServices = designServices;
   }
 

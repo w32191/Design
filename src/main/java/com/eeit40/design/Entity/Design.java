@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,7 +27,8 @@ public class Design {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
-  @OneToOne(fetch = FetchType.LAZY)
+  
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_member_id")
   private Member fkMember;
 
@@ -35,6 +37,8 @@ public class Design {
 
   @Column(name = "style", length = 10)
   private String style;
+
+
 
   @Column(name = "price")
   private Integer price;
