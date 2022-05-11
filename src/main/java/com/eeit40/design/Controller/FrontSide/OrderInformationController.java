@@ -139,6 +139,7 @@ public class OrderInformationController {
 	orderInfo.setAdd(request.getParameter("address"));
 	orderInfo.setNotes(request.getParameter("notes"));
 	orderInfo.setShipState("未付款");
+
 //		System.out.println("note"+request.getParameter("notes"));
 //		String coupondiscount = request.getParameter("discount");
 //		int discount = Integer.valueOf(coupondiscount);

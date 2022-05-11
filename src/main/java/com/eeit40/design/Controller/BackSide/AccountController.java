@@ -40,16 +40,18 @@ public class AccountController {
     	
     	if(!br.hasErrors()) {
     		Account login = accountService.login(email, pwd);
+//    		Integer accper = login.getPermission();
     		if(login != null) {
     		session.setAttribute("Baccount", login);
     		System.out.println(login);
     		mav.setViewName("B/Account/index");
     		return mav;
     		}
+    		mav.setViewName("B/Account/accounterror");
     		return mav;
     	}
-    	mav.setViewName("B/Account/login");
-    	return mav;
+    	mav.setViewName("B/Account/accounterror");
+		return mav;
 
     }
     
@@ -81,6 +83,7 @@ public class AccountController {
     HttpSession session, BindingResult br) {
     	
     	if(!br.hasErrors()) {
+    		account.setPermission(2);
     	 	Account accountregister = accountService.register(account);
     	 	session.setAttribute("member", accountregister);
     	 	System.out.println(accountregister);
@@ -108,6 +111,25 @@ public class AccountController {
     	return mav;
 			
     }
+    
+    @GetMapping("/B/accountError")
+    public ModelAndView accountError(ModelAndView mav) {
+    	
+    	mav.setViewName("/B/Account/accounterror");
+    	
+    	return mav;
+    }
+    
+    
+    @PostMapping("/B/accountError")
+    public ModelAndView reaccountError(ModelAndView mav) {
+    	
+    	mav.setViewName("B/Account/login");
+    	
+    	return mav;
+    	
+    }
+    
 }
 
 

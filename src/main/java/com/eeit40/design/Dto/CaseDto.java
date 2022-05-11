@@ -39,6 +39,16 @@ public class CaseDto {
 
     private String coverPhoto;
 
+    private Integer fk_member_id;
+
+    public Integer getFk_member_id() {
+        return fk_member_id;
+    }
+
+    public void setFk_member_id(Integer fk_member_id) {
+        this.fk_member_id = fk_member_id;
+    }
+
 
 //    private List<String> list;
 //

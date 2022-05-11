@@ -1,11 +1,18 @@
 package com.eeit40.design.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import com.eeit40.design.Dao.AccountRepository;
 import com.eeit40.design.Entity.Account;
+
 
 @Service
 public class AccountService {
@@ -31,7 +38,6 @@ public class AccountService {
 	
 	
 	public Account findAccountBypwd(String pwd) {
-		Account pwd1 = accountRepository.findAccountBypwd(pwd);
 	
 		return accountRepository.findAccountBypwd(pwd);
 
@@ -76,7 +82,24 @@ public class AccountService {
 		
 		return accountRepository.findAccountById(id);
 	}
-			
+	
+	
+	
+	public List<Account> findAccountAll(Account account){
+		
+		return accountRepository.findAll();
+	}
+	
+	
+	public Page<Account> findByPage(Integer pageNumber){
+		
+		Pageable pgb = PageRequest.of(pageNumber-1 , 5, Sort.Direction.ASC, "names");
+		
+		Page<Account> page = accountRepository.findAll(pgb);
+		
+		return page;
+	}
+	
 		
 		
 }

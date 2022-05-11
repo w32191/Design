@@ -95,74 +95,89 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>會員管理</h1>
+								<h1>個人資料修改</h1>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /# row -->
+				<div class="card" style="background-color: rgb(230, 230, 230);">
+					<div class="card">
+						<div class="custom-tab user-profile-tab">
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a aria-controls="1"
+									role="tab" data-toggle="tab">個人資料</a></li>
+							</ul>
+							<br> <br>
 
-				<div class="custom-tab user-profile-tab">
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a aria-controls="1"
-							role="tab" data-toggle="tab">個人資料</a></li>
-					</ul>
-					<br> <br>
-					<form:form class="form" name="member" ModelAttribute="memberupdate"
-						action="/Design/B/memberupdate">
-						<div class="name-content">
-							<span class="contact-title">姓名:</span> <input
-								class="mail-address" type="text" name="names"
-								value="${memberupdate.names}">
+							<form:form class="form" name="member"
+								ModelAttribute="memberupdate" action="/Design/B/memberupdate">
+								<div class="name-content">
+									<span class="contact-title">姓名:</span> <input
+										class="mail-address" type="text" id="names" name="names"
+										value="${memberupdate.names}">
+								</div>
+								<br>
+								<div class="phone-content">
+									<span class="contact-title">電話:</span> <input
+										class="phone-number" type="tel" id="phone" name="phone"
+										value="${memberupdate.phone}">
+								</div>
+								<br>
+								<div class="address-content">
+									<span class="contact-title">地址:</span> <input
+										class="mail-address" type="text" id="address" name="address"
+										value="${memberupdate.address}">
+								</div>
+								<br>
+								<div class="email-content">
+									<span class="contact-title">信箱:</span> <input
+										class="contact-email" type="email" id="email" name="email"
+										value="${Baccount.email}">
+								</div>
+								<br>
+								<div class="user-send-message">
+									<input type="submit" id="update" value="更新資料">
+								</div>
+							</form:form>
 						</div>
-						<br>
-						<div class="phone-content">
-							<span class="contact-title">電話:</span> <input
-								class="phone-number" type="tel" name="phone"
-								value="${memberupdate.phone}">
-						</div>
-						<br>
-						<div class="address-content">
-							<span class="contact-title">地址:</span> <input
-								class="mail-address" type="text" name="address"
-								value="${memberupdate.address}">
-						</div>
-						<br>
-						<div class="email-content">
-							<span class="contact-title">信箱:</span> <input
-								class="contact-email" type="email" name="email"
-								value="${account.email}">
-						</div>
-						<br>
-						<div class="password-content">
-							<span class="contact-title">密碼:</span> <input
-								class="contact-email" type="text" name="pwd"
-								value="${account.pwd}">
-						</div>
-						<div class="user-send-message">
-							<input type="submit" id="update" value="更新資料">
-
-
-						</div>
-					</form:form>
+					</div>
 				</div>
+				<br>
+				<p>
+					<button id="MemberUpdate1">一鍵修改個資</button>
+					<button id="ReMemberUpdate2">一鍵恢復個資</button>
+				</p>
 			</div>
 		</div>
 
 
 	</div>
 
-
+	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
 	<script>
-		document.getElementById('update').addEventListener('click',
-				function() {
-					Swal.fire({
-						icon : 'success',
-						title : '更新成功',
-						showConfirmButton : false,
-						timer : 1500
-					})
-				})
+		document.getElementById('update').addEventListener('click', function() {
+			Swal.fire({
+				icon : 'success',
+				title : '更新成功',
+				showConfirmButton : false,
+				timer : 1500
+			})
+		})
+
+		$('#MemberUpdate1').on("click", function() {
+			$('#names').val('葉阿寶');
+			$('#phone').val('0932446738');
+			$('#address').val('新北市五股區五福路11號');
+			$('#email').val('1234Abcd@gmail.com');
+		})
+
+		$('#ReMemberUpdate2').on("click", function() {
+			$('#names').val('王阿九');
+			$('#phone').val('0932234567');
+			$('#address').val('新北市三重區五華街282號');
+			$('#email').val('Abcd1234@gmail.com');
+		})
 	</script>
 
 
@@ -170,7 +185,7 @@
 
 
 	<!-- jQuery & Bootstrap-->
-	<jsp:include page="../IncludePage/staticPage/BackJsPage.jsp" />
+
 	<!-- Calender -->
 	<script
 		src="${contextRoot}/static/back/assets/js/lib/jquery-ui/jquery-ui.min.js"></script>

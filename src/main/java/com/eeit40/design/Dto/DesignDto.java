@@ -8,7 +8,7 @@ public class DesignDto {
 
     private String name;
 
-    private String classification;
+    private String style;
 
     private Integer price;
 
@@ -23,6 +23,26 @@ public class DesignDto {
     private String photo_1;
 
     private String photo_2;
+
+    private String location;
+
+    private Integer fk_member_id;
+
+    public Integer getFk_member_id() {
+        return fk_member_id;
+    }
+
+    public void setFk_member_id(Integer fk_member_id) {
+        this.fk_member_id = fk_member_id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getPhoto_1() {
         return photo_1;
@@ -72,12 +92,12 @@ public class DesignDto {
         this.name = name;
     }
 
-    public String getClassification() {
-        return classification;
+    public String getStyle() {
+        return style;
     }
 
-    public void setClassification(String classification) {
-        this.classification = classification;
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public Integer getPrice() {

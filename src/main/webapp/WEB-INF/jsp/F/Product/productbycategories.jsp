@@ -6,9 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>Design & Decor </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
+          rel="stylesheet"/>
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
 </head>
@@ -41,22 +43,7 @@
         </div>
     </section>
     <!-- page title area end -->
-    </section>
-        <div>
-            <img src="https://i.imgur.com/r5DUYEd.jpg">
-        </div>
-<div>
-    <div class="row">
-        <div class="col-xl-6 col-lg-6">
-        </div>
-        <div class="col-xl-6 col-lg-6">
-            <img src="https://i.imgur.com/dC7OHsj.jpg">
-        </div>
 
-    </div>
-</div>
-
-    </section>
     <!-- shop area start -->
     <section class="shop__area pt-100 pb-100">
         <div class="container">
@@ -68,9 +55,9 @@
                     <div class="shop__content-area">
                         <div class="shop__header d-sm-flex justify-content-between align-items-center mb-40">
                             <div class="shop__header-left">
-                                <div class="show-text">
-                                    <span>Showing 1–12 of 20 results</span>
-                                </div>
+<%--                                <div class="show-text">--%>
+<%--                                    <span>Showing 1–12 of 20 results</span>--%>
+<%--                                </div>--%>
                             </div>
                             <div class="shop__header-right d-flex align-items-center justify-content-between justify-content-sm-end">
                                 <div class="sort-wrapper mr-30 pr-25 p-relative">
@@ -629,5 +616,7 @@
 
 </script>
 <script src="${contextRoot}/static/front/universal/ProductByCategories.js"></script>
+<script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
+
 </body>
 </html>

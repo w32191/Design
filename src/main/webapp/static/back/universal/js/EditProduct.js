@@ -85,8 +85,8 @@ $(function () {
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <p>產品描述</p>
-                                                    <textarea rows="5" name="description" id="description"
-                                                              value="${res.description}" placeholder="${res.description}"></textarea>
+                                                    <textarea rows="18" name="description" id="description" class="form-control" style="height:100%"
+                                                              >${res.description}</textarea>
                                                 </div>
                                                 <div class="form-group" hidden>
                                                     <p>品牌</p>
@@ -255,6 +255,7 @@ $('#main-content').on('click','#savebtn',function (){
                     console.log(deres);
                     swal.fire({
                         icon: 'success',
+                        text: 'Something went wrong!',
                         html: '<h5>修改成功!</h5>'
                     }).then(function () {
                         window.location.href="/Design/B/Product/"

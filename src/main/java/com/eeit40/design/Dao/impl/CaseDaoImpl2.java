@@ -96,10 +96,29 @@ public class CaseDaoImpl2 {
         }
     }
 
+    public List<Case> getCaseByMemberId(Integer fk_member_id) {
+        String sql = "select * " +
+                " from cases " +
+                " where fk_member_id= :memberId  ORDER BY date_time desc ";
+
+        Map<String, Object> map = new HashMap();
+        map.put("memberId", fk_member_id);
+
+        List<Case> caseList = namedParameterJdbcTemplate.query(sql, map, new CaseRowMapper());
+//        System.out.println(caseList);
+
+        if (caseList.size() > 0) {
+            return caseList;
+        } else {
+            return null;
+        }
+    }
+
+
     public Integer createCase(CaseDto caseDto) {
         String sql =
-                "INSERT INTO cases (name,title,classification, location,  case_email,  message, date_time, expiry_date,cover_photo) " +
-                        "VALUES (:name, :title, :classification, :location, :caseEmail, :message, :dateTime, :expiryDate,:coverPhoto)";
+                "INSERT INTO cases (name,title,classification, location,  case_email,  message, date_time, expiry_date,cover_photo, fk_member_id) " +
+                        "VALUES (:name, :title, :classification, :location, :caseEmail, :message, :dateTime, :expiryDate,:coverPhoto ,:memberId )";
 
         Map<String, Object> map = new HashMap<>();
         map.put("title", caseDto.getTitle());
@@ -113,6 +132,11 @@ public class CaseDaoImpl2 {
             map.put("coverPhoto", null);
         } else {
             map.put("coverPhoto", caseDto.getCoverPhoto());
+        }
+        if(caseDto.getFk_member_id() != null){
+            map.put("memberId",caseDto.getFk_member_id());
+        }else {
+            map.put("memberId",null);
         }
 
         Date now = new Date();

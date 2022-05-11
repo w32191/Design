@@ -1645,8 +1645,8 @@ classificationData = [
 $(function () {
     // $('#table_id').DataTable();
 
-    let total,page;
-    let offset = 0 ;
+    let total, page;
+    let offset = 0;
     let fetchNext = 10;
 
     doClassificationData();
@@ -1680,18 +1680,20 @@ $(function () {
             })
             $('#table_tbody').append(case_data);
 
-            total= result.total
+            total = result.total
             page = Math.ceil(total / fetchNext);
             console.log(page);
 
             $("#pageBtn").append(`<li class="page-item">
                                                     <a class="page-link" id="previousPage">Previous</a>
                                                 </li>`);
-            for(let i = 1; i<=page ; i++){
+            for (let i = 1; i <= page; i++) {
 
-                $("#pageBtn").append(`<li class="page-item"><a class="page-link">${i}</a></li>`);
+                $("#pageBtn").append(`<li class="page-item"><a class="page-link" id="page${i}">${i}</a></li>`);
 
             }
+
+
             $("#pageBtn").append(`<li class="page-item">
                                                     <a class="page-link" id="nextPage">Next</a>
                                                 </li>`);
@@ -1708,6 +1710,48 @@ $(function () {
             console.log(err);
         }
     })
+
+    //跳頁
+    $('#pageBtn').on('click', 'a[id^=page]', function () {
+
+        $(this).closest('li').siblings('li').removeClass('active');
+        $(this).closest('li').addClass('active');
+        console.log();
+        let offset = 0;
+        let fetchNext = 10;
+        let page = $(this).text();
+        offset = offset + fetchNext * (page - 1);
+        $.ajax({
+            type: "GET",
+            url: "/Design/B/Cases?fetchNext=" + fetchNext + "&offset=" + offset,
+            success: function (result) {
+                $('#table_tbody').html('');
+                console.log(result);
+                case_data = '';
+
+                $.each(result.results, function (index, value) {
+
+                    case_data += '<tr>'
+                    case_data += '<td>' + value.id + '</td>'
+                    case_data += '<td>' + value.title + '</td>'
+                    case_data += '<td>' + value.name + '</td>'
+                    case_data += '<td>' + value.classification + '</td>'
+                    case_data += '<td>' + value.location + '</td>'
+                    case_data += '<td>' + value.caseEmail + '</td>'
+                    case_data += '<td>' + value.message + '</td>'
+                    case_data += '<td>' + value.coverPhoto + '</td>'
+                    case_data += '<td>' + value.dateTime + '</td>'
+                    case_data += '<td>' + value.expiryDate + '</td>'
+                    case_data += '<td><button type="button" class="btn btn-warning editBtn" id="editBtn' + value.id + '">編輯</button></td>'
+                    case_data += '<td><button type="button" class="btn btn-danger deleteBtn" id="deleteBtn' + value.id + '">刪除</button></td>'
+                    case_data += '</tr>'
+                })
+                $('#table_tbody').append(case_data);
+
+            }
+        })
+
+    });
     //---------- 載入頁面資料結束 ---------
 
     //---------- 刪除開始 ---------
@@ -1828,7 +1872,7 @@ $(function () {
                 $('#editLocation').val(result.location);
                 $('#editCaseEmail').val(result.caseEmail);
                 $('#editMessage').val(result.message);
-                $('#editCoverPhoto').attr('src',result.coverPhoto);
+                $('#editCoverPhoto').attr('src', result.coverPhoto);
                 $('#editExpiryDate').val(result.expiryDate);
 
 
@@ -1864,7 +1908,7 @@ $(function () {
             caseEmail: $('#editCaseEmail').val(),
             message: $('#editMessage').val(),
             expiryDate: $('#editExpiryDate').val(),
-            coverPhoto:$('#editCoverPhoto').attr('src')
+            coverPhoto: $('#editCoverPhoto').attr('src')
         }
         console.log(editData)
         //將輸入的文字資料,包進FormData
@@ -1942,7 +1986,7 @@ $(function () {
             caseEmail: $('#caseEmail').val(),
             message: $('#message').val(),
             expiryDate: $('#expiryDate').val(),
-            coverPhoto:$('#insertCoverPhoto').attr('src')
+            coverPhoto: $('#insertCoverPhoto').attr('src')
         }
         console.log(data)
         //將輸入的文字資料,包進FormData
@@ -2376,7 +2420,7 @@ $(function () {
             success: function (res) {
                 swal.close();
                 console.log(res);
-                $('#insertCoverPhoto').attr('src',`${res}`);
+                $('#insertCoverPhoto').attr('src', `${res}`);
 
             },
             error: function (err) {
@@ -2399,14 +2443,14 @@ $(function () {
             contentType: false,
             beforeSend: function () {
                 swal.fire({
-                    html: '<h5>新增中...</h5>',
+                    html: '<h5>修改中...</h5>',
                     showConfirmButton: false,
                 });
             },
             success: function (res) {
                 swal.close();
                 console.log(res);
-                $('#editCoverPhoto').attr('src',`${res}`);
+                $('#editCoverPhoto').attr('src', `${res}`);
             },
             error: function (err) {
                 console.log(err);
@@ -2425,7 +2469,7 @@ $(function () {
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                offset +=  fetchNext;
+                offset += fetchNext;
             },
             error: function (err) {
                 console.log(err);
@@ -2434,7 +2478,6 @@ $(function () {
     });
 
     //頁碼
-
 
 
     //---------- 頁面結束 ---------

@@ -39,13 +39,15 @@
                         </div>
                     </div>
                     <div class="postbox__title mb-55">
-                        <div id="table_tbody" class="coupon2">
-                            <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
-                                <button id="editBtn" class="os-btn os-btn-black" name="add_cart" type="submit">
-                                    編輯案件
-                                </button>
+                        <c:if test="${Design.fkMember.id eq memberId}">
+                            <div id="table_tbody" class="coupon2">
+                                <div class="coupon-all" style="margin-top: 0 ; padding-bottom: 25px">
+                                    <button id="editBtn" class="os-btn os-btn-black" name="add_cart" type="submit">
+                                        編輯案件
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </c:if>
                         <h1><a href="blog.html">${aCase.title}</a></h1>
                         <div class="blog__meta">
                             <span>${aCase.location}</span><br/>
