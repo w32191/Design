@@ -254,6 +254,103 @@
     </section>
     <!-- product area end -->
 
+        <!-- blog area start -->
+        <section class="blog__area pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section__title-wrapper text-center mb-55">
+                            <div class="section__title mb-10">
+                                <h2>Our Blog Posts</h2>
+                            </div>
+                            <div class="section__sub-title">
+                                <p>Mirum est notare quam littera gothica quam nunc putamus parum
+                                    claram!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="blog__slider owl-carousel">
+                            <div class="blog__item mb-30">
+                                <div class="blog__thumb fix">
+                                    <a href="blog-details.html" class="w-img"><img
+                                            src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg"
+                                            alt="blog"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="blog-details.html">Anteposuerit litterarum formas.</a>
+                                    </h4>
+                                    <div class="blog__meta">
+                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
+                                        <span>/ September 14, 2017</span>
+                                    </div>
+                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
+                                        claram.</p>
+                                    <a href="blog-details.html" class="os-btn">read more</a>
+                                </div>
+                            </div>
+                            <div class="blog__item mb-30">
+                                <div class="blog__thumb fix">
+                                    <a href="blog-details.html" class="w-img"><img
+                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
+                                            alt="blog"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="blog-details.html">Hanging fruit to identify</a></h4>
+                                    <div class="blog__meta">
+                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
+                                        <span>/ September 14, 2017</span>
+                                    </div>
+                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
+                                        claram.</p>
+                                    <a href="blog-details.html" class="os-btn">read more</a>
+                                </div>
+                            </div>
+                            <div class="blog__item mb-30">
+                                <div class="blog__thumb fix">
+                                    <a href="blog-details.html" class="w-img"><img
+                                            src="${contextRoot}/static/front/assets/img/blog/blog-3.jpg"
+                                            alt="blog"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="blog-details.html">The information highway will</a>
+                                    </h4>
+                                    <div class="blog__meta">
+                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
+                                        <span>/ September 14, 2017</span>
+                                    </div>
+                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
+                                        claram.</p>
+                                    <a href="blog-details.html" class="os-btn">read more</a>
+                                </div>
+                            </div>
+                            <div class="blog__item mb-30">
+                                <div class="blog__thumb fix">
+                                    <a href="blog-details.html" class="w-img"><img
+                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
+                                            alt="blog"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4><a href="blog-details.html">Additional clickthroughs from</a>
+                                    </h4>
+                                    <div class="blog__meta">
+                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
+                                        <span>/ September 14, 2017</span>
+                                    </div>
+                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
+                                        claram.</p>
+                                    <a href="blog-details.html" class="os-btn">read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- blog area end -->
+
 
     <!-- sale off area start -->
     <section class="sale__area pb-100">
@@ -320,102 +417,7 @@
     </section>
     <!-- client slider area end -->
 
-    <!-- blog area start -->
-    <section class="blog__area pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="section__title-wrapper text-center mb-55">
-                        <div class="section__title mb-10">
-                            <h2>Our Blog Posts</h2>
-                        </div>
-                        <div class="section__sub-title">
-                            <p>Mirum est notare quam littera gothica quam nunc putamus parum
-                                claram!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="blog__slider owl-carousel">
-                        <div class="blog__item mb-30">
-                            <div class="blog__thumb fix">
-                                <a href="blog-details.html" class="w-img"><img
-                                        src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg"
-                                        alt="blog"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-details.html">Anteposuerit litterarum formas.</a>
-                                </h4>
-                                <div class="blog__meta">
-                                    <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                    <span>/ September 14, 2017</span>
-                                </div>
-                                <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                    claram.</p>
-                                <a href="blog-details.html" class="os-btn">read more</a>
-                            </div>
-                        </div>
-                        <div class="blog__item mb-30">
-                            <div class="blog__thumb fix">
-                                <a href="blog-details.html" class="w-img"><img
-                                        src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
-                                        alt="blog"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-details.html">Hanging fruit to identify</a></h4>
-                                <div class="blog__meta">
-                                    <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                    <span>/ September 14, 2017</span>
-                                </div>
-                                <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                    claram.</p>
-                                <a href="blog-details.html" class="os-btn">read more</a>
-                            </div>
-                        </div>
-                        <div class="blog__item mb-30">
-                            <div class="blog__thumb fix">
-                                <a href="blog-details.html" class="w-img"><img
-                                        src="${contextRoot}/static/front/assets/img/blog/blog-3.jpg"
-                                        alt="blog"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-details.html">The information highway will</a>
-                                </h4>
-                                <div class="blog__meta">
-                                    <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                    <span>/ September 14, 2017</span>
-                                </div>
-                                <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                    claram.</p>
-                                <a href="blog-details.html" class="os-btn">read more</a>
-                            </div>
-                        </div>
-                        <div class="blog__item mb-30">
-                            <div class="blog__thumb fix">
-                                <a href="blog-details.html" class="w-img"><img
-                                        src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
-                                        alt="blog"></a>
-                            </div>
-                            <div class="blog__content">
-                                <h4><a href="blog-details.html">Additional clickthroughs from</a>
-                                </h4>
-                                <div class="blog__meta">
-                                    <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                    <span>/ September 14, 2017</span>
-                                </div>
-                                <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                    claram.</p>
-                                <a href="blog-details.html" class="os-btn">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- blog area end -->
+
 
     <!-- subscribe area start -->
 <%--    <section class="subscribe__area pb-100">--%>

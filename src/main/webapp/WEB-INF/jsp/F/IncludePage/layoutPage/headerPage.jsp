@@ -91,32 +91,26 @@
                                         <%--                                            </li>--%>
                                         <%--                                        </ul>--%>
                                     </li>
-                                    <li class="has-dropdown"><a href="blog.html">Blog</a>
+                                    <li class="has-dropdown"><a href="/Design//F/Design">找服務</a>
                                         <ul class="submenu transition-3">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-left-sidebar.html">Blog Left
-                                                Sidebar</a></li>
-                                            <li><a href="blog-no-sidebar.html">Blog No Sidebar</a>
-                                            </li>
-                                            <li><a href="blog-2-col.html">Blog 2 Column</a></li>
-                                            <li><a href="blog-2-col-mas.html">BLog 2 Col
-                                                Masonary</a></li>
-                                            <li><a href="blog-3-col.html">Blog 3 Column</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                            <li><a href="/Design/F/Design">設計</a></li>
+                                            <li><a href="/Design/F/Case">案例</a></li>
                                         </ul>
                                     </li>
-                                    <li class="has-dropdown"><a href="shop.html">Pages</a>
-                                        <ul class="submenu transition-3">
-                                            <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="register.html">Register</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="error.html">Error 404</a></li>
-                                        </ul>
-                                    </li>
+<%--                                    <li class="active "><a href="/Design//F/Design">找設計</a>--%>
+<%--                                    <li class="active "><a href="/Design//F/Case">找案例</a>--%>
+<%--                                    <li class="has-dropdown"><a href="shop.html">Pages</a>--%>
+<%--                                        <ul class="submenu transition-3">--%>
+<%--                                            --%>
+<%--                                            <li><a href="cart.html">Shopping Cart</a></li>--%>
+<%--                                            <li><a href="checkout.html">Checkout</a></li>--%>
+<%--                                            <li><a href="register.html">Register</a></li>--%>
+<%--                                            <li><a href="login.html">Login</a></li>--%>
+<%--                                            <li><a href="error.html">Error 404</a></li>--%>
+<%--                                        </ul>--%>
+<%--                                    </li>--%>
                                     <li><a href="/Design/F/CommonQuestion">常見問題</a></li>
-                                    <li><a href="">公告</a></li>
+                                    <li><a href="/Design/F/Announcement/viewMessages">公告</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -176,46 +170,46 @@
                                         <li>
                                             <div class="my-account">
                                                 <div class="extra-title">
-                                                    <h5>My Account</h5>
+                                                    <h6>My Account</h6>
                                                 </div>
                                                 <ul>
-                                                    <li><a href="/Design/F/Fmemberupdate">My Account</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                    <li><a href="cart.html">Cart</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="register.html">Create Account</a>
+                                                    <li><a href="/Design/F/Fmemberupdate">會員資料</a></li>
+                                                    <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
+<%--                                                    <li><a href="wishlist.html">Wishlist</a></li>--%>
+<%--                                                    <li><a href="cart.html">Cart</a></li>--%>
+<%--                                                    <li><a href="checkout.html">Checkout</a></li>--%>
+<%--                                                    <li><a href="register.html">Create Account</a>--%>
+                                                    <li><a href="/Design/F/Fregister">註冊</a></li>
                                                     <li><a href="/Design/F/Fdologout">登出</a></li>
-
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="lang">
-                                                <div class="extra-title">
-                                                    <h5>Language</h5>
-                                                </div>
-                                                <ul>
-                                                    <li><a href="#">English</a></li>
-                                                    <li><a href="#">France</a></li>
-                                                    <li><a href="#">Germany</a></li>
-                                                    <li><a href="#">Bangla</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="currency">
-                                                <div class="extra-title">
-                                                    <h5>currency</h5>
-                                                </div>
-                                                <ul>
-                                                    <li><a href="#">USD - US Dollar</a></li>
-                                                    <li><a href="#">EUR - Ruro</a></li>
-                                                    <li><a href="#">GBP - Britis Pound</a></li>
-                                                    <li><a href="#">INR - Indian Rupee</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
+<%--                                        <li>--%>
+<%--                                            <div class="lang">--%>
+<%--                                                <div class="extra-title">--%>
+<%--                                                    <h5>Language</h5>--%>
+<%--                                                </div>--%>
+<%--                                                <ul>--%>
+<%--                                                    <li><a href="#">English</a></li>--%>
+<%--                                                    <li><a href="#">France</a></li>--%>
+<%--                                                    <li><a href="#">Germany</a></li>--%>
+<%--                                                    <li><a href="#">Bangla</a></li>--%>
+<%--                                                </ul>--%>
+<%--                                            </div>--%>
+<%--                                        </li>--%>
+<%--                                        <li>--%>
+<%--                                            <div class="currency">--%>
+<%--                                                <div class="extra-title">--%>
+<%--                                                    <h5>currency</h5>--%>
+<%--                                                </div>--%>
+<%--                                                <ul>--%>
+<%--                                                    <li><a href="#">USD - US Dollar</a></li>--%>
+<%--                                                    <li><a href="#">EUR - Ruro</a></li>--%>
+<%--                                                    <li><a href="#">GBP - Britis Pound</a></li>--%>
+<%--                                                    <li><a href="#">INR - Indian Rupee</a></li>--%>
+<%--                                                </ul>--%>
+<%--                                            </div>--%>
+<%--                                        </li>--%>
                                     </ul>
                                 </li>
                             </ul>

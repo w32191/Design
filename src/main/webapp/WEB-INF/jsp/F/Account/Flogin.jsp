@@ -19,34 +19,34 @@
 
 </head>
 <body>
-	<%--Header Page--%>
-	<jsp:include page="../IncludePage/layoutPage/headerPage.jsp" />
+<%--Header Page--%>
+<jsp:include page="../IncludePage/layoutPage/headerPage.jsp" />
 
-	<main>
+<main>
 
-		<!-- page title area start -->
-		<section class="page__title p-relative d-flex align-items-center"
-			data-background="${contextRoot}/static/front/assets/img/page-title/page-title-1.jpg">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="page__title-inner text-center">
-							<h1>Login</h1>
-							<div class="page__title-breadcrumb">
-								<nav aria-label="breadcrumb">
-									<ol class="breadcrumb justify-content-center">
-										<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-										<li class="breadcrumb-item active" aria-current="page">
-											Login</li>
-									</ol>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- page title area end -->
+    <!-- page title area start -->
+    <section class="page__title p-relative d-flex align-items-center"
+             data-background="${contextRoot}/static/front/assets/img/page-title/page-title-1.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="page__title-inner text-center">
+                        <h1>Login</h1>
+                        <div class="page__title-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb justify-content-center">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Login</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page title area end -->
 
     <!-- login Area Strat-->
     <section class="login-area pt-100 pb-100">
@@ -55,33 +55,37 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="basic-login">
                         <h3 class="text-center mb-60">Login</h3>
-                        <form:form class="form" method="POST" modelAttribute="Flogin"
+                        <form:form class="form" method="POST" ModelAttribute="Flogin"
                                    action="/Design/F/Flogin">
                             <label for="email">信箱</label>
-                            <%--                            <input name="email" type="email" placeholder="請輸入信箱"/>--%>
-                            <form:input path="email" type="email" placeholder="請輸入信箱"/>
-                            <form:errors path="email" cssClass="error"/>
+                            <input name="email" id="email" type="email" placeholder="請輸入信箱" />
                             <label for="pwd">密碼</label>
-                            <%--                            <input name="pwd" type="password" placeholder="請輸入密碼"/>--%>
-                            <form:input path="pwd" type="password" placeholder="請輸入密碼"/>
-                            <form:errors path="pwd" cssClass="error"/>
+                            <input name="pwd" id="pwd" type="password" placeholder="請輸入密碼" />
                             <div class="login-action mb-20 fix">
-                                <span class="forgot-login f-right">
-                                        <a href="#">忘記密碼</a>
-                                    </span>
+									<span class="forgot-login f-right"> <a href="#">忘記密碼</a>
+									</span>
                             </div>
                             <button class="os-btn w-100">登入</button>
-                            <div class="or-divide"><span>or</span></div>
-                            <a href="/Design/F/Fregister" class="os-btn os-btn-black w-100"> 註冊</a>
+                            <div class="or-divide">
+                                <span>or</span>
+                            </div>
+                            <a href="/Design/F/Fregister" class="os-btn os-btn-black w-100">
+                                註冊</a>
                         </form:form>
+
                     </div>
+                    <button id="Flogin1">一般帳號</button>
+                    <button id="Flogin2">註冊後帳號</button>
                 </div>
             </div>
         </div>
     </section>
+
+
+
     <!-- login Area End-->
 </main>
-  
+
   	<%-- footer page --%>
 	<jsp:include page="../IncludePage/layoutPage/footerPage.jsp" />
 

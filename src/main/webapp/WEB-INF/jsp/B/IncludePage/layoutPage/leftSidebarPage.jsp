@@ -53,7 +53,7 @@
 
 				<li><a href="/Design/B/CommonQuestion"><i
 						class="ti-layout-tab"></i> 常見問題管理</a></li>
-				<li><a href="/Design/B/Announcement/viewMessage"><i
+				<li><a href="/Design/B/Announcement/viewMessages"><i
 						class="ti-layout-tab"></i> 公告管理</a></li>
 				<c:choose>
 					<c:when test="${sessionScope.Baccount.permission > 98}">
