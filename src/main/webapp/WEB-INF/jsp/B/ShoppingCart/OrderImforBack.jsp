@@ -208,7 +208,6 @@
                                                 <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
                                                    <c:choose>
                                                     <c:when test="${shipState !='所有訂單'}">
-
                                                         <li class="page-item">
                                                             <a href="/Design/B/allorder?shipState=${shipState}&p=${pageNumber}">
                                                              <c:out value="${pageNumber}"></c:out>

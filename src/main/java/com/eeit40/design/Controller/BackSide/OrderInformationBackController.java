@@ -49,6 +49,7 @@ public class OrderInformationBackController {
 //		return mav;
 //	}
 	
+	// 查詢所有訂單
 	@GetMapping("B/allorder")
 	public ModelAndView selectAllOrderByOrderId(ModelAndView mav,HttpServletRequest request, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 
@@ -63,20 +64,16 @@ public class OrderInformationBackController {
 		List<OrderInformation> shipPageContent = statePage.getContent();
 		mav.getModel().put("allOrder", shipPageContent);
 		mav.getModel().put("page", statePage);
-//		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
-//		mav.getModel().put("allOrder", shipStateDetail);
-//		System.out.println(shipStateDetail);
+		mav.addObject("shipState",shipState); //要丟回jsp用
 		
 		}else {
 		
 	    // 查詢所有訂單
-//		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
-//		mav.getModel().put("allOrder", allOrder);
-		
 		Page<OrderInformation> page = orderImformationService.findByPage(pageNumber);
 		List<OrderInformation> pageContent = page.getContent();
 		mav.getModel().put("allOrder", pageContent);
 		mav.getModel().put("page", page);
+		mav.addObject("shipState","所有訂單"); //要丟回jsp用
 		}
 		return mav;
 	}
@@ -179,7 +176,6 @@ public class OrderInformationBackController {
 	}
 
 	//分頁
-//	@ResponseBody
 	@GetMapping("B/page")
 	public ModelAndView viewOrder(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		
