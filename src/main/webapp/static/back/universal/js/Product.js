@@ -38,12 +38,12 @@ $(function () {
                                             </td>
                                            
                                             <td>
-                                            <a href="http://localhost:8080/Design/F/product/product-details?id=${id}">
+                                            <a href="http://localhost:8080/Design/F/product/product-details?id=${pdres[i].id}">
                                             <img src="${pdres[i].image01}" width="60px" height="60px"></a>
                                                 
                                             </td>
                                             
-                                            <td> <a href="http://localhost:8080/Design/F/product/product-details?id=${id}">
+                                            <td> <a href="http://localhost:8080/Design/F/product/product-details?id=${pdres[i].id}">
                                                 ${pdres[i].name}</a>
                                             </td>
                                           

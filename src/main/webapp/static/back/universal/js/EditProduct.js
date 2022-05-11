@@ -119,7 +119,13 @@ $(function () {
                         <a id="deletebtn" class="btn btn-danger">刪除</a>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-2">
+                    <div>
+                            <a id="onekey" class="btn btn-default">一鍵</a>
+                        </div>
+                        
+                </div>
+                <div class="col-lg-2">
                     
                         
                 </div>
@@ -294,4 +300,14 @@ $('#main-content').on('click','#savebtn',function (){
     //     }
 
 
+})
+
+
+$('#main-content').on("click",'#onekey',function () {
+    $('#name').val('Tom Dixon Stone LED Pendant Light 18cm 石器系列 圓形吊燈');
+    $('#price').val('17300');
+    $('#categories').val('Suspensions');
+    $('#stock').val('2');
+    $('#model').val('大理石白');
+    $('#description').val('2015 年，Tom Dixon 將這個獨特高雅的大理石之美，投入到吊燈系列作品，以白色大理石天然紋路，搭配象徵奢華亮彩的黃銅元素，合而為一，讓 Stone 系列吊燈，以精巧的尺寸，呈現一份無與倫比的主題張力。下方的黃銅反射罩設計，讓您不會直視光源，卻能夠反射出溫潤自然的幸福燈光。適合餐桌多盞搭配使用。');
 })
