@@ -419,4 +419,19 @@ $(function () {
   // 只要時間有改變
   $('#updateStartDate,#updateEndDate').change(checkEachProductTime);
 
+  // 圖片預覽
+  $('#updateImg').on('change',function (){
+    readURL(this);
+  });
+
+  function readURL(input){
+    if(input.files && input.files[0]){
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#activityImg").attr('src', e.target.result).removeAttr('hidden');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
 });

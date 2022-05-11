@@ -50,13 +50,13 @@
                                                             <c:forEach items="${activity.imgurImgs}"
                                                                        var="img"
                                                                        begin="0" end="0" step="1">
-                                                                <img class="img-fluid"
+                                                                <img class="img-fluid" id="activityImg"
                                                                      src="${img.link}"
                                                                      alt="Image Error"/>
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img class="img-fluid"
+                                                            <img class="img-fluid" id="activityImg"
                                                                  src="${contextRoot}/static/back/universal/images/no-image.jpeg"
                                                                  alt="Image Error"/>
                                                         </c:otherwise>
