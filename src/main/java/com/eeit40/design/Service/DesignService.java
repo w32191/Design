@@ -16,6 +16,8 @@ public interface DesignService {
 
     Design getDesignById(Integer id);
 
+    List<Design> getDesignByMemberId(Integer fk_member_id);
+
     Integer createDesign(DesignDto designDto);
 
     void deleteDesign(Integer id);

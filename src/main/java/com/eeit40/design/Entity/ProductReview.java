@@ -3,6 +3,7 @@ package com.eeit40.design.Entity;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "product_review")
 public class ProductReview {
 
@@ -28,6 +32,7 @@ public class ProductReview {
   @JoinColumn(name = "fk_product_id")
   private Product fkProduct;
 
+  @CreatedDate
   @Column(name = "comment_date")
   private LocalDate commentDate;
 

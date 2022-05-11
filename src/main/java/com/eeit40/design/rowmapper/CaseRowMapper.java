@@ -2,6 +2,7 @@ package com.eeit40.design.rowmapper;
 
 import com.eeit40.design.Entity.Case;
 import com.eeit40.design.Entity.CasesPhoto;
+import com.eeit40.design.Entity.Member;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -25,6 +26,9 @@ public class CaseRowMapper implements RowMapper<Case> {
         aCase.setDateTime(rs.getDate("date_time"));
         aCase.setViewingCount(rs.getInt("viewing_count"));
         aCase.setCoverPhoto(rs.getString("cover_photo"));
+        Member member = new Member();
+        member.setId(rs.getInt("fk_member_id"));
+        aCase.setFkMember(member);
 //        CasesPhoto casesPhoto = new CasesPhoto();
 //        casesPhoto.setCase_photo_id(rs.getInt("case_photo_id"));
 //        casesPhoto.setCase_photo_message(rs.getString("case_photo_message"));
