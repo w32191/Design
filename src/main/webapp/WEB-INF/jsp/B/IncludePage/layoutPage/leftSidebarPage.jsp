@@ -9,7 +9,7 @@
         <div class="nano-content">
             <ul>
                 <div class="logo">
-                    <a href=""><span>Design</span></a>
+                    <a href=""><span>DESIGN & DECOR</span></a>
                 </div>
 
                 <li class="label">功能選單</li>

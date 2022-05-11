@@ -53,8 +53,8 @@ $(function () {
                 pdtxt += `
                 <tr>
                     <td>${i + 1}</td>
-                    <td><img src="${pdres[i].image01}" width="50px"></td>
-                    <td>${pdres[i].name}</td>
+                    <td><a href="http://localhost:8080/Design/F/product/product-details?id=${pdres[i].id}"><img src="${pdres[i].image01}" width="60px" height="60px"></a></td>
+                    <td><a href="http://localhost:8080/Design/F/product/product-details?id=${pdres[i].id}">${pdres[i].name}</a></td>
                     <td>${pdres[i].stock}</td>
                     <td ><span class="badge badge-danger">${m}</span></td>
                     <td></td>
@@ -70,12 +70,18 @@ $(function () {
                 "errorCode": "-1",
                 "msg": "匯出成功",
                 "body": {
-                    "title": `庫存缺項明細(${brandName} ${brandPhone})`,
+                    "title": `庫存缺項-${brandName}${brandPhone})`,
                     "excelData": exdata
                 }
             };
             $('body').on('click', 'a[id=excelbtn]', function () {
                 console.log("88")
+                Swal.fire({
+                    icon: 'success',
+                    text: '已輸出報表',
+                    showConfirmButton: false,
+                    timer: 1000
+                                    })
                 excelExport();
             })
 

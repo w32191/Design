@@ -34,14 +34,14 @@
     <div class="main">
         <div class="container-fluid">
             <section id="main-content">
-                <div class="card" style="background-color: rgb(180,180,180);padding: 0">
+                <div class="card" style="background-color: rgb(180,180,180)">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card" >
                                 <div class="card-title pr">
                                     <div class="row">
                                         <div class="col-lg-9">
-                                            <h4>產品 Product</h4>
+                                            <h4>缺項產品--廠商</h4>
                                         </div>
                                         <div class="col-lg-3" id="addbtn">
                                         </div>
