@@ -428,7 +428,7 @@ $(function () {
     if(input.files && input.files[0]){
       let reader = new FileReader();
       reader.onload = function (e) {
-        $("#activityImg").attr('src', e.target.result).removeAttr('hidden');
+        $("#activityImg").attr('src', e.target.result);
       }
       reader.readAsDataURL(input.files[0]);
     }
