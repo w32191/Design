@@ -54,7 +54,7 @@
 					Design管理</a></li>
 
 				<li><a href="/Design/B/CommonQuestion"><i
-						class="ti-layout-tab"></i> 常見問題管理</a></li>
+						class="ti-comment-alt"></i> 常見問題管理</a></li>
 				<li><a href="/Design/B/Announcement/viewMessages"><i
 						class="ti-layout-tab"></i> 公告管理</a></li>
 				<c:choose>
@@ -64,24 +64,24 @@
 					
 					</c:when>
 				</c:choose>
-				<li><a href="/Design/B/memberupdate"><i class="ti-user"></i>
+				<li><a href="/Design/B/memberupdate"><i class="ti-pencil-alt"></i>
 						個人資料修改</a></li>
 
-				<li class="label">ＸＸ管理</li>
-				<li><a href="/Design/B/" class="sidebar-sub-toggle"> <i
-						class="ti-calendar"></i> ＸＸＸＸ <span
-						class="sidebar-collapse-icon ti-angle-down"></span></a>
-					<ul>
-						<li><a href="/Design/B/"> <i class="ti-view-list-alt"></i>ＸＸＸＸＸ
-						</a></li>
-					</ul></li>
+<%--				<li class="label">ＸＸ管理</li>--%>
+<%--				<li><a href="/Design/B/" class="sidebar-sub-toggle"> <i--%>
+<%--						class="ti-calendar"></i> ＸＸＸＸ <span--%>
+<%--						class="sidebar-collapse-icon ti-angle-down"></span></a>--%>
+<%--					<ul>--%>
+<%--						<li><a href="/Design/B/"> <i class="ti-view-list-alt"></i>ＸＸＸＸＸ--%>
+<%--						</a></li>--%>
+<%--					</ul></li>--%>
 				<li class="label">模板DemoPage</li>
 				<li><a href="/Design/B/Demo"><i class="ti-agenda"></i>
 						模板DemoPage</a></li>
 
 
 				<!--                 登出 -->
-				<li><a href="dologout"><i class="ti-close"></i> 登出</a></li>
+				<li><a href="/Design/B/dologout"><i class="ti-close"></i> 登出</a></li>
 			</ul>
 		</div>
 	</div>
