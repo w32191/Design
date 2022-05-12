@@ -97,18 +97,18 @@
                                             <li><a href="/Design/F/Case">案例</a></li>
                                         </ul>
                                     </li>
-<%--                                    <li class="active "><a href="/Design//F/Design">找設計</a>--%>
-<%--                                    <li class="active "><a href="/Design//F/Case">找案例</a>--%>
-<%--                                    <li class="has-dropdown"><a href="shop.html">Pages</a>--%>
-<%--                                        <ul class="submenu transition-3">--%>
-<%--                                            --%>
-<%--                                            <li><a href="cart.html">Shopping Cart</a></li>--%>
-<%--                                            <li><a href="checkout.html">Checkout</a></li>--%>
-<%--                                            <li><a href="register.html">Register</a></li>--%>
-<%--                                            <li><a href="login.html">Login</a></li>--%>
-<%--                                            <li><a href="error.html">Error 404</a></li>--%>
-<%--                                        </ul>--%>
-<%--                                    </li>--%>
+                                    <%--                                    <li class="active "><a href="/Design//F/Design">找設計</a>--%>
+                                    <%--                                    <li class="active "><a href="/Design//F/Case">找案例</a>--%>
+                                    <%--                                    <li class="has-dropdown"><a href="shop.html">Pages</a>--%>
+                                    <%--                                        <ul class="submenu transition-3">--%>
+                                    <%--                                            --%>
+                                    <%--                                            <li><a href="cart.html">Shopping Cart</a></li>--%>
+                                    <%--                                            <li><a href="checkout.html">Checkout</a></li>--%>
+                                    <%--                                            <li><a href="register.html">Register</a></li>--%>
+                                    <%--                                            <li><a href="login.html">Login</a></li>--%>
+                                    <%--                                            <li><a href="error.html">Error 404</a></li>--%>
+                                    <%--                                        </ul>--%>
+                                    <%--                                    </li>--%>
                                     <li><a href="/Design/F/CommonQuestion">常見問題</a></li>
                                     <li><a href="/Design/F/Announcement/viewMessages">公告</a></li>
                                 </ul>
@@ -169,55 +169,38 @@
                                     <ul class="extra-info">
                                         <li>
                                             <div class="my-account">
-                                                <div class="extra-title">
-                                                    <h6>My Account</h6>
-                                                </div>
-                                                <ul>
-                                                    <c:choose>
-                                                        <c:when test="${sessionScope.Faccount == null}">
-                                                            <li><a href="/Design/F/Flogin">登入</a></li>
-                                                            <li><a href="/Design/F/Fregister">註冊</a></li>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <li><a href="/Design/F/Fmemberupdate">會員資料</a></li>
-                                                            <li><a href="/Design/F/orderrecord">訂單查詢</a></li>
-                                                            <%--                                                    <li><a href="wishlist.html">Wishlist</a></li>--%>
-                                                            <%--                                                    <li><a href="cart.html">Cart</a></li>--%>
-                                                            <%--                                                    <li><a href="checkout.html">Checkout</a></li>--%>
-                                                            <%--                                                    <li><a href="register.html">Create Account</a>--%>
-                                                            <li><a href="/Design/F/Fdologout">登出</a></li>
-                                                        </c:otherwise>
-                                                    </c:choose>
 
-                                                </ul>
+
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.Faccount == null}">
+                                                        <div class="extra-title">
+<%--                                                            <h6>My Account</h6>--%>
+                                                        </div>
+                                                        <ul>
+                                                            <li><a href="/Design/F/Flogin">登入</a>
+                                                            </li>
+                                                            <li><a href="/Design/F/Fregister">註冊</a>
+                                                            </li>
+                                                        </ul>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="extra-title">
+                                                            <h6> ${sessionScope.Faccount.members.names}</h6>
+                                                        </div>
+                                                        <ul>
+                                                            <li><a href="/Design/F/Fmemberupdate">會員資料</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Design/F/orderrecord">訂單查詢</a>
+                                                            </li>
+
+                                                            <li><a href="/Design/F/Fdologout">登出</a>
+                                                            </li>
+                                                        </ul>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </li>
-<%--                                        <li>--%>
-<%--                                            <div class="lang">--%>
-<%--                                                <div class="extra-title">--%>
-<%--                                                    <h5>Language</h5>--%>
-<%--                                                </div>--%>
-<%--                                                <ul>--%>
-<%--                                                    <li><a href="#">English</a></li>--%>
-<%--                                                    <li><a href="#">France</a></li>--%>
-<%--                                                    <li><a href="#">Germany</a></li>--%>
-<%--                                                    <li><a href="#">Bangla</a></li>--%>
-<%--                                                </ul>--%>
-<%--                                            </div>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <div class="currency">--%>
-<%--                                                <div class="extra-title">--%>
-<%--                                                    <h5>currency</h5>--%>
-<%--                                                </div>--%>
-<%--                                                <ul>--%>
-<%--                                                    <li><a href="#">USD - US Dollar</a></li>--%>
-<%--                                                    <li><a href="#">EUR - Ruro</a></li>--%>
-<%--                                                    <li><a href="#">GBP - Britis Pound</a></li>--%>
-<%--                                                    <li><a href="#">INR - Indian Rupee</a></li>--%>
-<%--                                                </ul>--%>
-<%--                                            </div>--%>
-<%--                                        </li>--%>
                                     </ul>
                                 </li>
                             </ul>
@@ -253,12 +236,18 @@
                         <div class="header__search-categories">
                             <ul class="search-category">
                                 <li><a href="/Design/F/Product/">所有商品</a></li>
-                                <li><a href="/Design/F/product/productbybrand?brand=6">Tom Dixon</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=6">Tom Dixon</a>
+                                </li>
                                 <li><a href="/Design/F/product/productbybrand?brand=4">Menu</a></li>
-                                <li><a href="/Design/F/product/productbybrand?brand=9">BROKIS</a></li>
-                                <li><a href="/Design/F/product/productbybrand?brand=24">Louis Poulsen</a></li>
-                                <li><a href="/Design/F/product/productbybrand?brand=11">FOSCARINI</a></li>
-                                <li><a href="/Design/F/product/productbybrand?brand=15">FLOS</a></li>
+                                <li><a href="/Design/F/product/productbybrand?brand=9">BROKIS</a>
+                                </li>
+                                <li><a href="/Design/F/product/productbybrand?brand=24">Louis
+                                    Poulsen</a></li>
+                                <li>
+                                    <a href="/Design/F/product/productbybrand?brand=11">FOSCARINI</a>
+                                </li>
+                                <li><a href="/Design/F/product/productbybrand?brand=15">FLOS</a>
+                                </li>
 
 
                             </ul>
@@ -368,10 +357,6 @@
 <!-- extra info area end -->
 
 <script>
-
-
-
-
 
 
 </script>

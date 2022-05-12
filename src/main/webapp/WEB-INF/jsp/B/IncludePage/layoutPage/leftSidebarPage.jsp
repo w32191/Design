@@ -75,13 +75,13 @@
 <%--						<li><a href="/Design/B/"> <i class="ti-view-list-alt"></i>ＸＸＸＸＸ--%>
 <%--						</a></li>--%>
 <%--					</ul></li>--%>
-				<li class="label">模板DemoPage</li>
-				<li><a href="/Design/B/Demo"><i class="ti-agenda"></i>
-						模板DemoPage</a></li>
+<%--				<li class="label">模板DemoPage</li>--%>
+<%--				<li><a href="/Design/B/Demo"><i class="ti-agenda"></i>--%>
+<%--						模板DemoPage</a></li>--%>
 
 
 				<!--                 登出 -->
-				<li><a href="/Design/B/dologout"><i class="ti-close"></i> 登出</a></li>
+				<li><a id="dologout"><i class="ti-close"></i> 登出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -92,18 +92,19 @@
         function () {
             Swal.fire({
                 title: '確定要登出嗎?',
-                text: "",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#1e6fe5',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '是的'
+                confirmButtonText: '確認',
+				cancelButtonText:'取消'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        '登出成功',
-                        'success'
-                    )
+                    Swal.fire({
+						title:'登出成功',
+						icon:'success'
+					})
+					location.replace("/Design/B/dologout");
                 }
             })
         })
