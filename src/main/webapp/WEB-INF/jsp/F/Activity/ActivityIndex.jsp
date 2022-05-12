@@ -105,27 +105,27 @@
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="${contextRoot}/F/Design" class="w-img"><img
+                                <a href="${contextRoot}/F/Product/" class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-1.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="${contextRoot}/F/Design">找設計？</a>
+                                <h2><a href="${contextRoot}/F/Product/">家俱/家飾</a>
                                 </h2>
-                                <a href="${contextRoot}/F/Design" class="link-btn">立刻前往</a>
+                                <a href="${contextRoot}/F/Product/" class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a href="${contextRoot}/F/Case" class="w-img"><img
+                                <a  class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-2.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="${contextRoot}/F/Case">找案例？</a></h2>
-                                <a href="${contextRoot}/F/Case" class="link-btn">立刻前往</a>
+                                <h2><a href="${contextRoot}/F/Design">設計</a>/<a href="${contextRoot}/F/Case">案例</a></h2>
+                                <a  class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>

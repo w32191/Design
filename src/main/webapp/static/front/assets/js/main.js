@@ -145,7 +145,7 @@
 	});
 	BasicSlider.slick({
 		autoplay: true,
-		autoplaySpeed: 8000,
+		autoplaySpeed: 3000,
 		dots: true,
 		fade: true,
 		arrows: false,
