@@ -109,6 +109,7 @@ public class AccountController {
     	Account account  = new Account();
     	
     	mav.addObject("login",account);
+			mav.addObject("logoutResult","success");
     	mav.setViewName("B/Account/login");
     	return mav;
 			

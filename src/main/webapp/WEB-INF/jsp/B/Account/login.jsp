@@ -140,6 +140,17 @@
 				});
 			</script>
 		</c:when>
+		<c:when test="${logoutResult != null}">
+			<script>
+				Swal.fire({
+					position : 'top',
+					icon : 'success',
+					title : '已成功登出！！',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+		</c:when>
 	
 	</c:choose>
 

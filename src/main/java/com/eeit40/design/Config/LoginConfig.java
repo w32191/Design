@@ -25,6 +25,7 @@ public class LoginConfig implements WebMvcConfigurer {
     registrationBack.addPathPatterns("/B/**"); // 攔截 路徑
     registrationBack.excludePathPatterns(    // 新增不攔截路徑
         "/B/",
+        "/B/dologout",
         "/B/memberregister",
         "/B/login",                    // 登入路徑
         "/B/register",                // 註冊路徑
