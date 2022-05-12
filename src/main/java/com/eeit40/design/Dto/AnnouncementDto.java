@@ -17,7 +17,9 @@ public class AnnouncementDto implements Serializable {
   private String msg;
   
   private Integer id;
-  private String content; 
+  private String type; 
+  private String title; 
+  private String content;
   private Date added;
 //  private Map<String, byte[]> imgs; // <fileName,fileByte[]>
 //  private List<Integer> Id;
@@ -26,8 +28,10 @@ public class AnnouncementDto implements Serializable {
   }
 
   public AnnouncementDto(
-      @Nullable Integer id, String content, Date added){
+      @Nullable Integer id, String type, String title, String content, Date added){
     this.id = id;
+    this.type = type;
+    this.title = title;
     this.content = content;
     this.added = added;  
   
@@ -48,6 +52,22 @@ public class AnnouncementDto implements Serializable {
   public void setId(Integer id) {
     this.id = id;
   }
+  
+  public String getType() {
+	    return type;
+	  }
+
+	  public void setType(String type) {
+	    this.type = type;
+	  }
+  
+  public String getTitle() {
+	    return title;
+	  }
+
+	  public void setTitle(String title) {
+	    this.title = title;
+	  }
 
   public String getContent() {
     return content;
