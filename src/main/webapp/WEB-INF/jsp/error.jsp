@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>DESIGN & DECOR</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--  CSS include page--%>
@@ -37,7 +37,7 @@
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="${contextRoot}/F/">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
                                         404 Error page
                                     </li>

@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>訂單</title>
+    <title>訂單 - DESIGN & DECOR</title>
     <!-- Styles -->
     <!-- Common Styles -->
     <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp"/>

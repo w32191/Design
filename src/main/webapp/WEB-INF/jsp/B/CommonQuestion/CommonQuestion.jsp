@@ -10,7 +10,7 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <title>CommonQuestion</title>
+            <title>常見問題 - DESIGN & DECOR</title>
 
 
             <script src="${contextRoot}/static/back/assets/js/lib/jquery-3.5.1.min.js"></script>

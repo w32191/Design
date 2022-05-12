@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Focus Admin Dashboard</title>
+    <title>活動行事曆 - DESIGN & DECOR</title>
 
     <!-- Calender -->
     <%--    <link href="${contextRoot}/static/back/assets/css/lib/calendar/fullcalendar.css"--%>
