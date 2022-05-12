@@ -32,8 +32,10 @@
     <section class="slider__area p-relative">
         <div class="slider-active">
             <c:forEach items="${allActivity}" var="ac">
-                <fmt:parseDate value="${ac.startDate}" pattern="yyyy-MM-dd" var="parsedStartDate" type="date"/>
-                <fmt:parseDate value="${ac.endDate}" pattern="yyyy-MM-dd" var="parsedEndDate" type="date"/>
+                <fmt:parseDate value="${ac.startDate}" pattern="yyyy-MM-dd" var="parsedStartDate"
+                               type="date"/>
+                <fmt:parseDate value="${ac.endDate}" pattern="yyyy-MM-dd" var="parsedEndDate"
+                               type="date"/>
                 <c:choose>
                     <c:when test="${ac.imgurImgs.size() == 0}">
                         <div class="single-slider slider__height d-flex align-items-center"
@@ -46,12 +48,18 @@
                                                 data-delay=".2s">${ac.subject}</h2>
                                             <p data-animation="fadeInUp"
                                                data-delay=".4s">${ac.content}</p>
-                                            <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
-                                            <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                            <p data-animation="fadeInUp" data-delay=".4s">
+                                                限時折扣：<span
+                                                    class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span>
+                                            </p>
+                                            <p data-animation="fadeInUp"
+                                               class="text-danger font-weight-bold"
                                                data-delay=".4s">
-                                                <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
-                                                <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
-                                                    </p>
+                                                <fmt:formatDate value="${parsedStartDate}"
+                                                                pattern="MM/dd"/> ~
+                                                <fmt:formatDate value="${parsedEndDate}"
+                                                                pattern="MM/dd"/>
+                                            </p>
                                             <a href="/Design/F/Activity/productList/${ac.id}"
                                                class="os-btn os-btn-2"
                                                data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
@@ -74,15 +82,21 @@
                                                     data-delay=".2s">${ac.subject}</h2>
                                                 <p data-animation="fadeInUp"
                                                    data-delay=".4s">${ac.content}</p>
-                                                <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span></p>
-                                                <p data-animation="fadeInUp" class="text-danger font-weight-bold"
+                                                <p data-animation="fadeInUp" data-delay=".4s"> 限時折扣：<span
+                                                        class="font-weight-bold text-danger">${ac.discountPercentage}% !!!</span>
+                                                </p>
+                                                <p data-animation="fadeInUp"
+                                                   class="text-danger font-weight-bold"
                                                    data-delay=".4s">
-                                                    <fmt:formatDate value="${parsedStartDate}" pattern="MM/dd" /> ~
-                                                    <fmt:formatDate value="${parsedEndDate}" pattern="MM/dd" />
+                                                    <fmt:formatDate value="${parsedStartDate}"
+                                                                    pattern="MM/dd"/> ~
+                                                    <fmt:formatDate value="${parsedEndDate}"
+                                                                    pattern="MM/dd"/>
                                                 </p>
                                                 <a href="/Design/F/Activity/productList/${ac.id}"
                                                    class="os-btn os-btn-2"
-                                                   data-animation="fadeInUp" data-delay=".6s">手刀前往</a>
+                                                   data-animation="fadeInUp"
+                                                   data-delay=".6s">手刀前往</a>
                                             </div>
                                         </div>
                                     </div>
@@ -119,13 +133,14 @@
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item mb-30 p-relative">
                             <div class="banner__thumb fix">
-                                <a  class="w-img"><img
+                                <a class="w-img"><img
                                         src="${contextRoot}/static/front/assets/img/shop/banner/banner-sm-2.jpg"
                                         alt="banner"></a>
                             </div>
                             <div class="banner__content p-absolute transition-3">
-                                <h2><a href="${contextRoot}/F/Design">設計</a>/<a href="${contextRoot}/F/Case">案例</a></h2>
-                                <a  class="link-btn">立刻前往</a>
+                                <h2><a href="${contextRoot}/F/Design">設計</a>/<a
+                                        href="${contextRoot}/F/Case">案例</a></h2>
+                                <a class="link-btn">立刻前往</a>
                             </div>
                         </div>
                     </div>
@@ -254,102 +269,106 @@
     </section>
     <!-- product area end -->
 
-        <!-- blog area start -->
-        <section class="blog__area pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="section__title-wrapper text-center mb-55">
-                            <div class="section__title mb-10">
-                                <h2>Our Blog Posts</h2>
-                            </div>
-                            <div class="section__sub-title">
-                                <p>Mirum est notare quam littera gothica quam nunc putamus parum
-                                    claram!</p>
-                            </div>
+    <!-- blog area start -->
+    <section class="blog__area pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section__title-wrapper text-center mb-55">
+                        <div class="section__title mb-10">
+                            <h2>設計</h2>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="blog__slider owl-carousel">
-                            <div class="blog__item mb-30">
-                                <div class="blog__thumb fix">
-                                    <a href="blog-details.html" class="w-img"><img
-                                            src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg"
-                                            alt="blog"></a>
-                                </div>
-                                <div class="blog__content">
-                                    <h4><a href="blog-details.html">Anteposuerit litterarum formas.</a>
-                                    </h4>
-                                    <div class="blog__meta">
-                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                        <span>/ September 14, 2017</span>
-                                    </div>
-                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                        claram.</p>
-                                    <a href="blog-details.html" class="os-btn">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog__item mb-30">
-                                <div class="blog__thumb fix">
-                                    <a href="blog-details.html" class="w-img"><img
-                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
-                                            alt="blog"></a>
-                                </div>
-                                <div class="blog__content">
-                                    <h4><a href="blog-details.html">Hanging fruit to identify</a></h4>
-                                    <div class="blog__meta">
-                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                        <span>/ September 14, 2017</span>
-                                    </div>
-                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                        claram.</p>
-                                    <a href="blog-details.html" class="os-btn">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog__item mb-30">
-                                <div class="blog__thumb fix">
-                                    <a href="blog-details.html" class="w-img"><img
-                                            src="${contextRoot}/static/front/assets/img/blog/blog-3.jpg"
-                                            alt="blog"></a>
-                                </div>
-                                <div class="blog__content">
-                                    <h4><a href="blog-details.html">The information highway will</a>
-                                    </h4>
-                                    <div class="blog__meta">
-                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                        <span>/ September 14, 2017</span>
-                                    </div>
-                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                        claram.</p>
-                                    <a href="blog-details.html" class="os-btn">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog__item mb-30">
-                                <div class="blog__thumb fix">
-                                    <a href="blog-details.html" class="w-img"><img
-                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"
-                                            alt="blog"></a>
-                                </div>
-                                <div class="blog__content">
-                                    <h4><a href="blog-details.html">Additional clickthroughs from</a>
-                                    </h4>
-                                    <div class="blog__meta">
-                                        <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                        <span>/ September 14, 2017</span>
-                                    </div>
-                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum
-                                        claram.</p>
-                                    <a href="blog-details.html" class="os-btn">read more</a>
-                                </div>
-                            </div>
+                        <div class="section__sub-title">
+                            <p>NEW DESIGN</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- blog area end -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="blog__slider owl-carousel">
+                        <c:forEach items="${designList}" var="design">
+                            <div class="blog__item mb-30">
+                                <div class="blog__thumb fix">
+                                    <a href="${contextRoot}/F/viewDesignService/${design.id}"
+                                       class="w-img"><img
+                                            src="${design.coverPhoto}"
+                                            alt="blog"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <h4>
+                                        <a href="${contextRoot}/F/viewDesignService/${design.id}">${design.title}</a>
+                                    </h4>
+                                    <div class="blog__meta">
+                                        <span>By <a href="">${design.name}</a></span>
+                                        <span>${design.createTime}</span>
+                                    </div>
+                                    <div class="truncate">
+                                        <p>${design.message}</p>
+                                    </div>
+                                    <a href="${contextRoot}/F/viewDesignService/${design.id}" class="os-btn">read more</a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <%--                            <div class="blog__item mb-30">--%>
+                        <%--                                <div class="blog__thumb fix">--%>
+                        <%--                                    <a href="blog-details.html" class="w-img"><img--%>
+                        <%--                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"--%>
+                        <%--                                            alt="blog"></a>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="blog__content">--%>
+                        <%--                                    <h4><a href="blog-details.html">Hanging fruit to identify</a></h4>--%>
+                        <%--                                    <div class="blog__meta">--%>
+                        <%--                                        <span>By <a href="#">Shahnewaz Sakil</a></span>--%>
+                        <%--                                        <span>/ September 14, 2017</span>--%>
+                        <%--                                    </div>--%>
+                        <%--                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum--%>
+                        <%--                                        claram.</p>--%>
+                        <%--                                    <a href="blog-details.html" class="os-btn">read more</a>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="blog__item mb-30">--%>
+                        <%--                                <div class="blog__thumb fix">--%>
+                        <%--                                    <a href="blog-details.html" class="w-img"><img--%>
+                        <%--                                            src="${contextRoot}/static/front/assets/img/blog/blog-3.jpg"--%>
+                        <%--                                            alt="blog"></a>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="blog__content">--%>
+                        <%--                                    <h4><a href="blog-details.html">The information highway will</a>--%>
+                        <%--                                    </h4>--%>
+                        <%--                                    <div class="blog__meta">--%>
+                        <%--                                        <span>By <a href="#">Shahnewaz Sakil</a></span>--%>
+                        <%--                                        <span>/ September 14, 2017</span>--%>
+                        <%--                                    </div>--%>
+                        <%--                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum--%>
+                        <%--                                        claram.</p>--%>
+                        <%--                                    <a href="blog-details.html" class="os-btn">read more</a>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="blog__item mb-30">--%>
+                        <%--                                <div class="blog__thumb fix">--%>
+                        <%--                                    <a href="blog-details.html" class="w-img"><img--%>
+                        <%--                                            src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg"--%>
+                        <%--                                            alt="blog"></a>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="blog__content">--%>
+                        <%--                                    <h4><a href="blog-details.html">Additional clickthroughs from</a>--%>
+                        <%--                                    </h4>--%>
+                        <%--                                    <div class="blog__meta">--%>
+                        <%--                                        <span>By <a href="#">Shahnewaz Sakil</a></span>--%>
+                        <%--                                        <span>/ September 14, 2017</span>--%>
+                        <%--                                    </div>--%>
+                        <%--                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum--%>
+                        <%--                                        claram.</p>--%>
+                        <%--                                    <a href="blog-details.html" class="os-btn">read more</a>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog area end -->
 
 
     <!-- sale off area start -->
@@ -418,30 +437,29 @@
     <!-- client slider area end -->
 
 
-
     <!-- subscribe area start -->
-<%--    <section class="subscribe__area pb-100">--%>
-<%--        <div class="container">--%>
-<%--            <div class="subscribe__inner pt-95">--%>
-<%--                <div class="row">--%>
-<%--                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">--%>
-<%--                        <div class="subscribe__content text-center">--%>
-<%--                            <h2>Get Discount Info</h2>--%>
-<%--                            <p>Subscribe to the Outstock mailing list to receive updates on new--%>
-<%--                                arrivals, special offers and other discount information.</p>--%>
-<%--                            <div class="subscribe__form">--%>
-<%--                                <form action="#">--%>
-<%--                                    <input type="email"--%>
-<%--                                           placeholder="Subscribe to our newsletter...">--%>
-<%--                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </section>--%>
+    <%--    <section class="subscribe__area pb-100">--%>
+    <%--        <div class="container">--%>
+    <%--            <div class="subscribe__inner pt-95">--%>
+    <%--                <div class="row">--%>
+    <%--                    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2">--%>
+    <%--                        <div class="subscribe__content text-center">--%>
+    <%--                            <h2>Get Discount Info</h2>--%>
+    <%--                            <p>Subscribe to the Outstock mailing list to receive updates on new--%>
+    <%--                                arrivals, special offers and other discount information.</p>--%>
+    <%--                            <div class="subscribe__form">--%>
+    <%--                                <form action="#">--%>
+    <%--                                    <input type="email"--%>
+    <%--                                           placeholder="Subscribe to our newsletter...">--%>
+    <%--                                    <button class="os-btn os-btn-2 os-btn-3">subscribe</button>--%>
+    <%--                                </form>--%>
+    <%--                            </div>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                </div>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--    </section>--%>
     <!-- subscribe area end -->
 
     <!-- shop modal start -->

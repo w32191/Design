@@ -68,5 +68,25 @@ $(function () {
         }
     })
 
+    $(".truncate").each(function () {
+        truncate($(this));
+        console.log($(this))
+    });
+
+    function truncate(el) {
+        let clone = el.children().first(),
+            originalContent = el.html(),
+            text = clone.text();
+        let charLimit = 50;
+        if (clone[0].innerHTML.trim().length > charLimit) {
+            el.attr("data-originalContent", originalContent);
+            el.addClass('hasHidden');
+            clone.text(text.substring(0, charLimit) + "  ...。")
+            el.empty().append(clone);
+            // el.append($("<div class='read-more'><a href='#' class='more'>Read More</a>"));
+        }
+
+    }
+
 
 })
