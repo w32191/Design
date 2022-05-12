@@ -95,11 +95,11 @@
 												<tr>
 													<th class="product-thumbnail">商品照</th>
 													<th class="cart-product-name">商品</th>
-													<th class="cart-product-name">規格</th>
-													<th class="product-price">單價</th>
+													<th class="cart-product-name" style="width:86px;">規格</th>
+													<th class="product-price" style="width:90px;">單價</th>
 													<th class="product-quantity">數量</th>
 													<th class="product-subtotal">小計</th>
-													<th class="product-remove">刪除</th>
+													<th class="product-remove" style="width:55px;">刪除</th>
 												</tr>
 											</thead>
 											<tbody id="theTBody">
@@ -134,7 +134,7 @@
 														<td class="product-price product__price-2"><c:choose>
 																<c:when
 																	test='${discountMap.containsKey(cart.fkProduct.id)}'>
-                                                    $<span
+                                                                    $<span
 																		class="price currentPrice">${(cart.fkProduct.price*(100-discountMap.get(cart.fkProduct.id))/100).intValue()}</span>
 																	<br>
 																	<span class="old-price">$${cart.fkProduct.price}</span>
@@ -145,7 +145,7 @@
 																		OFF</span>
 																</c:when>
 																<c:otherwise>
-                                                    $<span
+                                                                    $<span
 																		class="price currentPrice">${cart.fkProduct.price}</span>
 																</c:otherwise>
 															</c:choose></td>
@@ -228,7 +228,6 @@
 								</form>
 							</c:when>
 						</c:choose>
-
 
 					</div>
 				</div>

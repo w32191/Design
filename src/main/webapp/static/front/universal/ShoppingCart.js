@@ -118,37 +118,35 @@ $(function () {
     //目前所屬tr
     let row = $(this).parent("td").parent("tr");
 	   
-    // swal.fire({
-    //   title: "確定要刪除？",
-    //   // text: "此動作無法復原！",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: '確定',
-    //   cancelButtonText: '取消'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
           $.ajax({
              url: "deleteshoppingcart",
              type: "GET",
              data: {
                 id: cartid
               },
+              beforeSend: function () {
+                swal.fire({
+                    html: '<h5>商品刪除...</h5>',
+                    // showConfirmButton: false,
+                    didOpen: () => {
+                      Swal.showLoading();
+                    },
+                    timer: 1000
+                });
+            },
              success: function (res) {
                 row.remove();
                 carTotals();
               }
-            })
-      // }
-  // })
-}) 
+         })
+  }) 
 
   $("#coupon_code").on("click", function () {
     $("#submit").attr('disabled', false);
   })
 
 //使用coupon
+
   $("#submit").on("change click", function () {
     // console.log($("#submit"));
     $("#submit").attr('disabled', true);
@@ -190,26 +188,34 @@ $(function () {
         }
       },
       error: function (err) {
-        console.log("沒接到值");
+        console.log(err);
       }
     });
+
+    
+
   });
+ 
 
 //一鍵輸入coupon
 
   //過期的
   $("#coupon1").click(function(){
     $("#coupon_code").val("折價一百");
-  })
+})
 
-  //可使用的
+  //未開始的
   $("#coupon2").click(function(){
+    $("#submit").attr('disabled', false);
     $("#coupon_code").val("滿2萬送5千");
-  })
+    $("span[id='couponContext']").text("");
+})
 
   //可使用的
   $("#coupon3").click(function(){
-    $("#coupon_code").val("歡慶週年");
+    $("#submit").attr('disabled', false);
+    $("#coupon_code").val("商城歡慶週年");
+    $("span[id='couponContext']").text("");
   })
 
 });

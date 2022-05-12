@@ -397,14 +397,6 @@
         autoOpen: false,
         width: 800,
         modal: true,
-        // buttons: {
-        //     "新增": function () {
-        //     $(this).dialog("close");
-        //    },
-        //    "取消": function () {
-        //     $(this).dialog('close');
-        //    },
-        // }
     }); 
 
     //點選日期
@@ -478,6 +470,14 @@
             data:{
                 shipState:shipState,
                 id:id
+            },
+            beforeSend: function () {
+                swal.fire({
+                    didOpen: () => {
+                      Swal.showLoading();
+                    },
+                    timer: 3000
+                });
             },
             success:function(result){
                 swal.fire({
