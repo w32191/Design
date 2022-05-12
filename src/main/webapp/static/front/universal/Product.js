@@ -157,7 +157,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  txt += `<span>$${res[i].price * (100
+                      - res[i].discountPercentage)
                   / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
@@ -270,7 +271,8 @@ $(function () {
                                             <div class="product__price transition-3">`;
 
                 if (res[i].discountPercentage != null) {
-                  txt += `<span>$${res[i].price * (100 - res[i].discountPercentage)
+                  txt += `<span>$${res[i].price * (100
+                      - res[i].discountPercentage)
                   / 100}</span><span class="old-price">$${res[i].price}</span>`;
 
                 } else {
@@ -355,24 +357,48 @@ $(function () {
 
   })
 
+  $('body').on('click', 'a[id^=addToCartBtn]', function () {
+    console.log("喔齁")
 
-
-    $('body').on('click', 'a[id^=addToCartBtn]', function () {
-        console.log("喔齁")
-
-        let id = $(this).attr('id').split("addToCartBtn")[1];
-        console.log(id)
-        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
-        {
-            Swal.fire({
-                text: '已加入購物車',
-                showConfirmButton: false,
-                timer: 1000
-            })
-
+    let id = $(this).attr('id').split("addToCartBtn")[1];
+    console.log(id)
+    // $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": 1})
+    // {
+    //     Swal.fire({
+    //         text: '已加入購物車',
+    //         showConfirmButton: false,
+    //         timer: 1000
+    //     })
+    //
+    // }
+    $.ajax({
+      url: "/Design/F/addshoppingcart",
+      type: 'GET',
+      data: {"fkProduct": id, "amount": 1},
+      success: function (res) {
+        console.log(res)
+        if (res == 'success') {
+          Swal.fire({
+            text: '已加入購物車',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        } else {
+          Swal.fire({
+            title: '請先登入！',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1000
+          })
         }
-    })
+      },
+      error: function (err) {
+        console.log(err)
+      }
 
+    });
+
+  })
 
 });
 
