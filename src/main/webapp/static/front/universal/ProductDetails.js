@@ -111,21 +111,63 @@ $(function () {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6">
+                    </div>`
+                    $.ajax({
+                        url: `/Design/F/ProductReview/ProductReview/${id}`,
+                        dataType: 'json',
+                        method: 'get',
+                        success: function (data) {
+                            let p=0;
+                            for (let r = 0; r < data.length; r++) {
+                                p += data[r].star;
+                            };
+                            let s = p/data.length;
+                            s = s.toFixed(1);//toFixed()此功能是留小數點後幾位
+                            if(s<1){
+                                $('#AllStar1').addClass('fa1 fa-star');
+                            }
+                            if(s>=1 && s<2){
+                                $('#AllStar1').addClass('fas fa-star');
+                            }
+                            if(s>=2 && s<3){
+                                $('#AllStar1').addClass('fas fa-star');
+                                $('#AllStar2').addClass('fas fa-star');
+                            }
+                            if(s>=3 && s<4){
+                                $('#AllStar1').addClass('fas fa-star');
+                                $('#AllStar2').addClass('fas fa-star');
+                                $('#AllStar3').addClass('fas fa-star');
+                            }
+                            if(s>=4 && s<=5){
+                                $('#AllStar1').addClass('fas fa-star');
+                                $('#AllStar2').addClass('fas fa-star');
+                                $('#AllStar3').addClass('fas fa-star');
+                                $('#AllStar4').addClass('fas fa-star');
+                            }
+                            if(s>=5){
+                                $('#AllStar1').addClass('fas fa-star');
+                                $('#AllStar2').addClass('fas fa-star');
+                                $('#AllStar3').addClass('fas fa-star');
+                                $('#AllStar4').addClass('fas fa-star');
+                                $('#AllStar5').addClass('fas fa-star');
+                            }
+                        }
+                     });
+                     
+                txt +=`<div class="col-xl-6 col-lg-6">
                         <div class="product__modal-content product__modal-content-2">
                             <h4><a href="product-details?id=${res.id}">${res.name}</a></h4>
                             <div class="rating rating-shop mb-15">
                                 <ul>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fas fa-star"></i></span></li>
-                                    <li><span><i class="fal fa-star"></i></span></li>
+                                    <li><span><i class="" id="AllStar1"></i></span></li>
+                                    <li><span><i class="" id="AllStar2"></i></span></li>
+                                    <li><span><i class="" id="AllStar3"></i></span></li>
+                                    <li><span><i class="" id="AllStar4"></i></span></li>
+                                    <li><span><i class="" id="AllStar5"></i></span></li>
                                 </ul>
                             </div>
                             <div class="product__price-2 mb-25">`;
-
+                   
         if (res.discountPercentage != null) {
             txt += `<span>$${res.price * (100 - res.discountPercentage)
             / 100}</span><span class="old-price">$${res.price}</span>`;
@@ -249,13 +291,20 @@ $(function () {
             success: function (data) {
                 console.log("data.length:" + data.length);
                 let reviewMain = "";
+                let k=0;
                 reviewMain += `<div class="postbox__comments">
                                                 <div class="postbox__comment-title mb-30">
-                                                    <h3>`;
+                                                    <h3 style='color:#bc8246'>`;
+                for (let m = 0; m < data.length; m++) {
+                    k += data[m].star;
+                };
+                let n = k/data.length;console.log(n);
+                n = n.toFixed(1);//toFixed()此功能是留小數點後幾位
 
                 reviewMain += `此商品有（` + data.length;
 
-                reviewMain += `）則評論</h3></div>`;
+                reviewMain += `）則評論，共`;
+                reviewMain += n + `分</h3></div>`;                
                 for (i = 0; i < data.length; i++) {
                     reviewMain += `<div class="latest-comments mb-30">
                                                 <ul>
@@ -280,6 +329,7 @@ $(function () {
                                                 </li>
                                                 `;
                     }
+                    
 
                     reviewMain += `</ul>
                                                 </div><p>` + data[i].comment + `</p>`;
@@ -291,6 +341,7 @@ $(function () {
                                                     </div>
                                                 </div>`;
                 }
+                
 
 
 
@@ -561,7 +612,6 @@ $(function () {
         $('#radio5').prop('checked',true);  
     });
     
-
     
 
      
