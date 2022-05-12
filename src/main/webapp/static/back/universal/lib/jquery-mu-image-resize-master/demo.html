@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-TW">
+	<head>
+		<meta charset="UTF-8" />		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js?ver=1.7.0" ></script>
+		<script type='text/javascript' src='jquery.mu.image.resize.js'></script>
+		<title>jQuery Mu Image Resize - The jQuery Plugin for image resizing & croping.</title>
+		<script>
+			$(function(){			
+				$('.resize').muImageResize({width: 150, height:150});
+				$('.c_resize').muImageResize();				
+			});
+		</script>		
+	</head>
+	
+	<body>
+		<img src="img/mwt_01.jpg" class="resize">
+		<br>
+		<img src="img/mwt_02.jpg" class="c_resize" data-w="300" data-h="300">
+	
+	</body>
+</html>
