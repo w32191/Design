@@ -91,7 +91,7 @@
                                         <%--                                            </li>--%>
                                         <%--                                        </ul>--%>
                                     </li>
-                                    <li class="has-dropdown"><a href="/Design//F/Design">找服務</a>
+                                    <li class="has-dropdown"><a href="/Design/F/Design">找服務</a>
                                         <ul class="submenu transition-3">
                                             <li><a href="/Design/F/Design">設計</a></li>
                                             <li><a href="/Design/F/Case">案例</a></li>
