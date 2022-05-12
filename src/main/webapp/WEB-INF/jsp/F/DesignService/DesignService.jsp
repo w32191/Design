@@ -87,14 +87,14 @@
                                                     <button class="shop-accordion-btn"
                                                             data-toggle="collapse"
                                                             data-target="#collapseAccessories"
-                                                            aria-expanded="true"
-                                                            aria-controls="collapseAccessories">
+                                                            aria-expanded="false"
+                                                            aria-controls="collapsecloth">
                                                         風格
                                                     </button>
                                                 </h5>
                                             </div>
 
-                                            <div id="collapseAccessories" class="collapse show"
+                                            <div id="collapseAccessories" class="collapse"
                                                  aria-labelledby="style"
                                                  data-parent="#accordion">
                                                 <div class="card-body">

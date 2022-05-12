@@ -1,5 +1,8 @@
 package com.eeit40.design.Dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class DesignQueryParams {
 
     private String search;
@@ -52,7 +55,11 @@ public class DesignQueryParams {
         this.offset = offset;
     }
 
-//    public void getSort(String sort) {
+    public DesignQueryParams(String search) {
+        this.search = search;
+    }
+
+    //    public void getSort(String sort) {
 //    }
 //
 //    public void getFetchNext(Integer fetchNext) {

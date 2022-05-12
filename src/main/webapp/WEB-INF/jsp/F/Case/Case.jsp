@@ -12,6 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--  CSS include page--%>
     <jsp:include page="../IncludePage/staticPage/FontCssPage.jsp"/>
+    <style>
+        /*.cCover {*/
+        /*    width: 300px;*/
+        /*    height: 0px;*/
+        /*    object-fit: none;*/
+        /*}*/
+    </style>
 </head>
 <body>
 <%--Header Page--%>
@@ -26,13 +33,13 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>News & Blog</h1>
+                        <h1>找案件</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Blog 3
-                                        Column
+                                    <li class="breadcrumb-item"><a href="${contextRoot}/F/Activity/index">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        <a href="${contextRoot}/F/Case"> Case</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -42,24 +49,24 @@
             </div>
         </div>
     </section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
-                        <div class="coupon2">
-                            <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有案件
-                            </button>
-<%--                            <c:if test="${account != null}">--%>
-                                <button onclick="location.href='${contextRoot}/F/UpdateCase'"
-                                        class="os-btn os-btn-black"
-                                        name="add_cart" type="submit">新增案件
-                                </button>
-<%--                            </c:if>--%>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
+                    <div class="coupon2">
+                        <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有案件
+                        </button>
+                        <%--                            <c:if test="${account != null}">--%>
+                        <button onclick="location.href='${contextRoot}/F/UpdateCase'"
+                                class="os-btn os-btn-black"
+                                name="add_cart" type="submit">新增案件
+                        </button>
+                        <%--                            </c:if>--%>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <!-- page title area end -->
 
     <!-- blog area start -->
@@ -135,7 +142,10 @@
 
 <!-- JavaScript -->
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
+<script type="text/javascript"
+        src="${contextRoot}/static/back/universal/lib/jquery-mu-image-resize-master/jquery.mu.image.resize.js"></script>
 <script src="${contextRoot}/static/front/universal/Case.js"></script>
+
 
 </body>
 </html>

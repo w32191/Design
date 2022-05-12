@@ -1644,10 +1644,10 @@ classificationData = [
 
 $(function () {
 
+    let charLimit = 20;
     doClassificationData();
     doLocationData();
     loadData();
-
 
     $('#SearchAllCases').click(function () {
         loadData();
@@ -2063,7 +2063,7 @@ $(function () {
                 $.each(result.results, function (index, value) {
                     let imgStr;
                     if (value.coverPhoto != null) {
-                        imgStr = `<img src=" ${value.coverPhoto} " alt="blog">`;
+                        imgStr = `<div style="width: 350px; height: 350px; object-fit: cover " class="cCover"><img src=" ${value.coverPhoto} "  class="background-cover"  alt="blog"></div>`;
                     } else {
                         imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
                     }
@@ -2079,7 +2079,7 @@ $(function () {
                         '<h4><a href="ViewCase/' + value.id + '" >' + value.title + '</a></h4>'
                     case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
                     case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
-                    case_data += '<p>' + value.message + '</p>'
+                    case_data += '<div class="truncate"><p>' + value.message + '</p></div>'
                     case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
                     case_data += '<span>  ' + value.dateTime + '</span></div>'
                     case_data += '<a href="ViewCase/' + value.id + '" class="os-btn">read more</a></div>'
@@ -2087,12 +2087,48 @@ $(function () {
 
                 })
                 $('#blogCase').append(case_data);
+                // $('.c_resize').muImageResize({width: 150, height:150});
+                $(".truncate").each(function () {
+                    truncate($(this));
+                });
+
             },
             error: function (err) {
                 console.log(err);
             }
         })
         //---------- 載入頁面資料結束 ---------
+    }
+    function truncate(el) {
+        let clone = el.children().first(),
+            originalContent = el.html(),
+            text = clone.text();
+
+        if (clone[0].innerHTML.trim().length > charLimit) {
+            el.attr("data-originalContent", originalContent);
+            el.addClass('hasHidden');
+            clone.text(text.substring(0, charLimit) + "  [...]。")
+            el.empty().append(clone);
+            // el.append($("<div class='read-more'><a href='#' class='more'>Read More</a>"));
+        }
+
+    }
+    $("body").on("click", 'a.more', function (e) {
+        e.preventDefault();
+        let truncateElement = $(this).parent().parent();
+        if (truncateElement.hasClass('hasHidden')) {
+            $(truncateElement).html(truncateElement.attr("data-originalContent"));
+            $(truncateElement).append($("<div class='read-more'><a href='#' class='more'>Read Less</a>"));
+            truncateElement.removeClass('hasHidden');
+        } else {
+            $('.read-more', truncateElement).remove();
+            truncate(truncateElement);
+        }
+    });
+
+
+    function muImageResize() {
+        $('.c_resize').muImageResize();
     }
 
 })
