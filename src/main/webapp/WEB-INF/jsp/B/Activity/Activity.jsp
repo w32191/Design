@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>活動</title>
+    <title>活動管理 - DESIGN & DECOR</title>
     <!-- Datatable -->
     <link href="${contextRoot}/static/back/assets/css/lib/data-table/dataTables.bootstrap.min.css"
           rel="stylesheet"/>

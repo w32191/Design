@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Focus Admin: Creative Admin Dashboard</title>
+    <title>DESIGN & DECOR</title>
 
     <!-- calendar2 -->
     <link href="${contextRoot}/static/back/assets/css/lib/calendar2/pignose.calendar.min.css"
