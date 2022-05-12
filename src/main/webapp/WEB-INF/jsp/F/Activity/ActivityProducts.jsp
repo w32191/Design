@@ -59,60 +59,68 @@
                             <div class="tab-pane fade show active" id="pills-grid" role="tabpanel"
                                  aria-labelledby="pills-grid-tab">
                                 <div class="row custom-row-10">
-                                    <c:forEach items="${activity.products}" var="product">
-                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 custom-col-10">
-                                            <div class="product__wrapper mb-60">
-                                                <div class="product__thumb">
-                                                    <a href="${contextRoot}/F/product/product-details?id=${product.id}"
-                                                       class="w-img">
-                                                        <c:choose>
-                                                            <c:when test="${product.image01 == null}">
-                                                                <img src="${contextRoot}/static/back/universal/images/no-image.jpeg"
-                                                                     alt="product-img">
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <img src="${product.image01}"
-                                                                     alt="product-img">
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                        <c:choose>
-                                                            <c:when test="${product.image02 == null}">
-                                                                <img class="product__thumb-2"
-                                                                     src="${contextRoot}/static/back/universal/images/no-image.jpeg"
-                                                                     alt="product-img">
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <img class="product__thumb-2"
-                                                                     src="${product.image02}"
-                                                                     alt="product-img">
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </a>
-                                                    <div class="product__sale">
-                                                        <span class="new">折扣</span>
-                                                        <span class="percent">-${activity.discountPercentage}%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product__content p-relative">
-                                                    <div class="product__content-inner">
-                                                        <h4>
-                                                            <a href="${contextRoot}/F/product/product-details?id=${product.id}">${product.name}</a>
-                                                        </h4>
-                                                        <div class="product__price transition-3">
-                                                            <c:set var="dis"
-                                                                   value="${(100-activity.discountPercentage)/100}"/>
-                                                            <span>$${(product.price*dis).intValue()}</span>
-                                                            <span class="old-price">$${product.price}</span>
+                                    <c:choose>
+                                        <c:when test="${activity.products.size()<0}">
+                                            <h2>此活動暫時無商品</h2>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${activity.products}" var="product">
+                                                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 custom-col-10">
+                                                    <div class="product__wrapper mb-60">
+                                                        <div class="product__thumb">
+                                                            <a href="${contextRoot}/F/product/product-details?id=${product.id}"
+                                                               class="w-img">
+                                                                <c:choose>
+                                                                    <c:when test="${product.image01 == null}">
+                                                                        <img src="${contextRoot}/static/back/universal/images/no-image.jpeg"
+                                                                             alt="product-img">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <img src="${product.image01}"
+                                                                             alt="product-img">
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <c:choose>
+                                                                    <c:when test="${product.image02 == null}">
+                                                                        <img class="product__thumb-2"
+                                                                             src="${contextRoot}/static/back/universal/images/no-image.jpeg"
+                                                                             alt="product-img">
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <img class="product__thumb-2"
+                                                                             src="${product.image02}"
+                                                                             alt="product-img">
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </a>
+                                                            <div class="product__sale">
+                                                                <span class="new">折扣</span>
+                                                                <span class="percent">-${activity.discountPercentage}%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product__content p-relative">
+                                                            <div class="product__content-inner">
+                                                                <h4>
+                                                                    <a href="${contextRoot}/F/product/product-details?id=${product.id}">${product.name}</a>
+                                                                </h4>
+                                                                <div class="product__price transition-3">
+                                                                    <c:set var="dis"
+                                                                           value="${(100-activity.discountPercentage)/100}"/>
+                                                                    <span>$${(product.price*dis).intValue()}</span>
+                                                                    <span class="old-price">$${product.price}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-cart p-absolute transition-3">
+                                                                <a id="newArrAddToCartBtn${product.id}">+
+                                                                    Add to Cart</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="add-cart p-absolute transition-3">
-                                                        <a id="newArrAddToCartBtn${product.id}">+
-                                                            Add to Cart</a>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </div>
                         </div>
