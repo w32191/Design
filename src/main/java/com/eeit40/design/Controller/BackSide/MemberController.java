@@ -44,18 +44,25 @@ public class MemberController {
 	
 	@PostMapping("/B/memberregister")
 	public ModelAndView memberregister(ModelAndView mav, @Valid @ModelAttribute(name = "memberregister") Member member,
+			 BindingResult br,
 		@RequestParam(name = "names") String names, @RequestParam(name = "phone") String phone,
-		@RequestParam(name = "address") String address, Account id, HttpSession session , BindingResult br) {
+		@RequestParam(name = "address") String address, Account id, HttpSession session ) {
 		
 		if(!br.hasErrors()) {
 			Account accre = (Account) session.getAttribute("member");
 			member.setFkAccount(accre);
-			memberService.memberRegister(member);
+			Member memberResult = memberService.memberRegister(member);
 			System.out.println(member);
 			if(session != null) {
 				session.invalidate();
 				System.out.println(session);
 			}
+			if(memberResult != null) {
+				mav.addObject("RegisterResult", "Success");
+			}else {
+				mav.addObject("RegisterResult", "Error");
+			}
+			
 			mav.setViewName("B/Account/login");
 			return mav;
 		}

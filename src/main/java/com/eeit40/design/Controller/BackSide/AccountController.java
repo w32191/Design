@@ -34,9 +34,10 @@ public class AccountController {
     
     //登入帳號中並存入session
     @PostMapping("/B/login")
-    public ModelAndView doLogin(ModelAndView mav, @Valid @ModelAttribute(name = "login") Account account, 
+    public ModelAndView doLogin(ModelAndView mav, @Valid @ModelAttribute(name = "login") Account account,
+    	 BindingResult br,
     		@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd,
-    		HttpSession session, RedirectAttributes redirectAttributes, BindingResult br) {
+    		HttpSession session, RedirectAttributes redirectAttributes) {
     	
     	if(!br.hasErrors()) {
     		Account login = accountService.login(email, pwd);
@@ -80,8 +81,8 @@ public class AccountController {
     //註冊帳號中
     @PostMapping("/B/register")
     public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "doRegister")
-    Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
-    HttpSession session, BindingResult br) {
+    Account account, BindingResult br, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
+    HttpSession session) {
     	
     	if(!br.hasErrors()) {
     		account.setPermission(2);
@@ -91,7 +92,7 @@ public class AccountController {
     		
     		Member member = new Member();
     		mav.addObject(member);
-    		mav.setViewName("B/Member/memberregister");
+    		mav.setViewName("redirect:/B/memberregister");
     		
     		return mav;
     	}
