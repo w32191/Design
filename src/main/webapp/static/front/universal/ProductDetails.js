@@ -294,7 +294,7 @@ $(function () {
                 let k=0;
                 reviewMain += `<div class="postbox__comments">
                                                 <div class="postbox__comment-title mb-30">
-                                                    <h3 style='color:#bc8246'>`;
+                                                    <h3 style="background-color:#bc8246;color:white">`;
                 for (let m = 0; m < data.length; m++) {
                     k += data[m].star;
                 };
