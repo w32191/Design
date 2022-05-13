@@ -17,6 +17,7 @@
           rel="stylesheet"/>
     <link href="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.css"
           rel="stylesheet"/>
+
 </head>
 <body>
 <jsp:include page="../IncludePage/layoutPage/headerPage.jsp"/>
@@ -149,7 +150,48 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/front/universal/DesignService.js"></script>
-
+<script>
+    $(window).scroll(function () {
+        //最後一頁scrollTop=body-window，50是預留空間
+        last = $("body").height() - $(window).height() - 10
+        if ($(window).scrollTop() >= last) {
+            $('#title').val("冶意執綠"),
+                $('#name').val("近境制作"),
+                $('#addStyleList> option:selected').text("工業風格"),
+                $('#addLocation> option:selected').text("台南市"),
+                $('#price').val(20000),
+                $('#message').val(`北京陽光城 溪山悅合院樣板間 360m2<br>
+            以和諧自然的材料<br>
+            肌理化表現<br>
+            由光影強調畫面的純粹<br>
+<br>
+「不只是安身之所，也滿足人對生活的想像。」<br>
+<br>
+空間美學以洞穴般的形式呈現<br>
+            從天井落下的光影隨時光演繹著<br>
+            以綠意寫生至空間當中<br>
+            自然感知<br>
+            結合大地元素置入其中<br>
+            泳池以量體崁卡的視感處理帶入材料的原始樣貌<br>
+            以線性燈具結合植物點綴空間<br>
+            串連場域和場域之間的關係<br>
+            滿足一家人的多樣社交機能<br>
+            表達極簡自然而內斂的心理感受<br>
+            空間傳遞不同的儀式體驗<br>
+            以和諧自然的材料<br>
+            肌理化表現<br>
+            由光影强調畫面的純粹<br>
+            -<br>
+「用設計情感凝聚，營造質樸的愜意」<br>
+玄關延伸手法，將材質與側櫃體在視覺效果一體成形，錯落的吊燈呼應前後關係，使量體産生虛實變化，轉角處壁面燈帶，利用光影體現漆面，豐富空間氛圍。<br>
+臥房墻體以肌理化處理，簡約幾何型態的軟裝搭配，使空間多一層表情和姿態。連結更衣室及睡眠空間，櫃體設計以通透的條紋玻璃結合金屬件，即使空間在光線穿透之下，仍保有隱蔽性。<br>
+踏階簍空的形式，金屬隔屏簡約明快，線性光源詮釋了層次感，透過量體的虛實及內崁手法表現櫃體收納，大地色系的主色調，將溫暖舒適的元素表現於場域中。木格栅型式由壁面延伸轉折，上挑空區天花至二層空間，增加暖調空間的視覺連接，深刻體驗空間給予的包覆感，在型構交錯之間，隨著時間演譯光影。<br>`),
+                $('#insertCoverPhoto').attr('src'),
+                $('#insertPhoto_1').attr('src'),
+                $('#insertPhoto_2').attr('src')
+        }
+    })
+</script>
 </body>
 
 </html>
