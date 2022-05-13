@@ -232,5 +232,9 @@
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/front/universal/ProductDetails.js"></script>
 
+<!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/decoupled-document/ckeditor.js"></script> -->
+
 </body>
 </html>

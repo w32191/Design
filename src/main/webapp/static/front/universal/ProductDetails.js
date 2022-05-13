@@ -394,8 +394,9 @@ $(function () {
                                                                         id="comments"
                                                                         cols="30" rows="10"
                                                                         placeholder="評論內容"></textarea>
+                                                                        <script>CKEDITOR.replace( 'comments', {});</script>
                                                                 </div>
-                                                            </div>
+                                                            </div>          
                                                             <div class="col-xl-12">
                                                                 <button class="os-btn os-btn-black" id="sendBtn"
                                                                 type="submit" >送出
@@ -612,7 +613,7 @@ $(function () {
         $('#radio5').prop('checked',true);  
     });
     
-    
+    //summernote
 
      
     
