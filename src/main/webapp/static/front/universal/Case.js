@@ -1926,7 +1926,7 @@ $(function () {
         const editData = {
             title: $('#editTitle').val(),
             name: $('#editName').val(),
-            classification: $('#editClassification> option:selected').text(),
+            classification: $('#editStyleList> option:selected').text(),
             location: $('#editLocation> option:selected').text(),
             caseEmail: $('#editCaseEmail').val(),
             message: $('#editMessage').val(),
