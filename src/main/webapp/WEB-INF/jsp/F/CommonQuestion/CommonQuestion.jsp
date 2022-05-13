@@ -62,7 +62,7 @@
                                             <div class="card-header white-bg" id="test${cq.id}">
                                                 <h5 class="mb-0">
                                                     <button class="shop-accordion-btn collapsed" data-toggle="collapse" data-target="#collapsetest${cq.id}" aria-expanded="false" aria-controls="collapsetest${cq.id}">
-                                                        ${cq.question}
+                                                        /${cq.question}
                                                     </button>
                                                 </h5>
                                             </div>
@@ -70,7 +70,7 @@
                                                 <div class="card-body">
                                                     <div class="categories__list">
                                                         <ul>
-                                                            <li><a href="#">${cq.answer}</a></li>
+                                                            <li style="background-color:#bc8246;color:white">${cq.answer}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
