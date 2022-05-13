@@ -86,24 +86,24 @@
     <div class="main">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8 p-r-0 title-margin-right">
+                <!-- <div class="col-lg-8 p-r-0 title-margin-right">
                     <div class="page-header">
                         <div class="page-title">
                             <h1>Hello, <span>Welcome Here</span></h1>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /# column -->
-                <div class="col-lg-4 p-l-0 title-margin-left">
+                <!-- <div class="col-lg-4 p-l-0 title-margin-left">
                     <div class="page-header">
                         <div class="page-title">
-                            <!-- <ol class="breadcrumb">
+                            <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Table-Jsgrid</li>
-                            </ol> -->
+                            </ol>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /# column -->
             </div>
             <!-- /# row -->
@@ -208,7 +208,6 @@
                                                 <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
                                                    <c:choose>
                                                     <c:when test="${shipState !='所有訂單'}">
-
                                                         <li class="page-item">
                                                             <a href="/Design/B/allorder?shipState=${shipState}&p=${pageNumber}">
                                                              <c:out value="${pageNumber}"></c:out>
@@ -398,14 +397,6 @@
         autoOpen: false,
         width: 800,
         modal: true,
-        // buttons: {
-        //     "新增": function () {
-        //     $(this).dialog("close");
-        //    },
-        //    "取消": function () {
-        //     $(this).dialog('close');
-        //    },
-        // }
     }); 
 
     //點選日期
@@ -479,6 +470,14 @@
             data:{
                 shipState:shipState,
                 id:id
+            },
+            beforeSend: function () {
+                swal.fire({
+                    didOpen: () => {
+                      Swal.showLoading();
+                    },
+                    timer: 3000
+                });
             },
             success:function(result){
                 swal.fire({

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.OrderInformation;
 import com.eeit40.design.Entity.OrderList;
+import com.eeit40.design.Service.MailService;
 import com.eeit40.design.Service.OrderImformationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +37,9 @@ public class OrderInformationBackController {
 
 	@Autowired
 	private Jackson2ObjectMapperBuilder builder;
+	
+	@Autowired
+	private MailService mailService;
 
 	// 查詢所有訂單
 //	@GetMapping("B/allorder")
@@ -49,6 +55,7 @@ public class OrderInformationBackController {
 //		return mav;
 //	}
 	
+	// 查詢所有訂單
 	@GetMapping("B/allorder")
 	public ModelAndView selectAllOrderByOrderId(ModelAndView mav,HttpServletRequest request, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 
@@ -63,20 +70,16 @@ public class OrderInformationBackController {
 		List<OrderInformation> shipPageContent = statePage.getContent();
 		mav.getModel().put("allOrder", shipPageContent);
 		mav.getModel().put("page", statePage);
-//		List<OrderInformation> shipStateDetail = orderImformationService.selectByShipState(shipState);
-//		mav.getModel().put("allOrder", shipStateDetail);
-//		System.out.println(shipStateDetail);
+		mav.addObject("shipState",shipState); //要丟回jsp用
 		
 		}else {
 		
 	    // 查詢所有訂單
-//		List<OrderInformation> allOrder = orderImformationService.selectAllOrderByOrderId();
-//		mav.getModel().put("allOrder", allOrder);
-		
 		Page<OrderInformation> page = orderImformationService.findByPage(pageNumber);
 		List<OrderInformation> pageContent = page.getContent();
 		mav.getModel().put("allOrder", pageContent);
 		mav.getModel().put("page", page);
+		mav.addObject("shipState","所有訂單"); //要丟回jsp用
 		}
 		return mav;
 	}
@@ -157,15 +160,20 @@ public class OrderInformationBackController {
 	
 	// 商家修改訂單出貨狀態
 	@PostMapping("B/editordershipstate")
-	public ModelAndView editShipStateByShipState(ModelAndView mav, HttpServletRequest request) throws ParseException {
+	public ModelAndView editShipStateByShipState(ModelAndView mav, HttpServletRequest request) throws Exception, Exception {
 
 			String shipState = request.getParameter("shipState");
 			String id = request.getParameter("id");
 			int imforId = Integer.valueOf(id);
-
-			 orderImformationService.editShipStateByShipState(shipState, imforId);
-
+			
+			 if (shipState.equals("已出貨")) {
+				    mailService.sendMailAfterChangeShipState(imforId);
+				}
+			
+			orderImformationService.editShipStateByShipState(shipState, imforId);
+			
 			mav.setViewName("redirect:/B/allorder");
+			
 			return mav;
 		}
 
@@ -179,7 +187,6 @@ public class OrderInformationBackController {
 	}
 
 	//分頁
-//	@ResponseBody
 	@GetMapping("B/page")
 	public ModelAndView viewOrder(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		

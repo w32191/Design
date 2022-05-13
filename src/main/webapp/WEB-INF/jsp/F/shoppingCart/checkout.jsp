@@ -373,7 +373,11 @@
             beforeSend: function () {
                 swal.fire({
                     html: '<h5>訂單送出...</h5>',
-                    showConfirmButton: false,
+                    // showConfirmButton: false,
+                    didOpen: () => {
+                      Swal.showLoading();
+                    },
+                    timer: 5000
                 });
             },
             success:function(result){

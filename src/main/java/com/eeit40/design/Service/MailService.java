@@ -2,6 +2,7 @@ package com.eeit40.design.Service;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -17,8 +18,10 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.eeit40.design.Dao.AccountRepository;
 import com.eeit40.design.Dao.MemberRepository;
+import com.eeit40.design.Dao.OrderInformationRepository;
 import com.eeit40.design.Entity.Account;
 import com.eeit40.design.Entity.Member;
+import com.eeit40.design.Entity.OrderInformation;
 
 @Service
 public class MailService {
@@ -32,10 +35,10 @@ public class MailService {
 	freemarker.template.Configuration freemarkerConfig;
 	
 	@Autowired
-	private MemberRepository member;
+	private AccountRepository account;
 	
 	@Autowired
-	private AccountRepository account;
+	private OrderInformationRepository orderInformation;
 	
 	private static final String FROM= "eeit40@gmail.com";
 	
@@ -75,8 +78,6 @@ public class MailService {
 	public void sendMailAfterOrder(int id) throws MessagingException, Exception {
 		
 		Account user = account.getById(id);
-//		Account user = account.getById(id).getMembers().getFkAccount();
-//		Member user = member.getById(id);
 		
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
@@ -102,5 +103,33 @@ public class MailService {
 		mailSender.send(mimeMessage);
 	}
 	
+	//訂單出貨後寄送mail
+	public void sendMailAfterChangeShipState(int id) throws MessagingException, Exception {
+			
+			Account user = orderInformation.getById(id).getFkAccount();
+			
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
+			helper.setFrom(FROM,"DESIGN & DECOR");
+			helper.setTo(user.getEmail());
+			helper.setSubject("您的訂單已經出貨");
+			
+			// template.html的EL數據
+			Map<String,Object> model = new HashMap<String,Object>();
+			model.put("membername", user.getMembers().getNames());
+			model.put("imforid",id);
+			
+			// email的HTML內容
+			String attachment = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfig.getTemplate("ChangeShippingState.html"), model);
+			helper.setText(attachment,true);
+			
+			// email的HTML內容中的圖片
+			File file = new File("");
+			String image = file.getAbsolutePath()+"/src/main/webapp/static/front/assets/img/logo/LOGO黑字去背300px.png"; //要更換
+			FileSystemResource img = new FileSystemResource(new File(image));
+			helper.addInline("logo", img);
+			
+			mailSender.send(mimeMessage);
+		}
 	
 }

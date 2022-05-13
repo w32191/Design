@@ -95,11 +95,11 @@
 												<tr>
 													<th class="product-thumbnail">商品照</th>
 													<th class="cart-product-name">商品</th>
-													<th class="cart-product-name">規格</th>
-													<th class="product-price">單價</th>
+													<th class="cart-product-name" style="width:86px;">規格</th>
+													<th class="product-price" style="width:90px;">單價</th>
 													<th class="product-quantity">數量</th>
 													<th class="product-subtotal">小計</th>
-													<th class="product-remove">刪除</th>
+													<th class="product-remove" style="width:55px;">刪除</th>
 												</tr>
 											</thead>
 											<tbody id="theTBody">
@@ -134,7 +134,7 @@
 														<td class="product-price product__price-2"><c:choose>
 																<c:when
 																	test='${discountMap.containsKey(cart.fkProduct.id)}'>
-                                                    $<span
+                                                                    $<span
 																		class="price currentPrice">${(cart.fkProduct.price*(100-discountMap.get(cart.fkProduct.id))/100).intValue()}</span>
 																	<br>
 																	<span class="old-price">$${cart.fkProduct.price}</span>
@@ -145,7 +145,7 @@
 																		OFF</span>
 																</c:when>
 																<c:otherwise>
-                                                    $<span
+                                                                    $<span
 																		class="price currentPrice">${cart.fkProduct.price}</span>
 																</c:otherwise>
 															</c:choose></td>
@@ -188,8 +188,8 @@
 										<div class="col-12">
 											<div class="coupon-all">
 												<div class="coupon">
-													<input id="coupon_code" class="input-text"
-														name="coupon_code" value="" placeholder="Coupon code"
+													<input id="coupon_code" class="input-text" style="color: #6F7172;"
+														name="coupon_code" value="" placeholder="折扣碼"
 														type="text">
 													<button class="os-btn os-btn-black" id="submit"
 														name="apply_coupon" type="submit" style="font-size:13px;">使用折價券</button>
@@ -207,9 +207,9 @@
 											<span class="text-danger" id="couponContext"></span>
 										</div> -->
                                         <div style="margin-top: 50px; margin-left: 20px;">
-                                            <button class="showcoupon" id="coupon1" type="button" >Coupon1</button>
-                                            <button class="showcoupon" id="coupon2" type="button" >Coupon2</button>
-                                            <button class="showcoupon" id="coupon3" type="button" >Coupon3</button>
+                                            <button class="showcoupon" id="coupon1" type="button" >一鍵</button>
+                                            <button class="showcoupon" id="coupon2" type="button" >輸入</button>
+                                            <button class="showcoupon" id="coupon3" type="button" >折扣碼</button>
                                         </div>
 										<div class="col-md-5 ml-auto">
 											<div class="cart-page-total">
@@ -228,7 +228,6 @@
 								</form>
 							</c:when>
 						</c:choose>
-
 
 					</div>
 				</div>
