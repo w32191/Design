@@ -25,7 +25,7 @@
 							<div class="col-lg-6">
 								<div class="login-content">
 									<div class="login-logo">
-										<a href="index.html"><span>註冊Design後台管理系統</span></a>
+										<a href="index.html"><span>DESIGN & DECOR 後台系統</span></a>
 									</div>
 									<div class="login-form">
 										<h4>註冊員工</h4>
@@ -41,7 +41,7 @@
 													class="form-control" placeholder="請填入密碼" required />
 											</div>
 											<div class="form-group">
-												<label>再次輸入密碼</label> <input type="password" id="pwd2" name="pwd"
+												<label>再次輸入密碼</label> <input type="password" id="pwd2" name="pwd2"
 													class="form-control" placeholder="請填入密碼" required />
 											</div>
 											<button id="submitBtn"
