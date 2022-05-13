@@ -34,7 +34,7 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>Hello, <span>Welcome Here</span></h1>
+							
                             <a type="button" id="insertBtn"
                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="${contextRoot}/B/Announcement/add">
                                 <i class="ti-plus"></i>新增公告
@@ -47,8 +47,8 @@
 						<div class="page-header">
 							<div class="page-title">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-									<li class="breadcrumb-item active">FORM VALIDATION</li>
+									<li class="breadcrumb-item"><a href="#"></a></li>
+									<li class="breadcrumb-item active"></li>
 								</ol>
 							</div>
 						</div>
@@ -62,13 +62,18 @@
 							<div class="card">
 								<c:forEach var="announcementWorkMessages"
 									items="${page.content}">
+									<h4>
 									<div class="card-header">
-
-										新增時間 <span> <fmt:formatDate
-												pattern="yyyy-MM-dd HH:mm:ss EEEE"
-												value="${announcementWorkMessages.added}" />
-										</span>
+										<span class="badge badge-secondary"><c:out value="${announcementWorkMessages.type}" /></span>
+												
+										&nbsp; 
+										<span> <fmt:formatDate
+												pattern="yyyy-MM-dd HH:mm:ss "
+												value="${announcementWorkMessages.added}" />										
+										</span>										
+										<c:out value="${announcementWorkMessages.title}" />
 									</div>
+									<h5>
 									<div class="card-body">
 										<c:out value="${announcementWorkMessages.content}" />
 										<div class="edit-link">
@@ -76,6 +81,8 @@
 											<a onclick="return confirm('確認刪除')"href="${contextRoot}/B/Announcement/deleteMessage?id=${announcementWorkMessages.id}">刪除</a>
 										</div>
 									</div>
+									</h5>
+									</h4>									
 								</c:forEach>
 
 								<div class="row justify-content-center">
