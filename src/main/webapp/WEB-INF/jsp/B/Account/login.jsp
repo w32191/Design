@@ -38,12 +38,12 @@
 								<form:errors name="*" />
 								<div class="form-group">
 									<label>信箱</label> <input type="email" id="email" name="email"
-										class="form-control" placeholder="請輸入信箱 " />
+										class="form-control" placeholder="請輸入信箱 " required />
 								</div>
 								<br>
 								<div class="form-group">
 									<label>密碼</label> <input type="password" id="pwd" name="pwd"
-										class="form-control" placeholder="請輸入密碼" />
+										class="form-control" placeholder="請輸入密碼" required />
 								</div>
 								<div class="checkbox">
 									<label class="pull-right"> <a href="#">Forgotten
@@ -67,9 +67,9 @@
 						</div>
 						<div class="card">
 							<p>
-								<button id="one">超級帳號</button>
-								<button id="two">一般帳號</button>
-								<button id="three">修改個資後帳號</button>
+								<button id="one">管理者</button>
+								<button id="two">員工</button>
+								<button id="three">新員工</button>
 							</p>
 						</div>
 					</div>
@@ -86,27 +86,18 @@
 		})
 
 		$('#two').on("click", function() {
-			$('#email').val('Abcd1234@gmail.com');
+			$('#email').val('eeit138g1.10@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
 
 		$('#three').on("click", function() {
-			$('#email').val('1234Abcd@gmail.com');
+			$('#email').val('Asdf1234@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
-
-		document.getElementById('loginbutton').addEventListener('click',
-				function() {
-					Swal.fire({
-						icon : 'success',
-						title : '登入成功',
-						showConfirmButton : false,
-						timer : 1500
-					})
-				})
 	</script>
 
 	<c:choose>
+
 		<c:when test="${errorMsg!=null}">
 			<script>
 				Swal.fire({
@@ -130,7 +121,7 @@
 			</script>
 		</c:when>
 		<c:when test="${RegisterResult == 'Error'}">
-		<script>
+			<script>
 				Swal.fire({
 					position : 'top',
 					icon : 'error',
@@ -151,7 +142,7 @@
 				});
 			</script>
 		</c:when>
-	
+
 	</c:choose>
 
 </body>

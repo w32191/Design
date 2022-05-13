@@ -56,6 +56,8 @@
 								<input name="email" id="email" type="email" placeholder="請輸入信箱" />
 								<label for="pass">密碼</label>
 								<input name="pwd" id="pwd" type="password" placeholder="請輸入密碼" />
+								<label for="pass">確認密碼</label>
+								<input name="pwd2" id="pwd2" type="password" placeholder="請輸入密碼" />
 								<div class="mt-10"></div>
 								<br>
 								<button type="submit" class="os-btn w-100">下一步</button>
@@ -83,6 +85,7 @@
 		$('#Frelogininsert').on("click", function() {
 			$('#email').val('Acvbnm12345@gmail.com');
 			$('#pwd').val('Passw0rd');
+			$('#pwd2').val('Passw0rd');
 		})
 	</script>
 </body>

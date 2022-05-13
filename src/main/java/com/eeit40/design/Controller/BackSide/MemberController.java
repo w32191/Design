@@ -51,6 +51,7 @@ public class MemberController {
 		if(!br.hasErrors()) {
 			Account accre = (Account) session.getAttribute("member");
 			member.setFkAccount(accre);
+			member.setServiceArea(-1);
 			Member memberResult = memberService.memberRegister(member);
 			System.out.println(member);
 			if(session != null) {
@@ -100,9 +101,11 @@ public class MemberController {
 			Integer accpre = acc.getPermission();
 			String accpwd = acc.getPwd();
 			Member member1 = memberService.findMemberById(accid);
+			Integer memser = member1.getServiceArea();
 			
 			member.setId(member1.getId());
 			member.setFkAccount(acc);
+			member.setServiceArea(memser);
 			Member newMember = memberService.save(member);
 			
 			Account accountid = accountService.findAccountById(accid);

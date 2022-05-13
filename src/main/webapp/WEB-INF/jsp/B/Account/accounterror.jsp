@@ -27,14 +27,15 @@
 				<div class="col-lg-6">
 					<div class="login-content">
 						<div class="login-logo">
-							<a><span>Design後台系統</span></a>
+							<a><span>DESIGN & DECOR 後台系統</span></a>
 						</div>
 						<form:form class="form" action="/Design/B/accountError">
-						<div class="login-form">
-							<h4>無此帳號</h4>
-							<button type="submit"
-								class="btn btn-primary btn-flat m-b-30 m-t-30">返回</button>
-						</div>
+							<div class="login-form">
+								<h4>此帳號無權限</h4>
+								<input type="button"
+									class="btn btn-primary btn-flat m-b-30 m-t-30"
+									 onclick="javascript:location.href='/Design/B/login'" value="返回"/>
+							</div>
 						</form:form>
 					</div>
 				</div>

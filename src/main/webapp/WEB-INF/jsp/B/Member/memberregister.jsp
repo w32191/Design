@@ -43,7 +43,7 @@
 								</div>
 								<div class="form-group">
 									<label>地址</label> <input type="text" id="address" name="address"
-										class="form-control" placeholder="請填入公司地址">
+										class="form-control" placeholder="請填入地址">
 								</div>
 								<button type="submit" id="memberregister"
 									class="btn btn-primary btn-flat m-b-30 m-t-30">完成</button>
@@ -80,7 +80,7 @@
 				})
 				
 		$('#memberres').on("click", function() {
-			$('#names').val('陳阿城');
+			$('#names').val('AAAAAAA');
 			$('#phone').val('09326789903');
 			$('#address').val('台北市中正區青島東路21-2號');
 		})		

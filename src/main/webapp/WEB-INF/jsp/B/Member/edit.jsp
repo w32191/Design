@@ -107,7 +107,18 @@
 						<li role="presentation" class="active"><a aria-controls="1"
 							role="tab" data-toggle="tab">個人資料</a></li>
 					</ul>
-					<br> <br>
+					<table class="table">
+									<thead>
+										<tr>
+											<td>權限列表:</td>
+											<td>管理者: 99</td>
+											<td>員工: 2</td>
+											<td>新註冊員工: -1</td>
+											<td>會員: 1</td>
+										</tr>
+									</thead>
+								</table>
+				
 					<div class="card">
 						<div class="card">
 							<form:form class="form" name="member" ModelAttribute="editMember"
@@ -133,6 +144,12 @@
 										value="${member.address}">
 								</div>
 								<br>
+								<div class="address-content">
+									<span class="contact-title">權限:</span> <input
+										class="mail-address" type="text" id="serviceArea" name="serviceArea"
+										value="${member.serviceArea}">
+								</div>
+								<br>
 
 								<div class="user-send-message">
 									<input type="submit" id="update" value="更新資料">
@@ -141,8 +158,8 @@
 						</div>
 						
 					</div>
-					<button id="ShowAllUpdate1">一鍵修改個資</button>
-					<button id="ReShowAllUpdate2">一鍵恢復個資</button>
+					<button id="ShowAllUpdate1">修改個資</button>
+					<button id="ReShowAllUpdate2">恢復個資</button>
 				</div>
 			</div>
 		</div>
@@ -162,16 +179,17 @@
 		})
 
 		$('#ShowAllUpdate1').on("click", function() {
-			$('#names').val('陳阿寶');
+			$('#names').val('BBBBBBB');
 			$('#phone').val('09322234099');
 			$('#address').val('台北市內湖區舊宗路一段268號');
 		})
 		
 		$('#ReShowAllUpdate2').on("click", function() {
-			$('#names').val('王阿九');
-			$('#phone').val('0932234567');
-			$('#address').val('新北市三重區五華街282號');
-		})
+			$('#names').val('AAAAAAA');
+			$('#phone').val('09326789903');
+			$('#address').val('台北市中正區青島東路21-2號');
+			$('#serviceArea').val('2');
+		})	
 	</script>
 
 
