@@ -1684,9 +1684,9 @@ $(function () {
             page = Math.ceil(total / fetchNext);
             console.log(page);
 
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="previousPage">Previous</a>
-                                                </li>`);
+            // $("#pageBtn").append(`<li class="page-item">
+            //                                         <a class="page-link" id="previousPage">Previous</a>
+            //                                     </li>`);
             for (let i = 1; i <= page; i++) {
 
                 $("#pageBtn").append(`<li class="page-item"><a class="page-link" id="page${i}">${i}</a></li>`);
@@ -1694,9 +1694,9 @@ $(function () {
             }
 
 
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="nextPage">Next</a>
-                                                </li>`);
+            // $("#pageBtn").append(`<li class="page-item">
+            //                                         <a class="page-link" id="nextPage">Next</a>
+            //                                     </li>`);
 
 
             // $("#pageBtn").html(txt);

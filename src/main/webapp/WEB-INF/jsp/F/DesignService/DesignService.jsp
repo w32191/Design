@@ -42,7 +42,7 @@
             </div>
         </div>
     </section>
-    <c:if test="${account != null}">
+<%--    <c:if test="${account != null}">--%>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-    </c:if>
+<%--    </c:if>--%>
     <!-- page title area end -->
 
     <!-- blog area start -->
@@ -76,7 +76,7 @@
                         </div>
                         <div class="sidebar__widget mb-55">
                             <div class="sidebar__widget-title mb-25">
-                                <h3>Product Categories</h3>
+                                <h3>Categories</h3>
                             </div>
                             <div class="sidebar__widget-content">
                                 <div class="categories">
@@ -156,107 +156,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="music">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsemusic"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsemusic">
-                                                        Music
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsemusic" class="collapse"
-                                                 aria-labelledby="music" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="decoration">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapseDecoration"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapseDecoration">
-                                                        Decoration
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseDecoration" class="collapse"
-                                                 aria-labelledby="decoration"
-                                                 data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="chair">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsechair"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsechair">
-                                                        Chair
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsechair" class="collapse"
-                                                 aria-labelledby="chair" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="light">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapselight"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapselight">
-                                                        Lighting
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapselight" class="collapse"
-                                                 aria-labelledby="light" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -268,126 +167,29 @@
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     <ul>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-1.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Make your life
-                                                        easy</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span> September 14, 2020</span>
+                                        <c:forEach items="${DesignStyleList}" var="design" begin="0" end="10">
+                                            <li class="d-flex">
+                                                    <%--                                                <div class="rc__post-thumb mr-20 ">--%>
+                                                    <%--                                                    <a href="blog-details.html">--%>
+                                                <img href="${design.id}"
+                                                     src="${design.coverPhoto}" width="50%"
+                                                     alt="blog-1"
+                                                     STYLE="margin-right: 10px">
+                                                    <%--                                                    </a>--%>
+                                                    <%--                                                </div>--%>
+                                                <div class="rc__post-content">
+                                                    <h6>
+                                                        <a href="${contextRoot}/F/viewDesignService/${design.id}">
+                                                                ${design.title}</a>
+                                                    </h6>
+                                                    <div class="rc__meta">
+                                                        <span>${design.name}</span>
+                                                        <span>${design.style}</span>
+                                                        <span>${design.createTime}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-2.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Feel like home</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 01, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-3.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Best thing ever</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 05, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Recent Comments</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="rc__comments">
-                                    <ul>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>Salim Rana</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>Shahnewaz Sakil</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>John Deo</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Archives</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="sidebar__links">
-                                    <ul>
-                                        <li><a href="#">December 2013</a></li>
-                                        <li><a href="#"> November 2013</a></li>
-                                        <li><a href="#"> September 2013</a></li>
-                                        <li><a href="#">November 2012</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Meta</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="sidebar__links">
-                                    <ul>
-                                        <li><a href="#">Log in</a></li>
-                                        <li><a href="#"> Entries RSS</a></li>
-                                        <li><a href="#"> Comments RSS</a></li>
-                                        <li><a href="#">WordPress.org</a></li>
+                                            </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>

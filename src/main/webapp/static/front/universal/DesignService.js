@@ -1695,7 +1695,8 @@ $(function () {
                         <h4 class="blog__title"><a href="viewDesignService/${value.id}">${value.title}</a></h4>
                         <div class="blog__meta">
                             <span>By <a href="viewDesignService/${value.id}">${value.name}</a></span>
-                            <span>${value.createTime}</span>
+                            <span>${value.createTime}</span><br/>
+                            <span>${value.style}</span>
                         </div>
                         <div class="truncate">
                             <p>${value.message}</p>

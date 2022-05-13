@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>找案件</h1>
+                        <h1>找裝修需求</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
@@ -54,14 +54,14 @@
             <div class="col-lg-12">
                 <div class="coupon-all" style="margin-top: 25px;padding-bottom: 25px">
                     <div class="coupon2">
-                        <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有案件
+                        <button id="SearchAllCases" class="os-btn os-btn-black" name="add_cart" type="submit">所有需求
                         </button>
-                        <%--                            <c:if test="${account != null}">--%>
+<%--                                                    <c:if test="${account != null}">--%>
                         <button onclick="location.href='${contextRoot}/F/UpdateCase'"
                                 class="os-btn os-btn-black"
-                                name="add_cart" type="submit">新增案件
+                                name="add_cart" type="submit">新增需求
                         </button>
-                        <%--                            </c:if>--%>
+<%--                                                    </c:if>--%>
                     </div>
                 </div>
             </div>

@@ -1665,12 +1665,12 @@ $(function () {
     function insertSend() {
         // 取得輸入的資料
         const data = {
-            title: $('#casetitle').val(),
+            title: $('#caseTitle').val(),
             name: $('#caseName').val(),
-            classification: $('#classification> option:selected').text(),
-            location: $('#location> option:selected').text(),
+            classification: $('#caseClassification> option:selected').text(),
+            location: $('#caseLocation> option:selected').text(),
             caseEmail: $('#Email').val(),
-            message: $('#message').val(),
+            message: $('#caseMessage').val(),
             expiryDate: $('#stopCaseTime').val(),
             coverPhoto: $('#insertCoverPhoto').attr('src')
         }
@@ -1729,7 +1729,7 @@ $(function () {
             option = document.createElement('option');
             option.innerHTML = `${value.name}`;
             // option.value = `${index}`;
-            $('#editClassification').append(option);
+            $('#editStyleList').append(option);
 
             // 新增dailog的下拉選單
             option = document.createElement('option');
@@ -1875,32 +1875,32 @@ $(function () {
     //---------- 修改開始 ----------
 
     //修改案件 按鈕
-    $('#table_tbody').on('click', 'button[id^=editBtn]', function () {
-        $('#editCaseDialog').removeAttr('hidden').dialog('open');
-        let editBtn = $(this);
-        // let id = editBtn.parent('td').siblings('td:eq(0)').text();
-        // console.log(id);
-        let id = $('#spanId').text();
-        $.ajax({
-            url: "/Design/F/Case/" + id,
-            type: "GET",
-            dataType: "json",
-            success: function (result) {
-                console.log(result);
-                $('#editTitle').val(result.title);
-                $('#editName').val(result.name);
-                $('#editClassification').val(result.classification);
-                $('#editLocation').val(result.location);
-                $('#editCaseEmail').val(result.caseEmail);
-                $('#editMessage').val(result.message);
-                $('#editCoverPhoto').attr('src', result.coverPhoto);
-                $('#editExpiryDate').val(result.expiryDate);
-
-
-                $('#updateCaseId').val(id);
-            }
-        })
-    });
+    // $('#editCaseBtn').click(function () {
+    //     $('#editCaseDialog').removeAttr('hidden').dialog('open');
+    //     let editCaseBtn = $(this);
+    //     // let id = editBtn.parent('td').siblings('td:eq(0)').text();
+    //     // console.log(id);
+    //     let id = $('#spanId').text();
+    //     $.ajax({
+    //         url: "/Design/F/Case/" + id,
+    //         type: "GET",
+    //         dataType: "json",
+    //         success: function (result) {
+    //             console.log(result);
+    //             $('#editTitle').val(result.title);
+    //             $('#editName').val(result.name);
+    //             $('#editClassification').val(result.classification);
+    //             $('#editLocation').val(result.location);
+    //             $('#editCaseEmail').val(result.caseEmail);
+    //             $('#editMessage').val(result.message);
+    //             $('#editCoverPhoto').attr('src', result.coverPhoto);
+    //             $('#editExpiryDate').val(result.expiryDate);
+    //
+    //
+    //             $('#updateCaseId').val(id);
+    //         }
+    //     })
+    // });
 
     //修改案件 dialog設定
     $('#editCaseDialog').dialog({
@@ -1917,6 +1917,8 @@ $(function () {
             },
         }
     });
+
+    $('#editCaseCheckBtn').on('click',editSend);
 
     // 發送修改案件資料
     function editSend() {
@@ -1955,7 +1957,7 @@ $(function () {
                     icon: "success",
                     html: "<h5>修改成功！</h5>",
                 }).then(function () {
-                    location.reload();
+                   location.replace(`/Design/F/ViewCase/${id}`)
                 });
             },
             error: function (err) {
@@ -2015,7 +2017,7 @@ $(function () {
                 $.each(result.results, function (index, value) {
                     let imgStr;
                     if (value.coverPhoto != null) {
-                        imgStr = `<img src=" ${value.coverPhoto}" style='width: 100% ' alt="blog">`;
+                        imgStr = `<img src=" ${value.coverPhoto}" style="width: 350px; height: 350px; object-fit: cover " alt="blog">`;
                     } else {
                         imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" style='width: 100%' alt="blog">`;
                     }
@@ -2063,9 +2065,9 @@ $(function () {
                 $.each(result.results, function (index, value) {
                     let imgStr;
                     if (value.coverPhoto != null) {
-                        imgStr = `<div style="width: 350px; height: 350px; object-fit: cover " class="cCover"><img src=" ${value.coverPhoto} "  class="background-cover"  alt="blog"></div>`;
+                        imgStr = `<div style="width: 350px; height: 350px; object-fit: cover " class="cCover"><img href="ViewCase/' + value.id + '" src=" ${value.coverPhoto} "  class="background-cover"  alt="blog"></div>`;
                     } else {
-                        imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                        imgStr = `<img href="ViewCase/' + value.id + '" src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
                     }
 
                     case_data += '<div class="col-xl-4 col-lg-4 col-md-6" style="padding-top: 24px">' +

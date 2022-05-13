@@ -29,13 +29,12 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Add Your Design</h1>
+                        <h1>Edit Your Case</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="${contextRoot}/F/Activity/index">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">
-                                        <a href="${contextRoot}/F/Design"> Design</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="${contextRoot}/F/Case"> Case</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -49,6 +48,7 @@
     <!-- Cart Area Strat-->
     <section class="cart-area pt-100 pb-100">
         <div class="container">
+            <span hidden id="spanEditId">${Case.id}</span>
             <div class="row">
                 <div class="col-lg">
                     <form action="#">
@@ -57,64 +57,49 @@
                                 <div class="basic-elements">
                                     <form>
                                         <div class="row">
+                                            <span hidden id="spanId">${Case.id}</span>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label>標題：</label>
-                                                    <input id="title" type="text" class="form-control" required/>
+                                                    <input id= "editTitle" type="text" class="form-control"
+                                                    value="${Case.title}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>名字：</label>
-                                                    <input id="name" type="text" class="form-control" required/>
+                                                    <input id= "editName" type="text" class="form-control"
+                                                           value="${Case.name}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>風格：</label>
-                                                    <select class="form-control" id="addStyleList">
-                                                        <%--<option>1</option>--%>
-                                                        <%--<option>2</option>--%>
-                                                        <%--<option>3</option>--%>
-                                                        <%--<option>4</option>--%>
-                                                        <%--<option>5</option>--%>
+                                                    <select class="form-control" id="editStyleList">
+                                                        <%--                                                        <option>1</option>--%>
+                                                        <%--                                                        <option>2</option>--%>
+                                                        <%--                                                        <option>3</option>--%>
+                                                        <%--                                                        <option>4</option>--%>
+                                                        <%--                                                        <option>5</option>--%>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>地點：</label>
-                                                    <select class="form-control" id="addLocation">
-                                                        <%--<option>1</option>--%>
-                                                        <%--<option>2</option>--%>
-                                                        <%--<option>3</option>--%>
-                                                        <%--<option>4</option>--%>
-                                                        <%--<option>5</option>--%>
+                                                    <select class="form-control" id="editLocation">
+                                                        <%--                                                        <option>1</option>--%>
+                                                        <%--                                                        <option>2</option>--%>
+                                                        <%--                                                        <option>3</option>--%>
+                                                        <%--                                                        <option>4</option>--%>
+                                                        <%--                                                        <option>5</option>--%>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>設計費：</label>
-                                                    <input id="price" type="number" class="form-control">
-                                                </div>
-                                                <div class="form-group">
                                                     <label>資訊：</label>
-                                                    <textarea id="message" class="form-control" rows="20"
-                                                              placeholder="Text input"></textarea>
+                                                    <textarea id= "editMessage" class="form-control" rows="20"
+                                                              placeholder="">${Case.message}</textarea>
                                                 </div>
                                                 <div class="form-group" id="imgDiv">
-                                                    <label>封面照片：</label><br/>
+                                                    <label>照片：</label><br/>
                                                     <input type="file" id="insertFile" class="imgur"
                                                            accept="image/*"
                                                            data-max-size="5000"/>
-                                                    <img src="" id="insertCoverPhoto" width="200"/>
-                                                </div>
-                                                <div class="form-group" id="imgDiv1">
-                                                    <label>內文照片：</label><br/>
-                                                    <input type="file" id="insertFile1" class="imgur1"
-                                                           accept="image/*"
-                                                           data-max-size="5000"/>
-                                                    <img src="" id="insertPhoto_1" width="200"/>
-                                                </div>
-                                                <div class="form-group" id="imgDiv2">
-                                                    <label>內文照片：</label><br/>
-                                                    <input type="file" id="insertFile2" class="imgur2"
-                                                           accept="image/*"
-                                                           data-max-size="5000"/>
-                                                    <img src="" id="insertPhoto_2" width="200"/>
+                                                    <img src="${Case.coverPhoto}" id="editCoverPhoto" width="200"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,9 +111,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="coupon2">
-                                    <button id="addDesignServiceBtn" class="os-btn os-btn-black"
-                                            style="margin-top: 25px"
-                                            name="add_case" type="submit">新增設計
+                                    <button id="editCaseCheckBtn" class="os-btn os-btn-black" style="margin-top: 25px"
+                                            name="add_case" type="submit">確定
                                     </button>
                                 </div>
                             </div>
@@ -148,7 +132,7 @@
 <jsp:include page="../IncludePage/staticPage/FontJsPage.jsp"/>
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="${contextRoot}/static/front/universal/DesignService.js"></script>
+<script src="${contextRoot}/static/front/universal/Case.js"></script>
 
 </body>
 
