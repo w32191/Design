@@ -1,25 +1,26 @@
 $(function () {
 
-    let getUrlString = location.href;
-    let url = new URL(getUrlString);
-    let id = url.searchParams.get('id')
+  let getUrlString = location.href;
+  let url = new URL(getUrlString);
+  let id = url.searchParams.get('id')
 
-    if(url.searchParams.get('id') == null){
-        id =  url.searchParams.get('productId');
-    }
-    console.log(id)
-    let amount;
+  if (url.searchParams.get('id') == null) {
+    id = url.searchParams.get('productId');
+  }
+  console.log(id)
+  let amount;
 
-    $.getJSON(`/Design/F/ProductReview/ProductReview/${id}`, function (reviewres) {
+  $.getJSON(`/Design/F/ProductReview/ProductReview/${id}`,
+      function (reviewres) {
         console.log(reviewres);
-    });
+      });
 
-    $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
-        console.log(res.name);
+  $.getJSON(`/Design/B/product/findProductById/${id}`, function (res) {
+    console.log(res.name);
 
-        let txt = '';
+    let txt = '';
 
-        txt += `
+    txt += `
 <div class="shop__top grey-bg-6 pt-100 pb-90">
             <div class="container">
                 <div class="row">
@@ -70,11 +71,11 @@ $(function () {
                                         <img src="${res.image01}"
                                              alt="" width="400px">`;
 
-        if (res.discountPercentage != null) {
-            let dis = `<div class="product__sale"><span class="new">活動</span><span class="percent">-${res.discountPercentage}%</span></div>`;
-            txt += dis;
-        }
-        txt += `</div>
+    if (res.discountPercentage != null) {
+      let dis = `<div class="product__sale"><span class="new">活動</span><span class="percent">-${res.discountPercentage}%</span></div>`;
+      txt += dis;
+    }
+    txt += `</div>
                                 </div>
                                 <div class="tab-pane fade" id="pro-two" role="tabpanel"
                                      aria-labelledby="pro-two-tab">
@@ -112,49 +113,50 @@ $(function () {
                             </div>
                         </div>
                     </div>`
-                    $.ajax({
-                        url: `/Design/F/ProductReview/ProductReview/${id}`,
-                        dataType: 'json',
-                        method: 'get',
-                        success: function (data) {
-                            let p=0;
-                            for (let r = 0; r < data.length; r++) {
-                                p += data[r].star;
-                            };
-                            let s = p/data.length;
-                            s = s.toFixed(1);//toFixed()此功能是留小數點後幾位
-                            if(s<1){
-                                $('#AllStar1').addClass('fa1 fa-star');
-                            }
-                            if(s>=1 && s<2){
-                                $('#AllStar1').addClass('fas fa-star');
-                            }
-                            if(s>=2 && s<3){
-                                $('#AllStar1').addClass('fas fa-star');
-                                $('#AllStar2').addClass('fas fa-star');
-                            }
-                            if(s>=3 && s<4){
-                                $('#AllStar1').addClass('fas fa-star');
-                                $('#AllStar2').addClass('fas fa-star');
-                                $('#AllStar3').addClass('fas fa-star');
-                            }
-                            if(s>=4 && s<=5){
-                                $('#AllStar1').addClass('fas fa-star');
-                                $('#AllStar2').addClass('fas fa-star');
-                                $('#AllStar3').addClass('fas fa-star');
-                                $('#AllStar4').addClass('fas fa-star');
-                            }
-                            if(s>=5){
-                                $('#AllStar1').addClass('fas fa-star');
-                                $('#AllStar2').addClass('fas fa-star');
-                                $('#AllStar3').addClass('fas fa-star');
-                                $('#AllStar4').addClass('fas fa-star');
-                                $('#AllStar5').addClass('fas fa-star');
-                            }
-                        }
-                     });
-                     
-                txt +=`<div class="col-xl-6 col-lg-6">
+    $.ajax({
+      url: `/Design/F/ProductReview/ProductReview/${id}`,
+      dataType: 'json',
+      method: 'get',
+      success: function (data) {
+        let p = 0;
+        for (let r = 0; r < data.length; r++) {
+          p += data[r].star;
+        }
+        ;
+        let s = p / data.length;
+        s = s.toFixed(1);//toFixed()此功能是留小數點後幾位
+        if (s < 1) {
+          $('#AllStar1').addClass('fa1 fa-star');
+        }
+        if (s >= 1 && s < 2) {
+          $('#AllStar1').addClass('fas fa-star');
+        }
+        if (s >= 2 && s < 3) {
+          $('#AllStar1').addClass('fas fa-star');
+          $('#AllStar2').addClass('fas fa-star');
+        }
+        if (s >= 3 && s < 4) {
+          $('#AllStar1').addClass('fas fa-star');
+          $('#AllStar2').addClass('fas fa-star');
+          $('#AllStar3').addClass('fas fa-star');
+        }
+        if (s >= 4 && s <= 5) {
+          $('#AllStar1').addClass('fas fa-star');
+          $('#AllStar2').addClass('fas fa-star');
+          $('#AllStar3').addClass('fas fa-star');
+          $('#AllStar4').addClass('fas fa-star');
+        }
+        if (s >= 5) {
+          $('#AllStar1').addClass('fas fa-star');
+          $('#AllStar2').addClass('fas fa-star');
+          $('#AllStar3').addClass('fas fa-star');
+          $('#AllStar4').addClass('fas fa-star');
+          $('#AllStar5').addClass('fas fa-star');
+        }
+      }
+    });
+
+    txt += `<div class="col-xl-6 col-lg-6">
                         <div class="product__modal-content product__modal-content-2">
                             <h4><a href="product-details?id=${res.id}">${res.name}</a></h4>
                             <div class="rating rating-shop mb-15">
@@ -167,16 +169,16 @@ $(function () {
                                 </ul>
                             </div>
                             <div class="product__price-2 mb-25">`;
-                   
-        if (res.discountPercentage != null) {
-            txt += `<span>$${res.price * (100 - res.discountPercentage)
-            / 100}</span><span class="old-price">$${res.price}</span>`;
 
-        } else {
-            txt += `<span>$${res.price}</span>`;
-        }
+    if (res.discountPercentage != null) {
+      txt += `<span>$${res.price * (100 - res.discountPercentage)
+      / 100}</span><span class="old-price">$${res.price}</span>`;
 
-        txt += `</div>
+    } else {
+      txt += `<span>$${res.price}</span>`;
+    }
+
+    txt += `</div>
                             <div class="product__modal-des mb-30">
                                 <p>品牌：<a href="/Design/F/product/productbybrand?brand=${res.fkBrand.id}" >${res.fkBrand.name}</a></p>
                                 <br>
@@ -196,7 +198,8 @@ $(function () {
                                     </div>
                                     
                                     <div class="product__modal-required mb-5">
-                                        <span>請選擇商品數量</span>
+                                        <span><span>庫存：${res.stock}
+                                        <br>請選擇商品數量</span>
                                     </div>
                                     <div class="pro-quan-area d-sm-flex align-items-center">
                                         <div class="product-quantity-title">
@@ -209,7 +212,16 @@ $(function () {
                                         <div class="pro-cart-btn">
                                             <a class="add-cart-btn mb-20" id="addToCartBtn">+ Add to Cart</a>
                                         </div>
+                                        
                                     </div>
+                                    <div class="product__modal-des mb-30">
+                                      <p>商品出貨與期貨等候時間說明：</p>
+                                     <ul>
+                                        <li>。若庫存顯示有現貨，約 1 - 2 工作天，即可出貨</li>
+                                        <li>。若庫存顯示為預購，需向國外原廠客訂預購，期貨時間約 4 - 6 個月左右到台灣</li>
+                                        <li>。庫存查詢或其他訂購問題，歡迎利用客服專線</li>
+                                    </ul>
+                            </div>
                                 </form>
                             </div>
                           
@@ -284,78 +296,77 @@ $(function () {
                                 <div class="tab-pane fade" id="review" role="tabpanel">
                                     <div class="product__details-review" id="reviewStart">`;
 
-        $.ajax({
-            url: `/Design/F/ProductReview/ProductReview/${id}`,
-            dataType: 'json',
-            method: 'get',
-            success: function (data) {
-                console.log("data.length:" + data.length);
-                let reviewMain = "";
-                let k=0;
-                reviewMain += `<div class="postbox__comments">
+    $.ajax({
+      url: `/Design/F/ProductReview/ProductReview/${id}`,
+      dataType: 'json',
+      method: 'get',
+      success: function (data) {
+        console.log("data.length:" + data.length);
+        let reviewMain = "";
+        let k = 0;
+        reviewMain += `<div class="postbox__comments">
                                                 <div class="postbox__comment-title mb-30">
                                                     <h3 style="background-color:#bc8246;color:white">`;
-                for (let m = 0; m < data.length; m++) {
-                    k += data[m].star;
-                };
-                let n = k/data.length;console.log(n);
-                n = n.toFixed(1);//toFixed()此功能是留小數點後幾位
+        for (let m = 0; m < data.length; m++) {
+          k += data[m].star;
+        }
+        ;
+        let n = k / data.length;
+        console.log(n);
+        n = n.toFixed(1);//toFixed()此功能是留小數點後幾位
 
-                reviewMain += `此商品有（` + data.length;
+        reviewMain += `此商品有（` + data.length;
 
-                reviewMain += `）則評論，共`;
-                reviewMain += n + `分</h3></div>`;                
-                for (i = 0; i < data.length; i++) {
-                    reviewMain += `<div class="latest-comments mb-30">
+        reviewMain += `）則評論，共`;
+        reviewMain += n + `分</h3></div>`;
+        for (i = 0; i < data.length; i++) {
+          reviewMain += `<div class="latest-comments mb-30">
                                                 <ul>
                                                     <li>
                                                         <div class="comments-box">
                                                             <div class="comments-avatar">
-                                                                <img src="` + data[i].fkMember.images + `" alt="">
-                                                            </div>` ;
-
-                    reviewMain += `
-                                                            <div class="comments-text">
-                                                            <div class="avatar-name">
-                                                            <h5>` + data[i].fkMember.names + `</h5><span>` + data[i].commentDate + `</span>
+                                                                <img src="`
+              + data[i].fkMember.images + `" alt="">
                                                             </div>`;
 
-                    reviewMain += `
+          reviewMain += `
+                                                            <div class="comments-text">
+                                                            <div class="avatar-name">
+                                                            <h5>`
+              + data[i].fkMember.names + `</h5><span>` + data[i].commentDate + `</span>
+                                                            </div>`;
+
+          reviewMain += `
                                                 <div class="user-rating">
                                                 <ul>`;
-                    for (j = 0; j < data[i].star; j++) {
-                        reviewMain += `<li><a href="#"><i
+          for (j = 0; j < data[i].star; j++) {
+            reviewMain += `<li><a href="#"><i
                                                     class="fas fa-star"></i></a>
                                                 </li>
                                                 `;
-                    }
-                    
+          }
 
-                    reviewMain += `</ul>
-                                                </div><p>` + data[i].comment + `</p>`;
+          reviewMain += `</ul>
+                                                </div><p>` + data[i].comment
+              + `</p>`;
 
-                    reviewMain += `</div>
+          reviewMain += `</div>
                                                                 </div>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>`;
-                }
-                
+        }
 
+        $('#reviewStart').html(reviewMain);
+      },
+      error: function (err) {
+        console.log(err)
+        alert('發生錯誤1')
+      }
+    });
 
-
-
-                $('#reviewStart').html(reviewMain);
-            },
-            error: function (err) {
-                console.log(err)
-                alert('發生錯誤1')
-            }
-        });
-
-
-        txt += `
+    txt += `
                                     </div>
                                                 <div class="post-comments-form mb-100">
                                                     <div class="post-comments-title mb-30">
@@ -413,37 +424,37 @@ $(function () {
             </div>
         </div>
     `
-        $('#pd1').html(txt);
+    $('#pd1').html(txt);
 
+    $(".cart-plus-minus").append(
+        '<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
 
-        $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
-
-        $(".qtybutton").on("click", function () {
-            var $button = $(this);
-            var oldValue = $button.parent().find("input").val();
-            if ($button.text() == "+") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 0;
-                }
-            }
-            $button.parent().find("input").val(newVal);
-        });
-
+    $(".qtybutton").on("click", function () {
+      var $button = $(this);
+      var oldValue = $button.parent().find("input").val();
+      if ($button.text() == "+") {
+        var newVal = parseFloat(oldValue) + 1;
+      } else {
+        // Don't allow decrementing below zero
+        if (oldValue > 0) {
+          var newVal = parseFloat(oldValue) - 1;
+        } else {
+          newVal = 0;
+        }
+      }
+      $button.parent().find("input").val(newVal);
     });
 
-    $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
-        console.log(newa[0].id)
-        console.log(newa[0].name)
-        let natxt = '';
+  });
 
-        for (let i = 0; i < 4; i++) {
-            natxt +=
-                `
+  $.getJSON(`/Design/B/product/findProductOrderByAddedDesc`, function (newa) {
+    console.log(newa[0].id)
+    console.log(newa[0].name)
+    let natxt = '';
+
+    for (let i = 0; i < 4; i++) {
+      natxt +=
+          `
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="product__wrapper mb-60">
                         <div class="product__thumb">
@@ -473,178 +484,171 @@ $(function () {
                     </div>
                 </div>
         `
-        }   //end of for
-        $('#na').html(natxt);
-    })
+    }   //end of for
+    $('#na').html(natxt);
+  })
 
+  $('body').on('click', '#addToCartBtn', function () {
+    console.log($('#amount').val());
+    amount = $('#amount').val();
+    // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&amount=${amount}`);
 
-    $('body').on('click', '#addToCartBtn', function () {
-        console.log($('#amount').val());
-        amount = $('#amount').val();
-        // $('#addToCartBtn').attr('href',`/Design/F/addshoppingcart?id=${id}&amount=${amount}`);
-
-
-        $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount}, function (res) {
-            Swal.fire({
-                text: '已加入購物車',
-                showConfirmButton: false,
-                timer: 1000
-            })
-            console.log(res)
+    $.get("/Design/F/addshoppingcart", {"fkProduct": id, "amount": amount},
+        function (res) {
+          Swal.fire({
+            text: '已加入購物車',
+            showConfirmButton: false,
+            timer: 1000
+          })
+          console.log(res)
         })
-        // console.log($('#amount').val());
+    // console.log($('#amount').val());
+  });
+
+  // 下方新品推薦加入購物車
+  $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
+
+    let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
+    console.log(id)
+    // $.get("/Design/F/addshoppingcart", { "fkProduct": id, "amount": 1 })
+    // {
+    //     Swal.fire({
+    //         text: '已加入購物車',
+    //         showConfirmButton: false,
+    //         timer: 1000
+    //     })
+    //     console.log($('#amount').val());
+    // }
+    $.ajax({
+      url: "/Design/F/addshoppingcart",
+      type: 'GET',
+      data: {"fkProduct": id, "amount": 1},
+      success: function (res) {
+        console.log(res)
+        if (res == 'success') {
+          Swal.fire({
+            text: '已加入購物車',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        } else {
+          Swal.fire({
+            title: '請先登入！',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
+      },
+      error: function (err) {
+        console.log(err)
+      }
+
     });
 
+  })
 
-    // 下方新品推薦加入購物車
-    $('body').on('click', 'a[id^=newArrAddToCartBtn]', function () {
-
-        let id = $(this).attr('id').split("newArrAddToCartBtn")[1];
-        console.log(id)
-        // $.get("/Design/F/addshoppingcart", { "fkProduct": id, "amount": 1 })
-        // {
-        //     Swal.fire({
-        //         text: '已加入購物車',
-        //         showConfirmButton: false,
-        //         timer: 1000
-        //     })
-        //     console.log($('#amount').val());
-        // }
-        $.ajax({
-            url: "/Design/F/addshoppingcart",
-            type: 'GET',
-            data: {"fkProduct": id, "amount": 1},
-            success: function (res) {
-                console.log(res)
-                if (res == 'success') {
-                    Swal.fire({
-                        text: '已加入購物車',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                } else {
-                    Swal.fire({
-                        title: '請先登入！',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                }
-            },
-            error: function (err) {
-                console.log(err)
-            }
-
-        });
-
-    })
-
-    // 取當前登入者的名字
-    $('#pd1').on('click', '#review-tab', function () {
-        $.ajax({
-            url: '/Design/F/getP',
-            type: 'GET',
-            success: function (res) {
-                console.log(res);
-                $('#insertName').val(res);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+  // 取當前登入者的名字
+  $('#pd1').on('click', '#review-tab', function () {
+    $.ajax({
+      url: '/Design/F/getP',
+      type: 'GET',
+      success: function (res) {
+        console.log(res);
+        $('#insertName').val(res);
+      },
+      error: function (err) {
+        console.log(err);
+      }
     });
+  });
 
-    // $('#pd1').on('click', '#sendBtn', function () {
-    //     $.ajax({
-    //         url: '/Design/F/ProductReview/insertProductReview',
-    //         type: 'POST',
-    //         data: {
-    //             comments: $('#comments').val(),
-    //             id:$('#prProduct').val()
-    //         },
-    //         success: function (res) {
-    //             console.log(res);
-    //         },
-    //         error: function (err) {
-    //             console.log(err);
-    //         }
+  // $('#pd1').on('click', '#sendBtn', function () {
+  //     $.ajax({
+  //         url: '/Design/F/ProductReview/insertProductReview',
+  //         type: 'POST',
+  //         data: {
+  //             comments: $('#comments').val(),
+  //             id:$('#prProduct').val()
+  //         },
+  //         success: function (res) {
+  //             console.log(res);
+  //         },
+  //         error: function (err) {
+  //             console.log(err);
+  //         }
 
-    //     });
-    // });
+  //     });
+  // });
 
+  //五星判斷
+  $('body').on('click', '#star01', function () {
+    $('#star01').removeClass('fal fa-star');
+    $('#star01').addClass('fas fa-star');
+    $('#star02').removeClass('fas fa-star');
+    $('#star02').addClass('fal fa-star');
+    $('#star03').removeClass('fas fa-star');
+    $('#star03').addClass('fal fa-star');
+    $('#star04').removeClass('fas fa-star');
+    $('#star04').addClass('fal fa-star');
+    $('#star05').removeClass('fas fa-star');
+    $('#star05').addClass('fal fa-star');
+    $('#radio1').prop('checked', true);
+  });
+  $('body').on('click', '#star02', function () {
+    $('#star01').removeClass('fal fa-star');
+    $('#star01').addClass('fas fa-star');
+    $('#star02').removeClass('fal fa-star');
+    $('#star02').addClass('fas fa-star');
+    $('#star03').removeClass('fas fa-star');
+    $('#star03').addClass('fal fa-star');
+    $('#star04').removeClass('fas fa-star');
+    $('#star04').addClass('fal fa-star');
+    $('#star05').removeClass('fas fa-star');
+    $('#star05').addClass('fal fa-star');
+    $('#radio2').prop('checked', true);
+  });
+  $('body').on('click', '#star03', function () {
+    $('#star01').removeClass('fal fa-star');
+    $('#star01').addClass('fas fa-star');
+    $('#star02').removeClass('fal fa-star');
+    $('#star02').addClass('fas fa-star');
+    $('#star03').removeClass('fal fa-star');
+    $('#star03').addClass('fas fa-star');
+    $('#star04').removeClass('fas fa-star');
+    $('#star04').addClass('fal fa-star');
+    $('#star05').removeClass('fas fa-star');
+    $('#star05').addClass('fal fa-star');
+    $('#radio3').prop('checked', true);
+  });
+  $('body').on('click', '#star04', function () {
+    $('#star01').removeClass('fal fa-star');
+    $('#star01').addClass('fas fa-star');
+    $('#star02').removeClass('fal fa-star');
+    $('#star02').addClass('fas fa-star');
+    $('#star03').removeClass('fal fa-star');
+    $('#star03').addClass('fas fa-star');
+    $('#star04').removeClass('fal fa-star');
+    $('#star04').addClass('fas fa-star');
+    $('#star05').removeClass('fas fa-star');
+    $('#star05').addClass('fal fa-star');
+    $('#radio4').prop('checked', true);
+  });
+  $('body').on('click', '#star05', function () {
+    $('#star01').removeClass('fal fa-star');
+    $('#star01').addClass('fas fa-star');
+    $('#star02').removeClass('fal fa-star');
+    $('#star02').addClass('fas fa-star');
+    $('#star03').removeClass('fal fa-star');
+    $('#star03').addClass('fas fa-star');
+    $('#star04').removeClass('fal fa-star');
+    $('#star04').addClass('fas fa-star');
+    $('#star05').removeClass('fal fa-star');
+    $('#star05').addClass('fas fa-star');
+    $('#radio5').prop('checked', true);
+  });
 
-    //五星判斷
-    $('body').on('click', '#star01', function () {
-        $('#star01').removeClass('fal fa-star');
-        $('#star01').addClass('fas fa-star');
-        $('#star02').removeClass('fas fa-star');
-        $('#star02').addClass('fal fa-star');   
-        $('#star03').removeClass('fas fa-star');
-        $('#star03').addClass('fal fa-star');
-        $('#star04').removeClass('fas fa-star');
-        $('#star04').addClass('fal fa-star');  
-        $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');
-        $('#radio1').prop('checked',true);
-    });
-    $('body').on('click', '#star02', function () {
-        $('#star01').removeClass('fal fa-star');
-        $('#star01').addClass('fas fa-star');
-        $('#star02').removeClass('fal fa-star');
-        $('#star02').addClass('fas fa-star');   
-        $('#star03').removeClass('fas fa-star');
-        $('#star03').addClass('fal fa-star');
-        $('#star04').removeClass('fas fa-star');
-        $('#star04').addClass('fal fa-star');  
-        $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star'); 
-        $('#radio2').prop('checked',true);
-    });
-    $('body').on('click', '#star03', function () {
-        $('#star01').removeClass('fal fa-star');
-        $('#star01').addClass('fas fa-star');
-        $('#star02').removeClass('fal fa-star');
-        $('#star02').addClass('fas fa-star');   
-        $('#star03').removeClass('fal fa-star');
-        $('#star03').addClass('fas fa-star');
-        $('#star04').removeClass('fas fa-star');
-        $('#star04').addClass('fal fa-star');  
-        $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');   
-        $('#radio3').prop('checked',true);  
-    });
-    $('body').on('click', '#star04', function () {
-        $('#star01').removeClass('fal fa-star');
-        $('#star01').addClass('fas fa-star');
-        $('#star02').removeClass('fal fa-star');
-        $('#star02').addClass('fas fa-star');   
-        $('#star03').removeClass('fal fa-star');
-        $('#star03').addClass('fas fa-star');
-        $('#star04').removeClass('fal fa-star');
-        $('#star04').addClass('fas fa-star');
-        $('#star05').removeClass('fas fa-star');
-        $('#star05').addClass('fal fa-star');  
-        $('#radio4').prop('checked',true);      
-    });
-    $('body').on('click', '#star05', function () {
-        $('#star01').removeClass('fal fa-star');
-        $('#star01').addClass('fas fa-star');
-        $('#star02').removeClass('fal fa-star');
-        $('#star02').addClass('fas fa-star');   
-        $('#star03').removeClass('fal fa-star');
-        $('#star03').addClass('fas fa-star');
-        $('#star04').removeClass('fal fa-star');
-        $('#star04').addClass('fas fa-star');  
-        $('#star05').removeClass('fal fa-star');
-        $('#star05').addClass('fas fa-star');    
-        $('#radio5').prop('checked',true);  
-    });
-    
-    //summernote
-
-     
-    
-             
+  //summernote
 
 })
 
