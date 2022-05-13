@@ -53,11 +53,11 @@
                             </div>
                         </c:if>
 
-                        <h1><a href="blog.html">${Design.title}</a></h1>
+                        <h1><a href="">${Design.title}</a></h1>
                         <div class="blog__meta">
                             <span>${Design.location}</span><br/>
                             <span>${Design.style}</span><br/>
-                            <span>By <a href="#">${Design.name}</a></span>
+                            <span>By <a href="">${Design.name}</a></span>
                             <span>/ ${Design.createTime}</span>
                         </div>
                     </div>
@@ -165,112 +165,7 @@
                         </div>
                     </div>
                     <div class="postbox__line mt-65"></div>
-                    <div class="postbox__comments pt-90">
-                        <div class="postbox__comment-title mb-30">
-                            <h3>Comments (32)</h3>
-                        </div>
-                        <div class="latest-comments mb-30">
-                            <ul>
-                                <li>
-                                    <div class="comments-box">
-                                        <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-1.png"
-                                                 alt="">
-                                        </div>
-                                        <div class="comments-text">
-                                            <div class="avatar-name">
-                                                <h5>Siarhei Dzenisenka</h5>
-                                                <span> - 3 months ago </span>
-                                                <a class="reply" href="#">Leave Reply</a>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors
-                                                now use Lorem Ipsum as their default model text, and
-                                                a search for <span>“lorem ipsum”</span> will uncover
-                                                many web sites still in their infancy. Various
-                                                versions have evolved over the years, sometimes by
-                                                accident, sometimes on purpose.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="children">
-                                    <div class="comments-box">
-                                        <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-2.png"
-                                                 alt="">
-                                        </div>
-                                        <div class="comments-text">
-                                            <div class="avatar-name">
-                                                <h5>Julias Roy</h5>
-                                                <span> - 6 months ago </span>
-                                                <a class="reply" href="#">Leave Reply</a>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors
-                                                now use Lorem Ipsum as their default model text, and
-                                                a search for <span>“lorem ipsum”</span> will uncover
-                                                many web sites still in their infancy. </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="comments-box">
-                                        <div class="comments-avatar">
-                                            <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                 alt="">
-                                        </div>
-                                        <div class="comments-text">
-                                            <div class="avatar-name">
-                                                <h5>Arista Williamson</h5>
-                                                <span> - 6 months ago </span>
-                                                <a class="reply" href="#">Leave Reply</a>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors
-                                                now use Lorem Ipsum as their default model text, and
-                                                a search for <span>“lorem ipsum”</span> will uncover
-                                                many web sites still in their infancy. Various
-                                                versions have evolved over the years, sometimes by
-                                                accident, sometimes on purpose.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="postbox__line mb-95"></div>
-                    <div class="post-comments-form mb-100">
-                        <div class="post-comments-title mb-30">
-                            <h3>Leave A Reply</h3>
-                        </div>
-                        <form id="contacts-form" class="conatct-post-form" action="#">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="contact-icon p-relative contacts-name">
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="contact-icon p-relative contacts-name">
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="contact-icon p-relative contacts-email">
-                                        <input type="text" placeholder="Subject">
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="contact-icon p-relative contacts-message">
-                                                <textarea name="comments" id="comments" cols="30"
-                                                          rows="10"
-                                                          placeholder="Comments"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <button class="os-btn os-btn-black" type="submit">Post comment
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="sidebar__wrapper">
@@ -284,216 +179,17 @@
                         </div>
                         <div class="sidebar__widget mb-55">
                             <div class="sidebar__widget-title mb-25">
-                                <h3>Product Categories</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="categories">
-                                    <div id="accordion">
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="accessories">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapseAccessories"
-                                                            aria-expanded="true"
-                                                            aria-controls="collapseAccessories">
-                                                        Accessories
-                                                    </button>
-                                                </h5>
-                                            </div>
-
-                                            <div id="collapseAccessories" class="collapse show"
-                                                 aria-labelledby="accessories"
-                                                 data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <c:forEach items="${StyleList}" var="style">
-                                                                <c:choose>
-                                                                    <c:when test="${style eq '所有風格'}">
-                                                                        <li><a href="${contextRoot}/F/Design">${style}</a></li>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <li><a href="${contextRoot}/F/Design?search=${style}">${style}</a></li>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </c:forEach>
-                                                            <%--                                                            <li><a href="#">Catagories 1</a></li>--%>
-                                                            <%--                                                            <li><a href="#">Catagories 2</a></li>--%>
-                                                            <%--                                                            <li><a href="#">Catagories 3</a></li>--%>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="cloth">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsecloth"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsecloth">
-                                                        Clothing
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsecloth" class="collapse"
-                                                 aria-labelledby="cloth" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="men">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsemen"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsemen">
-                                                        Men's
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsemen" class="collapse"
-                                                 aria-labelledby="men" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="music">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsemusic"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsemusic">
-                                                        Music
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsemusic" class="collapse"
-                                                 aria-labelledby="music" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="decoration">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapseDecoration"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapseDecoration">
-                                                        Decoration
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseDecoration" class="collapse"
-                                                 aria-labelledby="decoration"
-                                                 data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="chair">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapsechair"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapsechair">
-                                                        Chair
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapsechair" class="collapse"
-                                                 aria-labelledby="chair" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header white-bg" id="light">
-                                                <h5 class="mb-0">
-                                                    <button class="shop-accordion-btn collapsed"
-                                                            data-toggle="collapse"
-                                                            data-target="#collapselight"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapselight">
-                                                        Lighting
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapselight" class="collapse"
-                                                 aria-labelledby="light" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="categories__list">
-                                                        <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
                                 <h3>Latest Posts</h3>
                             </div>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     <ul>
-                                        <c:forEach items="${DesignList}" var="design" begin="0" end="2">
+                                        <c:forEach items="${DesignList}" var="design" begin="0" end="10">
                                             <li class="d-flex">
                                                     <%--                                                <div class="rc__post-thumb mr-20 ">--%>
                                                     <%--                                                    <a href="blog-details.html">--%>
                                                 <img href="${design.id}"
-                                                     src="${design.coverPhoto}" width="30%"
+                                                     src="${design.coverPhoto}" width="50%"
                                                      alt="blog-1"
                                                      STYLE="margin-right: 10px">
                                                     <%--                                                    </a>--%>
@@ -504,6 +200,8 @@
                                                                 ${design.title}</a>
                                                     </h6>
                                                     <div class="rc__meta">
+                                                        <span>${design.name}</span>
+                                                        <span>${design.style}</span>
                                                         <span>${design.createTime}</span>
                                                     </div>
                                                 </div>
@@ -543,81 +241,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Recent Comments</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="rc__comments">
-                                    <ul>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>Salim Rana</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>Shahnewaz Sakil</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-20">
-                                            <div class="rc__comments-avater mr-15">
-                                                <img src="${contextRoot}/static/front/assets/img/blog/comments/avater-3.png"
-                                                     alt="">
-                                            </div>
-                                            <div class="rc__comments-content">
-                                                <h6>John Deo</h6>
-                                                <p>Hi, this is a comment....</p>
-                                                <span>on <span class="highlight comment"> Hello world!</span></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Archives</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="sidebar__links">
-                                    <ul>
-                                        <li><a href="#">December 2013</a></li>
-                                        <li><a href="#"> November 2013</a></li>
-                                        <li><a href="#"> September 2013</a></li>
-                                        <li><a href="#">November 2012</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__widget mb-55">
-                            <div class="sidebar__widget-title mb-25">
-                                <h3>Meta</h3>
-                            </div>
-                            <div class="sidebar__widget-content">
-                                <div class="sidebar__links">
-                                    <ul>
-                                        <li><a href="#">Log in</a></li>
-                                        <li><a href="#"> Entries RSS</a></li>
-                                        <li><a href="#"> Comments RSS</a></li>
-                                        <li><a href="#">WordPress.org</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

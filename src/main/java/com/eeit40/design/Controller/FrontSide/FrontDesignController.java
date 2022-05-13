@@ -51,6 +51,17 @@ public class FrontDesignController {
     public ModelAndView getDesigns(ModelAndView modelAndView, HttpSession session) {
         Account account = (Account) session.getAttribute("Faccount");
         modelAndView.addObject("account", account);
+
+        DesignQueryParams designQueryParams = new DesignQueryParams();
+        designQueryParams.setOrderBy("create_time");
+        designQueryParams.setSort("desc");
+        designQueryParams.setFetchNext(11);
+        designQueryParams.setOffset(0);
+
+        List<Design> designStyleList = designService.getDesigns(designQueryParams);
+
+
+        modelAndView.addObject("DesignStyleList",designStyleList);
         modelAndView.setViewName("/F/DesignService/DesignService");
         return modelAndView;
     }
@@ -103,7 +114,6 @@ public class FrontDesignController {
         List<Design> designList = designService.getDesignByMemberId(design.getFkMember().getId());
         modelAndView.addObject("DesignList", designList);
         modelAndView.addObject("StyleList",styleList);
-        System.out.println(designList);
         modelAndView.addObject("Design", design);
         modelAndView.addObject("DesignStyleList", designStyleList);
 

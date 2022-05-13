@@ -1633,6 +1633,7 @@ StyleData = [
 ];
 $(function () {
 
+    let charLimit = 50;
     let total, page;
     let offset = 0;
     let fetchNext = 10;
@@ -1656,25 +1657,28 @@ $(function () {
                 design_data += '<td>' + value.name + '</td>'
                 design_data += '<td>' + value.style + '</td>'
                 design_data += '<td>' + value.location + '</td>'
-                design_data += '<td>' + value.message + '</td>'
+                design_data += '<td class="truncate"><p>' + value.message + '</p></td>'
                 design_data += '<td>' + value.price + '</td>'
-                design_data += '<td>' + value.coverPhoto + '</td>'
-                design_data += '<td>' + value.photo_1 + '</td>'
-                design_data += '<td>' + value.photo_2 + '</td>'
+                design_data += '<td>' + `<img src="${value.coverPhoto}" width="100px" >` + '</td>'
+                design_data += '<td>' + `<img src="${value.photo_1}" width="100px" >` + '</td>'
+                design_data += '<td>' + `<img src="${value.photo_2}" width="100px" >` + '</td>'
                 design_data += '<td>' + value.createTime + '</td>'
                 design_data += '<td>' + '<button type="button"  class="btn btn-warning editBtn" id="editBtn">編輯</button>' + '</td>'
                 design_data += '<td>' + '<button type="button" class="btn btn-danger deleteBtn" id="deleteBtn">刪除</button>' + '</td>'
                 design_data += '</tr>'
             })
             $('#table_tbody').append(design_data);
+            $(".truncate").each(function () {
+                truncate($(this));
+            });
 
             total = result.total
             page = Math.ceil(total / fetchNext);
             console.log(page);
 
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="previousPage">Previous</a>
-                                                </li>`);
+            // $("#pageBtn").append(`<li class="page-item">
+            //                                         <a class="page-link" id="previousPage">Previous</a>
+            //                                     </li>`);
             for (let i = 1; i <= page; i++) {
 
                 $("#pageBtn").append(`<li class="page-item"><a class="page-link" id="page${i}">${i}</a></li>`);
@@ -1682,9 +1686,9 @@ $(function () {
             }
 
 
-            $("#pageBtn").append(`<li class="page-item">
-                                                    <a class="page-link" id="nextPage">Next</a>
-                                                </li>`);
+            // $("#pageBtn").append(`<li class="page-item">
+            //                                         <a class="page-link" id="nextPage">Next</a>
+            //                                     </li>`);
 
 
             // $("#pageBtn").html(txt);
@@ -1724,17 +1728,20 @@ $(function () {
                     design_data += '<td>' + value.name + '</td>'
                     design_data += '<td>' + value.style + '</td>'
                     design_data += '<td>' + value.location + '</td>'
-                    design_data += '<td>' + value.message + '</td>'
+                    design_data += '<td class="truncate"><a>' + value.message + '</a></td>'
                     design_data += '<td>' + value.price + '</td>'
-                    design_data += '<td>' + value.coverPhoto + '</td>'
-                    design_data += '<td>' + value.photo_1 + '</td>'
-                    design_data += '<td>' + value.photo_2 + '</td>'
+                    design_data += '<td>' + `<img src="${value.coverPhoto}" width="100px" >` + '</td>'
+                    design_data += '<td>' + `<img src="${value.photo_1}" width="100px" >` + '</td>'
+                    design_data += '<td>' + `<img src="${value.photo_2}" width="100px" >` + '</td>'
                     design_data += '<td>' + value.createTime + '</td>'
                     design_data += '<td>' + '<button type="button" class="btn btn-warning editBtn" id="editBtn">編輯</button>' + '</td>'
                     design_data += '<td>' + '<button type="button" class="btn btn-danger deleteBtn" id="deleteBtn">刪除</button>' + '</td>'
                     design_data += '</tr>'
                 })
                 $('#table_tbody').append(design_data);
+                $(".truncate").each(function () {
+                    truncate($(this));
+                });
 
             }
         })
@@ -1912,17 +1919,20 @@ $(function () {
                         style_data += '<td>' + value.name + '</td>'
                         style_data += '<td>' + value.style + '</td>'
                         style_data += '<td>' + value.location + '</td>'
-                        style_data += '<td>' + value.message + '</td>'
+                        style_data += '<td class="truncate"><a>' + value.message + '</a></td>'
                         style_data += '<td>' + value.price + '</td>'
-                        style_data += '<td>' + value.coverPhoto + '</td>'
-                        style_data += '<td>' + value.photo_1 + '</td>'
-                        style_data += '<td>' + value.photo_2 + '</td>'
+                        style_data += '<td>' + `<img src="${value.coverPhoto}" width="100px" >` + '</td>'
+                        style_data += '<td>' + `<img src="${value.photo_1}" width="100px" >` + '</td>'
+                        style_data += '<td>' + `<img src="${value.photo_2}" width="100px" >` + '</td>'
                         style_data += '<td>' + value.createTime + '</td>'
                         style_data += '<td>' + '<button type="button"  class="btn btn-warning editBtn" id="editBtn">編輯</button>' + '</td>'
                         style_data += '<td>' + '<button type="button" class="btn btn-danger deleteBtn" id="deleteBtn">刪除</button>' + '</td>'
                         style_data += '</tr>'
                     })
                     $('.table').append(style_data);
+                    $(".truncate").each(function () {
+                        truncate($(this));
+                    });
                 } else {
                     //重新展入
                     location.reload();
@@ -1988,17 +1998,20 @@ $(function () {
                         location_data += '<td>' + value.name + '</td>'
                         location_data += '<td>' + value.style + '</td>'
                         location_data += '<td>' + value.location + '</td>'
-                        location_data += '<td>' + value.message + '</td>'
+                        location_data += '<td class="truncate"><a>' + value.message + '</a></td>'
                         location_data += '<td>' + value.price + '</td>'
-                        location_data += '<td>' + value.coverPhoto + '</td>'
-                        location_data += '<td>' + value.photo_1 + '</td>'
-                        location_data += '<td>' + value.photo_2 + '</td>'
+                        location_data += '<td>' + `<img src="${value.coverPhoto}" width="100px" >` + '</td>'
+                        location_data += '<td>' + `<img src="${value.photo_1}" width="100px" >` + '</td>'
+                        location_data += '<td>' + `<img src="${value.photo_2}" width="100px" >` + '</td>'
                         location_data += '<td>' + value.createTime + '</td>'
                         location_data += '<td>' + '<button type="button" class="btn btn-warning editBtn" id="editBtn">編輯</button>' + '</td>'
                         location_data += '<td>' + '<button type="button" class="btn btn-danger deleteBtn" id="deleteBtn">刪除</button>' + '</td>'
                         location_data += '</tr>'
                     })
                     $('.table').append(location_data);
+                    $(".truncate").each(function () {
+                        truncate($(this));
+                    });
                 } else {
                     location.reload();
                     // $('#findAll').append(caseMessage);
@@ -2190,6 +2203,33 @@ $(function () {
                 console.log(err);
             }
         })
+    });
+    function truncate(el) {
+        let clone = el.children().first(),
+            originalContent = el.html(),
+            text = clone.text();
+
+        if (clone[0].innerHTML.trim().length > charLimit) {
+            el.attr("data-originalContent", originalContent);
+            el.addClass('hasHidden');
+            clone.text(text.substring(0, charLimit) + "  [...]。")
+            el.empty().append(clone);
+            // el.append($("<div class='read-more'><a href='#' class='more'>Read More</a>"));
+        }
+
+    }
+
+    $("body").on("click", 'a.more', function (e) {
+        e.preventDefault();
+        let truncateElement = $(this).parent().parent();
+        if (truncateElement.hasClass('hasHidden')) {
+            $(truncateElement).html(truncateElement.attr("data-originalContent"));
+            $(truncateElement).append($("<div class='read-more'><a href='#' class='more'>Read Less</a>"));
+            truncateElement.removeClass('hasHidden');
+        } else {
+            $('.read-more', truncateElement).remove();
+            truncate(truncateElement);
+        }
     });
 
 //---------- 修改結束 ----------

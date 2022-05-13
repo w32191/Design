@@ -69,6 +69,15 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="col-lg-12">
+                                <ul class="pagination" id="pageBtn">
+                                    <%--                                                <li class="page-item">--%>
+                                    <%--                                                    <a class="page-link" id="previousPage">Previous</a>--%>
+                                    <%--                                                </li>--%>
+                                    <%--                                                <li class="page-item" id="pages"><a class="page-link"></a></li>--%>
+                                    <%--                                                <li class="page-item">--%>
+                                    <%--                                                    <a class="page-link" id="nextPage">Next</a>--%>
+                                    <%--                                                </li>--%>
+                                </ul>
                                 <div class="card">
                                     <div class="card-title">
                                         <h4>設計</h4>
@@ -102,15 +111,6 @@
 
                                                 </tbody>
                                             </table>
-                                            <ul class="pagination" id="pageBtn">
-                                                <%--                                                <li class="page-item">--%>
-                                                <%--                                                    <a class="page-link" id="previousPage">Previous</a>--%>
-                                                <%--                                                </li>--%>
-                                                <%--                                                <li class="page-item" id="pages"><a class="page-link"></a></li>--%>
-                                                <%--                                                <li class="page-item">--%>
-                                                <%--                                                    <a class="page-link" id="nextPage">Next</a>--%>
-                                                <%--                                                </li>--%>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>

@@ -81,6 +81,14 @@ public class CasePageController {
         return mav;
     }
 
+    @GetMapping("/F/EditCase/{id}")
+    public ModelAndView editCase(ModelAndView modelAndView, @PathVariable Integer id) {
+        Case aCase = caseService.getCaseById(id);
+        modelAndView.addObject("Case", aCase);
+        modelAndView.setViewName("/F/Case/EditCase");
+        return modelAndView;
+    }
+
     @GetMapping("/F/ViewCase/{id}")
     public ModelAndView viewCase(ModelAndView mav,
                                  @PathVariable Integer id,
@@ -99,9 +107,14 @@ public class CasePageController {
 
     @PostMapping("/F/Case/createCase")
     //@Valid DTO有@NOTNULL的註解時要加
-    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr) throws JsonProcessingException {
+    public ResponseEntity<Case> createCase(@RequestParam("data") String jsonStr, HttpSession session) throws JsonProcessingException {
         log.info(jsonStr);
+
+        Account account = (Account) session.getAttribute("Faccount");
+
+
         CaseDto caseDto = mapper.readValue(jsonStr, CaseDto.class);
+        caseDto.setFk_member_id(account.getMembers().getId());
         Integer id = caseService.createCase(caseDto);
 
         Case acase = caseService.getCaseById(id);
