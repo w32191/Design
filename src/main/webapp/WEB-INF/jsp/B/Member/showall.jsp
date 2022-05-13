@@ -98,7 +98,18 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>會員管理</h1>
+								<h3>會員管理</h3>
+								<table class="table">
+									<thead>
+										<tr>
+											<td>權限列表:</td>
+											<td>管理者: 99</td>
+											<td>員工: 2</td>
+											<td>新註冊員工: -1</td>
+											<td>會員: 1</td>
+										</tr>
+									</thead>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -111,7 +122,7 @@
 							<th scope="col">姓名</th>
 							<th scope="col">電話</th>
 							<th>地址</th>
-							<th></th>
+							<th>權限</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -122,6 +133,7 @@
 								<td>${Member.names}</td>
 								<td>${Member.phone}</td>
 								<td>${Member.address}</td>
+								<td>${Member.serviceArea}</td>
 
 								<td><a href="/Design/B/edit?id=${Member.id}">編輯</a></td>
 

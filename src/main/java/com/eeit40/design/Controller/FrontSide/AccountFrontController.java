@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,10 +79,15 @@ public class AccountFrontController {
   //註冊帳號中
   @PostMapping("/F/Fregister")
   public ModelAndView doRegister(ModelAndView mav, @Valid @ModelAttribute(name = "FdoRegister")
-  Account account, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
-      HttpSession session, BindingResult br) {
+  Account account,BindingResult br, @RequestParam(name = "email") String email , @RequestParam(name = "pwd") String pwd,
+      HttpSession session ) {
 
+
+for(FieldError d:br.getFieldErrors()) {
+	System.out.println(d);
+}
     if(!br.hasErrors()) {
+    	
       account.setPermission(1);
       Account accountregister = accountService.register(account);
       session.setAttribute("member", accountregister);
@@ -92,8 +98,13 @@ public class AccountFrontController {
       mav.setViewName("F/Member/Fmemberregister");
 
       return mav;
+    }else {
+    	
+    	mav.setViewName("F/Account/Fregister");
+    	 return mav;
     }
-    return null;
+    
+  
 
   }
 

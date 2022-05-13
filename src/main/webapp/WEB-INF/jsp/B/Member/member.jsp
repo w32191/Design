@@ -145,8 +145,8 @@
 				</div>
 				<br>
 				<p>
-					<button id="MemberUpdate1">一鍵修改個資</button>
-					<button id="ReMemberUpdate2">一鍵恢復個資</button>
+					<button id="MemberUpdate1">修改個資</button>
+					<button id="ReMemberUpdate2">恢復個資</button>
 				</p>
 			</div>
 		</div>
@@ -166,17 +166,15 @@
 		})
 
 		$('#MemberUpdate1').on("click", function() {
-			$('#names').val('葉阿寶');
+			$('#names').val('PPPPPP');
 			$('#phone').val('0932446738');
 			$('#address').val('新北市五股區五福路11號');
-			$('#email').val('1234Abcd@gmail.com');
 		})
 
 		$('#ReMemberUpdate2').on("click", function() {
-			$('#names').val('王阿九');
-			$('#phone').val('0932234567');
-			$('#address').val('新北市三重區五華街282號');
-			$('#email').val('Abcd1234@gmail.com');
+			$('#names').val('AAAAAAA');
+			$('#phone').val('09326789903');
+			$('#address').val('台北市中正區青島東路21-2號');
 		})
 	</script>
 

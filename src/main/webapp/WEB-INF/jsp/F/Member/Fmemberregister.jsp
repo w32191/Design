@@ -85,7 +85,7 @@
 	<script type="text/javascript">
 	
 		$('#Fmemberinsert').on("click", function() {
-			$('#names').val('黃小明');
+			$('#names').val('CCCCCC');
 			$('#phone').val('0932345679');
 			$('#address').val('台北市中正區仁愛路二段97-1號');
 		})

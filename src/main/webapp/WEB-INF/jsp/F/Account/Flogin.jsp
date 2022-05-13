@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Login</h1>
+                        <h1>登入</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
@@ -54,28 +54,30 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="basic-login">
-                        <h3 class="text-center mb-60">Login</h3>
+                        <h3 class="text-center mb-60">登入</h3>
                         <form:form class="form" method="POST" ModelAttribute="Flogin"
                                    action="/Design/F/Flogin">
                             <label for="email">信箱</label>
-                            <input name="email" id="email" type="email" placeholder="請輸入信箱" />
+                            <input name="email" id="email" type="email" placeholder="請輸入信箱" required/>
                             <label for="pwd">密碼</label>
-                            <input name="pwd" id="pwd" type="password" placeholder="請輸入密碼" />
+                            <input name="pwd" id="pwd" type="password" placeholder="請輸入密碼" required/>
                             <div class="login-action mb-20 fix">
 									<span class="forgot-login f-right"> <a href="#">忘記密碼</a>
 									</span>
                             </div>
-                            <button class="os-btn w-100">登入</button>
+                            <button class="os-btn os-btn-black w-100">登入</button>
                             <div class="or-divide">
                                 <span>or</span>
                             </div>
-                            <a href="/Design/F/Fregister" class="os-btn os-btn-black w-100">
+                            <a href="/Design/F/Fregister" class="os-btn w-100" >
                                 註冊</a>
                         </form:form>
 
                     </div>
                     <button id="Flogin1">一般帳號</button>
-                    <button id="Flogin2">註冊後帳號</button>
+                    <button id="Flogin2">新帳號</button>
+<!--                     <button id="Flogin3">註冊後帳號</button> -->
+<!--                     <button id="Flogin4">註冊後修改的帳號</button> -->
                 </div>
             </div>
         </div>
@@ -94,7 +96,7 @@
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
   <script type="text/javascript">
 		$('#Flogin1').on("click", function() {
-			$('#email').val('Abcd1234@gmail.com');
+			$('#email').val('eeit138g1.10@gmail.com');
 			$('#pwd').val('Passw0rd');
 		})
 		

@@ -40,7 +40,7 @@ public class Member {
   private String address;
 
   @Column(name = "service_area")
-  private String serviceArea;
+  private Integer serviceArea;
 
   @Column(name = "images")
   private byte[] images;
@@ -139,11 +139,11 @@ public class Member {
     this.images = images;
   }
 
-  public String getServiceArea() {
+  public Integer getServiceArea() {
     return serviceArea;
   }
 
-  public void setServiceArea(String serviceArea) {
+  public void setServiceArea(Integer serviceArea) {
     this.serviceArea = serviceArea;
   }
 

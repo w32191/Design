@@ -72,10 +72,10 @@
 
 							</form:form>
 						</div>
-						<button id="Fmem1">一鍵修改</button>
-						<button id="Fmem2">一鍵恢復</button>
-						<button id="Fmem3">一鍵註冊後帳號修改</button>
-						<button id="Fmem4">一鍵註冊後帳號恢復</button>
+						<button id="Fmem1">修改</button>
+						<button id="Fmem2">恢復</button>
+<!-- 						<button id="Fmem3">一鍵註冊後帳號修改</button> -->
+<!-- 						<button id="Fmem4">一鍵註冊後帳號恢復</button> -->
 					</div>
 				</div>
 			</div>
@@ -90,31 +90,15 @@
 	<jsp:include page="../IncludePage/staticPage/FontJsPage.jsp" />
 	<script type="text/javascript">
 		$('#Fmem1').on("click", function() {
-			$('#email').val('1234Abcd@gmail.com');
-			$('#names').val('葉阿寶');
+			$('#names').val('XXXXX');
 			$('#phone').val('0932446738');
 			$('#address').val('新北市五股區五福路11號');
 		})
 
 		$('#Fmem2').on("click", function() {
-			$('#names').val('王阿九');
+			$('#names').val('CCCCCC');
 			$('#phone').val('0932234567');
 			$('#address').val('新北市三重區五華街282號');
-			$('#email').val('Abcd1234@gmail.com');
-		})
-		
-		$('#Fmem3').on("click", function() {
-			$('#names').val('黃阿城');
-			$('#phone').val('0932374859');
-			$('#address').val('台北市大安區麗水街5-9號');
-			$('#email').val('Acvbnm12345@gmail.com');
-		})
-		
-		$('#Fmem4').on("click", function() {
-			$('#names').val('黃小明');
-			$('#phone').val('0932345679');
-			$('#address').val('台北市中正區仁愛路二段97-1號');
-			$('#email').val('Acvbnm12345@gmail.com');
 		})
 	</script>
 
