@@ -139,7 +139,7 @@
                             </div>
                             <div class="banner__content p-absolute transition-3">
                                 <h2><a href="${contextRoot}/F/Design">設計</a>/<a
-                                        href="${contextRoot}/F/Case">案例</a></h2>
+                                        href="${contextRoot}/F/Case">裝修需求</a></h2>
                                 <a class="link-btn">立刻前往</a>
                             </div>
                         </div>
