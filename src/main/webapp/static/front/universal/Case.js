@@ -1921,12 +1921,12 @@ $(function () {
     $('#editCaseCheckBtn').on('click',editSend);
 
     // 發送修改案件資料
-    function editSend() {
+    function editSend() {ee
         // 取得輸入的資料
         const editData = {
             title: $('#editTitle').val(),
             name: $('#editName').val(),
-            classification: $('#editClassification> option:selected').text(),
+            classification: $('#editStyleList> option:selected').text(),
             location: $('#editLocation> option:selected').text(),
             caseEmail: $('#editCaseEmail').val(),
             message: $('#editMessage').val(),
