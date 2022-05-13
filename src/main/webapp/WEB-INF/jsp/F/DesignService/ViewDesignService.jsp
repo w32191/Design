@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>DESIGN & DECOR</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -131,6 +131,7 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="blog__item mb-30">
+                                    <%--                                    <c:forEach items="Design" var="design"--%>
                                     <div class="blog__thumb fix">
                                         <a href="blog-details.html" class="w-img"><img
                                                 src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg" alt="blog"></a>
@@ -307,9 +308,19 @@
                                                 <div class="card-body">
                                                     <div class="categories__list">
                                                         <ul>
-                                                            <li><a href="#">Catagories 1</a></li>
-                                                            <li><a href="#">Catagories 2</a></li>
-                                                            <li><a href="#">Catagories 3</a></li>
+                                                            <c:forEach items="${StyleList}" var="style">
+                                                                <c:choose>
+                                                                    <c:when test="${style eq '所有風格'}">
+                                                                        <li><a href="${contextRoot}/F/Design">${style}</a></li>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <li><a href="${contextRoot}/F/Design?search=${style}">${style}</a></li>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                            <%--                                                            <li><a href="#">Catagories 1</a></li>--%>
+                                                            <%--                                                            <li><a href="#">Catagories 2</a></li>--%>
+                                                            <%--                                                            <li><a href="#">Catagories 3</a></li>--%>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -477,52 +488,57 @@
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     <ul>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-1.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Make your life
-                                                        easy</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span> September 14, 2020</span>
+                                        <c:forEach items="${DesignList}" var="design" begin="0" end="2">
+                                            <li class="d-flex">
+                                                    <%--                                                <div class="rc__post-thumb mr-20 ">--%>
+                                                    <%--                                                    <a href="blog-details.html">--%>
+                                                <img href="${design.id}"
+                                                     src="${design.coverPhoto}" width="30%"
+                                                     alt="blog-1"
+                                                     STYLE="margin-right: 10px">
+                                                    <%--                                                    </a>--%>
+                                                    <%--                                                </div>--%>
+                                                <div class="rc__post-content">
+                                                    <h6>
+                                                        <a href="${design.id}">
+                                                                ${design.title}</a>
+                                                    </h6>
+                                                    <div class="rc__meta">
+                                                        <span>${design.createTime}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-2.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Feel like home</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 01, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-3.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Best thing ever</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 05, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        </c:forEach>
+                                        <%--                                        <li class="d-flex">--%>
+                                        <%--                                            <div class="rc__post-thumb mr-20 ">--%>
+                                        <%--                                                <a href="blog-details.html"><img--%>
+                                        <%--                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-2.jpg"--%>
+                                        <%--                                                        alt="blog-1"></a>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                            <div class="rc__post-content">--%>
+                                        <%--                                                <h6>--%>
+                                        <%--                                                    <a href="blog-details.html">Feel like home</a>--%>
+                                        <%--                                                </h6>--%>
+                                        <%--                                                <div class="rc__meta">--%>
+                                        <%--                                                    <span>October 01, 2020</span>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </li>--%>
+                                        <%--                                        <li class="d-flex">--%>
+                                        <%--                                            <div class="rc__post-thumb mr-20 ">--%>
+                                        <%--                                                <a href="blog-details.html"><img--%>
+                                        <%--                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-3.jpg"--%>
+                                        <%--                                                        alt="blog-1"></a>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                            <div class="rc__post-content">--%>
+                                        <%--                                                <h6>--%>
+                                        <%--                                                    <a href="blog-details.html">Best thing ever</a>--%>
+                                        <%--                                                </h6>--%>
+                                        <%--                                                <div class="rc__meta">--%>
+                                        <%--                                                    <span>October 05, 2020</span>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </li>--%>
                                     </ul>
                                 </div>
                             </div>
@@ -610,63 +626,7 @@
     <!-- blog area end -->
 
     <!-- Cart Area Strat-->
-    <section id="editCaseDialog" class="cart-area pt-100 pb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg">
-                    <form action="#">
-                        <div class="table-content table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="product-thumbnail">標題</th>
-                                    <th class="cart-product-name">名字</th>
-                                    <th class="product-price">工程類別</th>
-                                    <th class="product-quantity">所在地區</th>
-                                    <th class="product-subtotal">E-mail</th>
-                                    <th class="product-remove">資訊</th>
-                                    <th class="product-remove">照片</th>
-                                    <th class="product-remove">結案時間</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <input id="editTitle" type="text"/>
-                                    </td>
-                                    <td><input id="editName" type="text"/></td>
-                                    <td><select id="editClassification"></select></td>
-                                    <td><select id="editLocation"></select></td>
-                                    <td><input id="editEmail" type="email"></td>
-                                    <td>
-                                        <textarea name="editMessage" id="editMessage" class="form-control" rows="3"
-                                                  placeholder="Text input" style="width: 300px"></textarea>
-                                    </td>
-                                    <td class="product-thumbnail" id="editImgDiv">
-                                        <input type="file" id="editFile" class="imgur" accept="image/*"
-                                               data-max-size="5000"/>
-                                        <img src="" id="editCoverPhoto" width="200"/>
-                                    </td>
-                                    <%--                                    <td class="product-thumbnail"><a href="product-details.html"><img src="${contextRoot}/static/front/assets/img/shop/product/product-2.jpg" alt=""></a></td>--%>
-                                    <td><input id="editExpiryDate" type="date"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="coupon2">
-                                    <button id="editCaseBtn" class="os-btn os-btn-black" style="margin-top: 25px"
-                                            name="add_case" type="submit">編輯案件
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <!-- Cart Area End-->
 
 </main>

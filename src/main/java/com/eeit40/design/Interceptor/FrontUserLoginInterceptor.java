@@ -5,9 +5,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
 public class FrontUserLoginInterceptor implements HandlerInterceptor {
 
   // 在請求處理之前進行呼叫(Controller方法呼叫之前)
@@ -23,6 +25,8 @@ public class FrontUserLoginInterceptor implements HandlerInterceptor {
         return true;
       }
       request.setAttribute("errorMsg", "請先登入！");
+      log.info(request.getServletPath());
+      session.setAttribute("beforeLoginUri",request.getServletPath());
       RequestDispatcher dispatcher = request.getRequestDispatcher("/F/Flogin");
       dispatcher.forward( request, response );
 //      response.sendRedirect(request.getContextPath() + "/F/Flogin");

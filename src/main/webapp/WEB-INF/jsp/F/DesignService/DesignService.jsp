@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Outstock - Clean, Minimal eCommerce HTML5 Template </title>
+    <title>DESIGN & DECOR</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--  CSS include page--%>
@@ -87,14 +87,14 @@
                                                     <button class="shop-accordion-btn"
                                                             data-toggle="collapse"
                                                             data-target="#collapseAccessories"
-                                                            aria-expanded="true"
-                                                            aria-controls="collapseAccessories">
+                                                            aria-expanded="false"
+                                                            aria-controls="collapsecloth">
                                                         風格
                                                     </button>
                                                 </h5>
                                             </div>
 
-                                            <div id="collapseAccessories" class="collapse show"
+                                            <div id="collapseAccessories" class="collapse"
                                                  aria-labelledby="style"
                                                  data-parent="#accordion">
                                                 <div class="card-body">

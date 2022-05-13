@@ -1718,7 +1718,6 @@ $(function () {
         })
 
 
-
         //---------- 載入頁面資料結束 ---------
     }
 
@@ -1736,19 +1735,19 @@ $(function () {
         }
 
     }
-        $("body").on("click", 'a.more', function (e) {
-            e.preventDefault();
-            let truncateElement = $(this).parent().parent();
-            if (truncateElement.hasClass('hasHidden')) {
-                $(truncateElement).html(truncateElement.attr("data-originalContent"));
-                $(truncateElement).append($("<div class='read-more'><a href='#' class='more'>Read Less</a>"));
-                truncateElement.removeClass('hasHidden');
-            } else {
-                $('.read-more', truncateElement).remove();
-                truncate(truncateElement);
-            }
-        });
 
+    $("body").on("click", 'a.more', function (e) {
+        e.preventDefault();
+        let truncateElement = $(this).parent().parent();
+        if (truncateElement.hasClass('hasHidden')) {
+            $(truncateElement).html(truncateElement.attr("data-originalContent"));
+            $(truncateElement).append($("<div class='read-more'><a href='#' class='more'>Read Less</a>"));
+            truncateElement.removeClass('hasHidden');
+        } else {
+            $('.read-more', truncateElement).remove();
+            truncate(truncateElement);
+        }
+    });
 
 
 //---------- 載入頁面資料結束 新增開始 ---------
@@ -1919,7 +1918,7 @@ $(function () {
 
                         Design_data += `<div class="blog__item blog__border-bottom mb-60 pb-60">
                         <div class="blog__thumb fix">
-                            <a href="blog-details.html" class="w-img">`;
+                            <a href="viewDesignService/${value.id}" class="w-img">`;
 
                         if (value.coverPhoto != null) {
 
@@ -1933,21 +1932,25 @@ $(function () {
                         Design_data += `</a>
                 </div>
                     <div class="blog__content">
-                        <h4 class="blog__title"><a href="blog-details.html">${value.title}</a></h4>
+                        <h4 class="blog__title"><a href="viewDesignService/${value.id}">${value.title}</a></h4>
                         <div class="blog__meta">
-                            <span>By <a href="#">${value.name}</a></span>
+                            <span>By <a href="viewDesignService/${value.id}">${value.name}</a></span>
                             <span>${value.createTime}</span>
                         </div>
-                        <p>${value.message}</p>
-                        <a href="blog-details.html" class="os-btn">read more</a>
+                        <div class="truncate">
+                            <p>${value.message}</p>
+                        </div>
+                        <div>
+                            <a href="viewDesignService/${value.id}" class="os-btn">read more</a>
+                        </div>
                     </div>
                 </div>
                     `;
-
                     })
                     $('#designBlog').append(Design_data);
-                    // console.log(Design_data);
-
+                    $(".truncate").each(function () {
+                        truncate($(this));
+                    });
                 },
                 error: function (err) {
                     console.log(err)
@@ -2029,7 +2032,7 @@ $(function () {
 
                         Design_data += `<div class="blog__item blog__border-bottom mb-60 pb-60">
                         <div class="blog__thumb fix">
-                            <a href="blog-details.html" class="w-img">`;
+                            <a href="viewDesignService/${value.id}" class="w-img">`;
 
                         if (value.coverPhoto != null) {
 
@@ -2043,21 +2046,25 @@ $(function () {
                         Design_data += `</a>
                 </div>
                     <div class="blog__content">
-                        <h4 class="blog__title"><a href="blog-details.html">${value.title}</a></h4>
+                        <h4 class="blog__title"><a href="viewDesignService/${value.id}">${value.title}</a></h4>
                         <div class="blog__meta">
-                            <span>By <a href="#">${value.name}</a></span>
+                            <span>By <a  href="viewDesignService/${value.id}">${value.name}</a></span>
                             <span>${value.createTime}</span>
                         </div>
-                        <p>${value.message}</p>
-                        <a href="blog-details.html" class="os-btn">read more</a>
+                        <div class="truncate">
+                            <p>${value.message}</p>
+                        </div>
+                        <div>
+                            <a href="viewDesignService/${value.id}" class="os-btn">read more</a>
+                        </div>
                     </div>
                 </div>
                     `;
-
                     })
                     $('#designBlog').append(Design_data);
-                    // console.log(Design_data);
-
+                    $(".truncate").each(function () {
+                        truncate($(this));
+                    });
                 },
                 error: function (err) {
                     console.log(err)

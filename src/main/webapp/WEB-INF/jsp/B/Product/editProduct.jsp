@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>編輯商品</title>
+    <title>編輯商品 - DESIGN & DECOR</title>
 
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
           rel="stylesheet"/>

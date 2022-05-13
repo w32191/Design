@@ -1,9 +1,12 @@
 package com.eeit40.design.Controller.FrontSide;
 
+import com.eeit40.design.Dto.DesignQueryParams;
 import com.eeit40.design.Dto.ProductAndDiscount;
 import com.eeit40.design.Entity.Activity;
+import com.eeit40.design.Entity.Design;
 import com.eeit40.design.Entity.Product;
 import com.eeit40.design.Service.ActivityService;
+import com.eeit40.design.Service.DesignService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +28,9 @@ public class ActivityController {
   @Autowired
   private ActivityService activityService;
 
+  @Autowired
+  private DesignService designService;
+
   @GetMapping("/F/Activity/index")
   public ModelAndView activityIndexPage(ModelAndView mav) {
 
@@ -36,9 +42,17 @@ public class ActivityController {
     List<ProductAndDiscount> padList = activityService.getProductsWithCurrentDiscount(productList);
 
 //    log.info("目前的productList size():" + productList.size());
+    DesignQueryParams designQueryParams = new DesignQueryParams();
+    designQueryParams.setOrderBy("create_time");
+    designQueryParams.setSort("desc");
+    designQueryParams.setFetchNext(10);
+    designQueryParams.setOffset(0);
+
+    List<Design> designList = designService.getDesigns(designQueryParams);
 
     mav.addObject("productList", padList);
     mav.addObject("allActivity", allActivity);
+    mav.addObject("designList",designList);
     mav.setViewName("/F/Activity/ActivityIndex");
     return mav;
   }

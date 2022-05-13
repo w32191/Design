@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Outstock - Clean, Minimal eCommerce HTML5 Template</title>
+<title>公告 - DESIGN & DECOR</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -55,24 +55,51 @@
 								<div class="postbox__line mt-65"></div>
 								<div class="postbox__comments pt-90">
 									<div class="postbox__comment-title mb-30">
-										<h3>Latest Announcement</h3>
+										<h3>最新公告</h3>
 									</div>
 									<div class="card">
-										<c:forEach var="announcementWorkMessages"
-											items="${page.content}">
-											<div class="card-header">
+ 										<c:forEach var="announcementWorkMessages" 
+ 											items="${page.content}"> 
+											<h4>
+ 											<div class="card-header"> 
+ 												<span class="badge badge-secondary"><c:out value="${announcementWorkMessages.type}" /></span>
+ 												&nbsp; 
+ 												 <span> <fmt:formatDate 
+ 														pattern="yyyy-MM-dd HH:mm:ss "
+ 														value="${announcementWorkMessages.added}" />
+ 												</span> 
+ 												<c:out value="${announcementWorkMessages.title}" />
+ 											</div>
+ 											<h5> 
+ 											<div class="card-body">
+ 												<c:out value="${announcementWorkMessages.content}" />		
+ 											</div>
+ 											</h5>
+ 											</h4>
+ 										</c:forEach>
+										
+<%-- 										<c:forEach items="${page.content}" var="announcementWorkMessages"> --%>
+<!--                                         <div class="card"> -->
+<%--                                             <div class="card-header white-bg" id="test${announcementWorkMessages.id}"> --%>
+<!--                                                 <h5 class="mb-0"> -->
+<%--                                                     <button class="shop-accordion-btn collapsed" data-toggle="collapse" data-target="#collapsetest${announcementWorkMessages.id}" aria-expanded="false" aria-controls="collapsetest${announcementWorkMessages.id}"> --%>
+<%--                                                         ${announcementWorkMessages.added} --%>
+<!--                                                     </button> -->
+<!--                                                 </h5> -->
+<!--                                             </div> -->
+<%--                                             <div id="collapsetest${announcementWorkMessages.id}" class="collapse" aria-labelledby="test${announcementWorkMessages.id}" data-parent="#accordion"> --%>
+<!--                                                 <div class="card-body"> -->
+<!--                                                     <div class="categories__list"> -->
+<!--                                                         <ul> -->
+<%--                                                             <li><a href="#">${announcementWorkMessages.content}</a></li> --%>
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
 
-												新增時間 <span> <fmt:formatDate
-														pattern="yyyy-MM-dd HH:mm:ss EEEE"
-														value="${announcementWorkMessages.added}" />
-												</span>
-											</div>
-											<div class="card-body">
-												<c:out value="${announcementWorkMessages.content}" />
-												
-											</div>
-										</c:forEach>
-
+<%--                                     </c:forEach> --%>
+																																																																																																									
 										<div class="row justify-content-center">
 											<div class="col-9">
 												<c:forEach var="pageNumber" begin="1"

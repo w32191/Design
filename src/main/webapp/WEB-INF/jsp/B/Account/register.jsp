@@ -59,6 +59,7 @@
 											<button id="putemailpwd">一鍵註冊</button>
 										</p>
 									</div>
+
 								</div>
 
 							</div>
@@ -120,4 +121,6 @@
 
 			</body>
 
+
 			</html>
+

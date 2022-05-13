@@ -78,8 +78,34 @@ public class FrontDesignController {
         } else {
             modelAndView.addObject("memberId", -1);
         }
+        String[] styleList = new String[]{
+                "所有風格",
+                "現代風格",
+                "工業風格",
+                "北歐風格",
+                "鄉村風格",
+                "地中海風",
+                "古典風格",
+                "奢華風格",
+                "美式風格",
+                "日式風格",
+                "中式風格",
+                "其他風格"};
 
+        DesignQueryParams designQueryParams = new DesignQueryParams();
+        designQueryParams.setSearch(design.getStyle());
+        designQueryParams.setOrderBy("create_time");
+        designQueryParams.setSort("desc");
+        designQueryParams.setFetchNext(10);
+        designQueryParams.setOffset(0);
+
+        List<Design> designStyleList = designService.getDesigns(designQueryParams);
+        List<Design> designList = designService.getDesignByMemberId(design.getFkMember().getId());
+        modelAndView.addObject("DesignList", designList);
+        modelAndView.addObject("StyleList",styleList);
+        System.out.println(designList);
         modelAndView.addObject("Design", design);
+        modelAndView.addObject("DesignStyleList", designStyleList);
 
         modelAndView.setViewName("/F/DesignService/ViewDesignService");
         return modelAndView;

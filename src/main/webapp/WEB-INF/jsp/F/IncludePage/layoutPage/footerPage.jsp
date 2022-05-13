@@ -12,8 +12,8 @@
                         <div class="footer__widget mb-30">
                             <div class="footer__widget-title mb-25">
                                 <a href="/Design/F/Activity/index"><img
-                                        src="https://i.imgur.com/dGD07Lm.png"
-                                        alt="logo"></a>
+                                        src="${contextRoot}/static/front/assets/img/logo/logoGo.png"
+                                        alt="logo" width="330"></a>
                             </div>
                             <div class="footer__widget-content">
                                 <p></p>

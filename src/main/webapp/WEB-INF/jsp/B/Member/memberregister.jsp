@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Focus Admin: Widget</title>
+<title>註冊會員 - DESIGN & DECOR</title>
 
 <!-- Common Styles -->
 <jsp:include page="../IncludePage/staticPage/BackCssPage.jsp" />

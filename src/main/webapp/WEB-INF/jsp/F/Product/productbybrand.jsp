@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Design & Decor </title>
+    <title>DESIGN & DECOR</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.css"
