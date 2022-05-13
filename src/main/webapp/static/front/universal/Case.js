@@ -1921,7 +1921,7 @@ $(function () {
     $('#editCaseCheckBtn').on('click',editSend);
 
     // 發送修改案件資料
-    function editSend() {ee
+    function editSend() {
         // 取得輸入的資料
         const editData = {
             title: $('#editTitle').val(),
