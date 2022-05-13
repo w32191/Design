@@ -47,8 +47,8 @@ public class AccountFrontController {
         session.setAttribute("Faccount", login);
         System.out.println(login);
         if (session.getAttribute("beforeLoginUri") != null) {
-          session.removeAttribute("beforeLoginUri");
           mav.setViewName("redirect:" + session.getAttribute("beforeLoginUri"));
+          session.removeAttribute("beforeLoginUri");
         } else {
           mav.setViewName("redirect:/F/Activity/index");
         }

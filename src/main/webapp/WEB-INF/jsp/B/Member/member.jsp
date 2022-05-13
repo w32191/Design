@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>個人資料修改 - DESIGN & DECOR</title>
+<title>個人資料管理 - DESIGN & DECOR</title>
 
 
 <!-- Toastr -->
@@ -95,7 +95,7 @@
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>個人資料修改</h1>
+								<h1>個人資料管理</h1>
 							</div>
 						</div>
 					</div>

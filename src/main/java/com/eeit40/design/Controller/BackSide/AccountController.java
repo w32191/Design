@@ -54,7 +54,7 @@ public class AccountController {
 				if (login != null) {
 					session.setAttribute("Baccount", login);
 					System.out.println(login);
-					mav.setViewName("redirect:/B/Product/");
+					mav.setViewName("redirect:/B/memberupdate");
 //    				mav.setViewName("B/Account/index");
 					return mav;
 				}
