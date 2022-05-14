@@ -23,9 +23,10 @@ $(function () {
   });
 
   // 刪除按鈕 按了觸發
-  $('.btn.btn-danger.delete').click(function () {
+  $('#theTbody').on('click', '.btn.btn-danger.delete', function () {
     let deleteBtn = $(this);
     let id = deleteBtn.parent('td').siblings('td:eq(1)').text();
+    console.log(id);
     let urlStr = "delete/" + id;
     let idList = [];
     deleteSend(urlStr, idList);
