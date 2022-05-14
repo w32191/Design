@@ -212,15 +212,20 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
 
   // 檢查新增、更新時輸入的資料是否完善
   private ResponseEntity<String> checkInputData(ActivityDto dto) {
-
-    if (dto.getSubject() == null) {
-      return new ResponseEntity<>("請輸入活動主題！", HttpStatus.BAD_REQUEST);
+    LocalDate now = LocalDate.now();
+    System.out.println(dto);
+    if (dto.getSubject().length() < 2) {
+      return new ResponseEntity<>("請輸入 活動主題！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getDiscountPercentage() == null) {
+      return new ResponseEntity<>("請輸入 折扣％！", HttpStatus.BAD_REQUEST);
     } else if (dto.getStartDate() == null) {
-      return new ResponseEntity<>("請輸入開始日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("請輸入 開始日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate().isBefore(now)) {
+      return new ResponseEntity<>("開始日期 不可早於 今日！", HttpStatus.BAD_REQUEST);
     } else if (dto.getEndDate() == null) {
-      return new ResponseEntity<>("請輸入結束日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("請輸入 結束日期！", HttpStatus.BAD_REQUEST);
     } else if (dto.getStartDate().isAfter(dto.getEndDate())) {
-      return new ResponseEntity<>("開始日期不可晚於結束日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("開始日期 不可晚於 結束日期！", HttpStatus.BAD_REQUEST);
     } else {
       return new ResponseEntity<>(HttpStatus.OK);
     }
