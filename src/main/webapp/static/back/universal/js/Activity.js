@@ -175,7 +175,8 @@ $(function () {
       content: $('#insertContent').val(),
       discountPercentage: $('#insertdiscountPercentage').val(),
       startDate: $('#insertStartDate').val(),
-      endDate: $('#insertEndDate').val()
+      endDate: $('#insertEndDate').val(),
+      color:$('#insertColor').val()
     }
     // 將輸入的文字資料及檔案，包進FormData
     const dataFile = new FormData();

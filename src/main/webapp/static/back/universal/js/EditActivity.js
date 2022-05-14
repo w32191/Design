@@ -343,6 +343,7 @@ $(function () {
           discountPercentage: $('#updatediscountPercentage').val(),
           startDate: $('#updateStartDate').val(),
           endDate: $('#updateEndDate').val(),
+          color:$('#updateColor').val(),
           productId: checkProductArray
           // brands: brandsChecked
         }

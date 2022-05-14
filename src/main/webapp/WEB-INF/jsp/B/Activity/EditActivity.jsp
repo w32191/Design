@@ -119,15 +119,36 @@
                                                                               class="form-control"
                                                                               rows="4">${activity.content}</textarea>
                                                                 </div>
-                                                                <div class="contact-information">
-                                                                    <span class="contact-title">折扣％：</span>
-                                                                    <input type="number"
-                                                                           class="form-control-sm"
-                                                                           placeholder="%"
-                                                                           name="discountPercentage"
-                                                                           value="${activity.discountPercentage}"
-                                                                           id="updatediscountPercentage">
-                                                                    <span class="contact-website"> % OFF </span>
+                                                                <%--                                                                <div class="contact-information">--%>
+                                                                <%--                                                                    <span class="contact-title">折扣％：</span>--%>
+                                                                <%--                                                                    <input type="number"--%>
+                                                                <%--                                                                           class="form-control-sm"--%>
+                                                                <%--                                                                           placeholder="%"--%>
+                                                                <%--                                                                           name="discountPercentage"--%>
+                                                                <%--                                                                           value="${activity.discountPercentage}"--%>
+                                                                <%--                                                                           id="updatediscountPercentage">--%>
+                                                                <%--                                                                    <span class="contact-website"> % OFF </span>--%>
+                                                                <%--                                                                </div>--%>
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="updatediscountPercentage">折扣：(
+                                                                            %OFF)
+                                                                            <input type="number"
+                                                                                   class="form-control"
+                                                                                   placeholder="%"
+                                                                                   name="discountPercentage"
+                                                                                   value="${activity.discountPercentage}"
+                                                                                   id="updatediscountPercentage"/>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <label> 行事曆 顏色：
+                                                                            <input type="color"
+                                                                                   name="color"
+                                                                                   id="updateColor"
+                                                                                   value="${activity.color}"/>
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -150,21 +171,7 @@
                                                                        class="form-control form-control-lg">
                                                             </div>
                                                         </div>
-                                                        <%--                                                        <div class="work-content">--%>
-                                                        <%--                                                            <p>--%>
-                                                        <%--                                                                <span>開始日期：</span>--%>
-                                                        <%--                                                                --%>
-                                                        <%--                                                            </p>--%>
-                                                        <%--                                                        </div>--%>
-                                                        <%--                                                        <div class="work-content">--%>
-                                                        <%--                                                            <p>--%>
-                                                        <%--                                                                <span>結束日期：</span>--%>
-                                                        <%--                                                                <input type="date" name="endDate"--%>
-                                                        <%--                                                                       value="${activity.endDate}"--%>
-                                                        <%--                                                                       id="updateEndDate"--%>
-                                                        <%--                                                                       class="form-control">--%>
-                                                        <%--                                                            </p>--%>
-                                                        <%--                                                        </div>--%>
+
                                                     </div>
                                                 </div>
                                             </div>

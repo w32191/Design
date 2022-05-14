@@ -54,6 +54,9 @@ public class Activity {
   @Column(name = "photo")
   private byte[] photo;
 
+  @Column(name = "color")
+  private String color;
+
   @ManyToMany(cascade = {javax.persistence.CascadeType.ALL})
   @JoinTable(name = "activities_product",
       joinColumns = @JoinColumn(name = "fk_activities_id", referencedColumnName = "id"),
@@ -76,6 +79,7 @@ public class Activity {
     sb.append(", photo=").append(Arrays.toString(photo));
     sb.append(", products=").append(products);
     sb.append(", imgurImgs=").append(imgurImgs);
+    sb.append(", color=").append(color);
     sb.append('}');
     return sb.toString();
   }

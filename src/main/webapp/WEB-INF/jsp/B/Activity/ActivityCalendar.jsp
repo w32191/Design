@@ -93,32 +93,43 @@
                                                                               rows="4"></textarea>
 
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="insertdiscountPercentage">折扣％：
-                                                                    </label>
-                                                                    <div>
-                                                                        <input type="number"
-                                                                               class="form-control form-control-lg"
-                                                                               min="1" max="99"
-                                                                               id="insertdiscountPercentage">
+                                                                <div class="row">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertdiscountPercentage">折扣：(
+                                                                            %OFF)
+                                                                        </label>
+                                                                        <div>
+                                                                            <input type="number"
+                                                                                   value="0"
+                                                                                   class="form-control"
+                                                                                   min="1" max="99"
+                                                                                   id="insertdiscountPercentage">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label> 行事曆 顏色：
+                                                                            <input type="color"
+                                                                                   name="color"
+                                                                                   id="insertColor"/>
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                        <div class="form-group col-sm-6">
-                                                                            <label for="insertStartDate">開始日：
-                                                                            </label>
-                                                                            <input type="date"
-                                                                                   name="startDate"
-                                                                                   id="insertStartDate"
-                                                                                   class="form-control form-control-lg">
-                                                                        </div>
-                                                                        <div class="form-group col-sm-6">
-                                                                            <label for="insertEndDate">結束日：</label>
-                                                                            <input type="date"
-                                                                                   name="startDate"
-                                                                                   id="insertEndDate"
-                                                                                   class="form-control form-control-lg">
-                                                                        </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertStartDate">開始日：
+                                                                        </label>
+                                                                        <input type="date"
+                                                                               name="startDate"
+                                                                               id="insertStartDate"
+                                                                               class="form-control form-control-lg">
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertEndDate">結束日：</label>
+                                                                        <input type="date"
+                                                                               name="startDate"
+                                                                               id="insertEndDate"
+                                                                               class="form-control form-control-lg">
+                                                                    </div>
                                                                 </div>
                                                                 <div class="custom-file">
                                                                     <input type="file"
@@ -126,7 +137,9 @@
                                                                            id="insertUploadFile">
                                                                     <label class="custom-file-label"
                                                                            for="insertUploadFile">選擇檔案...</label>
-                                                                    <img src="" alt="" hidden id="reviewImg" class="col-md-7 ml-auto rounded"/>
+                                                                    <img src="" alt="" hidden
+                                                                         id="reviewImg"
+                                                                         class="col-md-7 ml-auto rounded"/>
                                                                 </div>
                                                             </form>
 
