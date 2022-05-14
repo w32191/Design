@@ -162,15 +162,18 @@ $(function () {
 
     if (sortSapn.hasClass('ti-angle-double-down')) {
       orderBy = 'asc';
-      sortSapn.closest('tr').find('span').removeClass('ti-angle-double-up')
-      .addClass('ti-angle-double-down').removeClass('text-danger');
+      sortSapn.closest('tr').find('span').addClass('ti-angle-double-down')
+      .removeClass('ti-angle-double-up text-light badge badge-secondary');
+
       sortSapn.removeClass('ti-angle-double-down').addClass(
-          'ti-angle-double-up').addClass('text-danger');
+          'ti-angle-double-up').addClass('text-light badge badge-secondary');
+
     } else if (sortSapn.hasClass('ti-angle-double-up')) {
       orderBy = 'desc';
-      sortSapn.closest('tr').find('span').removeClass('ti-angle-double-up')
-      .addClass('ti-angle-double-down').removeClass('text-danger');
-      sortSapn.addClass('text-danger');
+      sortSapn.closest('tr').find('span').addClass('ti-angle-double-down')
+      .removeClass('ti-angle-double-up text-light badge badge-secondary');
+
+      sortSapn.addClass('text-light').addClass('badge badge-secondary');
     }
   }
 
