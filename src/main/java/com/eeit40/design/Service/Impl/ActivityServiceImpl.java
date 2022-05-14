@@ -60,6 +60,9 @@ public class ActivityServiceImpl implements ActivityService {
   @Autowired
   private ActivityProductDao activityProductDao;
 
+  //設定顯示顏色
+  private final String[] colors = {"#0080FF","#df1317","#e4934b","#e2bb8b","#91bcc6","#07abcc","#194645","#001871","#ff585d","#ffb549","#41b6e6"};
+
   @Autowired
   private ImgurUtil imgurUtil;
 
@@ -86,13 +89,12 @@ public class ActivityServiceImpl implements ActivityService {
   public List<EventDto> findAllEvent() {
     List<Activity> result = activityRepository.findAll();
     List<EventDto> eventDtoList = new ArrayList<>();
-    //設定顯示顏色
-    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF", "#FF5151"};
+
     int a = 0;
     for (Activity ac : result) {
       EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
 
-      if (a == 5) {
+      if (a == 10) {
         dto.setBackgroundColor(colors[a]);
         a = 0;
       } else {

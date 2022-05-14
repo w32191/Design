@@ -98,20 +98,19 @@
                                                                     </label>
                                                                     <div>
                                                                         <input type="number"
-                                                                               value="50"
                                                                                class="form-control"
                                                                                min="1" max="99"
                                                                                id="insertdiscountPercentage">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label>開始日：
+                                                                    <label for="insertStartDate">開始日：
                                                                         <input type="date"
                                                                                name="startDate"
                                                                                id="insertStartDate"
                                                                                class="form-control form-control-lg">
                                                                     </label>
-                                                                    <label>結束日：
+                                                                    <label for="insertEndDate">結束日：
                                                                         <input type="date"
                                                                                name="startDate"
                                                                                id="insertEndDate"
@@ -140,10 +139,10 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button id="oneKeyInputBtn"
-                                                                    class="btn btn-danger waves-effect waves-light save-category"
-                                                            >一鍵輸入
-                                                            </button>
+<%--                                                            <button id="oneKeyInputBtn"--%>
+<%--                                                                    class="btn btn-danger waves-effect waves-light save-category"--%>
+<%--                                                            >一鍵輸入--%>
+<%--                                                            </button>--%>
                                                             <button type="button" id="insertBtn"
                                                                     class="btn btn-primary waves-effect waves-light save-category"
                                                                     data-dismiss="modal">新增活動

@@ -46,8 +46,29 @@ $(function () {
 
   });
 
-  // 一件輸入按鈕
-  $('#oneKeyInputBtn').click(oneKeyInput);
+  // // 一件輸入按鈕
+  // $('#oneKeyInputBtn').click(oneKeyInput);
+
+  $('label[for=insertSubject]').click(function (){
+    $('#insertSubject').val('Tom Dixon. 週年慶');
+  });
+
+  $('label[for=insertContent]').click(function (){
+    $('#insertContent').val('Tom Dixon. 週年慶\n限時三天！！\n只有三天要買要快！！！\n全品牌七折！！');
+  });
+
+  $('label[for=insertdiscountPercentage]').click(function (){
+    $('#insertdiscountPercentage').val(33);
+  });
+
+  $('label[for=insertStartDate]').click(function (){
+    document.getElementById('insertStartDate').valueAsDate = new Date();
+  });
+
+  $('label[for=insertEndDate]').click(function (){
+    $('#insertEndDate').val('2022-05-23');
+  });
+
 
   $('#cleanSearch').click(function () {
     $('#searchStart').val('');
