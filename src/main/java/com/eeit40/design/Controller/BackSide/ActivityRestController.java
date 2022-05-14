@@ -189,17 +189,26 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
       @RequestParam(value = "start", defaultValue = "2000-01-01") String start,
       @RequestParam(value = "end", defaultValue = "2100-12-30") String end,
       @RequestParam(value = "subject", required = false) String subject,
+      @RequestParam(value = "sortBy", defaultValue = "startDate") String sortStr,
+      @RequestParam(value = "order", defaultValue = "asc") String order,
       @RequestParam(value = "page", defaultValue = "1") Integer pageNumber) {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate startDate = LocalDate.parse(start, formatter);
     LocalDate endDate = LocalDate.parse(end, formatter);
-    if (subject == null) {
-      return service.findActivitiesByTimePaged(startDate, endDate, pageNumber);
+    boolean orderBy;
+    if (order.equals("asc")) {
+      orderBy = true;
     } else {
-      return service.findActivitiesByTimePaged(startDate, endDate, subject, pageNumber);
+      orderBy = false;
     }
 
+    if (subject == null) {
+      return service.findActivitiesByTimePaged(startDate, endDate, sortStr, pageNumber, orderBy);
+    } else {
+      return service.findActivitiesByTimePaged(startDate, endDate, subject, sortStr, pageNumber,
+          orderBy);
+    }
   }
 
 

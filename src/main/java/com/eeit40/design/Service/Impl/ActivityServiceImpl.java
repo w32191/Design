@@ -77,8 +77,12 @@ public class ActivityServiceImpl implements ActivityService {
   }
 
   //統一控制分頁排序
-  private Pageable pageControls(Integer pageNumber) {
-    return PageRequest.of(pageNumber - 1, 5, Sort.by("startDate").ascending());
+  private Pageable pageControls(String sortStr, Integer pageNumber, boolean asc) {
+    if (asc) {
+      return PageRequest.of(pageNumber - 1, 5, Sort.by(sortStr).ascending());
+    } else {
+      return PageRequest.of(pageNumber - 1, 5, Sort.by(sortStr).descending());
+    }
   }
 
   @Override
@@ -101,7 +105,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findByPage(Integer pageNumber) {
-    return activityRepository.findAll(pageControls(pageNumber));
+    return activityRepository.findAll(pageControls("id", pageNumber,true));
   }
 
   @Override
@@ -226,7 +230,8 @@ public class ActivityServiceImpl implements ActivityService {
   // 找分頁過後的品牌
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
-    return brandRepository.findAll(pageControls(pageNumber));
+    Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.by("id").ascending());
+    return brandRepository.findAll(page);
   }
 
   // 找品牌的全部產品
@@ -396,17 +401,17 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      Integer pageNumber) {
+      String sortStr, Integer pageNumber,boolean asc) {
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetween(startDate, endDate,
-        startDate, endDate, pageControls(pageNumber));
+        startDate, endDate, pageControls(sortStr, pageNumber,asc));
   }
 
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      String subject, Integer pageNumber) {
+      String subject, String sortStr, Integer pageNumber,boolean asc) {
 
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetweenAndSubjectContaining(
-        startDate, endDate, startDate, endDate, subject, pageControls(pageNumber));
+        startDate, endDate, startDate, endDate, subject, pageControls(sortStr, pageNumber,asc));
   }
 
   @Override

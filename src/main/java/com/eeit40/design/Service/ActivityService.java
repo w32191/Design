@@ -59,15 +59,15 @@ public interface ActivityService {
   // 用product id 當Map 的 key
   Map<Integer, Integer> getCurrentDiscountIntegerMap(List<ShoppingCard> cart);
 
-  List<ProductAndDiscount>  getProductsWithCurrentDiscount(List<Product> productList);
+  List<ProductAndDiscount> getProductsWithCurrentDiscount(List<Product> productList);
 
   Activity getProductsWithCurrentDiscountByActivityId(Integer id);
 
   Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      Integer pageNumber);
+      String sortStr, Integer pageNumber,boolean asc);
 
   Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      String subejct, Integer pageNumber);
+      String subject, String sortStr, Integer pageNumber,boolean asc);
 
 
   List<String> findActivitiesSubBySubject(String subject);

@@ -1,6 +1,8 @@
 $(function () {
   let pageUl = $('#pageUl');
   let searchName = $('#searchName');
+  let sort = 'startDate';
+  let orderBy = 'asc';
 
   $('#deleteBatchBtn').click(function () {
     let idList = [];
@@ -73,7 +75,7 @@ $(function () {
     $('#searchStart').val('');
     $('#searchEnd').val('');
     searchName.val('');
-    pageAndSearch(1);
+    pageAndSearch(sort, 1);
   });
 
   //  篩選的主題、時間欄位
@@ -130,6 +132,48 @@ $(function () {
     readURL(this);
   });
 
+  // 用折扣排序
+  $('#discountTh').on('click', function () {
+    sort = 'discountPercentage';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#idTh').on('click', function () {
+    sort = 'id';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#startTh').on('click', function () {
+    sort = 'startDate';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#endTh').on('click', function () {
+    sort = 'endDate';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  function changeSortIcon(e) {
+    let sortSapn = e.children('span');
+
+    if (sortSapn.hasClass('ti-angle-double-down')) {
+      orderBy = 'asc';
+      sortSapn.closest('tr').find('span').removeClass('ti-angle-double-up')
+      .addClass('ti-angle-double-down').removeClass('text-danger');
+      sortSapn.removeClass('ti-angle-double-down').addClass(
+          'ti-angle-double-up').addClass('text-danger');
+    } else if (sortSapn.hasClass('ti-angle-double-up')) {
+      orderBy = 'desc';
+      sortSapn.closest('tr').find('span').removeClass('ti-angle-double-up')
+      .addClass('ti-angle-double-down').removeClass('text-danger');
+      sortSapn.addClass('text-danger');
+    }
+  }
+
   function readURL(input) {
     if (input.files && input.files[0]) {
       let reader = new FileReader();
@@ -153,6 +197,8 @@ $(function () {
         start: start,
         end: end,
         subject: subject,
+        sortBy: sort,
+        order: orderBy,
         page: page
       },
       success: function (res) {
@@ -176,7 +222,7 @@ $(function () {
       discountPercentage: $('#insertdiscountPercentage').val(),
       startDate: $('#insertStartDate').val(),
       endDate: $('#insertEndDate').val(),
-      color:$('#insertColor').val()
+      color: $('#insertColor').val()
     }
     // 將輸入的文字資料及檔案，包進FormData
     const dataFile = new FormData();

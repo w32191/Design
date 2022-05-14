@@ -96,14 +96,30 @@
                                                             全選
                                                         </button>
                                                     </th>
-                                                    <th>#</th>
-                                                    <th>主題</th>
-                                                    <th>圖片</th>
-                                                    <th>折扣</th>
-                                                    <th>起始日</th>
-                                                    <th>結束日</th>
-                                                    <th>編輯</th>
-                                                    <th>刪除</th>
+                                                    <th id="idTh"><span
+                                                            class="ti-angle-double-down"> 編號</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 主題</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 圖片</span>
+                                                    </th>
+                                                    <th id="discountTh"><span
+                                                            class="ti-angle-double-down"> 折扣 </span>
+                                                    </th>
+                                                    <th id="startTh"><span
+                                                            class="ti-angle-double-down"> 起始日</span>
+                                                    </th>
+                                                    <th id="endTh"><span
+                                                            class="ti-angle-double-down"> 結束日</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 編輯</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 刪除</span>
+                                                    </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="theTbody">
