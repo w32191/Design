@@ -49,26 +49,25 @@ $(function () {
   // // 一件輸入按鈕
   // $('#oneKeyInputBtn').click(oneKeyInput);
 
-  $('label[for=insertSubject]').click(function (){
+  $('label[for=insertSubject]').click(function () {
     $('#insertSubject').val('Tom Dixon. 週年慶');
   });
 
-  $('label[for=insertContent]').click(function (){
+  $('label[for=insertContent]').click(function () {
     $('#insertContent').val('Tom Dixon. 週年慶\n限時三天！！\n只有三天要買要快！！！\n全品牌七折！！');
   });
 
-  $('label[for=insertdiscountPercentage]').click(function (){
+  $('label[for=insertdiscountPercentage]').click(function () {
     $('#insertdiscountPercentage').val(33);
   });
 
-  $('label[for=insertStartDate]').click(function (){
+  $('label[for=insertStartDate]').click(function () {
     document.getElementById('insertStartDate').valueAsDate = new Date();
   });
 
-  $('label[for=insertEndDate]').click(function (){
+  $('label[for=insertEndDate]').click(function () {
     $('#insertEndDate').val('2022-05-23');
   });
-
 
   $('#cleanSearch').click(function () {
     $('#searchStart').val('');
@@ -126,6 +125,21 @@ $(function () {
     pageAndSearch(parseInt(page) - 1);
   });
 
+  // 圖片預覽
+  $('#insertUploadFile').on('change', function () {
+    readURL(this);
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#reviewImg").attr('src', e.target.result).removeAttr('hidden');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
   // 換頁以及search時 更新資料
   function pageAndSearch(page) {
     let start = $('#searchStart').val();
@@ -145,6 +159,7 @@ $(function () {
         // console.log(res);
         showTableData(res.content);
         showPaginationButton(res.totalPages, res.number, res.numberOfElements);
+        showTotalElements(res.totalElements);
       },
       error: function (err) {
         console.log(err);
@@ -210,8 +225,8 @@ $(function () {
       text: "此動作無法復原！",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#348def',
       confirmButtonText: '確定刪除',
       cancelButtonText: '取消'
     }).then((result) => {   // 按了任何一個按鈕後
@@ -345,6 +360,10 @@ $(function () {
 
     pageUl.html(txt);
 
+  }
+
+  function showTotalElements(totalElements) {
+    $('#totalElements').text(`共 ${totalElements} 筆`);
   }
 
 });

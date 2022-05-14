@@ -156,27 +156,40 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <nav aria-label="...">
-                                            <ul class="pagination" id="pageUl">
-                                                <li class="page-item disabled">
-                                                    <button class="page-link" id="prePageBtn">前一頁
-                                                    </button>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <button class="page-link numBtn">1</button>
-                                                </li>
-                                                <c:forEach begin="2" end="${activities.totalPages}"
-                                                           var="i">
-                                                    <li class="page-item">
-                                                        <button class="page-link numBtn">${i}</button>
-                                                    </li>
-                                                </c:forEach>
-                                                <li class="page-item">
-                                                    <button class="page-link" id="nextPageBtn">後一頁
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <nav aria-label="...">
+                                                    <ul class="pagination" id="pageUl">
+                                                        <li class="page-item disabled">
+                                                            <button class="page-link"
+                                                                    id="prePageBtn">
+                                                                前一頁
+                                                            </button>
+                                                        </li>
+                                                        <li class="page-item active">
+                                                            <button class="page-link numBtn">1
+                                                            </button>
+                                                        </li>
+                                                        <c:forEach begin="2"
+                                                                   end="${activities.totalPages}"
+                                                                   var="i">
+                                                            <li class="page-item">
+                                                                <button class="page-link numBtn">${i}</button>
+                                                            </li>
+                                                        </c:forEach>
+                                                        <li class="page-item">
+                                                            <button class="page-link"
+                                                                    id="nextPageBtn">
+                                                                後一頁
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h4 class="text-primary text-lg-left" id="totalElements">共 ${activities.totalElements} 筆</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /# card -->
@@ -232,39 +245,40 @@
                                                    id="insertdiscountPercentage">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="insertStartDate">開始日：
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="insertStartDate">開始日：
+                                            </label>
                                             <input type="date"
                                                    name="startDate"
                                                    id="insertStartDate"
                                                    class="form-control form-control-lg">
-                                        </label>
-                                        <label for="insertEndDate">結束日：
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="insertEndDate">結束日：</label>
                                             <input type="date"
                                                    name="startDate"
                                                    id="insertEndDate"
                                                    class="form-control form-control-lg">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-
+                                        </div>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file"
                                                class="custom-file-input"
                                                id="insertUploadFile">
                                         <label class="custom-file-label"
-                                               for="insertUploadFile">選擇檔案...</label>
-
+                                               for="insertUploadFile">選擇圖片...</label>
+                                        <img src="" alt="" hidden id="reviewImg"
+                                             class="col-md-7 ml-auto rounded"/>
                                     </div>
                                 </form>
 
                             </div>
                             <div class="modal-footer">
-<%--                                <button id="oneKeyInputBtn"--%>
-<%--                                        class="btn btn-danger waves-effect waves-light save-category"--%>
-<%--                                >一鍵輸入--%>
-<%--                                </button>--%>
+                                <%--                                <button id="oneKeyInputBtn"--%>
+                                <%--                                        class="btn btn-danger waves-effect waves-light save-category"--%>
+                                <%--                                >一鍵輸入--%>
+                                <%--                                </button>--%>
                                 <button type="button" id="insertBtn"
                                         class="btn btn-primary waves-effect waves-light save-category"
                                         data-dismiss="modal">新增活動

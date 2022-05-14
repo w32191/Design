@@ -282,8 +282,8 @@ $(function () {
         // .find('input').attr('disabled', 'disabled').removeAttr('checked');
         $(`#checkProduct${productId}`).attr('disabled', 'disabled').removeAttr(
             'checked')
-        .parent('td').siblings('td:eq(1)').children('h6').text(`${txt[0]} ~ ${txt[1]}已經有活動`);
-
+        .parent('td').siblings('td:eq(1)').children('h6').text(
+            `${txt[0]} ~ ${txt[1]}已經有活動`);
 
       }
     })
@@ -420,12 +420,12 @@ $(function () {
   $('#updateStartDate,#updateEndDate').change(checkEachProductTime);
 
   // 圖片預覽
-  $('#updateImg').on('change',function (){
+  $('#updateImg').on('change', function () {
     readURL(this);
   });
 
-  function readURL(input){
-    if(input.files && input.files[0]){
+  function readURL(input) {
+    if (input.files && input.files[0]) {
       let reader = new FileReader();
       reader.onload = function (e) {
         $("#activityImg").attr('src', e.target.result);

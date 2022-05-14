@@ -35,7 +35,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -61,7 +60,8 @@ public class ActivityServiceImpl implements ActivityService {
   private ActivityProductDao activityProductDao;
 
   //設定顯示顏色
-  private final String[] colors = {"#0080FF","#df1317","#e4934b","#e2bb8b","#91bcc6","#07abcc","#194645","#001871","#ff585d","#ffb549","#41b6e6"};
+  private final String[] colors = {"#0080FF", "#df1317", "#e4934b", "#e2bb8b", "#91bcc6", "#07abcc",
+      "#194645", "#001871", "#ff585d", "#ffb549", "#41b6e6"};
 
   @Autowired
   private ImgurUtil imgurUtil;
@@ -79,6 +79,10 @@ public class ActivityServiceImpl implements ActivityService {
     this.imgurUtil.setAuthorization(authorization);
   }
 
+  //統一控制分頁排序
+  private Pageable pageControls(Integer pageNumber) {
+    return PageRequest.of(pageNumber - 1, 5, Sort.by("startDate").ascending());
+  }
 
   @Override
   public List<Activity> findAll() {
@@ -109,8 +113,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findByPage(Integer pageNumber) {
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Direction.DESC, "id");
-    return activityRepository.findAll(page);
+    return activityRepository.findAll(pageControls(pageNumber));
   }
 
   @Override
@@ -233,8 +236,7 @@ public class ActivityServiceImpl implements ActivityService {
   // 找分頁過後的品牌
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
-    Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
-    return brandRepository.findAll(pageable);
+    return brandRepository.findAll(pageControls(pageNumber));
   }
 
   // 找品牌的全部產品
@@ -405,20 +407,16 @@ public class ActivityServiceImpl implements ActivityService {
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
       Integer pageNumber) {
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
-//    return activityRepository.findActivitiesByTime(startDate, endDate, page);
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetween(startDate, endDate,
-        startDate, endDate, page);
+        startDate, endDate, pageControls(pageNumber));
   }
 
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      String subject,
-      Integer pageNumber) {
+      String subject, Integer pageNumber) {
 
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetweenAndSubjectContaining(
-        startDate, endDate, startDate, endDate, subject, page);
+        startDate, endDate, startDate, endDate, subject, pageControls(pageNumber));
   }
 
   @Override

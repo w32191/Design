@@ -29,6 +29,21 @@ $(function () {
     $('#insertEndDate').val('2022-05-23');
   });
 
+  // 圖片預覽
+  $('#insertUploadFile').on('change',function (){
+    readURL(this);
+  });
+
+  function readURL(input){
+    if(input.files && input.files[0]){
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#reviewImg").attr('src', e.target.result).removeAttr('hidden');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
 });
 
 function setCalender() {

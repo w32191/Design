@@ -50,7 +50,8 @@
                                                             <c:forEach items="${activity.imgurImgs}"
                                                                        var="img"
                                                                        begin="0" end="0" step="1">
-                                                                <img class="img-fluid" id="activityImg"
+                                                                <img class="img-fluid"
+                                                                     id="activityImg"
                                                                      src="${img.link}"
                                                                      alt="Image Error"/>
                                                             </c:forEach>
@@ -94,7 +95,7 @@
                                                         <i class="ti-layout-grid3-alt"></i>關閉清單
                                                     </button>
                                                     <a class="btn btn-warning btn-addon"
-                                                            href="${contextRoot}/B/Activity/findAll" >
+                                                       href="${contextRoot}/B/Activity/findAll">
                                                         <i class="ti-back-left"></i>回活動清單
                                                     </a>
                                                 </div>
@@ -113,7 +114,8 @@
                                                                 <div class="phone-content">
                                                                     <span class="contact-title">活動內容:</span>
                                                                     <textarea id="updateContent"
-                                                                              name="content"  style="height:100%"
+                                                                              name="content"
+                                                                              style="height:100%"
                                                                               class="form-control"
                                                                               rows="4">${activity.content}</textarea>
                                                                 </div>
@@ -129,25 +131,40 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="work-content">
-                                                            <p>
-                                                                <span>開始日期：</span>
+                                                        <div class="row">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="updateStartDate">開始日：
+                                                                </label>
                                                                 <input type="date"
                                                                        value="${activity.startDate}"
                                                                        name="startDate"
                                                                        id="updateStartDate"
-                                                                       class="form-control">
-                                                            </p>
-                                                        </div>
-                                                        <div class="work-content">
-                                                            <p>
-                                                                <span>結束日期：</span>
+                                                                       class="form-control form-control-lg">
+
+                                                            </div>
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="updateEndDate">結束日：</label>
                                                                 <input type="date" name="endDate"
                                                                        value="${activity.endDate}"
                                                                        id="updateEndDate"
-                                                                       class="form-control">
-                                                            </p>
+                                                                       class="form-control form-control-lg">
+                                                            </div>
                                                         </div>
+                                                        <%--                                                        <div class="work-content">--%>
+                                                        <%--                                                            <p>--%>
+                                                        <%--                                                                <span>開始日期：</span>--%>
+                                                        <%--                                                                --%>
+                                                        <%--                                                            </p>--%>
+                                                        <%--                                                        </div>--%>
+                                                        <%--                                                        <div class="work-content">--%>
+                                                        <%--                                                            <p>--%>
+                                                        <%--                                                                <span>結束日期：</span>--%>
+                                                        <%--                                                                <input type="date" name="endDate"--%>
+                                                        <%--                                                                       value="${activity.endDate}"--%>
+                                                        <%--                                                                       id="updateEndDate"--%>
+                                                        <%--                                                                       class="form-control">--%>
+                                                        <%--                                                            </p>--%>
+                                                        <%--                                                        </div>--%>
                                                     </div>
                                                 </div>
                                             </div>
