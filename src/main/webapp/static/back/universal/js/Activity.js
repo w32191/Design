@@ -76,7 +76,7 @@ $(function () {
     $('#searchStart').val('');
     $('#searchEnd').val('');
     searchName.val('');
-    pageAndSearch(sort, 1);
+    pageAndSearch(1);
   });
 
   //  篩選的主題、時間欄位
