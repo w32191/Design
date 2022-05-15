@@ -158,6 +158,14 @@ $(function () {
     pageAndSearch(1);
   });
 
+  $('#searchStartLabel').on('click',function (){
+    $('#searchStart').val('2022-05-16');
+  });
+
+  $('#searchEndLabel').on('click',function (){
+    $('#searchEnd').val('2022-05-31');
+  });
+
   function changeSortIcon(e) {
     let sortSapn = e.children('span');
 

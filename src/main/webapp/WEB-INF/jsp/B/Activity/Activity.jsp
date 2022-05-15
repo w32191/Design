@@ -68,12 +68,12 @@
                                                            class="form-control border border-primary"
                                                            id="searchName">
                                                 </label>
-                                                <label> 開始日期：
+                                                <label for="searchStart" id="searchStartLabel"> 開始日期：
                                                     <input type="date"
                                                            class="form-control border border-primary"
                                                            id="searchStart"/>
                                                 </label>
-                                                <label> 結束日期：
+                                                <label for="searchEnd" id="searchEndLabel"> 結束日期：
                                                     <input type="date"
                                                            class="form-control border border-primary"
                                                            id="searchEnd"/>
