@@ -42,7 +42,7 @@
                 <div class="col-lg-8 p-r-0 title-margin-right">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>Hello, <span>Welcome Here</span></h1>
+<%--                            <h1>Hello, <span>Welcome Here</span></h1>--%>
                             <button type="button" id="insertBtn"
                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
                                 <i class="ti-plus"></i>新增設計
@@ -55,8 +55,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Table-Jsgrid</li>
+<%--                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>--%>
+<%--                                <li class="breadcrumb-item active">Table-Jsgrid</li>--%>
                             </ol>
                         </div>
                     </div>

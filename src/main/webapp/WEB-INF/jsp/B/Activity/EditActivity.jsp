@@ -34,205 +34,216 @@
         <div class="container-fluid">
             <section id="main-content">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="card outCard">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="user-profile">
+                                        <form id="updateForm">
+                                            <div class="row">
 
-                                <div class="user-profile">
-                                    <form id="updateForm">
-                                        <div class="row">
-
-                                            <div class="col-lg-5">
-                                                <h4 id="activityID">${activity.id}</h4>
-                                                <div class="user-photo m-b-30">
-                                                    <c:choose>
-                                                        <c:when test="${activity.imgurImgs.size() != 0}">
-                                                            <c:forEach items="${activity.imgurImgs}"
-                                                                       var="img"
-                                                                       begin="0" end="0" step="1">
+                                                <div class="col-lg-5">
+                                                    <h4 id="activityID">${activity.id}</h4>
+                                                    <div class="user-photo m-b-30">
+                                                        <c:choose>
+                                                            <c:when test="${activity.imgurImgs.size() != 0}">
+                                                                <c:forEach
+                                                                        items="${activity.imgurImgs}"
+                                                                        var="img"
+                                                                        begin="0" end="0" step="1">
+                                                                    <img class="img-fluid"
+                                                                         id="activityImg"
+                                                                         src="${img.link}"
+                                                                         alt="Image Error"/>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
                                                                 <img class="img-fluid"
                                                                      id="activityImg"
-                                                                     src="${img.link}"
+                                                                     src="${contextRoot}/static/back/universal/images/no-image.jpeg"
                                                                      alt="Image Error"/>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <img class="img-fluid" id="activityImg"
-                                                                 src="${contextRoot}/static/back/universal/images/no-image.jpeg"
-                                                                 alt="Image Error"/>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
 
-                                                <div class="custom-file">
-                                                    <%--                                                    <span>更換圖片:</span>--%>
-                                                    <label class="custom-file-label"
-                                                           for="updateImg">更換圖片</label>
-                                                    <input type="file" name="updateImg"
-                                                           id="updateImg" class="custom-file-input">
+                                                    <div class="custom-file">
+                                                        <%--                                                    <span>更換圖片:</span>--%>
+                                                        <label class="custom-file-label"
+                                                               for="updateImg">更換圖片</label>
+                                                        <input type="file" name="updateImg"
+                                                               id="updateImg"
+                                                               class="custom-file-input">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="user-profile-name">
-                                                    <h1><input type="text"
-                                                               value="${activity.subject}"
-                                                               name="subject"
-                                                               id="updateSubject">
+                                                <div class="col-lg-7">
+                                                    <div class="user-profile-name">
+                                                        <h1><input type="text"
+                                                                   value="${activity.subject}"
+                                                                   name="subject"
+                                                                   id="updateSubject">
 
-                                                    </h1>
-                                                </div>
-                                                <div class="user-send-message">
-                                                    <button class="btn btn-primary btn-addon"
-                                                            type="button" id="updateBtn">
-                                                        <i class="ti-email"></i>編輯完成
-                                                    </button>
-                                                    <button class="btn btn-secondary btn-addon"
-                                                            type="button" id="openProducts">
-                                                        <i class="ti-layout-grid3-alt"></i>商品清單
-                                                    </button>
-                                                    <button class="btn btn-secondary btn-addon"
-                                                            type="button" id="closeProducts" hidden>
-                                                        <i class="ti-layout-grid3-alt"></i>關閉清單
-                                                    </button>
-                                                    <a class="btn btn-warning btn-addon"
-                                                       href="${contextRoot}/B/Activity/findAll">
-                                                        <i class="ti-back-left"></i>回活動清單
-                                                    </a>
-                                                </div>
-                                                <div class="custom-tab user-profile-tab">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li role="presentation" class="active">
-                                                            <a href="#1" aria-controls="1"
-                                                               role="tab"
-                                                               data-toggle="tab">內容</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
-                                                             id="1">
-                                                            <div class="contact-information">
-                                                                <div class="phone-content">
-                                                                    <span class="contact-title">活動內容:</span>
-                                                                    <textarea id="updateContent"
-                                                                              name="content"
-                                                                              style="height:100%"
-                                                                              class="form-control"
-                                                                              rows="4">${activity.content}</textarea>
-                                                                </div>
-                                                                <%--                                                                <div class="contact-information">--%>
-                                                                <%--                                                                    <span class="contact-title">折扣％：</span>--%>
-                                                                <%--                                                                    <input type="number"--%>
-                                                                <%--                                                                           class="form-control-sm"--%>
-                                                                <%--                                                                           placeholder="%"--%>
-                                                                <%--                                                                           name="discountPercentage"--%>
-                                                                <%--                                                                           value="${activity.discountPercentage}"--%>
-                                                                <%--                                                                           id="updatediscountPercentage">--%>
-                                                                <%--                                                                    <span class="contact-website"> % OFF </span>--%>
-                                                                <%--                                                                </div>--%>
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <label for="updatediscountPercentage">折扣：(
-                                                                            %OFF)
-                                                                            <input type="number"
-                                                                                   class="form-control"
-                                                                                   placeholder="%"
-                                                                                   name="discountPercentage"
-                                                                                   value="${activity.discountPercentage}"
-                                                                                   id="updatediscountPercentage"/>
-                                                                        </label>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="user-send-message">
+                                                        <button class="btn btn-primary btn-addon"
+                                                                type="button" id="updateBtn">
+                                                            <i class="ti-email"></i>編輯完成
+                                                        </button>
+                                                        <button class="btn btn-secondary btn-addon"
+                                                                type="button" id="openProducts">
+                                                            <i class="ti-layout-grid3-alt"></i>商品清單
+                                                        </button>
+                                                        <button class="btn btn-secondary btn-addon"
+                                                                type="button" id="closeProducts"
+                                                                hidden>
+                                                            <i class="ti-layout-grid3-alt"></i>關閉清單
+                                                        </button>
+                                                        <a class="btn btn-warning btn-addon"
+                                                           href="${contextRoot}/B/Activity/findAll">
+                                                            <i class="ti-back-left"></i>回活動清單
+                                                        </a>
+                                                    </div>
+                                                    <div class="custom-tab user-profile-tab">
+                                                        <ul class="nav nav-tabs" role="tablist">
+                                                            <li role="presentation" class="active">
+                                                                <a href="#1" aria-controls="1"
+                                                                   role="tab"
+                                                                   data-toggle="tab">內容</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div role="tabpanel"
+                                                                 class="tab-pane active"
+                                                                 id="1">
+                                                                <div class="contact-information">
+                                                                    <div class="phone-content">
+                                                                        <span class="contact-title">活動內容:</span>
+                                                                        <textarea id="updateContent"
+                                                                                  name="content"
+                                                                                  style="height:100%"
+                                                                                  class="form-control"
+                                                                                  rows="4">${activity.content}</textarea>
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <label> 行事曆 顏色：
-                                                                            <input type="color"
-                                                                                   name="color"
-                                                                                   id="updateColor"
-                                                                                   value="${activity.color}"/>
-                                                                        </label>
+                                                                    <%--                                                                <div class="contact-information">--%>
+                                                                    <%--                                                                    <span class="contact-title">折扣％：</span>--%>
+                                                                    <%--                                                                    <input type="number"--%>
+                                                                    <%--                                                                           class="form-control-sm"--%>
+                                                                    <%--                                                                           placeholder="%"--%>
+                                                                    <%--                                                                           name="discountPercentage"--%>
+                                                                    <%--                                                                           value="${activity.discountPercentage}"--%>
+                                                                    <%--                                                                           id="updatediscountPercentage">--%>
+                                                                    <%--                                                                    <span class="contact-website"> % OFF </span>--%>
+                                                                    <%--                                                                </div>--%>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <label for="updatediscountPercentage">折扣：(
+                                                                                %OFF)
+                                                                                <input type="number"
+                                                                                       class="form-control"
+                                                                                       placeholder="%"
+                                                                                       name="discountPercentage"
+                                                                                       value="${activity.discountPercentage}"
+                                                                                       id="updatediscountPercentage"/>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <label> 行事曆 顏色：
+                                                                                <input type="color"
+                                                                                       name="color"
+                                                                                       id="updateColor"
+                                                                                       value="${activity.color}"/>
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="updateStartDate">開始日：
-                                                                </label>
-                                                                <input type="date"
-                                                                       value="${activity.startDate}"
-                                                                       name="startDate"
-                                                                       id="updateStartDate"
-                                                                       class="form-control form-control-lg">
+                                                            <div class="row">
+                                                                <div class="form-group col-sm-6">
+                                                                    <label for="updateStartDate">開始日：
+                                                                    </label>
+                                                                    <input type="date"
+                                                                           value="${activity.startDate}"
+                                                                           name="startDate"
+                                                                           id="updateStartDate"
+                                                                           class="form-control form-control-lg">
 
+                                                                </div>
+                                                                <div class="form-group col-sm-6">
+                                                                    <label for="updateEndDate">結束日：</label>
+                                                                    <input type="date"
+                                                                           name="endDate"
+                                                                           value="${activity.endDate}"
+                                                                           id="updateEndDate"
+                                                                           class="form-control form-control-lg">
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="updateEndDate">結束日：</label>
-                                                                <input type="date" name="endDate"
-                                                                       value="${activity.endDate}"
-                                                                       id="updateEndDate"
-                                                                       class="form-control form-control-lg">
-                                                            </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-
                     </div>
-
                 </div>
                 <!-- /# row -->
                 <div class="row">
-                    <div class="col-lg-4" id="brandsList" hidden>
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>品牌清單</h4>
-                            </div>
-                            <div class="recent-comment" id="brandContent">
-                                <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
 
+                        <div class="col-lg-4" id="brandsList" hidden>
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4>品牌清單</h4>
+                                </div>
+                                <div class="recent-comment" id="brandContent">
+                                    <%--  點了商品清單按鈕後，品牌清單顯示在這邊--%>
+
+                                </div>
                             </div>
+                            <!-- /# card -->
                         </div>
-                        <!-- /# card -->
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-8" id="productList" hidden>
-                        <div class="card">
-                            <div class="card-title">
-                                <h4 id="h4ProductTitle">產品清單</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover" id="productListTable">
-                                        <thead>
-                                        <tr>
 
-                                            <th>
-                                                <button class="btn btn-primary" id="selectAllBtn">
-                                                    全選
-                                                </button>
-                                                <button class="btn btn-primary" id="unSelectAllBtn"
-                                                        hidden>取消全選
-                                                </button>
-                                            </th>
-                                            <th>圖片</th>
-                                            <th>名稱</th>
-                                            <th>分類</th>
-                                            <th>價格</th>
-                                            <th>庫存</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="productTbody">
-                                        </tbody>
-                                    </table>
+                        <!-- /# column -->
+
+                        <div class="col-lg-8" id="productList" hidden>
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4 id="h4ProductTitle">產品清單</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="productListTable">
+                                            <thead>
+                                            <tr>
+
+                                                <th>
+                                                    <button class="btn btn-primary"
+                                                            id="selectAllBtn">
+                                                        全選
+                                                    </button>
+                                                    <button class="btn btn-primary"
+                                                            id="unSelectAllBtn"
+                                                            hidden>取消全選
+                                                    </button>
+                                                </th>
+                                                <th>圖片</th>
+                                                <th>名稱</th>
+                                                <th>分類</th>
+                                                <th>價格</th>
+                                                <th>庫存</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="productTbody">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /# column -->
+                        <!-- /# column -->
 
                 </div>
             </section>

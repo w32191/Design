@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="bg-primary">
+<body class="bg-light">
 
 
 	<div class="unix-login">
@@ -29,10 +29,10 @@
 				<div class="col-lg-6">
 					<div class="login-content">
 						<div class="login-logo">
-							<a><span>DESIGN & DECOR 後台系統</span></a>
+<%--							<a><span>DESIGN & DECOR 後台系統</span></a>--%>
 						</div>
 						<div class="login-form">
-							<h4>登入 DESIGN & DECOR 後台</h4>
+							<h4><br>DESIGN & DECOR<br><br>管理系統<br></h4>
 							<form:form class="form" name="account" ModelAttribute="login"
 								action="/Design/B/login">
 								<form:errors name="*" />
@@ -46,8 +46,8 @@
 										class="form-control" placeholder="請輸入密碼" required />
 								</div>
 								<div class="checkbox">
-									<label class="pull-right"> <a href="#">Forgotten
-											Password?</a>
+									<label class="pull-right"> <a href="">忘記密碼？
+											</a>
 									</label>
 									<button type="submit" id="loginbutton"
 										class="btn btn-primary btn-flat m-b-30 m-t-30">登入</button>

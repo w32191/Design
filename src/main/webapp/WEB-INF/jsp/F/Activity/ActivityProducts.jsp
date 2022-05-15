@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>${activity.subject}</h1>
+                        <h1 style="color: ${activity.color}">${activity.subject}</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
@@ -60,8 +60,24 @@
                                  aria-labelledby="pills-grid-tab">
                                 <div class="row custom-row-10">
                                     <c:choose>
-                                        <c:when test="${activity.products.size()<0}">
-                                            <h2>此活動暫時無商品</h2>
+                                        <c:when test="${activity.products.size() < 1}">
+                                            <div class="container">
+                                                <div class="row align-items-center">
+                                                    <div class="col align-self-start"></div>
+                                                    <div class="col">
+                                                        <h2>此活動暫時無商品 !</h2>
+                                                        <a href="${contextRoot}/F/" style="justify-content: center">回首頁</a>
+                                                    </div>
+                                                    <div class="col align-self-end"></div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col align-self-start"></div>
+                                                    <div class="col">
+
+                                                    </div>
+                                                    <div class="col align-self-end"></div>
+                                                </div>
+                                            </div>
                                         </c:when>
                                         <c:otherwise>
                                             <c:forEach items="${activity.products}" var="product">
@@ -131,7 +147,6 @@
         </div>
     </section>
     <!-- shop area end -->
-
 
 
 </main>

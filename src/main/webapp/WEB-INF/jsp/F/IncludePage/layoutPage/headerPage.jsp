@@ -94,7 +94,7 @@
                                     <li class="has-dropdown"><a href="/Design/F/Design">找服務</a>
                                         <ul class="submenu transition-3">
                                             <li><a href="/Design/F/Design">設計</a></li>
-                                            <li><a href="/Design/F/Case">案例</a></li>
+                                            <li><a href="/Design/F/Case">裝修需求</a></li>
                                         </ul>
                                     </li>
                                     <%--                                    <li class="active "><a href="/Design//F/Design">找設計</a>--%>
@@ -165,16 +165,54 @@
                                     <%--                                        </li>--%>
                                     <%--                                    </ul>--%>
                                 </li>
-                                <li><a href="javascript:void(0);"><i class="far fa-bars"></i></a>
-                                    <ul class="extra-info">
-                                        <li>
-                                            <div class="my-account">
+                                <%--                                <li><a href="javascript:void(0);"><i class="far fa-bars"></i></a>--%>
+                                <%--                                    <ul class="extra-info">--%>
+                                <%--                                        <li>--%>
+                                <%--                                            <div class="my-account">--%>
 
 
-                                                <c:choose>
-                                                    <c:when test="${sessionScope.Faccount == null}">
+                                <%--                                                <c:choose>--%>
+                                <%--                                                    <c:when test="${sessionScope.Faccount == null}">--%>
+                                <%--                                                        <div class="extra-title">--%>
+                                <%--&lt;%&ndash;                                                            <h6>My Account</h6>&ndash;%&gt;--%>
+                                <%--                                                        </div>--%>
+                                <%--                                                        <ul>--%>
+                                <%--                                                            <li><a href="/Design/F/Flogin">登入</a>--%>
+                                <%--                                                            </li>--%>
+                                <%--                                                            <li><a href="/Design/F/Fregister">註冊</a>--%>
+                                <%--                                                            </li>--%>
+                                <%--                                                        </ul>--%>
+                                <%--                                                    </c:when>--%>
+                                <%--                                                    <c:otherwise>--%>
+                                <%--                                                        <div class="extra-title">--%>
+                                <%--                                                            <h6> ${sessionScope.Faccount.members.names}</h6>--%>
+                                <%--                                                        </div>--%>
+                                <%--                                                        <ul>--%>
+                                <%--                                                            <li><a href="/Design/F/Fmemberupdate">會員資料</a>--%>
+                                <%--                                                            </li>--%>
+                                <%--                                                            <li>--%>
+                                <%--                                                                <a href="/Design/F/orderrecord">訂單查詢</a>--%>
+                                <%--                                                            </li>--%>
+
+                                <%--                                                            <li><a href="/Design/F/Fdologout">登出</a>--%>
+                                <%--                                                            </li>--%>
+                                <%--                                                        </ul>--%>
+                                <%--                                                    </c:otherwise>--%>
+                                <%--                                                </c:choose>--%>
+                                <%--                                            </div>--%>
+                                <%--                                        </li>--%>
+                                <%--                                    </ul>--%>
+                                <%--                                </li>--%>
+
+
+                                <c:choose>
+                                    <c:when test="${sessionScope.Faccount == null}">
+                                        <li><a href="javascript:void(0);"><i class="far fa-bars"></i> 尚未登入</a>
+                                            <ul class="extra-info">
+                                                <li>
+                                                    <div class="my-account">
                                                         <div class="extra-title">
-<%--                                                            <h6>My Account</h6>--%>
+                                                                <%--                                                            <h6>My Account</h6>--%>
                                                         </div>
                                                         <ul>
                                                             <li><a href="/Design/F/Flogin">登入</a>
@@ -182,8 +220,16 @@
                                                             <li><a href="/Design/F/Fregister">註冊</a>
                                                             </li>
                                                         </ul>
-                                                    </c:when>
-                                                    <c:otherwise>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="javascript:void(0);"><i class="far fa-bars"></i> ${sessionScope.Faccount.members.names} </a>
+                                            <ul class="extra-info">
+                                                <li>
+                                                    <div class="my-account">
                                                         <div class="extra-title">
                                                             <h6> ${sessionScope.Faccount.members.names}</h6>
                                                         </div>
@@ -197,12 +243,13 @@
                                                             <li><a href="/Design/F/Fdologout">登出</a>
                                                             </li>
                                                         </ul>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </li>
-                                    </ul>
-                                </li>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </ul>
                         </div>
                     </div>

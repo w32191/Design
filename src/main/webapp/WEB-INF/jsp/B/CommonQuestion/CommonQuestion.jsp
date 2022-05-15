@@ -40,9 +40,9 @@
                                     <div class="col-lg-8 p-r-0 title-margin-right">
                                         <div class="page-header">
                                             <div class="page-title">
-                                                <h1>Hello,
-                                                    <span>Welcome Here</span>
-                                                </h1>
+<%--                                                <h1>Hello,--%>
+<%--                                                    <span>Welcome Here</span>--%>
+<%--                                                </h1>--%>
                                                 <button type="button"
                                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
                                                     data-toggle="modal" data-target="#insertModal">
@@ -56,10 +56,10 @@
                                         <div class="page-header">
                                             <div class="page-title">
                                                 <ol class="breadcrumb">
-                                                    <li class="breadcrumb-item">
-                                                        <a href="#">Dashboard</a>
-                                                    </li>
-                                                    <li class="breadcrumb-item active">UI-Blank</li>
+<%--                                                    <li class="breadcrumb-item">--%>
+<%--                                                        <a href="#">Dashboard</a>--%>
+<%--                                                    </li>--%>
+<%--                                                    <li class="breadcrumb-item active">UI-Blank</li>--%>
                                                 </ol>
                                             </div>
                                         </div>

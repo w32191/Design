@@ -92,7 +92,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public List<EventDto> findAllEvent() {
-    List<Activity> result = activityRepository.findAll(Sort.by("id").descending());
+    List<Activity> result = activityRepository.findAll(Sort.by("id").ascending());
     List<EventDto> eventDtoList = new ArrayList<>();
 
     for (Activity ac : result) {

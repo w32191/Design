@@ -16,7 +16,7 @@
 
                 <li>
                     <a href="/Design/B/Product/" class="sidebar-sub-toggle">
-                        <i class="ti-layout-tab"></i> 商品管理
+                        <i class="ti-package"></i> 商品管理
                         <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li>
@@ -32,7 +32,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/Design/B/allorder"><i class="ti-layout-tab"></i> 訂單管理</a>
+                    <a href="/Design/B/allorder"><i class="ti-shopping-cart-full"></i> 訂單管理</a>
                 </li>
 
 
@@ -56,11 +56,11 @@
 				<li><a href="/Design/B/CommonQuestion"><i
 						class="ti-comment-alt"></i> 常見問題管理</a></li>
 				<li><a href="/Design/B/Announcement/viewMessages"><i
-						class="ti-layout-tab"></i> 公告管理</a></li>
+						class="ti-announcement"></i> 公告管理</a></li>
 				<c:choose>
 					<c:when test="${sessionScope.Baccount.permission > 98}">
 					<li><a href="/Design/B/view"><i class="ti-user"></i>
-						其他帳號管理</a></li>
+						帳號管理</a></li>
 					
 					</c:when>
 				</c:choose>

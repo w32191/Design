@@ -61,6 +61,7 @@ public class ActivityController {
   @GetMapping("/F/Activity/productList/{id}")
   public ModelAndView productList(ModelAndView mav, @PathVariable Integer id) {
     Activity activity = activityService.getProductsWithCurrentDiscountByActivityId(id);
+    System.out.println(activity.getProducts());
     mav.addObject("activity", activity);
     mav.setViewName("/F/Activity/ActivityProducts");
     return mav;

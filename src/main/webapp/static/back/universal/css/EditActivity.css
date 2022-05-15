@@ -59,3 +59,8 @@ label img {
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;
 }
+
+.outCard{
+  padding: 0;
+  background-color: rgb(230,230,230);
+}
