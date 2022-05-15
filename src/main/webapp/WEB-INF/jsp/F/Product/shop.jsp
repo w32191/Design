@@ -43,20 +43,97 @@
         </div>
     </section>
     <!-- page title area end -->
-
+    <%--    <section class="client__area pt-15 pb-140">--%>
+    <%--        <div class="container">--%>
+    <%--            <div class="row">--%>
+    <%--                <div class="col-xl-12">--%>
+    <%--                    <div class="client__slider owl-carousel text-center">--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=6"><img--%>
+    <%--                                    src="https://i.imgur.com/dftzIxn.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=15"><img--%>
+    <%--                                    src="https://i.imgur.com/Aw91g70.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=24"><img--%>
+    <%--                                    src="https://i.imgur.com/P3jjoZj.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=4"><img--%>
+    <%--                                    src="https://i.imgur.com/jkzjZA2.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=11"><img--%>
+    <%--                                    src="https://i.imgur.com/jAgPxzR.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="client__thumb">--%>
+    <%--                            <a href="/Design/F/product/productbybrand?brand=9"><img--%>
+    <%--                                    src="https://i.imgur.com/8eclJGq.jpg"--%>
+    <%--                                    alt="client"></a>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                </div>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--    </section>--%>
     <!-- shop area start -->
     <section class="shop__area pt-100 pb-100">
         <div class="container">
+            <%--            中間品牌廣告導覽             --%>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="client__slider owl-carousel text-center">
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=6"><img
+                                    src="https://i.imgur.com/dftzIxn.jpg"
+                                    alt="client"></a>
+                        </div>
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=15"><img
+                                    src="https://i.imgur.com/Aw91g70.jpg"
+                                    alt="client"></a>
+                        </div>
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=24"><img
+                                    src="https://i.imgur.com/P3jjoZj.jpg"
+                                    alt="client"></a>
+                        </div>
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=4"><img
+                                    src="https://i.imgur.com/jkzjZA2.jpg"
+                                    alt="client"></a>
+                        </div>
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=11"><img
+                                    src="https://i.imgur.com/jAgPxzR.jpg"
+                                    alt="client"></a>
+                        </div>
+                        <div class="client__thumb">
+                            <a href="/Design/F/product/productbybrand?brand=9"><img
+                                    src="https://i.imgur.com/8eclJGq.jpg"
+                                    alt="client"></a>
+                        </div>
+                    </div><br><br><br>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-4">
                     <jsp:include page="../IncludePage/layoutPage/productLeftSideBar.jsp"/>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8">
                     <div class="shop__content-area">
+
                         <div class="shop__header d-sm-flex justify-content-between align-items-center mb-40">
                             <div class="shop__header-left">
                                 <div class="show-text">
-                                    <span>Showing 1–12 of 20 results</span>
+                                    <span>Showing 1–20 of 20 results</span>
                                 </div>
                             </div>
                             <div class="shop__header-right d-flex align-items-center justify-content-between justify-content-sm-end">
@@ -622,3 +699,4 @@
 
 </body>
 </html>
+
