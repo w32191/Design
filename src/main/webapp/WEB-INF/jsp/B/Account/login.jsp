@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="bg-light">
+<body class="" style="background-color: rgb(230,230,230)">
 
 
 	<div class="unix-login">
@@ -59,9 +59,6 @@
 								<p>
 									註冊員工<a href="/Design/B/register"> 立即加入</a>
 								</p>
-
-
-
 							</div>
 
 						</div>
