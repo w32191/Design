@@ -1,8 +1,8 @@
 $(function () {
   let pageUl = $('#pageUl');
   let searchName = $('#searchName');
-  let sort = 'startDate';
-  let orderBy = 'asc';
+  let sort = 'id';
+  let orderBy = 'desc';
 
   $('#deleteBatchBtn').click(function () {
     let idList = [];
@@ -356,7 +356,7 @@ $(function () {
       $.each(activities, function (index, ac) {
         txt += `<tr><td><input type="checkbox" id="checkbox${ac.id}" class="form-control checks"></td>`;
         txt += `<td class="showId">${ac.id}</td>`;
-        txt += `<td>${ac.subject}</td>`;
+        txt += `<td><p style="border-bottom: solid ${ac.color} 5px">${ac.subject}</p></td>`;
 
         if (ac.imgurImgs.length > 0) {
           txt += ` <td><img src="${ac.imgurImgs[0].link}" alt="" width="100"/></td>`

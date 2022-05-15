@@ -58,10 +58,10 @@
                                                     <i class="fa fa-minus"></i> 批次刪除
                                                 </button>
                                             </div>
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-3">
                                                 <h2>活動管理</h2>
                                             </div>
-                                            <div class="col-lg-7 .bg-light rounded text-primary p-l-0 title-margin-left">
+                                            <div class="col-lg-6 .bg-light rounded text-primary p-l-0 title-margin-left">
                                                 篩選：
                                                 <label>主題:
                                                     <input type="text"
@@ -130,7 +130,7 @@
                                                                    class="form-control checks">
                                                         </td>
                                                         <td class="showId">${ac.id}</td>
-                                                        <td>${ac.subject}</td>
+                                                        <td><p style="border-bottom: solid ${ac.color} 5px">${ac.subject}</p></td>
                                                         <c:choose>
                                                             <c:when test="${ac.imgurImgs.size() != 0 }">
                                                                 <c:forEach items="${ac.imgurImgs}"
