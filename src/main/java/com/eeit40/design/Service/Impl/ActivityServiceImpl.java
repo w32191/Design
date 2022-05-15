@@ -105,7 +105,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findByPage(Integer pageNumber) {
-    return activityRepository.findAll(pageControls("id", pageNumber,true));
+    return activityRepository.findAll(pageControls("id", pageNumber,false));
   }
 
   @Override
