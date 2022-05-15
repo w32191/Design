@@ -361,11 +361,43 @@
 <script src="${contextRoot}/static/back/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <%--<script src="${contextRoot}/static/back/assets/js/lib/data-table/datatables-init.js"></script>--%>
 
-
+insertCaseDialog
 <script src="${contextRoot}/static/back/universal/taiwan_districts.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/back/universal/Case.js"></script>
+<script>
+    $('#insertFile').mouseover(function () {
+        $('#title').val("開關查修及更換"),
+            $('#name').val("王英及"),
+            $('#classification> option:selected').text("水電工程"),
+            $('#location> option:selected').text("高雄市"),
+            $('#caseEmail').val("ricc@gmail.com"),
+            $('#expiryDate').val("2022-07-28"),
+            $('#message').val(`1. 自行買星光開關要更換，結果燈不亮 <br/>
+            2. 屋舊，發現有些開關沒反應 <br/>
+            3. 3燈吊燈，1燈不亮，更換新燈泡還是一樣 <br/>
+            4. 需要順便幫我鑽孔浴室內的三層跟二層置物架<br/>
+                `),
+            $('#insertCoverPhoto').attr('src',"https://i.imgur.com/MNxtvzI.jpg")
+
+    })
+</script>
+
+<script>
+    $('#editFile').mouseover(function () {
+        $('#editTitle').val("工作台冰箱不冷"),
+            $('#editName').val("黃燈灰"),
+            $('#editClassification> option:selected').text("廚房設備"),
+            $('#editLocation> option:selected').text("桃園市"),
+            $('#editCaseEmail').val("likeyoumm@hotmail.com"),
+            $('#editExpiryDate').val("2022-08-08"),
+            $('#editMessage').val(`工作台冰箱吹出來的風不冷<br/>
+                `),
+            $('#editCoverPhoto').attr('src',"https://i.imgur.com/477cFHk.jpg")
+
+    })
+</script>
 
 <%--<script>--%>
 <%--    console.log(Taiwan_districts);--%>

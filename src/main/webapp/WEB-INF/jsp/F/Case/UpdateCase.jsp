@@ -29,12 +29,13 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Add Your Case</h1>
+                        <h1>新增裝潢需求</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="${contextRoot}/F/Activity/index">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="${contextRoot}/F/Case"> Case</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a
+                                            href="${contextRoot}/F/Case"> Case</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -61,18 +62,18 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label>標題：</label>
-                                                    <input id= "caseTitle" type="text" class="form-control">
+                                                    <input id="caseTitle" type="text" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>名字：</label>
-                                                    <input id= "caseName" type="text" class="form-control">
+                                                    <input id="caseName" type="text" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>名字：</label>
-                                                    <input id= "caseEmail" type="text" class="form-control">
+                                                    <label>E-mail：</label>
+                                                    <input id="caseEmail" type="text" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>風格：</label>
+                                                    <label>工程種類：</label>
                                                     <select class="form-control" id="classificationData">
                                                         <%--                                                        <option>1</option>--%>
                                                         <%--                                                        <option>2</option>--%>
@@ -92,10 +93,15 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>結案時間：</label>
+                                                    <input id="expiryDate" type="date" class="form-control">
+                                                </div>
+                                                <div class="form-group">
                                                     <label>資訊：</label>
-                                                    <textarea id= "caseMessage" class="form-control" rows="20"
+                                                    <textarea id="caseMessage" class="form-control" rows="20"
                                                               placeholder=""></textarea>
                                                 </div>
+
                                                 <div class="form-group" id="imgDiv">
                                                     <label>照片：</label><br/>
                                                     <input type="file" id="insertFile" class="imgur"
@@ -135,7 +141,19 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/front/universal/Case.js"></script>
+<script>
+    $('#addCaseBtn').mouseover(function () {
+        $('#caseTitle').val("牆面開孔"),
+            $('#caseName').val("偉德"),
+            $('#classificationData> option:selected').text("拆除工程"),
+            $('#locationData> option:selected').text("新竹市"),
+            $('#caseEmail').val("lulu@hotmail.com"),
+            $('#expiryDate').val("2022-08-20"),
+            $('#caseMessage').val(`開孔高70公分×寬60公分，牆厚度25公分 如圖片所框處<br/>`),
+            $('#insertCoverPhoto').attr('src', "https://i.imgur.com/LIBbI5r.jpg")
 
+    })
+</script>
 </body>
 
 </html>

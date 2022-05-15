@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </c:if>
-                        <h1><a href="blog.html">${aCase.title}</a></h1>
+                        <h1><a href="${contextRoot}/F/Case/">${aCase.title}</a></h1>
                         <div class="blog__meta">
                             <span>${aCase.location}</span><br/>
                             <span>${aCase.classification}</span><br/>
@@ -112,83 +112,83 @@
                             </div>
                         </div>
                     </div>
-                    <div class="postbox__related-title">
-                        <h3>You Might Also Like</h3>
-                    </div>
-                    <div class="postbox__related-item">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6">
-                                <div class="blog__item mb-30">
-                                    <div class="blog__thumb fix">
-                                        <a href="blog-details.html" class="w-img"><img
-                                                src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg" alt="blog"></a>
-                                    </div>
-                                    <div class="blog__content">
-                                        <h4><a href="blog-details.html">Anteposuerit litterarum
-                                            formas.</a></h4>
-                                        <div class="blog__meta">
-                                            <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                            <span>/ September 14, 2017</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6">
-                                <div class="blog__item mb-30">
-                                    <div class="blog__thumb fix">
-                                        <a href="blog-details.html" class="w-img"><img
-                                                src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg" alt="blog"></a>
-                                    </div>
-                                    <div class="blog__content">
-                                        <h4><a href="blog-details.html">Hanging fruit to identify a
-                                            ballpark</a></h4>
-                                        <div class="blog__meta">
-                                            <span>By <a href="#">Shahnewaz Sakil</a></span>
-                                            <span>/ September 14, 2017</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="postbox__line mt-65"></div>
+<%--                    <div class="postbox__related-title">--%>
+<%--                        <h3>You Might Also Like</h3>--%>
+<%--                    </div>--%>
+<%--                    <div class="postbox__related-item">--%>
+<%--                        <div class="row">--%>
+<%--                            <div class="col-xl-6 col-lg-6 col-md-6">--%>
+<%--                                <div class="blog__item mb-30">--%>
+<%--                                    <div class="blog__thumb fix">--%>
+<%--                                        <a href="blog-details.html" class="w-img"><img--%>
+<%--                                                src="${contextRoot}/static/front/assets/img/blog/blog-1.jpg" alt="blog"></a>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="blog__content">--%>
+<%--                                        <h4><a href="blog-details.html">Anteposuerit litterarum--%>
+<%--                                            formas.</a></h4>--%>
+<%--                                        <div class="blog__meta">--%>
+<%--                                            <span>By <a href="#">Shahnewaz Sakil</a></span>--%>
+<%--                                            <span>/ September 14, 2017</span>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-xl-6 col-lg-6 col-md-6">--%>
+<%--                                <div class="blog__item mb-30">--%>
+<%--                                    <div class="blog__thumb fix">--%>
+<%--                                        <a href="blog-details.html" class="w-img"><img--%>
+<%--                                                src="${contextRoot}/static/front/assets/img/blog/blog-2.jpg" alt="blog"></a>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="blog__content">--%>
+<%--                                        <h4><a href="blog-details.html">Hanging fruit to identify a--%>
+<%--                                            ballpark</a></h4>--%>
+<%--                                        <div class="blog__meta">--%>
+<%--                                            <span>By <a href="#">Shahnewaz Sakil</a></span>--%>
+<%--                                            <span>/ September 14, 2017</span>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="postbox__line mt-65"></div>--%>
 
-                    <div class="postbox__line mb-95"></div>
-                    <div class="post-comments-form mb-100">
-                        <div class="post-comments-title mb-30">
-                            <h3>Leave A Reply</h3>
-                        </div>
-                        <form id="contacts-form" class="conatct-post-form" action="#">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="contact-icon p-relative contacts-name">
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <div class="contact-icon p-relative contacts-name">
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="contact-icon p-relative contacts-email">
-                                        <input type="text" placeholder="Subject">
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div class="contact-icon p-relative contacts-message">
-                                                <textarea name="comments" id="comments" cols="30"
-                                                          rows="10"
-                                                          placeholder="Comments"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12">
-                                    <button class="os-btn os-btn-black" type="submit">Post comment
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<%--                    <div class="postbox__line mb-95"></div>--%>
+<%--                    <div class="post-comments-form mb-100">--%>
+<%--                        <div class="post-comments-title mb-30">--%>
+<%--                            <h3>Leave A Reply</h3>--%>
+<%--                        </div>--%>
+<%--                        <form id="contacts-form" class="conatct-post-form" action="#">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-xl-6 col-lg-6 col-md-6">--%>
+<%--                                    <div class="contact-icon p-relative contacts-name">--%>
+<%--                                        <input type="text" placeholder="Name">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-xl-6 col-lg-6 col-md-6">--%>
+<%--                                    <div class="contact-icon p-relative contacts-name">--%>
+<%--                                        <input type="email" placeholder="Email">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-xl-12">--%>
+<%--                                    <div class="contact-icon p-relative contacts-email">--%>
+<%--                                        <input type="text" placeholder="Subject">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-xl-12">--%>
+<%--                                    <div class="contact-icon p-relative contacts-message">--%>
+<%--                                                <textarea name="comments" id="comments" cols="30"--%>
+<%--                                                          rows="10"--%>
+<%--                                                          placeholder="Comments"></textarea>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-xl-12">--%>
+<%--                                    <button class="os-btn os-btn-black" type="submit">Post comment--%>
+<%--                                    </button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </form>--%>
+<%--                    </div>--%>
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="sidebar__wrapper">
@@ -202,57 +202,64 @@
                         </div>
                         <div class="sidebar__widget mb-55">
                             <div class="sidebar__widget-title mb-25">
-                                <h3>Latest Posts</h3>
+                                <h3>最新需求 By <span style="color: #bc8246">${aCase.name}</span></h3>
                             </div>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     <ul>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-1.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Make your life
-                                                        easy</a>
-                                                </h6>
-                                                <div class="rc__meta">postbox__comments pt-90
-                                                    <span> September 14, 2020</span>
+                                        <c:forEach items="${caseList1}" var="ca" begin="0" end="10">
+                                            <li class="d-flex">
+                                                    <%--                                                <div class="rc__post-thumb mr-20 ">--%>
+                                                    <%--                                                    <a href="blog-details.html">--%>
+                                                <img href="${ca.id}"
+                                                     src="${ca.coverPhoto}" width="50%"
+                                                     alt="blog-1"
+                                                     STYLE="margin-right: 10px">
+                                                    <%--                                                    </a>--%>
+                                                    <%--                                                </div>--%>
+                                                <div class="rc__post-content">
+                                                    <h6>
+                                                        <a href="${ca.id}">
+                                                                ${ca.title}</a>
+                                                    </h6>
+                                                    <div class="rc__meta">
+                                                        <span>${ca.name}</span>
+<%--                                                        <span>${case.style}</span>--%>
+<%--                                                        <span>${case.createTime}</span>--%>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-2.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Feel like home</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 01, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="rc__post-thumb mr-20 ">
-                                                <a href="blog-details.html"><img
-                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-3.jpg"
-                                                        alt="blog-1"></a>
-                                            </div>
-                                            <div class="rc__post-content">
-                                                <h6>
-                                                    <a href="blog-details.html">Best thing ever</a>
-                                                </h6>
-                                                <div class="rc__meta">
-                                                    <span>October 05, 2020</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        </c:forEach>
+                                        <%--                                        <li class="d-flex">--%>
+                                        <%--                                            <div class="rc__post-thumb mr-20 ">--%>
+                                        <%--                                                <a href="blog-details.html"><img--%>
+                                        <%--                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-2.jpg"--%>
+                                        <%--                                                        alt="blog-1"></a>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                            <div class="rc__post-content">--%>
+                                        <%--                                                <h6>--%>
+                                        <%--                                                    <a href="blog-details.html">Feel like home</a>--%>
+                                        <%--                                                </h6>--%>
+                                        <%--                                                <div class="rc__meta">--%>
+                                        <%--                                                    <span>October 01, 2020</span>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </li>--%>
+                                        <%--                                        <li class="d-flex">--%>
+                                        <%--                                            <div class="rc__post-thumb mr-20 ">--%>
+                                        <%--                                                <a href="blog-details.html"><img--%>
+                                        <%--                                                        src="${contextRoot}/static/front/assets/img/blog/sm/blog-sm-3.jpg"--%>
+                                        <%--                                                        alt="blog-1"></a>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                            <div class="rc__post-content">--%>
+                                        <%--                                                <h6>--%>
+                                        <%--                                                    <a href="blog-details.html">Best thing ever</a>--%>
+                                        <%--                                                </h6>--%>
+                                        <%--                                                <div class="rc__meta">--%>
+                                        <%--                                                    <span>October 05, 2020</span>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </li>--%>
                                     </ul>
                                 </div>
                             </div>

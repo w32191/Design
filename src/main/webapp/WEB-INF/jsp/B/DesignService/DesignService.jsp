@@ -289,6 +289,43 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/back/universal/DesignService.js"></script>
+<script>
+    $('#insertDesignDialog').mouseover(function () {
+        $('#title').val("遠域生活"),
+            $('#name').val("近境制作"),
+            $('#style> option:selected').text("工業風格"),
+            $('#location> option:selected').text("台南市"),
+            $('#price').val(20000),
+            $('#message').val(`美學館整體的規劃通過延伸沙盤中空區的縱橫牆體，改造一面過渡一至三樓的建築量體，
+            藉由這道量體的劃分空間的功能區域。讓步入空間的方式形成遞進，延伸，轉換層次變化，通過建築的語言構造空間情緒的起，承，轉，合。<br>/
+            <br>/
+            <br>/
+步入空間，兩扇高聳冷冽的金屬拉門緩緩拉開，像一場的舞台劇目的開始。石材雕塑裡映射到天花閃爍洵波光，延續庭院水景的蘊意。
+深色亮光的咖啡溶地面倒映出背景圓形的光圈和格柵外透出來的微弱光影，創造幽韻靜雅的空間意境，像船舟一般漂浮的藝術品接待台，
+隱喻遠航回歸的旅人腳下停泊。<br>/
+            <br>/
+            <br>/
+轉折進入藝廊空間，水聲潺潺，幽蘊的扭曲裡一條瀑布從天然的毛石牆面垂直而下，延伸至地面錯落有致的山石水景中，彷若溪山行旅之間，
+雨後初晴的通過電視廳旋轉，進入沙發盤區，豁然開朗，三層挑高的鑽石型玻璃空間浮現眼前，空間的情緒由暗轉明。<br>/
+            <br>/
+            <br>/
+橢圓形的黑鏡地面與瀝水石山岩相連，猶如置身一面山谷中鏡湖，碟形沙盤像一葉輕舟漂浮其中，意境深遠..迴轉返折進入接合區，
+庭院的水景像一面鋪開的中國長卷繪畫映入眼目，空間的詩意猶然生。微波潺流的水面為背景，把橫長形的下沉吧台量體置入前端，
+吧台之中的服務人員像畫卷前端的一筆，形成微妙的生動畫境。<br>/
+            <br>/
+            <br>/
+從傾注的大雨到雨間停息，再轉入雨後山澗的溪流，折回到山谷中的鏡湖，意象交融，通過分解提煉自然的氣韻變化構造形成這一段的場域，
+最後通過空間層境人們遊走其中，深入其境，又脫離其中，最終指向內心的寧靜..慢慢的去思索人生的追求。<br>/
+            <br>/
+            <br>/
+
+`),
+            $('#insertCoverPhoto').attr('src'),
+            $('#insertPhoto_1').attr('src'),
+            $('#insertPhoto_2').attr('src')
+
+    })
+</script>
 
 <%--<script>--%>
 <%--    console.log(Taiwan_districts);--%>

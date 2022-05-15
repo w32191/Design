@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-inner text-center">
-                        <h1>Edit Your Case</h1>
+                        <h1>編輯裝修需求</h1>
                         <div class="page__title-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
@@ -65,12 +65,11 @@
                                                     value="${Case.title}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>名字：</label>
-                                                    <input id= "editName" type="text" class="form-control"
-                                                           value="${Case.name}">
+                                                    <label>E-mail：</label>
+                                                    <input id= "editEmail" type="email" class="form-control"    >
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>風格：</label>
+                                                    <label>工程總類：</label>
                                                     <select class="form-control" id="editStyleList">
                                                         <%--                                                        <option>1</option>--%>
                                                         <%--                                                        <option>2</option>--%>
@@ -88,6 +87,10 @@
                                                         <%--                                                        <option>4</option>--%>
                                                         <%--                                                        <option>5</option>--%>
                                                     </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>結案時間：</label>
+                                                    <input id= "editExpiryDate" type="Date" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>資訊：</label>
@@ -133,6 +136,20 @@
 <script src="${contextRoot}/static/back/universal/lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
 <script src="${contextRoot}/static/back/universal/lib/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="${contextRoot}/static/front/universal/Case.js"></script>
+<script>
+    $('#editCaseCheckBtn').mouseover(function () {
+        $('#editTitle').val("牆面開孔"),
+
+            $('#editEmail').val("luby@hotmail.com"),
+            $('#editStyleList> option:selected').text("水電工程"),
+            $('#editLocation> option:selected').text("新北市"),
+            $('#editCaseEmail').val("lulu@hotmail.com"),
+            $('#editExpiryDate').val("2022-08-20"),
+            $('#editMessage').val(`開孔高70公分×寬60公分，牆厚度25公分 如圖片所框處<br/>`),
+            $('#editCoverPhoto').attr('src', "https://i.imgur.com/LIBbI5r.jpg")
+
+    })
+</script>
 
 </body>
 

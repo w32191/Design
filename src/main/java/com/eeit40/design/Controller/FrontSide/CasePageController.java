@@ -77,6 +77,15 @@ public class CasePageController {
     public ModelAndView index(ModelAndView mav, HttpSession session) {
         Account account = (Account) session.getAttribute("Faccount");
         mav.addObject("account", account);
+
+        CaseQueryParams caseQueryParams = new CaseQueryParams();
+        caseQueryParams.setOrderBy("date_time");
+        caseQueryParams.setSort("desc");
+        caseQueryParams.setFetchNext(11);
+        caseQueryParams.setOffset(0);
+        List<Case> caseList = caseService.getCases(caseQueryParams);
+
+        mav.addObject("CaseList" , caseList);
         mav.setViewName("F/Case/Case");
         return mav;
     }
@@ -100,6 +109,21 @@ public class CasePageController {
         } else {
             mav.addObject("memberId", -1);
         }
+
+        CaseQueryParams caseQueryParams = new CaseQueryParams();
+        caseQueryParams.setOrderBy("date_time");
+        caseQueryParams.setSort("desc");
+        caseQueryParams.setFetchNext(11);
+        caseQueryParams.setOffset(0);
+
+        List<Case> caseList = caseService.getCases(caseQueryParams);
+        List<Case> caseList1 = caseService.getCaseByMemberId(aCase.getFkMember().getId());
+        System.out.println(caseList1);
+
+        mav.addObject("caseList" , caseList);
+        mav.addObject("caseList1", caseList1);
+//        mav.addObject("classification",classifica);
+
         mav.addObject("aCase", aCase);
         mav.setViewName("F/Case/ViewCase");
         return mav;
