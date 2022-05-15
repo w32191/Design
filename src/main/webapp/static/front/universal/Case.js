@@ -1667,8 +1667,8 @@ $(function () {
         const data = {
             title: $('#caseTitle').val(),
             name: $('#caseName').val(),
-            classification: $('#caseClassification> option:selected').text(),
-            location: $('#caseLocation> option:selected').text(),
+            classification: $('#classificationData> option:selected').text(),
+            location: $('#locationData> option:selected').text(),
             caseEmail: $('#Email').val(),
             message: $('#caseMessage').val(),
             expiryDate: $('#stopCaseTime').val(),
@@ -2017,26 +2017,26 @@ $(function () {
                 $.each(result.results, function (index, value) {
                     let imgStr;
                     if (value.coverPhoto != null) {
-                        imgStr = `<img src=" ${value.coverPhoto}" style="width: 350px; height: 350px; object-fit: cover " alt="blog">`;
+                        imgStr = `<img href="/Design/F/ViewCase/' + value.id + '" src=" ${value.coverPhoto}" style="width: 350px; height: 350px; object-fit: cover " alt="blog">`;
                     } else {
-                        imgStr = `<img src="/Design/static/back/universal/images/no-image.jpeg" style='width: 100%' alt="blog">`;
+                        imgStr = `<img href="/Design/F/ViewCase/' + value.id + '" src="/Design/static/back/universal/images/no-image.jpeg" style='width: 100%' alt="blog">`;
                     }
 
                     case_data += '<div class="col-xl-4 col-lg-4 col-md-6" style="padding-top: 24px">' +
                         '<div class="blog__wrapper">' +
                         '<div class="blog__item blog__border-bottom mb-60 pb-60">'
                     case_data += '<div class="blog__thumb fix">' +
-                        '<a href="ViewCase/${value.id}" class="w-img">' + imgStr +
+                        '<a href="/Design/F/ViewCase/' + value.id + '" class="w-img">' + imgStr +
                         '</a>' +
                         '</div>'
-                    case_data += '<div className="blog__content">' +
-                        '<h4><a href="blog-details.html">' + value.title + '</a></h4>'
+                    case_data += '<div class="blog__content">' +
+                        '<h4><a  href="/Design/F/ViewCase/' + value.id + '">' + value.title + '</a></h4>'
                     case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
                     case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
                     case_data += '<p>' + value.message + '</p>'
-                    case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
+                    case_data += '<div class="blog__meta"><span>By <a href="/Design/F/ViewCase/' + value.id + '">' + value.name + '</a></span>'
                     case_data += '<span>  ' + value.dateTime + '</span></div>'
-                    case_data += '<a href="blog-details.html" class="os-btn">read more</a></div>'
+                    case_data += '<a href="/Design/F/ViewCase/' + value.id + '" class="os-btn">read more</a></div>'
                     case_data += '</div></div></div>'
 
                 })
@@ -2067,24 +2067,24 @@ $(function () {
                     if (value.coverPhoto != null) {
                         imgStr = `<div style="width: 350px; height: 350px; object-fit: cover " class="cCover"><img href="ViewCase/' + value.id + '" src=" ${value.coverPhoto} "  class="background-cover"  alt="blog"></div>`;
                     } else {
-                        imgStr = `<img href="ViewCase/' + value.id + '" src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
+                        imgStr = `<img href="/Design/F/ViewCase/' + value.id + '" src="/Design/static/back/universal/images/no-image.jpeg" alt="blog">`;
                     }
 
                     case_data += '<div class="col-xl-4 col-lg-4 col-md-6" style="padding-top: 24px">' +
                         '<div class="blog__wrapper">' +
                         '<div class="blog__item blog__border-bottom mb-60 pb-60">'
                     case_data += '<div class="blog__thumb fix">' +
-                        '<a href="ViewCase/' + value.id + '" class="w-img">' + imgStr +
+                        '<a href="/Design/F/ViewCase/' + value.id + '" class="w-img">' + imgStr +
                         '</a>' +
                         '</div>'
-                    case_data += '<div className="blog__content">' +
-                        '<h4><a href="ViewCase/' + value.id + '" >' + value.title + '</a></h4>'
+                    case_data += '<div class="blog__content">' +
+                        '<h4><a href="/Design/F/ViewCase/' + value.id + '" >' + value.title + '</a></h4>'
                     case_data += '<div class="blog__meta"><span><a class="classificationSearch" >' + value.classification + '</a></span></div>'
                     case_data += '<div class="blog__meta"><span><a class="locationSearch">' + value.location + '</a></span><br/></div>'
                     case_data += '<div class="truncate"><p>' + value.message + '</p></div>'
                     case_data += '<div class="blog__meta"><span>By <a href="#">' + value.name + '</a></span>'
                     case_data += '<span>  ' + value.dateTime + '</span></div>'
-                    case_data += '<a href="ViewCase/' + value.id + '" class="os-btn">read more</a></div>'
+                    case_data += '<a href="/Design/F/ViewCase/' + value.id + '" class="os-btn">read more</a></div>'
                     case_data += '</div></div></div>'
 
                 })

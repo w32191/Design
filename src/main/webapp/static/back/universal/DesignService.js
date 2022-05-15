@@ -1959,7 +1959,7 @@ $(function () {
             option = document.createElement('option');
             option.innerHTML = `${value.name}`;
             // option.value = `${index}`;
-            $('#editLocation').append(option);
+            $('#editLocation    ').append(option);
 
             option = document.createElement('option');
             if (value.name !== "所有地區") {

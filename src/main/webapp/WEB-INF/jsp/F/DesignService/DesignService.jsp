@@ -162,7 +162,7 @@
                         </div>
                         <div class="sidebar__widget mb-55">
                             <div class="sidebar__widget-title mb-25">
-                                <h3>Latest Posts</h3>
+                                <h3>New Design</h3>
                             </div>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">

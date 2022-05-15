@@ -47,7 +47,7 @@
                                     <button id="editDesignBtn"
                                             onclick="location.href='${contextRoot}/F/editDesignService/${Design.id}'"
                                             class="os-btn os-btn-black" name="add_cart" type="submit">
-                                        編輯案件
+                                        編輯設計
                                     </button>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="sidebar__widget mb-55">
                             <div class="sidebar__widget-title mb-25">
-                                <h3>Latest Posts</h3>
+                                <h3>New Design By <span style="color: #bc8246">${Design.name}</span></h3>
                             </div>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">

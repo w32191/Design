@@ -170,28 +170,34 @@ public class DesignDaoImpl {
     map.put("style", designDto.getStyle());
     map.put("message", designDto.getMessage());
     map.put("price", designDto.getPrice());
-    if (designDto.getCoverPhoto() != null) {
-      if (designDto.getCoverPhoto().length() < 10) {
-        map.put("coverPhoto", null);
-      }
-      map.put("coverPhoto", null);
-    } else {
-      map.put("coverPhoto", designDto.getCoverPhoto());
-    }
-    if (designDto.getPhoto_1() != null) {
-      if (designDto.getPhoto_1().length() < 10) {
-        map.put("photo_1", null);
-      }
-    } else {
-      map.put("photo_1", designDto.getPhoto_1());
-    }
-    if (designDto.getPhoto_2() != null) {
-      if (designDto.getPhoto_2().length() < 10) {
-        map.put("photo_2", null);
-      }
-    } else {
-      map.put("photo_2", designDto.getPhoto_2());
-    }
+    map.put("coverPhoto",designDto.getCoverPhoto());
+    map.put("photo_1",designDto.getPhoto_1());
+    map.put("photo_2",designDto.getPhoto_2());
+
+//    if (designDto.getCoverPhoto() != null) {
+//      if (designDto.getCoverPhoto().length() < 10) {
+//        map.put("coverPhoto", null);
+//      }else {
+//        map.put("coverPhoto", designDto.getCoverPhoto());
+//      }
+//      map.put("coverPhoto", null);
+//    } else {
+//      map.put("coverPhoto", designDto.getCoverPhoto());
+//    }
+//    if (designDto.getPhoto_1() != null) {
+//      if (designDto.getPhoto_1().length() < 10) {
+//        map.put("photo_1", null);
+//      }
+//    } else {
+//      map.put("photo_1", designDto.getPhoto_1());
+//    }
+//    if (designDto.getPhoto_2() != null) {
+//      if (designDto.getPhoto_2().length() < 10) {
+//        map.put("photo_2", null);
+//      }
+//    } else {
+//      map.put("photo_2", designDto.getPhoto_2());
+//    }
     map.put("location", designDto.getLocation());
 
     namedParameterJdbcTemplate.update(sql, map);
