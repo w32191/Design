@@ -1,13 +1,49 @@
 $(function () {
   setCalender();
-  $('#insertBtn').on('click',insertSend);
+  $('#insertBtn').on('click', insertSend);
 
-  $('#insertdiscountPercentage').on('change',function (){
+  $('#insertdiscountPercentage').on('change', function () {
     let value = $('#insertdiscountPercentage').val();
     $('#disSpan').text(`${value}%`);
   });
 
-  $('#oneKeyInputBtn').click(oneKeyInput);
+  // $('#oneKeyInputBtn').click(oneKeyInput);
+
+  $('label[for=insertSubject]').click(function () {
+    $('#insertSubject').val('Tom Dixon. 週年慶');
+  });
+
+  $('label[for=insertContent]').click(function () {
+    $('#insertContent').val('Tom Dixon. 週年慶\n限時三天！！\n只有三天要買要快！！！\n全品牌七折！！');
+  });
+
+  $('label[for=insertdiscountPercentage]').click(function () {
+    $('#insertdiscountPercentage').val(33);
+  });
+
+  $('label[for=insertStartDate]').click(function () {
+    document.getElementById('insertStartDate').valueAsDate = new Date();
+  });
+
+  $('label[for=insertEndDate]').click(function () {
+    $('#insertEndDate').val('2022-05-23');
+  });
+
+  // 圖片預覽
+  $('#insertUploadFile').on('change', function () {
+    readURL(this);
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#reviewImg").attr('src', e.target.result).removeAttr('hidden');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
 });
 
 function setCalender() {
@@ -50,7 +86,8 @@ function insertSend() {
     content: $('#insertContent').val(),
     discountPercentage: $('#insertdiscountPercentage').val(),
     startDate: $('#insertStartDate').val(),
-    endDate: $('#insertEndDate').val()
+    endDate: $('#insertEndDate').val(),
+    color: $('#insertColor').val()
   }
   // 將輸入的文字資料及檔案，包進FormData
   const dataFile = new FormData();
@@ -94,7 +131,7 @@ function insertSend() {
   });
 }
 
-function oneKeyInput(){
+function oneKeyInput() {
   $('#insertSubject').val('Tom Dixon. 週年慶');
   $('#insertContent').val('全品牌限時特價！！\n只要三折！！！\n通通三折，要買要快！！');
   $('#insertdiscountPercentage').val(30);

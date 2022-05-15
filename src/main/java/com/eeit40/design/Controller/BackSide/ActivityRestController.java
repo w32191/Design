@@ -189,17 +189,26 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
       @RequestParam(value = "start", defaultValue = "2000-01-01") String start,
       @RequestParam(value = "end", defaultValue = "2100-12-30") String end,
       @RequestParam(value = "subject", required = false) String subject,
+      @RequestParam(value = "sortBy", defaultValue = "startDate") String sortStr,
+      @RequestParam(value = "order", defaultValue = "asc") String order,
       @RequestParam(value = "page", defaultValue = "1") Integer pageNumber) {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate startDate = LocalDate.parse(start, formatter);
     LocalDate endDate = LocalDate.parse(end, formatter);
-    if (subject == null) {
-      return service.findActivitiesByTimePaged(startDate, endDate, pageNumber);
+    boolean orderBy;
+    if (order.equals("asc")) {
+      orderBy = true;
     } else {
-      return service.findActivitiesByTimePaged(startDate, endDate, subject, pageNumber);
+      orderBy = false;
     }
 
+    if (subject == null) {
+      return service.findActivitiesByTimePaged(startDate, endDate, sortStr, pageNumber, orderBy);
+    } else {
+      return service.findActivitiesByTimePaged(startDate, endDate, subject, sortStr, pageNumber,
+          orderBy);
+    }
   }
 
 
@@ -212,15 +221,20 @@ public class ActivityRestController { // 給前端Ajax提供JSON 資料的RestCo
 
   // 檢查新增、更新時輸入的資料是否完善
   private ResponseEntity<String> checkInputData(ActivityDto dto) {
-
-    if (dto.getSubject() == null) {
-      return new ResponseEntity<>("請輸入活動主題！", HttpStatus.BAD_REQUEST);
+    LocalDate now = LocalDate.now();
+    System.out.println(dto);
+    if (dto.getSubject().length() < 2) {
+      return new ResponseEntity<>("請輸入 活動主題！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getDiscountPercentage() == null) {
+      return new ResponseEntity<>("請輸入 折扣％！", HttpStatus.BAD_REQUEST);
     } else if (dto.getStartDate() == null) {
-      return new ResponseEntity<>("請輸入開始日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("請輸入 開始日期！", HttpStatus.BAD_REQUEST);
+    } else if (dto.getStartDate().isBefore(now)) {
+      return new ResponseEntity<>("開始日期 不可早於 今日！", HttpStatus.BAD_REQUEST);
     } else if (dto.getEndDate() == null) {
-      return new ResponseEntity<>("請輸入結束日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("請輸入 結束日期！", HttpStatus.BAD_REQUEST);
     } else if (dto.getStartDate().isAfter(dto.getEndDate())) {
-      return new ResponseEntity<>("開始日期不可晚於結束日期！", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("開始日期 不可晚於 結束日期！", HttpStatus.BAD_REQUEST);
     } else {
       return new ResponseEntity<>(HttpStatus.OK);
     }

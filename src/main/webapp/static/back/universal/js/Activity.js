@@ -1,6 +1,8 @@
 $(function () {
   let pageUl = $('#pageUl');
   let searchName = $('#searchName');
+  let sort = 'id';
+  let orderBy = 'desc';
 
   $('#deleteBatchBtn').click(function () {
     let idList = [];
@@ -21,9 +23,10 @@ $(function () {
   });
 
   // 刪除按鈕 按了觸發
-  $('.btn.btn-danger.delete').click(function () {
+  $('#theTbody').on('click', '.btn.btn-danger.delete', function () {
     let deleteBtn = $(this);
     let id = deleteBtn.parent('td').siblings('td:eq(1)').text();
+    console.log(id);
     let urlStr = "delete/" + id;
     let idList = [];
     deleteSend(urlStr, idList);
@@ -46,8 +49,28 @@ $(function () {
 
   });
 
-  // 一件輸入按鈕
-  $('#oneKeyInputBtn').click(oneKeyInput);
+  // // 一件輸入按鈕
+  // $('#oneKeyInputBtn').click(oneKeyInput);
+
+  $('label[for=insertSubject]').click(function () {
+    $('#insertSubject').val('Tom Dixon. 週年慶');
+  });
+
+  $('label[for=insertContent]').click(function () {
+    $('#insertContent').val('Tom Dixon. 週年慶\n限時三天！！\n只有三天要買要快！！！\n全品牌七折！！');
+  });
+
+  $('label[for=insertdiscountPercentage]').click(function () {
+    $('#insertdiscountPercentage').val(33);
+  });
+
+  $('label[for=insertStartDate]').click(function () {
+    document.getElementById('insertStartDate').valueAsDate = new Date();
+  });
+
+  $('label[for=insertEndDate]').click(function () {
+    $('#insertEndDate').val('2022-05-23');
+  });
 
   $('#cleanSearch').click(function () {
     $('#searchStart').val('');
@@ -105,6 +128,74 @@ $(function () {
     pageAndSearch(parseInt(page) - 1);
   });
 
+  // 圖片預覽
+  $('#insertUploadFile').on('change', function () {
+    readURL(this);
+  });
+
+  // 用折扣排序
+  $('#discountTh').on('click', function () {
+    sort = 'discountPercentage';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#idTh').on('click', function () {
+    sort = 'id';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#startTh').on('click', function () {
+    sort = 'startDate';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#endTh').on('click', function () {
+    sort = 'endDate';
+    changeSortIcon($(this));
+    pageAndSearch(1);
+  });
+
+  $('#searchStartLabel').on('click',function (){
+    $('#searchStart').val('2022-05-16');
+  });
+
+  $('#searchEndLabel').on('click',function (){
+    $('#searchEnd').val('2022-05-31');
+  });
+
+  function changeSortIcon(e) {
+    let sortSapn = e.children('span');
+
+    if (sortSapn.hasClass('ti-angle-double-down')) {
+      orderBy = 'asc';
+      sortSapn.closest('tr').find('span').addClass('ti-angle-double-down')
+      .removeClass('ti-angle-double-up text-light badge badge-secondary');
+
+      sortSapn.removeClass('ti-angle-double-down').addClass(
+          'ti-angle-double-up').addClass('text-light badge badge-secondary');
+
+    } else if (sortSapn.hasClass('ti-angle-double-up')) {
+      orderBy = 'desc';
+      sortSapn.closest('tr').find('span').addClass('ti-angle-double-down')
+      .removeClass('ti-angle-double-up text-light badge badge-secondary');
+
+      sortSapn.addClass('text-light').addClass('badge badge-secondary');
+    }
+  }
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#reviewImg").attr('src', e.target.result).removeAttr('hidden');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
   // 換頁以及search時 更新資料
   function pageAndSearch(page) {
     let start = $('#searchStart').val();
@@ -118,12 +209,15 @@ $(function () {
         start: start,
         end: end,
         subject: subject,
+        sortBy: sort,
+        order: orderBy,
         page: page
       },
       success: function (res) {
         // console.log(res);
         showTableData(res.content);
         showPaginationButton(res.totalPages, res.number, res.numberOfElements);
+        showTotalElements(res.totalElements);
       },
       error: function (err) {
         console.log(err);
@@ -139,7 +233,8 @@ $(function () {
       content: $('#insertContent').val(),
       discountPercentage: $('#insertdiscountPercentage').val(),
       startDate: $('#insertStartDate').val(),
-      endDate: $('#insertEndDate').val()
+      endDate: $('#insertEndDate').val(),
+      color: $('#insertColor').val()
     }
     // 將輸入的文字資料及檔案，包進FormData
     const dataFile = new FormData();
@@ -189,8 +284,8 @@ $(function () {
       text: "此動作無法復原！",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#348def',
       confirmButtonText: '確定刪除',
       cancelButtonText: '取消'
     }).then((result) => {   // 按了任何一個按鈕後
@@ -269,7 +364,7 @@ $(function () {
       $.each(activities, function (index, ac) {
         txt += `<tr><td><input type="checkbox" id="checkbox${ac.id}" class="form-control checks"></td>`;
         txt += `<td class="showId">${ac.id}</td>`;
-        txt += `<td>${ac.subject}</td>`;
+        txt += `<td><p style="border-bottom: solid ${ac.color} 5px">${ac.subject}</p></td>`;
 
         if (ac.imgurImgs.length > 0) {
           txt += ` <td><img src="${ac.imgurImgs[0].link}" alt="" width="100"/></td>`
@@ -324,6 +419,10 @@ $(function () {
 
     pageUl.html(txt);
 
+  }
+
+  function showTotalElements(totalElements) {
+    $('#totalElements').text(`共 ${totalElements} 筆`);
   }
 
 });

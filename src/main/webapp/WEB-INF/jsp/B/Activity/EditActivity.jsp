@@ -37,26 +37,27 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <div class="user-profile">
                                     <form id="updateForm">
                                         <div class="row">
-
                                             <div class="col-lg-5">
                                                 <h4 id="activityID">${activity.id}</h4>
                                                 <div class="user-photo m-b-30">
                                                     <c:choose>
                                                         <c:when test="${activity.imgurImgs.size() != 0}">
-                                                            <c:forEach items="${activity.imgurImgs}"
-                                                                       var="img"
-                                                                       begin="0" end="0" step="1">
-                                                                <img class="img-fluid" id="activityImg"
+                                                            <c:forEach
+                                                                    items="${activity.imgurImgs}"
+                                                                    var="img"
+                                                                    begin="0" end="0" step="1">
+                                                                <img class="img-fluid"
+                                                                     id="activityImg"
                                                                      src="${img.link}"
                                                                      alt="Image Error"/>
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img class="img-fluid" id="activityImg"
+                                                            <img class="img-fluid"
+                                                                 id="activityImg"
                                                                  src="${contextRoot}/static/back/universal/images/no-image.jpeg"
                                                                  alt="Image Error"/>
                                                         </c:otherwise>
@@ -68,7 +69,8 @@
                                                     <label class="custom-file-label"
                                                            for="updateImg">更換圖片</label>
                                                     <input type="file" name="updateImg"
-                                                           id="updateImg" class="custom-file-input">
+                                                           id="updateImg"
+                                                           class="custom-file-input">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7">
@@ -90,11 +92,12 @@
                                                         <i class="ti-layout-grid3-alt"></i>商品清單
                                                     </button>
                                                     <button class="btn btn-secondary btn-addon"
-                                                            type="button" id="closeProducts" hidden>
+                                                            type="button" id="closeProducts"
+                                                            hidden>
                                                         <i class="ti-layout-grid3-alt"></i>關閉清單
                                                     </button>
                                                     <a class="btn btn-warning btn-addon"
-                                                            href="${contextRoot}/B/Activity/findAll" >
+                                                       href="${contextRoot}/B/Activity/findAll">
                                                         <i class="ti-back-left"></i>回活動清單
                                                     </a>
                                                 </div>
@@ -107,47 +110,72 @@
                                                         </li>
                                                     </ul>
                                                     <div class="tab-content">
-                                                        <div role="tabpanel" class="tab-pane active"
+                                                        <div role="tabpanel"
+                                                             class="tab-pane active"
                                                              id="1">
                                                             <div class="contact-information">
                                                                 <div class="phone-content">
                                                                     <span class="contact-title">活動內容:</span>
                                                                     <textarea id="updateContent"
-                                                                              name="content"  style="height:100%"
+                                                                              name="content"
+                                                                              style="height:100%"
                                                                               class="form-control"
                                                                               rows="4">${activity.content}</textarea>
                                                                 </div>
-                                                                <div class="contact-information">
-                                                                    <span class="contact-title">折扣％：</span>
-                                                                    <input type="number"
-                                                                           class="form-control-sm"
-                                                                           placeholder="%"
-                                                                           name="discountPercentage"
-                                                                           value="${activity.discountPercentage}"
-                                                                           id="updatediscountPercentage">
-                                                                    <span class="contact-website"> % OFF </span>
+                                                                <%--                                                                <div class="contact-information">--%>
+                                                                <%--                                                                    <span class="contact-title">折扣％：</span>--%>
+                                                                <%--                                                                    <input type="number"--%>
+                                                                <%--                                                                           class="form-control-sm"--%>
+                                                                <%--                                                                           placeholder="%"--%>
+                                                                <%--                                                                           name="discountPercentage"--%>
+                                                                <%--                                                                           value="${activity.discountPercentage}"--%>
+                                                                <%--                                                                           id="updatediscountPercentage">--%>
+                                                                <%--                                                                    <span class="contact-website"> % OFF </span>--%>
+                                                                <%--                                                                </div>--%>
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="updatediscountPercentage">折扣：(
+                                                                            %OFF)
+                                                                            <input type="number"
+                                                                                   class="form-control"
+                                                                                   placeholder="%"
+                                                                                   name="discountPercentage"
+                                                                                   value="${activity.discountPercentage}"
+                                                                                   id="updatediscountPercentage"/>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <label> 行事曆 顏色：
+                                                                            <input type="color"
+                                                                                   name="color"
+                                                                                   id="updateColor"
+                                                                                   value="${activity.color}"/>
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="work-content">
-                                                            <p>
-                                                                <span>開始日期：</span>
+                                                        <div class="row">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="updateStartDate">開始日：
+                                                                </label>
                                                                 <input type="date"
                                                                        value="${activity.startDate}"
                                                                        name="startDate"
                                                                        id="updateStartDate"
-                                                                       class="form-control">
-                                                            </p>
-                                                        </div>
-                                                        <div class="work-content">
-                                                            <p>
-                                                                <span>結束日期：</span>
-                                                                <input type="date" name="endDate"
+                                                                       class="form-control form-control-lg">
+
+                                                            </div>
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="updateEndDate">結束日：</label>
+                                                                <input type="date"
+                                                                       name="endDate"
                                                                        value="${activity.endDate}"
                                                                        id="updateEndDate"
-                                                                       class="form-control">
-                                                            </p>
+                                                                       class="form-control form-control-lg">
+                                                            </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,12 +184,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
+
                 <!-- /# row -->
                 <div class="row">
+
                     <div class="col-lg-4" id="brandsList" hidden>
                         <div class="card">
                             <div class="card-title">
@@ -174,7 +202,9 @@
                         </div>
                         <!-- /# card -->
                     </div>
+
                     <!-- /# column -->
+
                     <div class="col-lg-8" id="productList" hidden>
                         <div class="card">
                             <div class="card-title">
@@ -187,10 +217,12 @@
                                         <tr>
 
                                             <th>
-                                                <button class="btn btn-primary" id="selectAllBtn">
+                                                <button class="btn btn-primary"
+                                                        id="selectAllBtn">
                                                     全選
                                                 </button>
-                                                <button class="btn btn-primary" id="unSelectAllBtn"
+                                                <button class="btn btn-primary"
+                                                        id="unSelectAllBtn"
                                                         hidden>取消全選
                                                 </button>
                                             </th>

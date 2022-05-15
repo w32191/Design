@@ -58,22 +58,22 @@
                                                     <i class="fa fa-minus"></i> 批次刪除
                                                 </button>
                                             </div>
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-3">
                                                 <h2>活動管理</h2>
                                             </div>
-                                            <div class="col-lg-7 .bg-light rounded text-primary p-l-0 title-margin-left">
+                                            <div class="col-lg-6 .bg-light rounded text-primary p-l-0 title-margin-left">
                                                 篩選：
                                                 <label>主題:
                                                     <input type="text"
                                                            class="form-control border border-primary"
                                                            id="searchName">
                                                 </label>
-                                                <label> 開始日期：
+                                                <label for="searchStart" id="searchStartLabel"> 開始日期：
                                                     <input type="date"
                                                            class="form-control border border-primary"
                                                            id="searchStart"/>
                                                 </label>
-                                                <label> 結束日期：
+                                                <label for="searchEnd" id="searchEndLabel"> 結束日期：
                                                     <input type="date"
                                                            class="form-control border border-primary"
                                                            id="searchEnd"/>
@@ -96,14 +96,30 @@
                                                             全選
                                                         </button>
                                                     </th>
-                                                    <th>#</th>
-                                                    <th>主題</th>
-                                                    <th>圖片</th>
-                                                    <th>折扣</th>
-                                                    <th>起始日</th>
-                                                    <th>結束日</th>
-                                                    <th>編輯</th>
-                                                    <th>刪除</th>
+                                                    <th id="idTh"><span
+                                                            class="ti-angle-double-down"> 編號</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 主題</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 圖片</span>
+                                                    </th>
+                                                    <th id="discountTh"><span
+                                                            class="ti-angle-double-down"> 折扣 </span>
+                                                    </th>
+                                                    <th id="startTh"><span
+                                                            class="ti-angle-double-down"> 起始日</span>
+                                                    </th>
+                                                    <th id="endTh"><span
+                                                            class="ti-angle-double-down"> 結束日</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 編輯</span>
+                                                    </th>
+                                                    <th><span
+                                                            class="ti-angle-double-down"> 刪除</span>
+                                                    </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="theTbody">
@@ -114,7 +130,7 @@
                                                                    class="form-control checks">
                                                         </td>
                                                         <td class="showId">${ac.id}</td>
-                                                        <td>${ac.subject}</td>
+                                                        <td><p style="border-bottom: solid ${ac.color} 5px">${ac.subject}</p></td>
                                                         <c:choose>
                                                             <c:when test="${ac.imgurImgs.size() != 0 }">
                                                                 <c:forEach items="${ac.imgurImgs}"
@@ -156,27 +172,42 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <nav aria-label="...">
-                                            <ul class="pagination" id="pageUl">
-                                                <li class="page-item disabled">
-                                                    <button class="page-link" id="prePageBtn">前一頁
-                                                    </button>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <button class="page-link numBtn">1</button>
-                                                </li>
-                                                <c:forEach begin="2" end="${activities.totalPages}"
-                                                           var="i">
-                                                    <li class="page-item">
-                                                        <button class="page-link numBtn">${i}</button>
-                                                    </li>
-                                                </c:forEach>
-                                                <li class="page-item">
-                                                    <button class="page-link" id="nextPageBtn">後一頁
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <nav aria-label="...">
+                                                    <ul class="pagination" id="pageUl">
+                                                        <li class="page-item disabled">
+                                                            <button class="page-link"
+                                                                    id="prePageBtn">
+                                                                前一頁
+                                                            </button>
+                                                        </li>
+                                                        <li class="page-item active">
+                                                            <button class="page-link numBtn">1
+                                                            </button>
+                                                        </li>
+                                                        <c:forEach begin="2"
+                                                                   end="${activities.totalPages}"
+                                                                   var="i">
+                                                            <li class="page-item">
+                                                                <button class="page-link numBtn">${i}</button>
+                                                            </li>
+                                                        </c:forEach>
+                                                        <li class="page-item">
+                                                            <button class="page-link"
+                                                                    id="nextPageBtn">
+                                                                後一頁
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h4 class="text-primary text-lg-left"
+                                                    id="totalElements">共 ${activities.totalElements}
+                                                    筆</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /# card -->
@@ -222,49 +253,58 @@
                                                   rows="4"></textarea>
 
                                     </div>
-                                    <div class="form-group">
-                                        <label for="insertdiscountPercentage">折扣％：
-                                        </label>
-                                        <div>
-                                            <input type="number" value="50"
-                                                   class="form-control"
-                                                   min="1" max="99"
-                                                   id="insertdiscountPercentage">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="insertdiscountPercentage">折扣：(
+                                                %OFF)
+                                            </label>
+                                            <div>
+                                                <input type="number" value="0"
+                                                       class="form-control"
+                                                       min="1" max="99"
+                                                       id="insertdiscountPercentage">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label> 行事曆 顏色：
+                                                <input type="color" name="color" id="insertColor"/>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>開始日：
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="insertStartDate">開始日：
+                                            </label>
                                             <input type="date"
                                                    name="startDate"
                                                    id="insertStartDate"
                                                    class="form-control form-control-lg">
-                                        </label>
-                                        <label>結束日：
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="insertEndDate">結束日：</label>
                                             <input type="date"
                                                    name="startDate"
                                                    id="insertEndDate"
                                                    class="form-control form-control-lg">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-
+                                        </div>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file"
                                                class="custom-file-input"
                                                id="insertUploadFile">
                                         <label class="custom-file-label"
-                                               for="insertUploadFile">選擇檔案...</label>
-
+                                               for="insertUploadFile">選擇圖片...</label>
+                                        <img src="" alt="" hidden id="reviewImg"
+                                             class="col-md-7 ml-auto rounded"/>
                                     </div>
                                 </form>
 
                             </div>
                             <div class="modal-footer">
-                                <button id="oneKeyInputBtn"
-                                        class="btn btn-danger waves-effect waves-light save-category"
-                                >一鍵輸入
-                                </button>
+                                <%--                                <button id="oneKeyInputBtn"--%>
+                                <%--                                        class="btn btn-danger waves-effect waves-light save-category"--%>
+                                <%--                                >一鍵輸入--%>
+                                <%--                                </button>--%>
                                 <button type="button" id="insertBtn"
                                         class="btn btn-primary waves-effect waves-light save-category"
                                         data-dismiss="modal">新增活動

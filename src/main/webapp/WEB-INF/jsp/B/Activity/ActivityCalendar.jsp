@@ -88,62 +88,67 @@
                                                                 <div class="form-group">
                                                                     <label for="insertContent">活動內容：</label>
                                                                     <textarea id="insertContent"
-                                                                              class="form-control"
+                                                                              class="form-control form-control-lg"
                                                                               style="height:100%"
                                                                               rows="4"></textarea>
 
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="insertdiscountPercentage">折扣％：
-                                                                    </label>
-                                                                    <div>
-                                                                        <input type="number"
-                                                                               value="50"
-                                                                               class="form-control"
-                                                                               min="1" max="99"
-                                                                               id="insertdiscountPercentage">
+                                                                <div class="row">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertdiscountPercentage">折扣：(
+                                                                            %OFF)
+                                                                        </label>
+                                                                        <div>
+                                                                            <input type="number"
+                                                                                   value="0"
+                                                                                   class="form-control"
+                                                                                   min="1" max="99"
+                                                                                   id="insertdiscountPercentage">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label> 行事曆 顏色：
+                                                                            <input type="color"
+                                                                                   name="color"
+                                                                                   id="insertColor"/>
+                                                                        </label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label>開始日：
+                                                                <div class="row">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertStartDate">開始日：
+                                                                        </label>
                                                                         <input type="date"
                                                                                name="startDate"
                                                                                id="insertStartDate"
                                                                                class="form-control form-control-lg">
-                                                                    </label>
-                                                                    <label>結束日：
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="insertEndDate">結束日：</label>
                                                                         <input type="date"
                                                                                name="startDate"
                                                                                id="insertEndDate"
                                                                                class="form-control form-control-lg">
-                                                                    </label>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group">
-
-                                                                </div>
-                                                                <%--                                                        <div class="form-group">--%>
-                                                                <%--                                                            <label>上傳圖片：--%>
-                                                                <%--                                                                <input type="file" name="files"--%>
-                                                                <%--                                                                       id="insertUploadFile"--%>
-                                                                <%--                                                                       class="form-control">--%>
-                                                                <%--                                                            </label>--%>
-                                                                <%--                                                        </div>--%>
                                                                 <div class="custom-file">
                                                                     <input type="file"
                                                                            class="custom-file-input"
                                                                            id="insertUploadFile">
                                                                     <label class="custom-file-label"
                                                                            for="insertUploadFile">選擇檔案...</label>
-
+                                                                    <img src="" alt="" hidden
+                                                                         id="reviewImg"
+                                                                         class="col-md-7 ml-auto rounded"/>
                                                                 </div>
                                                             </form>
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button id="oneKeyInputBtn"
-                                                                    class="btn btn-danger waves-effect waves-light save-category"
-                                                            >一鍵輸入
-                                                            </button>
+                                                            <%--                                                            <button id="oneKeyInputBtn"--%>
+                                                            <%--                                                                    class="btn btn-danger waves-effect waves-light save-category"--%>
+                                                            <%--                                                            >一鍵輸入--%>
+                                                            <%--                                                            </button>--%>
                                                             <button type="button" id="insertBtn"
                                                                     class="btn btn-primary waves-effect waves-light save-category"
                                                                     data-dismiss="modal">新增活動

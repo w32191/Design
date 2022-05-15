@@ -12,13 +12,13 @@ import org.springframework.data.repository.query.Param;
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
   @Query(value =
-      "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo] "
+      "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo],[color] "
           + " FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0",
       nativeQuery = true)
   List<Activity> findActivitiesCurrentTime();
 
   @Query(value =
-      "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo] "
+      "SELECT [id],[subject],[content],[discount_percentage],[start_date],[end_date],[photo],[color] "
           + " FROM activities WHERE DateDiff(Day,start_date,getdate()) >= 0 AND DateDiff(Day,end_date,getdate()) <= 0 AND [id]=:id",
       nativeQuery = true)
   Activity findActivitiesCurrentTime(@Param("id") Integer id);

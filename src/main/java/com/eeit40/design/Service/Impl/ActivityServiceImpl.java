@@ -35,7 +35,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,6 +59,7 @@ public class ActivityServiceImpl implements ActivityService {
   @Autowired
   private ActivityProductDao activityProductDao;
 
+
   @Autowired
   private ImgurUtil imgurUtil;
 
@@ -76,6 +76,14 @@ public class ActivityServiceImpl implements ActivityService {
     this.imgurUtil.setAuthorization(authorization);
   }
 
+  //統一控制分頁排序
+  private Pageable pageControls(String sortStr, Integer pageNumber, boolean asc) {
+    if (asc) {
+      return PageRequest.of(pageNumber - 1, 5, Sort.by(sortStr).ascending());
+    } else {
+      return PageRequest.of(pageNumber - 1, 5, Sort.by(sortStr).descending());
+    }
+  }
 
   @Override
   public List<Activity> findAll() {
@@ -84,22 +92,12 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public List<EventDto> findAllEvent() {
-    List<Activity> result = activityRepository.findAll();
+    List<Activity> result = activityRepository.findAll(Sort.by("id").ascending());
     List<EventDto> eventDtoList = new ArrayList<>();
-    //設定顯示顏色
-    String[] colors = {"#28FF28", "#019858", "#FFA042", "#81C0C0", "#D3A4FF", "#FF5151"};
-    int a = 0;
+
     for (Activity ac : result) {
-      EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate());
-
-      if (a == 5) {
-        dto.setBackgroundColor(colors[a]);
-        a = 0;
-      } else {
-        dto.setBackgroundColor(colors[a]);
-        a++;
-      }
-
+      EventDto dto = new EventDto(ac.getId(), ac.getSubject(), ac.getStartDate(), ac.getEndDate(),
+          ac.getColor());
       eventDtoList.add(dto);
     }
     return eventDtoList;
@@ -107,8 +105,7 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findByPage(Integer pageNumber) {
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Direction.DESC, "id");
-    return activityRepository.findAll(page);
+    return activityRepository.findAll(pageControls("id", pageNumber,false));
   }
 
   @Override
@@ -132,6 +129,7 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setDiscountPercentage(dto.getDiscountPercentage());
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
+    activity.setColor(dto.getColor());
 
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
     //活動關聯圖片
@@ -195,6 +193,7 @@ public class ActivityServiceImpl implements ActivityService {
     activity.setContent(dto.getContent());
     activity.setStartDate(dto.getStartDate());
     activity.setEndDate(dto.getEndDate());
+    activity.setColor(dto.getColor());
     activity.setDiscountPercentage(dto.getDiscountPercentage());
     Set<ImgurImg> imgs = doUploadImg(dto.getInsertImg(), activity);
 
@@ -231,8 +230,8 @@ public class ActivityServiceImpl implements ActivityService {
   // 找分頁過後的品牌
   @Override
   public Page<Brand> findAllBrandByPage(Integer pageNumber) {
-    Pageable pageable = PageRequest.of(pageNumber - 1, 10, Direction.ASC, "id");
-    return brandRepository.findAll(pageable);
+    Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.by("id").ascending());
+    return brandRepository.findAll(page);
   }
 
   // 找品牌的全部產品
@@ -402,21 +401,17 @@ public class ActivityServiceImpl implements ActivityService {
 
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      Integer pageNumber) {
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
-//    return activityRepository.findActivitiesByTime(startDate, endDate, page);
+      String sortStr, Integer pageNumber,boolean asc) {
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetween(startDate, endDate,
-        startDate, endDate, page);
+        startDate, endDate, pageControls(sortStr, pageNumber,asc));
   }
 
   @Override
   public Page<Activity> findActivitiesByTimePaged(LocalDate startDate, LocalDate endDate,
-      String subject,
-      Integer pageNumber) {
+      String subject, String sortStr, Integer pageNumber,boolean asc) {
 
-    Pageable page = PageRequest.of(pageNumber - 1, 5, Sort.by("id").descending());
     return activityRepository.findActivitiesByStartDateBetweenAndEndDateBetweenAndSubjectContaining(
-        startDate, endDate, startDate, endDate, subject, page);
+        startDate, endDate, startDate, endDate, subject, pageControls(sortStr, pageNumber,asc));
   }
 
   @Override

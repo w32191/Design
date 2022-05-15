@@ -19,11 +19,12 @@ public class EventDto {
 
   private String backgroundColor;
 
-  public EventDto(Integer id, String title, LocalDate startDate, LocalDate endDate) {
+  public EventDto(Integer id, String title, LocalDate startDate, LocalDate endDate, String color) {
     long one = 1L;
     this.id = id;
     this.title = title;
     this.start = startDate;
     this.end = endDate.plusDays(one);
+    this.backgroundColor = color;
   }
 }
