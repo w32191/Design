@@ -103,27 +103,19 @@
                                     </div>
                                     <div class="input-group">
                                         <form:textarea path="title" class="form-control"
-                                                       id="titleId"></form:textarea>
+                                                       id="titleId" />
                                     </div>
-
-                                    <div class="input-group mb-3 col-sm-5">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="contentId"
-                                                   id="contentSpan"><span
-                                                    style="color: red">*</span>公告內容</label>
-                                        </div>
-                                        <div class="input-group">
-                                            <form:textarea path="content" class="form-control"
-                                                           id="contentId"></form:textarea>
-                                        </div>
-
-                                        <input type="submit" name="submit" value="輸入">
-                                        </form:form>
-
-
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="contentId"
+                                               id="contentSpan"><span
+                                                style="color: red">*</span>公告內容</label>
                                     </div>
-
-
+                                    <div class="input-group">
+                                        <form:textarea path="content" class="form-control"
+                                               rows="5" cssStyle="height: 100%" id="contentId" />
+                                    </div>
+                                    <input type="submit" name="submit" value="輸入" class="btn btn-primary">
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
@@ -146,10 +138,11 @@
 <!-- scripit init-->
 <script>
   $('#titleSapn').on('click', function () {
-	$('#titleId').val("【5/18凌晨暫停服務～系統進行維護升級】");
+    $('#titleId').val("【5/18凌晨暫停服務～系統進行維護升級】");
   });
   $('#contentSpan').on('click', function () {
-    $('#contentId').val("【5/18凌晨暫停服務～系統進行維護升級】 為了提供更好的服務，將於2022/5/18(三)凌晨01:00 ~ 05:00時段內進行系統維護升級，此時段內將無法使用支付轉帳，若造成您的困擾敬請見諒！")
+    $('#contentId').val(
+        "【5/18凌晨暫停服務～系統進行維護升級】 為了提供更好的服務，將於2022/5/18(三)凌晨01:00 ~ 05:00時段內進行系統維護升級，此時段內將無法使用支付轉帳，若造成您的困擾敬請見諒！")
   })
 </script>
 </body>
