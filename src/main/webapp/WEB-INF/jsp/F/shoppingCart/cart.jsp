@@ -30,11 +30,15 @@
         height: 50px;
         line-height: 46px;
         padding: 0 30px;
-        border: 1px solid #ebebeb;
+        /* border: 1px solid #ebebeb; */
         color: #6f7172;
         background: transparent;
         z-index: 1;
         font-size: 10px;
+		
+		border-radius: 50px;
+		size: 30%;
+		border: none;
     }
 </style>
 </head>
@@ -186,7 +190,15 @@
 									</div>
 									<div class="row">
 										<div class="col-12">
+											<!-- <div style=" margin-left: 20px;">
+												<button class="showcoupon" id="coupon1" type="button" >.</button>
+												<button class="showcoupon" id="coupon2" type="button" >.</button>
+												<button class="showcoupon" id="coupon3" type="button" >.</button>
+												<button class="showcoupon" type="button" >.</button>
+												<button class="showcoupon" type="button" >.</button>
+											</div> -->
 											<div class="coupon-all">
+												
 												<div class="coupon">
 													<input id="coupon_code" class="input-text" style="color: #6F7172;"
 														name="coupon_code" value="" placeholder="折扣碼"
@@ -206,10 +218,12 @@
 										<!-- <div style="margin-top: 10px; margin-left: 20px; color: brown;">
 											<span class="text-danger" id="couponContext"></span>
 										</div> -->
-                                        <div style="margin-top: 50px; margin-left: 20px;">
-                                            <button class="showcoupon" id="coupon1" type="button" >一鍵</button>
-                                            <button class="showcoupon" id="coupon2" type="button" >輸入</button>
-                                            <button class="showcoupon" id="coupon3" type="button" >折扣碼</button>
+                                        <div style="margin-top: 20px; margin-left: 20px;">
+                                            <button class="showcoupon" id="coupon1" type="button" >.</button>
+                                            <button class="showcoupon" id="coupon2" type="button" >.</button>
+                                            <button class="showcoupon" id="coupon3" type="button" >.</button>
+											<button class="showcoupon" type="button" >.</button>
+                                            <button class="showcoupon" type="button" >.</button>
                                         </div>
 										<div class="col-md-5 ml-auto">
 											<div class="cart-page-total">
