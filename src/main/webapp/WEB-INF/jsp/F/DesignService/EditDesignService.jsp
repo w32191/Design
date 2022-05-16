@@ -157,7 +157,7 @@
 <script>
     $('#editDesignServiceBtn').mouseover(function () {
         $('#editTitle').val("樸質"),
-            $('#editname').val("近境制作"),
+            $('#editname').val("EEIT140"),
             $('#editStyleList> option:selected').text("工業風格"),
             $('#editLocation> option:selected').text("台南市"),
             $('#editPrice').val(20000),

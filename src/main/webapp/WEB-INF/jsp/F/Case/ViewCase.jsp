@@ -43,7 +43,7 @@
                             <div id="table_tbody" class="coupon2">
                                 <div class="coupon-all" style="margin-top: 0 ; padding-bottom: 25px">
                                     <a href="${contextRoot}/F/EditCase/${aCase.id} " id="editBtn" class="os-btn os-btn-black" name="add_cart" type="submit">
-                                        編輯案件
+                                        編輯需求
                                     </a>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                                                     <%--                                                <div class="rc__post-thumb mr-20 ">--%>
                                                     <%--                                                    <a href="blog-details.html">--%>
                                                 <img href="${ca.id}"
-                                                     src="${ca.coverPhoto}" width="50%"
+                                                     src="${ca.coverPhoto}" width="30%"
                                                      alt="blog-1"
                                                      STYLE="margin-right: 10px">
                                                     <%--                                                    </a>--%>
@@ -223,7 +223,9 @@
                                                                 ${ca.title}</a>
                                                     </h6>
                                                     <div class="rc__meta">
-                                                        <span>${ca.name}</span>
+                                                        <span>${ca.classification}</span><br/>
+                                                        <span>By <a style="color: #bc8246">${ca.name}</a></span><br/>
+                                                        <span>${ca.dateTime}</span>
 <%--                                                        <span>${case.style}</span>--%>
 <%--                                                        <span>${case.createTime}</span>--%>
                                                     </div>
@@ -273,63 +275,63 @@
     <!-- blog area end -->
 
     <!-- Cart Area Strat-->
-    <section id="editCaseDialog" class="cart-area pt-100 pb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg">
-                    <form action="#">
-                        <div class="table-content table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="product-thumbnail">標題</th>
-                                    <th class="cart-product-name">名字</th>
-                                    <th class="product-price">工程類別</th>
-                                    <th class="product-quantity">所在地區</th>
-                                    <th class="product-subtotal">E-mail</th>
-                                    <th class="product-remove">資訊</th>
-                                    <th class="product-remove">照片</th>
-                                    <th class="product-remove">結案時間</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <input id="editTitle" type="text"/>
-                                    </td>
-                                    <td><input id="editName" type="text"/></td>
-                                    <td><select id="editClassification"></select></td>
-                                    <td><select id="editLocation"></select></td>
-                                    <td><input id="editEmail" type="email"></td>
-                                    <td>
-                                        <textarea name="editMessage" id="editMessage" class="form-control" rows="3"
-                                                  placeholder="Text input" style="width: 300px"></textarea>
-                                    </td>
-                                    <td class="product-thumbnail" id="editImgDiv">
-                                        <input type="file" id="editFile" class="imgur" accept="image/*"
-                                               data-max-size="5000"/>
-                                        <img src="" id="editCoverPhoto" width="200"/>
-                                    </td>
-                                    <%--                                    <td class="product-thumbnail"><a href="product-details.html"><img src="${contextRoot}/static/front/assets/img/shop/product/product-2.jpg" alt=""></a></td>--%>
-                                    <td><input id="editExpiryDate" type="date"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="coupon2">
-                                    <button id="editCaseBtn" class="os-btn os-btn-black" style="margin-top: 25px"
-                                            name="add_case" type="submit">編輯需求
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+<%--    <section id="editCaseDialog" class="cart-area pt-100 pb-100">--%>
+<%--        <div class="container">--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-lg">--%>
+<%--                    <form action="#">--%>
+<%--                        <div class="table-content table-responsive">--%>
+<%--                            <table class="table">--%>
+<%--                                <thead>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="product-thumbnail">標題</th>--%>
+<%--                                    <th class="cart-product-name">名字</th>--%>
+<%--                                    <th class="product-price">工程類別</th>--%>
+<%--                                    <th class="product-quantity">所在地區</th>--%>
+<%--                                    <th class="product-subtotal">E-mail</th>--%>
+<%--                                    <th class="product-remove">資訊</th>--%>
+<%--                                    <th class="product-remove">照片</th>--%>
+<%--                                    <th class="product-remove">結案時間</th>--%>
+<%--                                </tr>--%>
+<%--                                </thead>--%>
+<%--                                <tbody>--%>
+<%--                                <tr>--%>
+<%--                                    <td>--%>
+<%--                                        <input id="editTitle" type="text"/>--%>
+<%--                                    </td>--%>
+<%--                                    <td><input id="editName" type="text"/></td>--%>
+<%--                                    <td><select id="editClassification"></select></td>--%>
+<%--                                    <td><select id="editLocation"></select></td>--%>
+<%--                                    <td><input id="editEmail" type="email"></td>--%>
+<%--                                    <td>--%>
+<%--                                        <textarea name="editMessage" id="editMessage" class="form-control" rows="3"--%>
+<%--                                                  placeholder="Text input" style="width: 300px"></textarea>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="product-thumbnail" id="editImgDiv">--%>
+<%--                                        <input type="file" id="editFile" class="imgur" accept="image/*"--%>
+<%--                                               data-max-size="5000"/>--%>
+<%--                                        <img src="" id="editCoverPhoto" width="200"/>--%>
+<%--                                    </td>--%>
+<%--                                    &lt;%&ndash;                                    <td class="product-thumbnail"><a href="product-details.html"><img src="${contextRoot}/static/front/assets/img/shop/product/product-2.jpg" alt=""></a></td>&ndash;%&gt;--%>
+<%--                                    <td><input id="editExpiryDate" type="date"></td>--%>
+<%--                                </tr>--%>
+<%--                                </tbody>--%>
+<%--                            </table>--%>
+<%--                        </div>--%>
+<%--                        <div class="row">--%>
+<%--                            <div class="col-12">--%>
+<%--                                <div class="coupon2">--%>
+<%--                                    <button id="editCaseBtn" class="os-btn os-btn-black" style="margin-top: 25px"--%>
+<%--                                            name="add_case" type="submit">編輯需求--%>
+<%--                                    </button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
     <!-- Cart Area End-->
 
 </main>

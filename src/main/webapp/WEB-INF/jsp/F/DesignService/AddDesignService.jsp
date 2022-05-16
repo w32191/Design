@@ -153,7 +153,7 @@
 <script>
     $('#addDesignServiceBtn').mouseover(function () {
             $('#title').val("冶意執綠"),
-            $('#name').val("近境制作"),
+            $('#name').val("EEIT140"),
             $('#addStyleList> option:selected').text("工業風格"),
             $('#addLocation> option:selected').text("台南市"),
             $('#price').val(20000),

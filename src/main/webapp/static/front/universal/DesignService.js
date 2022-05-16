@@ -1795,7 +1795,7 @@ $(function () {
                     icon: "success",
                     html: "<h5>新增成功！</h5>",
                 }).then(function () {
-                    window.location.href = "/Design/F/Design";
+                    location.replace(`/Design/F/Design`)
                 });
             },
             error: function (err) {
@@ -2143,7 +2143,7 @@ $(function () {
                     icon: "success",
                     html: "<h5>修改成功！</h5>",
                 }).then(function () {
-                    window.location.href = `/Design/F/viewDesignService/${id}`;
+                    location.replace(`/Design/F/viewDesignService/${id}`)
                 });
             },
             error: function (err) {
