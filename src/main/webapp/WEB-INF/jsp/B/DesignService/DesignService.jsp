@@ -42,7 +42,7 @@
                 <div class="col-lg-8 p-r-0 title-margin-right">
                     <div class="page-header">
                         <div class="page-title">
-<%--                            <h1>Hello, <span>Welcome Here</span></h1>--%>
+                            <%--                            <h1>Hello, <span>Welcome Here</span></h1>--%>
                             <button type="button" id="insertBtn"
                                     class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
                                 <i class="ti-plus"></i>新增設計
@@ -55,8 +55,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-<%--                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>--%>
-<%--                                <li class="breadcrumb-item active">Table-Jsgrid</li>--%>
+                                <%--                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>--%>
+                                <%--                                <li class="breadcrumb-item active">Table-Jsgrid</li>--%>
                             </ol>
                         </div>
                     </div>
@@ -292,7 +292,7 @@
 <script>
     $('#insertDesignDialog').mouseover(function () {
         $('#title').val("遠域生活"),
-            $('#name').val("近境制作"),
+            $('#name').val("EEIT140"),
             $('#style> option:selected').text("工業風格"),
             $('#location> option:selected').text("台南市"),
             $('#price').val(20000),
@@ -320,9 +320,53 @@
             <br>/
 
 `),
-            $('#insertCoverPhoto').attr('src'),
-            $('#insertPhoto_1').attr('src'),
-            $('#insertPhoto_2').attr('src')
+            $('#insertCoverPhoto').attr('src', "https://i.imgur.com/mPg7tBI.jpg");
+        $('#insertPhoto_1').attr('src', "https://i.imgur.com/Bmly8tv.jpg");
+        $('#insertPhoto_2').attr('src', "https://i.imgur.com/waS0SVe.jpg");
+
+    })
+</script>
+<script>
+    $('#editDesignDialog').mouseover(function () {
+        $('#editTitle').val("國泰悠陽");
+        $('#editName').val("EEIT140");
+        $('#editStyle> option:selected').text("奢華風格");
+        $('#editLocation> option:selected').text("臺北市");
+        $('#editPrice').val(25000);
+        $('#editMessage').val(`時光的漸變<br>
+古咖金色點綴室內的整體性<br>
+闡述出渾然天成的高貴感<br>
+一個慵懶的下午<br>
+在光影流動中不同的情緒<br>
+擁有一段純潔而豐富的獨處時光<br>
+-<br>
+<br>
+<br>
+<br>
+<br>
+處在寂然 平和 豐潤的氛圍<br>
+有形無形的生活軌跡　<br>
+儲藏在與器物中的相處之中<br>
+<br>
+<br>
+<br>
+映入眼簾的石材<br>
+端莊典雅且帶有個性紋路<br>
+純淨的白延伸至臥室溫潤了整體溫度<br>
+而座落在每個空間的燈具<br>
+妝點空間獨有色彩<br>
+公私領域利用移動隔間<br>
+使視覺脈絡增添不同樣貌<br>
+開放同時保有隱私<br>
+感受著彼此的一舉一動<br>
+讓這份關係更加緊密  讓空間更加純粹<br>
+<br>
+            <br>
+<br>
+`);
+        $('#editCoverPhoto').attr('src', "https://i.imgur.com/QmajCZs.jpg");
+        $('#editPhoto_1').attr('src', "https://i.imgur.com/A4KLgyn.jpg");
+        $('#editPhoto_2').attr('src', "https://i.imgur.com/P5U015N.jpg");
 
     })
 </script>

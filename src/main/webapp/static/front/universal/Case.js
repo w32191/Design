@@ -1669,9 +1669,9 @@ $(function () {
             name: $('#caseName').val(),
             classification: $('#classificationData> option:selected').text(),
             location: $('#locationData> option:selected').text(),
-            caseEmail: $('#Email').val(),
+            caseEmail: $('#caseEmail').val(),
             message: $('#caseMessage').val(),
-            expiryDate: $('#stopCaseTime').val(),
+            expiryDate: $('#expiryDate').val(),
             coverPhoto: $('#insertCoverPhoto').attr('src')
         }
         console.log(data)
@@ -1928,7 +1928,7 @@ $(function () {
             name: $('#editName').val(),
             classification: $('#editStyleList> option:selected').text(),
             location: $('#editLocation> option:selected').text(),
-            caseEmail: $('#editCaseEmail').val(),
+            caseEmail: $('#editEmail').val(),
             message: $('#editMessage').val(),
             expiryDate: $('#editExpiryDate').val(),
             coverPhoto: $('#editCoverPhoto').attr('src')

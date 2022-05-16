@@ -369,10 +369,10 @@ insertCaseDialog
 <script>
     $('#insertFile').mouseover(function () {
         $('#title').val("開關查修及更換"),
-            $('#name').val("王英及"),
+            $('#name').val("EEIT140"),
             $('#classification> option:selected').text("水電工程"),
             $('#location> option:selected').text("高雄市"),
-            $('#caseEmail').val("ricc@gmail.com"),
+            $('#caseEmail').val("EEIT140@gmail.com"),
             $('#expiryDate').val("2022-07-28"),
             $('#message').val(`1. 自行買星光開關要更換，結果燈不亮 <br/>
             2. 屋舊，發現有些開關沒反應 <br/>
@@ -387,10 +387,10 @@ insertCaseDialog
 <script>
     $('#editFile').mouseover(function () {
         $('#editTitle').val("工作台冰箱不冷"),
-            $('#editName').val("黃燈灰"),
+            $('#editName').val("EEIT140"),
             $('#editClassification> option:selected').text("廚房設備"),
             $('#editLocation> option:selected').text("桃園市"),
-            $('#editCaseEmail').val("likeyoumm@hotmail.com"),
+            $('#editCaseEmail').val("EEIT140@hotmail.com"),
             $('#editExpiryDate').val("2022-08-08"),
             $('#editMessage').val(`工作台冰箱吹出來的風不冷<br/>
                 `),

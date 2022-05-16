@@ -98,7 +98,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>資訊：</label>
-                                                    <textarea id="caseMessage" class="form-control" rows="20"
+                                                    <textarea id="caseMessage" class="form-control" rows="5"
                                                               placeholder=""></textarea>
                                                 </div>
 
@@ -143,14 +143,14 @@
 <script src="${contextRoot}/static/front/universal/Case.js"></script>
 <script>
     $('#addCaseBtn').mouseover(function () {
-        $('#caseTitle').val("牆面開孔"),
-            $('#caseName').val("偉德"),
-            $('#classificationData> option:selected').text("拆除工程"),
-            $('#locationData> option:selected').text("新竹市"),
-            $('#caseEmail').val("lulu@hotmail.com"),
+        $('#caseTitle').val("冷氣漏水 冰箱不涼"),
+            $('#caseName').val("EEIT140"),
+            $('#classificationData> option:selected').text("空調工程"),
+            $('#locationData> option:selected').text("臺北市"),
+            $('#caseEmail').val("EEIT140@gmail.com"),
             $('#expiryDate').val("2022-08-20"),
-            $('#caseMessage').val(`開孔高70公分×寬60公分，牆厚度25公分 如圖片所框處<br/>`),
-            $('#insertCoverPhoto').attr('src', "https://i.imgur.com/LIBbI5r.jpg")
+            $('#caseMessage').val(`冷氣外的管子好像掉了 外面會漏水 冰箱冷凍不夠冷 冷藏不會涼`),
+            $('#insertCoverPhoto').attr('src', "https://i.imgur.com/5ZCCjRx.jpg")
 
     })
 </script>

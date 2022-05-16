@@ -63,14 +63,20 @@
                                                     <label>標題：</label>
                                                     <input id= "editTitle" type="text" class="form-control"
                                                     value="${Case.title}">
-                                                </div>
+                                                </div><div class="form-group">
+                                                <label>名字：</label>
+                                                <input id= "editName" type="text" class="form-control"
+                                                       value="${Case.name}">
+                                            </div>
                                                 <div class="form-group">
                                                     <label>E-mail：</label>
-                                                    <input id= "editEmail" type="email" class="form-control"    >
+                                                    <input id= "editEmail" type="email" class="form-control"
+                                                           value="${Case.caseEmail}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>工程總類：</label>
+                                                    <label>工程種類：</label>
                                                     <select class="form-control" id="editStyleList">
+                                                        <option>${Case.classification}</option>
                                                         <%--                                                        <option>1</option>--%>
                                                         <%--                                                        <option>2</option>--%>
                                                         <%--                                                        <option>3</option>--%>
@@ -81,6 +87,7 @@
                                                 <div class="form-group">
                                                     <label>地點：</label>
                                                     <select class="form-control" id="editLocation">
+                                                        <option>${Case.location}</option>
                                                         <%--                                                        <option>1</option>--%>
                                                         <%--                                                        <option>2</option>--%>
                                                         <%--                                                        <option>3</option>--%>
@@ -90,11 +97,12 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>結案時間：</label>
-                                                    <input id= "editExpiryDate" type="Date" class="form-control">
+                                                    <input id= "editExpiryDate" type="Date" class="form-control"
+                                                    value="${Case.expiryDate}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>資訊：</label>
-                                                    <textarea id= "editMessage" class="form-control" rows="20"
+                                                    <textarea id= "editMessage" class="form-control" rows="5"
                                                               placeholder="">${Case.message}</textarea>
                                                 </div>
                                                 <div class="form-group" id="imgDiv">
@@ -138,15 +146,15 @@
 <script src="${contextRoot}/static/front/universal/Case.js"></script>
 <script>
     $('#editCaseCheckBtn').mouseover(function () {
-        $('#editTitle').val("牆面開孔"),
-
-            $('#editEmail').val("luby@hotmail.com"),
-            $('#editStyleList> option:selected').text("水電工程"),
-            $('#editLocation> option:selected').text("新北市"),
-            $('#editCaseEmail').val("lulu@hotmail.com"),
+        $('#editTitle').val("磁磚更換"),
+            $('#editName').val("EEIT140"),
+            $('#editEmail').val("EEIT140@hotmail.com"),
+            $('#editStyleList> option:selected').text("地板工程"),
+            $('#editLocation> option:selected').text("臺北市"),
+            $('#editCaseEmail').val("EEIT140@hotmail.com"),
             $('#editExpiryDate').val("2022-08-20"),
-            $('#editMessage').val(`開孔高70公分×寬60公分，牆厚度25公分 如圖片所框處<br/>`),
-            $('#editCoverPhoto').attr('src', "https://i.imgur.com/LIBbI5r.jpg")
+            $('#editMessage').val(`洗手台下方地板磁磚積水無法順利排水,需重新鋪設,自有磁磚可以更換（之前更換時有留下新的幾片）`),
+            $('#editCoverPhoto').attr('src', "https://i.imgur.com/y8rGAja.jpg")
 
     })
 </script>
