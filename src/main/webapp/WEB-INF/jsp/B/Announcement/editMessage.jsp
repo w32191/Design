@@ -59,27 +59,69 @@
 
 								<div class="card-header">編輯訊息</div>
 								<div class="card-body">
-
-									<form:form class="form" method="POST"
-										modelAttribute="announcementWorkMessages">
-
-										<form:input type="hidden" path="id" />
+								
+								<form:form class="form" method="POST"
+                                        action="/Design/B/Announcement/add"
+                                        modelAttribute="announcementWorkMessages">
+                                        
+                                        
+                                        <form:input type="hidden" path="id" />
 										<form:input type="hidden" path="added" />
 
-										<!-- form:errors  bindingResult 回傳的物件 -->
-										
+                                <!-- form:errors  bindingResult 回傳的物件 -->
 
-										<div class="input-group">
-											<form:textarea path="content" class="form-control"></form:textarea>
-										</div>
+                                <div class="input-group mb-3 col-sm-5">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="contact"><span
+                                                style="color: red">*</span>公告類型</label>
+                                    </div>
+                                    <select class="form-control"
+                                            aria-describedby="announcement_type"
+                                            name="type" id="announcement_type" required>
+                                        <option value="" style="display: none"></option>
+                                        <option value="系統維護">系統維護</option>
+                                        <option value="活動通知">活動通知</option>
+                                        <option value="重要公告">重要公告</option>
+                                            <%-- 												<c:forEach items="${page.type}" --%>
+                                            <%-- 													var="announcementWorkMessages"> --%>
+                                            <%-- 													<c:choose> --%>
+                                            <%-- 														<c:when --%>
+                                            <%-- 															test="${announcementWorkMessages.Type == announcementWorkMessages.Type}"> --%>
+                                            <%-- 															<option value="${announcementWorkMessages.id}" selected="selected"> --%>
+                                            <%-- 																${announcementWorkMessages.type}</option> --%>
+                                            <%-- 														</c:when> --%>
+                                            <%-- 														<c:otherwise> --%>
+                                            <%-- 															<option value="${announcementWorkMessages.id}"> --%>
+                                            <%-- 																${announcementWorkMessages.type}</option> --%>
+                                            <%-- 														</c:otherwise> --%>
+                                            <%-- 													</c:choose> --%>
+                                            <%-- 												</c:forEach> --%>
+                                    </select>
+                                </div>
 
-										<input type="submit" name="submit" value="送出">
-									</form:form>
 
-
+                                <div class="input-group mb-3 col-sm-5">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="titleId"
+                                               id="titleSapn"><span
+                                                style="color: red">*</span>公告標題</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <form:textarea path="title" class="form-control"
+                                                       id="titleId" />
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="contentId"
+                                               id="contentSpan"><span
+                                                style="color: red">*</span>公告內容</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <form:textarea path="content" class="form-control"
+                                               rows="5" cssStyle="height: 100%" id="contentId" />
+                                    </div>
+                                    <input type="submit" name="submit" value="輸入" class="btn btn-primary">
+                                    </form:form>							
 								</div>
-
-
 							</div>
 						</div>
 					</div>

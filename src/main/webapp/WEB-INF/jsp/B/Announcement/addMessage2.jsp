@@ -57,8 +57,6 @@
                         <div class="card">
                             <div class="card-header">新增公告</div>
                             <div class="card-body">
-
-
                                 <form:form class="form" method="POST"
                                         action="/Design/B/Announcement/add"
                                         modelAttribute="announcementWorkMessages">
@@ -76,7 +74,7 @@
                                         <option value="" style="display: none"></option>
                                         <option value="系統維護">系統維護</option>
                                         <option value="活動通知">活動通知</option>
-                                        <option value="共要公告">重要公告</option>
+                                        <option value="重要公告">重要公告</option>
                                             <%-- 												<c:forEach items="${page.type}" --%>
                                             <%-- 													var="announcementWorkMessages"> --%>
                                             <%-- 													<c:choose> --%>
@@ -93,8 +91,6 @@
                                             <%-- 												</c:forEach> --%>
                                     </select>
                                 </div>
-
-
                                 <div class="input-group mb-3 col-sm-5">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="titleId"
